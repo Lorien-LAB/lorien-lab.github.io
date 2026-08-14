@@ -31,3 +31,9 @@ jobs:
           test -f dist/projects/reproductions/index.html
           test -f dist/knowledge/reproductions/index.html
           grep -qi 'http-equiv="refresh"' dist/knowledge/reproductions/index.html
+      - name: Reject stale active reproduction URLs
+        run: |
+          if grep -R "knowledge/reproductions" src README.md; then
+            echo "Found stale active knowledge/reproductions URL"
+            exit 1
+          fi
