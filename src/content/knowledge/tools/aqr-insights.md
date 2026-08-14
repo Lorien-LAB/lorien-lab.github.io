@@ -14,6 +14,7 @@ tags:
 featured: false
 related: []
 relatedNotes: []
+officialUrl: https://www.aqr.com/Insights
 toolUrl: https://www.aqr.com/Insights
 ---
 
