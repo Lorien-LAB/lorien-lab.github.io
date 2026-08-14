@@ -29,4 +29,28 @@ const notes = defineCollection({
   }),
 });
 
-export const collections = { research, projects, notes };
+const knowledge = defineCollection({
+  loader: glob({ base: './src/content/knowledge', pattern: '**/*.md' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    type: z.enum(['concept', 'paper', 'tool', 'topic']),
+    domain: z.string(),
+    category: z.string(),
+    status: z.enum(['seed', 'growing', 'mature']),
+    date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    tags: commonTags,
+    featured: z.boolean().default(false),
+    related: z.array(z.string()).default([]),
+    relatedNotes: z.array(z.string()).default([]),
+    sourceUrl: z.string().url().optional(),
+    authors: z.array(z.string()).optional(),
+    year: z.number().int().optional(),
+    paperUrl: z.string().url().optional(),
+    language: z.string().optional(),
+    toolUrl: z.string().url().optional(),
+  }),
+});
+
+export const collections = { research, projects, notes, knowledge };
