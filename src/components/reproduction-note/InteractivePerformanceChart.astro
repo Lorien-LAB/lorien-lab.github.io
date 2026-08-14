@@ -22,7 +22,7 @@ const cutoff = data.cutoff;
       </div>
     </div>
     <div class="metric-strip" id="rn-metrics">
-      <div><span>Range Return</span><strong>—</strong></div><div><span>Max Drawdown</span><strong>—</strong></div><div><span>Last NAV</span><strong>—</strong></div><div><span>Window</span><strong>—</strong></div>
+      <div><span>Annualized Return</span><strong>—</strong></div><div><span>Sharpe*</span><strong>—</strong></div><div><span>Max Drawdown</span><strong>—</strong></div><div><span>Window</span><strong>—</strong></div>
     </div>
     <div class="plot-card">
       <div class="plot-head"><div><strong id="rn-chart-title">Roll Timing</strong><span>Optimized vs benchmark</span></div><div class="legend" id="rn-legend"></div></div>
@@ -31,7 +31,7 @@ const cutoff = data.cutoff;
       <div id="rn-dd" class="svg-host dd" aria-label="Drawdown chart"></div>
       <div id="rn-tooltip" class="tooltip" hidden></div>
     </div>
-    <p class="chart-foot">Comparable research cutoff: <strong>{cutoff}</strong>. OOS begins <strong>{oosStart}</strong>. Hover the NAV panel to inspect dates and values.</p>
+    <p class="chart-foot">Comparable research cutoff: <strong>{cutoff}</strong>. OOS begins <strong>{oosStart}</strong>. Hover the NAV panel to inspect dates and values. <strong>*</strong> Dynamic Sharpe is estimated from the displayed sampled NAV cadence; headline Sharpe above comes from the full run.</p>
   </div>
 </section>
 
@@ -59,6 +59,8 @@ const cutoff = data.cutoff;
   const node=(tag,a={})=>{const e=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,String(v)));return e};
   const text=(s,x,y,a={})=>{const e=node('text',{x,y,...a});e.textContent=s;return e};
   const path=(vals,x,y)=>vals.map((v,i)=>(i?'L':'M')+' '+x(i).toFixed(1)+' '+y(v).toFixed(1)).join(' ');
+  const mean=a=>a.reduce((s,x)=>s+x,0)/Math.max(1,a.length);
+  const sd=a=>{if(a.length<2)return 0;const m=mean(a);return Math.sqrt(a.reduce((s,x)=>s+(x-m)*(x-m),0)/(a.length-1))};
   function render(){
     const c=slice(); if(!c) return; host.innerHTML='';ddHost.innerHTML='';
     document.getElementById('rn-chart-title').textContent=mode==='roll'?'Roll Timing':'Cross-Maturity Arbitrage';
@@ -71,7 +73,9 @@ const cutoff = data.cutoff;
     overlay.addEventListener('pointermove',ev=>{const b=s.getBoundingClientRect(),px=(ev.clientX-b.left)/b.width*W,i=Math.max(0,Math.min(n-1,Math.round((px-L)/(W-L-R)*(n-1))));const x=xs(i);cross.setAttribute('x1',x);cross.setAttribute('x2',x);cross.setAttribute('opacity','1');tip.hidden=false;tip.style.left=Math.min(b.width-190,Math.max(8,ev.clientX-b.left+12))+'px';tip.style.top=Math.max(8,ev.clientY-b.top-10)+'px';tip.innerHTML=`<strong>${c.dates[i]}</strong>`+c.series.map((q,j)=>`<div style="margin-top:4px">${j===0?'Optimized':q.name}: <b>${q.values[i].toFixed(3)}x</b></div>`).join('')});
     overlay.addEventListener('pointerleave',()=>{cross.setAttribute('opacity','0');tip.hidden=true});host.appendChild(s);
     let dlo=Math.min(...c.dd,0);const dy=v=>T+(0-v)/(0-dlo||1)*(DH-T-22);const d=svg(DH);[0,.5,1].forEach(q=>{const v=dlo*q,y=dy(v);d.appendChild(node('line',{x1:L,y1:y,x2:W-R,y2:y,stroke:'var(--border)'}));d.appendChild(text(v.toFixed(1)+'%',L-7,y+4,{'text-anchor':'end',fill:'var(--muted)','font-size':'11'}));});d.appendChild(node('path',{d:path(c.dd,xs,dy),fill:'none',stroke:'var(--danger)','stroke-width':1.7}));ddHost.appendChild(d);
-    const first=c.series[0].values[0],last=c.series[0].values.at(-1),ret=last/first-1,mdd=Math.min(...c.dd),m=document.querySelectorAll('#rn-metrics strong');m[0].textContent=(ret*100).toFixed(1)+'%';m[1].textContent=mdd.toFixed(1)+'%';m[2].textContent=last.toFixed(2)+'x';m[3].textContent=c.dates[0]+' → '+c.dates.at(-1);
+    const nav=c.series[0].values,first=nav[0],last=nav.at(-1),days=(new Date(c.dates.at(-1))-new Date(c.dates[0]))/86400000,years=Math.max(days/365.25,1/365.25),ann=Math.pow(last/first,1/years)-1;
+    const rs=nav.slice(1).map((v,i)=>v/nav[i]-1),obsPerYear=rs.length/years,vol=sd(rs),sharpe=vol>0?mean(rs)/vol*Math.sqrt(obsPerYear):0,mdd=Math.min(...c.dd),m=document.querySelectorAll('#rn-metrics strong');
+    m[0].textContent=(ann*100).toFixed(1)+'%';m[1].textContent=sharpe.toFixed(2);m[2].textContent=mdd.toFixed(1)+'%';m[3].textContent=c.dates[0]+' → '+c.dates.at(-1);
   }
   document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.mode').forEach(x=>x.classList.remove('active'));b.classList.add('active');mode=b.dataset.mode;render()}));
   document.querySelectorAll('.range').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.range').forEach(x=>x.classList.remove('active'));b.classList.add('active');range=b.dataset.range;render()}));render();
