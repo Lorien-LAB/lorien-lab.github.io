@@ -70,6 +70,38 @@ const reproductionMetric = z.object({
   difference: z.string().optional(),
 });
 
+const reproductionCaseStudy = z.object({
+  shortTitle: z.string(),
+  subtitle: z.string().optional(),
+  verdicts: z.array(z.object({
+    label: z.string(),
+    status: z.enum(['reproduced', 'partial', 'not-reproduced', 'extension']),
+    evidence: z.string(),
+  })).default([]),
+  factorEvidence: z.array(z.object({
+    factor: z.string(),
+    paper: z.string(),
+    reproduced: z.string(),
+    note: z.string().optional(),
+  })).default([]),
+  strategyFlow: z.array(z.string()).default([]),
+  limitations: z.array(z.object({
+    title: z.string(),
+    detail: z.string(),
+  })).default([]),
+  extension: z.object({
+    title: z.string(),
+    thesis: z.string(),
+    metrics: z.array(z.object({
+      label: z.string(),
+      paper: z.string().optional(),
+      baseline: z.string().optional(),
+      extension: z.string(),
+    })).default([]),
+    caution: z.string().optional(),
+  }).optional(),
+});
+
 const reproductionBase = z.object({
   slug: z.string().min(1),
   title: z.string(),
@@ -98,6 +130,7 @@ const reproductionBase = z.object({
   relatedKnowledge: z.array(z.string()).default([]),
   relatedNotes: z.array(z.string()).default([]),
   relatedProjects: z.array(z.string()).default([]),
+  caseStudy: reproductionCaseStudy.optional(),
 });
 
 const academicReproduction = reproductionBase.extend({
