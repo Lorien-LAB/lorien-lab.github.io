@@ -1,0 +1,34 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import ReproductionScore from './ReproductionScore.astro';
+interface Props { entry: CollectionEntry<'reproductions'>; }
+const { entry } = Astro.props;
+const slug = entry.data.slug || entry.id.split('/').pop();
+const href = `${import.meta.env.BASE_URL}knowledge/reproductions/${slug}/`;
+const sourceLabel = entry.data.sourceType === 'academic' ? 'Academic Paper' : 'Broker Report';
+const resultLabel = entry.data.result.replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
+const stageLabel = entry.data.stage.replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
+const visibilityLabel = entry.data.codeVisibility === 'partial' ? 'Partial Code' : entry.data.codeVisibility === 'private' ? 'Private Code' : 'Public Code';
+---
+<a class="reproduction-card" href={href}>
+  <div class="reproduction-topline">
+    <span class={`source source-${entry.data.sourceType}`}>{sourceLabel}</span>
+    <span class={`result result-${entry.data.result}`}>{resultLabel}</span>
+  </div>
+  <h3>{entry.data.title}</h3>
+  <p>{entry.data.description}</p>
+  <div class="reproduction-meta">
+    <div><span>Research Area</span><strong>{entry.data.researchArea}</strong></div>
+    <div><span>Stage</span><strong>{stageLabel}</strong></div>
+    <div><span>Code</span><strong>{visibilityLabel}</strong></div>
+  </div>
+  {entry.data.score && <ReproductionScore score={entry.data.score} compact />}
+  <span class="reproduction-arrow" aria-hidden="true">→</span>
+</a>
+
+<style>
+.reproduction-card{position:relative;display:grid;gap:16px;min-height:300px;padding:23px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--ink);box-shadow:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.reproduction-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));box-shadow:var(--shadow);color:var(--ink)}
+.reproduction-topline{display:flex;align-items:center;justify-content:space-between;gap:10px;font:700 .65rem var(--font-mono);text-transform:uppercase;letter-spacing:.06em}.source{color:var(--accent-strong)}.source-broker{color:#287fbe}.result{padding:4px 7px;border:1px solid var(--border);border-radius:999px;color:var(--muted)}.result-successful,.result-extended{color:var(--accent-strong);border-color:color-mix(in srgb,var(--accent) 38%,var(--border))}.result-failed{color:var(--danger)}
+.reproduction-card h3{margin:0;font-size:1.15rem;line-height:1.35;letter-spacing:-.025em}.reproduction-card>p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.6}.reproduction-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding-top:14px;border-top:1px solid var(--border)}.reproduction-meta span,.reproduction-meta strong{display:block}.reproduction-meta span{color:var(--muted);font:600 .56rem var(--font-mono);text-transform:uppercase}.reproduction-meta strong{margin-top:4px;font-size:.72rem;line-height:1.35}.reproduction-arrow{position:absolute;right:18px;bottom:15px;color:var(--accent-strong);font:800 1.1rem var(--font-mono)}
+@media(max-width:560px){.reproduction-meta{grid-template-columns:1fr}.reproduction-card{min-height:0}}
+</style>
