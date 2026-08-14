@@ -14,6 +14,7 @@ tags:
 featured: false
 related: []
 relatedNotes: []
+officialUrl: https://www.quantstart.com/articles/
 toolUrl: https://www.quantstart.com/articles/
 ---
 
