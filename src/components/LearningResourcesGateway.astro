@@ -1,0 +1,32 @@
+---
+interface Props { href: string; }
+const { href } = Astro.props;
+const stages = ['Core Skills', 'Factor Investing', 'Advanced Concepts', 'Systems', 'Stay Current'];
+---
+<section class="learning-gateway" aria-labelledby="learning-gateway-title">
+  <div class="gateway-copy">
+    <div class="mono-label">Learning Roadmap</div>
+    <h2 id="learning-gateway-title">Financial Engineering Learning Resources</h2>
+    <p>A structured quantitative-finance learning path from foundational skills and factor investing through advanced concepts, research systems, and frontier resources.</p>
+    <p class="gateway-source">Adapted from <a href="https://www.shichuan.info/">Prof. Chuan Shi (石川教授)</a>'s curated guide.</p>
+    <a class="gateway-cta" href={href}>Explore learning resources →</a>
+  </div>
+  <div class="gateway-flow" aria-label="Recommended learning path">
+    {stages.map((stage, index) => <div><span>{String(index + 1).padStart(2, '0')}</span><strong>{stage}</strong></div>)}
+  </div>
+</section>
+
+<style>
+.learning-gateway{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center;padding:32px;border:1px solid color-mix(in srgb,var(--accent) 30%,var(--border));border-radius:var(--radius-lg);background:linear-gradient(135deg,color-mix(in srgb,var(--accent-soft) 30%,var(--surface)),color-mix(in srgb,var(--surface) 92%,var(--bg)));box-shadow:0 16px 50px rgba(16,40,55,.05)}
+.gateway-copy h2{margin:8px 0 13px;font-size:clamp(2rem,4vw,3.3rem);line-height:1.02;letter-spacing:-.05em}
+.gateway-copy>p{max-width:640px;margin:0;color:var(--muted);line-height:1.7}
+.gateway-source{margin-top:15px!important;font-size:.88rem}
+.gateway-source a{font-weight:800;color:var(--ink);text-decoration:underline;text-decoration-color:color-mix(in srgb,var(--accent) 55%,transparent);text-underline-offset:3px}
+.gateway-source a:hover{color:var(--accent-strong)}
+.gateway-cta{display:inline-block;margin-top:21px;color:var(--accent-strong);font-weight:800}
+.gateway-flow{border-top:1px solid var(--border)}
+.gateway-flow div{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.gateway-flow span{font:700 .66rem var(--font-mono);color:var(--accent-strong)}
+.gateway-flow strong{font-size:.84rem}
+@media(max-width:800px){.learning-gateway{grid-template-columns:1fr;gap:30px;padding:24px}}
+</style>
