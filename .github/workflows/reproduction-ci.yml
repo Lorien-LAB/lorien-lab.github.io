@@ -36,7 +36,7 @@ jobs:
           trap 'kill $SERVER_PID || true' EXIT
           sleep 2
           npx --yes playwright@1.55.0 screenshot --browser=chromium --viewport-size='1440,1200' --full-page http://127.0.0.1:4173/knowledge/reproductions/ qa/reproductions-desktop.png
-          npx --yes playwright@1.55.0 screenshot --browser=chromium --device='iPhone 13' --full-page http://127.0.0.1:4173/knowledge/reproductions/ qa/reproductions-mobile.png
+          npx --yes playwright@1.55.0 screenshot --browser=chromium --viewport-size='390,844' --full-page http://127.0.0.1:4173/knowledge/reproductions/ qa/reproductions-mobile.png
       - name: Upload visual QA artifact
         uses: actions/upload-artifact@v4
         with:
