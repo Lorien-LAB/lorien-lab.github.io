@@ -40,13 +40,13 @@ const cutoff = data.cutoff;
 @media(max-width:760px){.chart-intro{grid-template-columns:1fr}.metric-strip{grid-template-columns:1fr 1fr}.plot-head{flex-direction:column}.chart-toolbar{align-items:flex-start;flex-direction:column}}
 </style>
 
-<script define:vars={{ chartData, oosStart, cutoff }}>
+<script is:inline define:vars={{ chartData, oosStart, cutoff }}>
 (function(){
   const host=document.getElementById('rn-nav'), ddHost=document.getElementById('rn-dd'), tip=document.getElementById('rn-tooltip');
   if(!host||!ddHost||!tip) return;
   let mode='roll', range='all';
   const W=1000,H=360,DH=145,L=54,R=18,T=18,B=30;
-  const palette=['var(--accent)','var(--muted)','var(--teal)'];
+  const palette=['var(--accent)','var(--muted)','var(--accent-strong)'];
   const pick=()=>chartData[mode];
   const slice=()=>{
     const c=pick(); if(!c) return null;
