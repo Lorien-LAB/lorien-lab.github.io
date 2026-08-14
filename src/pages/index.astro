@@ -12,7 +12,7 @@ const projects=(await getCollection('projects',({data})=>data.featured)).sort((a
 const notes=(await getCollection('notes',({data})=>!data.draft)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf()).slice(0,3);
 const focus=['Alpha Discovery','Futures & Term Structure','Market Microstructure','CTA & Systematic Trading','Machine Learning','Research Engineering'];
 ---
-<BaseLayout title="Xiang Luo · Quantitative Research" description="Quantitative research portfolio covering alpha discovery, futures, market microstructure, systematic trading, and research infrastructure.">
+<BaseLayout title="Lorien Lab · Quantitative Research" description="Quantitative research portfolio covering alpha discovery, futures, market microstructure, systematic trading, and research infrastructure.">
   <Hero />
   <section class="section"><div class="container"><SectionHeading label="01 / Research" title="Research Areas" description="Research programs organized around mechanisms, data, and falsifiable questions." href={`${base}research/`} linkLabel="View all research →"/><div class="card-grid">{research.map(entry=><ResearchCard entry={entry}/>)}</div></div></section>
   <section class="section"><div class="container"><SectionHeading label="02 / Build" title="Featured Projects" description="Infrastructure and strategy frameworks designed to make research faster, more reproducible, and easier to audit." href={`${base}projects/`} linkLabel="View all projects →"/><div class="card-grid">{projects.map(entry=><ProjectCard entry={entry}/>)}</div></div></section>
