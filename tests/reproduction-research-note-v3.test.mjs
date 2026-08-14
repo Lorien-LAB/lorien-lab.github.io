@@ -50,7 +50,7 @@ test('hero exposes absolute performance before relative alpha', async () => {
 
 test('primary chart is one interactive NAV and drawdown workspace', async () => {
   const chart = await readFile('src/components/reproduction-note/InteractivePerformanceChart.astro', 'utf8');
-  for (const token of ['Roll Timing', 'Cross-Maturity Arbitrage', 'All', 'In Sample', 'OOS', 'OUT OF SAMPLE', 'Drawdown']) {
+  for (const token of ['Roll Timing', 'Cross-Maturity Arbitrage', 'All', 'In Sample', 'OOS', 'OUT OF SAMPLE', 'Annualized Return', 'Sharpe', 'Max Drawdown', 'Drawdown']) {
     assert.ok(chart.includes(token), `chart missing ${token}`);
   }
   assert.match(chart, /mousemove|pointermove/);
