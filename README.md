@@ -95,8 +95,6 @@ Academic code:  https://github.com/Lorien-LAB/quant-research-reproductions/tree/
 Broker code:    https://github.com/Lorien-LAB/quant-research-reproductions/tree/main/broker/<slug>/
 ```
 
-The legacy `/knowledge/reproductions/*` URL family is retained only as a backward-compatible static redirect to the Projects namespace.
-
 The same canonical `slug` must identify one reproduction across the website, generated original-source HTML, and executable-code repository.
 
 Every reproduction has exactly one source type:
