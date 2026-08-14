@@ -2,6 +2,7 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import KnowledgeCard from '../../components/KnowledgeCard.astro';
+import ReproductionGateway from '../../components/ReproductionGateway.astro';
 
 const base = import.meta.env.BASE_URL;
 const entries = (await getCollection('knowledge')).sort((a,b) => (b.data.updated ?? b.data.date).valueOf() - (a.data.updated ?? a.data.date).valueOf());
@@ -53,6 +54,8 @@ const typeCounts = Object.fromEntries(['concept','paper','tool','topic'].map((ty
       </div>
     </div>
   </section>
+
+  <section class="section"><div class="container"><ReproductionGateway href={`${base}knowledge/reproductions/`} /></div></section>
 
   {featured.length > 0 && <section class="section featured-section">
     <div class="container">
