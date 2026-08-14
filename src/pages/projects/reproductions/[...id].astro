@@ -11,6 +11,13 @@ import ReproductionFactorEvidence from '../../../components/ReproductionFactorEv
 import ReproductionStrategyFlow from '../../../components/ReproductionStrategyFlow.astro';
 import ReproductionLimitations from '../../../components/ReproductionLimitations.astro';
 import ReproductionExtensionPanel from '../../../components/ReproductionExtensionPanel.astro';
+import ResearchNoteHero from '../../../components/reproduction-note/ResearchNoteHero.astro';
+import InteractivePerformanceChart from '../../../components/reproduction-note/InteractivePerformanceChart.astro';
+import OriginalStrategyStory from '../../../components/reproduction-note/OriginalStrategyStory.astro';
+import ReproductionAuditStory from '../../../components/reproduction-note/ReproductionAuditStory.astro';
+import OptimizationStory from '../../../components/reproduction-note/OptimizationStory.astro';
+import ResearchAuditAppendix from '../../../components/reproduction-note/ResearchAuditAppendix.astro';
+import { researchNoteData } from '../../../data/reproduction-research-note/stock-index-futures-roll-basis-timing';
 
 export async function getStaticPaths() {
   const entries = await getCollection('reproductions');
@@ -20,14 +27,15 @@ export async function getStaticPaths() {
 const { entry } = Astro.props as { entry: CollectionEntry<'reproductions'> };
 const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL;
-const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const slugOf = (id: string) => id.split('/').pop() ?? id;
+const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
+const caseStudy = entry.data.caseStudy;
+const isResearchNoteV3 = entry.data.slug === 'stock-index-futures-roll-basis-timing';
 const sourceLabel = entry.data.sourceType === 'academic' ? 'Academic Paper' : 'Broker Report';
 const resultLabel = entry.data.result.replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
 const visibilityLabel = entry.data.codeVisibility === 'partial' ? 'Partial Code Release' : entry.data.codeVisibility === 'private' ? 'Implementation Private' : 'Public Code';
 const sourceLink = entry.data.sourceType === 'academic' ? (entry.data.paperUrl ?? entry.data.sourceUrl) : entry.data.sourceUrl;
-const caseStudy = entry.data.caseStudy;
-const pageTitle = caseStudy?.shortTitle ?? entry.data.title;
+const pageTitle = isResearchNoteV3 ? '股指期货滚贴水择时与市场情绪因子' : (caseStudy?.shortTitle ?? entry.data.title);
 
 const [knowledge, notes, projects] = await Promise.all([getCollection('knowledge'), getCollection('notes'), getCollection('projects')]);
 const resolveSlugs = <T extends { id: string }>(slugs: string[], collection: T[]) => slugs.flatMap((slug) => {
@@ -47,86 +55,64 @@ const artifactLinks = [
 ].filter(Boolean) as { label: string; href: string; external: boolean }[];
 ---
 <BaseLayout title={`${pageTitle} · Lorien Lab`} description={entry.data.description}>
-  <article class="reproduction-record">
-    {caseStudy ? <ReproductionCaseStudyHeader entry={entry} /> : <header class="record-head">
-      <div class="container record-wrap">
-        <a class="back" href={`${base}projects/reproductions/`}>← All reproductions</a>
-        <div class="record-kicker"><span>{sourceLabel}</span><span>{entry.data.researchArea}</span></div>
-        <h1>{entry.data.title}</h1>
-        <p class="record-description">{entry.data.description}</p>
-        <div class="source-metadata">
-          {entry.data.sourceType === 'academic' ? <>
-            <div><span>Authors</span><strong>{entry.data.authors.join(' · ')}</strong></div>
-            <div><span>Year</span><strong>{entry.data.year}</strong></div>
-            {(entry.data.journal ?? entry.data.conference ?? entry.data.venue) && <div><span>Venue</span><strong>{entry.data.journal ?? entry.data.conference ?? entry.data.venue}</strong></div>}
-            {entry.data.doi && <div><span>DOI</span><strong>{entry.data.doi}</strong></div>}
-          </> : <>
-            <div><span>Broker</span><strong>{entry.data.broker}</strong></div>
-            <div><span>Analysts</span><strong>{entry.data.analysts.join(' · ')}</strong></div>
-            <div><span>Published</span><strong>{entry.data.publishDate.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})}</strong></div>
-            {entry.data.series && <div><span>Series</span><strong>{entry.data.series}</strong></div>}
-          </>}
-        </div>
-        <TagList tags={entry.data.tags} />
-      </div>
-    </header>}
+  {isResearchNoteV3 ? (
+    <article class="research-note-v3">
+      <ResearchNoteHero data={researchNoteData} entry={entry} />
+      <InteractivePerformanceChart data={researchNoteData} />
+      <OriginalStrategyStory data={researchNoteData} />
+      <ReproductionAuditStory data={researchNoteData} />
+      <OptimizationStory data={researchNoteData} />
+      <ResearchAuditAppendix data={researchNoteData} entry={entry} />
+    </article>
+  ) : (
+    <article class="reproduction-record">
+      {caseStudy ? <ReproductionCaseStudyHeader entry={entry} /> : (
+        <header class="record-head"><div class="container record-wrap">
+          <a class="back" href={`${base}projects/reproductions/`}>← All reproductions</a>
+          <div class="record-kicker"><span>{sourceLabel}</span><span>{entry.data.researchArea}</span></div>
+          <h1>{entry.data.title}</h1><p>{entry.data.description}</p>
+          <div class="source-meta">
+            {entry.data.sourceType === 'academic' ? <><span>{entry.data.authors.join(' · ')}</span><span>{entry.data.year}</span></> : <><span>{entry.data.broker}</span><span>{entry.data.analysts.join(' · ')}</span><span>{entry.data.publishDate.toLocaleDateString('en-US')}</span></>}
+          </div><TagList tags={entry.data.tags} />
+        </div></header>
+      )}
 
-    <section class="record-status"><div class="container record-wrap status-grid">
-      <div class="status-copy"><div class="mono-label">Reproduction Status</div><div class="status-line"><strong class={`result result-${entry.data.result}`}>{resultLabel}</strong><span>{visibilityLabel}</span></div>{!caseStudy && entry.data.resultSummary && <p>{entry.data.resultSummary}</p>}</div>
-      <div class="status-facts">{entry.data.market && <div><span>Market</span><strong>{entry.data.market}</strong></div>}{entry.data.assetClass && <div><span>Asset Class</span><strong>{entry.data.assetClass}</strong></div>}{entry.data.frequency && <div><span>Frequency</span><strong>{entry.data.frequency}</strong></div>}{entry.data.dataAvailability && <div><span>Data</span><strong>{entry.data.dataAvailability}</strong></div>}</div>
-      <div class="pipeline-wrap"><ReproductionPipeline stage={entry.data.stage} /></div>
-    </div></section>
+      <section class="record-status"><div class="container record-wrap status-grid">
+        <div><div class="mono-label">Reproduction Status</div><div class="status-line"><strong>{resultLabel}</strong><span>{visibilityLabel}</span></div></div>
+        <div class="facts">{entry.data.market && <span>Market · {entry.data.market}</span>}{entry.data.frequency && <span>Frequency · {entry.data.frequency}</span>}{entry.data.dataAvailability && <span>Data · {entry.data.dataAvailability}</span>}</div>
+        <div class="pipeline"><ReproductionPipeline stage={entry.data.stage} /></div>
+      </div></section>
 
-    {caseStudy ? <>
-      <div class="container case-study-content">
+      {caseStudy ? <div class="container legacy-case">
         <ReproductionVerdictGrid verdicts={caseStudy.verdicts} />
         {caseStudy.strategyFlow.length > 0 && <ReproductionStrategyFlow steps={caseStudy.strategyFlow} />}
         {caseStudy.factorEvidence.length > 0 && <ReproductionFactorEvidence factors={caseStudy.factorEvidence} />}
-
-        {(entry.data.metrics.length > 0 || entry.data.score) && <section class="structured-evidence" aria-labelledby="strategy-evidence-title">
-          <div class="structured-head"><div><div class="mono-label">Strategy Replication</div><h2 id="strategy-evidence-title">Headline evidence, kept traceable.</h2></div><p>Only decision-relevant baseline comparisons are surfaced here. The score remains a secondary audit aid rather than the verdict engine.</p></div>
-          <div class="structured-grid">
-            {entry.data.metrics.length > 0 && <div class="comparison-panel"><div class="mono-label">Original vs Reproduced</div><div class="metric-table-wrap"><table><thead><tr><th>Metric</th><th>Original</th><th>Ours</th><th>Difference</th></tr></thead><tbody>{entry.data.metrics.map((metric) => <tr><td>{metric.name}</td><td>{metric.original}</td><td>{metric.reproduced}</td><td>{metric.difference ?? '—'}</td></tr>)}</tbody></table></div></div>}
-            {entry.data.score && <ReproductionScore score={entry.data.score} />}
-          </div>
-        </section>}
-
         {caseStudy.limitations.length > 0 && <ReproductionLimitations limitations={caseStudy.limitations} />}
-
-        <section class="narrative-section" aria-labelledby="research-narrative-title">
-          <div class="narrative-intro"><div class="mono-label">Research Narrative</div><h2 id="research-narrative-title">How the reproduction was built and validated.</h2><p>The full debugging trail and exhaustive experiment logs stay in the research repository; this public narrative preserves only decisions that matter for auditability.</p></div>
-          <main class="prose reproduction-prose case-prose"><Content /></main>
-        </section>
-
+        <main class="prose"><Content /></main>
         {caseStudy.extension && <ReproductionExtensionPanel extension={caseStudy.extension} />}
-      </div>
-      <ReproductionCharts slug={entry.data.slug} />
-    </> : <>
-      <div class="container record-content">
-        <main class="prose reproduction-prose"><Content /></main>
-        {(entry.data.metrics.length > 0 || entry.data.score) && <aside class="evidence-column">
-          {entry.data.metrics.length > 0 && <section class="comparison-panel"><div class="mono-label">Original vs Reproduced</div><div class="metric-table-wrap"><table><thead><tr><th>Metric</th><th>Original</th><th>Ours</th><th>Difference</th></tr></thead><tbody>{entry.data.metrics.map((metric) => <tr><td>{metric.name}</td><td>{metric.original}</td><td>{metric.reproduced}</td><td>{metric.difference ?? '—'}</td></tr>)}</tbody></table></section>}
+        {entry.data.score && <ReproductionScore score={entry.data.score} />}
+      </div> : <div class="container generic-content">
+        <main class="prose"><Content /></main>
+        {(entry.data.metrics.length > 0 || entry.data.score) && <aside>
+          {entry.data.metrics.length > 0 && <div class="metrics"><div class="mono-label">Original vs Reproduced</div>{entry.data.metrics.map((m)=><div><span>{m.name}</span><strong>{m.original} → {m.reproduced}</strong></div>)}</div>}
           {entry.data.score && <ReproductionScore score={entry.data.score} />}
         </aside>}
-      </div>
-      <ReproductionCharts slug={entry.data.slug} />
-    </>}
+      </div>}
 
-    <section class="record-footer"><div class="container record-wrap footer-grid">
-      <div class="artifact-panel"><div class="mono-label">Artifacts</div><h2>Research outputs</h2>{artifactLinks.length > 0 ? <div class="artifact-links">{artifactLinks.map((artifact) => <a href={artifact.href} target={artifact.external ? '_blank' : undefined} rel={artifact.external ? 'noreferrer' : undefined}>{artifact.label} →</a>)}</div> : <p class="muted">No public artifacts are linked yet.</p>}{entry.data.codeVisibility === 'private' && <div class="private-status">Implementation Private</div>}</div>
-      {(relatedKnowledge.length + relatedNotes.length + relatedProjects.length > 0) && <div class="relations"><div class="mono-label">Connected Research</div><h2>Related knowledge</h2><div class="relation-groups">
-        {relatedKnowledge.length > 0 && <div><strong>Knowledge</strong>{relatedKnowledge.map((item) => <a href={`${base}knowledge/${slugOf(item.id)}/`}>{item.data.title} →</a>)}</div>}
-        {relatedNotes.length > 0 && <div><strong>Notes</strong>{relatedNotes.map((item) => <a href={`${base}notes/${slugOf(item.id)}/`}>{item.data.title} →</a>)}</div>}
-        {relatedProjects.length > 0 && <div><strong>Projects</strong>{relatedProjects.map((item) => <a href={`${base}projects/${slugOf(item.id)}/`}>{item.data.title} →</a>)}</div>}
-      </div></div>}
-    </div></section>
-  </article>
+      <ReproductionCharts slug={entry.data.slug} />
+      <section class="record-footer"><div class="container record-wrap footer-grid">
+        <div><div class="mono-label">Artifacts</div><h2>Research outputs</h2>{artifactLinks.length > 0 ? <div class="artifact-links">{artifactLinks.map((a)=><a href={a.href} target={a.external?'_blank':undefined} rel={a.external?'noreferrer':undefined}>{a.label} →</a>)}</div> : <p>No public artifacts are linked yet.</p>}{entry.data.codeVisibility === 'private' && <div>Implementation Private</div>}</div>
+        {(relatedKnowledge.length + relatedNotes.length + relatedProjects.length > 0) && <div><div class="mono-label">Connected Research</div><div class="relations">
+          {relatedKnowledge.map((item)=><a href={`${base}knowledge/${slugOf(item.id)}/`}>{item.data.title} →</a>)}
+          {relatedNotes.map((item)=><a href={`${base}notes/${slugOf(item.id)}/`}>{item.data.title} →</a>)}
+          {relatedProjects.map((item)=><a href={`${base}projects/${slugOf(item.id)}/`}>{item.data.title} →</a>)}
+        </div></div>}
+      </div></section>
+    </article>
+  )}
 </BaseLayout>
 
 <style>
-.record-head{padding:62px 0 48px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 78%,var(--bg)),var(--bg))}.record-wrap{max-width:1120px}.back{display:inline-block;margin-bottom:38px;color:var(--muted);font-weight:700;font-size:.88rem}.record-kicker{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:13px;font:700 .68rem var(--font-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent-strong)}.record-kicker span+span:before{content:' / ';color:var(--muted)}.record-head h1{max-width:980px;margin:0 0 16px;font-size:clamp(2.45rem,6vw,4.8rem);line-height:.98;letter-spacing:-.055em}.record-description{max-width:820px;margin:0;color:var(--muted);font-size:1.08rem}.source-metadata{display:flex;flex-wrap:wrap;gap:22px 34px;margin-top:28px;padding-top:21px;border-top:1px solid var(--border)}.source-metadata span,.source-metadata strong{display:block}.source-metadata span{color:var(--muted);font:600 .6rem var(--font-mono);text-transform:uppercase}.source-metadata strong{margin-top:4px;font-size:.82rem}
-.record-status{padding:30px 0;border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--surface) 58%,var(--bg))}.status-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:28px 55px;align-items:start}.status-line{display:flex;align-items:center;gap:12px;margin-top:8px}.status-line>span{color:var(--muted);font:650 .7rem var(--font-mono);text-transform:uppercase}.result{font:800 1.1rem var(--font-mono);text-transform:uppercase;color:var(--accent-strong)}.result-failed{color:var(--danger)}.status-copy p{margin:10px 0 0;color:var(--muted);font-size:.88rem}.status-facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.status-facts div{padding-left:12px;border-left:2px solid var(--border)}.status-facts span,.status-facts strong{display:block}.status-facts span{color:var(--muted);font:600 .57rem var(--font-mono);text-transform:uppercase}.status-facts strong{margin-top:4px;font-size:.75rem}.pipeline-wrap{grid-column:1/-1}
-.case-study-content{max-width:1160px;padding-top:8px;padding-bottom:58px}.structured-evidence{padding:38px 0}.structured-head{display:grid;grid-template-columns:1fr minmax(280px,500px);gap:44px;align-items:end;margin-bottom:22px}.structured-head h2,.narrative-intro h2{margin:7px 0 0;font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.05em}.structured-head>p,.narrative-intro>p{margin:0;color:var(--muted);line-height:1.65}.structured-grid{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(280px,.65fr);gap:18px;align-items:start}.narrative-section{padding:46px 0}.narrative-intro{display:grid;grid-template-columns:1fr minmax(280px,500px);gap:44px;align-items:end;margin-bottom:28px}.case-prose{max-width:820px;margin:0}.record-content{display:grid;grid-template-columns:minmax(0,760px) minmax(300px,1fr);gap:62px;align-items:start;padding-top:62px;padding-bottom:62px}.reproduction-prose{max-width:none;margin:0}.evidence-column{display:grid;gap:18px;position:sticky;top:94px}.comparison-panel{padding:21px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}.metric-table-wrap{overflow-x:auto;margin-top:16px}.comparison-panel table{width:100%;border-collapse:collapse;font-size:.75rem}.comparison-panel th,.comparison-panel td{padding:9px 7px;text-align:left;border-bottom:1px solid var(--border);white-space:nowrap}.comparison-panel th{color:var(--muted);font:700 .58rem var(--font-mono);text-transform:uppercase}.comparison-panel td:not(:first-child){font-family:var(--font-mono)}
-.record-footer{padding:54px 0;background:color-mix(in srgb,var(--surface) 72%,var(--bg));border-top:1px solid var(--border)}.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px}.record-footer h2{margin:8px 0 19px;font-size:1.6rem;letter-spacing:-.035em}.artifact-links{display:flex;flex-wrap:wrap;gap:9px}.artifact-links a{padding:9px 12px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font-size:.78rem;font-weight:750}.private-status{display:inline-flex;margin-top:12px;padding:8px 10px;border:1px dashed var(--border);border-radius:8px;color:var(--muted);font:700 .7rem var(--font-mono);text-transform:uppercase}.muted{color:var(--muted)}.relation-groups{display:grid;gap:18px}.relation-groups>div{display:grid;gap:7px}.relation-groups strong{color:var(--muted);font:700 .62rem var(--font-mono);text-transform:uppercase}.relation-groups a{font-size:.86rem;font-weight:700;color:var(--accent-strong)}
-@media(max-width:980px){.status-grid,.record-content,.footer-grid,.structured-grid{grid-template-columns:1fr}.status-facts{grid-template-columns:repeat(2,1fr)}.evidence-column{position:static;grid-row:1}.record-content{gap:34px}.structured-head,.narrative-intro{grid-template-columns:1fr}}@media(max-width:560px){.status-facts{grid-template-columns:1fr 1fr}.source-metadata{display:grid;grid-template-columns:1fr 1fr}.record-head{padding-top:48px}}
+.record-wrap{max-width:1120px}.record-head{padding:60px 0;border-bottom:1px solid var(--border)}.record-head .back{display:inline-block;margin-bottom:32px;color:var(--muted);font-weight:700}.record-kicker{font:700 .65rem var(--font-mono);color:var(--accent-strong);text-transform:uppercase}.record-kicker span+span:before{content:' / '}.record-head h1{max-width:960px;margin:10px 0;font-size:clamp(2.4rem,6vw,4.7rem);line-height:.98;letter-spacing:-.055em}.record-head p{max-width:820px;color:var(--muted)}.source-meta{display:flex;gap:18px;flex-wrap:wrap;margin:24px 0;color:var(--muted);font:650 .67rem var(--font-mono)}.record-status{padding:28px 0;border-bottom:1px solid var(--border);background:var(--surface)}.status-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:22px}.status-line{display:flex;gap:12px;margin-top:7px;align-items:center}.status-line strong{font:800 1rem var(--font-mono);color:var(--accent-strong)}.status-line span{font:650 .6rem var(--font-mono);color:var(--muted)}.facts{display:flex;gap:14px;flex-wrap:wrap;color:var(--muted);font:650 .62rem var(--font-mono)}.pipeline{grid-column:1/-1}.legacy-case{max-width:1120px;padding-top:30px;padding-bottom:50px}.legacy-case>.prose{max-width:820px;margin:45px 0}.generic-content{display:grid;grid-template-columns:minmax(0,760px) minmax(280px,1fr);gap:55px;padding-top:55px;padding-bottom:55px}.generic-content aside{display:grid;gap:15px;align-content:start}.metrics{padding:18px;border:1px solid var(--border);border-radius:10px}.metrics>div:not(.mono-label){display:flex;justify-content:space-between;gap:10px;padding:9px 0;border-bottom:1px solid var(--border);font-size:.7rem}.record-footer{padding:48px 0;border-top:1px solid var(--border);background:var(--surface)}.footer-grid{display:grid;grid-template-columns:1fr 1fr;gap:55px}.artifact-links,.relations{display:flex;gap:9px;flex-wrap:wrap}.artifact-links a,.relations a{padding:8px 10px;border:1px solid var(--border);border-radius:8px;font-size:.73rem}
+@media(max-width:800px){.status-grid,.generic-content,.footer-grid{grid-template-columns:1fr}}
 </style>
