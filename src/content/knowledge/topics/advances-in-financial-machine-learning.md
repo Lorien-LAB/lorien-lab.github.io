@@ -14,6 +14,7 @@ tags:
 featured: false
 related: []
 relatedNotes: []
+officialUrl: https://uat.store.wiley.com/en-us/advances-in-financial-machine-learning-p-9781119482086
 sourceUrl: https://github.com/BlackArbsCEO/Adv_Fin_ML_Exercises
 ---
 
@@ -25,6 +26,14 @@ The guide points to an exercise repository associated with Marcos López de Prad
 
 The resource appears in the **Advanced Concepts** stage, after the guide's core-skills and factor-investing material.
 
-## Resource
+## Official resource
 
-[Advances in Financial Machine Learning Exercises](https://github.com/BlackArbsCEO/Adv_Fin_ML_Exercises)
+The canonical publisher page for the book is:
+
+[Advances in Financial Machine Learning — Wiley](https://uat.store.wiley.com/en-us/advances-in-financial-machine-learning-p-9781119482086)
+
+## Supplementary exercises
+
+Prof. Shi's guide specifically references the following exercise repository. It is retained as supplementary material rather than labeled official book code:
+
+[Adv_Fin_ML_Exercises](https://github.com/BlackArbsCEO/Adv_Fin_ML_Exercises)
