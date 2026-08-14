@@ -1,0 +1,22 @@
+---
+interface ExtensionMetric { label: string; paper?: string; baseline?: string; extension: string; }
+interface Extension { title: string; thesis: string; metrics: ExtensionMetric[]; caution?: string; }
+interface Props { extension: Extension; }
+const { extension } = Astro.props;
+---
+<section class="extension-panel" aria-labelledby="extension-title">
+  <div class="extension-intro">
+    <div class="mono-label">Beyond Reproduction</div>
+    <h2 id="extension-title">{extension.title}</h2>
+    <p>{extension.thesis}</p>
+    <div class="extension-badge">Lorien Lab research extension · not source-paper evidence</div>
+  </div>
+  <div class="extension-evidence">
+    <div class="table-wrap"><table><thead><tr><th>Metric</th><th>Paper</th><th>Baseline reproduction</th><th>Extension</th></tr></thead><tbody>{extension.metrics.map((metric) => <tr><td>{metric.label}</td><td>{metric.paper ?? '—'}</td><td>{metric.baseline ?? '—'}</td><td><strong>{metric.extension}</strong></td></tr>)}</tbody></table></div>
+    {extension.caution && <aside class="caution"><span>Evidence caution</span><p>{extension.caution}</p></aside>}
+  </div>
+</section>
+
+<style>
+.extension-panel{display:grid;grid-template-columns:.78fr 1.22fr;gap:52px;padding:52px;border:1px solid color-mix(in srgb,var(--accent) 30%,var(--border));border-radius:var(--radius-lg);background:linear-gradient(135deg,color-mix(in srgb,var(--accent-soft) 24%,var(--surface)),var(--surface));box-shadow:0 18px 54px rgba(16,40,55,.045)}.extension-intro h2{margin:8px 0 14px;font-size:clamp(2rem,4vw,3.2rem);line-height:1.03;letter-spacing:-.05em}.extension-intro>p{margin:0;color:var(--muted);line-height:1.7}.extension-badge{display:inline-block;margin-top:22px;padding:8px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);color:var(--muted);font:700 .61rem var(--font-mono);text-transform:uppercase;letter-spacing:.04em}.extension-evidence{display:grid;gap:16px}.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}table{width:100%;border-collapse:collapse;min-width:600px}th,td{padding:12px 13px;text-align:left;border-bottom:1px solid var(--border)}th{color:var(--muted);font:700 .58rem var(--font-mono);text-transform:uppercase}td{font-size:.79rem}td:not(:first-child){font-family:var(--font-mono);white-space:nowrap}tbody tr:last-child td{border-bottom:0}.caution{padding:16px 18px;border-left:3px solid #a36c16;background:color-mix(in srgb,#a36c16 8%,var(--surface));border-radius:0 9px 9px 0}.caution span{font:800 .61rem var(--font-mono);text-transform:uppercase;letter-spacing:.05em;color:#a36c16}.caution p{margin:7px 0 0;color:var(--muted);font-size:.82rem;line-height:1.62}@media(max-width:900px){.extension-panel{grid-template-columns:1fr;padding:30px;gap:30px}}@media(max-width:560px){.extension-panel{padding:23px}}
+</style>
