@@ -3,7 +3,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import '../styles/global.css';
 interface Props { title: string; description?: string; class?: string; }
-const { title, description = 'Quantitative research, systematic strategies, and research infrastructure by Xiang Luo.', class: bodyClass } = Astro.props;
+const { title, description = 'Quantitative research, systematic strategies, and research infrastructure by Lorien Lab.', class: bodyClass } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 ---
 <!doctype html>
