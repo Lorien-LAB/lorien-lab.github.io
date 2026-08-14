@@ -16,13 +16,22 @@ const requiredFiles = [
   'README.md',
 ];
 
+const knowledgeFiles = [
+  'src/pages/knowledge/index.astro',
+  'src/pages/knowledge/[...id].astro',
+  'src/content/knowledge/concepts/walk-forward-validation.md',
+  'src/content/knowledge/concepts/fama-macbeth-regression.md',
+  'src/content/knowledge/tools/rqalpha.md',
+  'src/content/knowledge/topics/automated-factor-discovery.md',
+];
+
 test('portfolio exposes every required v1 surface', async () => {
   for (const file of requiredFiles) await access(file);
 });
 
 test('header contains the complete portfolio navigation', async () => {
   const source = await readFile('src/components/Header.astro', 'utf8');
-  for (const label of ['Home', 'Research', 'Projects', 'Notes', 'CV', 'About']) {
+  for (const label of ['Home', 'Research', 'Projects', 'Knowledge', 'Notes', 'CV', 'About']) {
     assert.ok(source.includes(`['${label}',`) || source.includes(`>${label}<`), `missing ${label} navigation item`);
   }
 });
@@ -39,4 +48,39 @@ test('deployment workflow targets GitHub Pages', async () => {
   assert.match(source, /withastro\/action@v6/);
   assert.match(source, /actions\/deploy-pages/);
   assert.match(source, /pages: write/);
+});
+
+test('knowledge base exposes its content model and required surfaces', async () => {
+  for (const file of knowledgeFiles) await access(file);
+
+  const config = await readFile('src/content.config.ts', 'utf8');
+  assert.match(config, /const knowledge = defineCollection/);
+  for (const type of ['concept', 'paper', 'tool', 'topic']) {
+    assert.ok(config.includes(`'${type}'`), `knowledge schema missing ${type} type`);
+  }
+  assert.match(config, /seed/);
+  assert.match(config, /growing/);
+  assert.match(config, /mature/);
+});
+
+test('knowledge base navigation and homepage integration are present', async () => {
+  const header = await readFile('src/components/Header.astro', 'utf8');
+  assert.ok(header.includes("['Knowledge', '/knowledge/']"));
+
+  const home = await readFile('src/pages/index.astro', 'utf8');
+  assert.match(home, /Knowledge Base/);
+  assert.match(home, /Explore Knowledge/);
+});
+
+test('Obsidian knowledge graph is explicitly coming soon and is not a dead link', async () => {
+  const source = await readFile('src/pages/knowledge/index.astro', 'utf8');
+  assert.match(source, /Obsidian Knowledge Graph/);
+  assert.match(source, /Coming Soon/);
+  assert.doesNotMatch(source, /<a[^>]+href=[^>]*obsidian/i);
+});
+
+test('knowledge page derives counts instead of hard-coding invented corpus statistics', async () => {
+  const source = await readFile('src/pages/knowledge/index.astro', 'utf8');
+  assert.doesNotMatch(source, /184 Concepts|36 Papers|22 Tools|14 Research Topics/);
+  assert.match(source, /entries\.filter|knowledge\.filter|domainCount|counts|length/);
 });
