@@ -1,0 +1,71 @@
+---
+const { data } = Astro.props as { data: any };
+const sensitivity = data.sensitivity;
+const maxSensitivity = Math.max(...sensitivity.map((x:any)=>x.value));
+---
+<section class="optimization" id="optimization">
+  <div class="container opt-wrap">
+    <div class="chapter-no">06 · My Research</div>
+    <div class="opt-head">
+      <div><h2>我没有继续堆因子，而是先问：<br/><em>模型究竟在哪里损失信息？</em></h2><p>复现完成后，我把研究重点从“能否还原论文”转向“为什么某些 signal flips 没有经济意义”。核心不是追逐一组更漂亮的参数，而是定位 ensemble 的状态转换机制。</p></div>
+      <aside><span>SELECTED · H–M RESEARCH</span><strong>13.2%</strong><small>annualized return</small><div><b>+1.30%</b> full-sample improvement</div><div><b>+5.38%</b> OOS improvement</div><div><b>~3.8</b> switches / year</div></aside>
+    </div>
+
+    <section class="finding">
+      <div class="finding-index">FINDING 01</div>
+      <div class="finding-grid">
+        <div><h3>ADR 是一个弱 alpha，但它同时是 ensemble 的“状态锚”。</h3><p>复现里 ADR 的 CMO 逻辑难以重现，直接剔除 ADR 后，IC OOS improvement 从 <strong>+1.96%</strong> 提升到 <strong>+2.57%</strong>。但代价是 switches/year 从 4.6 跳到 <strong>13.8</strong>。</p><p>这说明“删除差因子”不是完整答案：ADR 即使自身边际弱，也长期压低 aggregate signal 的翻转频率，承担了类似 regularizer 的功能。</p></div>
+        <blockquote>A weak alpha factor can still be valuable if it stabilizes the ensemble state.</blockquote>
+      </div>
+    </section>
+
+    <section class="finding">
+      <div class="finding-index">FINDING 02</div>
+      <div class="finding-grid">
+        <div><h3>真正的问题在 aggregate signal，而不是单个 factor。</h3><p>波动率、振幅、横截面 dispersion 都是慢变量；但 MESA / MACD 等策略层会生成短期翻转。我的 hypothesis 是：这些 flip 中相当一部分是 <strong>execution-layer white noise</strong>，并不代表 sentiment regime 真正改变。</p><p>因此 intervention 发生在 <strong>aggregate</strong> tradable state：只有对侧信号持续存在才切换合约。Factor-level Hysteresis 的效果更差，说明聚合后的可交易状态才是正确的 intervention level。</p></div>
+        <div class="signal-demo" aria-label="Hysteresis mechanism"><div><span>RAW AGGREGATE</span><code>− + − + + − + + + + +</code><small>short flips contaminate state</small></div><b>↓</b><div><span>HYSTERESIS</span><code>− − − − − − + + + + +</code><small>persistent regime only</small></div></div>
+      </div>
+    </section>
+
+    <section class="sensitivity-section">
+      <div class="section-title"><div><div class="mono-label">PARAMETER SENSITIVITY</div><h3>10 天附近出现 knee，而不是“越慢越好”。</h3></div><p>这支持 noise filtering 与 reaction lag 的权衡。adaptive confirmation 被后续 H–M 实验<strong>证伪 / rejected</strong>：更复杂的自适应窗口并没有超过固定窗口。</p></div>
+      <div class="sensitivity" aria-label="Hysteresis sensitivity">
+        {sensitivity.map((x:any)=><div class="sens-row"><span>{x.window}d</span><div><i style={`width:${Math.max(6,x.value/maxSensitivity*100)}%`}></i></div><strong>+{x.value.toFixed(2)}%</strong>{x.window==='10'&&<em>KNEE</em>}</div>)}
+      </div>
+    </section>
+
+    <section class="finding selected-finding">
+      <div class="finding-index">SELECTED RULE</div>
+      <div class="finding-grid">
+        <div><h3>Asymmetric Hysteresis 10/5：慢进当季，快出当季。</h3><p><strong>10/5</strong> 的经济含义不是对称延迟。进入 current-quarter 需要 10 日持续确认，避免短期噪声把持仓切到更敏感的远端；退出只需 5 日，因为状态恶化时需要更快保护已经积累的 carry。</p><p>随后 H–M 研究加入一个独立的 <strong>deep-discount anchor q=0.15</strong>：当基差进入极深贴水区域，强制给予 current-quarter 一定状态锚。最终推荐配置为：</p><div class="formula">3 factors (ADR removed) + aggregate asymmetric Hysteresis 10/5 + deep-discount anchor q=0.15</div></div>
+        <div class="selected-stats"><div><span>Annualized Return</span><strong>13.2%</strong></div><div><span>Sharpe</span><strong>0.65</strong></div><div><span>Max Drawdown</span><strong>-34.8%</strong></div><div><span>OOS Improvement</span><strong>+5.38%</strong></div></div>
+      </div>
+    </section>
+
+    <section class="ablation">
+      <div class="section-title"><div><div class="mono-label">ABLATION · FALSIFICATION</div><h3>Ablation 不是只展示 winner，而是保留被证伪的方向。</h3></div><p>Negative Control 很重要：如果一个 trick 对所有品种都“有效”，反而更像参数挖掘。</p></div>
+      <div class="ablation-table">
+        <div class="a-head"><span>EXPERIMENT</span><span>FULL</span><span>OOS</span><span>SWITCHES</span><span>VERDICT</span></div>
+        {data.ablations.map((a:any)=><div class:list={['a-row',a.verdict.includes('recommended')&&'chosen',a.verdict==='rejected'&&'rejected']}><strong>{a.name}</strong><span>{a.full}</span><span>{a.oos}</span><span>{a.switches}</span><em>{a.verdict}</em></div>)}
+      </div>
+      <div class="negative-controls">
+        <p><strong>Adaptive confirmation → 证伪 / rejected.</strong> 自适应 vol/flip 窗口更复杂，但没有超过固定 10 日。</p>
+        <p><strong>IM Hysteresis → OOS 变差并出现 negative result.</strong> 说明 IM 的低频切换仍携带边际，不能把 IC 的执行改造机械复制过去。</p>
+        <p><strong>Dedicated spread signals → rejected.</strong> 跨期价差动量/均值回归没有超过原论文的 sentiment regime signal。</p>
+      </div>
+    </section>
+
+    <section class="cross-index">
+      <div class="chapter-no">BEYOND IC · CROSS-INDEX RESEARCH</div><div class="cross-grid"><div><h3>IM+IC 50/50：用更可靠品种为弱品种降噪。</h3><p>IM 原始复现偏弱后，我没有给 IM 强套 Hysteresis，而是用同为小盘风格、basis regime 高度相关的 IC 信号做 cross-index confirmation。<strong>IM+IC 50/50</strong> 在 H–M 实验中得到全样本 +1.76%、OOS +2.41%。这是独立 extension，仍需要更长实时样本验证。</p></div><div class="cross-stat"><span>IM OOS</span><strong>+2.41%</strong><small>paper +1.5% · reproduced +0.7%</small></div></div>
+    </section>
+
+    <section class="cross-maturity">
+      <div class="chapter-no">MECHANISM CHECK · CROSS-MATURITY</div><div class="cross-grid"><div><h3>为什么同样的过滤，在 6× spread 上影响更明显？</h3><p>跨期套利把错误 regime switch 的损失放大。若“短期 flip 是噪声”这个 hypothesis 为真，那么过滤低质量切换在 leveraged spread 上应该产生更大的边际。实验结果方向与这个预测一致，因此 cross-maturity 更适合作为 <strong>mechanism check</strong>，而不是把某个高 OOS 数字当营销 headline。</p></div><div class="cross-stat"><span>RESEARCH LOGIC</span><strong>same signal</strong><small>different payoff sensitivity</small></div></div>
+    </section>
+  </div>
+</section>
+
+<style>
+.optimization{padding:20px 0 50px}.opt-wrap{max-width:1120px}.chapter-no,.finding-index{font:800 .66rem var(--font-mono);letter-spacing:.09em;color:var(--accent-strong);text-transform:uppercase}.opt-head{display:grid;grid-template-columns:1fr .62fr;gap:70px;align-items:end;padding:60px 0 45px}.opt-head h2{margin:10px 0 15px;font-size:clamp(2.25rem,4.8vw,4rem);line-height:1.01;letter-spacing:-.06em}.opt-head h2 em{font-style:normal;color:var(--accent-strong)}.opt-head p,.finding p,.section-title p,.cross-grid p{color:var(--muted);line-height:1.8}.opt-head aside{padding:22px;border:1px solid color-mix(in srgb,var(--accent) 55%,var(--border));border-radius:15px;background:linear-gradient(145deg,color-mix(in srgb,var(--accent-soft) 30%,var(--surface)),var(--surface))}.opt-head aside>span{font:800 .58rem var(--font-mono);color:var(--accent-strong)}.opt-head aside>strong{display:block;margin:16px 0 3px;font:800 4rem/1 var(--font-mono);letter-spacing:-.07em}.opt-head aside>small{color:var(--muted)}.opt-head aside>div{display:flex;justify-content:space-between;margin-top:11px;padding-top:10px;border-top:1px solid var(--border);font:.67rem var(--font-mono)}.finding,.sensitivity-section,.ablation,.cross-index,.cross-maturity{padding:48px 0;border-top:1px solid var(--border)}.finding-grid,.cross-grid{display:grid;grid-template-columns:1fr .78fr;gap:65px;align-items:center}.finding h3,.section-title h3,.cross-grid h3{margin:9px 0;font-size:clamp(1.55rem,3vw,2.35rem);letter-spacing:-.04em}.finding blockquote{margin:0;padding:24px;border-left:3px solid var(--accent);font-size:clamp(1.15rem,2.2vw,1.55rem);font-weight:800;line-height:1.55}.signal-demo{display:grid;gap:9px}.signal-demo>div{padding:17px;border:1px solid var(--border);border-radius:11px;background:var(--surface)}.signal-demo span,.signal-demo code,.signal-demo small{display:block}.signal-demo span{font:800 .57rem var(--font-mono);color:var(--accent-strong)}.signal-demo code{margin-top:8px;font-size:1rem;letter-spacing:.12em}.signal-demo small{margin-top:5px;color:var(--muted)}.signal-demo>b{text-align:center;color:var(--accent-strong)}.section-title{display:grid;grid-template-columns:1fr minmax(300px,480px);gap:48px;align-items:end;margin-bottom:24px}.section-title p{margin:0}.sensitivity{max-width:800px}.sens-row{display:grid;grid-template-columns:50px 1fr 75px 55px;gap:12px;align-items:center;padding:9px 0}.sens-row>span,.sens-row>strong,.sens-row>em{font:700 .68rem var(--font-mono)}.sens-row>div{height:7px;background:color-mix(in srgb,var(--border) 65%,transparent);border-radius:10px;overflow:hidden}.sens-row i{display:block;height:100%;background:var(--accent);border-radius:10px}.sens-row em{font-style:normal;color:var(--accent-strong);font-size:.56rem}.selected-finding{background:linear-gradient(90deg,color-mix(in srgb,var(--accent-soft) 22%,transparent),transparent);padding-left:24px;padding-right:24px}.formula{margin-top:18px;padding:14px;border:1px solid var(--border);border-radius:9px;font:700 .72rem/1.6 var(--font-mono);background:var(--surface)}.selected-stats{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}.selected-stats div{padding:17px;background:var(--surface)}.selected-stats span,.selected-stats strong{display:block}.selected-stats span{font:650 .55rem var(--font-mono);color:var(--muted);text-transform:uppercase}.selected-stats strong{margin-top:6px;font:800 1.45rem var(--font-mono)}.ablation-table{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.a-head,.a-row{display:grid;grid-template-columns:2.2fr .7fr .7fr .65fr 1.25fr;gap:12px;align-items:center}.a-head{padding:9px 10px;color:var(--muted);font:700 .55rem var(--font-mono)}.a-row{padding:11px 10px;border-top:1px solid var(--border)}.a-row strong{font-size:.74rem}.a-row span,.a-row em{font:650 .65rem var(--font-mono)}.a-row em{font-style:normal;color:var(--muted)}.a-row.chosen{background:color-mix(in srgb,var(--accent-soft) 28%,transparent)}.a-row.chosen em{color:var(--accent-strong);font-weight:800}.a-row.rejected{opacity:.72}.negative-controls{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:20px}.negative-controls p{margin:0;padding:14px;border-left:2px solid var(--border);font-size:.72rem;line-height:1.65;color:var(--muted)}.negative-controls strong{color:var(--ink)}.cross-stat{padding:24px;border:1px solid var(--border);border-radius:13px;background:var(--surface)}.cross-stat span,.cross-stat strong,.cross-stat small{display:block}.cross-stat span{font:800 .56rem var(--font-mono);color:var(--accent-strong)}.cross-stat strong{margin:13px 0 3px;font:800 2.3rem var(--font-mono)}.cross-stat small{color:var(--muted)}
+@media(max-width:800px){.opt-head,.finding-grid,.section-title,.cross-grid{grid-template-columns:1fr}.negative-controls{grid-template-columns:1fr}.a-head,.a-row{grid-template-columns:1.6fr .7fr .7fr}.a-head span:nth-child(n+4),.a-row>*:nth-child(n+4){display:none}}
+</style>
