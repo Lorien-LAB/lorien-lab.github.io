@@ -28,8 +28,9 @@ Content lives in Markdown:
 - `src/content/projects/`
 - `src/content/notes/`
 - `src/content/knowledge/`
+- `src/content/reproductions/`
 
-Schemas are defined in `src/content.config.ts`. Adding a Markdown file automatically creates a static detail page at build time.
+Schemas are defined in `src/content.config.ts`. Adding a Markdown file automatically creates a static detail page at build time when the corresponding collection has a route.
 
 Research frontmatter: `title`, `description`, `category`, `status`, `date`, `tags`, `featured`, optional `repoUrl`.
 
@@ -73,6 +74,81 @@ Knowledge detail routes are published at `/knowledge/<slug>/` even though source
 
 The external Obsidian knowledge graph is intentionally shown as `Coming Soon`; there is no public Obsidian Publish URL configured yet.
 
+### Quant Research Reproductions
+
+The Reproduction Workbench is an empirical-research subsystem inside the Knowledge Base. It supports both quantitative-finance academic papers and quantitative / financial-engineering broker reports while keeping reproduction records separate from reusable Knowledge objects.
+
+Website source layout:
+
+```text
+src/content/reproductions/
+├── academic/
+└── broker/
+```
+
+Canonical routes and cross-repository slug contract:
+
+```text
+Website record: /knowledge/reproductions/<slug>/
+Original HTML:  /reports/<slug>/
+Academic code:  https://github.com/Lorien-LAB/quant-research-reproductions/tree/main/academic/<slug>/
+Broker code:    https://github.com/Lorien-LAB/quant-research-reproductions/tree/main/broker/<slug>/
+```
+
+The same canonical `slug` must identify one reproduction across the website, generated original-source HTML, and executable-code repository.
+
+Every reproduction has exactly one source type:
+
+- `academic`
+- `broker`
+
+The six-stage workflow is:
+
+```text
+reading → data → implementation → validation → reproduction → extension
+```
+
+Result states are independent from workflow stage:
+
+```text
+successful | partial | failed | inconclusive | extended
+```
+
+Code visibility is explicit:
+
+```text
+public | partial | private
+```
+
+- `public`: a real public `codeUrl` may be rendered.
+- `partial`: a real public partial-release `codeUrl` may be rendered.
+- `private`: the website renders `Implementation Private` and no code link.
+
+The optional six-dimensional score uses values from 0 to 5:
+
+- `dataMatch`
+- `methodMatch`
+- `signalMatch`
+- `performanceMatch`
+- `robustness`
+- `reproducibility`
+
+The website derives the overall score as the arithmetic mean of the dimensions that are actually present. Missing dimensions remain missing; they are never filled with invented values.
+
+`metrics` supports structured Original vs Reproduced comparisons using strings for `original`, `reproduced`, and optional `difference`, so percentages, intervals, units, and non-standard statistics can be represented without forcing a numeric format.
+
+Academic records additionally require `authors` and `year`; broker records require `broker`, `analysts`, and `publishDate`. The full schema lives in `src/content.config.ts`.
+
+Original PDFs are not hosted in this repository. Another agent or workflow may later generate an HTML representation under `/reports/<slug>/`; `reportHtmlPath` is optional and an `Original HTML` action is rendered only when the path is real. The same rule applies to source, code, notebook, configuration, and results links: no destination, no button.
+
+Relationship arrays `relatedKnowledge`, `relatedNotes`, and `relatedProjects` use slugs. Unresolved slugs are omitted instead of generating broken routes.
+
+Do not create fake reproduction records, Sharpe ratios, IC values, scores, or claimed replication results for UI population. An empty collection is a valid state and is rendered intentionally by the workbench.
+
+Executable reproduction code, reusable research infrastructure, templates, and agent contracts belong in the companion repository:
+
+`Lorien-LAB/quant-research-reproductions`
+
 ## GitHub Pages
 
 This repository deploys through GitHub Actions. The workflow in `.github/workflows/deploy.yml` builds the site and publishes `dist/` whenever `main` is updated.
@@ -95,7 +171,7 @@ After the GitHub Pages version works, add the custom domain in repository Pages 
 
 - Static HTML first, minimal browser JavaScript.
 - Markdown-first research publishing.
-- No fabricated investment-performance metrics or knowledge corpus statistics.
+- No fabricated investment-performance metrics, knowledge corpus statistics, or reproduction outcomes.
 - Light/dark theme with persistent user preference.
 - Responsive and keyboard-accessible navigation.
 - Easy for both researchers and coding agents to extend.
