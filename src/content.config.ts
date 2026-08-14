@@ -53,4 +53,77 @@ const knowledge = defineCollection({
   }),
 });
 
-export const collections = { research, projects, notes, knowledge };
+const reproductionScore = z.object({
+  dataMatch: z.number().min(0).max(5).optional(),
+  methodMatch: z.number().min(0).max(5).optional(),
+  signalMatch: z.number().min(0).max(5).optional(),
+  performanceMatch: z.number().min(0).max(5).optional(),
+  robustness: z.number().min(0).max(5).optional(),
+  reproducibility: z.number().min(0).max(5).optional(),
+});
+
+const reproductionMetric = z.object({
+  name: z.string(),
+  original: z.string(),
+  reproduced: z.string(),
+  difference: z.string().optional(),
+});
+
+const reproductionBase = z.object({
+  slug: z.string().min(1),
+  title: z.string(),
+  description: z.string(),
+  researchArea: z.string(),
+  stage: z.enum(['reading', 'data', 'implementation', 'validation', 'reproduction', 'extension']),
+  result: z.enum(['successful', 'partial', 'failed', 'inconclusive', 'extended']),
+  resultSummary: z.string().optional(),
+  codeVisibility: z.enum(['public', 'partial', 'private']),
+  date: z.coerce.date(),
+  updated: z.coerce.date().optional(),
+  tags: commonTags,
+  featured: z.boolean().default(false),
+  assetClass: z.string().optional(),
+  market: z.string().optional(),
+  frequency: z.string().optional(),
+  dataAvailability: z.string().optional(),
+  reportHtmlPath: z.string().regex(/^\/reports\/[A-Za-z0-9._\/-]+\/?$/).optional(),
+  sourceUrl: z.string().url().optional(),
+  codeUrl: z.string().url().optional(),
+  notebookUrl: z.string().url().optional(),
+  configurationUrl: z.string().url().optional(),
+  resultsUrl: z.string().url().optional(),
+  score: reproductionScore.optional(),
+  metrics: z.array(reproductionMetric).default([]),
+  relatedKnowledge: z.array(z.string()).default([]),
+  relatedNotes: z.array(z.string()).default([]),
+  relatedProjects: z.array(z.string()).default([]),
+});
+
+const academicReproduction = reproductionBase.extend({
+  sourceType: z.literal('academic'),
+  authors: z.array(z.string()).min(1),
+  year: z.number().int().min(1900).max(2100),
+  venue: z.string().optional(),
+  journal: z.string().optional(),
+  conference: z.string().optional(),
+  doi: z.string().optional(),
+  ssrn: z.string().optional(),
+  arxiv: z.string().optional(),
+  paperUrl: z.string().url().optional(),
+});
+
+const brokerReproduction = reproductionBase.extend({
+  sourceType: z.literal('broker'),
+  broker: z.string(),
+  analysts: z.array(z.string()).min(1),
+  publishDate: z.coerce.date(),
+  series: z.string().optional(),
+  reportNumber: z.string().optional(),
+});
+
+const reproductions = defineCollection({
+  loader: glob({ base: './src/content/reproductions', pattern: '**/*.md' }),
+  schema: z.discriminatedUnion('sourceType', [academicReproduction, brokerReproduction]),
+});
+
+export const collections = { research, projects, notes, knowledge, reproductions };
