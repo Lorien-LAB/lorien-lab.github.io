@@ -1,210 +1,234 @@
 ---
-// 交互式净值/基准/回撤曲线（用于 reproduction 详情页）
-// 数据来自复现 run（价格指数口径，起始日归一）。
+// Interactive research curves backed only by stored reproduction-run data.
+// The registry is explicit so stored extension experiments are never
+// presented as if they were paper-baseline reproduction curves.
 import charts from '../data/reproduction-charts/stock-index-futures-roll-basis-timing.json';
 
+interface Props { slug: string; }
 const { slug } = Astro.props;
-const show = slug === 'stock-index-futures-roll-basis-timing';
+
+type ChartPlanItem = {
+  sourceTitle: string;
+  eyebrow: 'Replication' | 'Extension';
+  question: string;
+  note: string;
+};
+
+const chartPlan: Record<string, ChartPlanItem[]> = {
+  'stock-index-futures-roll-basis-timing': [
+    {
+      sourceTitle: 'IC 滚贴水（3因子+迟滞+锚）',
+      eyebrow: 'Extension',
+      question: 'How does the filtered IC execution signal reshape roll timing?',
+      note: 'Stored run: three-factor IC signal with hysteresis and a basis-level anchor. This is a later extension experiment, not the paper-baseline reproduction.',
+    },
+    {
+      sourceTitle: 'IC 跨期套利 6x（同信号）',
+      eyebrow: 'Extension',
+      question: 'What happens when the same follow-on signal is applied to 6× cross-maturity arbitrage?',
+      note: 'Stored run: 6× IC cross-maturity application using the same follow-on signal. It is shown as extension evidence and is not used to establish the baseline replication verdict.',
+    },
+  ],
+};
+
+const selectedCharts = (chartPlan[slug] ?? []).flatMap((plan) => {
+  const data = charts.find((chart) => chart.title === plan.sourceTitle);
+  return data ? [{ ...data, ...plan }] : [];
+});
 ---
 
-{show && (
-  <section class="repro-charts-section">
+{selectedCharts.length > 0 && (
+  <section class="repro-charts-section" aria-labelledby="selected-curves-title">
     <div class="container record-wrap">
-      <div class="mono-label">Net Value & Drawdown</div>
-      <h2 class="charts-title">复现结果净值曲线</h2>
-      <p class="charts-note">
-        悬停查看日期与当日净值；点击图例可隐藏/显示某条线。红/绿=择时策略、灰虚线=基准（当月展期/正套）、
-        蓝=指数（中证500/中证1000）、下方红色=回撤（%）。价格指数口径。
-      </p>
-      <div id="repro-charts" class="repro-charts"></div>
+      <div class="charts-intro">
+        <div>
+          <div class="mono-label">Selected Experiment Curves</div>
+          <h2 id="selected-curves-title">Charts with a specific research question.</h2>
+        </div>
+        <p>
+          The stored chart dataset currently contains follow-on experiment configurations rather than the final paper-baseline curves.
+          They are therefore presented only as <strong>Extension</strong> evidence. Baseline replication is documented in the audited comparisons above.
+        </p>
+      </div>
+      <div id="repro-charts" class="repro-charts" aria-live="off"></div>
     </div>
   </section>
 )}
 
 <style>
-  .repro-charts-section { padding: 20px 0 8px; }
-  .charts-title { margin: 8px 0 6px; font-size: 1.5rem; letter-spacing: -0.03em; }
-  .charts-note { margin: 0 0 22px; color: var(--muted); font-size: .93rem; max-width: 720px; }
-  .repro-charts { display: flex; flex-direction: column; gap: 26px; }
-
-  /* 图表元素由 JS 动态创建，无 Astro scope 属性 → 必须 :global() */
-  :global(.ichart) { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px 6px; position: relative; }
-  :global(.ichart-head) { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
-  :global(.ichart-title) { font-weight: 700; font-size: 1.02rem; letter-spacing: -0.02em; }
-  :global(.ichart-legend) { display: inline-flex; gap: 9px; flex-wrap: wrap; }
-  :global(.ichart-leg-item) { display: inline-flex; align-items: center; gap: 5px; font-size: .78rem; color: var(--muted); cursor: pointer; user-select: none; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); transition: opacity .15s; }
-  :global(.ichart-leg-item:hover) { border-color: var(--muted); }
-  :global(.ichart-sw) { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
-  :global(svg.ichart-eq), :global(svg.ichart-dd) { width: 100%; height: auto; display: block; overflow: visible; }
-  :global(svg.ichart-eq) { cursor: crosshair; }
-  :global(svg.ichart-eq .ichart-grid), :global(svg.ichart-dd .ichart-grid) { stroke: var(--border); stroke-width: 1; opacity: .6; }
-  :global(svg.ichart-eq .ichart-ylab), :global(svg.ichart-eq .ichart-xlab), :global(svg.ichart-dd .ichart-ylab) { fill: var(--muted); font-size: 10.5px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
-  :global(svg.ichart-eq .ichart-end) { fill: var(--muted); font-size: 11px; }
-  :global(.ichart-tip) { position: absolute; pointer-events: none; z-index: 20; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 8px 11px; font-size: .78rem; box-shadow: var(--shadow); min-width: 160px; max-width: 260px; }
-  :global(.tip-date) { font-weight: 700; margin-bottom: 5px; font-size: .74rem; }
-  :global(.tip-row) { display: flex; align-items: center; gap: 7px; margin: 2px 0; color: var(--muted); white-space: nowrap; }
-  :global(.tip-row b) { margin-left: auto; color: var(--ink); font-family: var(--font-mono); font-weight: 700; font-variant-numeric: tabular-nums; }
-  :global(.tip-dot) { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+.repro-charts-section{padding:22px 0 64px}.charts-intro{display:grid;grid-template-columns:1fr minmax(280px,520px);gap:46px;align-items:end;margin-bottom:24px}.charts-intro h2{margin:7px 0 0;font-size:clamp(1.9rem,4vw,3rem);letter-spacing:-.05em}.charts-intro>p{margin:0;color:var(--muted);line-height:1.65}.repro-charts{display:flex;flex-direction:column;gap:24px}:global(.ichart){position:relative;padding:22px 20px 10px;border:1px solid var(--border);border-radius:var(--radius-lg);background:var(--surface);box-shadow:0 12px 36px rgba(16,40,55,.035)}:global(.ichart-context){display:grid;grid-template-columns:1fr minmax(260px,460px);gap:32px;align-items:end;margin-bottom:18px}:global(.ichart-eyebrow){font:800 .59rem var(--font-mono);letter-spacing:.06em;text-transform:uppercase;color:#4770b4}:global(.ichart-question){display:block;margin-top:6px;font-size:1.04rem;line-height:1.4}:global(.ichart-note){margin:0;color:var(--muted);font-size:.79rem;line-height:1.55}:global(.ichart-source){display:block;margin-top:5px;color:var(--muted);font:650 .62rem var(--font-mono)}:global(.ichart-head){display:flex;justify-content:flex-end;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:7px}:global(.ichart-legend){display:inline-flex;gap:7px;flex-wrap:wrap}:global(.ichart-leg-item){display:inline-flex;align-items:center;gap:5px;padding:3px 8px;border:1px solid var(--border);border-radius:999px;background:var(--bg);color:var(--muted);font-size:.73rem;cursor:pointer;user-select:none;transition:opacity .15s,border-color .15s}:global(.ichart-leg-item:hover){border-color:var(--muted)}:global(.ichart-sw){display:inline-block;width:8px;height:8px;border-radius:50%}:global(svg.ichart-eq),:global(svg.ichart-dd){display:block;width:100%;height:auto;overflow:visible}:global(svg.ichart-eq){cursor:crosshair}:global(.ichart-grid){stroke:var(--border);stroke-width:1;opacity:.62}:global(.ichart-ylab),:global(.ichart-xlab){fill:var(--muted);font-size:10.5px;font-family:var(--font-mono);font-variant-numeric:tabular-nums}:global(.ichart-end){fill:var(--muted);font-size:10.5px}:global(.ichart-tip){position:absolute;z-index:20;display:none;min-width:170px;max-width:280px;padding:9px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface);box-shadow:var(--shadow);pointer-events:none;font-size:.76rem}:global(.tip-date){margin-bottom:5px;font-weight:750}:global(.tip-row){display:flex;align-items:center;gap:7px;margin:2px 0;color:var(--muted);white-space:nowrap}:global(.tip-row b){margin-left:auto;color:var(--ink);font:700 .72rem var(--font-mono);font-variant-numeric:tabular-nums}:global(.tip-dot){display:inline-block;width:7px;height:7px;border-radius:50%;flex-shrink:0}@media(max-width:900px){.charts-intro,:global(.ichart-context){grid-template-columns:1fr;gap:12px}}@media(max-width:560px){:global(.ichart){padding:17px 12px 8px}.repro-charts-section{padding-bottom:44px}}
 </style>
 
-<script define:vars={{ charts }}>
-  (function () {
-    if (!document.getElementById('repro-charts')) return;
-    const PALETTE = ['--accent', '--muted', '#4a7bd0'];   // 择时 / 基准 / 指数
-    const DD_COLOR = '--danger';
-    const PLOT_W = 720, PLOT_H = 250, DDH = 130;
-    const ML = 46, MR = 12, MT = 16, MB = 26;
+<script define:vars={{ selectedCharts }}>
+(function () {
+  const root = document.getElementById('repro-charts');
+  if (!root || !selectedCharts.length) return;
 
-    function el(tag, attrs, children) {
-      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
-      for (const k in attrs) e.setAttribute(k, attrs[k]);
-      (children || []).forEach(c => e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
-      return e;
-    }
-    function niceTicks(min, max, n) {
-      const span = max - min, step0 = span / n;
-      const mag = Math.pow(10, Math.floor(Math.log10(Math.max(step0, 1e-12))));
-      const norm = step0 / mag;
-      const step = [1, 2, 2.5, 5, 10].find(m => norm <= m) * mag;
-      const out = []; let v = Math.ceil(min / step) * step;
-      while (v <= max + 1e-9) { out.push(v); v += step; }
-      return out;
-    }
+  const PALETTE = ['--accent', '--muted', '#4a7bd0'];
+  const DD_COLOR = '--danger';
+  const PLOT_W = 720, PLOT_H = 248, DDH = 122;
+  const ML = 48, MR = 14, MT = 15, MB = 26;
+  const cssColor = (token) => token.startsWith('--') ? `var(${token})` : token;
 
-    function buildChart(cfg) {
-      const wrap = document.createElement('div');
-      wrap.className = 'ichart';
+  function svgEl(tag, attrs, children) {
+    const node = document.createElementNS('http://www.w3.org/2000/svg', tag);
+    Object.entries(attrs || {}).forEach(([key, value]) => node.setAttribute(key, String(value)));
+    (children || []).forEach((child) => node.appendChild(typeof child === 'string' ? document.createTextNode(child) : child));
+    return node;
+  }
 
-      // 标题 + 图例
-      const head = document.createElement('div');
-      head.className = 'ichart-head';
-      const t = document.createElement('span'); t.className = 'ichart-title'; t.textContent = cfg.title;
-      head.appendChild(t);
-      const leg = document.createElement('span'); leg.className = 'ichart-legend';
-      cfg.series.forEach(function (s, si) {
-        const item = document.createElement('span'); item.className = 'ichart-leg-item';
-        item.dataset.si = si; item.dataset.hidden = '0';
-        const sw = document.createElement('span'); sw.className = 'ichart-sw'; sw.style.background = 'var(' + PALETTE[si] + ')';
-        item.appendChild(sw);
-        const nm = document.createElement('span'); nm.textContent = s.name;
-        item.appendChild(nm);
-        item.addEventListener('click', function () {
-          const h = item.dataset.hidden === '1';
-          item.dataset.hidden = h ? '0' : '1';
-          item.style.opacity = h ? '1' : '0.35';
-          const els = svgEq.querySelectorAll('[data-si="' + si + '"]');
-          for (let k = 0; k < els.length; k++) els[k].style.display = h ? '' : 'none';
-        });
-        leg.appendChild(item);
+  function niceTicks(min, max, count) {
+    const span = Math.max(max - min, 1e-12);
+    const raw = span / count;
+    const mag = Math.pow(10, Math.floor(Math.log10(raw)));
+    const norm = raw / mag;
+    const multiple = [1, 2, 2.5, 5, 10].find((item) => norm <= item) || 10;
+    const step = multiple * mag;
+    const ticks = [];
+    for (let value = Math.ceil(min / step) * step; value <= max + 1e-9; value += step) ticks.push(value);
+    return ticks;
+  }
+
+  function buildChart(cfg) {
+    const wrap = document.createElement('article');
+    wrap.className = 'ichart';
+
+    const context = document.createElement('div');
+    context.className = 'ichart-context';
+    const question = document.createElement('div');
+    const eyebrow = document.createElement('span');
+    eyebrow.className = 'ichart-eyebrow';
+    eyebrow.textContent = cfg.eyebrow;
+    const title = document.createElement('strong');
+    title.className = 'ichart-question';
+    title.textContent = cfg.question;
+    const source = document.createElement('span');
+    source.className = 'ichart-source';
+    source.textContent = `Stored configuration · ${cfg.sourceTitle}`;
+    question.append(eyebrow, title, source);
+    const note = document.createElement('p');
+    note.className = 'ichart-note';
+    note.textContent = cfg.note;
+    context.append(question, note);
+    wrap.appendChild(context);
+
+    const head = document.createElement('div');
+    head.className = 'ichart-head';
+    const legend = document.createElement('span');
+    legend.className = 'ichart-legend';
+    head.appendChild(legend);
+    wrap.appendChild(head);
+
+    const t0 = new Date(cfg.dates[0]).getTime();
+    const t1 = new Date(cfg.dates[cfg.dates.length - 1]).getTime();
+    const span = (t1 - t0) || 1;
+    const X = (date) => ML + (date.getTime() - t0) / span * (PLOT_W - ML - MR);
+    const allValues = cfg.series.flatMap((series) => series.values);
+    const vmin = Math.min(...allValues), vmax = Math.max(...allValues);
+    const pad = (vmax - vmin) * .06 || .1;
+    const Y = (value) => MT + (1 - (value - (vmin - pad)) / ((vmax + pad) - (vmin - pad))) * (PLOT_H - MT - MB);
+
+    const svgEq = svgEl('svg', { viewBox: `0 0 ${PLOT_W} ${PLOT_H}`, class: 'ichart-eq', role: 'img', 'aria-label': cfg.question });
+    svgEq.appendChild(svgEl('title', {}, [cfg.question]));
+
+    niceTicks(vmin - pad, vmax + pad, 4).forEach((value) => {
+      const y = Y(value);
+      svgEq.appendChild(svgEl('line', { x1: ML, y1: y, x2: PLOT_W - MR, y2: y, class: 'ichart-grid' }));
+      svgEq.appendChild(svgEl('text', { x: ML - 6, y: y + 4, class: 'ichart-ylab', 'text-anchor': 'end' }, [String(Math.round(value * 1000) / 1000)]));
+    });
+
+    [0, Math.floor((cfg.dates.length - 1) / 3), Math.floor(2 * (cfg.dates.length - 1) / 3), cfg.dates.length - 1].forEach((index) => {
+      const x = X(new Date(cfg.dates[index]));
+      svgEq.appendChild(svgEl('text', { x, y: PLOT_H - 7, class: 'ichart-xlab', 'text-anchor': 'middle' }, [cfg.dates[index].slice(0, 4)]));
+    });
+
+    cfg.series.forEach((series, seriesIndex) => {
+      const color = cssColor(PALETTE[seriesIndex] || '--accent');
+      const points = series.values.map((value, index) => `${X(new Date(cfg.dates[index]))},${Y(value)}`).join(' ');
+      const path = svgEl('path', { d: `M ${points}`, fill: 'none', 'data-si': seriesIndex });
+      path.setAttribute('style', `stroke:${color};stroke-width:2;stroke-linejoin:round;stroke-linecap:round;${series.dash ? 'stroke-dasharray:5 3;' : ''}`);
+      svgEq.appendChild(path);
+
+      const item = document.createElement('button');
+      item.type = 'button';
+      item.className = 'ichart-leg-item';
+      item.setAttribute('aria-pressed', 'true');
+      const swatch = document.createElement('span');
+      swatch.className = 'ichart-sw';
+      swatch.style.background = color;
+      const label = document.createElement('span');
+      label.textContent = series.name;
+      item.append(swatch, label);
+      item.addEventListener('click', () => {
+        const visible = item.getAttribute('aria-pressed') === 'true';
+        item.setAttribute('aria-pressed', visible ? 'false' : 'true');
+        item.style.opacity = visible ? '.38' : '1';
+        svgEq.querySelectorAll(`[data-si="${seriesIndex}"]`).forEach((node) => { node.style.display = visible ? 'none' : ''; });
       });
-      head.appendChild(leg);
-      wrap.appendChild(head);
+      legend.appendChild(item);
+    });
 
-      // 坐标映射（t0/t1 ms，span ms 同单位）
-      const t0 = new Date(cfg.dates[0]).getTime(), t1 = new Date(cfg.dates[cfg.dates.length - 1]).getTime();
-      const span = (t1 - t0) || 1;
-      const X = function (d) { return ML + (d.getTime() - t0) / span * (PLOT_W - ML - MR); };
-      const allv = [].concat.apply([], cfg.series.map(function (s) { return s.values; }));
-      const vmin = Math.min.apply(null, allv), vmax = Math.max.apply(null, allv);
-      const pad = (vmax - vmin) * 0.06 || 0.1;
-      const Y = function (v) { return MT + (1 - (v - (vmin - pad)) / ((vmax + pad) - (vmin - pad))) * (PLOT_H - MT - MB); };
+    const lastLabel = cfg.series.map((series) => `${series.name} ${series.values[series.values.length - 1].toFixed(2)}×`).join('  ');
+    svgEq.appendChild(svgEl('text', { x: PLOT_W - MR, y: MT + 7, class: 'ichart-end', 'text-anchor': 'end' }, [lastLabel]));
+    wrap.appendChild(svgEq);
 
-      // 净值 SVG
-      const svgEq = el('svg', { viewBox: '0 0 ' + PLOT_W + ' ' + PLOT_H, class: 'ichart-eq' });
-      svgEq.setAttribute('style', 'width:100%;height:auto;display:block');
-      svgEq.appendChild(el('title', {}, [cfg.title]));
-      niceTicks(vmin - pad, vmax + pad, 4).forEach(function (v) {
-        const y = Y(v);
-        svgEq.appendChild(el('line', { x1: ML, y1: y, x2: PLOT_W - MR, y2: y, class: 'ichart-grid' }));
-        svgEq.appendChild(el('text', { x: ML - 6, y: y + 4, class: 'ichart-ylab' }, [String(Math.round(v * 1000) / 1000)]));
+    const ddMin = Math.min(...cfg.dd);
+    const ddFloor = Math.min(ddMin, -1e-9);
+    const ddY = (value) => MT + (1 - (value - ddFloor) / (0 - ddFloor)) * (DDH - MT - 22);
+    const svgDd = svgEl('svg', { viewBox: `0 0 ${PLOT_W} ${DDH}`, class: 'ichart-dd', role: 'img', 'aria-label': `${cfg.question} drawdown` });
+    niceTicks(ddFloor, 0, 3).forEach((value) => {
+      const y = ddY(value);
+      svgDd.appendChild(svgEl('line', { x1: ML, y1: y, x2: PLOT_W - MR, y2: y, class: 'ichart-grid' }));
+      svgDd.appendChild(svgEl('text', { x: ML - 6, y: y + 4, class: 'ichart-ylab', 'text-anchor': 'end' }, [`${Math.round(value)}%`]));
+    });
+    const ddPath = cfg.dd.map((value, index) => `${index === 0 ? 'M' : 'L'} ${X(new Date(cfg.dates[index]))} ${ddY(value)}`).join(' ');
+    const ddColor = cssColor(DD_COLOR);
+    svgDd.appendChild(svgEl('path', { d: `${ddPath} L ${X(new Date(cfg.dates[cfg.dates.length - 1]))} ${DDH - 22} L ${X(new Date(cfg.dates[0]))} ${DDH - 22} Z`, style: `fill:${ddColor};fill-opacity:.12` }));
+    svgDd.appendChild(svgEl('path', { d: ddPath, fill: 'none', style: `stroke:${ddColor};stroke-width:1.4` }));
+    wrap.appendChild(svgDd);
+
+    const crossEq = svgEl('line', { x1: 0, y1: MT, x2: 0, y2: PLOT_H - MB, style: 'stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0', 'pointer-events': 'none' });
+    const crossDd = svgEl('line', { x1: 0, y1: MT, x2: 0, y2: DDH - 22, style: 'stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0', 'pointer-events': 'none' });
+    const overlay = svgEl('rect', { x: ML, y: MT, width: PLOT_W - ML - MR, height: PLOT_H - MT - MB, style: 'fill:rgba(0,0,0,0);cursor:crosshair' });
+    svgEq.append(overlay, crossEq);
+    svgDd.appendChild(crossDd);
+
+    const tip = document.createElement('div');
+    tip.className = 'ichart-tip';
+    wrap.appendChild(tip);
+
+    const nearest = (fraction) => {
+      const targetX = ML + (PLOT_W - ML - MR) * fraction;
+      let best = 0, distance = Infinity;
+      cfg.dates.forEach((date, index) => {
+        const current = Math.abs(X(new Date(date)) - targetX);
+        if (current < distance) { distance = current; best = index; }
       });
-      [0, Math.floor((cfg.dates.length - 1) / 3), Math.floor(2 * (cfg.dates.length - 1) / 3), cfg.dates.length - 1].forEach(function (i) {
-        const x = X(new Date(cfg.dates[i]));
-        svgEq.appendChild(el('text', { x: x, y: PLOT_H - 8, class: 'ichart-xlab', 'text-anchor': 'middle' }, [cfg.dates[i].slice(0, 4)]));
-      });
-      cfg.series.forEach(function (s, si) {
-        const pts = s.values.map(function (v, i) { return X(new Date(cfg.dates[i])) + ',' + Y(v); }).join(' ');
-        const p = el('path', { d: 'M ' + pts, fill: 'none', 'data-si': si });
-        p.setAttribute('style', 'stroke:var(' + PALETTE[si] + ');stroke-width:2;stroke-linejoin:round;stroke-linecap:round;' + (s.dash ? 'stroke-dasharray:5 3;' : ''));
-        svgEq.appendChild(p);
-        const xs = X(new Date(cfg.dates[cfg.dates.length - 1])), ys = Y(s.values[s.values.length - 1]);
-        svgEq.appendChild(el('circle', { cx: xs, cy: ys, r: 3.5, 'data-si': si, style: 'fill:var(' + PALETTE[si] + ')' }));
-      });
-      const lastLbl = cfg.series.map(function (s, si) { return s.name + ' ' + s.values[s.values.length - 1].toFixed(2) + 'x'; }).join('  ');
-      svgEq.appendChild(el('text', { x: PLOT_W - MR, y: MT + 6, class: 'ichart-end', 'text-anchor': 'end' }, [lastLbl]));
-      wrap.appendChild(svgEq);
+      return best;
+    };
 
-      // 回撤 SVG
-      const ddmin = Math.min.apply(null, cfg.dd);
-      const svgDd = el('svg', { viewBox: '0 0 ' + PLOT_W + ' ' + DDH, class: 'ichart-dd' });
-      svgDd.setAttribute('style', 'width:100%;height:auto;display:block');
-      const ddY = function (v) { return MT + (1 - (v - ddmin) / (0 - ddmin)) * (DDH - MT - 22); };
-      niceTicks(ddmin, 0, 3).forEach(function (v) {
-        const y = ddY(v);
-        svgDd.appendChild(el('line', { x1: ML, y1: y, x2: PLOT_W - MR, y2: y, class: 'ichart-grid' }));
-        svgDd.appendChild(el('text', { x: ML - 6, y: y + 4, class: 'ichart-ylab' }, [String(Math.round(v)) + '%']));
-      });
-      const ddPath = cfg.dd.map(function (v, i) {
-        return (i === 0 ? 'M' : 'L') + ' ' + X(new Date(cfg.dates[i])) + ' ' + ddY(v);
-      }).join(' ');
-      svgDd.appendChild(el('path', { d: ddPath + ' L ' + X(new Date(cfg.dates[cfg.dates.length - 1])) + ' ' + (DDH - 22) + ' L ' + X(new Date(cfg.dates[0])) + ' ' + (DDH - 22) + ' Z', style: 'fill:var(' + DD_COLOR + ');fill-opacity:0.15' }));
-      svgDd.appendChild(el('path', { d: ddPath, fill: 'none', style: 'stroke:var(' + DD_COLOR + ');stroke-width:1.5' }));
-      wrap.appendChild(svgDd);
+    overlay.addEventListener('mousemove', (event) => {
+      const rect = svgEq.getBoundingClientRect();
+      const index = nearest((event.clientX - rect.left) / rect.width);
+      const x = X(new Date(cfg.dates[index]));
+      crossEq.setAttribute('x1', x); crossEq.setAttribute('x2', x); crossEq.style.opacity = '1';
+      crossDd.setAttribute('x1', x); crossDd.setAttribute('x2', x); crossDd.style.opacity = '1';
+      tip.innerHTML = `<div class="tip-date">${cfg.dates[index]}</div>` + cfg.series.map((series, seriesIndex) => `<div class="tip-row"><span class="tip-dot" style="background:${cssColor(PALETTE[seriesIndex] || '--accent')}"></span><span>${series.name}</span><b>${series.values[index].toFixed(3)}×</b></div>`).join('') + `<div class="tip-row"><span class="tip-dot" style="background:${ddColor}"></span><span>Drawdown</span><b>${cfg.dd[index].toFixed(1)}%</b></div>`;
+      tip.style.display = 'block';
+      const wrapRect = wrap.getBoundingClientRect();
+      const left = Math.min(Math.max(event.clientX - wrapRect.left + 12, 8), Math.max(8, wrapRect.width - 285));
+      tip.style.left = `${left}px`;
+      tip.style.top = `${Math.max(86, event.clientY - wrapRect.top - 24)}px`;
+    });
+    overlay.addEventListener('mouseleave', () => {
+      crossEq.style.opacity = '0';
+      crossDd.style.opacity = '0';
+      tip.style.display = 'none';
+    });
 
-      // 悬停层
-      const overlay = el('rect', { x: ML, y: MT, width: PLOT_W - ML - MR, height: PLOT_H - MT - MB, style: 'fill:rgba(0,0,0,0);cursor:crosshair' });
-      const cross = el('line', { x1: 0, y1: MT, x2: 0, y2: PLOT_H - MB, style: 'stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0', 'pointer-events': 'none' });
-      svgEq.appendChild(overlay); svgEq.appendChild(cross);
-      const crossDd = el('line', { x1: 0, y1: MT, x2: 0, y2: DDH - 22, style: 'stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0', 'pointer-events': 'none' });
-      svgDd.appendChild(crossDd);
+    root.appendChild(wrap);
+  }
 
-      const tip = document.createElement('div');
-      tip.className = 'ichart-tip'; tip.style.display = 'none';
-      wrap.appendChild(tip);
-
-      const findNearest = function (px) {
-        const plotX = ML + (PLOT_W - ML - MR) * px;
-        let best = 0, bestDist = 1e18;
-        for (let i = 0; i < cfg.dates.length; i++) {
-          const d = Math.abs(X(new Date(cfg.dates[i])) - plotX);
-          if (d < bestDist) { bestDist = d; best = i; }
-        }
-        return best;
-      };
-
-      overlay.addEventListener('mousemove', function (ev) {
-        const eqRect = svgEq.getBoundingClientRect();
-        const wrapRect = wrap.getBoundingClientRect();
-        const px = (ev.clientX - eqRect.left) / eqRect.width;
-        const i = findNearest(px);
-        const x = X(new Date(cfg.dates[i]));
-        const yEq = Y(cfg.series[0].values[i]);
-        cross.setAttribute('x1', x); cross.setAttribute('x2', x); cross.setAttribute('opacity', '1');
-        crossDd.setAttribute('x1', x); crossDd.setAttribute('x2', x); crossDd.setAttribute('opacity', '1');
-        let html = '<div class="tip-date">' + cfg.dates[i] + '</div>';
-        cfg.series.forEach(function (s, si) {
-          html += '<div class="tip-row"><span class="tip-dot" style="background:var(' + PALETTE[si] + ')"></span><span>' + s.name + '</span><b>' + s.values[i].toFixed(3) + 'x</b></div>';
-        });
-        html += '<div class="tip-row"><span class="tip-dot" style="background:var(' + DD_COLOR + ')"></span><span>回撤</span><b>' + cfg.dd[i].toFixed(1) + '%</b></div>';
-        tip.innerHTML = html;
-        tip.style.display = 'block';
-        const tRect = tip.getBoundingClientRect();
-        const baseX = eqRect.left - wrapRect.left;
-        const baseY = eqRect.top - wrapRect.top;
-        let tx = baseX + (x / PLOT_W) * eqRect.width + 14;
-        if (tx + tRect.width > wrapRect.width - 8) tx = baseX + (x / PLOT_W) * eqRect.width - tRect.width - 14;
-        let ty = baseY + (yEq / PLOT_H) * eqRect.height - tRect.height - 12;
-        if (ty < 2) ty = baseY + (yEq / PLOT_H) * eqRect.height + 14;
-        tip.style.left = tx + 'px';
-        tip.style.top = ty + 'px';
-      });
-      overlay.addEventListener('mouseleave', function () {
-        cross.setAttribute('opacity', '0'); crossDd.setAttribute('opacity', '0'); tip.style.display = 'none';
-      });
-
-      document.getElementById('repro-charts').appendChild(wrap);
-    }
-
-    charts.forEach(function (c) { buildChart(c); });
-  })();
+  selectedCharts.map(buildChart);
+})();
 </script>
