@@ -1,0 +1,35 @@
+---
+interface Props {
+  stage: 'reading' | 'data' | 'implementation' | 'validation' | 'reproduction' | 'extension';
+}
+const { stage } = Astro.props;
+const stages = [
+  ['reading', 'Reading'],
+  ['data', 'Data'],
+  ['implementation', 'Implementation'],
+  ['validation', 'Validation'],
+  ['reproduction', 'Reproduction'],
+  ['extension', 'Extension'],
+] as const;
+const currentIndex = stages.findIndex(([key]) => key === stage);
+---
+<ol class="reproduction-pipeline" aria-label="Reproduction workflow">
+  {stages.map(([key, label], index) => {
+    const state = index < currentIndex ? 'complete' : index === currentIndex ? 'current' : 'pending';
+    return <li class={`stage stage-${state}`} aria-current={state === 'current' ? 'step' : undefined}>
+      <span class="stage-marker" aria-hidden="true">{state === 'complete' ? '✓' : String(index + 1).padStart(2, '0')}</span>
+      <span class="stage-copy"><strong>{label}</strong><small>{state}</small></span>
+    </li>;
+  })}
+</ol>
+
+<style>
+.reproduction-pipeline{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:0;padding:0;margin:0;list-style:none;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--surface)}
+.stage{position:relative;display:flex;gap:10px;align-items:center;min-width:0;padding:14px 13px;border-right:1px solid var(--border)}.stage:last-child{border-right:0}
+.stage-marker{display:grid;place-items:center;flex:0 0 28px;height:28px;border:1px solid var(--border);border-radius:50%;font:700 .65rem var(--font-mono);color:var(--muted);background:var(--bg)}
+.stage-copy{min-width:0}.stage-copy strong,.stage-copy small{display:block}.stage-copy strong{font-size:.76rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.stage-copy small{margin-top:2px;color:var(--muted);font:600 .58rem var(--font-mono);text-transform:uppercase;letter-spacing:.05em}
+.stage-complete .stage-marker{border-color:color-mix(in srgb,var(--accent) 55%,var(--border));background:var(--accent-soft);color:var(--accent-strong)}
+.stage-current{background:color-mix(in srgb,var(--accent-soft) 55%,var(--surface))}.stage-current .stage-marker{border-color:var(--accent);background:var(--accent);color:#03140e}.stage-current .stage-copy strong{color:var(--accent-strong)}
+@media(max-width:900px){.reproduction-pipeline{grid-template-columns:repeat(3,1fr)}.stage:nth-child(3){border-right:0}.stage:nth-child(-n+3){border-bottom:1px solid var(--border)}}
+@media(max-width:560px){.reproduction-pipeline{grid-template-columns:1fr 1fr}.stage:nth-child(3){border-right:1px solid var(--border)}.stage:nth-child(even){border-right:0}.stage:nth-child(-n+4){border-bottom:1px solid var(--border)}}
+</style>
