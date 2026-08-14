@@ -1,4 +1,4 @@
-# Xiang Luo — Quant Research Portfolio
+# Lorien Lab — Quant Research Portfolio
 
 A content-driven personal website for quantitative research / financial engineering, built with Astro and deployable to GitHub Pages.
 
@@ -12,15 +12,13 @@ npm run test
 npm run build
 ```
 
-## Editing personal information
+## Personal information
 
-Before publishing, search for these intentionally editable values:
+- Display name: `Lorien Lab`.
+- GitHub: `https://github.com/Lorien-LAB`.
+- Education and research experience are maintained in the CV page.
 
-- `Xiang Luo` — display name.
-- `https://github.com/Lorien-LAB` — GitHub profile URL.
-- `Your university · Degree and dates` — verified education details.
-
-Place the real PDF CV at `public/cv/Xiang-Luo-CV.pdf`.
+The published PDF CV lives at `public/cv/Lorien-Lab-CV.pdf`.
 
 ## Content authoring
 
@@ -40,21 +38,17 @@ Note frontmatter: `title`, `description`, `date`, `tags`, `category`, `draft`.
 
 ## GitHub Pages
 
-Create a GitHub repository, push this source, then in **Settings → Pages** select **GitHub Actions** as the source.
+This repository deploys through GitHub Actions. The workflow in `.github/workflows/deploy.yml` builds the site and publishes `dist/` whenever `main` is updated.
 
-Set repository Actions variables under **Settings → Secrets and variables → Actions → Variables**:
-
-### User site (`username.github.io`)
+For a user site (`username.github.io`):
 
 - `SITE_URL=https://username.github.io`
 - `BASE_PATH=/`
 
-### Project site (for example `personal-site`)
+For a project site:
 
 - `SITE_URL=https://username.github.io`
-- `BASE_PATH=/personal-site`
-
-The workflow in `.github/workflows/deploy.yml` builds the site and publishes `dist/` whenever `main` is updated.
+- `BASE_PATH=/project-name`
 
 ## Custom domain later
 
