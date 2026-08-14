@@ -1,0 +1,14 @@
+---
+interface Props { steps: string[]; }
+const { steps } = Astro.props;
+---
+<section class="flow-section" aria-labelledby="strategy-flow-title">
+  <div class="flow-head"><div class="mono-label">Strategy in 30 Seconds</div><h2 id="strategy-flow-title">Basis timing, not equity direction.</h2><p>The signal chooses the maturity to hold. It does not forecast whether the equity index itself rises or falls.</p></div>
+  <ol class="flow-list">
+    {steps.map((step, index) => <li><span>{String(index + 1).padStart(2,'0')}</span><strong>{step}</strong></li>)}
+  </ol>
+</section>
+
+<style>
+.flow-section{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:start;padding:38px 0 46px;border-block:1px solid var(--border)}.flow-head h2{margin:8px 0 12px;font-size:clamp(1.9rem,4vw,3rem);line-height:1.02;letter-spacing:-.05em}.flow-head p{max-width:520px;margin:0;color:var(--muted);line-height:1.65}.flow-list{margin:0;padding:0;list-style:none;border-top:1px solid var(--border)}.flow-list li{display:grid;grid-template-columns:48px 1fr;gap:14px;align-items:start;padding:15px 0;border-bottom:1px solid var(--border)}.flow-list span{font:700 .63rem var(--font-mono);color:var(--accent-strong)}.flow-list strong{font-size:.88rem;line-height:1.5}@media(max-width:820px){.flow-section{grid-template-columns:1fr;gap:28px}}
+</style>
