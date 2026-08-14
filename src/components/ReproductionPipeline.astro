@@ -14,7 +14,7 @@ const stages = [
 const currentIndex = stages.findIndex(([key]) => key === stage);
 ---
 <ol class="reproduction-pipeline" aria-label="Reproduction workflow">
-  {stages.map(([key, label], index) => {
+  {stages.map(([, label], index) => {
     const state = index < currentIndex ? 'complete' : index === currentIndex ? 'current' : 'pending';
     return <li class={`stage stage-${state}`} aria-current={state === 'current' ? 'step' : undefined}>
       <span class="stage-marker" aria-hidden="true">{state === 'complete' ? '✓' : String(index + 1).padStart(2, '0')}</span>
