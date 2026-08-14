@@ -26,13 +26,13 @@ The method separates **risk exposure estimation** from **cross-sectional pricing
 
 ## Core mechanism
 
-For asset or portfolio \(i\), the first-stage time-series regression estimates factor loadings such as \(\beta_i\). At each later date \(t\), a cross-sectional regression can be written schematically as
+For asset or portfolio `i`, the first-stage time-series regression estimates factor loadings such as `beta_i`. At each later date `t`, a cross-sectional regression can be written schematically as:
 
-\[
-R_{i,t} = \gamma_{0,t} + \gamma_{1,t}\hat\beta_i + \varepsilon_{i,t}.
-\]
+```text
+R(i,t) = gamma(0,t) + gamma(1,t) * beta_hat(i) + epsilon(i,t)
+```
 
-The sequence of cross-sectional coefficients \(\gamma_{1,t}\) is then averaged through time. In multi-factor applications, the same logic extends to several estimated exposures or characteristics.
+The sequence of cross-sectional coefficients `gamma(1,t)` is then averaged through time. In multi-factor applications, the same logic extends to several estimated exposures or characteristics.
 
 ## Assumptions and interpretation
 
