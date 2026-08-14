@@ -14,6 +14,7 @@ tags:
 featured: false
 related: []
 relatedNotes: []
+officialUrl: https://christophm.github.io/interpretable-ml-book/
 sourceUrl: https://christophm.github.io/interpretable-ml-book/
 ---
 
