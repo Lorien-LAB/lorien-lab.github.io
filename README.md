@@ -76,7 +76,7 @@ The external Obsidian knowledge graph is intentionally shown as `Coming Soon`; t
 
 ### Quant Research Reproductions
 
-The Reproduction Workbench is an empirical-research subsystem inside the Knowledge Base. It supports both quantitative-finance academic papers and quantitative / financial-engineering broker reports while keeping reproduction records separate from reusable Knowledge objects.
+The Reproduction Workbench is an empirical-research subsystem under **Projects**. It supports both quantitative-finance academic papers and quantitative / financial-engineering broker reports while keeping reproduction records separate from ordinary project cards and reusable Knowledge objects.
 
 Website source layout:
 
@@ -89,11 +89,13 @@ src/content/reproductions/
 Canonical routes and cross-repository slug contract:
 
 ```text
-Website record: /knowledge/reproductions/<slug>/
+Website record: /projects/reproductions/<slug>/
 Original HTML:  /reports/<slug>/
 Academic code:  https://github.com/Lorien-LAB/quant-research-reproductions/tree/main/academic/<slug>/
 Broker code:    https://github.com/Lorien-LAB/quant-research-reproductions/tree/main/broker/<slug>/
 ```
+
+The legacy `/knowledge/reproductions/*` URL family is retained only as a backward-compatible static redirect to the Projects namespace.
 
 The same canonical `slug` must identify one reproduction across the website, generated original-source HTML, and executable-code repository.
 
