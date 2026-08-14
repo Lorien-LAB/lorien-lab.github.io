@@ -1,0 +1,44 @@
+---
+const { data, entry } = Astro.props as { data: any; entry: any };
+const score = entry.data.score ?? {};
+const scores = [
+  ['Data Match', score.dataMatch], ['Method Match', score.methodMatch], ['Signal Match', score.signalMatch],
+  ['Performance Match', score.performanceMatch], ['Robustness', score.robustness], ['Reproducibility', score.reproducibility],
+].filter(([,v])=>v !== undefined);
+---
+<section class="research-audit" id="research-audit">
+  <div class="container audit-wrap">
+    <div class="audit-head"><div><div class="mono-label">APPENDIX</div><h2>Research Audit</h2></div><p>主叙事展示研究问题、证据与决策；这里保留可复核的口径、限制、评分和 artifacts。</p></div>
+    <div class="audit-grid">
+      <div class="score-panel">
+        <div class="mono-label">REPRODUCTION SCORE</div>
+        {scores.map(([name,value])=><div class="score-row"><span>{name}</span><div><i style={`width:${Number(value)/5*100}%`}></i></div><strong>{Number(value).toFixed(1)} / 5</strong></div>)}
+      </div>
+      <div class="limitations">
+        <div class="mono-label">LIMITATIONS & SCOPE</div>
+        <ul>
+          <li><strong>OOS is short.</strong> 真 OOS 从 <code>2025-10-01</code> 到 <code>2026-06-26</code>，因此首屏 OOS improvement 不能独立作为最终稳健性结论。</li>
+          <li><strong>No transaction costs.</strong> 与原研报一致，当前 backtest 未计 transaction costs、slippage 与 market impact；低换手设计有利，但仍需成本压力测试。</li>
+          <li><strong>Index convention differs.</strong> Lorien Lab 的绝对 roll excess 使用 price index；原研报相关绝对口径使用 total-return index。相对同一 benchmark 的优化更可比。</li>
+          <li><strong>Figure 53 is under-specified.</strong> MESA / Hilbert / Kaufman 等实现细节与筛选规则无法做到 source-identical，因此策略选择只判定 partial。</li>
+          <li><strong>Latest anchor is researched, not immutable.</strong> q=0.15 来自 H–M 实验；需要滚动分位、成本和更长 forward sample 继续验证。</li>
+          <li><strong>IM+IC is an extension.</strong> 跨品种 50/50 信号是 Lorien Lab 新构造，不属于原研报，应单独跟踪实时表现。</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="artifact-grid">
+      <a href={data.sources.code} target="_blank" rel="noreferrer"><span>RESEARCH REPOSITORY</span><strong>Index-Timing/Reproduction03</strong><small>code · tests · data pipeline · research logs</small></a>
+      <a href={data.sources.config} target="_blank" rel="noreferrer"><span>CONFIGURATION</span><strong>repro03.yaml</strong><small>frozen reproduction conventions</small></a>
+      <a href={data.sources.reproduction} target="_blank" rel="noreferrer"><span>REPRODUCTION REPORT</span><strong>Full audit trail</strong><small>source claim → reproduction evidence</small></a>
+      <a href={data.sources.optimization} target="_blank" rel="noreferrer"><span>LATEST OPTIMIZATION</span><strong>H–M new directions</strong><small>rolling validation · cross-index · anchor</small></a>
+    </div>
+
+    <div class="source-note"><strong>Source attribution.</strong> Original research: Orient Futures / 东证衍生品研究院, 李晓辉、朱仪清, 2026-06-26. This page re-draws mechanisms and visualizations from Lorien Lab research outputs and does not republish report pages. Research cutoff for comparable headline metrics: <code>{data.cutoff}</code>.</div>
+  </div>
+</section>
+
+<style>
+.research-audit{padding:58px 0 70px;border-top:1px solid var(--border);background:color-mix(in srgb,var(--surface) 65%,var(--bg))}.audit-wrap{max-width:1120px}.audit-head{display:grid;grid-template-columns:1fr minmax(280px,480px);gap:50px;align-items:end;margin-bottom:28px}.audit-head h2{margin:7px 0 0;font-size:clamp(2rem,4vw,3.3rem);letter-spacing:-.05em}.audit-head p{margin:0;color:var(--muted);line-height:1.7}.audit-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:16px}.score-panel,.limitations{padding:20px;border:1px solid var(--border);border-radius:13px;background:var(--surface)}.score-row{display:grid;grid-template-columns:1fr 1.2fr 66px;gap:11px;align-items:center;padding:11px 0;border-bottom:1px solid var(--border)}.score-row:last-child{border-bottom:0}.score-row span,.score-row strong{font:650 .62rem var(--font-mono)}.score-row strong{text-align:right}.score-row>div{height:5px;border-radius:10px;background:color-mix(in srgb,var(--border) 70%,transparent);overflow:hidden}.score-row i{display:block;height:100%;background:var(--accent);border-radius:10px}.limitations ul{margin:15px 0 0;padding-left:18px}.limitations li{margin:9px 0;color:var(--muted);font-size:.75rem;line-height:1.6}.limitations strong{color:var(--ink)}.limitations code{font-family:var(--font-mono);color:var(--accent-strong)}.artifact-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:16px}.artifact-grid a{padding:16px;border:1px solid var(--border);border-radius:11px;background:var(--surface);transition:transform .16s,border-color .16s}.artifact-grid a:hover{transform:translateY(-2px);border-color:var(--accent)}.artifact-grid span,.artifact-grid strong,.artifact-grid small{display:block}.artifact-grid span{font:750 .53rem var(--font-mono);color:var(--accent-strong)}.artifact-grid strong{margin-top:8px;font-size:.78rem}.artifact-grid small{margin-top:5px;color:var(--muted);font-size:.62rem;line-height:1.45}.source-note{margin-top:24px;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:.7rem;line-height:1.65}.source-note strong{color:var(--ink)}
+@media(max-width:800px){.audit-head,.audit-grid{grid-template-columns:1fr}.artifact-grid{grid-template-columns:1fr 1fr}}@media(max-width:520px){.artifact-grid{grid-template-columns:1fr}}
+</style>
