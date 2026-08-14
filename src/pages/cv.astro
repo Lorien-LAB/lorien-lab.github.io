@@ -1,5 +1,100 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
-<BaseLayout title="CV · Xiang Luo" description="Web CV for Xiang Luo, focused on quantitative research and financial engineering."><header class="page-hero"><div class="container cv-head"><div><div class="mono-label">Curriculum Vitae</div><h1>Research profile.</h1><p>This web CV is intentionally structured around research capability. Replace the editable fields below with your verified education, experience, and contact details before publishing.</p></div></div></header><div class="container cv-wrap"><section><h2>Education</h2><div class="cv-entry"><div><strong>Financial Engineering</strong><span>Your university · Degree and dates</span></div><p>Use this space for degree details, relevant coursework, honors, exchange study, or thesis information you want to publish.</p></div></section><section><h2>Research & Project Experience</h2><div class="cv-entry"><div><strong>Quantitative Research Systems</strong><span>Independent / academic project</span></div><p>Factor research infrastructure, automated discovery loops, systematic strategy research, and reproducible experiment design.</p></div><div class="cv-entry"><div><strong>Futures & Systematic Strategy Research</strong><span>Research portfolio</span></div><p>Term structure, spread state modeling, CTA trend/reversal research, risk scaling, and microstructure-derived daily alpha.</p></div></section><section><h2>Technical Skills</h2><div class="skill-lines"><p><strong>Research:</strong> factor mining, cross-sectional testing, time-series modeling, portfolio construction, backtesting, validation</p><p><strong>Programming:</strong> Python, data pipelines, ML tooling, research automation</p><p><strong>Methods:</strong> statistics, machine learning, optimization, time series, market microstructure</p></div></section><section><h2>Research Interests</h2><div class="interest-grid"><span>Alpha Discovery</span><span>Futures</span><span>Market Microstructure</span><span>CTA</span><span>Machine Learning</span><span>Agentic Research Systems</span></div></section></div></BaseLayout>
-<style>.cv-head{display:flex;justify-content:space-between;align-items:end;gap:40px}.cv-head>div{max-width:780px}.cv-wrap{max-width:980px;padding-top:52px}.cv-wrap section{display:grid;grid-template-columns:220px 1fr;gap:40px;padding:34px 0;border-bottom:1px solid var(--border)}.cv-wrap h2{margin:0;font-size:1rem;font-family:var(--font-mono);color:var(--accent-strong)}.cv-entry{margin-bottom:26px}.cv-entry:last-child{margin-bottom:0}.cv-entry>div{display:flex;justify-content:space-between;gap:24px}.cv-entry span{color:var(--muted);font-size:.86rem}.cv-entry p,.skill-lines p{margin:7px 0 0;color:var(--muted)}.interest-grid{display:flex;flex-wrap:wrap;gap:9px}.interest-grid span{padding:7px 11px;background:var(--surface);border:1px solid var(--border);border-radius:999px;font-size:.82rem}.pdf-note{margin:32px 0;color:var(--muted);font-size:.85rem}.pdf-note code{font-family:var(--font-mono)}@media(max-width:720px){.cv-head{align-items:flex-start;flex-direction:column}.cv-wrap section{grid-template-columns:1fr;gap:15px}.cv-entry>div{flex-direction:column;gap:2px}}</style>
+<BaseLayout title="CV · Xiang Luo" description="Curriculum vitae of Xiang Luo, Quantitative Finance student and quantitative researcher.">
+  <header class="page-hero">
+    <div class="container cv-head">
+      <div>
+        <div class="mono-label">Curriculum Vitae</div>
+        <h1>Quantitative research,<br/>from hypothesis to system.</h1>
+        <p>Quantitative Finance student at The Chinese University of Hong Kong, Shenzhen, focused on factor research, systematic trading, asset pricing, and agent-assisted research infrastructure.</p>
+      </div>
+    </div>
+  </header>
+
+  <div class="container cv-wrap">
+    <section>
+      <h2>Education</h2>
+      <div>
+        <div class="cv-entry">
+          <div><strong>The Chinese University of Hong Kong, Shenzhen</strong><span>Shenzhen, China · Expected May 2028</span></div>
+          <p><b>Major:</b> Quantitative Finance · <b>CGPA:</b> 3.84 / 4.0 · <b>MGPA:</b> 3.89 / 4.0</p>
+          <p><b>Core coursework:</b> Calculus, Linear Algebra, Discrete Mathematics, Optimization, Ordinary Differential Equations, Probability & Statistics, Stochastic Processes, Data Structures, Machine Learning, Econometrics, Portfolio Analysis, Options & Futures Analysis.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Internship Experience</h2>
+      <div>
+        <div class="cv-entry">
+          <div><strong>Systematic Futures Calendar-Spread Strategy Research</strong><span>May–Jul 2026</span></div>
+          <p>Built an end-to-end research and strategy pipeline covering contract screening, dominant / secondary contract identification, spread construction, signal generation, and evaluation. Added tradability constraints from open interest, volume, delivery proximity, and roll confirmation, then combined term-structure information with mean-reversion behavior.</p>
+          <p>Designed a multi-stage signal and risk-control framework using volatility-state identification, spread forecasting, convergence-space estimation, dynamic transaction-cost constraints, historical-percentile gating, and strict Walk-Forward validation.</p>
+          <p><b>Backtest:</b> 2023–2026 rolling test window, 2 bp transaction-cost assumption per leg per side, Sharpe 2.40, maximum drawdown 5.28%.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Projects & Research</h2>
+      <div>
+        <div class="cv-entry">
+          <div><strong>S&amp;P 500 Dynamic Positioning Strategy</strong><span>Dec 2025</span></div>
+          <p>Kaggle Hull Tactical market-prediction project using Python, XGBoost, LSTM, and MSTL decomposition. Mined 94 financial features and selected 28 high-potential factors; combined multi-frequency decomposition with machine-learning models and grid search.</p>
+          <p>Reported 81.67% directional accuracy and R² 0.6191. Built a signal-to-position layer using signal-to-noise mapping and adaptive smoothing under a 2× leverage constraint, reaching a Top 10% / bronze-level competition result at the time recorded in the CV.</p>
+        </div>
+
+        <div class="cv-entry">
+          <div><strong>Automated Factor Research &amp; Backtesting System</strong><span>2026–Present</span></div>
+          <p>Independent research project combining genetic search, LLM-based factor discovery, vectorized computation, an event-driven engine, and an Obsidian knowledge graph. Collected and reproduced 4,000+ factors, unified data interfaces and operators, and built a precomputed-matrix backtesting architecture with 14-dimensional performance ranking and Barra-style exposure analysis.</p>
+          <p>Connected the factor library, backtest engine, Notion, and Obsidian so validated factors can be written back into a persistent research knowledge base with full performance records.</p>
+        </div>
+
+        <div class="cv-entry">
+          <div><strong>A-Share Bull-Market Review &amp; Bubble-Risk Analysis</strong><span>Mar 2026</span></div>
+          <p>Compared three A-share bull-market cycles through margin leverage, mutual-fund issuance, and high-beta brokerage-stock behavior; studied lead-lag relationships between micro liquidity peaks and index peaks. Built an HS300 equity-risk-premium and dividend-yield-spread valuation monitor.</p>
+        </div>
+
+        <div class="cv-entry">
+          <div><strong>A-Share Cross-Segment Pair Trading &amp; Fundamental Survival Analysis</strong><span>Mar 2026</span></div>
+          <p>Cleaned more than 740,000 A-share observations and built a mean-reversion strategy around main-board vs growth-board P/E valuation premia, evaluated with five-year rolling windows. Separately studied 12-year persistence in corporate fundamentals, comparing high-ROA persistence (11.46%) with high-revenue-growth persistence (0.28%).</p>
+        </div>
+
+        <div class="cv-entry">
+          <div><strong>A-Share CAPM &amp; Low-Beta Anomaly Study</strong><span>Apr 2026</span></div>
+          <p>Implemented a Fama–MacBeth two-pass regression framework on A-share main-board data, using time-series OLS to estimate systematic risk for 44 dynamic portfolios. The recorded model R² reached 0.84; cross-sectional tests also identified a positive zero-beta alpha consistent with a low-beta anomaly.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Technical Skills</h2>
+      <div class="skill-lines">
+        <p><strong>Programming:</strong> Python (pandas, NumPy, SciPy, scikit-learn); C++, MATLAB, Stata, R</p>
+        <p><strong>AI &amp; workflows:</strong> OpenClaw, Hermes, Claude Code, Codex multi-agent collaboration, n8n, Notion, Obsidian</p>
+        <p><strong>Quant tooling:</strong> RQAlpha, VeighNa, Ricequant, WorldQuant Brain, self-built equity / futures multi-factor research and automated factor-discovery platforms, QMT integration</p>
+        <p><strong>Academic tooling:</strong> LaTeX, Microsoft Office</p>
+      </div>
+    </section>
+
+    <section>
+      <h2>Honors &amp; Awards</h2>
+      <div>
+        <div class="cv-entry compact"><div><strong>COMAP Mathematical Contest in Modeling — Honorable Mention</strong><span>Feb 2026</span></div></div>
+        <div class="cv-entry compact"><div><strong>Guangdong–Hong Kong–Macao Greater Bay Area International Programming Contest — First Prize</strong><span>Apr 2025</span></div></div>
+        <div class="cv-entry compact"><div><strong>National College Student Mathematics Competition — Second Prize</strong><span>Nov 2025</span></div></div>
+        <div class="cv-entry compact"><div><strong>China Undergraduate Mathematical Contest in Modeling — Third Prize</strong><span>Sep 2025</span></div></div>
+      </div>
+    </section>
+
+    <section>
+      <h2>Research Interests</h2>
+      <div class="interest-grid"><span>Alpha Discovery</span><span>Futures</span><span>Asset Pricing</span><span>Systematic Trading</span><span>Machine Learning</span><span>Agentic Research Systems</span></div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+.cv-head{display:flex;justify-content:space-between;align-items:end;gap:40px}.cv-head>div{max-width:780px}.cv-wrap{max-width:1080px;padding-top:52px}.cv-wrap section{display:grid;grid-template-columns:210px 1fr;gap:46px;padding:36px 0;border-bottom:1px solid var(--border)}.cv-wrap h2{margin:0;font-size:1rem;font-family:var(--font-mono);color:var(--accent-strong)}.cv-entry{margin-bottom:30px}.cv-entry:last-child{margin-bottom:0}.cv-entry.compact{margin-bottom:15px}.cv-entry>div{display:flex;justify-content:space-between;gap:24px;align-items:baseline}.cv-entry strong{font-size:1rem}.cv-entry span{color:var(--muted);font-size:.84rem;white-space:nowrap}.cv-entry p,.skill-lines p{margin:8px 0 0;color:var(--muted);line-height:1.72}.cv-entry p b{color:var(--ink);font-weight:700}.skill-lines p+ p{margin-top:12px}.interest-grid{display:flex;flex-wrap:wrap;gap:9px}.interest-grid span{padding:7px 11px;background:var(--surface);border:1px solid var(--border);border-radius:999px;font-size:.82rem}@media(max-width:760px){.cv-head{align-items:flex-start;flex-direction:column}.cv-wrap section{grid-template-columns:1fr;gap:16px}.cv-entry>div{flex-direction:column;align-items:flex-start;gap:3px}.cv-entry span{white-space:normal}}
+</style>
