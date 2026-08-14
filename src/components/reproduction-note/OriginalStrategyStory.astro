@@ -1,0 +1,82 @@
+---
+const { data } = Astro.props as { data: any };
+const p = data.pipeline;
+const factorGroups = [
+  ['现货价格波动','Volatility · Amplitude','风险水平上升通常对应基差走弱'],
+  ['交易活跃度','Turnover · Volume','风险偏好与交易热度'],
+  ['市场结构','ADR · Dispersion','宽度改善偏正向，分化加剧偏负向'],
+  ['期权风险定价','VIX · SKEW','避险定价上升通常对应贴水加深'],
+  ['期权交易结构','PCR','看跌交易占比刻画风险偏好'],
+  ['资金行为','Margin financing','杠杆资金边际变化'],
+];
+---
+<section class="story original-story">
+  <div class="container story-wrap">
+    <section class="chapter" id="opportunity">
+      <div class="chapter-no">01 · The Opportunity</div>
+      <div class="chapter-grid">
+        <div>
+          <h2>Roll Premium 从哪里来？</h2>
+          <p>股指期货长期存在空头套保需求，IC / IM 因此经常处于贴水。随着合约临近到期，期货价格向现货收敛；对长期多头而言，这个收敛过程就是可被获取的 <strong>Roll Premium</strong>。原研报真正要优化的，不是“要不要做多指数”，而是<strong>同样持有指数 beta 时，应该持有哪个期限的合约</strong>。</p>
+          <p>期限结构存在凸性：距离到期越近，基差通常收敛越快，所以固定期限策略里 <strong>current-month</strong> 是自然 benchmark。但当整条基差曲线发生平移，远端合约的变化更剧烈，于是动态切换期限存在额外空间。</p>
+        </div>
+        <div class="mechanism" aria-label="Roll premium mechanism">
+          <div><span>01</span><strong>Persistent discount</strong><small>长期套保卖压形成贴水</small></div><b>→</b>
+          <div><span>02</span><strong>Convergence</strong><small>到期前期货向现货收敛</small></div><b>→</b>
+          <div><span>03</span><strong>Roll Premium</strong><small>多头获取基差修复收益</small></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="chapter" id="original-strategy">
+      <div class="chapter-no">02 · The Original Strategy</div>
+      <div class="chapter-grid intro">
+        <div>
+          <h2>原研报不是预测指数方向，而是预测 <em>basis regime</em>。</h2>
+          <p>预测目标是 <strong>current-quarter annualized basis</strong> 的方向。这个指标比当月年化基差更平滑，又能代表整条期限结构；同时它与期限斜率、跨期价差变化高度一致。</p>
+        </div>
+        <div class="trade-rule">
+          <div class="rule up"><span>Basis rising</span><strong>→ hold current-quarter</strong><small>贴水收敛，远端修复更快</small></div>
+          <div class="rule down"><span>Basis falling</span><strong>→ hold current-month</strong><small>贴水走阔，近月更抗跌</small></div>
+        </div>
+      </div>
+
+      <div class="pipeline" aria-label="Original strategy pipeline">
+        <div class="pipe-node"><span>MARKET SENTIMENT</span><strong>{p.primaryFactors}</strong><small>primary factors</small></div><i>→</i>
+        <div class="pipe-node"><span>FEATURE ENGINEERING</span><strong>{p.secondaryFactors}</strong><small>secondary factors</small></div><i>→</i>
+        <div class="pipe-node"><span>SCREENING</span><strong>{p.retainedFactors}</strong><small>retained factors</small></div><i>→</i>
+        <div class="pipe-node"><span>SIGNAL SEARCH</span><strong>{p.timingMethods}</strong><small>timing methods</small></div><i>→</i>
+        <div class="pipe-node final"><span>AGGREGATION</span><strong>±1</strong><small>maturity state</small></div>
+      </div>
+
+      <div class="explain-grid">
+        <div>
+          <h3>① 经济逻辑先于统计筛选</h3>
+          <p>原研报先从六类情绪变量出发，为每类因子规定与基差的预期方向，再做统计筛选。这不是无约束因子挖掘，而是 <strong>financial hypothesis → statistical evidence</strong>。</p>
+          <div class="factor-groups">{factorGroups.map(([g,e,l])=><div><strong>{g}</strong><span>{e}</span><small>{l}</small></div>)}</div>
+        </div>
+        <div>
+          <h3>② 10 → 55：把经济变量变成状态变量</h3>
+          <p>10 个一级因子经过不同回看期、60 日去中枢、单边 HP filter 与 EMA smoothing，扩展为 55 个二级候选。预处理不是统一流水线，而是根据中枢漂移、噪声和 SNR 调整。</p>
+          <h3>③ Spearman + 方向约束 → 7 个代表因子</h3>
+          <p>每个一级因子只保留一个代表二级因子：要求样本内 <strong>Spearman</strong> 方向符合经济逻辑，并在候选中有较强 |ρ|。最终 IC 保留 4 个，IM 保留 3 个。</p>
+        </div>
+      </div>
+
+      <div class="methods">
+        <div><span>13 TREND METHODS</span><p>DoubleMA · WMA · EXPMA · Hilbert · Kaufman · MESA · MidPoint · TRIX · MACD · BOLL · Donchian · ROC · Continuous</p></div>
+        <div><span>5 REVERSAL METHODS</span><p>RSI · CMO · Quantile · RROC · RContinuous</p></div>
+      </div>
+      <p class="method-note">每个代表因子进入宽参数池。原研报并非只拿最优参数：策略内至少约 1/4 参数组合的 Sharpe 需要高于 benchmark，再结合头部 Sharpe 与 <strong>Parameter Stability</strong> 选择方法。这个环节本质上是 parameter-surface robustness screening。</p>
+
+      <aside class="zigzag"><div class="mono-label">STRUCTURAL VALIDATION, NOT A TRADING SIGNAL</div><h3>Zig-zag 只回答“理论空间有多大”。</h3><p><strong>Zig-zag 不是 tradable signal / 不是真实交易信号。</strong>它会动态重绘，只能事后划分 historical basis regime。原研报用它验证：如果能准确知道当季年化基差的上/下行区间，期限切换确实有理论价值；真正可交易的预测器仍然是情绪因子体系。</p></aside>
+
+      <aside class="handoff"><div class="mono-label">THE ORIGINAL REPORT'S OWN FAILED EXTENSION</div><h3>原作者也尝试过“基差下行就空仓”，但最终放弃。</h3><p>Oracle 式 Zig-zag 下，这个延伸框架理论上非常强；但换成真实情绪因子后，“真正下行”与“只是暂时无法判断”被混在一起，空仓过久反而错过 roll premium，整体多数不如原框架。这个失败非常重要：它把研究问题从“是否应该回避下行期”推进到了<strong>如何更可靠地识别状态切换</strong>。</p></aside>
+    </section>
+  </div>
+</section>
+
+<style>
+.story{padding:24px 0}.story-wrap{max-width:1120px}.chapter{padding:64px 0;border-bottom:1px solid var(--border)}.chapter-no{font:800 .66rem var(--font-mono);letter-spacing:.09em;color:var(--accent-strong);text-transform:uppercase}.chapter h2{margin:10px 0 20px;font-size:clamp(2.2rem,4.5vw,3.7rem);line-height:1.02;letter-spacing:-.055em}.chapter h2 em{font-style:normal;color:var(--accent-strong)}.chapter p{color:var(--muted);line-height:1.8}.chapter p strong{color:var(--ink)}.chapter-grid{display:grid;grid-template-columns:1fr .95fr;gap:64px;align-items:center}.mechanism{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;align-items:center;gap:10px}.mechanism>div{min-height:128px;padding:15px;border:1px solid var(--border);border-radius:12px;background:var(--surface)}.mechanism span,.pipe-node span,.methods span{font:750 .55rem var(--font-mono);color:var(--accent-strong)}.mechanism strong,.mechanism small{display:block}.mechanism strong{margin-top:20px;font-size:.9rem}.mechanism small{margin-top:5px;color:var(--muted);font-size:.68rem;line-height:1.5}.mechanism>b{color:var(--accent-strong)}.trade-rule{display:grid;gap:10px}.rule{padding:16px 18px;border-left:3px solid var(--accent);background:var(--surface);border-radius:0 10px 10px 0}.rule span,.rule strong,.rule small{display:block}.rule span{font:700 .62rem var(--font-mono);color:var(--muted);text-transform:uppercase}.rule strong{margin-top:5px}.rule small{margin-top:3px;color:var(--muted)}.rule.down{border-left-color:var(--muted)}.pipeline{display:grid;grid-template-columns:repeat(9,auto);align-items:center;gap:8px;margin:38px 0 44px}.pipe-node{padding:15px 12px;border:1px solid var(--border);border-radius:11px;text-align:center;background:var(--surface)}.pipe-node strong,.pipe-node small{display:block}.pipe-node strong{margin:7px 0 2px;font:800 1.8rem var(--font-mono)}.pipe-node small{color:var(--muted);font-size:.62rem}.pipe-node.final{border-color:color-mix(in srgb,var(--accent) 55%,var(--border))}.pipeline i{font-style:normal;color:var(--muted)}.explain-grid{display:grid;grid-template-columns:1fr 1fr;gap:50px}.explain-grid h3{margin:26px 0 6px;font-size:1.1rem}.factor-groups{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:18px}.factor-groups div{padding:11px;border:1px solid var(--border);border-radius:9px}.factor-groups strong,.factor-groups span,.factor-groups small{display:block}.factor-groups strong{font-size:.78rem}.factor-groups span{margin-top:3px;color:var(--accent-strong);font:650 .58rem var(--font-mono)}.factor-groups small{margin-top:5px;color:var(--muted);font-size:.62rem}.methods{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:36px}.methods>div{padding:17px;border:1px solid var(--border);border-radius:11px;background:var(--surface)}.methods p{margin:7px 0 0;font:650 .72rem/1.7 var(--font-mono);color:var(--ink)}.method-note{max-width:850px}.zigzag,.handoff{margin-top:28px;padding:22px 24px;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.zigzag h3,.handoff h3{margin:7px 0;font-size:1.35rem}.zigzag p,.handoff p{margin:0}.handoff{background:color-mix(in srgb,var(--accent-soft) 22%,transparent)}
+@media(max-width:800px){.chapter-grid,.explain-grid,.methods{grid-template-columns:1fr}.mechanism{grid-template-columns:1fr}.mechanism>b{transform:rotate(90deg);text-align:center}.pipeline{grid-template-columns:1fr}.pipeline i{transform:rotate(90deg);text-align:center}.factor-groups{grid-template-columns:1fr}}
+</style>
