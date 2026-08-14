@@ -4,7 +4,7 @@ import ReproductionScore from './ReproductionScore.astro';
 interface Props { entry: CollectionEntry<'reproductions'>; }
 const { entry } = Astro.props;
 const slug = entry.data.slug || entry.id.split('/').pop();
-const href = `${import.meta.env.BASE_URL}knowledge/reproductions/${slug}/`;
+const href = `${import.meta.env.BASE_URL}projects/reproductions/${slug}/`;
 const sourceLabel = entry.data.sourceType === 'academic' ? 'Academic Paper' : 'Broker Report';
 const resultLabel = entry.data.result.replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
 const stageLabel = entry.data.stage.replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
