@@ -5,7 +5,6 @@ type RawChart = { title: string; dates: string[]; series: ChartSeries[]; dd: num
 
 const charts = rawCharts as RawChart[];
 const cutoff = '2026-06-26';
-const oosStart = '2025-10-01';
 
 function trimChart(chart: RawChart | undefined) {
   if (!chart) return null;
@@ -27,46 +26,20 @@ export const researchNoteData = {
   oosStart: '2025-10-01',
   hero: {
     paper: {
-      label: 'Orient Futures',
-      annualizedReturn: '13.6%',
-      sharpe: '0.58',
-      maxDrawdown: '-34.4%',
-      benchmarkAnnualized: '12.5%',
-      fullSampleImprovement: '+1.10%',
-      oosImprovement: '+2.60%',
-      switchesPerYear: '4.5',
-      provenance: 'Reported by Orient Futures',
+      label: 'Orient Futures', annualizedReturn: '13.6%', sharpe: '0.58', maxDrawdown: '-34.4%', benchmarkAnnualized: '12.5%',
+      fullSampleImprovement: '+1.10%', oosImprovement: '+2.60%', switchesPerYear: '4.5', provenance: 'Reported by Orient Futures',
     },
     reproduced: {
-      label: 'Reproduced',
-      annualizedReturn: '12.4%',
-      sharpe: '0.62',
-      maxDrawdown: '-34.8%',
-      benchmarkAnnualized: '11.9%',
-      fullSampleImprovement: '+0.50%',
-      oosImprovement: '+1.96%',
-      switchesPerYear: '4.6',
-      provenance: 'Reproduced by Lorien Lab',
+      label: 'Reproduced', annualizedReturn: '12.4%', sharpe: '0.62', maxDrawdown: '-34.8%', benchmarkAnnualized: '11.9%',
+      fullSampleImprovement: '+0.50%', oosImprovement: '+1.96%', switchesPerYear: '4.6', provenance: 'Reproduced by Lorien Lab',
     },
     optimized: {
-      label: 'Optimized',
-      annualizedReturn: '13.2%',
-      sharpe: '0.65',
-      maxDrawdown: '-34.8%',
-      benchmarkAnnualized: '11.9%',
-      fullSampleImprovement: '+1.30%',
-      oosImprovement: '+5.38%',
-      switchesPerYear: '~3.8',
-      provenance: 'Optimized by Lorien Lab',
+      label: 'Optimized', annualizedReturn: '13.2%', sharpe: '0.65', maxDrawdown: '-34.8%', benchmarkAnnualized: '11.9%',
+      fullSampleImprovement: '+1.30%', oosImprovement: '+5.38%', switchesPerYear: '~3.8', provenance: 'Optimized by Lorien Lab',
       configuration: 'IC 3-factor + asymmetric Hysteresis 10/5 + deep-discount anchor q=0.15',
     },
   },
-  pipeline: {
-    primaryFactors: 10,
-    secondaryFactors: 55,
-    retainedFactors: 7,
-    timingMethods: 18,
-  },
+  pipeline: { primaryFactors: 10, secondaryFactors: 55, retainedFactors: 7, timingMethods: 18 },
   factors: [
     { factor: 'IC annualized volatility', paper: -0.35, reproduced: -0.356 },
     { factor: 'IC amplitude', paper: -0.34, reproduced: -0.341 },
@@ -88,11 +61,7 @@ export const researchNoteData = {
     { name: 'IM+IC 50/50', full: '+1.76%', oos: '+2.41%', switches: '5.5', verdict: 'H-M cross-index improvement' },
   ],
   sensitivity: [
-    { window: '5', value: 0.59 },
-    { window: '10', value: 1.13 },
-    { window: '15', value: 0.42 },
-    { window: '20', value: 0.32 },
-    { window: '30', value: 0.46 },
+    { window: '5', value: 0.59 }, { window: '10', value: 1.13 }, { window: '15', value: 0.42 }, { window: '20', value: 0.32 }, { window: '30', value: 0.46 },
   ],
   charts: { roll: rollChart, arb: arbChart },
   sources: {
