@@ -4,6 +4,7 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import TagList from '../../../components/TagList.astro';
 import ReproductionPipeline from '../../../components/ReproductionPipeline.astro';
 import ReproductionScore from '../../../components/ReproductionScore.astro';
+import ReproductionCharts from '../../../components/ReproductionCharts.astro';
 
 export async function getStaticPaths() {
   const entries = await getCollection('reproductions');
@@ -77,6 +78,8 @@ const artifactLinks = [
         {entry.data.score && <ReproductionScore score={entry.data.score} />}
       </aside>}
     </div>
+
+    <ReproductionCharts slug={entry.data.slug} />
 
     <section class="record-footer"><div class="container record-wrap footer-grid">
       <div class="artifact-panel"><div class="mono-label">Artifacts</div><h2>Research outputs</h2>{artifactLinks.length > 0 ? <div class="artifact-links">{artifactLinks.map((artifact) => <a href={artifact.href} target={artifact.external ? '_blank' : undefined} rel={artifact.external ? 'noreferrer' : undefined}>{artifact.label} →</a>)}</div> : <p class="muted">No public artifacts are linked yet.</p>}{entry.data.codeVisibility === 'private' && <div class="private-status">Implementation Private</div>}</div>

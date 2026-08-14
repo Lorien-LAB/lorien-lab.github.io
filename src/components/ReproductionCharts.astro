@@ -1,0 +1,210 @@
+---
+// 交互式净值/基准/回撤曲线（用于 reproduction 详情页）
+// 数据来自复现 run（价格指数口径，起始日归一）。
+import charts from '../data/reproduction-charts/stock-index-futures-roll-basis-timing.json';
+
+const { slug } = Astro.props;
+const show = slug === 'stock-index-futures-roll-basis-timing';
+---
+
+{show && (
+  <section class="repro-charts-section">
+    <div class="container record-wrap">
+      <div class="mono-label">Net Value & Drawdown</div>
+      <h2 class="charts-title">复现结果净值曲线</h2>
+      <p class="charts-note">
+        悬停查看日期与当日净值；点击图例可隐藏/显示某条线。红/绿=择时策略、灰虚线=基准（当月展期/正套）、
+        蓝=指数（中证500/中证1000）、下方红色=回撤（%）。价格指数口径。
+      </p>
+      <div id="repro-charts" class="repro-charts"></div>
+    </div>
+  </section>
+)}
+
+<style>
+  .repro-charts-section { padding: 20px 0 8px; }
+  .charts-title { margin: 8px 0 6px; font-size: 1.5rem; letter-spacing: -0.03em; }
+  .charts-note { margin: 0 0 22px; color: var(--muted); font-size: .93rem; max-width: 720px; }
+  .repro-charts { display: flex; flex-direction: column; gap: 26px; }
+
+  /* 图表元素由 JS 动态创建，无 Astro scope 属性 → 必须 :global() */
+  :global(.ichart) { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 16px 18px 6px; position: relative; }
+  :global(.ichart-head) { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+  :global(.ichart-title) { font-weight: 700; font-size: 1.02rem; letter-spacing: -0.02em; }
+  :global(.ichart-legend) { display: inline-flex; gap: 9px; flex-wrap: wrap; }
+  :global(.ichart-leg-item) { display: inline-flex; align-items: center; gap: 5px; font-size: .78rem; color: var(--muted); cursor: pointer; user-select: none; padding: 2px 8px; border-radius: 999px; border: 1px solid var(--border); background: var(--surface-2); transition: opacity .15s; }
+  :global(.ichart-leg-item:hover) { border-color: var(--muted); }
+  :global(.ichart-sw) { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+  :global(svg.ichart-eq), :global(svg.ichart-dd) { width: 100%; height: auto; display: block; overflow: visible; }
+  :global(svg.ichart-eq) { cursor: crosshair; }
+  :global(svg.ichart-eq .ichart-grid), :global(svg.ichart-dd .ichart-grid) { stroke: var(--border); stroke-width: 1; opacity: .6; }
+  :global(svg.ichart-eq .ichart-ylab), :global(svg.ichart-eq .ichart-xlab), :global(svg.ichart-dd .ichart-ylab) { fill: var(--muted); font-size: 10.5px; font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+  :global(svg.ichart-eq .ichart-end) { fill: var(--muted); font-size: 11px; }
+  :global(.ichart-tip) { position: absolute; pointer-events: none; z-index: 20; background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 8px 11px; font-size: .78rem; box-shadow: var(--shadow); min-width: 160px; max-width: 260px; }
+  :global(.tip-date) { font-weight: 700; margin-bottom: 5px; font-size: .74rem; }
+  :global(.tip-row) { display: flex; align-items: center; gap: 7px; margin: 2px 0; color: var(--muted); white-space: nowrap; }
+  :global(.tip-row b) { margin-left: auto; color: var(--ink); font-family: var(--font-mono); font-weight: 700; font-variant-numeric: tabular-nums; }
+  :global(.tip-dot) { width: 8px; height: 8px; border-radius: 50%; display: inline-block; flex-shrink: 0; }
+</style>
+
+<script define:vars={{ charts }}>
+  (function () {
+    if (!document.getElementById('repro-charts')) return;
+    const PALETTE = ['--accent', '--muted', '#4a7bd0'];   // 择时 / 基准 / 指数
+    const DD_COLOR = '--danger';
+    const PLOT_W = 720, PLOT_H = 250, DDH = 130;
+    const ML = 46, MR = 12, MT = 16, MB = 26;
+
+    function el(tag, attrs, children) {
+      const e = document.createElementNS('http://www.w3.org/2000/svg', tag);
+      for (const k in attrs) e.setAttribute(k, attrs[k]);
+      (children || []).forEach(c => e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c));
+      return e;
+    }
+    function niceTicks(min, max, n) {
+      const span = max - min, step0 = span / n;
+      const mag = Math.pow(10, Math.floor(Math.log10(Math.max(step0, 1e-12))));
+      const norm = step0 / mag;
+      const step = [1, 2, 2.5, 5, 10].find(m => norm <= m) * mag;
+      const out = []; let v = Math.ceil(min / step) * step;
+      while (v <= max + 1e-9) { out.push(v); v += step; }
+      return out;
+    }
+
+    function buildChart(cfg) {
+      const wrap = document.createElement('div');
+      wrap.className = 'ichart';
+
+      // 标题 + 图例
+      const head = document.createElement('div');
+      head.className = 'ichart-head';
+      const t = document.createElement('span'); t.className = 'ichart-title'; t.textContent = cfg.title;
+      head.appendChild(t);
+      const leg = document.createElement('span'); leg.className = 'ichart-legend';
+      cfg.series.forEach(function (s, si) {
+        const item = document.createElement('span'); item.className = 'ichart-leg-item';
+        item.dataset.si = si; item.dataset.hidden = '0';
+        const sw = document.createElement('span'); sw.className = 'ichart-sw'; sw.style.background = 'var(' + PALETTE[si] + ')';
+        item.appendChild(sw);
+        const nm = document.createElement('span'); nm.textContent = s.name;
+        item.appendChild(nm);
+        item.addEventListener('click', function () {
+          const h = item.dataset.hidden === '1';
+          item.dataset.hidden = h ? '0' : '1';
+          item.style.opacity = h ? '1' : '0.35';
+          const els = svgEq.querySelectorAll('[data-si="' + si + '"]');
+          for (let k = 0; k < els.length; k++) els[k].style.display = h ? '' : 'none';
+        });
+        leg.appendChild(item);
+      });
+      head.appendChild(leg);
+      wrap.appendChild(head);
+
+      // 坐标映射（t0/t1 ms，span ms 同单位）
+      const t0 = new Date(cfg.dates[0]).getTime(), t1 = new Date(cfg.dates[cfg.dates.length - 1]).getTime();
+      const span = (t1 - t0) || 1;
+      const X = function (d) { return ML + (d.getTime() - t0) / span * (PLOT_W - ML - MR); };
+      const allv = [].concat.apply([], cfg.series.map(function (s) { return s.values; }));
+      const vmin = Math.min.apply(null, allv), vmax = Math.max.apply(null, allv);
+      const pad = (vmax - vmin) * 0.06 || 0.1;
+      const Y = function (v) { return MT + (1 - (v - (vmin - pad)) / ((vmax + pad) - (vmin - pad))) * (PLOT_H - MT - MB); };
+
+      // 净值 SVG
+      const svgEq = el('svg', { viewBox: '0 0 ' + PLOT_W + ' ' + PLOT_H, class: 'ichart-eq' });
+      svgEq.setAttribute('style', 'width:100%;height:auto;display:block');
+      svgEq.appendChild(el('title', {}, [cfg.title]));
+      niceTicks(vmin - pad, vmax + pad, 4).forEach(function (v) {
+        const y = Y(v);
+        svgEq.appendChild(el('line', { x1: ML, y1: y, x2: PLOT_W - MR, y2: y, class: 'ichart-grid' }));
+        svgEq.appendChild(el('text', { x: ML - 6, y: y + 4, class: 'ichart-ylab' }, [String(Math.round(v * 1000) / 1000)]));
+      });
+      [0, Math.floor((cfg.dates.length - 1) / 3), Math.floor(2 * (cfg.dates.length - 1) / 3), cfg.dates.length - 1].forEach(function (i) {
+        const x = X(new Date(cfg.dates[i]));
+        svgEq.appendChild(el('text', { x: x, y: PLOT_H - 8, class: 'ichart-xlab', 'text-anchor': 'middle' }, [cfg.dates[i].slice(0, 4)]));
+      });
+      cfg.series.forEach(function (s, si) {
+        const pts = s.values.map(function (v, i) { return X(new Date(cfg.dates[i])) + ',' + Y(v); }).join(' ');
+        const p = el('path', { d: 'M ' + pts, fill: 'none', 'data-si': si });
+        p.setAttribute('style', 'stroke:var(' + PALETTE[si] + ');stroke-width:2;stroke-linejoin:round;stroke-linecap:round;' + (s.dash ? 'stroke-dasharray:5 3;' : ''));
+        svgEq.appendChild(p);
+        const xs = X(new Date(cfg.dates[cfg.dates.length - 1])), ys = Y(s.values[s.values.length - 1]);
+        svgEq.appendChild(el('circle', { cx: xs, cy: ys, r: 3.5, 'data-si': si, style: 'fill:var(' + PALETTE[si] + ')' }));
+      });
+      const lastLbl = cfg.series.map(function (s, si) { return s.name + ' ' + s.values[s.values.length - 1].toFixed(2) + 'x'; }).join('  ');
+      svgEq.appendChild(el('text', { x: PLOT_W - MR, y: MT + 6, class: 'ichart-end', 'text-anchor': 'end' }, [lastLbl]));
+      wrap.appendChild(svgEq);
+
+      // 回撤 SVG
+      const ddmin = Math.min.apply(null, cfg.dd);
+      const svgDd = el('svg', { viewBox: '0 0 ' + PLOT_W + ' ' + DDH, class: 'ichart-dd' });
+      svgDd.setAttribute('style', 'width:100%;height:auto;display:block');
+      const ddY = function (v) { return MT + (1 - (v - ddmin) / (0 - ddmin)) * (DDH - MT - 22); };
+      niceTicks(ddmin, 0, 3).forEach(function (v) {
+        const y = ddY(v);
+        svgDd.appendChild(el('line', { x1: ML, y1: y, x2: PLOT_W - MR, y2: y, class: 'ichart-grid' }));
+        svgDd.appendChild(el('text', { x: ML - 6, y: y + 4, class: 'ichart-ylab' }, [String(Math.round(v)) + '%']));
+      });
+      const ddPath = cfg.dd.map(function (v, i) {
+        return (i === 0 ? 'M' : 'L') + ' ' + X(new Date(cfg.dates[i])) + ' ' + ddY(v);
+      }).join(' ');
+      svgDd.appendChild(el('path', { d: ddPath + ' L ' + X(new Date(cfg.dates[cfg.dates.length - 1])) + ' ' + (DDH - 22) + ' L ' + X(new Date(cfg.dates[0])) + ' ' + (DDH - 22) + ' Z', style: 'fill:var(' + DD_COLOR + ');fill-opacity:0.15' }));
+      svgDd.appendChild(el('path', { d: ddPath, fill: 'none', style: 'stroke:var(' + DD_COLOR + ');stroke-width:1.5' }));
+      wrap.appendChild(svgDd);
+
+      // 悬停层
+      const overlay = el('rect', { x: ML, y: MT, width: PLOT_W - ML - MR, height: PLOT_H - MT - MB, style: 'fill:rgba(0,0,0,0);cursor:crosshair' });
+      const cross = el('line', { x1: 0, y1: MT, x2: 0, y2: PLOT_H - MB, style: 'stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0', 'pointer-events': 'none' });
+      svgEq.appendChild(overlay); svgEq.appendChild(cross);
+      const crossDd = el('line', { x1: 0, y1: MT, x2: 0, y2: DDH - 22, style: 'stroke:var(--muted);stroke-width:1;stroke-dasharray:3 3;opacity:0', 'pointer-events': 'none' });
+      svgDd.appendChild(crossDd);
+
+      const tip = document.createElement('div');
+      tip.className = 'ichart-tip'; tip.style.display = 'none';
+      wrap.appendChild(tip);
+
+      const findNearest = function (px) {
+        const plotX = ML + (PLOT_W - ML - MR) * px;
+        let best = 0, bestDist = 1e18;
+        for (let i = 0; i < cfg.dates.length; i++) {
+          const d = Math.abs(X(new Date(cfg.dates[i])) - plotX);
+          if (d < bestDist) { bestDist = d; best = i; }
+        }
+        return best;
+      };
+
+      overlay.addEventListener('mousemove', function (ev) {
+        const eqRect = svgEq.getBoundingClientRect();
+        const wrapRect = wrap.getBoundingClientRect();
+        const px = (ev.clientX - eqRect.left) / eqRect.width;
+        const i = findNearest(px);
+        const x = X(new Date(cfg.dates[i]));
+        const yEq = Y(cfg.series[0].values[i]);
+        cross.setAttribute('x1', x); cross.setAttribute('x2', x); cross.setAttribute('opacity', '1');
+        crossDd.setAttribute('x1', x); crossDd.setAttribute('x2', x); crossDd.setAttribute('opacity', '1');
+        let html = '<div class="tip-date">' + cfg.dates[i] + '</div>';
+        cfg.series.forEach(function (s, si) {
+          html += '<div class="tip-row"><span class="tip-dot" style="background:var(' + PALETTE[si] + ')"></span><span>' + s.name + '</span><b>' + s.values[i].toFixed(3) + 'x</b></div>';
+        });
+        html += '<div class="tip-row"><span class="tip-dot" style="background:var(' + DD_COLOR + ')"></span><span>回撤</span><b>' + cfg.dd[i].toFixed(1) + '%</b></div>';
+        tip.innerHTML = html;
+        tip.style.display = 'block';
+        const tRect = tip.getBoundingClientRect();
+        const baseX = eqRect.left - wrapRect.left;
+        const baseY = eqRect.top - wrapRect.top;
+        let tx = baseX + (x / PLOT_W) * eqRect.width + 14;
+        if (tx + tRect.width > wrapRect.width - 8) tx = baseX + (x / PLOT_W) * eqRect.width - tRect.width - 14;
+        let ty = baseY + (yEq / PLOT_H) * eqRect.height - tRect.height - 12;
+        if (ty < 2) ty = baseY + (yEq / PLOT_H) * eqRect.height + 14;
+        tip.style.left = tx + 'px';
+        tip.style.top = ty + 'px';
+      });
+      overlay.addEventListener('mouseleave', function () {
+        cross.setAttribute('opacity', '0'); crossDd.setAttribute('opacity', '0'); tip.style.display = 'none';
+      });
+
+      document.getElementById('repro-charts').appendChild(wrap);
+    }
+
+    charts.forEach(function (c) { buildChart(c); });
+  })();
+</script>
