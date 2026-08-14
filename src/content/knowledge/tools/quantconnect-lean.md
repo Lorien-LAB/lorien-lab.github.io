@@ -14,6 +14,7 @@ tags:
 featured: false
 related: []
 relatedNotes: []
+officialUrl: https://github.com/QuantConnect/Lean
 toolUrl: https://github.com/QuantConnect/Lean
 ---
 
