@@ -26,3 +26,20 @@ jobs:
         run: npm run check
       - name: Astro build
         run: npm run build
+      - name: Install Chromium for visual QA
+        run: npx --yes playwright@1.55.0 install --with-deps chromium
+      - name: Capture reproduction workbench screenshots
+        run: |
+          mkdir -p qa
+          python3 -m http.server 4173 --directory dist >/tmp/reproduction-server.log 2>&1 &
+          SERVER_PID=$!
+          trap 'kill $SERVER_PID || true' EXIT
+          sleep 2
+          npx --yes playwright@1.55.0 screenshot --browser=chromium --viewport-size='1440,1200' --full-page http://127.0.0.1:4173/knowledge/reproductions/ qa/reproductions-desktop.png
+          npx --yes playwright@1.55.0 screenshot --browser=chromium --device='iPhone 13' --full-page http://127.0.0.1:4173/knowledge/reproductions/ qa/reproductions-mobile.png
+      - name: Upload visual QA artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: reproduction-workbench-visual-qa
+          path: qa/*.png
+          retention-days: 1
