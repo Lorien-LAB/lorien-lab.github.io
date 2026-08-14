@@ -93,6 +93,32 @@ test('knowledge page derives counts instead of hard-coding invented corpus stati
   assert.match(source, /entries\.filter|knowledge\.filter|domainCount|counts|length/);
 });
 
+test('knowledge landing exposes the financial engineering learning resources gateway', async () => {
+  await access('src/components/LearningResourcesGateway.astro');
+  const gateway = await readFile('src/components/LearningResourcesGateway.astro', 'utf8');
+  const page = await readFile('src/pages/knowledge/index.astro', 'utf8');
+
+  for (const text of [
+    'Financial Engineering Learning Resources',
+    'Prof. Chuan Shi',
+    '石川教授',
+    'https://www.shichuan.info/',
+    'Core Skills',
+    'Factor Investing',
+    'Advanced Concepts',
+    'Systems',
+    'Stay Current',
+    'Explore learning resources',
+  ]) assert.ok(gateway.includes(text), `gateway missing ${text}`);
+
+  assert.match(page, /import LearningResourcesGateway/);
+  assert.match(page, /knowledge\/financial-engineering-learning-resources\//);
+  assert.match(page, /<LearningResourcesGateway/);
+  assert.match(page, /<ReproductionGateway/);
+  assert.match(page, /entries\.map/);
+  assert.ok(page.indexOf('<LearningResourcesGateway') < page.indexOf('<ReproductionGateway'));
+});
+
 test('reproduction workbench exposes its required surfaces', async () => {
   for (const file of reproductionFiles) await access(file);
 });
