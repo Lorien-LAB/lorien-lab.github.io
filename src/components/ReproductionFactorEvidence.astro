@@ -1,0 +1,21 @@
+---
+interface FactorEvidence { factor: string; paper: string; reproduced: string; note?: string; }
+interface Props { factors: FactorEvidence[]; }
+const { factors } = Astro.props;
+---
+<section class="factor-section" aria-labelledby="factor-replication-title">
+  <div class="factor-head">
+    <div><div class="mono-label">Factor Replication</div><h2 id="factor-replication-title">Representative sentiment factors</h2></div>
+    <p>Spearman correlation against the current-quarter annualized basis target. Values are displayed exactly as documented in the reproduction evidence.</p>
+  </div>
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Factor</th><th>Paper ρ</th><th>Reproduced ρ</th><th>Audit note</th></tr></thead>
+      <tbody>{factors.map((item) => <tr><td>{item.factor}</td><td>{item.paper}</td><td>{item.reproduced}</td><td>{item.note ?? 'Direction and magnitude closely aligned'}</td></tr>)}</tbody>
+    </table>
+  </div>
+</section>
+
+<style>
+.factor-section{padding:34px 0}.factor-head{display:grid;grid-template-columns:1fr minmax(280px,500px);gap:44px;align-items:end;margin-bottom:20px}.factor-head h2{margin:7px 0 0;font-size:clamp(1.8rem,3.8vw,2.9rem);letter-spacing:-.045em}.factor-head>p{margin:0;color:var(--muted);line-height:1.65}.table-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}table{width:100%;border-collapse:collapse;min-width:720px}th,td{padding:13px 15px;text-align:left;border-bottom:1px solid var(--border);vertical-align:top}th{color:var(--muted);font:700 .61rem var(--font-mono);text-transform:uppercase;letter-spacing:.04em}td{font-size:.82rem}td:nth-child(2),td:nth-child(3){font:750 .78rem var(--font-mono);white-space:nowrap}td:last-child{color:var(--muted);line-height:1.5}tbody tr:last-child td{border-bottom:0}@media(max-width:900px){.factor-head{grid-template-columns:1fr}}
+</style>
