@@ -44,6 +44,7 @@ const knowledge = defineCollection({
     featured: z.boolean().default(false),
     related: z.array(z.string()).default([]),
     relatedNotes: z.array(z.string()).default([]),
+    officialUrl: z.string().url().optional(),
     sourceUrl: z.string().url().optional(),
     authors: z.array(z.string()).optional(),
     year: z.number().int().optional(),
