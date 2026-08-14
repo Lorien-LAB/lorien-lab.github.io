@@ -11,8 +11,7 @@ export async function getStaticPaths() {
   }));
 }
 
-interface Props { entry: CollectionEntry<'knowledge'>; }
-const { entry } = Astro.props;
+const { entry } = Astro.props as { entry: CollectionEntry<'knowledge'> };
 const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL;
 const knowledge = await getCollection('knowledge');
@@ -24,11 +23,18 @@ const relatedKnowledge = entry.data.related.map((slug) => knowledgeBySlug.get(sl
 const relatedNotes = entry.data.relatedNotes.map((slug) => notesBySlug.get(slug)).filter(Boolean) as CollectionEntry<'notes'>[];
 const typeLabel = entry.data.type === 'topic' ? 'Research Topic' : entry.data.type[0].toUpperCase() + entry.data.type.slice(1);
 const lastUpdated = entry.data.updated ?? entry.data.date;
-const externalLinks = [
+const externalLinkCandidates = [
+  entry.data.officialUrl && [entry.data.type === 'tool' ? 'Official Website' : 'Official Resource', entry.data.officialUrl],
   entry.data.paperUrl && ['Paper', entry.data.paperUrl],
   entry.data.toolUrl && ['Tool website', entry.data.toolUrl],
   entry.data.sourceUrl && ['Source', entry.data.sourceUrl],
 ].filter(Boolean) as [string, string][];
+const seenExternalUrls = new Set<string>();
+const externalLinks = externalLinkCandidates.filter(([, url]) => {
+  if (seenExternalUrls.has(url)) return false;
+  seenExternalUrls.add(url);
+  return true;
+});
 ---
 <BaseLayout title={`${entry.data.title} · Lorien Lab`} description={entry.data.description}>
   <article>
