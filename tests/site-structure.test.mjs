@@ -25,6 +25,14 @@ const knowledgeFiles = [
   'src/content/knowledge/topics/automated-factor-discovery.md',
 ];
 
+const reproductionFiles = [
+  'src/pages/knowledge/reproductions/index.astro',
+  'src/pages/knowledge/reproductions/[...id].astro',
+  'src/components/ReproductionCard.astro',
+  'src/components/ReproductionPipeline.astro',
+  'src/components/ReproductionScore.astro',
+];
+
 test('portfolio exposes every required v1 surface', async () => {
   for (const file of requiredFiles) await access(file);
 });
@@ -83,4 +91,52 @@ test('knowledge page derives counts instead of hard-coding invented corpus stati
   const source = await readFile('src/pages/knowledge/index.astro', 'utf8');
   assert.doesNotMatch(source, /184 Concepts|36 Papers|22 Tools|14 Research Topics/);
   assert.match(source, /entries\.filter|knowledge\.filter|domainCount|counts|length/);
+});
+
+test('reproduction workbench exposes its required surfaces', async () => {
+  for (const file of reproductionFiles) await access(file);
+});
+
+test('reproduction collection models source, workflow, result, visibility, and scoring states', async () => {
+  const config = await readFile('src/content.config.ts', 'utf8');
+  assert.match(config, /const reproductions = defineCollection/);
+  for (const value of ['academic', 'broker']) assert.ok(config.includes(`'${value}'`), `missing source type ${value}`);
+  for (const value of ['reading', 'data', 'implementation', 'validation', 'reproduction', 'extension']) assert.ok(config.includes(`'${value}'`), `missing stage ${value}`);
+  for (const value of ['successful', 'partial', 'failed', 'inconclusive', 'extended']) assert.ok(config.includes(`'${value}'`), `missing result ${value}`);
+  for (const value of ['public', 'partial', 'private']) assert.ok(config.includes(`'${value}'`), `missing code visibility ${value}`);
+  for (const value of ['dataMatch', 'methodMatch', 'signalMatch', 'performanceMatch', 'robustness', 'reproducibility']) assert.match(config, new RegExp(value), `missing score dimension ${value}`);
+});
+
+test('knowledge base links to the reproduction workbench', async () => {
+  const source = await readFile('src/pages/knowledge/index.astro', 'utf8');
+  assert.match(source, /knowledge\/reproductions\//);
+  assert.match(source, /Reproductions|Reproduction/);
+});
+
+test('reproduction workbench separates academic papers and broker reports and exposes all filters', async () => {
+  const source = await readFile('src/pages/knowledge/reproductions/index.astro', 'utf8');
+  assert.match(source, /Academic Papers/);
+  assert.match(source, /Broker Reports/);
+  assert.match(source, /source type|Source Type/i);
+  assert.match(source, /research area|Research Area/i);
+  assert.match(source, /stage/i);
+  assert.match(source, /result/i);
+  assert.match(source, /code visibility|Code Visibility/i);
+});
+
+test('reproduction workbench provides a truthful empty state and no fabricated performance examples', async () => {
+  const source = await readFile('src/pages/knowledge/reproductions/index.astro', 'utf8');
+  assert.match(source, /Reproduction library initialized\. Research records will appear as reproductions are completed\./);
+  assert.doesNotMatch(source, /0\.054|0\.049|1\.82|1\.61|4\.33|Sharpe\s+[0-9]|Rank IC\s+[0-9]/i);
+});
+
+test('reproduction detail route guards optional artifacts instead of emitting dead links', async () => {
+  const source = await readFile('src/pages/knowledge/reproductions/[...id].astro', 'utf8');
+  assert.match(source, /reportHtmlPath/);
+  assert.match(source, /codeVisibility/);
+  assert.match(source, /Implementation Private/);
+  assert.match(source, /metrics/);
+  assert.match(source, /relatedKnowledge/);
+  assert.match(source, /relatedNotes/);
+  assert.match(source, /relatedProjects/);
 });
