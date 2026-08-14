@@ -1,11 +1,10 @@
 ---
 slug: stock-index-futures-roll-basis-timing
-title: "股指期货滚贴水择时策略与市场情绪因子 (Roll/Discount Basis Timing Strategy for Stock Index Futures and Market Sentiment Factors)"
-description: "Reproduction of Orient Futures' basis-timing strategy: IC/IM index-futures roll-premium harvesting with market-sentiment timing signals, plus documented extensions."
+title: "股指期货滚贴水择时策略与市场情绪因子"
+description: "An auditable reproduction of Orient Futures' IC/IM roll-basis timing framework, separating replicated evidence, unresolved deviations, and later Lorien Lab extensions."
 researchArea: "Index Futures Timing"
 stage: extension
 result: extended
-resultSummary: "Core reproduction succeeds: IC multi-factor strategy (OOS +2.0% vs paper +2.6%, P/L 1.11 vs 1.12, switches 4.6 vs 4.5) and 6x cross-maturity arbitrage (OOS +20.7% vs +25.2%, annual sign 9/9). Exact figure-53 TA-selection list not reproduced (formulas undisclosed). Clear extensions (asymmetric confirmation, IM+IC signal averaging, deep-discount anchor, portfolio) documented separately."
 codeVisibility: public
 
 sourceType: broker
@@ -17,6 +16,7 @@ publishDate: 2026-06-26
 series: "股指期货深度报告"
 
 date: 2026-08-14
+updated: 2026-08-15
 tags:
   - Broker Research
   - Index Futures
@@ -28,12 +28,14 @@ featured: false
 assetClass: Equity Index Futures
 market: China A-share
 frequency: Daily
-dataAvailability: Partial
+dataAvailability: "Partial · core futures/index/PIT constituent data available; some source fields require proxies or are unavailable"
 
-codeUrl: "https://github.com/Lorien-LAB/quant-research-reproductions/tree/main/broker/stock-index-futures-roll-basis-timing/"
+codeUrl: "https://github.com/Lorien-LAB/Index-Timing/tree/master/Reproduction03"
+configurationUrl: "https://github.com/Lorien-LAB/Index-Timing/blob/master/Reproduction03/configs/repro03.yaml"
+resultsUrl: "https://github.com/Lorien-LAB/Index-Timing/blob/master/Reproduction03/doc/reproduction_report.md"
 
 metrics:
-  - name: "IC multi-factor OOS optimization (多头差)"
+  - name: "IC multi-factor OOS optimization"
     original: "+2.6%"
     reproduced: "+2.0%"
     difference: "-0.6pp"
@@ -41,15 +43,11 @@ metrics:
     original: "1.12"
     reproduced: "1.11"
     difference: "-0.01"
-  - name: "IC multi-factor annual switches"
+  - name: "IC multi-factor switches / year"
     original: "4.5"
     reproduced: "4.6"
     difference: "+0.1"
-  - name: "IC roll premium excess 2023+ (当月 continuous)"
-    original: "5.10%"
-    reproduced: "6.29%"
-    difference: "+1.19pp (price vs total-return index)"
-  - name: "IC cross-maturity arbitrage OOS optimization (6x)"
+  - name: "IC cross-maturity OOS optimization (6x)"
     original: "+25.2%"
     reproduced: "+20.7%"
     difference: "-4.5pp"
@@ -62,106 +60,131 @@ score:
   robustness: 3
   reproducibility: 4
 
+caseStudy:
+  shortTitle: "股指期货滚贴水择时与市场情绪因子"
+  subtitle: "Reproduction of Orient Futures' 2026 research on basis timing and sentiment signals"
+  verdicts:
+    - label: "Basis & roll engine"
+      status: reproduced
+      evidence: "IC passive current-month roll baseline Sharpe is 0.554 versus 0.54 in the report, with the roll-return attribution independently audited."
+    - label: "Sentiment-factor layer"
+      status: reproduced
+      evidence: "All seven representative-factor correlation directions match; the final reproduction report records six of seven magnitudes within 0.01 of the source value."
+    - label: "IC multi-factor timing"
+      status: reproduced
+      evidence: "OOS optimization is +2.0% versus +2.6%; P/L is 1.11 versus 1.12; annual switching is 4.6 versus 4.5."
+    - label: "IC cross-maturity arbitrage"
+      status: reproduced
+      evidence: "The 6x IC cross-maturity strategy retains a large OOS edge: +20.7% versus +25.2% in the report."
+    - label: "IM timing"
+      status: partial
+      evidence: "IM OOS optimization is +0.7% versus +1.5%, while reproduced switching frequency is materially higher than the report."
+    - label: "Exact Figure-53 strategy selection"
+      status: partial
+      evidence: "Only a subset of retained TA strategies matches exactly; MESA/Hilbert/Kaufman definitions and parts of the selection behavior are not fully specified by the source."
+  factorEvidence:
+    - factor: "IC annualized volatility"
+      paper: "-0.35"
+      reproduced: "-0.356"
+    - factor: "IC amplitude"
+      paper: "-0.34"
+      reproduced: "-0.341"
+    - factor: "IC constituent ADR"
+      paper: "+0.15"
+      reproduced: "+0.142"
+    - factor: "IC constituent return dispersion"
+      paper: "-0.30"
+      reproduced: "-0.302"
+    - factor: "IM annualized volatility"
+      paper: "-0.59"
+      reproduced: "-0.594"
+    - factor: "IM constituent return dispersion"
+      paper: "-0.19"
+      reproduced: "-0.153"
+      note: "Direction matches; the magnitude gap is larger than for the other representative factors."
+    - factor: "IM VIX"
+      paper: "-0.59"
+      reproduced: "-0.596"
+  strategyFlow:
+    - "Market sentiment factors"
+    - "Forecast direction of the current-quarter annualized basis"
+    - "Basis expected to rise → hold the current-quarter contract"
+    - "Basis expected to fall → hold the current-month contract"
+    - "Compare with passive current-month rolling"
+  limitations:
+    - title: "Figure 53 is only partially reproducible"
+      detail: "The exact retained TA-strategy list is not fully recovered. Several method definitions and selection details are under-specified, so the public result treats this layer as partial rather than silently choosing the closest implementation."
+    - title: "The IM side is weaker"
+      detail: "The reproduction obtains about +0.7% OOS optimization versus +1.5% in the report, with a substantially higher switching frequency. The shorter IM history and MESA behavior are material uncertainties."
+    - title: "Absolute roll excess uses a different index convention"
+      detail: "The reproduction uses a price-index basis while the report's absolute excess comparison uses total-return indices. Dividends therefore shift absolute roll-excess levels, although the timing-versus-passive optimization comparison is much less sensitive to that convention."
+  extension:
+    title: "Asymmetric Hysteresis Confirmation"
+    thesis: "After reconstructing the source framework, Lorien Lab tests whether slow sentiment regimes can be traded more cleanly by filtering transient aggregate signal flips: enter the current-quarter contract only after 10 confirmed days and exit after 5."
+    metrics:
+      - label: "Full-sample timing improvement"
+        paper: "+1.1%"
+        baseline: "+0.50%"
+        extension: "+1.32%"
+      - label: "OOS timing improvement"
+        paper: "+2.6%"
+        baseline: "+1.96%"
+        extension: "+4.10%"
+      - label: "Switches / year"
+        paper: "4.5"
+        baseline: "≈4.6"
+        extension: "≈4.5"
+    caution: "The reported extension OOS window is short (approximately 2025-10 through 2026-06). Treat the headline OOS uplift as provisional; full-sample decomposition, parameter sensitivity, and rolling validation are more informative than the single short OOS number."
+
 relatedKnowledge: []
 relatedNotes: []
 relatedProjects: []
 ---
 
-## Report thesis
+## Research question
 
-Orient Futures proposes a **roll/discount basis timing strategy** for stock-index index futures (IC = CSI 500, IM = CSI 1000): hold the futures contract long to harvest the persistent discount-premium convergence (rolling premium), and switch between the **current-month** (当月) and **current-quarter** (当季) continuous contracts based on a market-sentiment timing signal built from the **current-quarter annualized basis rate**.
+The source report asks whether the persistent discount in Chinese equity-index futures can be harvested more efficiently by **timing the maturity held**, rather than by forecasting the direction of the equity index itself. Its core hypothesis is that market-sentiment variables contain information about the direction of the **current-quarter annualized basis**, which can guide a switch between current-month and current-quarter futures.
 
-## Original claim
+The reproduction therefore focuses on a falsifiable chain: reconstruct the futures term structure and roll return correctly, rebuild the sentiment-factor layer, reproduce the report's multi-factor timing logic, and then compare the resulting maturity-selection strategy with passive current-month rolling.
 
-The paper claims that market-sentiment factors (volatility, amplitude, breadth ADR, return dispersion, option-implied VIX) predict the direction of the current-quarter annualized basis rate, and that timing between 当月/当季 yields a measurable improvement over the passive 当月 roll benchmark:
+## Original mechanism
 
-- IC multi-factor: full-sample optimization +1.1%, OOS +2.6%, win rate 54.9%, P/L 1.12, 4.5 switches/yr.
-- IM multi-factor: full-sample +1.4%, OOS +1.5%, win 61.4%, P/L 1.17, 2.0 switches/yr.
-- 6x-levered cross-maturity arbitrage: IC full-sample +13.5% / OOS +25.2%; IM +18.1% / +13.9%.
+IC and IM futures have historically exhibited persistent discount regimes. As a discounted futures contract approaches expiry, basis convergence can generate positive roll-related return for a long futures investor. The report argues that this opportunity is not constant across maturities.
 
-## Reproduction target
+Its timing rule is simple at the portfolio level: when the current-quarter annualized basis is expected to **rise** (discount convergence), hold the **current-quarter** contract; when it is expected to **fall** (discount widening), hold the **current-month** contract. The benchmark is passive current-month rolling.
 
-1. Contract chain (当月/下月/当季/隔季 unified ladder) and current-quarter annualized basis rate.
-2. Roll-premium excess attribution (paper formula 1: `excess(T) = b_held(T)(T) − b_held(T)(T-1)`).
-3. Chart-51 representative factor selection (Spearman direction + max |ρ|) and correlations.
-4. Chart-52 18-method × parameter-grid strategy signals; chart-53 retained strategy list.
-5. IC/IM multi-factor backtest (OOS / full-sample / excess blocks).
-6. 6x cross-maturity arbitrage backtest.
+Market sentiment enters upstream of that rule. The report builds candidate variables from index volatility and amplitude, constituent breadth and dispersion, option-implied information, and financing activity, then maps retained representatives through technical timing methods into a daily basis-direction signal.
+
+## Reproduction design
+
+The public case study summarizes a larger audit trail in [`Index-Timing/Reproduction03`](https://github.com/Lorien-LAB/Index-Timing/tree/master/Reproduction03). The implementation reconstructs four maturity buckets (current month, next month, current quarter, next quarter), the current-quarter annualized basis target, the roll-return attribution engine, representative sentiment factors, technical-method signals, IC/IM multi-factor timing, and the 6x cross-maturity application.
+
+For baseline reproduction evidence, this page uses the finalized reproduction outputs rather than later optimization experiments. Lorien Lab's post-reproduction execution research is presented separately under **Beyond Reproduction**.
 
 ## Data reconstruction
 
-- Futures daily per-contract close + delivery metadata (2010–2026, 529 IC/IM/IH/IF contracts); local xtdata snapshot + incremental refresh.
-- Index daily for CSI 500 / CSI 1000 (000905.SH / 000852.SH).
-- Constituent daily bars (all-A daily, 2010–2026) with **point-in-time** quarterly index-weight membership to avoid survivorship.
-- CSI 1000 index options (MO, from 2022-07) with model-free implied vol (`vix_like_30d`), skew, PCR; CSI 500 ETF options (510500) as IC-side proxy.
-- Margin-balance changes.
-- **Unavailable**: free-float daily turnover (paper drops the factor anyway; local data is monthly snapshot only).
+The working dataset combines daily per-contract equity-index futures prices and delivery metadata, CSI 500 / CSI 1000 index histories, constituent daily bars with **point-in-time** historical membership, CSI 1000 index-option information from the MO contract family, and financing-balance data.
+
+Several source conventions cannot be matched perfectly. The public evidence therefore keeps the data state as partial rather than implying source-equivalent inputs. In particular, a usable historical free-float daily turnover series is unavailable, while the absolute roll-excess comparison is based on price indices rather than the total-return index convention used in the report.
 
 ## Method reconstruction
 
-- **Unified ladder** contract designation (nearest two monthly delivery months + nearest two quarterly months not already 当月/下月), self-consistent with the switch-day rule.
-- **Switch day** = next trading day after the 3rd Friday; **roll day** = 4 trading days before the 3rd Friday close (当月 monthly; 当季 in Jan/Apr/Jul/Oct). ⚠️ Anchor resolved to the 3rd Friday after an audit that nearly mis-set it to the switch day (the price-index Sharpe coincidentally ≈ paper baseline; the roll premium excess is the true discriminator — issues #33).
-- **Annualization**: 365 natural days; basis from close prices; one-sided HP filter λ=100 (boundary corrected −4λ → −2λ).
-- **Roll excess** = formula-1 daily attribution on the held contract's signed basis rate; multi-head = index return + roll excess.
-- **Signals**: 18 TA methods (SMA/WMA/EXPMA/Kaufman/MESA/MidPoint/Hilbert/TRIX/MACD/BOLL/Donchian/ROC/Continuous + RSI/CMO/Quantile/RROC/RContinuous) via TA-Lib; MESA = Ehlers MAMA with alpha∈[f,s] interpretation; signal 0 → hold-previous.
-- **Factor/multi-factor signal** = sign of arithmetic mean of retained strategy signals (0 → hold previous).
-- Optimization = 多头差 (strategy absolute − benchmark absolute), the paper's consistent headline metric.
+The contract ladder uses the nearest monthly maturities plus the nearest quarterly maturities not already occupied by the monthly buckets. The basis is measured from closing prices and annualized with **365 natural days**, consistent with the project's frozen convention. Current-month rolling occurs four trading days before the third-Friday expiry anchor; quarterly rolling applies the analogous rule in quarter months.
 
-## Implementation
+The roll engine attributes daily excess to the signed basis change of the contract actually held. The sentiment layer uses causal transformations, including one-sided filtering where required, and the strategy layer implements the report's trend/reversal method families with standard TA-Lib definitions where available. A zero aggregate signal carries the previous position rather than forcing a new trade.
 
-- Code: `broker/stock-index-futures-roll-basis-timing/src/` (package `repro03`: paths/io/calendar/contracts/basis/transforms/factors/selection/signals/strategy/roll_returns).
-- Build scripts: `scripts/build_*_foundation.py`, `select_strategies.py`, `backtest_multifactor.py`.
-- Config: `configs/repro03.yaml`; tests: 80/80 passing.
-- Environment: Python 3.13, pandas 3.0.5, TA-Lib 0.7.1, scipy, pyarrow.
+Some method definitions cannot be made source-identical. That ambiguity is most visible in the Figure-53 retained-strategy list, which is why that layer is reported as **partial** even though the higher-level IC timing results are close.
 
-## Validation
+## Validation protocol
 
-- **Look-ahead**: all signals causal (T-day signal → T+1 position); HP filter causal (expanding window); no future information.
-- **Survivorship**: PIT constituent membership; no look-ahead universe.
-- **Timing**: roll anchor cross-checked via roll-premium excess (not baseline Sharpe — see Method note).
-- **Benchmark**: 当月 continuous (passive roll); arbitrage benchmark = always 正套 (long 当月 / short 当季).
-- **Costs**: none (paper's assumption).
+The implementation uses **T-day information for T+1 positioning**, so the published timing rule does not consume future observations. Historical constituent membership is point-in-time to avoid survivorship leakage. The roll anchor was audited against roll-premium attribution rather than accepted solely because a headline Sharpe happened to look close.
 
-## Results
+The passive benchmark is current-month continuous rolling. For the cross-maturity application, the benchmark is the always-positive-spread position (long current month / short current quarter). Transaction costs are not included because the source report also excludes them; the page therefore does **not** claim cost-robust live performance.
 
-### Original report
+## Research conclusion
 
-IC multi-factor: full-sample +1.1%, OOS +2.6%, win 54.9%, P/L 1.12, 4.5 switches/yr; cross-arb 6x: full +13.5% / OOS +25.2%.
+The strongest replication evidence is concentrated in three places: the basis/roll engine, the representative sentiment-factor relationships, and the IC strategy layer. IC OOS timing improvement is close to the source (+2.0% versus +2.6%), P/L and annual switching are almost identical, and the IC cross-maturity application preserves a large OOS edge (+20.7% versus +25.2%).
 
-### Reproduced
+The reproduction is not exact everywhere. IM timing is materially weaker, and the Figure-53 strategy-selection layer is only partially matched because important technical-method definitions and selection details remain under-specified. The price-index versus total-return convention also changes absolute roll-excess levels.
 
-IC multi-factor: full-sample optimization **+0.5%**, OOS **+2.0%**, win 54.1%, P/L **1.11**, switches **4.6**/yr; cross-arb 6x: full **+5.5%** / OOS **+20.7%**. IC roll baseline Sharpe 0.554 vs 0.54; roll excess 2023+ 6.29% vs 5.10%.
-
-### Differences
-
-- IC multi-factor headline metrics match closely (OOS −0.6pp, P/L −0.01, switches +0.1); full-sample optimization is lower (+0.5% vs +1.1%) because the ADR factor contributes ≈0 in our data (paper's CMO-on-ADR signals never beat baseline here).
-- Cross-arb full-sample lower (+5.5% vs +13.5%) but OOS +20.7% vs +25.2%; annual sign matches 9/9.
-- IM side weaker (OOS +0.7% vs +1.5%; switches 6.6 vs 2.0/yr) driven by IM-vol MESA signal noise (standard libraries cannot reproduce the paper's MESA as stable+effective) and short IM data history.
-
-## Known deviations
-
-1. **Figure-53 exact TA-selection list not reproduced** (3/7 factors match exactly; the paper's retained strategies do beat baseline in our engine but ranking/≥1/4-threshold differ). Root cause: paper does not disclose MESA/Hilbert/Kaufman formulas or the exact selection rule quantiles.
-2. **Price-index basis vs paper total-return index**: our absolute excess is higher by the implied dividend (IC ~1.2%, IM ~0.3%, IH ~3.5%, IF ~2.8%). Optimization (多头差) is dividend-invariant.
-3. **IM multi-factor** weaker (see Differences).
-4. **ADR CMO reversal** signals underperform baseline in our data; the paper retains them.
-5. Free-float turnover unavailable (paper drops it).
-
-## Robustness
-
-- **Roll-forward validation**: hysteresis confirmation selected in-sample (2018–22) keeps beating baseline in validation (2023–25) and true OOS (2025-10+): OOS +4.10% vs +2.57%.
-- Hysteresis knee peaks at confirm=10 (degrades at 15/20/30) — real signal-to-noise optimum, not monotone overfit; annual decomposition matches the paper's figure-90 direction (7/9 years positive).
-- Cross-arb hysteresis helps in-sample and OOS but the 2023–25 validation window is negative for both configs (regime-dependent).
-- No cost sensitivity (paper excludes costs; our lower-turnover optimizations would only improve).
-
-## Extensions
-
-*Separate from reproduction evidence.*
-
-1. **Aggregate asymmetric hysteresis confirmation** (enter 当季 after 10 confirmed days, exit after 5): IC full-sample optimization +0.50% → +1.32%, OOS +1.96% → +4.10%, turnover 4.6 → 4.4/yr (paper 4.5). Mechanism: sentiment factors are slow 120-day regime indicators; short-term signal flips are noise filtered by confirmation.
-2. **Cross-product signal averaging (IM+IC 50/50)**: IM full-sample +0.84% → +1.76%, OOS +0.74% → +2.41% (beats paper 1.4%/1.5%). Both small-cap bases are highly correlated; the more-reliable IC signal de-noises IM.
-3. **Deep-discount level anchor**: force 当季 when the basis is below its 15th percentile → OOS +5.38%.
-4. **Roll + arbitrage portfolio** (beta 1x + beta-neutral 6x spread): Sharpe 0.65 → 1.46, max drawdown −34.8% → −24.2%.
-
-## Conclusion
-
-The paper's **core strategy claims are reproduced**: the basis-timing engine, chart-51 factor selection, IC multi-factor performance (P/L, turnover, OOS edge), and the cross-maturity arbitrage direction and magnitude. The headline divergences are (a) the exact figure-53 TA-selection list (formulas undisclosed), (b) a weaker IM side, and (c) price- vs total-return index basis affecting absolute excess only. Clear extensions (asymmetric confirmation, IM+IC averaging, deep-discount anchor, portfolio) are documented separately and materially improve OOS/Sharpe beyond the paper. **Result: extended** — core reproduction succeeded with documented deviations plus defensible extensions.
+Accordingly, the project is classified as **extended**: the core IC mechanism and principal cross-maturity effect are reproduced with documented deviations, after which separate Lorien Lab experiments explore execution-layer improvements. The complete technical report, configuration, code, and experiment history remain in the linked Reproduction03 research repository.
