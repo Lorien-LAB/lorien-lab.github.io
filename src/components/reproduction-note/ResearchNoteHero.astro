@@ -1,0 +1,47 @@
+---
+const { data, entry } = Astro.props as { data: any; entry: any };
+const cols = [data.hero.paper, data.hero.reproduced, data.hero.optimized];
+---
+<header class="rn-hero">
+  <div class="container rn-wrap">
+    <a class="back" href={`${import.meta.env.BASE_URL}projects/reproductions/`}>← Quant Research Reproductions</a>
+    <div class="eyebrow">RESEARCH REPRODUCTION · EXECUTION RESEARCH</div>
+    <h1>股指期货滚贴水择时与市场情绪因子</h1>
+    <p class="thesis"><strong>不预测指数方向</strong>，而是预测基差 <em>regime</em>，动态选择当月 / 当季合约，以提高股指期货 <strong>Roll Premium</strong>。</p>
+    <p class="sub">从东证期货策略复现，到执行层状态过滤、非对称 Hysteresis 与跨品种信号研究。</p>
+
+    <div class="provenance-row">
+      <span>Orient Futures · 2026-06-26</span><span>Reproduced by Lorien Lab</span><span>Optimized by Lorien Lab</span>
+    </div>
+
+    <section class="performance" aria-labelledby="performance-title">
+      <div class="section-head"><span id="performance-title">FULL-SAMPLE PERFORMANCE</span><span>Comparable cutoff · {data.cutoff}</span></div>
+      <div class="perf-grid">
+        {cols.map((col: any, i: number) => <article class:list={['perf-col', i === 2 && 'selected']}>
+          <div class="col-label">{col.label}</div>
+          <div class="annual-label">Annualized Return</div>
+          <div class="annual">{col.annualizedReturn}</div>
+          <div class="risk-row">
+            <div><span>Sharpe</span><strong>{col.sharpe}</strong></div>
+            <div><span>Max Drawdown</span><strong>{col.maxDrawdown}</strong></div>
+          </div>
+          <div class="provenance">{col.provenance}</div>
+        </article>)}
+      </div>
+      <div class="increment-grid">
+        <div><span>vs Passive Benchmark</span><strong>{data.hero.optimized.fullSampleImprovement}</strong><small>latest IC configuration</small></div>
+        <div><span>OOS Improvement</span><strong>{data.hero.optimized.oosImprovement}</strong><small>{data.oosStart} → {data.cutoff}</small></div>
+        <div><span>Switches / Year</span><strong>{data.hero.optimized.switchesPerYear}</strong><small>paper 4.5 · reproduced 4.6</small></div>
+      </div>
+      <p class="takeaway">Higher performance, without higher turnover.</p>
+    </section>
+
+    <div class="meta"><span>{entry.data.broker}</span><span>{entry.data.analysts.join(' · ')}</span><span>{entry.data.market}</span><span>{entry.data.frequency}</span></div>
+  </div>
+</header>
+
+<style>
+.rn-hero{padding:54px 0 34px;background:radial-gradient(circle at 78% 15%,color-mix(in srgb,var(--accent) 13%,transparent),transparent 34%),linear-gradient(180deg,color-mix(in srgb,var(--surface) 74%,var(--bg)),var(--bg));border-bottom:1px solid var(--border)}
+.rn-wrap{max-width:1180px}.back{display:inline-block;margin-bottom:42px;color:var(--muted);font-size:.82rem;font-weight:750}.eyebrow,.section-head,.col-label,.annual-label,.provenance,.increment-grid span,.increment-grid small,.meta{font-family:var(--font-mono)}.eyebrow{font-size:.65rem;letter-spacing:.1em;color:var(--accent-strong);font-weight:800}.rn-hero h1{max-width:980px;margin:12px 0 18px;font-size:clamp(2.7rem,6vw,5.5rem);line-height:.94;letter-spacing:-.06em}.thesis{max-width:920px;margin:0;font-size:clamp(1.16rem,2.1vw,1.65rem);line-height:1.55}.thesis em{font-style:normal;color:var(--accent-strong)}.sub{max-width:820px;color:var(--muted);margin:12px 0 0;line-height:1.7}.provenance-row{display:flex;gap:10px;flex-wrap:wrap;margin:28px 0 18px}.provenance-row span{padding:7px 9px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font-size:.7rem}.performance{margin-top:18px;border-top:1px solid var(--border);border-bottom:1px solid var(--border);padding:20px 0 22px}.section-head{display:flex;justify-content:space-between;gap:16px;color:var(--muted);font-size:.62rem;letter-spacing:.07em}.perf-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}.perf-col{padding:20px;border:1px solid var(--border);border-radius:14px;background:color-mix(in srgb,var(--surface) 86%,transparent)}.perf-col.selected{border-color:color-mix(in srgb,var(--accent) 60%,var(--border));background:linear-gradient(145deg,color-mix(in srgb,var(--accent-soft) 34%,var(--surface)),var(--surface))}.col-label{font-size:.68rem;text-transform:uppercase;font-weight:800;color:var(--accent-strong)}.annual-label{margin-top:22px;color:var(--muted);font-size:.58rem;text-transform:uppercase}.annual{margin-top:2px;font:800 clamp(2.4rem,5vw,4.4rem)/1 var(--font-mono);letter-spacing:-.06em}.risk-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:21px;padding-top:14px;border-top:1px solid var(--border)}.risk-row span,.risk-row strong{display:block}.risk-row span{font:600 .56rem var(--font-mono);color:var(--muted);text-transform:uppercase}.risk-row strong{margin-top:4px;font:800 1rem var(--font-mono)}.provenance{margin-top:15px;color:var(--muted);font-size:.55rem}.increment-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:14px;background:var(--border);border:1px solid var(--border);border-radius:12px;overflow:hidden}.increment-grid>div{padding:15px;background:var(--surface)}.increment-grid span,.increment-grid strong,.increment-grid small{display:block}.increment-grid span{font-size:.58rem;color:var(--muted);text-transform:uppercase}.increment-grid strong{margin-top:5px;font:800 1.45rem var(--font-mono);color:var(--accent-strong)}.increment-grid small{margin-top:3px;color:var(--muted);font-size:.54rem}.takeaway{margin:18px 0 0;font-weight:800;font-size:1.05rem}.meta{display:flex;gap:18px;flex-wrap:wrap;margin-top:22px;color:var(--muted);font-size:.62rem}.meta span+span:before{content:'·';margin-right:18px;color:var(--border)}
+@media(max-width:760px){.perf-grid,.increment-grid{grid-template-columns:1fr}.section-head{align-items:flex-start;flex-direction:column}.rn-hero h1{font-size:clamp(2.5rem,14vw,4.2rem)}}
+</style>
