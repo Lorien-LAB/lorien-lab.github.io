@@ -26,11 +26,16 @@ const knowledgeFiles = [
 ];
 
 const reproductionFiles = [
-  'src/pages/knowledge/reproductions/index.astro',
-  'src/pages/knowledge/reproductions/[...id].astro',
+  'src/pages/projects/reproductions/index.astro',
+  'src/pages/projects/reproductions/[...id].astro',
   'src/components/ReproductionCard.astro',
   'src/components/ReproductionPipeline.astro',
   'src/components/ReproductionScore.astro',
+];
+
+const legacyReproductionPages = [
+  'src/pages/knowledge/reproductions/index.astro',
+  'src/pages/knowledge/reproductions/[...id].astro',
 ];
 
 test('portfolio exposes every required v1 surface', async () => {
@@ -93,7 +98,7 @@ test('knowledge page derives counts instead of hard-coding invented corpus stati
   assert.match(source, /entries\.filter|knowledge\.filter|domainCount|counts|length/);
 });
 
-test('knowledge landing exposes the financial engineering learning resources gateway', async () => {
+test('knowledge landing keeps learning resources and no longer owns reproductions', async () => {
   await access('src/components/LearningResourcesGateway.astro');
   const gateway = await readFile('src/components/LearningResourcesGateway.astro', 'utf8');
   const page = await readFile('src/pages/knowledge/index.astro', 'utf8');
@@ -114,13 +119,24 @@ test('knowledge landing exposes the financial engineering learning resources gat
   assert.match(page, /import LearningResourcesGateway/);
   assert.match(page, /knowledge\/financial-engineering-learning-resources\//);
   assert.match(page, /<LearningResourcesGateway/);
-  assert.match(page, /<ReproductionGateway/);
+  assert.doesNotMatch(page, /import ReproductionGateway/);
+  assert.doesNotMatch(page, /<ReproductionGateway/);
   assert.match(page, /entries\.map/);
-  assert.ok(page.indexOf('<LearningResourcesGateway') < page.indexOf('<ReproductionGateway'));
 });
 
-test('reproduction workbench exposes its required surfaces', async () => {
+test('projects landing is the first-class reproduction gateway', async () => {
+  const page = await readFile('src/pages/projects/index.astro', 'utf8');
+  assert.match(page, /import ReproductionGateway/);
+  assert.match(page, /projects\/reproductions\//);
+  assert.match(page, /<ReproductionGateway/);
+  assert.match(page, /ProjectCard/);
+});
+
+test('reproduction workbench canonical route files live under projects only', async () => {
   for (const file of reproductionFiles) await access(file);
+  for (const file of legacyReproductionPages) {
+    await assert.rejects(() => access(file), { code: 'ENOENT' }, `legacy active route should be removed: ${file}`);
+  }
 });
 
 test('reproduction collection models source, workflow, result, visibility, and scoring states', async () => {
@@ -133,14 +149,32 @@ test('reproduction collection models source, workflow, result, visibility, and s
   for (const value of ['dataMatch', 'methodMatch', 'signalMatch', 'performanceMatch', 'robustness', 'reproducibility']) assert.match(config, new RegExp(value), `missing score dimension ${value}`);
 });
 
-test('knowledge base links to the reproduction workbench', async () => {
-  const source = await readFile('src/pages/knowledge/index.astro', 'utf8');
-  assert.match(source, /knowledge\/reproductions\//);
-  assert.match(source, /Reproductions|Reproduction/);
+test('reproduction cards and detail navigation use projects canonical URLs', async () => {
+  const card = await readFile('src/components/ReproductionCard.astro', 'utf8');
+  const detail = await readFile('src/pages/projects/reproductions/[...id].astro', 'utf8');
+  assert.match(card, /projects\/reproductions\/\$\{slug\}\//);
+  assert.doesNotMatch(card, /knowledge\/reproductions\/\$\{slug\}/);
+  assert.match(detail, /projects\/reproductions\//);
+  assert.doesNotMatch(detail, /knowledge\/reproductions\//);
+});
+
+test('Astro redirects preserve legacy knowledge reproduction URLs', async () => {
+  const config = await readFile('astro.config.mjs', 'utf8');
+  assert.match(config, /redirects\s*:/);
+  assert.match(config, /['"]\/knowledge\/reproductions['"]\s*:\s*['"]\/projects\/reproductions['"]/);
+  assert.match(config, /['"]\/knowledge\/reproductions\/\[\.\.\.id\]['"]\s*:\s*['"]\/projects\/reproductions\/\[\.\.\.id\]['"]/);
+  assert.match(config, /output:\s*'static'/);
+});
+
+test('current README documents projects as the reproduction canonical namespace', async () => {
+  const readme = await readFile('README.md', 'utf8');
+  assert.match(readme, /Projects/);
+  assert.match(readme, /Website record:\s+\/projects\/reproductions\/<slug>\//);
+  assert.doesNotMatch(readme, /Website record:\s+\/knowledge\/reproductions\/<slug>\//);
 });
 
 test('reproduction workbench separates academic papers and broker reports and exposes all filters', async () => {
-  const source = await readFile('src/pages/knowledge/reproductions/index.astro', 'utf8');
+  const source = await readFile('src/pages/projects/reproductions/index.astro', 'utf8');
   assert.match(source, /Academic Papers/);
   assert.match(source, /Broker Reports/);
   assert.match(source, /source type|Source Type/i);
@@ -151,14 +185,14 @@ test('reproduction workbench separates academic papers and broker reports and ex
 });
 
 test('reproduction workbench provides a truthful empty state and no fabricated performance examples', async () => {
-  const source = await readFile('src/pages/knowledge/reproductions/index.astro', 'utf8');
+  const source = await readFile('src/pages/projects/reproductions/index.astro', 'utf8');
   assert.match(source, /Reproduction library initialized\./);
   assert.match(source, /Research records will appear as reproductions are completed\./);
   assert.doesNotMatch(source, /0\.054|0\.049|1\.82|1\.61|4\.33|Sharpe\s+[0-9]|Rank IC\s+[0-9]/i);
 });
 
 test('reproduction detail route guards optional artifacts instead of emitting dead links', async () => {
-  const source = await readFile('src/pages/knowledge/reproductions/[...id].astro', 'utf8');
+  const source = await readFile('src/pages/projects/reproductions/[...id].astro', 'utf8');
   assert.match(source, /reportHtmlPath/);
   assert.match(source, /codeVisibility/);
   assert.match(source, /Implementation Private/);
