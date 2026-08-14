@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+const b = import.meta.env.BASE_URL;
 ---
 <BaseLayout title="CV · Xiang Luo" description="Curriculum vitae of Xiang Luo, Quantitative Finance student and quantitative researcher.">
   <header class="page-hero">
@@ -9,6 +10,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         <h1>Quantitative research,<br/>from hypothesis to system.</h1>
         <p>Quantitative Finance student at The Chinese University of Hong Kong, Shenzhen, focused on factor research, systematic trading, asset pricing, and agent-assisted research infrastructure.</p>
       </div>
+      <a class="button primary" href={`${b}cv/Xiang-Luo-CV.pdf`} target="_blank" rel="noreferrer">Download PDF CV ↓</a>
     </div>
   </header>
 
@@ -96,5 +98,5 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 </BaseLayout>
 
 <style>
-.cv-head{display:flex;justify-content:space-between;align-items:end;gap:40px}.cv-head>div{max-width:780px}.cv-wrap{max-width:1080px;padding-top:52px}.cv-wrap section{display:grid;grid-template-columns:210px 1fr;gap:46px;padding:36px 0;border-bottom:1px solid var(--border)}.cv-wrap h2{margin:0;font-size:1rem;font-family:var(--font-mono);color:var(--accent-strong)}.cv-entry{margin-bottom:30px}.cv-entry:last-child{margin-bottom:0}.cv-entry.compact{margin-bottom:15px}.cv-entry>div{display:flex;justify-content:space-between;gap:24px;align-items:baseline}.cv-entry strong{font-size:1rem}.cv-entry span{color:var(--muted);font-size:.84rem;white-space:nowrap}.cv-entry p,.skill-lines p{margin:8px 0 0;color:var(--muted);line-height:1.72}.cv-entry p b{color:var(--ink);font-weight:700}.skill-lines p+ p{margin-top:12px}.interest-grid{display:flex;flex-wrap:wrap;gap:9px}.interest-grid span{padding:7px 11px;background:var(--surface);border:1px solid var(--border);border-radius:999px;font-size:.82rem}@media(max-width:760px){.cv-head{align-items:flex-start;flex-direction:column}.cv-wrap section{grid-template-columns:1fr;gap:16px}.cv-entry>div{flex-direction:column;align-items:flex-start;gap:3px}.cv-entry span{white-space:normal}}
+.cv-head{display:flex;justify-content:space-between;align-items:end;gap:40px}.cv-head>div{max-width:780px}.cv-head>.button{flex:0 0 auto}.cv-wrap{max-width:1080px;padding-top:52px}.cv-wrap section{display:grid;grid-template-columns:210px 1fr;gap:46px;padding:36px 0;border-bottom:1px solid var(--border)}.cv-wrap h2{margin:0;font-size:1rem;font-family:var(--font-mono);color:var(--accent-strong)}.cv-entry{margin-bottom:30px}.cv-entry:last-child{margin-bottom:0}.cv-entry.compact{margin-bottom:15px}.cv-entry>div{display:flex;justify-content:space-between;gap:24px;align-items:baseline}.cv-entry strong{font-size:1rem}.cv-entry span{color:var(--muted);font-size:.84rem;white-space:nowrap}.cv-entry p,.skill-lines p{margin:8px 0 0;color:var(--muted);line-height:1.72}.cv-entry p b{color:var(--ink);font-weight:700}.skill-lines p+ p{margin-top:12px}.interest-grid{display:flex;flex-wrap:wrap;gap:9px}.interest-grid span{padding:7px 11px;background:var(--surface);border:1px solid var(--border);border-radius:999px;font-size:.82rem}@media(max-width:760px){.cv-head{align-items:flex-start;flex-direction:column}.cv-wrap section{grid-template-columns:1fr;gap:16px}.cv-entry>div{flex-direction:column;align-items:flex-start;gap:3px}.cv-entry span{white-space:normal}}
 </style>
