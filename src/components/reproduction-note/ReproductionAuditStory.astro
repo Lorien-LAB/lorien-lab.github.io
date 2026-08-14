@@ -1,0 +1,59 @@
+---
+const { data } = Astro.props as { data: any };
+---
+<section class="audit-story" id="reproduction-audit">
+  <div class="container audit-wrap">
+    <div class="chapter-no">03 · Rebuilding It From Scratch</div>
+    <div class="head-grid">
+      <div><h2>真正的复现，不是把报告里的参数抄进回测。</h2><p>我先把研究对象重建成一个可审计系统：合约链、基差归因、PIT 成分股、情绪因子、18 类 signal families、portfolio accounting，再逐层与原研报对账。只要底层口径错一层，最终净值“看起来接近”也没有意义。</p></div>
+      <div class="build-stats">
+        <div><strong>529</strong><span>futures contracts reconstructed</span></div>
+        <div><strong>55</strong><span>secondary-factor candidates</span></div>
+        <div><strong>18</strong><span>signal families implemented</span></div>
+        <div><strong>33</strong><span>ambiguities / issues audited</span></div>
+      </div>
+    </div>
+
+    <div class="research-stack">
+      <div><span>DATA</span><strong>Contract ladder + index + option + PIT constituents</strong><p>从逐合约行情重建 current-month / next-month / current-quarter / next-quarter，而不是依赖现成连续合约；历史指数成分使用 PIT membership，避免 survivorship leakage。</p></div>
+      <div><span>ACCOUNTING</span><strong>Roll-return attribution engine</strong><p>把期货多头收益拆成指数 beta 与持仓合约的 signed-basis change，逐日检查换月与跨期价差归因。</p></div>
+      <div><span>SIGNAL</span><strong>55 candidates → 7 factors → 18 methods</strong><p>复刻代表因子和 parameter grid，同时审计 MESA / Hilbert / Kaufman 等未完全披露的 implementation conventions。</p></div>
+      <div><span>VALIDATION</span><strong>T-day information → T+1 position</strong><p>对 signal lag、0 信号保持、Donchian/BOLL persistent state、OOS 边界和 benchmark 统一做 causal audit。</p></div>
+    </div>
+
+    <section class="chapter replication">
+      <div class="chapter-no">04 · Replication Evidence</div>
+      <div class="rep-head"><div><h2>先证明底层 signal structure 被恢复，再谈净值。</h2><p>最有说服力的证据不是单独一条 equity curve，而是七个代表因子的相关方向和量级都能从独立数据管线中重新得到。</p></div><div class="rep-summary"><strong>7 / 7</strong><span>correlation directions match</span><small>6 / 7 magnitudes within ≈ 0.01</small></div></div>
+
+      <div class="factor-comparison" aria-label="Factor evidence comparison">
+        <div class="factor-head"><span>FACTOR</span><span>ORIENT FUTURES</span><span>LORIEN LAB</span><span>GAP</span></div>
+        {data.factors.map((f:any)=>{
+          const gap=Math.abs(f.paper-f.reproduced);
+          return <div class="factor-row"><strong>{f.factor}</strong><span>{f.paper>0?'+':''}{f.paper.toFixed(3)}</span><span>{f.reproduced>0?'+':''}{f.reproduced.toFixed(3)}</span><span class:list={['gap',gap>.02&&'warn']}>{gap.toFixed(3)}</span></div>
+        })}
+      </div>
+
+      <div class="headline-evidence">
+        <article><span>IC MULTI-FACTOR · OOS IMPROVEMENT</span><strong>+2.0% <i>vs</i> +2.6%</strong><small>reproduced vs report</small></article>
+        <article><span>P/L RATIO · SWITCHES / YEAR</span><strong>1.11 / 4.6</strong><small>report 1.12 / 4.5</small></article>
+        <article><span>IC CROSS-MATURITY · OOS</span><strong>+20.7% <i>vs</i> +25.2%</strong><small>same regime signal, 6× spread</small></article>
+      </div>
+    </section>
+
+    <section class="chapter breaks">
+      <div class="chapter-no">05 · Where the Reproduction Broke</div>
+      <h2>成功复现以后，真正有价值的是解释“不一致”。</h2>
+      <div class="break-grid">
+        <article><span>01</span><h3>Figure 53 只能部分精确恢复</h3><p>代表因子层高度吻合，但具体 TA strategy selection 对 MESA、Hilbert、Kaufman 公式与筛选细节敏感。Figure 53 只有部分 exact match，因此不能把“结果接近”包装成方法完全一致。</p></article>
+        <article><span>02</span><h3>IM 比 IC 更弱</h3><p>IM 数据历史更短，部分低频因子样本外尚未发生足够切换；复现 OOS 优化约 +0.7% 而原报告为 +1.5%。这是后续引入跨品种信号研究的起点，而不是被隐藏的失败。</p></article>
+        <article><span>03</span><h3>price-index vs total-return</h3><p>本复现使用 price-index 口径，而原研报绝对 roll excess 使用 total-return index。股息会系统性改变绝对超额水平，但“择时策略 vs 同一 benchmark”的多头差更不敏感。</p></article>
+      </div>
+      <blockquote>Replication exposed a model-selection fragility that headline performance alone would not reveal.</blockquote>
+    </section>
+  </div>
+</section>
+
+<style>
+.audit-story{padding:30px 0 0}.audit-wrap{max-width:1120px}.chapter-no{font:800 .66rem var(--font-mono);letter-spacing:.09em;color:var(--accent-strong);text-transform:uppercase}.head-grid,.rep-head{display:grid;grid-template-columns:1fr .8fr;gap:60px;align-items:end;padding:62px 0 30px}.head-grid h2,.chapter h2{margin:10px 0 14px;font-size:clamp(2.2rem,4.5vw,3.7rem);line-height:1.02;letter-spacing:-.055em}.head-grid p,.chapter p{color:var(--muted);line-height:1.8}.build-stats{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--border);border-radius:14px;overflow:hidden}.build-stats div{padding:16px;background:var(--surface);border-bottom:1px solid var(--border)}.build-stats div:nth-child(odd){border-right:1px solid var(--border)}.build-stats strong,.build-stats span{display:block}.build-stats strong{font:800 2.1rem var(--font-mono);letter-spacing:-.05em}.build-stats span{margin-top:4px;color:var(--muted);font:600 .55rem/1.4 var(--font-mono);text-transform:uppercase}.research-stack{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:64px}.research-stack>div{padding:18px;border-top:2px solid var(--border)}.research-stack span{font:800 .56rem var(--font-mono);color:var(--accent-strong)}.research-stack strong{display:block;margin-top:10px;font-size:.84rem}.research-stack p{font-size:.74rem;line-height:1.65;color:var(--muted)}.chapter{padding:62px 0;border-top:1px solid var(--border)}.rep-summary{padding:20px;border-left:1px solid var(--border)}.rep-summary strong,.rep-summary span,.rep-summary small{display:block}.rep-summary strong{font:800 3.4rem var(--font-mono);letter-spacing:-.07em}.rep-summary span{font-weight:800}.rep-summary small{margin-top:5px;color:var(--muted)}.factor-comparison{border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.factor-head,.factor-row{display:grid;grid-template-columns:1.65fr .75fr .75fr .45fr;gap:16px;align-items:center}.factor-head{padding:9px 12px;color:var(--muted);font:700 .55rem var(--font-mono)}.factor-row{padding:12px;border-top:1px solid var(--border)}.factor-row strong{font-size:.78rem}.factor-row span{font:700 .73rem var(--font-mono)}.factor-row .gap{color:var(--accent-strong)}.factor-row .gap.warn{color:var(--danger)}.headline-evidence{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}.headline-evidence article{padding:18px;border:1px solid var(--border);border-radius:11px;background:var(--surface)}.headline-evidence span,.headline-evidence strong,.headline-evidence small{display:block}.headline-evidence span{font:700 .55rem var(--font-mono);color:var(--muted)}.headline-evidence strong{margin-top:9px;font:800 1.2rem var(--font-mono)}.headline-evidence strong i{font-style:normal;color:var(--muted);font-size:.65rem}.headline-evidence small{margin-top:4px;color:var(--muted)}.breaks h2{max-width:830px}.break-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:28px}.break-grid article{padding:20px;border-top:2px solid var(--border);background:color-mix(in srgb,var(--surface) 65%,transparent)}.break-grid article>span{font:800 .6rem var(--font-mono);color:var(--accent-strong)}.break-grid h3{margin:10px 0 4px;font-size:1rem}.break-grid p{font-size:.77rem;margin:0}.breaks blockquote{margin:38px 0 0;padding:18px 0 18px 26px;border-left:3px solid var(--accent);font-size:clamp(1.25rem,2.5vw,1.8rem);font-weight:800;line-height:1.45}
+@media(max-width:800px){.head-grid,.rep-head{grid-template-columns:1fr}.research-stack,.headline-evidence,.break-grid{grid-template-columns:1fr}.factor-head,.factor-row{grid-template-columns:1.5fr .8fr .8fr .45fr;gap:8px}.factor-row strong{font-size:.7rem}}
+</style>
