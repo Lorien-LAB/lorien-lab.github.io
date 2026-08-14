@@ -14,6 +14,7 @@ tags:
 featured: false
 related: []
 relatedNotes: []
+officialUrl: https://www.mlfactor.com/
 sourceUrl: https://www.mlfactor.com/python.html
 ---
 
@@ -25,6 +26,12 @@ The guide presents *Machine Learning for Factor Investing* as a free book with c
 
 It appears in the **Factor Investing** stage, after core data-science and quantitative-programming resources.
 
-## Resource
+## Official resource
 
-[Machine Learning for Factor Investing](https://www.mlfactor.com/python.html)
+[Machine Learning for Factor Investing](https://www.mlfactor.com/)
+
+## Supplementary code / notebooks
+
+The guide specifically points readers to the book site's Python material:
+
+[Chapter 18 Python notebooks](https://www.mlfactor.com/python.html)
