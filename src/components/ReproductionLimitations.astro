@@ -1,0 +1,15 @@
+---
+interface Limitation { title: string; detail: string; }
+interface Props { limitations: Limitation[]; }
+const { limitations } = Astro.props;
+---
+<section class="limitations" aria-labelledby="limitations-title">
+  <div class="limitations-head"><div class="mono-label">Research Integrity</div><h2 id="limitations-title">What did not reproduce exactly?</h2><p>These differences are part of the result, not implementation footnotes. They define where the evidence is weaker or the source is under-specified.</p></div>
+  <div class="limitations-list">
+    {limitations.map((item, index) => <article><span>{String(index + 1).padStart(2,'0')}</span><div><h3>{item.title}</h3><p>{item.detail}</p></div></article>)}
+  </div>
+</section>
+
+<style>
+.limitations{padding:48px 0}.limitations-head{max-width:820px;margin-bottom:22px}.limitations-head h2{margin:8px 0 12px;font-size:clamp(2rem,4vw,3.2rem);letter-spacing:-.05em}.limitations-head p{margin:0;color:var(--muted);line-height:1.7}.limitations-list{border-top:1px solid var(--border)}article{display:grid;grid-template-columns:54px 1fr;gap:18px;padding:20px 0;border-bottom:1px solid var(--border)}article>span{font:800 .67rem var(--font-mono);color:var(--danger)}h3{margin:0 0 7px;font-size:1rem}p{margin:0;color:var(--muted);font-size:.87rem;line-height:1.65}
+</style>
