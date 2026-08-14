@@ -14,6 +14,7 @@ tags:
 featured: false
 related: []
 relatedNotes: []
+officialUrl: https://www.shichuan.info/teaching/DDA3600
 toolUrl: https://www.shichuan.info/teaching/DDA3600
 ---
 
