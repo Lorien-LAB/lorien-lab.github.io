@@ -1,0 +1,39 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TagList from './TagList.astro';
+
+interface Props { entry: CollectionEntry<'reproductions'>; }
+const { entry } = Astro.props;
+const caseStudy = entry.data.caseStudy!;
+const sourceLabel = entry.data.sourceType === 'academic' ? 'Academic Paper' : 'Broker Report';
+const resultLabel = entry.data.result.replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
+const visibilityLabel = entry.data.codeVisibility === 'partial' ? 'Partial Code Release' : entry.data.codeVisibility === 'private' ? 'Implementation Private' : 'Public Code';
+---
+<header class="case-head">
+  <div class="container case-wrap">
+    <a class="back" href={`${import.meta.env.BASE_URL}projects/reproductions/`}>← All reproductions</a>
+    <div class="case-kicker"><span>{sourceLabel}</span><span>{entry.data.researchArea}</span></div>
+    <h1>{caseStudy.shortTitle}</h1>
+    {caseStudy.subtitle && <p class="subtitle">{caseStudy.subtitle}</p>}
+    <p class="source-title"><span>Source report</span>{entry.data.title}</p>
+
+    <div class="identity-grid">
+      {entry.data.sourceType === 'academic' ? <>
+        <div><span>Authors</span><strong>{entry.data.authors.join(' · ')}</strong></div>
+        <div><span>Year</span><strong>{entry.data.year}</strong></div>
+        {(entry.data.journal ?? entry.data.conference ?? entry.data.venue) && <div><span>Venue</span><strong>{entry.data.journal ?? entry.data.conference ?? entry.data.venue}</strong></div>}
+      </> : <>
+        <div><span>Broker</span><strong>{entry.data.broker}</strong></div>
+        <div><span>Analysts</span><strong>{entry.data.analysts.join(' · ')}</strong></div>
+        <div><span>Published</span><strong>{entry.data.publishDate.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})}</strong></div>
+      </>}
+      <div><span>Research status</span><strong>{resultLabel}</strong></div>
+      <div><span>Code</span><strong>{visibilityLabel}</strong></div>
+    </div>
+    <TagList tags={entry.data.tags} />
+  </div>
+</header>
+
+<style>
+.case-head{padding:54px 0 42px;border-bottom:1px solid var(--border);background:radial-gradient(circle at 84% 18%,color-mix(in srgb,var(--accent-soft) 46%,transparent),transparent 35%),linear-gradient(180deg,color-mix(in srgb,var(--surface) 80%,var(--bg)),var(--bg))}.case-wrap{max-width:1160px}.back{display:inline-block;margin-bottom:34px;color:var(--muted);font-weight:700;font-size:.86rem}.case-kicker{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:13px;font:700 .67rem var(--font-mono);text-transform:uppercase;letter-spacing:.065em;color:var(--accent-strong)}.case-kicker span+span:before{content:' / ';color:var(--muted)}h1{max-width:980px;margin:0;font-size:clamp(2.8rem,6vw,5.6rem);line-height:.94;letter-spacing:-.065em}.subtitle{max-width:780px;margin:18px 0 0;color:var(--muted);font:500 1.02rem/1.7 var(--font-mono)}.source-title{display:grid;gap:5px;max-width:900px;margin:25px 0 0;padding-top:18px;border-top:1px solid var(--border);color:var(--muted);font-size:.84rem}.source-title span{font:700 .59rem var(--font-mono);text-transform:uppercase;letter-spacing:.06em;color:var(--accent-strong)}.identity-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:16px;margin:26px 0 20px}.identity-grid div{padding-left:12px;border-left:2px solid var(--border);min-width:0}.identity-grid span,.identity-grid strong{display:block}.identity-grid span{color:var(--muted);font:650 .56rem var(--font-mono);text-transform:uppercase;letter-spacing:.04em}.identity-grid strong{margin-top:5px;font-size:.76rem;line-height:1.45;overflow-wrap:anywhere}@media(max-width:900px){.identity-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:560px){.case-head{padding-top:44px}.identity-grid{grid-template-columns:1fr 1fr}h1{font-size:clamp(2.45rem,14vw,4.2rem)}}
+</style>
