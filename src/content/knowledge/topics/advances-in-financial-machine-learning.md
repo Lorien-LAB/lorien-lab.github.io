@@ -1,0 +1,30 @@
+---
+title: Advances in Financial Machine Learning
+description: Exercises associated with Marcos López de Prado's financial-machine-learning work, emphasizing common analytical pitfalls and advanced methodologies.
+type: topic
+domain: Machine Learning
+category: Financial ML
+status: growing
+date: 2025-11-01
+tags:
+  - Financial Machine Learning
+  - Marcos López de Prado
+  - Quantitative Finance
+  - Exercises
+featured: false
+related: []
+relatedNotes: []
+sourceUrl: https://github.com/BlackArbsCEO/Adv_Fin_ML_Exercises
+---
+
+## What the guide highlights
+
+The guide points to an exercise repository associated with Marcos López de Prado's *Advances in Financial Machine Learning*. It emphasizes learning how to avoid common pitfalls in financial data analysis while studying advanced financial-machine-learning methodologies.
+
+## Place in the learning path
+
+The resource appears in the **Advanced Concepts** stage, after the guide's core-skills and factor-investing material.
+
+## Resource
+
+[Advances in Financial Machine Learning Exercises](https://github.com/BlackArbsCEO/Adv_Fin_ML_Exercises)
