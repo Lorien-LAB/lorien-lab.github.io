@@ -126,7 +126,8 @@ test('reproduction workbench separates academic papers and broker reports and ex
 
 test('reproduction workbench provides a truthful empty state and no fabricated performance examples', async () => {
   const source = await readFile('src/pages/knowledge/reproductions/index.astro', 'utf8');
-  assert.match(source, /Reproduction library initialized\. Research records will appear as reproductions are completed\./);
+  assert.match(source, /Reproduction library initialized\./);
+  assert.match(source, /Research records will appear as reproductions are completed\./);
   assert.doesNotMatch(source, /0\.054|0\.049|1\.82|1\.61|4\.33|Sharpe\s+[0-9]|Rank IC\s+[0-9]/i);
 });
 
