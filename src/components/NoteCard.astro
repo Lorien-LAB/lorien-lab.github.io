@@ -1,0 +1,9 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TagList from './TagList.astro';
+interface Props { entry: CollectionEntry<'notes'>; }
+const { entry } = Astro.props;
+const href = `${import.meta.env.BASE_URL}notes/${entry.id}/`;
+---
+<a class="note-row" href={href}><div><div class="card-meta"><span>{entry.data.category}</span><span>{entry.data.date.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})}</span></div><h3>{entry.data.title}</h3><p>{entry.data.description}</p><TagList tags={entry.data.tags}/></div><span class="arrow" aria-hidden="true">↗</span></a>
+<style>.note-row{display:grid;grid-template-columns:1fr auto;gap:20px;padding:24px 0;border-top:1px solid var(--border)}.note-row:last-child{border-bottom:1px solid var(--border)}.note-row h3{margin:0 0 7px;font-size:1.12rem;letter-spacing:-.02em}.note-row p{margin:0;color:var(--muted);max-width:740px}.arrow{font-size:1.4rem;color:var(--accent-strong);transition:transform .18s ease}.note-row:hover{color:var(--ink)}.note-row:hover .arrow{transform:translate(3px,-3px)}</style>

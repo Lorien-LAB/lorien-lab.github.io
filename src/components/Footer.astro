@@ -1,0 +1,13 @@
+---
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="container footer-inner">
+    <div><strong>Xiang Luo</strong><p>Quantitative research, systematic strategies, and research infrastructure.</p></div>
+    <div class="footer-links"><a href="https://github.com/Lorien-LAB" target="_blank" rel="noreferrer">GitHub</a></div>
+    <small>© {year} Xiang Luo. Built with Astro.</small>
+  </div>
+</footer>
+<style>
+.site-footer{margin-top:80px;border-top:1px solid var(--border);background:var(--surface);padding:42px 0}.footer-inner{display:grid;grid-template-columns:1.4fr auto auto;gap:30px;align-items:end}.site-footer strong{letter-spacing:-.02em}.site-footer p{margin:6px 0 0;color:var(--muted);font-size:.88rem;max-width:520px}.footer-links{display:flex;gap:18px}.footer-links a{font-weight:700;font-size:.88rem;color:var(--muted)}.site-footer small{color:var(--muted);font-size:.75rem}@media(max-width:760px){.footer-inner{grid-template-columns:1fr;align-items:start}.site-footer{margin-top:50px}}
+</style>

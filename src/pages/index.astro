@@ -1,0 +1,23 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import SectionHeading from '../components/SectionHeading.astro';
+import ResearchCard from '../components/ResearchCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import NoteCard from '../components/NoteCard.astro';
+const base=import.meta.env.BASE_URL;
+const research=(await getCollection('research',({data})=>data.featured)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf()).slice(0,3);
+const projects=(await getCollection('projects',({data})=>data.featured)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf()).slice(0,3);
+const notes=(await getCollection('notes',({data})=>!data.draft)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf()).slice(0,3);
+const focus=['Alpha Discovery','Futures & Term Structure','Market Microstructure','CTA & Systematic Trading','Machine Learning','Research Engineering'];
+---
+<BaseLayout title="Xiang Luo · Quantitative Research" description="Quantitative research portfolio covering alpha discovery, futures, market microstructure, systematic trading, and research infrastructure.">
+  <Hero />
+  <section class="section"><div class="container"><SectionHeading label="01 / Research" title="Research Areas" description="Research programs organized around mechanisms, data, and falsifiable questions." href={`${base}research/`} linkLabel="View all research →"/><div class="card-grid">{research.map(entry=><ResearchCard entry={entry}/>)}</div></div></section>
+  <section class="section"><div class="container"><SectionHeading label="02 / Build" title="Featured Projects" description="Infrastructure and strategy frameworks designed to make research faster, more reproducible, and easier to audit." href={`${base}projects/`} linkLabel="View all projects →"/><div class="card-grid">{projects.map(entry=><ProjectCard entry={entry}/>)}</div></div></section>
+  <section class="section"><div class="container"><SectionHeading label="03 / Notes" title="Latest Research Notes" description="Methodology, architecture decisions, paper reading, and experiment write-ups." href={`${base}notes/`} linkLabel="Read all notes →"/><div>{notes.map(entry=><NoteCard entry={entry}/>)}</div></div></section>
+  <section class="section focus-section"><div class="container focus-grid"><div><div class="mono-label">Current Focus</div><h2>Building a research process that scales ideas without scaling noise.</h2></div><div class="focus-list">{focus.map((item,i)=><div><span>{String(i+1).padStart(2,'0')}</span><strong>{item}</strong></div>)}</div></div></section>
+  <section class="contact-strip"><div class="container contact-inner"><div><div class="mono-label">Contact</div><h2>Interested in quantitative research, systematic trading, or research systems?</h2></div><a class="button primary" href="https://github.com/Lorien-LAB" target="_blank" rel="noreferrer">View GitHub →</a></div></section>
+</BaseLayout>
+<style>.focus-section{padding-top:78px}.focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}.focus-grid h2{margin:12px 0 0;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.05em}.focus-list{border-top:1px solid var(--border)}.focus-list div{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--border)}.focus-list span{color:var(--accent-strong);font:700 .75rem var(--font-mono)}.focus-list strong{font-size:.94rem}.contact-strip{margin-top:56px;padding:52px 0;background:var(--hero);color:var(--hero-ink)}.contact-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}.contact-strip h2{max-width:720px;margin:8px 0 0;font-size:clamp(1.55rem,3vw,2.5rem);line-height:1.1;letter-spacing:-.035em}@media(max-width:780px){.focus-grid{grid-template-columns:1fr;gap:35px}.contact-inner{align-items:flex-start;flex-direction:column}}</style>

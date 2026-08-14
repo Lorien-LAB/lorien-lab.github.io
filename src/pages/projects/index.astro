@@ -1,0 +1,7 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+const entries = (await getCollection('projects')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+---
+<BaseLayout title="Projects · Xiang Luo" description="Research engineering projects for factor discovery, systematic futures, and quantitative experimentation."><header class="page-hero"><div class="container"><div class="mono-label">Projects</div><h1>Research systems<br/>built to compound.</h1><p>Selected infrastructure and strategy frameworks built around reproducibility, modularity, and long-horizon research iteration.</p></div></header><section class="section"><div class="container card-grid">{entries.map(entry=><ProjectCard entry={entry}/>)}</div></section></BaseLayout>

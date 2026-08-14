@@ -1,0 +1,15 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import TagList from './TagList.astro';
+interface Props { entry: CollectionEntry<'research'>; }
+const { entry } = Astro.props;
+const href = `${import.meta.env.BASE_URL}research/${entry.id}/`;
+---
+<a class="card research-card" href={href}>
+  <div class="card-body">
+    <div class="card-meta"><span>{entry.data.category}</span><span>{entry.data.status}</span></div>
+    <h3>{entry.data.title}</h3><p>{entry.data.description}</p>
+    <TagList tags={entry.data.tags} />
+  </div>
+</a>
+<style>.research-card{display:block;box-shadow:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.research-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));box-shadow:var(--shadow);color:var(--ink)}</style>
