@@ -1,0 +1,69 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import TagList from '../../components/TagList.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('knowledge');
+  return entries.map((entry) => ({
+    params: { id: entry.id.split('/').pop() },
+    props: { entry },
+  }));
+}
+
+interface Props { entry: CollectionEntry<'knowledge'>; }
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const base = import.meta.env.BASE_URL;
+const knowledge = await getCollection('knowledge');
+const notes = await getCollection('notes', ({ data }) => !data.draft);
+const slugOf = (id: string) => id.split('/').pop() ?? id;
+const knowledgeBySlug = new Map(knowledge.map((item) => [slugOf(item.id), item]));
+const notesBySlug = new Map(notes.map((item) => [slugOf(item.id), item]));
+const relatedKnowledge = entry.data.related.map((slug) => knowledgeBySlug.get(slug)).filter(Boolean) as CollectionEntry<'knowledge'>[];
+const relatedNotes = entry.data.relatedNotes.map((slug) => notesBySlug.get(slug)).filter(Boolean) as CollectionEntry<'notes'>[];
+const typeLabel = entry.data.type === 'topic' ? 'Research Topic' : entry.data.type[0].toUpperCase() + entry.data.type.slice(1);
+const lastUpdated = entry.data.updated ?? entry.data.date;
+const externalLinks = [
+  entry.data.paperUrl && ['Paper', entry.data.paperUrl],
+  entry.data.toolUrl && ['Tool website', entry.data.toolUrl],
+  entry.data.sourceUrl && ['Source', entry.data.sourceUrl],
+].filter(Boolean) as [string, string][];
+---
+<BaseLayout title={`${entry.data.title} · Lorien Lab`} description={entry.data.description}>
+  <article>
+    <header class="knowledge-head">
+      <div class="container knowledge-wrap">
+        <a class="back" href={`${base}knowledge/`}>← Knowledge Base</a>
+        <div class="knowledge-kicker"><span>{typeLabel}</span><span>{entry.data.domain}</span><span>{entry.data.category}</span></div>
+        <h1>{entry.data.title}</h1>
+        <p class="lede">{entry.data.description}</p>
+        <div class="knowledge-meta">
+          <time datetime={lastUpdated.toISOString()}>Updated {lastUpdated.toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'})}</time>
+          <span class={`status status-${entry.data.status}`}>{entry.data.status}</span>
+          {entry.data.authors?.length && <span>{entry.data.authors.join(', ')}</span>}
+          {entry.data.year && <span>{entry.data.year}</span>}
+          {entry.data.language && <span>{entry.data.language}</span>}
+        </div>
+        <TagList tags={entry.data.tags} />
+      </div>
+    </header>
+
+    <div class="container detail-grid">
+      <div class="prose knowledge-body"><Content /></div>
+      <aside class="relations" aria-label="Knowledge relationships">
+        <div class="relation-block">
+          <div class="mono-label">Knowledge Map</div>
+          <dl><div><dt>Type</dt><dd>{typeLabel}</dd></div><div><dt>Domain</dt><dd>{entry.data.domain}</dd></div><div><dt>Category</dt><dd>{entry.data.category}</dd></div><div><dt>Status</dt><dd>{entry.data.status}</dd></div></dl>
+        </div>
+        {relatedKnowledge.length > 0 && <div class="relation-block"><h2>Related Knowledge</h2>{relatedKnowledge.map((item) => <a href={`${base}knowledge/${slugOf(item.id)}/`}><span>{item.data.type}</span><strong>{item.data.title}</strong> →</a>)}</div>}
+        {relatedNotes.length > 0 && <div class="relation-block"><h2>Related Notes</h2>{relatedNotes.map((item) => <a href={`${base}notes/${item.id}/`}><span>Note</span><strong>{item.data.title}</strong> →</a>)}</div>}
+        {externalLinks.length > 0 && <div class="relation-block"><h2>Sources & Links</h2>{externalLinks.map(([label,url]) => <a href={url} target="_blank" rel="noreferrer"><strong>{label}</strong> ↗</a>)}</div>}
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+.knowledge-head{padding:62px 0 48px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 86%,transparent),transparent)}.knowledge-wrap{max-width:940px}.back{display:inline-block;margin-bottom:34px;color:var(--muted);font-weight:700;font-size:.86rem}.knowledge-kicker{display:flex;flex-wrap:wrap;gap:9px;font:700 .68rem var(--font-mono);text-transform:uppercase;letter-spacing:.07em;color:var(--accent-strong)}.knowledge-kicker span+span:before{content:'•';margin-right:9px;color:var(--border-strong)}.knowledge-head h1{max-width:900px;margin:13px 0 17px;font-size:clamp(2.5rem,6vw,4.8rem);line-height:.98;letter-spacing:-.06em}.lede{max-width:760px;margin:0 0 23px;color:var(--muted);font-size:1.08rem;line-height:1.65}.knowledge-meta{display:flex;flex-wrap:wrap;align-items:center;gap:13px;margin-bottom:17px;color:var(--muted);font:600 .73rem var(--font-mono)}.status{padding:4px 8px;border:1px solid var(--border);border-radius:999px;text-transform:uppercase;letter-spacing:.05em}.status-mature{color:var(--accent-strong)}.detail-grid{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:72px;align-items:start;padding-top:60px}.knowledge-body{max-width:760px}.relations{position:sticky;top:104px}.relation-block{padding:19px 0;border-top:1px solid var(--border)}.relation-block:last-child{border-bottom:1px solid var(--border)}.relation-block h2{margin:0 0 11px;font-size:.78rem;font-family:var(--font-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}.relation-block dl{margin:13px 0 0}.relation-block dl div{display:flex;justify-content:space-between;gap:18px;padding:8px 0;border-top:1px solid var(--border);font-size:.78rem}.relation-block dt{color:var(--muted)}.relation-block dd{margin:0;text-align:right;font-weight:700}.relation-block>a{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:11px 0;border-top:1px solid var(--border);color:var(--ink);font-size:.82rem}.relation-block>a span{grid-column:1/-1;color:var(--muted);font:600 .65rem var(--font-mono);text-transform:uppercase}.relation-block>a:hover strong{color:var(--accent-strong)}@media(max-width:860px){.detail-grid{grid-template-columns:1fr;gap:34px}.relations{position:static}.knowledge-body{max-width:none}}
+</style>
