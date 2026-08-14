@@ -1,0 +1,43 @@
+---
+interface Score {
+  dataMatch?: number;
+  methodMatch?: number;
+  signalMatch?: number;
+  performanceMatch?: number;
+  robustness?: number;
+  reproducibility?: number;
+}
+interface Props { score?: Score; compact?: boolean; }
+const { score, compact = false } = Astro.props;
+const dimensions = [
+  ['dataMatch', 'Data Match'],
+  ['methodMatch', 'Method Match'],
+  ['signalMatch', 'Signal Match'],
+  ['performanceMatch', 'Performance Match'],
+  ['robustness', 'Robustness'],
+  ['reproducibility', 'Reproducibility'],
+] as const;
+const rows = dimensions.flatMap(([key, label]) => {
+  const value = score?.[key];
+  return typeof value === 'number' ? [{ key, label, value }] : [];
+});
+const overall = rows.length ? rows.reduce((sum, row) => sum + row.value, 0) / rows.length : null;
+---
+{rows.length > 0 && <section class:list={['score-panel', { compact }]} aria-label="Reproduction score">
+  <div class="score-head">
+    <div><span class="score-label">Reproduction Score</span><small>{rows.length} dimensions assessed</small></div>
+    {overall !== null && <strong>{overall.toFixed(2)}<span>/5</span></strong>}
+  </div>
+  {!compact && <div class="score-rows">
+    {rows.map(({ label, value }) => <div class="score-row">
+      <div class="score-row-head"><span>{label}</span><strong>{value.toFixed(1)} / 5</strong></div>
+      <div class="score-track" aria-hidden="true"><i style={`width:${Math.max(0, Math.min(5, value)) / 5 * 100}%`}></i></div>
+    </div>)}
+  </div>}
+</section>}
+
+<style>
+.score-panel{padding:21px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}
+.score-panel.compact{padding:12px 14px;border-radius:10px}.score-head{display:flex;align-items:flex-end;justify-content:space-between;gap:18px}.score-label{display:block;font:700 .7rem var(--font-mono);letter-spacing:.07em;text-transform:uppercase;color:var(--accent-strong)}.score-head small{display:block;margin-top:4px;color:var(--muted);font-size:.7rem}.score-head>strong{font:800 1.65rem var(--font-mono);letter-spacing:-.06em}.score-head>strong span{margin-left:3px;color:var(--muted);font-size:.72rem;letter-spacing:0}.compact .score-head>strong{font-size:1.05rem}.compact .score-head small{display:none}
+.score-rows{display:grid;gap:14px;margin-top:21px;padding-top:19px;border-top:1px solid var(--border)}.score-row-head{display:flex;justify-content:space-between;gap:14px;margin-bottom:6px;font-size:.78rem}.score-row-head strong{font:700 .7rem var(--font-mono);color:var(--muted)}.score-track{height:6px;border-radius:999px;background:var(--surface-2);overflow:hidden}.score-track i{display:block;height:100%;border-radius:inherit;background:var(--accent)}
+</style>
