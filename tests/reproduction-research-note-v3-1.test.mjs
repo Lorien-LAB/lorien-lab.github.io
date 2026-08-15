@@ -48,3 +48,9 @@ test('portfolio chart uses stored chart data rather than synthetic summary recon
   assert.match(source, /charts:\s*\{[^}]*portfolio/s);
   assert.doesNotMatch(source, /39\.9[^\n]{0,120}cumprod|summary[^\n]{0,120}NAV/i);
 });
+
+test('portfolio chart filters the generator raw-return pseudo benchmark before plotting NAV', async () => {
+  const source = await readFile(dataPath, 'utf8');
+  assert.match(source, /portfolioChartRaw/);
+  assert.match(source, /portfolioChartRaw\.series\.filter\(\(_series, index\) => index !== 1\)/);
+});
