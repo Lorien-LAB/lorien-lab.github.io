@@ -5,10 +5,74 @@ import ProjectCard from '../../components/ProjectCard.astro';
 import ReproductionGateway from '../../components/ReproductionGateway.astro';
 
 const base = import.meta.env.BASE_URL;
-const entries = (await getCollection('projects')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
+const entries = (await getCollection('projects')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const systemIds = new Set(['quant-research-harness', 'llm-factor-discovery']);
+const strategyIds = new Set(['cta-research-framework']);
+const systems = entries.filter((entry) => systemIds.has(entry.id));
+const strategies = entries.filter((entry) => strategyIds.has(entry.id));
+const otherProjects = entries.filter((entry) => !systemIds.has(entry.id) && !strategyIds.has(entry.id));
 ---
+
 <BaseLayout title="Projects · Lorien Lab" description="Research engineering projects for factor discovery, systematic futures, and quantitative experimentation.">
-  <header class="page-hero"><div class="container"><div class="mono-label">Projects</div><h1>Research systems<br/>built to compound.</h1><p>Selected infrastructure and strategy frameworks built around reproducibility, modularity, and long-horizon research iteration.</p></div></header>
-  <section class="section"><div class="container"><ReproductionGateway href={`${base}projects/reproductions/`} /></div></section>
-  <section class="section"><div class="container card-grid">{entries.map(entry=><ProjectCard entry={entry}/>)}</div></section>
+  <header class="page-hero">
+    <div class="container">
+      <div class="mono-label">Projects</div>
+      <h1>Research systems<br/>built to compound.</h1>
+      <p>Infrastructure, search systems, strategy frameworks, and empirical reproductions organized around one principle: research should become more inspectable and reusable as the experiment count grows.</p>
+    </div>
+  </header>
+
+  <section class="section reproduction-section">
+    <div class="container"><ReproductionGateway href={`${base}projects/reproductions/`} /></div>
+  </section>
+
+  <section class="section project-group" aria-labelledby="research-systems-title">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <div class="mono-label">Research Systems</div>
+          <h2 id="research-systems-title">Infrastructure for repeatable research.</h2>
+          <p>Workbenches, search loops, and interfaces designed to make quantitative research durable, inspectable, and extensible across both human and agent workflows.</p>
+        </div>
+      </div>
+      <div class="card-grid two">{systems.map((entry) => <ProjectCard entry={entry} />)}</div>
+    </div>
+  </section>
+
+  <section class="section project-group" aria-labelledby="strategy-frameworks-title">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <div class="mono-label">Strategy Frameworks</div>
+          <h2 id="strategy-frameworks-title">Reusable structures for systematic trading research.</h2>
+          <p>Strategy families evaluated under shared assumptions, risk controls, and validation discipline rather than isolated headline backtests.</p>
+        </div>
+      </div>
+      <div class="card-grid">{strategies.map((entry) => <ProjectCard entry={entry} />)}</div>
+    </div>
+  </section>
+
+  {otherProjects.length > 0 && (
+    <section class="section project-group" aria-labelledby="other-projects-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="mono-label">Additional Projects</div>
+            <h2 id="other-projects-title">Research objects outside the current flagship groups.</h2>
+            <p>New project records remain visible even before they are assigned to a permanent portfolio category.</p>
+          </div>
+        </div>
+        <div class="card-grid">{otherProjects.map((entry) => <ProjectCard entry={entry} />)}</div>
+      </div>
+    </section>
+  )}
 </BaseLayout>
+
+<style>
+  .reproduction-section { padding-bottom: 42px; }
+  .project-group { border-top: 1px solid var(--border); }
+  .project-group .section-heading { max-width: 850px; }
+  .project-group .section-heading h2 { margin-top: 8px; }
+  .project-group :global(.project-card) { min-height: 100%; }
+</style>
