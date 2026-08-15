@@ -20,6 +20,7 @@ function trimChart(chart: RawChart | undefined) {
 
 const rollChart = trimChart(charts.find((c) => c.title.startsWith('IC 滚贴水')));
 const arbChart = trimChart(charts.find((c) => c.title.startsWith('IC 跨期套利')));
+const portfolioChart = trimChart(charts.find((c) => c.title.startsWith('组合（IC 滚贴水 + 跨期 1:1）')));
 
 export const researchNoteData = {
   cutoff: '2026-06-26',
@@ -39,6 +40,49 @@ export const researchNoteData = {
       configuration: 'IC 3-factor + asymmetric Hysteresis 10/5 + deep-discount anchor q=0.15',
     },
   },
+  portfolio: {
+    flagship: {
+      role: 'FLAGSHIP PORTFOLIO',
+      name: 'IC Roll Timing + 1.0× Cross-Maturity Arbitrage',
+      annualizedReturn: '39.9%',
+      sharpe: '1.46',
+      maxDrawdown: '-24.2%',
+      note: 'Beta-bearing Roll Premium strategy + beta-neutral cross-maturity alpha stream.',
+      provenance: 'Constructed by Lorien Lab · full-sample research result',
+    },
+    strategies: [
+      {
+        role: 'CORE STRATEGY',
+        name: 'Optimized Roll Timing',
+        annualizedReturn: '13.2%',
+        sharpe: '0.65',
+        maxDrawdown: '-34.8%',
+        note: '3 factors + asymmetric Hysteresis 10/5 + deep-discount anchor q=0.15',
+      },
+      {
+        role: 'ALPHA OVERLAY',
+        name: 'Cross-Maturity Arbitrage 6×',
+        annualizedReturn: '22.6%',
+        sharpe: '1.32',
+        maxDrawdown: '-20.2%',
+        note: 'Beta-neutral cross-maturity spread alpha stream',
+      },
+      {
+        role: 'DIVERSIFIED PORTFOLIO',
+        name: 'Roll + 0.5× Arb',
+        annualizedReturn: '26.3%',
+        sharpe: '1.14',
+        maxDrawdown: '-27.8%',
+        note: 'Intermediate allocation between the core beta strategy and alpha overlay',
+      },
+    ],
+  },
+  evolution: [
+    { label: 'Orient Futures', annualizedReturn: '13.6%', kind: 'report' },
+    { label: 'Independent Reproduction', annualizedReturn: '12.4%', kind: 'reproduction' },
+    { label: 'Optimized Roll Timing', annualizedReturn: '13.2%', kind: 'strategy' },
+    { label: 'Research Portfolio', annualizedReturn: '39.9%', kind: 'portfolio' },
+  ],
   pipeline: { primaryFactors: 10, secondaryFactors: 55, retainedFactors: 7, timingMethods: 18 },
   factors: [
     { factor: 'IC annualized volatility', paper: -0.35, reproduced: -0.356 },
@@ -63,7 +107,7 @@ export const researchNoteData = {
   sensitivity: [
     { window: '5', value: 0.59 }, { window: '10', value: 1.13 }, { window: '15', value: 0.42 }, { window: '20', value: 0.32 }, { window: '30', value: 0.46 },
   ],
-  charts: { roll: rollChart, arb: arbChart },
+  charts: { roll: rollChart, arb: arbChart, portfolio: portfolioChart },
   sources: {
     code: 'https://github.com/Lorien-LAB/Index-Timing/tree/master/Reproduction03',
     config: 'https://github.com/Lorien-LAB/Index-Timing/blob/master/Reproduction03/configs/repro03.yaml',
