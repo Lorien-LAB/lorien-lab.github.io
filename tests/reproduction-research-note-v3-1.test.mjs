@@ -17,17 +17,19 @@ test('v3.1 data defines flagship portfolio and exactly three subordinate strateg
 
 test('hero makes flagship performance visually primary and keeps three subordinate strategy cards', async () => {
   const hero = await readFile(heroPath, 'utf8');
-  for (const token of ['FLAGSHIP PORTFOLIO', 'Annualized Return', '39.9%', 'Sharpe', '1.46', 'Max Drawdown', '-24.2%', 'strategy-stack', 'From Paper to Portfolio']) {
+  for (const token of ['flagship-performance', 'Annualized Return', 'Sharpe', 'Max Drawdown', 'strategy-stack', 'From Paper to Portfolio']) {
     assert.ok(hero.includes(token), `hero missing ${token}`);
   }
+  assert.match(hero, /data\.portfolio\.flagship/);
   assert.match(hero, /data\.portfolio\.strategies\.map/);
+  assert.match(hero, /data\.evolution\.map/);
   assert.ok(!hero.includes('const cols = [data.hero.paper, data.hero.reproduced, data.hero.optimized]'), 'old equal-weight three-column hero still active');
 });
 
-test('research evolution preserves paper to portfolio lineage', async () => {
-  const hero = await readFile(heroPath, 'utf8');
+test('research evolution data preserves paper to portfolio lineage', async () => {
+  const source = await readFile(dataPath, 'utf8');
   for (const token of ['Orient Futures', 'Independent Reproduction', 'Optimized Roll Timing', 'Research Portfolio', '13.6%', '12.4%', '13.2%', '39.9%']) {
-    assert.ok(hero.includes(token), `evolution missing ${token}`);
+    assert.ok(source.includes(token), `evolution missing ${token}`);
   }
 });
 
