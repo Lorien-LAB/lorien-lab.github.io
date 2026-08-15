@@ -4,115 +4,78 @@ Date: 2026-08-16
 
 ## Goal
 
-Extend the existing Lorien Lab Knowledge Base with a scalable quantitative-interview learning system built from concepts, problems, solution techniques, source books, and learning paths.
+Extend Lorien Lab’s existing Knowledge Base into a scalable quantitative-interview learning system built from **concepts, problems, solution techniques, sources, and later learning paths**.
 
-The initial content source will be the commonly referenced quantitative interview “Green Book” and “Red Book”, but the architecture must not be book-specific. It should remain valid when later adding interview questions and problem sets from firms such as Jane Street, Optiver, SIG, Citadel, HRT, IMC, DRW, Jump, Akuna, personal notes, and original problems.
+The first content sources are the quantitative-interview books commonly referred to by the user as the **Green Book** and **Red Book**, but the architecture must not be book-specific. It must remain valid when later adding firm interview questions, university problem sets, competition material, personal notes, and original Lorien Lab problems.
 
-The system should answer five different user intents cleanly:
+The public system should support five distinct intents:
 
-1. **Learn a concept** — understand the theory, intuition, formulas, prerequisites, and related ideas.
-2. **Practice a problem** — attempt a question before revealing hints and solutions.
-3. **Study a solution pattern** — learn reusable techniques such as conditioning, symmetry, indicator variables, recursion, martingales, or backward induction.
-4. **Follow a source** — browse the Green Book, Red Book, or another source chapter by chapter without making the book itself the primary information architecture.
-5. **Follow a learning path** — study a topic in prerequisite order rather than source-book order.
+1. **Learn** a reusable concept.
+2. **Practice** an individual problem before revealing the solution.
+3. **Study** a reusable solution technique.
+4. **Browse** a source in its original chapter/problem order.
+5. **Follow** a prerequisite-based learning path once enough content exists.
 
-The public site should present Lorien Lab’s own structured knowledge, derivations, explanations, and problem-solving insights. Source books provide provenance; they do not define the site’s ontology.
+The source books provide provenance. They do **not** define the site ontology.
 
 ---
 
-## Current Site Context
+## 1. Current Site Context
 
-The current Knowledge Base is implemented as one Astro content collection with four entry types:
+The current Knowledge collection supports four public entry types:
 
 - `concept`
 - `paper`
 - `tool`
 - `topic`
 
-Knowledge entries currently support domain/category taxonomy, maturity state, tags, related knowledge, related notes, and optional source/official links. The Knowledge landing page is optimized for browsing a general research library by domain and type.
+It already supports domain/category taxonomy, maturity state, tags, related Knowledge, related Notes, and optional source/official links.
 
-This existing structure is a good fit for concepts and reusable research objects, but it should not absorb hundreds of interview problems as a fifth ad-hoc knowledge type. Problems have different lifecycle, metadata, rendering, filtering, and interaction requirements.
+That model is appropriate for reusable knowledge objects, but not for hundreds of interview problems. Problems have different metadata, rendering, filtering, provenance, difficulty, and practice behavior.
 
-Therefore the Quant Interview system should extend the site with dedicated content collections while preserving the current Knowledge Base as the conceptual layer.
+**Decision:** keep the existing Knowledge collection as the conceptual layer and add dedicated collections for problems and problem sources.
 
 ---
 
-# 1. Core Information Architecture
+# 2. Canonical Content Objects
 
-The system has four primary content objects and two derived navigation objects.
+The architecture has four primary content objects.
 
-## 1.1 Concept
+## 2.1 Concept
 
-A reusable theoretical knowledge object.
+Concepts continue to live in the existing `knowledge` collection with `type: concept`.
 
-Examples:
+Examples include:
 
-- conditional probability
-- Bayes theorem
-- conditional expectation
-- random walk
-- Markov chain
-- martingale
-- optional stopping
-- order statistics
-- maximum likelihood estimation
-- Kelly criterion
+- conditional probability;
+- Bayes theorem;
+- conditional expectation;
+- random walk;
+- Markov chain;
+- martingale;
+- optional stopping;
+- order statistics;
+- maximum likelihood estimation;
+- Kelly criterion.
 
-Concepts continue to live in the existing `knowledge` collection.
-
-A concept should explain:
+A strong Concept page should eventually cover:
 
 - definition;
 - intuition;
 - core formulas;
-- properties;
+- important properties;
 - derivations where useful;
 - prerequisites;
-- typical interview recognition patterns;
+- interview recognition patterns;
 - common mistakes;
 - related techniques;
 - related problems.
 
-Concepts are **not** source-specific. A concept should not be duplicated simply because it appears in both books.
+Concepts are source-independent. The same concept must not be duplicated merely because it appears in multiple books.
 
-## 1.2 Problem
+## 2.2 Technique
 
-A standalone practice object.
-
-A problem is not merely a section inside a concept page. It has independent identity, source provenance, difficulty, concepts, solution techniques, variants, hints, and solution methods.
-
-Examples:
-
-- Green Book probability problem 37;
-- Red Book stochastic-process problem 14;
-- Jane Street coin-game interview problem;
-- original Lorien Lab extension of a classic stopping-time puzzle.
-
-Problems live in a new `problems` collection.
-
-## 1.3 Source / Book
-
-A source object describes where problems originate and preserves canonical ordering.
-
-Initial source records:
-
-- Green Book
-- Red Book
-
-Future source records may include:
-
-- firm interview collections;
-- university problem sets;
-- competition archives;
-- personal/original problem collections.
-
-Sources live in a new `problemSources` collection rather than being encoded only as tags.
-
-## 1.4 Technique
-
-A reusable problem-solving method.
-
-Examples:
+A technique is a reusable problem-solving method such as:
 
 - symmetry;
 - conditioning;
@@ -129,48 +92,108 @@ Examples:
 - exchange arguments;
 - Bayesian updating.
 
-Techniques should be modeled as Knowledge concepts or as a dedicated subtype within the existing conceptual Knowledge Base, not duplicated as arbitrary problem metadata only.
+**Canonical decision:** techniques are **not a fifth Knowledge type and not a separate content collection**. They are normal Knowledge entries with:
 
-Each technique page should answer:
+```yaml
+type: concept
+category: Problem Solving Techniques
+```
 
-- what the technique is;
+The `problems.techniques` field references these Knowledge slugs.
+
+A technique page should explain:
+
+- what the method is;
 - when to recognize it;
 - the canonical pattern;
 - common traps;
 - representative problems using it.
 
-## 1.5 Problem Family — derived navigation object
+This gives the site one conceptual graph instead of separate Concept and Technique databases.
 
-A family groups structurally related problems.
+## 2.3 Problem
 
-Examples:
+A Problem is a standalone practice object with independent identity, provenance, difficulty, concepts, techniques, hints, solutions, variants, and relationships.
 
-- gambler’s ruin family;
-- stopping-time family;
-- coin-pattern family;
-- random allocation family;
-- secretary / optimal stopping family.
+Problems live in a new `problems` collection.
 
-A family is initially derived from shared metadata and explicit `family` slugs. It does not need its own full content collection in Phase 1.
+A Problem must not be implemented as a large subsection inside a Concept entry. This preserves reusable linking in both directions:
 
-## 1.6 Learning Path — derived or later explicit object
+```text
+Concept → many Problems
+Problem → many Concepts
+Technique → many Problems
+Source → many Problems
+```
 
-A learning path orders concepts and representative problems by prerequisite structure.
+## 2.4 Problem Source
 
-Examples:
+A Problem Source represents provenance and ordering.
 
-- Quant Probability Interview Path;
-- Stochastic Processes Interview Path;
-- Market Making Foundations Path;
-- Options Interview Path.
+Initial source records:
 
-Learning paths are Phase 3+ and should not block the first implementation.
+- Green Book;
+- Red Book.
+
+Future source records may represent firm interview collections, university materials, public archives, or Lorien Lab original collections.
+
+Sources live in a new `problemSources` collection backed by `src/content/problem-sources/`.
+
+A Source owns bibliographic/provenance metadata and original ordering. It does **not** own the canonical Problem URL.
 
 ---
 
-# 2. Repository Content Layout
+# 3. Derived Navigation Objects
 
-Recommended source layout:
+## 3.1 Problem Family
+
+A Problem may optionally declare a `family` slug for structurally related problems, for example:
+
+- gambler’s ruin;
+- stopping time;
+- coin patterns;
+- occupancy;
+- birthday collision;
+- secretary / optimal stopping;
+- market-making inventory.
+
+Phase 1 does not create a separate family collection. Family pages, if added later, are derived from Problem metadata.
+
+## 3.2 Learning Path
+
+Learning paths combine concepts, techniques, and representative problems in prerequisite order.
+
+Example conceptual structure:
+
+```text
+Counting
+  ↓
+Conditional Probability
+  ↓
+Bayes
+  ↓
+Expectation
+  ↓
+Indicator Variables
+  ↓
+Conditional Expectation
+  ↓
+Random Walk
+  ↓
+Markov Chains
+  ↓
+Martingales
+  ↓
+Stopping Times
+```
+
+Learning paths are explicitly deferred until the corpus is large enough to justify them.
+
+---
+
+# 4. Repository Content Layout
+
+Use this content structure:
 
 ```text
 src/content/
@@ -196,106 +219,97 @@ src/content/
 └── reproductions/
 ```
 
-Do **not** place every question under `src/content/knowledge/green-book/` or `knowledge/red-book/`. That would bind the ontology to two books and make later source expansion awkward.
+The subdirectories under `problems/` are editorial organization only.
 
-The file hierarchy under `problems/` is editorial organization only. Public URLs should be source-independent and stable.
+**Do not** place every question under `src/content/knowledge/green-book/` or `knowledge/red-book/`. That would bind the ontology to two sources and make later expansion awkward.
 
 ---
 
-# 3. Canonical URL Design
+# 5. Canonical URL Design
 
-## 3.1 Quant Interview Hub
+## 5.1 Quant Interview Hub
 
 ```text
 /knowledge/quant-interview/
 ```
 
-This is the primary public gateway.
+This is the primary public gateway from Knowledge.
 
-It should expose four main actions:
+It exposes:
 
 ```text
 Learn       → concepts
 Practice    → problem bank
-Sources     → Green Book / Red Book / future sources
+Sources     → Green Book / Red Book / later sources
 Techniques  → reusable solution methods
 ```
 
-## 3.2 Problem Index
+## 5.2 Problem Bank
 
 ```text
 /problems/
 ```
 
-The problem bank is a first-class site surface rather than being hidden under one book page.
+The problem bank is a first-class site surface rather than a subsection of either book.
 
-## 3.3 Problem Detail
+## 5.3 Problem Detail
 
 ```text
 /problems/<slug>/
 ```
 
-Examples:
+Problem slugs must be human-readable and stable. Source grouping in the repository must not leak into public route structure.
 
-```text
-/problems/green-book-random-walk-hitting-probability/
-/problems/red-book-conditional-expectation-game/
-```
-
-The slug should remain human-readable and stable even if source metadata changes.
-
-## 3.4 Source Index
+## 5.4 Source Index
 
 ```text
 /knowledge/quant-interview/sources/
 ```
 
-## 3.5 Source Detail
+## 5.5 Source Detail
 
 ```text
 /knowledge/quant-interview/sources/green-book/
 /knowledge/quant-interview/sources/red-book/
 ```
 
-These pages preserve chapter/order navigation but do not own the canonical problem URLs.
+Source pages preserve source order and link to canonical Problem pages.
 
-## 3.6 Concept Detail
+## 5.6 Concept and Technique Detail
 
 Existing Knowledge URLs remain canonical:
 
 ```text
-/knowledge/conditional-probability/
-/knowledge/martingale/
-/knowledge/order-statistics/
+/knowledge/<knowledge-slug>/
 ```
 
-Concept pages should gain a “Related Problems” surface populated from problem metadata.
+Concept and technique pages gain reverse-linked Problem sections without changing their current URLs.
 
 ---
 
-# 4. Problem Schema
+# 6. Problem Schema
 
-The new `problems` collection should be explicit enough to support future filtering, graph relationships, and practice modes.
-
-Recommended fields:
+The `problems` collection should support the following fields.
 
 ```yaml
-id: gb-probability-037
+problemId: gb-probability-037
 
 title: Random Walk Hitting Probability
-description: A first-step-analysis problem involving absorption probabilities in a one-dimensional random walk.
+description: A first-step-analysis problem involving an absorbing random walk.
 
 date: 2026-08-16
 updated: 2026-08-16
 
+originType: book
 source: green-book
 sourceSection: Probability
-sourceChapter: 3
+sourceChapter: "3"
 sourceProblem: "37"
+sourceReference: "Probability · Problem 37"
 
-originType: book
+# optional only when a legitimate public destination exists
+sourceUrl: "https://example.org/public-source-page"
 
-# classification
 domain: Mathematics & Statistics
 category: Probability
 subcategories:
@@ -307,7 +321,6 @@ tags:
   - random-walk
   - interview
 
-# knowledge graph
 concepts:
   - conditional-probability
   - random-walk
@@ -323,111 +336,171 @@ prerequisites:
 relatedProblems:
   - rb-random-walk-012
 
-family: gambler-ruin
+family: gamblers-ruin
 
-# difficulty
 mathDifficulty: 2
 insightDifficulty: 4
 interviewDifficulty: 3
-
-# practice metadata
 estimatedMinutes: 10
+
 status: solved
 featured: false
-
-# publication/provenance controls
-sourceReference: "Chapter 3, Problem 37"
-sourceUrl: optional-public-source-url
 ```
 
-### Difficulty scale
+The example URL above is illustrative only; production records omit `sourceUrl` unless a real permitted URL has been verified.
 
-Use integers from 1–5.
+## 6.1 Field semantics
 
-- `mathDifficulty`: technical mathematical complexity;
-- `insightDifficulty`: difficulty of identifying the key idea;
-- `interviewDifficulty`: combined practical difficulty under interview conditions.
+### `problemId`
 
-This is superior to a single Easy/Medium/Hard value because many quantitative brain teasers use elementary mathematics but require a difficult insight.
+Stable source-aware internal identifier. It must be unique across the collection.
 
-### Problem status
+### `originType`
 
-Recommended editorial status:
+Phase-1 enum:
+
+```text
+book | interview | original | public-archive
+```
+
+### `source`
+
+Slug of a valid `problemSources` entry. Required for source-derived problems; optional only for genuinely original Lorien Lab problems.
+
+### `concepts`
+
+Knowledge slugs representing theory needed to understand the problem.
+
+### `techniques`
+
+Knowledge slugs whose entries have `type: concept` and `category: Problem Solving Techniques`.
+
+### `prerequisites`
+
+Knowledge slugs that should normally be understood before attempting the problem.
+
+### `relatedProblems`
+
+Canonical Problem `problemId` values or canonical problem slugs; implementation must choose exactly one representation and validate it consistently. The implementation plan should prefer canonical Problem slugs because they map directly to routes.
+
+### `family`
+
+Optional stable structural family slug.
+
+---
+
+# 7. Difficulty Model
+
+Use three integer dimensions from 1 to 5.
+
+## `mathDifficulty`
+
+Technical mathematical complexity.
+
+## `insightDifficulty`
+
+Difficulty of recognizing the core trick, abstraction, or structure.
+
+## `interviewDifficulty`
+
+Combined difficulty under interview time pressure, including communication and execution.
+
+This is intentionally more expressive than Easy / Medium / Hard because many quantitative interview puzzles use elementary mathematics but require a difficult insight.
+
+Difficulty values are editorial judgments, not claims of universal consensus.
+
+---
+
+# 8. Editorial Status vs User Progress
+
+Problem editorial status is:
 
 ```text
 draft | reviewed | solved | extended
 ```
 
-This describes Lorien Lab content maturity, not user progress.
+This describes the maturity of Lorien Lab’s published problem record.
 
-User-specific progress should not be stored in static Markdown frontmatter.
+It does **not** represent the visitor’s personal progress.
+
+User-specific states such as solved, favorite, review-later, confidence, or spaced-repetition interval must not be stored in static Markdown frontmatter.
+
+Phase 1 has no authenticated user-progress model.
 
 ---
 
-# 5. Problem Markdown Body Contract
+# 9. Problem Content Contract
 
-A problem record should follow a repeatable structure.
+A mature Problem record should follow this narrative order:
 
 ```markdown
 ## Problem
 
-Lorien Lab’s own concise formulation of the problem.
+Independent Lorien Lab formulation.
 
 ## Think before revealing
 
-Optional framing and suggested time budget.
+Suggested approach/time framing without giving away the answer.
 
 ## Hints
 
-### Hint 1
-...
-
-### Hint 2
-...
+Progressive hints from light to strong.
 
 ## Solution
 
-### Method 1 · First-step analysis
-...
-
-### Method 2 · Martingale argument
-...
+One or more independently derived solution methods.
 
 ## Why this problem matters
 
-What the interviewer/problem is testing.
+What recognition, reasoning, or communication skill the problem tests.
 
 ## Common mistakes
 
-...
+Typical incorrect assumptions or dead ends.
 
 ## Extensions
 
-Variants, generalizations, harder forms, simulation checks, or connections.
+Variants, generalizations, harder forms, numerical checks, or links to broader theory.
 ```
 
-Not every problem needs every section, but flagship/classic problems should aim for the full structure.
+Not every problem requires multiple solution methods or every optional section, but classic/high-value problems should aim for the full structure.
 
 ---
 
-# 6. Public Problem Detail UI
+# 10. Problem Reveal Behavior
 
-A dedicated `ProblemLayout` should be created instead of rendering problems with the generic Knowledge article layout.
+Problem pages should encourage an attempt before showing the answer.
 
-## Header
+Phase 1 uses native HTML disclosure behavior rather than a client framework:
 
-The top of a problem page should surface:
+- problem statement visible by default;
+- hints collapsed by default;
+- full solution collapsed by default;
+- each hint independently revealable when useful;
+- no JavaScript required for core access.
 
-- problem title;
-- source;
-- chapter/section/problem number when available;
+The exact authoring mechanism may be Astro components or accessible `<details>` elements, but the public behavior above is required.
+
+---
+
+# 11. Dedicated Problem Layout
+
+Create a dedicated `ProblemLayout` rather than rendering problems with the generic Knowledge detail page.
+
+## 11.1 Header
+
+Surface:
+
+- problem identity;
+- title;
+- source and source reference;
 - domain/category;
-- concept tags;
-- technique tags;
+- concepts;
+- techniques;
 - three-dimensional difficulty;
-- suggested solution time.
+- estimated time.
 
-Example visual hierarchy:
+Illustrative hierarchy:
 
 ```text
 PROBLEM · GB-037
@@ -444,41 +517,42 @@ Concepts    Random Walk · Conditional Probability
 Techniques  First-Step Analysis · Recursion
 ```
 
-## Main workspace
+## 11.2 Main workspace
 
-Recommended order:
+Order:
 
 1. Problem statement
-2. “Think first” prompt
-3. expandable hints
-4. solution methods
-5. interview insight
-6. common mistakes
-7. extensions / variants
-8. related problems
+2. Think-first framing
+3. Hints
+4. Solution method(s)
+5. Why this problem matters
+6. Common mistakes
+7. Extensions
+8. Related problems
 
-The first public version may use native `<details>` elements for hints/solutions to remain static-first and accessible without a client framework.
+## 11.3 Sidebar
 
-## Sidebar
-
-A sticky sidebar can show:
+May show:
 
 - source metadata;
-- prerequisite concepts;
+- prerequisites;
+- concepts;
 - techniques;
-- related problems;
 - problem family;
-- previous / next problem in source order.
+- related problems;
+- previous / next Problem in source order.
+
+The sidebar must never show dead links for unresolved relationships.
 
 ---
 
-# 7. Quant Interview Hub
+# 12. Quant Interview Hub
 
-The hub at `/knowledge/quant-interview/` should be designed as a dedicated gateway, not a normal Knowledge Card.
-
-Recommended sections:
+The hub at `/knowledge/quant-interview/` is a dedicated gateway, not a normal Knowledge Card.
 
 ## Hero
+
+Positioning:
 
 ```text
 Quant Interview Knowledge System
@@ -492,9 +566,9 @@ Primary actions:
 - Practice Problems
 - Explore Sources
 
-## Knowledge domains
+## Interview taxonomy
 
-Suggested initial taxonomy:
+Initial categories may include:
 
 - Probability
 - Statistics
@@ -515,32 +589,29 @@ Suggested initial taxonomy:
 - Machine Learning
 - Mental Math
 
-This is an interview-specific taxonomy layered on top of the existing high-level Knowledge domains.
+This taxonomy is an interview-facing navigation layer. It does not replace the current high-level Knowledge domains.
 
 ## Source gateways
 
-Dedicated cards for:
+Green Book and Red Book receive dedicated source cards.
 
-- Green Book
-- Red Book
-
-Each card should show derived counts such as indexed problems and represented concepts. Counts must always be derived from content rather than hard-coded aspirational numbers.
+Any counts shown on those cards must be derived from actual content.
 
 ## Technique library
 
-A compact index of reusable solution methods.
+Surface Knowledge concepts whose category is `Problem Solving Techniques`.
 
 ## Learning paths
 
-Initially marked as planned or shown only when real path content exists.
+Do not render empty or fake learning paths. Show this section only after real path content exists.
 
 ---
 
-# 8. Knowledge Landing Integration
+# 13. Knowledge Landing Integration
 
-The existing `/knowledge/` page should keep its role as the broad research library.
+The existing `/knowledge/` page remains the broad research library.
 
-Add one prominent gateway alongside the existing Financial Engineering Learning Resources gateway:
+Add one prominent gateway near the existing Financial Engineering Learning Resources gateway:
 
 ```text
 QUANT INTERVIEW
@@ -552,28 +623,28 @@ Probability · Statistics · Brain Teasers · Stochastic Processes · Markets ·
 Explore Problem Bank →
 ```
 
-Do not add hundreds of problems to the existing Knowledge Index. The general Knowledge Index should remain concept/paper/tool/topic-oriented.
+Do **not** inject hundreds of Problem records into the existing general Knowledge Index.
 
-Problems should have their own `/problems/` search/index UI.
+The current Knowledge Index remains concept/paper/tool/topic-oriented. Problems use `/problems/`.
 
 ---
 
-# 9. Problem Index and Filtering
+# 14. Problem Index
 
-The `/problems/` page should support static-first browsing and progressively enhanced browser-side filtering similar to the current Knowledge index.
+The `/problems/` page should be static-first with progressively enhanced filtering.
 
-Recommended filters:
+Phase-1 filters:
 
-- search;
-- domain/category;
+- text search;
+- category/domain;
 - source;
-- difficulty;
+- interview difficulty;
 - concept;
-- technique;
-- status;
-- problem family.
+- technique.
 
-Recommended row/card metadata:
+Later filters may add family and editorial status if they provide real value.
+
+Each row/card should expose enough metadata to compare problems without opening every page:
 
 ```text
 GB-037   Random Walk Hitting Probability
@@ -582,119 +653,124 @@ Math 2 · Insight 4 · Interview 3
 First-Step Analysis · Recursion
 ```
 
-The first version does not need complex client-side multi-select UI. Simple selects plus text search are sufficient.
+All Problem links remain usable when JavaScript is unavailable.
 
 ---
 
-# 10. Concept ↔ Problem Graph
+# 15. Concept ↔ Problem Reverse Linking
 
-This is the most important cross-linking rule.
-
-Problems declare their concepts:
+Problems declare forward relationships:
 
 ```yaml
 concepts:
   - conditional-expectation
   - martingale
+
+techniques:
+  - conditioning
 ```
 
-Concept pages derive related problems by reverse lookup.
+Concept/Technique pages derive related Problems by reverse lookup.
 
-Therefore:
+Required graph directions:
 
 ```text
-Concept → Problems
-Problem → Concepts
-Source  → Problems
-Problem → Techniques
+Concept   → Problems
+Problem   → Concepts
 Technique → Problems
+Problem   → Techniques
+Source    → Problems
+Problem   → Source
 ```
 
-No duplicated relationship data is required for the reverse direction unless an explicit editorial ordering is desired.
+Do not duplicate reverse relationships in Concept frontmatter unless editorial ordering later requires it.
 
-Broken slugs should be omitted from rendering and caught in tests, consistent with the current site’s truthfulness/relationship philosophy.
+Missing relationship targets must be omitted from rendering and detected by tests.
 
 ---
 
-# 11. Source / Book Model
+# 16. Problem Source Model
 
-A source record should contain bibliographic/provenance information rather than reproducing the book.
+A `problemSources` entry contains provenance and source navigation metadata.
 
-Recommended fields:
+Required Phase-1 fields:
 
 ```yaml
-slug: green-book
-title: Quant Interview Green Book
 shortTitle: Green Book
+displayTitle: Green Book
 sourceType: book
-authors: [...]
-year: ...
-description: ...
-
-sections:
-  - Probability
-  - Statistics
-  - ...
-
-officialUrl: optional
+description: Source metadata and indexing context for problems attributed to this book.
 ```
 
-The source page should provide:
+Optional fields are added only when externally verified:
 
-- source description;
-- chapter/section navigation;
-- indexed-problem count;
-- concept coverage;
-- difficulty distribution;
-- links to canonical problem pages.
+```text
+authors
+year
+edition
+officialUrl
+publisherUrl
+isbn
+```
 
-It should not publish a PDF copy or function as a chapter-by-chapter text mirror.
+Do not guess bibliographic metadata merely to populate the UI.
+
+Source identity is provided by the content entry slug (`green-book`, `red-book`); a duplicate `slug` field is unnecessary.
+
+A Source page should provide:
+
+- verified source description;
+- source sections/chapters actually represented in the corpus;
+- indexed Problem count;
+- represented Concept count;
+- difficulty distribution when enough content exists;
+- canonical Problem links.
+
+Source pages must not host or reconstruct the book itself.
 
 ---
 
-# 12. Copyright and Provenance Rules
+# 17. Copyright and Provenance Rules
 
-This is a hard requirement for the public site.
+This is a hard public-site requirement.
 
-## Public content principle
+## Publish
 
-The site should publish:
+The site may publish:
 
-- Lorien Lab’s own conceptual summaries;
+- Lorien Lab’s own concept summaries;
 - independently written explanations;
 - independently derived solutions;
-- reformulated problem statements where appropriate;
+- appropriately reformulated problem statements;
 - original diagrams;
 - original variants and extensions;
-- source references and bibliographic provenance.
+- source references and verified provenance links.
 
 ## Do not publish
 
 - full book PDFs;
-- scans/screenshots of book pages;
+- scans or screenshots of book pages;
 - large verbatim portions of copyrighted text;
-- complete answer keys copied verbatim;
-- a source-order mirror whose primary value is replacing purchase/access to the original book.
+- copied answer keys;
+- a source-order mirror whose primary value is substituting for the original book.
 
 ## Attribution
 
-Every source-derived problem should have a stable source reference such as:
+Every source-derived Problem must expose a stable source reference such as:
 
 ```text
 Source: Green Book · Probability · Problem 37
 ```
 
-Where a legitimate official/public URL exists, it may be linked.
+A source URL appears only when a legitimate public destination has been verified.
 
 ---
 
-# 13. Solution Quality Standard
+# 18. Solution Quality Standard
 
-The system should optimize for understanding rather than answer density.
+The system optimizes for reusable understanding, not answer density.
 
-For important problems, prefer multiple solution methods when genuinely useful.
-
-Example:
+When genuinely valuable, include multiple independent methods such as:
 
 ```text
 Method A · Direct counting
@@ -703,181 +779,76 @@ Method C · Martingale
 Method D · Numerical verification
 ```
 
-Each method should make its trade-off clear:
+For each method, the prose should make clear:
 
-- key insight;
+- core insight;
 - mathematical complexity;
-- interview suitability;
+- interview usefulness;
 - generalizability.
 
-A problem page should also explain **why the problem matters**:
-
-- what recognition skill is tested;
-- what shortcut or abstraction is expected;
-- what common wrong assumptions appear;
-- how the idea generalizes.
+Important Problems should explain **why the problem matters** and identify common wrong approaches.
 
 ---
 
-# 14. Problem Families
+# 19. Agent Authoring Contract
 
-Problems may optionally declare a `family` slug.
+An Agent adding a source-derived Problem must:
 
-Example families:
+1. assign a stable Problem slug and `problemId`;
+2. record source provenance without guessing missing bibliographic fields;
+3. map the Problem to existing Concept slugs;
+4. create a new Concept only when it is genuinely reusable;
+5. map reusable techniques to Knowledge entries in `Problem Solving Techniques`;
+6. assign all three difficulty dimensions conservatively;
+7. write an independent problem formulation suitable for public publication;
+8. derive the solution independently rather than copying source prose;
+9. add progressive hints when useful;
+10. add variants or related Problems only when the relationship is real;
+11. run schema and relationship validation;
+12. never fabricate corpus counts, source links, or source metadata.
 
-```text
-gamblers-ruin
-coin-patterns
-occupancy
-birthday-collision
-stopping-time
-secretary-problem
-market-making-inventory
-```
-
-Initially, the family page can be derived dynamically from all problems sharing the same slug.
-
-Future versions may promote important families into full Knowledge topic pages.
-
----
-
-# 15. Learning Paths
-
-Learning paths are intentionally deferred until the base graph is populated.
-
-A path should combine:
-
-```text
-Concept → Concept → Core Problems → Technique → Challenge Problems
-```
-
-Example probability path:
-
-```text
-Counting
-  ↓
-Conditional Probability
-  ↓
-Bayes
-  ↓
-Expectation
-  ↓
-Indicator Variables
-  ↓
-Conditional Expectation
-  ↓
-Random Walk
-  ↓
-Markov Chains
-  ↓
-Martingales
-  ↓
-Stopping Times
-```
-
-Learning paths should not be hard-coded before enough content exists to make them useful.
+This contract should be copied into the repository authoring guide during implementation.
 
 ---
 
-# 16. Practice Mode — Future Phase
+# 20. Validation and Testing
 
-A later `/problems/practice/` surface may support:
+## 20.1 Schema tests
 
-- random problem;
-- domain filters;
-- difficulty range;
-- source filters;
-- unsolved/review filters;
-- daily problem sets;
-- favorites;
-- spaced repetition.
+Validate:
 
-This phase will require a user-progress persistence strategy. The initial static site should not invent this state model prematurely.
+- difficulty values are integers from 1–5;
+- `problemId` values are unique;
+- source slugs resolve when present;
+- concept slugs resolve;
+- technique slugs resolve and point to Knowledge concepts categorized as `Problem Solving Techniques`;
+- prerequisite slugs resolve;
+- related Problem slugs resolve;
+- source problem identifiers do not collide within the same source.
 
-Possible future persistence choices include:
+## 20.2 Route tests
 
-- local browser storage for private single-device progress;
-- optional authenticated backend for cross-device progress.
+Validate:
 
-No backend is required for Phase 1.
+- every Problem has `/problems/<slug>/`;
+- source pages link to canonical Problem routes;
+- Concept pages reverse-link to associated Problems;
+- existing Knowledge URLs remain unchanged;
+- unresolved optional relationships never render dead links.
 
----
+## 20.3 Truthfulness tests and conventions
 
-# 17. Search and Discoverability
+Automated tests should reject:
 
-The problem search index should include:
-
-- title;
-- description;
-- source;
-- source reference;
-- domain/category;
-- concepts;
-- techniques;
-- tags;
-- family.
-
-The global site should eventually be able to surface a concept and its problems from either search direction.
-
-Search should remain progressively enhanced: all problems must still be navigable when JavaScript is unavailable.
-
----
-
-# 18. Agent Authoring Contract
-
-Because Lorien Lab is designed for both humans and coding agents, problem ingestion must be deterministic.
-
-An agent adding a problem should:
-
-1. assign a stable `id` and slug;
-2. record source provenance;
-3. map the problem to existing concept slugs;
-4. create missing concepts only when genuinely reusable;
-5. map reusable solution techniques;
-6. assign three difficulty dimensions with justification in review notes if uncertain;
-7. write an independent problem formulation;
-8. write independent derivations rather than copying a source answer;
-9. add hints before the full solution when useful;
-10. add related problems/variants only when the relationship is real;
-11. run relationship validation tests;
-12. never fabricate source metadata or performance/progress counts.
-
-This contract should later be documented in the repository README or a dedicated authoring guide after implementation.
-
----
-
-# 19. Validation and Testing
-
-The implementation should add automated contracts for:
-
-## Schema validation
-
-- all problem difficulty values are 1–5;
-- all source slugs resolve;
-- all concept slugs resolve;
-- all technique slugs resolve;
-- all related-problem slugs resolve;
-- source problem identifiers are unique within a source.
-
-## Route validation
-
-- every problem has a canonical `/problems/<slug>/` page;
-- source pages link to canonical problem URLs;
-- concept pages reverse-link to associated problems;
-- Knowledge hub routes remain unchanged.
-
-## Truthfulness / copyright guardrails
-
-Tests cannot prove copyright compliance, but repository conventions should reject:
-
-- hosted source PDFs under the public source tree when they are not explicitly licensed;
-- hard-coded fake counts;
+- hard-coded fake corpus counts;
 - placeholder source links;
-- source records with missing provenance identifiers where one is required.
+- accidental public hosting of source PDFs under the new interview content tree.
 
-## Build gates
+Copyright compliance still requires editorial review; tests are a guardrail, not a legal classifier.
 
-Completion requires:
+## 20.4 Completion gates
+
+Every implementation phase must pass:
 
 ```text
 npm run test
@@ -887,114 +858,123 @@ npm run build
 
 ---
 
-# 20. Visual Design Principles
+# 21. Visual Design Principles
 
-The Quant Interview system should fit the current Lorien Lab aesthetic rather than becoming a separate app.
+The Quant Interview system remains part of Lorien Lab rather than becoming a separate LeetCode-style application.
 
 Reuse:
 
-- existing dark/light theme tokens;
+- current light/dark theme;
 - mono labels;
-- bordered research cards;
 - restrained accent color;
+- bordered research cards;
 - static-first layouts;
 - sticky contextual sidebars where useful.
 
-Problem pages should feel more like a technical interview workspace than a blog post.
+Problem pages should feel like a technical interview workspace.
 
 Avoid:
 
-- gamified gradients/badges that make the site look like LeetCode clone;
-- decorative scoring without real semantics;
-- excessive client-side animation;
-- hiding core content behind JavaScript.
+- decorative gamification;
+- meaningless scores;
+- excessive animation;
+- hiding core content behind JavaScript;
+- creating a second unrelated visual language.
 
 ---
 
-# 21. Implementation Phases
+# 22. Implementation Phases
 
 ## Phase 1 — Foundation
 
-Build only the durable model and minimum useful surfaces:
+Implement:
 
 - `problems` collection;
 - `problemSources` collection;
-- problem schema;
-- source schema;
+- schemas and relationship validation;
 - `/problems/` index;
 - `/problems/<slug>/` detail route;
+- dedicated `ProblemLayout`;
 - `/knowledge/quant-interview/` hub;
-- Green Book and Red Book source pages;
+- source index/detail routes;
 - Knowledge landing gateway;
-- Concept → related problems reverse links;
-- initial tests and authoring rules.
+- Concept/Technique → related Problem reverse links;
+- repository authoring rules;
+- tests.
 
-Populate only a small representative seed set sufficient to validate the architecture.
+Use only a small, reviewed seed corpus sufficient to validate the architecture. Do not bulk-ingest both books before the model and UI are proven.
 
-## Phase 2 — Full Book Ingestion
+## Phase 2 — Full Green/Red Book Ingestion
 
-After the architecture proves stable:
+After Phase 1 is stable:
 
-- ingest all Green Book knowledge points and problems;
-- ingest all Red Book knowledge points and problems;
-- deduplicate overlapping concepts;
-- map problem families;
-- add multiple solutions/variants where valuable;
-- improve filters based on real corpus distribution.
+- ingest all desired Green Book knowledge points and Problems;
+- ingest all desired Red Book knowledge points and Problems;
+- deduplicate overlapping Concepts;
+- map Problems to Techniques;
+- map Problem families;
+- add independent solutions, hints, and extensions;
+- refine filters based on actual corpus distribution.
 
-## Phase 3 — Knowledge Graph and Paths
+Bulk ingestion must preserve the copyright/provenance rules above.
 
-Add:
+## Phase 3 — Graph and Learning Paths
+
+Add only after the corpus has enough density:
 
 - prerequisite visualization;
-- technique ↔ problem pages;
-- problem-family pages;
+- Technique-focused browsing;
+- Problem-family pages;
 - structured learning paths;
-- coverage dashboards derived from real content.
+- real coverage dashboards derived from content.
 
-## Phase 4 — Practice System
+## Phase 4 — Practice and Progress
 
-Add only after enough problems exist:
+Potential later additions:
 
 - random practice;
 - daily sets;
-- local progress;
+- local solved/review state;
+- favorites;
 - review queues;
 - spaced repetition;
-- optional persistent account-backed progress if ever justified.
+- optional authenticated cross-device progress if eventually justified.
+
+No backend or authenticated state is required for Phase 1.
 
 ---
 
-# 22. Non-Goals for the First Implementation
+# 23. Non-Goals for Phase 1
 
-The first implementation will **not**:
+Phase 1 will not:
 
 - reproduce either book verbatim;
-- host book PDFs;
-- add hundreds of unreviewed placeholder problems;
-- build user authentication;
+- host source PDFs;
+- bulk-create hundreds of unreviewed placeholders;
+- add a fifth Knowledge type for Problems or Techniques;
+- build authentication;
 - build cross-device progress storage;
 - implement spaced repetition;
-- implement a complex interactive graph engine;
+- implement a heavy interactive graph engine;
 - redesign the entire Knowledge Base;
-- replace the current concept/paper/tool/topic model;
-- create fake completion statistics or aspirational corpus counts.
+- create fake source metadata or completion statistics.
 
 ---
 
-# 23. Acceptance Criteria
+# 24. Acceptance Criteria
 
 The foundation is successful when:
 
-1. Green Book and Red Book are modeled as sources, not as the information architecture itself.
-2. Problems have first-class canonical routes and metadata independent from Knowledge entries.
-3. Existing Knowledge concepts can connect to many problems across many sources without duplication.
-4. A visitor can browse by concept, problem, source, and solution technique.
-5. Problem pages encourage attempting the problem before revealing solutions.
-6. Source provenance is visible and systematic.
-7. The public site publishes independent Lorien Lab explanations/solutions rather than a book mirror.
-8. The data model can accept future firm interview problems without schema redesign.
-9. All counts shown in the UI are derived from actual content.
-10. Existing Knowledge URLs and current site architecture remain stable.
-11. The implementation remains static-first and Astro-native.
-12. Test, check, and production build gates pass before merge.
+1. Green Book and Red Book are modeled as **sources**, not as the site ontology.
+2. Problems have first-class canonical routes independent from Knowledge entries.
+3. Techniques reuse the existing Knowledge `concept` model under `Problem Solving Techniques`.
+4. A Concept or Technique can connect to Problems from many sources without duplication.
+5. A visitor can browse by Concept, Problem, Source, and Technique.
+6. Problem pages encourage attempting the question before revealing hints and solutions.
+7. Source provenance is visible and systematic.
+8. The public site contains Lorien Lab’s independent explanations and derivations rather than a book mirror.
+9. The architecture can accept future firm interview problems without schema redesign.
+10. All displayed counts are derived from real content.
+11. Existing Knowledge URLs remain stable.
+12. The system remains Astro-native and static-first.
+13. Test, check, and production build gates pass before merge.
