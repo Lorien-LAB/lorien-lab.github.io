@@ -38,6 +38,16 @@ Project frontmatter: `title`, `description`, `status`, `date`, `tags`, `featured
 
 Note frontmatter: `title`, `description`, `date`, `tags`, `category`, `draft`.
 
+### Project case studies
+
+Ordinary project detail pages use `ProjectCaseStudyLayout` and are intended to read as technical research case studies rather than short product blurbs. Keep the project-specific research narrative in Markdown; H2 and H3 headings automatically populate the in-page project outline.
+
+`metrics`, `repoUrl`, and `docsUrl` are optional. Add them only when the value or destination is factual and currently valid. A missing repository or document should remain absent rather than being replaced with a generic profile link or placeholder button.
+
+Flagship project pages should make the research problem, design thesis, architecture, validation discipline, limitations or failure modes, and current development priorities explicit. When maturity differs across modules, distinguish implemented or active work from experimental mechanisms and planned directions instead of presenting the entire architecture as production-complete.
+
+Empirical reproduction of an academic paper or broker report belongs in the **Reproduction Workbench** under `/projects/reproductions/`. Do not duplicate a source-grounded reproduction as an ordinary project merely to obtain a different presentation.
+
 ### Knowledge Base
 
 The Knowledge Base is separate from Notes. Knowledge entries are structured, reusable research objects; Notes remain long-form essays, methodology, experiments, and research narratives.
