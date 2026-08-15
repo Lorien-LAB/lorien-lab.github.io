@@ -20,7 +20,12 @@ function trimChart(chart: RawChart | undefined) {
 
 const rollChart = trimChart(charts.find((c) => c.title.startsWith('IC 滚贴水')));
 const arbChart = trimChart(charts.find((c) => c.title.startsWith('IC 跨期套利')));
-const portfolioChart = trimChart(charts.find((c) => c.title.startsWith('组合（IC 滚贴水 + 跨期 1:1）')));
+const portfolioChartRaw = trimChart(charts.find((c) => c.title.startsWith('组合（IC 滚贴水 + 跨期 1:1）')));
+// The upstream generator stores raw daily current-month returns at series index 1
+// while the other portfolio-chart series are cumulative NAV. Never plot unlike units together.
+const portfolioChart = portfolioChartRaw
+  ? { ...portfolioChartRaw, series: portfolioChartRaw.series.filter((_series, index) => index !== 1) }
+  : null;
 
 export const researchNoteData = {
   cutoff: '2026-06-26',
