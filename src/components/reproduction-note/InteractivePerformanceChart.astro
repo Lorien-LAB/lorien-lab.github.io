@@ -8,12 +8,13 @@ const cutoff = data.cutoff;
   <div class="container chart-wrap">
     <div class="chart-intro">
       <div><div class="mono-label">INTERACTIVE PERFORMANCE</div><h2 id="performance-chart-title">净值、回撤与 OOS，一张图里检查。</h2></div>
-      <p>时间序列仅使用 Lorien Lab 的真实回测输出；原研报只以已报告指标出现，不构造 synthetic paper NAV。</p>
+      <p>时间序列仅使用 Lorien Lab 的真实回测输出；原研报只以已报告指标出现，不构造 synthetic paper NAV。Roll Timing 与 Cross-Maturity Arbitrage 既可单独检查，也可查看最终组合。</p>
     </div>
     <div class="chart-toolbar">
       <div class="segmented" role="tablist" aria-label="Strategy view">
-        <button class="mode active" data-mode="roll">Roll Timing</button>
-        <button class="mode" data-mode="arb">Cross-Maturity Arbitrage</button>
+        <button class="mode active" data-mode="roll">Optimized Roll</button>
+        <button class="mode" data-mode="arb">Cross-Maturity Arb</button>
+        <button class="mode" data-mode="portfolio">Flagship Portfolio</button>
       </div>
       <div class="segmented ranges" aria-label="Date range">
         <button class="range active" data-range="all">All</button>
@@ -25,18 +26,18 @@ const cutoff = data.cutoff;
       <div><span>Annualized Return</span><strong>—</strong></div><div><span>Sharpe*</span><strong>—</strong></div><div><span>Max Drawdown</span><strong>—</strong></div><div><span>Window</span><strong>—</strong></div>
     </div>
     <div class="plot-card">
-      <div class="plot-head"><div><strong id="rn-chart-title">Roll Timing</strong><span>Optimized vs benchmark</span></div><div class="legend" id="rn-legend"></div></div>
+      <div class="plot-head"><div><strong id="rn-chart-title">Optimized Roll</strong><span id="rn-chart-subtitle">Core Roll Timing strategy vs passive benchmark</span></div><div class="legend" id="rn-legend"></div></div>
       <div id="rn-nav" class="svg-host" aria-label="NAV chart"></div>
       <div class="dd-label"><span>Drawdown</span><span id="rn-oos-label">OUT OF SAMPLE · {oosStart}</span></div>
       <div id="rn-dd" class="svg-host dd" aria-label="Drawdown chart"></div>
       <div id="rn-tooltip" class="tooltip" hidden></div>
     </div>
-    <p class="chart-foot">Comparable research cutoff: <strong>{cutoff}</strong>. OOS begins <strong>{oosStart}</strong>. Hover the NAV panel to inspect dates and values. <strong>*</strong> Dynamic Sharpe is estimated from the displayed sampled NAV cadence; headline Sharpe above comes from the full run.</p>
+    <p class="chart-foot">Comparable research cutoff: <strong>{cutoff}</strong>. OOS begins <strong>{oosStart}</strong>. Hover the NAV panel to inspect dates and values. <strong>*</strong> Dynamic Sharpe is estimated from the displayed sampled NAV cadence; headline Sharpe above comes from the full run. The underlying research covers Roll Timing, Cross-Maturity Arbitrage, and their flagship portfolio combination.</p>
   </div>
 </section>
 
 <style>
-.chart-section{padding:44px 0 54px;border-bottom:1px solid var(--border)}.chart-wrap{max-width:1180px}.chart-intro{display:grid;grid-template-columns:1fr minmax(280px,470px);gap:40px;align-items:end}.chart-intro h2{margin:7px 0 0;font-size:clamp(2rem,4vw,3.35rem);letter-spacing:-.05em}.chart-intro p{margin:0;color:var(--muted);line-height:1.7}.chart-toolbar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:26px 0 12px}.segmented{display:inline-flex;padding:3px;border:1px solid var(--border);border-radius:10px;background:var(--surface)}.segmented button{border:0;background:transparent;color:var(--muted);padding:8px 11px;border-radius:7px;font:700 .65rem var(--font-mono);cursor:pointer}.segmented button.active{background:var(--ink);color:var(--bg)}.metric-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--border);margin-bottom:12px}.metric-strip>div{background:var(--surface);padding:12px 14px}.metric-strip span,.metric-strip strong{display:block}.metric-strip span{font:600 .55rem var(--font-mono);color:var(--muted);text-transform:uppercase}.metric-strip strong{margin-top:4px;font:800 .9rem var(--font-mono)}.plot-card{position:relative;padding:18px;border:1px solid var(--border);border-radius:16px;background:var(--surface);box-shadow:0 16px 45px rgba(15,35,45,.045)}.plot-head{display:flex;justify-content:space-between;gap:20px;align-items:start;margin-bottom:6px}.plot-head strong,.plot-head span{display:block}.plot-head strong{font-size:1rem}.plot-head span{color:var(--muted);font-size:.72rem}.legend{display:flex;gap:8px;flex-wrap:wrap}.legend span{display:inline-flex;align-items:center;gap:5px;font:650 .6rem var(--font-mono)}.legend i{width:18px;height:2px;display:inline-block}.svg-host svg{width:100%;height:auto;display:block;overflow:visible}.dd-label{display:flex;justify-content:space-between;margin:8px 4px 1px;color:var(--muted);font:700 .58rem var(--font-mono);text-transform:uppercase}.dd-label span:last-child{color:var(--accent-strong)}.tooltip{position:absolute;z-index:5;pointer-events:none;padding:9px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface);box-shadow:var(--shadow);font:650 .65rem var(--font-mono);min-width:165px}.chart-foot{margin:12px 2px 0;color:var(--muted);font-size:.75rem}.chart-foot strong{color:var(--ink)}
+.chart-section{padding:44px 0 54px;border-bottom:1px solid var(--border)}.chart-wrap{max-width:1180px}.chart-intro{display:grid;grid-template-columns:1fr minmax(280px,470px);gap:40px;align-items:end}.chart-intro h2{margin:7px 0 0;font-size:clamp(2rem,4vw,3.35rem);letter-spacing:-.05em}.chart-intro p{margin:0;color:var(--muted);line-height:1.7}.chart-toolbar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:26px 0 12px}.segmented{display:inline-flex;padding:3px;border:1px solid var(--border);border-radius:10px;background:var(--surface);flex-wrap:wrap}.segmented button{border:0;background:transparent;color:var(--muted);padding:8px 11px;border-radius:7px;font:700 .65rem var(--font-mono);cursor:pointer}.segmented button.active{background:var(--ink);color:var(--bg)}.metric-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--border);margin-bottom:12px}.metric-strip>div{background:var(--surface);padding:12px 14px}.metric-strip span,.metric-strip strong{display:block}.metric-strip span{font:600 .55rem var(--font-mono);color:var(--muted);text-transform:uppercase}.metric-strip strong{margin-top:4px;font:800 .9rem var(--font-mono)}.plot-card{position:relative;padding:18px;border:1px solid var(--border);border-radius:16px;background:var(--surface);box-shadow:0 16px 45px rgba(15,35,45,.045)}.plot-head{display:flex;justify-content:space-between;gap:20px;align-items:start;margin-bottom:6px}.plot-head strong,.plot-head span{display:block}.plot-head strong{font-size:1rem}.plot-head span{color:var(--muted);font-size:.72rem}.legend{display:flex;gap:8px;flex-wrap:wrap}.legend span{display:inline-flex;align-items:center;gap:5px;font:650 .6rem var(--font-mono)}.legend i{width:18px;height:2px;display:inline-block}.svg-host svg{width:100%;height:auto;display:block;overflow:visible}.dd-label{display:flex;justify-content:space-between;margin:8px 4px 1px;color:var(--muted);font:700 .58rem var(--font-mono);text-transform:uppercase}.dd-label span:last-child{color:var(--accent-strong)}.tooltip{position:absolute;z-index:5;pointer-events:none;padding:9px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface);box-shadow:var(--shadow);font:650 .65rem var(--font-mono);min-width:165px}.chart-foot{margin:12px 2px 0;color:var(--muted);font-size:.75rem}.chart-foot strong{color:var(--ink)}
 @media(max-width:760px){.chart-intro{grid-template-columns:1fr}.metric-strip{grid-template-columns:1fr 1fr}.plot-head{flex-direction:column}.chart-toolbar{align-items:flex-start;flex-direction:column}}
 </style>
 
@@ -47,6 +48,11 @@ const cutoff = data.cutoff;
   let mode='roll', range='all';
   const W=1000,H=360,DH=145,L=54,R=18,T=18,B=30;
   const palette=['var(--accent)','var(--muted)','var(--accent-strong)'];
+  const modeLabels={
+    roll:{title:'Optimized Roll',subtitle:'Core Roll Timing strategy vs passive benchmark',primary:'Optimized Roll'},
+    arb:{title:'Cross-Maturity Arb',subtitle:'6× Cross-Maturity Arbitrage vs positive-spread benchmark',primary:'Cross-Maturity Arb'},
+    portfolio:{title:'Flagship Portfolio',subtitle:'IC Roll Timing + 1.0× Cross-Maturity Arbitrage',primary:'Flagship Portfolio'},
+  };
   const pick=()=>chartData[mode];
   const slice=()=>{
     const c=pick(); if(!c) return null;
@@ -63,14 +69,16 @@ const cutoff = data.cutoff;
   const sd=a=>{if(a.length<2)return 0;const m=mean(a);return Math.sqrt(a.reduce((s,x)=>s+(x-m)*(x-m),0)/(a.length-1))};
   function render(){
     const c=slice(); if(!c) return; host.innerHTML='';ddHost.innerHTML='';
-    document.getElementById('rn-chart-title').textContent=mode==='roll'?'Roll Timing':'Cross-Maturity Arbitrage';
-    const lg=document.getElementById('rn-legend');lg.innerHTML='';c.series.forEach((s,i)=>{const z=document.createElement('span');z.innerHTML=`<i style="background:${palette[i]}"></i>${i===0?'Optimized':s.name}`;lg.appendChild(z)});
+    const labels=modeLabels[mode];
+    document.getElementById('rn-chart-title').textContent=labels.title;
+    document.getElementById('rn-chart-subtitle').textContent=labels.subtitle;
+    const lg=document.getElementById('rn-legend');lg.innerHTML='';c.series.forEach((s,i)=>{const z=document.createElement('span');z.innerHTML=`<i style="background:${palette[i]}"></i>${i===0?labels.primary:s.name}`;lg.appendChild(z)});
     const n=c.dates.length, xs=i=>L+i/Math.max(1,n-1)*(W-L-R); const all=c.series.flatMap(s=>s.values);let lo=Math.min(...all),hi=Math.max(...all),pad=(hi-lo)*.07||.1;lo-=pad;hi+=pad;const ys=v=>T+(hi-v)/(hi-lo)*(H-T-B);
     const s=svg(H); for(let k=0;k<5;k++){const v=lo+(hi-lo)*k/4,y=ys(v);s.appendChild(node('line',{x1:L,y1:y,x2:W-R,y2:y,stroke:'var(--border)'}));s.appendChild(text(v.toFixed(2),L-7,y+4,{'text-anchor':'end',fill:'var(--muted)','font-size':'11'}));}
     const oos=c.dates.findIndex(d=>d>=oosStart); if(oos>=0){s.insertBefore(node('rect',{x:xs(oos),y:T,width:W-R-xs(oos),height:H-T-B,fill:'var(--accent-soft)',opacity:.35}),s.firstChild);s.appendChild(text('OUT OF SAMPLE',Math.min(W-R-8,xs(oos)+8),T+14,{fill:'var(--accent-strong)','font-size':'10','font-weight':'700'}));}
     c.series.forEach((ser,i)=>{const p=node('path',{d:path(ser.values,xs,ys),fill:'none',stroke:palette[i],'stroke-width':i===0?2.6:1.7,'stroke-dasharray':ser.dash?'6 4':'','stroke-linejoin':'round','stroke-linecap':'round'});s.appendChild(p)});
     const overlay=node('rect',{x:L,y:T,width:W-L-R,height:H-T-B,fill:'transparent'});s.appendChild(overlay);const cross=node('line',{y1:T,y2:H-B,stroke:'var(--muted)','stroke-dasharray':'3 3',opacity:0});s.appendChild(cross);
-    overlay.addEventListener('pointermove',ev=>{const b=s.getBoundingClientRect(),px=(ev.clientX-b.left)/b.width*W,i=Math.max(0,Math.min(n-1,Math.round((px-L)/(W-L-R)*(n-1))));const x=xs(i);cross.setAttribute('x1',x);cross.setAttribute('x2',x);cross.setAttribute('opacity','1');tip.hidden=false;tip.style.left=Math.min(b.width-190,Math.max(8,ev.clientX-b.left+12))+'px';tip.style.top=Math.max(8,ev.clientY-b.top-10)+'px';tip.innerHTML=`<strong>${c.dates[i]}</strong>`+c.series.map((q,j)=>`<div style="margin-top:4px">${j===0?'Optimized':q.name}: <b>${q.values[i].toFixed(3)}x</b></div>`).join('')});
+    overlay.addEventListener('pointermove',ev=>{const b=s.getBoundingClientRect(),px=(ev.clientX-b.left)/b.width*W,i=Math.max(0,Math.min(n-1,Math.round((px-L)/(W-L-R)*(n-1))));const x=xs(i);cross.setAttribute('x1',x);cross.setAttribute('x2',x);cross.setAttribute('opacity','1');tip.hidden=false;tip.style.left=Math.min(b.width-190,Math.max(8,ev.clientX-b.left+12))+'px';tip.style.top=Math.max(8,ev.clientY-b.top-10)+'px';tip.innerHTML=`<strong>${c.dates[i]}</strong>`+c.series.map((q,j)=>`<div style="margin-top:4px">${j===0?labels.primary:q.name}: <b>${q.values[i].toFixed(3)}x</b></div>`).join('')});
     overlay.addEventListener('pointerleave',()=>{cross.setAttribute('opacity','0');tip.hidden=true});host.appendChild(s);
     let dlo=Math.min(...c.dd,0);const dy=v=>T+(0-v)/(0-dlo||1)*(DH-T-22);const d=svg(DH);[0,.5,1].forEach(q=>{const v=dlo*q,y=dy(v);d.appendChild(node('line',{x1:L,y1:y,x2:W-R,y2:y,stroke:'var(--border)'}));d.appendChild(text(v.toFixed(1)+'%',L-7,y+4,{'text-anchor':'end',fill:'var(--muted)','font-size':'11'}));});d.appendChild(node('path',{d:path(c.dd,xs,dy),fill:'none',stroke:'var(--danger)','stroke-width':1.7}));ddHost.appendChild(d);
     const nav=c.series[0].values,first=nav[0],last=nav.at(-1),days=(new Date(c.dates.at(-1))-new Date(c.dates[0]))/86400000,years=Math.max(days/365.25,1/365.25),ann=Math.pow(last/first,1/years)-1;
