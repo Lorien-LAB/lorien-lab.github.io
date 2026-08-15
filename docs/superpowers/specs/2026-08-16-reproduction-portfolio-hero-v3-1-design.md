@@ -127,7 +127,9 @@ Primary tabs:
 2. `Cross-Maturity Arb`
 3. `Flagship Portfolio`
 
-Do not add `Roll + 0.5× Arb` as another large chart tab unless a real committed machine-readable series is already available and adding it materially improves interpretation. Its metrics are sufficient in the strategy stack.
+The existing research chart generator already produces a real `组合（IC 滚贴水 + 跨期 1:1）` series from actual optimized roll returns plus the 6× cross-maturity arbitrage return stream. V3.1 must expose that real committed series through the `Flagship Portfolio` tab, trimmed to the same research cutoff as the other charts.
+
+Do **not** add `Roll + 0.5× Arb` as another large chart tab unless a real committed machine-readable series is added by the research pipeline. Its verified summary metrics are sufficient in the strategy stack; no synthetic NAV may be constructed in the website layer.
 
 Existing range controls remain:
 
@@ -165,6 +167,7 @@ Recommended shape:
 - existing `hero.paper`
 - existing `hero.reproduced`
 - existing `hero.optimized`
+- `charts.portfolio` sourced from the committed real combination chart
 
 The component should render from structured data.
 
@@ -192,7 +195,7 @@ In scope:
 - Redesign of `ResearchNoteHero.astro`.
 - Structured portfolio metrics in the V3 data source.
 - Reordering/reframing the existing Paper → Reproduction → Optimization comparison.
-- Updating interactive chart navigation to include the flagship portfolio if a real committed series exists.
+- Exposing the already-real committed Roll + 1.0× Arb combination series as the `Flagship Portfolio` interactive chart tab.
 - Tests covering the new headline, strategy stack, provenance distinctions, and no fabricated series.
 
 Out of scope:
@@ -202,7 +205,7 @@ Out of scope:
 - Adding new strategy variants.
 - Rewriting the full research-note narrative below the hero.
 - Adding decorative charts without research value.
-- Inventing missing NAV series.
+- Inventing missing NAV series, including a website-generated Roll + 0.5× Arb series.
 
 ## 11. Acceptance criteria
 
@@ -217,11 +220,12 @@ The change is complete only if all of the following hold:
    - Roll + 0.5× Arb — 26.3 / 1.14 / -27.8.
 5. The paper/reproduced/optimized comparison remains available but is visually secondary.
 6. The page preserves the distinction between strategy improvement (+1.30 pp / +5.38 pp) and absolute portfolio annualized returns.
-7. No synthetic time series are introduced.
-8. Existing mobile responsiveness remains functional.
-9. Existing V3 tests remain green after any necessary expectation updates.
-10. New tests guard against accidentally replacing the 13.2% optimized roll figure with 39.9%.
-11. Astro check/build succeed with no new warnings or hints attributable to V3.1.
+7. The interactive chart exposes `Optimized Roll`, `Cross-Maturity Arb`, and the real committed `Flagship Portfolio` combination series.
+8. No synthetic time series are introduced.
+9. Existing mobile responsiveness remains functional.
+10. Existing V3 tests remain green after any necessary expectation updates.
+11. New tests guard against accidentally replacing the 13.2% optimized roll figure with 39.9%.
+12. Astro check/build succeed with no new warnings or hints attributable to V3.1.
 
 ## 12. Testing strategy
 
@@ -234,7 +238,8 @@ Add focused source/render tests for:
 - `Optimized Roll Timing` still maps to `13.2%`.
 - `39.9%` appears in a portfolio context.
 - Existing paper/reproduced metrics remain present.
-- Interactive chart only exposes views backed by real data.
+- `charts.portfolio` is sourced from the real committed combination chart rather than synthesized in the component.
+- Interactive chart exposes exactly the intended research views backed by real data.
 
 Run:
 
