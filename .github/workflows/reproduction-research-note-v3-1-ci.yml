@@ -1,0 +1,29 @@
+name: Reproduction Research Note V3.1 CI
+
+on:
+  push:
+    branches: [reproduction-research-note-v3-1]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+      - run: npm install
+      - run: npm test
+      - run: npm run check
+      - run: npm run build
+      - name: Verify V3.1 output
+        run: |
+          PAGE=dist/projects/reproductions/stock-index-futures-roll-basis-timing/index.html
+          test -f "$PAGE"
+          grep -q '39.9%' "$PAGE"
+          grep -q 'FLAGSHIP PORTFOLIO' "$PAGE"
+          grep -q 'From Paper to Portfolio' "$PAGE"
