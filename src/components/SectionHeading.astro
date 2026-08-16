@@ -1,8 +1,23 @@
 ---
-interface Props { label?: string; title: string; description?: string; href?: string; linkLabel?: string; }
-const { label, title, description, href, linkLabel = 'View all →' } = Astro.props;
+interface Props {
+  label?: string;
+  labelZh?: string;
+  title: string;
+  titleZh?: string;
+  description?: string;
+  descriptionZh?: string;
+  href?: string;
+  linkLabel?: string;
+  linkLabelZh?: string;
+}
+const { label, labelZh, title, titleZh, description, descriptionZh, href, linkLabel = 'View all →', linkLabelZh } = Astro.props;
 ---
 <div class="section-heading">
-  <div>{label && <div class="mono-label">{label}</div>}<h2>{title}</h2>{description && <p>{description}</p>}</div>
-  {href && <a class="section-link" href={href}>{linkLabel}</a>}
+  <div>
+    {label && <div class="mono-label"><span class="lang-en">{label}</span>{labelZh && <span class="lang-zh" lang="zh-CN">{labelZh}</span>}</div>}
+    <h2><span class="lang-en">{title}</span>{titleZh && <span class="lang-zh" lang="zh-CN">{titleZh}</span>}</h2>
+    {description && <p><span class="lang-en">{description}</span>{descriptionZh && <span class="lang-zh" lang="zh-CN">{descriptionZh}</span>}</p>}
+  </div>
+  {href && <a class="section-link" href={href}><span class="lang-en">{linkLabel}</span>{linkLabelZh && <span class="lang-zh" lang="zh-CN">{linkLabelZh}</span>}</a>}
 </div>
+<style>.section-heading h2>.lang-en,.section-heading h2>.lang-zh,.section-heading p>.lang-en,.section-heading p>.lang-zh{display:block}</style>
