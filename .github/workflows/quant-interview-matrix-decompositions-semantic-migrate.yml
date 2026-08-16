@@ -1,0 +1,104 @@
+name: Quant Interview Matrix Decompositions Semantic Migration
+
+on:
+  push:
+    branches:
+      - chatgpt/quant-interview-workstream-matrix-decompositions-2026-08-16
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Resolve matrix decomposition semantic identities
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const decisions = {
+            'green-book': {
+              '3.6.2::qr-decomposition': {
+                state: 'knowledge-only',
+                canonicalProblems: [],
+                canonicalKnowledge: ['qr-decomposition'],
+                resolutionNote: 'This source item defines reusable orthogonal-triangular factorization knowledge; it enriches canonical QR Knowledge and does not create a standalone public Problem.'
+              },
+              '3.6.2::least-squares-regression': {
+                state: 'canonical-problem',
+                canonicalProblems: ['least-squares-via-qr'],
+                canonicalKnowledge: ['qr-decomposition'],
+                resolutionNote: 'This is a distinct interview reasoning task. The canonical Problem teaches direct QR on the design matrix; the source normal-equation-first presentation remains internal evidence rather than the recommended public algorithm.'
+              },
+              '3.6.5::lu-decomposition': {
+                state: 'knowledge-only',
+                canonicalProblems: [],
+                canonicalKnowledge: ['lu-cholesky-decomposition'],
+                resolutionNote: 'LU is reusable elimination and triangular-solve knowledge here, with no independent source reasoning task that warrants a separate canonical Problem.'
+              },
+              '3.6.5::cholesky-decomposition': {
+                state: 'knowledge-only',
+                canonicalProblems: [],
+                canonicalKnowledge: ['lu-cholesky-decomposition'],
+                resolutionNote: 'Cholesky belongs in the shared decomposition ontology with LU; the definition and factorization conditions enrich canonical Knowledge rather than creating a duplicate public Problem.'
+              },
+              '3.6.5::correlated-normal-generation': {
+                state: 'canonical-problem',
+                canonicalProblems: ['generate-correlated-gaussians'],
+                canonicalKnowledge: ['lu-cholesky-decomposition', 'singular-value-decomposition'],
+                resolutionNote: 'Generating correlated normals is an independent simulation reasoning task. The canonical Problem generalizes the two-dimensional construction to SPD Cholesky and PSD spectral or SVD covariance factors.'
+              },
+              '3.6.5::singular-value-decomposition': {
+                state: 'knowledge-only',
+                canonicalProblems: [],
+                canonicalKnowledge: ['singular-value-decomposition'],
+                resolutionNote: 'This item contributes reusable rectangular, rank-aware SVD knowledge and does not define a separate canonical interview Problem.'
+              }
+            },
+            'red-book': {
+              '6.2.1::6.10': {
+                state: 'canonical-problem',
+                canonicalProblems: ['matrix-square-root-and-cholesky-factor'],
+                canonicalKnowledge: ['eigenbasis-decomposition', 'lu-cholesky-decomposition'],
+                resolutionNote: 'This task is the semantic anchor for the canonical matrix-square-root and Gram-factor Problem. Its entrywise square-root route is retained as an alternative method while the canonical page foregrounds reusable spectral and Cholesky structure.'
+              }
+            },
+            '150-most-frequently-asked': {
+              '2.2::5': {
+                state: 'variant',
+                canonicalProblems: ['matrix-square-root-and-cholesky-factor'],
+                canonicalKnowledge: ['eigenbasis-decomposition', 'lu-cholesky-decomposition'],
+                resolutionNote: 'This task has the same reasoning identity as the canonical matrix-square-root and factor Problem, but contributes a different matrix and useful spectral and Cholesky calculations, so it is retained as a meaningful variant inside the same public page.'
+              }
+            }
+          };
+
+          for (const [source, sourceDecisions] of Object.entries(decisions)) {
+            const file = `src/data/quant-interview/coverage/${source}.json`;
+            const ledger = JSON.parse(fs.readFileSync(file, 'utf8'));
+            const byKey = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
+            for (const [key, decision] of Object.entries(sourceDecisions)) {
+              const entry = byKey.get(key);
+              if (!entry) throw new Error(`Missing inventory row ${source} ${key}`);
+              Object.assign(entry, decision);
+            }
+            fs.writeFileSync(file, `${JSON.stringify(ledger, null, 2)}\n`);
+          }
+          NODE
+      - name: Commit semantic decisions when needed
+        run: |
+          if git diff --quiet -- src/data/quant-interview/coverage; then
+            echo "Semantic decisions already present; nothing to commit."
+            exit 0
+          fi
+          git config user.name "Lorien"
+          git config user.email "2249297094@qq.com"
+          git add src/data/quant-interview/coverage/*.json
+          git commit -m "data: resolve matrix decomposition semantic identities"
+          git push
