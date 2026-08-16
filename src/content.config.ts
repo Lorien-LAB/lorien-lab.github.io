@@ -60,14 +60,28 @@ const problemSources = defineCollection({
   schema: z.object({
     shortTitle: z.string(),
     displayTitle: z.string(),
+    canonicalTitle: z.string(),
+    aliases: z.array(z.string()).default([]),
     sourceType: z.enum(['book', 'interview', 'public-archive', 'original']),
     description: z.string(),
     authors: z.array(z.string()).optional(),
+    publisher: z.string().optional(),
     year: z.number().int().min(1900).max(2100).optional(),
     edition: z.string().optional(),
+    editionStatus: z.enum(['work-identified', 'edition-pinned']),
+    ingestionStatus: z.enum(['source-only', 'manifest-ready', 'ingesting', 'complete']),
+    bibliographicUrl: z.string().url().optional(),
     officialUrl: z.string().url().optional(),
     publisherUrl: z.string().url().optional(),
     isbn: z.string().optional(),
+  }).superRefine((source, ctx) => {
+    if (source.editionStatus === 'edition-pinned' && !source.edition) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['edition'],
+        message: 'Edition-pinned sources require an exact edition label.',
+      });
+    }
   }),
 });
 
