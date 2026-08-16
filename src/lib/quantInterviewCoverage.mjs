@@ -61,13 +61,17 @@ export function validateCoverageLedger(ledger, context) {
     if (!mapEntry) throw new Error(`Coverage section has no source-topic mapping: ${entry.sourceSection}`);
     if (!Array.isArray(entry.canonicalTopics)) throw new Error(`Coverage canonicalTopics must be an array at ${key}`);
     const mappedTopics = new Set(mapEntry.canonicalTopics);
+    let requiresTopicOverride = false;
     for (const topic of entry.canonicalTopics) {
       if (!topicIds.has(topic)) throw new Error(`Unknown canonical topic ${topic} at ${key}`);
       const isAllowed = entry.sourceItem === null
         ? mappedTopics.has(topic)
         : topicFallsUnderMappedBranch(topic, mappedTopics, topicById);
-      if (!isAllowed) {
-        throw new Error(`Coverage topics are inconsistent with source-topic map at ${key}: ${topic}`);
+      if (!isAllowed) requiresTopicOverride = true;
+    }
+    if (entry.sourceItem !== null && requiresTopicOverride) {
+      if (typeof entry.topicOverrideReason !== 'string' || !entry.topicOverrideReason.trim()) {
+        throw new Error(`Coverage item-level topic override requires a topic override reason at ${key}.`);
       }
     }
     if (entry.sourceItem === null) {
