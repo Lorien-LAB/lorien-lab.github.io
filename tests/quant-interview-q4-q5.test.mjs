@@ -34,7 +34,7 @@ test('Questions 4-5 are independently authored as S3-plus problem records', asyn
 
 test('Question 4 teaches identity swapping / crossing invariance rather than simulating collisions', async () => {
   const text = await readFile(q4Path, 'utf8');
-  assert.match(text, /swap identities|exchange labels|pass through/i);
+  assert.match(text, /exchange their identities|swap the two messages|pass(?:ed|ing)? through/i);
   assert.match(text, /1000/);
 });
 
