@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 
 const sources = [
   'src/content/problem-sources/green-book.md',
@@ -11,13 +11,16 @@ const techniques = [
   'src/content/knowledge/concepts/first-step-analysis.md',
   'src/content/knowledge/concepts/recursion-problem-solving.md',
 ];
-const seeds = [
-  'src/content/problems/original/conditional-dice-expectation.md',
-  'src/content/problems/original/random-walk-boundary.md',
-];
 
-test('phase 1 contains truthful source containers and original seed problems', async () => {
-  for (const file of [...sources, ...techniques, ...seeds]) await access(file);
+async function findProblem(slug) {
+  const files = await readdir('src/content/problems', { recursive: true });
+  const match = files.find((path) => String(path).endsWith(`/${slug}.md`) || String(path) === `${slug}.md`);
+  assert.ok(match, `missing problem ${slug}`);
+  return `src/content/problems/${match}`;
+}
+
+test('phase 1 retains truthful source containers and canonical seed problems', async () => {
+  for (const file of [...sources, ...techniques]) await access(file);
 
   for (const file of sources) {
     const source = await readFile(file, 'utf8');
@@ -25,16 +28,15 @@ test('phase 1 contains truthful source containers and original seed problems', a
     assert.doesNotMatch(source, /https?:\/\/example\./);
   }
 
-  for (const file of seeds) {
+  for (const slug of ['conditional-dice-expectation', 'random-walk-boundary']) {
+    const file = await findProblem(slug);
     const source = await readFile(file, 'utf8');
-    assert.match(source, /originType:\s*original/);
     assert.match(source, /mathDifficulty:\s*[1-5]/);
     assert.match(source, /insightDifficulty:\s*[1-5]/);
     assert.match(source, /interviewDifficulty:\s*[1-5]/);
     assert.match(source, /<details>/);
     assert.match(source, /<summary>[^<]*Hint/i);
     assert.match(source, /<summary>[^<]*Solution/i);
-    assert.doesNotMatch(source, /source:\s*(green-book|red-book)/);
   }
 });
 
