@@ -4,4 +4,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import NoteCard from '../../components/NoteCard.astro';
 const entries = (await getCollection('notes', ({data}) => !data.draft)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
 ---
-<BaseLayout title="Notes · Lorien Lab" description="Research notes on quantitative finance, statistics, market structure, and research engineering."><header class="page-hero"><div class="container"><div class="mono-label">Research Notes</div><h1>Working ideas,<br/>made explicit.</h1><p>Long-form notes for methodology, system design, paper reading, experiments, and the assumptions behind quantitative research decisions.</p></div></header><section class="section"><div class="container">{entries.map(entry=><NoteCard entry={entry}/>)}</div></section></BaseLayout>
+<BaseLayout title="Notes · Lorien Lab" description="Research notes on quantitative finance, statistics, market structure, and research engineering.">
+  <header class="page-hero"><div class="container"><div class="mono-label"><span class="lang-en">Research Notes</span><span class="lang-zh" lang="zh-CN">研究笔记</span></div><h1><span class="lang-en">Working ideas,<br/>made explicit.</span><span class="lang-zh" lang="zh-CN">把工作中的想法，<br/>清晰地写下来。</span></h1><p><span class="lang-en">Long-form notes for methodology, system design, paper reading, experiments, and the assumptions behind quantitative research decisions.</span><span class="lang-zh" lang="zh-CN">记录研究方法、系统设计、论文阅读、实验过程，以及量化研究决策背后的关键假设。</span></p></div></header>
+  <section class="section"><div class="container">{entries.map(entry=><NoteCard entry={entry}/>)}</div></section>
+</BaseLayout>
+<style>.page-hero h1>.lang-en,.page-hero h1>.lang-zh,.page-hero p>.lang-en,.page-hero p>.lang-zh{display:block}</style>
