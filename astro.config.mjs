@@ -10,6 +10,8 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   redirects: {
+    '/research': '/research-projects',
+    '/projects': '/research-projects',
     '/knowledge/reproductions': '/projects/reproductions',
     '/knowledge/reproductions/[...id]': '/projects/reproductions/[...id]',
   },
