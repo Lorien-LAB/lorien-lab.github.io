@@ -5,6 +5,17 @@
     "determinants-eigenvalues"
   ],
   "status": "complete",
+  "completedDate": "2026-08-16",
+  "verification": {
+    "commit": "b070f6f9c318372dfcf0d942f3a67299a8e4a493",
+    "runId": 31948322741,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
   "sourceScopes": [
     {
       "source": "green-book",
