@@ -63,3 +63,30 @@ test('rank Knowledge states the dimension boundary for consistent underdetermine
   assert.match(text, /fewer independent equations than unknowns[\s\S]{0,500}(?:cannot|not)[\s\S]{0,120}unique/i);
   assert.match(text, /rank\(A\)[\s\S]{0,200}<=?[\s\S]{0,100}min\(m,n\)|rank[\s\S]{0,300}min\(m,n\)/i);
 });
+
+test('linear systems Knowledge classifies consistency through ranks and RREF', async () => {
+  const text = await readKnowledge('linear-systems-consistency');
+  assert.match(text, /^quantInterviewTopics:\s*\[linear-algebra-matrix-methods, vectors-linear-systems\]$/m);
+  assert.match(text, /Ax\s*=\s*b/);
+  assert.match(text, /augmented matrix/i);
+  assert.match(text, /Gaussian elimination/i);
+  assert.match(text, /RREF|reduced row[- ]echelon/i);
+  assert.match(text, /pivot/i);
+  assert.match(text, /free variables?/i);
+  assert.match(text, /rank\(A\)\s*=\s*rank\(\[A\|b\]\)/);
+  assert.match(text, /unique solution/i);
+  assert.match(text, /infinitely many solutions/i);
+  assert.match(text, /no solution/i);
+  assert.match(text, /Ax\s*=\s*0[\s\S]{0,300}N\(A\)/);
+  assert.match(text, /x\s*=\s*x_p\s*\+\s*z|x_p\s*\+\s*N\(A\)/);
+  assert.match(text, /qr-decomposition/);
+  assert.match(text, /lu-cholesky-decomposition/);
+  assert.match(text, /singular-value-decomposition/);
+  assert.match(text, /## Interview Checks/i);
+});
+
+test('linear systems Knowledge distinguishes singular coefficient matrices from inconsistent augmented systems', async () => {
+  const text = await readKnowledge('linear-systems-consistency');
+  assert.match(text, /rank\(\[A\|b\]\)[\s\S]{0,200}>[\s\S]{0,120}rank\(A\)[\s\S]{0,250}no solution/i);
+  assert.match(text, /singular[\s\S]{0,500}(?:no solution|infinitely many)/i);
+});
