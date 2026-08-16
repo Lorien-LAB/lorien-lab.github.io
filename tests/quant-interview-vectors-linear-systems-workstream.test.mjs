@@ -148,3 +148,59 @@ test('canonical extension audit metadata is never a public rendering dependency'
   assert.doesNotMatch(publicText, /linear-algebra-vectors-linear-systems-004\.json/);
   assert.doesNotMatch(publicText, /data\/quant-interview\/workstreams/);
 });
+
+test('all inspected vectors linear systems source rows are terminal and resolve to real canonical slugs', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const problemSlugs = await markdownSlugs('src/content/problems');
+  const knowledgeSlugs = await markdownSlugs('src/content/knowledge');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+
+  for (const [source, keys] of Object.entries(sourceInventory)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    const byKey = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
+    for (const [section, item] of keys) {
+      const entry = byKey.get(`${section}::${item}`);
+      assert.ok(entry, `missing completion row ${source} ${section} ${item}`);
+      assert.doesNotMatch(entry.state, /^(?:pending|needs-review)$/);
+      assert.match(entry.resolutionNote ?? '', /\S/, `${source} ${section} ${item} lacks a resolution note`);
+    }
+    assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+      taxonomy,
+      sourceTopicMap,
+      problemSlugs,
+      knowledgeSlugs,
+      allowUnresolvedCanonicalRefs: false,
+    }));
+  }
+});
+
+test('Red source has an explicit no-new-direct-item audit for this workstream', async () => {
+  const workstream = await readJson(workstreamPath);
+  const redScope = workstream.sourceScopes.find((scope) => scope.source === 'red-book');
+  assert.ok(redScope, 'missing Red source scope');
+  assert.equal(redScope.reviewOutcome, 'no-new-direct-item');
+  assert.match(redScope.reviewNote ?? '', /vector|basis|rank|linear-system/i);
+});
+
+test('knowledge-only Green vector material remains publicly visible through Interview Checks', async () => {
+  const file = await findKnowledge('vector-geometry-inner-products');
+  const text = await readFile(file, 'utf8');
+  assert.match(text, /## Interview Checks/i);
+  assert.match(text, /Cauchy[-– ]Schwarz/i);
+  assert.match(text, /correlation coefficient|correlation/i);
+});
+
+test('vectors linear systems public corpus contains no source-named duplicate pages', async () => {
+  const files = (await readdir('src/content/problems/linear-algebra')).filter((file) => String(file).endsWith('.md')).map(String);
+  assert.deepEqual(files.filter((file) => /green|red|150|frequently-asked|question-9/i.test(file)), []);
+  assert.equal(files.filter((file) => /correlation-matrix-parameter-range\.md$/.test(file)).length, 1);
+  assert.equal(files.filter((file) => /product-of-row-stochastic-matrices\.md$/.test(file)).length, 1);
+  assert.equal(files.filter((file) => /rank-and-consistency-of-linear-system\.md$/.test(file)).length, 1);
+});
+
+test('vectors linear systems workstream closes only after every completion invariant holds', async () => {
+  const workstream = await readJson(workstreamPath);
+  assert.equal(workstream.status, 'complete');
+  assert.deepEqual(workstream.canonicalExtensions, expectedExtensions);
+});
