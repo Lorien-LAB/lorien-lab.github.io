@@ -1,0 +1,69 @@
+name: Quant Interview Matrix Decompositions Inventory Migration
+
+on:
+  push:
+    branches:
+      - chatgpt/quant-interview-workstream-matrix-decompositions-2026-08-16
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - name: Upsert matrix decomposition inventory rows
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const specs = {
+            'green-book': [
+              ['3.6.2', 'qr-decomposition'],
+              ['3.6.2', 'least-squares-regression'],
+              ['3.6.5', 'lu-decomposition'],
+              ['3.6.5', 'cholesky-decomposition'],
+              ['3.6.5', 'correlated-normal-generation'],
+              ['3.6.5', 'singular-value-decomposition'],
+            ],
+            'red-book': [['6.2.1', '6.10']],
+            '150-most-frequently-asked': [['2.2', '5']],
+          };
+          for (const [source, rows] of Object.entries(specs)) {
+            const path = `src/data/quant-interview/coverage/${source}.json`;
+            const ledger = JSON.parse(fs.readFileSync(path, 'utf8'));
+            const key = (e) => `${e.sourceSection}::${e.sourceItem ?? ''}`;
+            const existing = new Set(ledger.entries.map(key));
+            for (const [sourceSection, sourceItem] of rows) {
+              const k = `${sourceSection}::${sourceItem}`;
+              if (!existing.has(k)) {
+                ledger.entries.push({
+                  sourceSection,
+                  sourceItem,
+                  canonicalTopics: ['matrix-decompositions'],
+                  state: 'needs-review',
+                  canonicalProblems: [],
+                  canonicalKnowledge: [],
+                });
+                existing.add(k);
+              }
+            }
+            fs.writeFileSync(path, `${JSON.stringify(ledger, null, 2)}\n`);
+          }
+          NODE
+      - name: Commit migration when needed
+        run: |
+          if git diff --quiet -- src/data/quant-interview/coverage; then
+            echo "Inventory rows already present; nothing to commit."
+            exit 0
+          fi
+          git config user.name "Lorien"
+          git config user.email "2249297094@qq.com"
+          git add src/data/quant-interview/coverage/*.json
+          git commit -m "data: inventory matrix decomposition source items"
+          git push
