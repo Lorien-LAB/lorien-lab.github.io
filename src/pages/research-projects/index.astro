@@ -1,0 +1,124 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ResearchCard from '../../components/ResearchCard.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import ReproductionGateway from '../../components/ReproductionGateway.astro';
+
+const base = import.meta.env.BASE_URL;
+const research = (await getCollection('research')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+const projects = (await getCollection('projects')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const systemIds = new Set(['quant-research-harness', 'llm-factor-discovery']);
+const strategyIds = new Set(['cta-research-framework']);
+const systems = projects.filter((entry) => systemIds.has(entry.id));
+const strategies = projects.filter((entry) => strategyIds.has(entry.id));
+const otherProjects = projects.filter((entry) => !systemIds.has(entry.id) && !strategyIds.has(entry.id));
+---
+
+<BaseLayout
+  title="Research & Projects · Lorien Lab"
+  description="Quantitative research, strategy research, research systems, and empirical reproductions by Lorien Lab."
+>
+  <header class="page-hero portfolio-hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="mono-label"><span class="lang-en">Research &amp; Projects</span><span class="lang-zh" lang="zh-CN">研究与项目</span></div>
+        <h1><span class="lang-en">Research questions.<br/>Systems that compound.</span><span class="lang-zh" lang="zh-CN">从研究问题出发，<br/>让系统持续积累。</span></h1>
+        <p><span class="lang-en">One portfolio for quantitative research, systematic strategy development, research infrastructure, and empirical reproduction. The emphasis is not on separating “research” from “projects”, but on showing how ideas become validated and reusable research objects.</span><span class="lang-zh" lang="zh-CN">这里统一呈现量化研究、系统化策略开发、研究基础设施与实证复现。重点不再是人为区分“研究”和“项目”，而是展示一个想法如何被验证，并最终沉淀为可复用的研究对象。</span></p>
+      </div>
+      <div class="portfolio-index" aria-label="Portfolio categories / 研究与项目分类">
+        <a href="#research-tracks"><span>01</span><strong><span class="lang-en">Research Tracks</span><span class="lang-zh" lang="zh-CN">研究方向</span></strong></a>
+        <a href="#reproductions"><span>02</span><strong><span class="lang-en">Reproductions</span><span class="lang-zh" lang="zh-CN">论文与研报复现</span></strong></a>
+        <a href="#research-systems"><span>03</span><strong><span class="lang-en">Research Systems</span><span class="lang-zh" lang="zh-CN">研究系统</span></strong></a>
+        <a href="#strategy-frameworks"><span>04</span><strong><span class="lang-en">Strategy Frameworks</span><span class="lang-zh" lang="zh-CN">策略框架</span></strong></a>
+      </div>
+    </div>
+  </header>
+
+  <section id="research-tracks" class="section portfolio-group" aria-labelledby="research-tracks-title">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <div class="mono-label"><span class="lang-en">01 / Research Tracks</span><span class="lang-zh" lang="zh-CN">01 / 研究方向</span></div>
+          <h2 id="research-tracks-title"><span class="lang-en">Questions first. Models second.</span><span class="lang-zh" lang="zh-CN">问题优先，模型其次。</span></h2>
+          <p><span class="lang-en">Research programs organized around economic mechanisms, data-generating processes, and falsifiable questions rather than isolated backtests.</span><span class="lang-zh" lang="zh-CN">研究围绕经济机制、数据生成过程与可证伪问题组织，而不是由彼此孤立的回测结果拼接而成。</span></p>
+        </div>
+      </div>
+      <div class="card-grid">{research.map((entry) => <ResearchCard entry={entry} />)}</div>
+    </div>
+  </section>
+
+  <section id="reproductions" class="section reproduction-section portfolio-group" aria-labelledby="reproductions-title">
+    <div class="container">
+      <div class="section-heading compact-heading">
+        <div>
+          <div class="mono-label"><span class="lang-en">02 / Reproductions</span><span class="lang-zh" lang="zh-CN">02 / 复现研究</span></div>
+          <h2 id="reproductions-title"><span class="lang-en">Reproduce before extending.</span><span class="lang-zh" lang="zh-CN">先复现，再扩展。</span></h2>
+          <p><span class="lang-en">Academic papers and broker reports are treated as inspectable research workflows: source, implementation, validation, result, and extension.</span><span class="lang-zh" lang="zh-CN">将学术论文与券商研报视为可检查的研究工作流：从原始来源、实现、验证到结果与进一步扩展。</span></p>
+        </div>
+      </div>
+      <ReproductionGateway href={`${base}projects/reproductions/`} />
+    </div>
+  </section>
+
+  <section id="research-systems" class="section portfolio-group" aria-labelledby="research-systems-title">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <div class="mono-label"><span class="lang-en">03 / Research Systems</span><span class="lang-zh" lang="zh-CN">03 / 研究系统</span></div>
+          <h2 id="research-systems-title"><span class="lang-en">Infrastructure for repeatable research.</span><span class="lang-zh" lang="zh-CN">为可重复研究构建基础设施。</span></h2>
+          <p><span class="lang-en">Workbenches, search loops, and interfaces designed to make quantitative research durable, inspectable, and extensible across both human and agent workflows.</span><span class="lang-zh" lang="zh-CN">通过工作台、搜索闭环与统一接口，让量化研究在人类与 Agent 工作流中都具备持久性、可检查性与可扩展性。</span></p>
+        </div>
+      </div>
+      <div class="card-grid two">{systems.map((entry) => <ProjectCard entry={entry} />)}</div>
+    </div>
+  </section>
+
+  <section id="strategy-frameworks" class="section portfolio-group" aria-labelledby="strategy-frameworks-title">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <div class="mono-label"><span class="lang-en">04 / Strategy Frameworks</span><span class="lang-zh" lang="zh-CN">04 / 策略框架</span></div>
+          <h2 id="strategy-frameworks-title"><span class="lang-en">Reusable structures for systematic trading research.</span><span class="lang-zh" lang="zh-CN">面向系统化交易研究的可复用结构。</span></h2>
+          <p><span class="lang-en">Strategy families evaluated under shared assumptions, risk controls, and validation discipline rather than isolated headline backtests.</span><span class="lang-zh" lang="zh-CN">在统一假设、风险控制与验证纪律下评估策略族，而不是比较条件各异的单次亮眼回测。</span></p>
+        </div>
+      </div>
+      <div class="card-grid">{strategies.map((entry) => <ProjectCard entry={entry} />)}</div>
+    </div>
+  </section>
+
+  {otherProjects.length > 0 && (
+    <section class="section portfolio-group" aria-labelledby="additional-projects-title">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <div class="mono-label"><span class="lang-en">05 / Additional Projects</span><span class="lang-zh" lang="zh-CN">05 / 其他项目</span></div>
+            <h2 id="additional-projects-title"><span class="lang-en">Research objects outside the current flagship groups.</span><span class="lang-zh" lang="zh-CN">尚未归入当前核心分组的研究对象。</span></h2>
+            <p><span class="lang-en">New project records stay visible while the portfolio evolves, even before they are assigned to a permanent category.</span><span class="lang-zh" lang="zh-CN">随着研究组合持续演进，新项目即使尚未归入长期分类，也会继续保留并展示。</span></p>
+          </div>
+        </div>
+        <div class="card-grid">{otherProjects.map((entry) => <ProjectCard entry={entry} />)}</div>
+      </div>
+    </section>
+  )}
+</BaseLayout>
+
+<style>
+  .portfolio-hero { padding-bottom: 70px; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: 70px; align-items: end; }
+  .portfolio-hero h1>.lang-en,.portfolio-hero h1>.lang-zh,.portfolio-hero p>.lang-en,.portfolio-hero p>.lang-zh,.portfolio-group h2>.lang-en,.portfolio-group h2>.lang-zh,.portfolio-group p>.lang-en,.portfolio-group p>.lang-zh,.portfolio-index strong>.lang-en,.portfolio-index strong>.lang-zh{display:block}
+  .portfolio-index { border-top: 1px solid rgba(255,255,255,.18); }
+  .portfolio-index a { display: grid; grid-template-columns: 42px 1fr; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.12); color: #d9e3ea; }
+  .portfolio-index a:hover { color: var(--accent); }
+  .portfolio-index a>span { color: var(--accent); font: 700 .7rem var(--font-mono); }
+  .portfolio-index strong { font-size: .88rem; }
+  .portfolio-group { border-top: 1px solid var(--border); scroll-margin-top: 88px; }
+  .portfolio-group:first-of-type { border-top: 0; }
+  .portfolio-group .section-heading { max-width: 850px; }
+  .portfolio-group .section-heading h2 { margin-top: 8px; }
+  .compact-heading { margin-bottom: 28px; }
+  .reproduction-section { background: color-mix(in srgb, var(--surface) 58%, transparent); }
+  .portfolio-group :global(.project-card), .portfolio-group :global(.research-card) { min-height: 100%; }
+  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:38px}.portfolio-hero{padding-bottom:54px}}
+</style>
