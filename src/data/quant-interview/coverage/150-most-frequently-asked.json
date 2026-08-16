@@ -92,7 +92,8 @@
         "correlation-matrix",
         "positive-semidefinite-matrix",
         "principal-minor-feasibility"
-      ]
+      ],
+      "resolutionNote": "Existing canonical parameter-range problem."
     },
     {
       "sourceSection": "2",
@@ -270,10 +271,16 @@
         "covariance-correlation-matrices",
         "positive-semidefinite-matrices"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+      "state": "variant",
+      "canonicalProblems": [
+        "covariance-matrix-positive-semidefinite-proof"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Same covariance-PSD proof identity, extended to show the correlation matrix is PSD as well."
     },
     {
       "sourceSection": "2.2",
@@ -282,10 +289,15 @@
         "linear-algebra-matrix-methods",
         "covariance-correlation-matrices"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "covariance-to-correlation-matrix"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Distinct normalization/congruence-transform problem."
     },
     {
       "sourceSection": "2.2",
@@ -295,10 +307,16 @@
         "covariance-correlation-matrices",
         "positive-semidefinite-matrices"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "equicorrelation-matrix-bounds"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Distinct n-dimensional equicorrelation eigenvalue/bound problem."
     },
     {
       "sourceSection": "2.2",
@@ -308,10 +326,17 @@
         "covariance-correlation-matrices",
         "positive-semidefinite-matrices"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "correlation-matrix-parameter-range"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Repeats the First Look parameter matrix; its additional Schur/completing-square methods enrich the existing canonical problem rather than creating another page."
     }
   ]
 }

@@ -706,10 +706,17 @@
         "covariance-correlation-matrices",
         "positive-semidefinite-matrices"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+      "state": "variant",
+      "canonicalProblems": [
+        "correlation-matrix-parameter-range"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Same joint-correlation feasibility family, posed as validity of a fully specified triple and naturally generalizable to an admissible interval."
     },
     {
       "sourceSection": "3.2.1",
@@ -719,10 +726,16 @@
         "covariance-correlation-matrices",
         "positive-semidefinite-matrices"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "covariance-matrix-positive-semidefinite-proof"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "The question says positive definite, while its solution correctly observes covariance matrices are only guaranteed positive semidefinite. Canonical wording uses the correct PSD claim."
     },
     {
       "sourceSection": "6.2.1",
@@ -731,10 +744,14 @@
         "linear-algebra-matrix-methods",
         "positive-semidefinite-matrices"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+      "canonicalKnowledge": [
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Definition/properties material enriches canonical PSD/PD Knowledge and interview checks."
     }
   ]
 }

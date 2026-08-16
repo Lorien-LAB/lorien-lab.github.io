@@ -1955,10 +1955,14 @@
         "linear-algebra-matrix-methods",
         "positive-semidefinite-matrices"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+      "canonicalKnowledge": [
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "The source section mixes a correct PSD quadratic-form definition with an overbroad leading-principal-minor statement. Canonical Knowledge distinguishes PSD from the positive-definite Sylvester criterion."
     },
     {
       "sourceSection": "3.6.4",
@@ -1968,10 +1972,17 @@
         "covariance-correlation-matrices",
         "positive-semidefinite-matrices"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+      "state": "variant",
+      "canonicalProblems": [
+        "correlation-matrix-parameter-range"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Same matrix-feasibility structure as the canonical parameter-range problem, with different fixed correlations and a different admissible interval."
     },
     {
       "sourceSection": "4.5",
@@ -1980,10 +1991,13 @@
         "linear-algebra-matrix-methods",
         "covariance-correlation-matrices"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+      "canonicalKnowledge": [
+        "correlation-matrix"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Definitions and normalization identities enrich canonical covariance/correlation Knowledge rather than forming a standalone problem."
     }
   ]
 }
