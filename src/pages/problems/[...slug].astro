@@ -13,9 +13,8 @@ export async function getStaticPaths() {
 
 const { problem } = Astro.props as { problem: CollectionEntry<'problems'> };
 const problems = await getCollection('problems');
-const sources = await getCollection('problemSources');
 const knowledge = await getCollection('knowledge');
-validateProblemRelationships(problems, sources, knowledge);
+validateProblemRelationships(problems, knowledge);
 
 const knowledgeBySlug = new Map(knowledge.map((entry) => [slugOf(entry.id), entry]));
 const problemsBySlug = new Map(problems.map((entry) => [slugOf(entry.id), entry]));
