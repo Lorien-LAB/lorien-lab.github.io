@@ -1,0 +1,234 @@
+{
+  "source": "green-book",
+  "canonicalTitle": "A Practical Guide to Quantitative Finance Interviews",
+  "tocStatus": "user-supplied",
+  "coverageClaim": "structure-seed-not-problem-complete",
+  "editionStatus": "work-identified",
+  "edition": null,
+  "sections": [
+    {"id":"preface","title":"Preface","titleZh":"前言","kind":"frontmatter"},
+    {"id":"1","title":"General Principles","titleZh":"一般原则","kind":"chapter","children":[
+      {"id":"1.1","title":"Build a broad knowledge base","titleZh":"建立广泛的知识基础"},
+      {"id":"1.2","title":"Practice your interview skills","titleZh":"练习面试技巧"},
+      {"id":"1.3","title":"Listen carefully","titleZh":"仔细倾听"},
+      {"id":"1.4","title":"Speak your mind","titleZh":"说出你的想法"},
+      {"id":"1.5","title":"Make reasonable assumptions","titleZh":"做出合理的假设"}
+    ]},
+    {"id":"2","title":"Brain Teasers","titleZh":"脑筋急转弯","kind":"chapter","children":[
+      {"id":"2.1","title":"Problem Simplification","titleZh":"问题简化","children":[
+        {"id":"2.1.screwy-pirates","title":"Screwy pirates","titleZh":"海盗分金","kind":"problem-label"},
+        {"id":"2.1.tiger-and-sheep","title":"Tiger and sheep","titleZh":"老虎与羊","kind":"problem-label"}
+      ]},
+      {"id":"2.2","title":"Logic Reasoning","titleZh":"逻辑推理","children":[
+        {"id":"2.2.river-crossing","title":"River crossing","titleZh":"过河","kind":"problem-label"},
+        {"id":"2.2.birthday-problem","title":"Birthday problem","titleZh":"生日问题","kind":"problem-label"},
+        {"id":"2.2.card-game","title":"Card game","titleZh":"纸牌游戏","kind":"problem-label"},
+        {"id":"2.2.burning-ropes","title":"Burning ropes","titleZh":"烧绳子","kind":"problem-label"},
+        {"id":"2.2.defective-ball","title":"Defective ball","titleZh":"找出坏球","kind":"problem-label"},
+        {"id":"2.2.trailing-zeros","title":"Trailing zeros","titleZh":"阶乘末尾的零","kind":"problem-label"},
+        {"id":"2.2.horse-race","title":"Horse race","titleZh":"赛马","kind":"problem-label"},
+        {"id":"2.2.infinite-sequence","title":"Infinite sequence","titleZh":"无穷序列","kind":"problem-label"}
+      ]},
+      {"id":"2.3","title":"Thinking Out of the Box","titleZh":"跳出思维定势","children":[
+        {"id":"2.3.box-packing","title":"Box packing","titleZh":"装箱问题","kind":"problem-label"},
+        {"id":"2.3.calendar-cubes","title":"Calendar cubes","titleZh":"日历骰子","kind":"problem-label"},
+        {"id":"2.3.door-to-offer","title":"Door to offer","titleZh":"通往录用的大门","kind":"problem-label"},
+        {"id":"2.3.message-delivery","title":"Message delivery","titleZh":"信息传递","kind":"problem-label"},
+        {"id":"2.3.last-ball","title":"Last ball","titleZh":"最后一个球","kind":"problem-label"},
+        {"id":"2.3.light-switches","title":"Light switches","titleZh":"电灯开关","kind":"problem-label"},
+        {"id":"2.3.quant-salary","title":"Quant salary","titleZh":"量化分析师的薪水","kind":"problem-label"}
+      ]},
+      {"id":"2.4","title":"Application of Symmetry","titleZh":"对称性的应用","children":[
+        {"id":"2.4.coin-piles","title":"Coin piles","titleZh":"硬币堆","kind":"problem-label"},
+        {"id":"2.4.mislabeled-bags","title":"Mislabeled bags","titleZh":"错误标签的袋子","kind":"problem-label"},
+        {"id":"2.4.wise-men","title":"Wise men","titleZh":"智者","kind":"problem-label"}
+      ]},
+      {"id":"2.5","title":"Series Summation","titleZh":"级数求和","children":[
+        {"id":"2.5.clock-pieces","title":"Clock pieces","titleZh":"时钟碎片","kind":"problem-label"},
+        {"id":"2.5.missing-integers","title":"Missing integers","titleZh":"缺失的整数","kind":"problem-label"},
+        {"id":"2.5.counterfeit-coins-i","title":"Counterfeit coins I","titleZh":"假币 I","kind":"problem-label"}
+      ]},
+      {"id":"2.6","title":"The Pigeon Hole Principle","titleZh":"鸽巢原理","children":[
+        {"id":"2.6.matching-socks","title":"Matching socks","titleZh":"配对袜子","kind":"problem-label"},
+        {"id":"2.6.handshakes","title":"Handshakes","titleZh":"握手问题","kind":"problem-label"},
+        {"id":"2.6.have-we-met-before","title":"Have we met before?","titleZh":"我们以前见过吗？","kind":"problem-label"},
+        {"id":"2.6.ants-on-a-square","title":"Ants on a square","titleZh":"正方形上的蚂蚁","kind":"problem-label"},
+        {"id":"2.6.counterfeit-coins-ii","title":"Counterfeit coins II","titleZh":"假币 II","kind":"problem-label"}
+      ]},
+      {"id":"2.7","title":"Modular Arithmetic","titleZh":"模运算","children":[
+        {"id":"2.7.prisoner-problem","title":"Prisoner problem","titleZh":"囚犯问题","kind":"problem-label"},
+        {"id":"2.7.division-by-9","title":"Division by 9","titleZh":"被9整除","kind":"problem-label"},
+        {"id":"2.7.chameleon-colors","title":"Chameleon colors","titleZh":"变色龙的颜色","kind":"problem-label"}
+      ]},
+      {"id":"2.8","title":"Math Induction","titleZh":"数学归纳法","children":[
+        {"id":"2.8.coin-split-problem","title":"Coin split problem","titleZh":"分硬币问题","kind":"problem-label"},
+        {"id":"2.8.chocolate-bar-problem","title":"Chocolate bar problem","titleZh":"巧克力棒问题","kind":"problem-label"},
+        {"id":"2.8.race-track","title":"Race track","titleZh":"赛道问题","kind":"problem-label"}
+      ]},
+      {"id":"2.9","title":"Proof by Contradiction","titleZh":"反证法","children":[
+        {"id":"2.9.irrational-number","title":"Irrational number","titleZh":"无理数","kind":"problem-label"},
+        {"id":"2.9.rainbow-hats","title":"Rainbow hats","titleZh":"彩虹帽子","kind":"problem-label"}
+      ]}
+    ]},
+    {"id":"3","title":"Calculus and Linear Algebra","titleZh":"微积分与线性代数","kind":"chapter","children":[
+      {"id":"3.1","title":"Limits and Derivatives","titleZh":"极限与导数","children":[
+        {"id":"3.1.1","title":"Basics of derivatives","titleZh":"导数基础"},
+        {"id":"3.1.2","title":"Maximum and minimum","titleZh":"最大值与最小值"},
+        {"id":"3.1.3","title":"L'Hospital's rule","titleZh":"洛必达法则"}
+      ]},
+      {"id":"3.2","title":"Integration","titleZh":"积分","children":[
+        {"id":"3.2.1","title":"Basics of integration","titleZh":"积分基础"},
+        {"id":"3.2.2","title":"Applications of integration","titleZh":"积分的应用"},
+        {"id":"3.2.3","title":"Expected value using integration","titleZh":"使用积分计算期望值"}
+      ]},
+      {"id":"3.3","title":"Partial Derivatives and Multiple Integrals","titleZh":"偏导数与多重积分"},
+      {"id":"3.4","title":"Important Calculus Methods","titleZh":"重要的微积分方法","children":[
+        {"id":"3.4.1","title":"Taylor's series","titleZh":"泰勒级数"},
+        {"id":"3.4.2","title":"Newton's method","titleZh":"牛顿法"},
+        {"id":"3.4.3","title":"Lagrange multipliers","titleZh":"拉格朗日乘数法"}
+      ]},
+      {"id":"3.5","title":"Ordinary Differential Equations","titleZh":"常微分方程","children":[
+        {"id":"3.5.1","title":"Separable differential equations","titleZh":"可分离变量的微分方程"},
+        {"id":"3.5.2","title":"First-order linear differential equations","titleZh":"一阶线性微分方程"},
+        {"id":"3.5.3","title":"Homogeneous linear equations","titleZh":"齐次线性方程"},
+        {"id":"3.5.4","title":"Nonhomogeneous linear equations","titleZh":"非齐次线性方程"}
+      ]},
+      {"id":"3.6","title":"Linear Algebra","titleZh":"线性代数","children":[
+        {"id":"3.6.1","title":"Vectors","titleZh":"向量"},
+        {"id":"3.6.2","title":"QR decomposition","titleZh":"QR分解"},
+        {"id":"3.6.3","title":"Determinant, eigenvalue and eigenvector","titleZh":"行列式、特征值与特征向量"},
+        {"id":"3.6.4","title":"Positive semidefinite/definite matrix","titleZh":"半正定/正定矩阵"},
+        {"id":"3.6.5","title":"LU decomposition and Cholesky decomposition","titleZh":"LU分解与乔莱斯基分解"}
+      ]}
+    ]},
+    {"id":"4","title":"Probability Theory","titleZh":"概率论","kind":"chapter","children":[
+      {"id":"4.1","title":"Basic Probability Definitions and Set Operations","titleZh":"基本概率定义与集合运算","children":[
+        {"id":"4.1.coin-toss-game","title":"Coin toss game","titleZh":"抛硬币游戏","kind":"problem-label"},
+        {"id":"4.1.card-game","title":"Card game","titleZh":"纸牌游戏","kind":"problem-label"},
+        {"id":"4.1.drunk-passenger","title":"Drunk passenger","titleZh":"醉酒乘客","kind":"problem-label"}
+      ]},
+      {"id":"4.2","title":"Combinatorial Analysis","titleZh":"组合分析","children":[
+        {"id":"4.2.poker-hands","title":"Poker hands","titleZh":"扑克牌型","kind":"problem-label"},
+        {"id":"4.2.hopping-rabbit","title":"Hopping rabbit","titleZh":"跳跃的兔子","kind":"problem-label"},
+        {"id":"4.2.screwy-pirates-2","title":"Screwy pirates 2","titleZh":"海盗分金 2","kind":"problem-label"},
+        {"id":"4.2.chess-tournament","title":"Chess tournament","titleZh":"国际象棋锦标赛","kind":"problem-label"},
+        {"id":"4.2.application-letters","title":"Application letters","titleZh":"求职信","kind":"problem-label"},
+        {"id":"4.2.birthday-problem","title":"Birthday problem","titleZh":"生日问题","kind":"problem-label"},
+        {"id":"4.2.100th-digit","title":"100th digit","titleZh":"第100位数字","kind":"problem-label"},
+        {"id":"4.2.cubic-of-integer","title":"Cubic of integer","titleZh":"整数的立方","kind":"problem-label"}
+      ]},
+      {"id":"4.3","title":"Conditional Probability and Bayes' formula","titleZh":"条件概率与贝叶斯公式","children":[
+        {"id":"4.3.boys-and-girls","title":"Boys and girls","titleZh":"男孩和女孩","kind":"problem-label"},
+        {"id":"4.3.all-girl-world","title":"All-girl world?","titleZh":"全是女孩的世界？","kind":"problem-label"},
+        {"id":"4.3.unfair-coin","title":"Unfair coin","titleZh":"不公平的硬币","kind":"problem-label"},
+        {"id":"4.3.fair-probability-from-unfair-coin","title":"Fair probability from an unfair coin","titleZh":"从不公平硬币中产生公平概率","kind":"problem-label"},
+        {"id":"4.3.dart-game","title":"Dart game","titleZh":"掷飞镖游戏","kind":"problem-label"},
+        {"id":"4.3.birthday-line","title":"Birthday line","titleZh":"生日排队","kind":"problem-label"},
+        {"id":"4.3.dice-order","title":"Dice order","titleZh":"骰子顺序","kind":"problem-label"},
+        {"id":"4.3.monty-hall","title":"Monty Hall problem","titleZh":"蒙提霍尔问题","kind":"problem-label"},
+        {"id":"4.3.amoeba-population","title":"Amoeba population","titleZh":"变形虫种群","kind":"problem-label"},
+        {"id":"4.3.candies-in-a-jar","title":"Candies in a jar","titleZh":"罐子里的糖果","kind":"problem-label"},
+        {"id":"4.3.coin-toss-game","title":"Coin toss game","titleZh":"抛硬币游戏","kind":"problem-label"},
+        {"id":"4.3.russian-roulette-series","title":"Russian roulette series","titleZh":"俄罗斯轮盘赌系列","kind":"problem-label"},
+        {"id":"4.3.aces","title":"Aces","titleZh":"拿到A","kind":"problem-label"},
+        {"id":"4.3.gamblers-ruin","title":"Gambler's ruin problem","titleZh":"赌徒破产问题","kind":"problem-label"},
+        {"id":"4.3.basketball-scores","title":"Basketball scores","titleZh":"篮球得分","kind":"problem-label"},
+        {"id":"4.3.cars-on-road","title":"Cars on road","titleZh":"路上的汽车","kind":"problem-label"}
+      ]},
+      {"id":"4.4","title":"Discrete and Continuous Distributions","titleZh":"离散与连续分布","children":[
+        {"id":"4.4.meeting-probability","title":"Meeting probability","titleZh":"相遇概率","kind":"problem-label"},
+        {"id":"4.4.probability-of-triangle","title":"Probability of triangle","titleZh":"构成三角形的概率","kind":"problem-label"},
+        {"id":"4.4.poisson-process-property","title":"Property of Poisson process","titleZh":"泊松过程的性质","kind":"problem-label"},
+        {"id":"4.4.normal-moments","title":"Moments of normal distribution","titleZh":"正态分布的矩","kind":"problem-label"}
+      ]},
+      {"id":"4.5","title":"Expected Value, Variance & Covariance","titleZh":"期望值、方差与协方差","children":[
+        {"id":"4.5.connecting-noodles","title":"Connecting noodles","titleZh":"连接面条","kind":"problem-label"},
+        {"id":"4.5.optimal-hedge-ratio","title":"Optimal hedge ratio","titleZh":"最优对冲比率","kind":"problem-label"},
+        {"id":"4.5.dice-game","title":"Dice game","titleZh":"骰子游戏","kind":"problem-label"},
+        {"id":"4.5.card-game","title":"Card game","titleZh":"纸牌游戏","kind":"problem-label"},
+        {"id":"4.5.sum-of-random-variables","title":"Sum of random variables","titleZh":"随机变量之和","kind":"problem-label"},
+        {"id":"4.5.coupon-collection","title":"Coupon collection","titleZh":"收集优惠券","kind":"problem-label"},
+        {"id":"4.5.joint-default-probability","title":"Joint default probability","titleZh":"联合违约概率","kind":"problem-label"}
+      ]},
+      {"id":"4.6","title":"Order Statistics","titleZh":"顺序统计量","children":[
+        {"id":"4.6.expected-max-min","title":"Expected value of max and min","titleZh":"最大值和最小值的期望值","kind":"problem-label"},
+        {"id":"4.6.correlation-max-min","title":"Correlation of max and min","titleZh":"最大值和最小值的相关性","kind":"problem-label"},
+        {"id":"4.6.random-ants","title":"Random ants","titleZh":"随机蚂蚁","kind":"problem-label"}
+      ]}
+    ]},
+    {"id":"5","title":"Stochastic Process and Stochastic Calculus","titleZh":"随机过程与随机微积分","kind":"chapter","children":[
+      {"id":"5.1","title":"Markov Chain","titleZh":"马尔可夫链","children":[
+        {"id":"5.1.gamblers-ruin","title":"Gambler's ruin problem","titleZh":"赌徒破产问题","kind":"problem-label"},
+        {"id":"5.1.dice-question","title":"Dice question","titleZh":"骰子问题","kind":"problem-label"},
+        {"id":"5.1.coin-triplets","title":"Coin triplets","titleZh":"硬币三连","kind":"problem-label"},
+        {"id":"5.1.color-balls","title":"Color balls","titleZh":"彩色球","kind":"problem-label"}
+      ]},
+      {"id":"5.2","title":"Martingale and Random walk","titleZh":"鞅与随机游走","children":[
+        {"id":"5.2.drunk-man","title":"Drunk man","titleZh":"醉汉","kind":"problem-label"},
+        {"id":"5.2.dice-game","title":"Dice game","titleZh":"骰子游戏","kind":"problem-label"},
+        {"id":"5.2.ticket-line","title":"Ticket line","titleZh":"排队买票","kind":"problem-label"},
+        {"id":"5.2.coin-sequence","title":"Coin sequence","titleZh":"硬币序列","kind":"problem-label"}
+      ]},
+      {"id":"5.3","title":"Dynamic Programming","titleZh":"动态规划","children":[
+        {"id":"5.3.dp-algorithm","title":"Dynamic programming (DP) algorithm","titleZh":"动态规划 (DP) 算法"},
+        {"id":"5.3.dice-game","title":"Dice game","titleZh":"骰子游戏","kind":"problem-label"},
+        {"id":"5.3.world-series","title":"World series","titleZh":"世界大赛","kind":"problem-label"},
+        {"id":"5.3.dynamic-dice-game","title":"Dynamic dice game","titleZh":"动态骰子游戏","kind":"problem-label"},
+        {"id":"5.3.dynamic-card-game","title":"Dynamic card game","titleZh":"动态纸牌游戏","kind":"problem-label"}
+      ]},
+      {"id":"5.4","title":"Brownian Motion and Stochastic Calculus","titleZh":"布朗运动与随机微积分","children":[
+        {"id":"5.4.brownian-motion","title":"Brownian motion","titleZh":"布朗运动"},
+        {"id":"5.4.stopping-time","title":"Stopping time / first passage time","titleZh":"停时/首达时"},
+        {"id":"5.4.itos-lemma","title":"Ito's lemma","titleZh":"伊藤引理"}
+      ]}
+    ]},
+    {"id":"6","title":"Finance","titleZh":"金融学","kind":"chapter","children":[
+      {"id":"6.1","title":"Option Pricing","titleZh":"期权定价","children":[
+        {"id":"6.1.price-direction","title":"Price direction of options","titleZh":"期权价格方向"},
+        {"id":"6.1.put-call-parity","title":"Put-call parity","titleZh":"看涨-看跌期权平价关系"},
+        {"id":"6.1.american-european","title":"American vs. European options","titleZh":"美式期权与欧式期权"},
+        {"id":"6.1.bsm-pde","title":"Black-Scholes-Merton differential equation","titleZh":"布莱克-斯科尔斯-默顿微分方程"},
+        {"id":"6.1.black-scholes-formula","title":"Black-Scholes formula","titleZh":"布莱克-斯科尔斯公式"}
+      ]},
+      {"id":"6.2","title":"The Greeks","titleZh":"希腊字母","children":[
+        {"id":"6.2.delta","title":"Delta"},{"id":"6.2.gamma","title":"Gamma"},{"id":"6.2.theta","title":"Theta"},{"id":"6.2.vega","title":"Vega"}
+      ]},
+      {"id":"6.3","title":"Option Portfolios and Exotic Options","titleZh":"期权组合与奇异期权","children":[
+        {"id":"6.3.bull-spread","title":"Bull spread","titleZh":"牛市价差"},
+        {"id":"6.3.straddle","title":"Straddle","titleZh":"跨式期权"},
+        {"id":"6.3.binary-options","title":"Binary options","titleZh":"二元期权"},
+        {"id":"6.3.exchange-options","title":"Exchange options","titleZh":"交换期权"}
+      ]},
+      {"id":"6.4","title":"Other Finance Questions","titleZh":"其他金融问题","children":[
+        {"id":"6.4.portfolio-optimization","title":"Portfolio optimization","titleZh":"投资组合优化"},
+        {"id":"6.4.value-at-risk","title":"Value at risk","titleZh":"风险价值"},
+        {"id":"6.4.duration-convexity","title":"Duration and convexity","titleZh":"久期与凸性"},
+        {"id":"6.4.forward-futures","title":"Forward and futures","titleZh":"远期与期货"},
+        {"id":"6.4.interest-rate-models","title":"Interest rate models","titleZh":"利率模型"}
+      ]}
+    ]},
+    {"id":"7","title":"Algorithms and Numerical Methods","titleZh":"算法与数值方法","kind":"chapter","children":[
+      {"id":"7.1","title":"Algorithms","titleZh":"算法","children":[
+        {"id":"7.1.number-swap","title":"Number swap","titleZh":"数字交换"},
+        {"id":"7.1.unique-elements","title":"Unique elements","titleZh":"唯一元素"},
+        {"id":"7.1.horner","title":"Horner's algorithm","titleZh":"霍纳算法"},
+        {"id":"7.1.moving-average","title":"Moving average","titleZh":"移动平均"},
+        {"id":"7.1.sorting","title":"Sorting algorithm","titleZh":"排序算法"},
+        {"id":"7.1.random-permutation","title":"Random permutation","titleZh":"随机排列"},
+        {"id":"7.1.search","title":"Search algorithm","titleZh":"搜索算法"},
+        {"id":"7.1.fibonacci","title":"Fibonacci numbers","titleZh":"斐波那契数列"},
+        {"id":"7.1.max-subarray","title":"Maximum contiguous subarray","titleZh":"最大连续子数组"}
+      ]},
+      {"id":"7.2","title":"The Power of Two","titleZh":"2的幂","children":[
+        {"id":"7.2.power-of-2","title":"Power of 2?","titleZh":"判断是否为2的幂？"},
+        {"id":"7.2.multiply-by-7","title":"Multiplication by 7","titleZh":"乘以7"},
+        {"id":"7.2.probability-simulation","title":"Probability simulation","titleZh":"概率模拟"},
+        {"id":"7.2.poisonous-wine","title":"Poisonous wine","titleZh":"毒酒"}
+      ]},
+      {"id":"7.3","title":"Numerical Methods","titleZh":"数值方法","children":[
+        {"id":"7.3.monte-carlo","title":"Monte Carlo simulation","titleZh":"蒙特卡洛模拟"},
+        {"id":"7.3.finite-difference","title":"Finite difference method","titleZh":"有限差分法"}
+      ]}
+    ]}
+  ]
+}
