@@ -8,7 +8,7 @@ category: Linear Algebra
 subcategories: [Correlation Matrices, Positive Semidefinite Matrices]
 tags: [Linear Algebra, Correlation, PSD, Interview]
 quantInterviewTopics: [linear-algebra-matrix-methods, covariance-correlation-matrices, positive-semidefinite-matrices]
-concepts: [correlation-matrix, positive-semidefinite-matrix]
+concepts: [correlation-matrix, positive-semidefinite-matrix, vector-geometry-inner-products]
 techniques: [principal-minor-feasibility]
 prerequisites: []
 relatedProblems: [covariance-matrix-positive-semidefinite-proof, covariance-to-correlation-matrix, equicorrelation-matrix-bounds]
@@ -177,6 +177,20 @@ and
 Hence the exact feasible range is
 
 **`0.28 <= rho <= 1`.**
+
+There is also a useful geometric route. Represent the correlation matrix as the Gram matrix of three unit vectors `x,y,z`. If
+
+`x^T y = x^T z = 0.8`,
+
+then both `y` and `z` make an angle `theta` with `x`, where `cos(theta)=0.8`. Their mutual angle can range from `0` to `2 theta`. Thus the largest possible mutual correlation is
+
+`cos(0)=1`,
+
+while the smallest is
+
+`cos(2 theta) = 2 cos^2(theta)-1 = 2(0.8)^2-1 = 0.28`.
+
+The geometry and PSD calculation are two views of the same constraint: a valid correlation matrix must be realizable as one consistent system of unit-vector inner products.
 
 The upper endpoint corresponds to the last two standardized variables becoming perfectly correlated; the lower endpoint is another singular PSD boundary.
 

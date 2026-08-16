@@ -20,6 +20,8 @@ const currentProblemSlugs = [
   'least-squares-via-qr',
   'matrix-square-root-and-cholesky-factor',
   'generate-correlated-gaussians',
+  'product-of-row-stochastic-matrices',
+  'rank-and-consistency-of-linear-system',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -41,6 +43,9 @@ const expectedKnowledgeTopics = new Map([
   ['qr-decomposition', ['linear-algebra-matrix-methods', 'matrix-decompositions']],
   ['lu-cholesky-decomposition', ['linear-algebra-matrix-methods', 'matrix-decompositions']],
   ['singular-value-decomposition', ['linear-algebra-matrix-methods', 'matrix-decompositions']],
+  ['vector-geometry-inner-products', ['linear-algebra-matrix-methods', 'vectors-linear-systems']],
+  ['linear-independence-span-basis-rank', ['linear-algebra-matrix-methods', 'vectors-linear-systems']],
+  ['linear-systems-consistency', ['linear-algebra-matrix-methods', 'vectors-linear-systems']],
 ]);
 
 async function findProblem(slug) {
@@ -114,6 +119,7 @@ test('current source-derived items remain auditable in hidden coverage with reso
     ['1::2', 'missing-digit-power-of-two'],
     ['1::4', 'ants-crossing-line'],
     ['1::5', 'correlation-matrix-parameter-range'],
+    ['2.2::9', 'product-of-row-stochastic-matrices'],
   ]);
   for (const [key, slug] of expected) {
     const entry = items.get(key);
