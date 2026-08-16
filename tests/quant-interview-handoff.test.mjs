@@ -67,7 +67,7 @@ test('source catalog records three verified source files without claiming proble
   assert.match(catalog, /Topic-first/i);
 });
 
-test('handoff records two completed cross-book linear-algebra workstreams and stays topic-first', async () => {
+test('handoff records three completed cross-book linear-algebra workstreams and stays topic-first', async () => {
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
   for (const stage of ['Stage A', 'Stage B', 'Stage C', 'Stage D']) assert.match(handoff, new RegExp(`${stage}[\\s\\S]*complete`, 'i'));
 
@@ -93,8 +93,22 @@ test('handoff records two completed cross-book linear-algebra workstreams and st
     'trace-ab-equals-trace-ba',
     'commutator-cannot-equal-identity',
   ]) assert.match(handoff, new RegExp(slug));
-  assert.match(handoff, /no-new-direct-item|no new direct/i);
-  assert.match(handoff, /6\.10[\s\S]{0,200}Matrix Decompositions|Matrix Decompositions[\s\S]{0,200}6\.10/i);
+
+  assert.match(handoff, /linear-algebra-matrix-decompositions-003/);
+  assert.match(handoff, /31952974738/);
+  assert.match(handoff, /970d2a1d82d9e54a2881411a424e3313bfd16b58/);
+  for (const slug of [
+    'qr-decomposition',
+    'lu-cholesky-decomposition',
+    'singular-value-decomposition',
+    'least-squares-via-qr',
+    'matrix-square-root-and-cholesky-factor',
+    'generate-correlated-gaussians',
+  ]) assert.match(handoff, new RegExp(slug));
+  assert.match(handoff, /variant/i);
+  assert.match(handoff, /one canonical Problem|one public Problem|same canonical Problem/i);
+  assert.match(handoff, /16 canonical Problems/i);
+  assert.match(handoff, /18 explicitly topic-classified|18 topic-classified/i);
 
   assert.match(handoff, /knowledge-only/i);
   assert.match(handoff, /source-neutral/i);
@@ -103,8 +117,8 @@ test('handoff records two completed cross-book linear-algebra workstreams and st
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
   assert.match(nextAction, /cross-book/i);
   assert.match(nextAction, /Linear Algebra & Matrix Methods/i);
-  assert.match(nextAction, /Matrix Decompositions/i);
-  assert.doesNotMatch(nextAction, /Determinants & Eigenvalues[\s\S]{0,160}(?:execute|next|continue)/i);
+  assert.match(nextAction, /Vectors & Linear Systems/i);
+  assert.doesNotMatch(nextAction, /Matrix Decompositions[\s\S]{0,160}(?:execute|next|continue)/i);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);
   assert.doesNotMatch(nextAction, /Green[^\n]*(?:then|→)[^\n]*Red|Red[^\n]*(?:then|→)[^\n]*150/i);
 });
