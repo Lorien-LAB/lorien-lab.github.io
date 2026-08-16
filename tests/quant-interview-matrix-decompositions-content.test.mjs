@@ -20,7 +20,8 @@ test('QR Knowledge covers dimensions, stable least squares, uniqueness, and rank
   assert.match(text, /Householder|modified Gram-Schmidt/i);
   assert.match(text, /pivoted QR|column-pivoted QR|column pivoting/i);
   assert.match(text, /rank-deficient|rank deficient/i);
-  assert.match(text, /positive[\s\S]{0,80}diagonal[\s\S]{0,180}unique|unique[\s\S]{0,180}positive[\s\S]{0,80}diagonal/i);
+  assert.match(text, /diagonal entr(?:y|ies)[\s\S]{0,100}positive|positive[\s\S]{0,100}diagonal entr(?:y|ies)/i);
+  assert.match(text, /factors are unique|factorization is unique|QR factors are unique/i);
   assert.match(text, /## Interview Checks/i);
   assert.doesNotMatch(text, /Green Book|Red Book|150 Most Frequently|Question\s+\d+/i);
 });
