@@ -84,3 +84,16 @@ test('topic taxonomy rejects duplicate ids, duplicate sibling order, and reused 
     { id: 'b', title: 'B', order: 2, children: [shared] },
   ]}), /reused or cyclic/i);
 });
+
+test('all three source TOCs are explicitly reconciled into the canonical topic map', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const topicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const tocBySource = {
+    'green-book': await readJson('src/data/quant-interview/toc/green-book.json'),
+    'red-book': await readJson('src/data/quant-interview/toc/red-book.json'),
+    '150-most-frequently-asked': await readJson('src/data/quant-interview/toc/150-most-frequently-asked.json'),
+  };
+  const { validateSourceTopicMap } = await import('../src/lib/quantInterviewTopics.mjs');
+  assert.doesNotThrow(() => validateSourceTopicMap(topicMap, taxonomy, tocBySource));
+  assert.equal(topicMap.entries.length, new Set(topicMap.entries.map((x) => `${x.source}::${x.sourceSection}`)).size);
+});
