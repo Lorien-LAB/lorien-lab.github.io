@@ -1,18 +1,20 @@
 ---
 interface Props { href: string; }
 const { href } = Astro.props;
+const stages = ['Reading','Data','Implementation','Validation','Reproduction','Extension'];
+const stagesZh = ['阅读','数据','实现','验证','复现','扩展'];
 ---
 <section class="reproduction-gateway" aria-labelledby="reproduction-gateway-title">
   <div class="gateway-copy">
-    <div class="mono-label">Empirical Research</div>
-    <h2 id="reproduction-gateway-title">Quant Research Reproductions</h2>
-    <p>Auditable reproductions of quantitative-finance academic papers and broker research reports, tracked from reading and data reconstruction through validation, empirical comparison, and extension.</p>
-    <a href={href}>Open reproduction workbench →</a>
+    <div class="mono-label"><span class="lang-en">Empirical Research</span><span class="lang-zh" lang="zh-CN">实证研究</span></div>
+    <h2 id="reproduction-gateway-title"><span class="lang-en">Quant Research Reproductions</span><span class="lang-zh" lang="zh-CN">量化研究复现</span></h2>
+    <p><span class="lang-en">Auditable reproductions of quantitative-finance academic papers and broker research reports, tracked from reading and data reconstruction through validation, empirical comparison, and extension.</span><span class="lang-zh" lang="zh-CN">对量化金融学术论文与券商研报进行可审计复现，从阅读、数据重建一路记录到验证、实证比较与进一步扩展。</span></p>
+    <a href={href}><span class="lang-en">Open reproduction workbench →</span><span class="lang-zh" lang="zh-CN">打开复现工作台 →</span></a>
   </div>
-  <div class="gateway-flow" aria-label="Reproduction workflow">
-    {['Reading','Data','Implementation','Validation','Reproduction','Extension'].map((stage,index) => <div><span>{String(index + 1).padStart(2,'0')}</span><strong>{stage}</strong></div>)}
+  <div class="gateway-flow" aria-label="Reproduction workflow / 复现流程">
+    {stages.map((stage,index) => <div><span>{String(index + 1).padStart(2,'0')}</span><strong><span class="lang-en">{stage}</span><span class="lang-zh" lang="zh-CN">{stagesZh[index]}</span></strong></div>)}
   </div>
 </section>
 <style>
-.reproduction-gateway{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center;padding:32px;border:1px solid color-mix(in srgb,var(--accent) 32%,var(--border));border-radius:var(--radius-lg);background:linear-gradient(130deg,color-mix(in srgb,var(--accent-soft) 24%,var(--surface)),var(--surface));box-shadow:0 16px 50px rgba(16,40,55,.05)}.gateway-copy h2{margin:8px 0 13px;font-size:clamp(2rem,4vw,3.3rem);line-height:1.02;letter-spacing:-.05em}.gateway-copy p{max-width:630px;margin:0;color:var(--muted);line-height:1.7}.gateway-copy a{display:inline-block;margin-top:21px;color:var(--accent-strong);font-weight:800}.gateway-flow{border-top:1px solid var(--border)}.gateway-flow div{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}.gateway-flow span{font:700 .66rem var(--font-mono);color:var(--accent-strong)}.gateway-flow strong{font-size:.82rem}@media(max-width:800px){.reproduction-gateway{grid-template-columns:1fr;gap:30px;padding:24px}}
+.reproduction-gateway{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center;padding:32px;border:1px solid color-mix(in srgb,var(--accent) 32%,var(--border));border-radius:var(--radius-lg);background:linear-gradient(130deg,color-mix(in srgb,var(--accent-soft) 24%,var(--surface)),var(--surface));box-shadow:0 16px 50px rgba(16,40,55,.05)}.gateway-copy h2{margin:8px 0 13px;font-size:clamp(2rem,4vw,3.3rem);line-height:1.02;letter-spacing:-.05em}.gateway-copy h2>.lang-en,.gateway-copy h2>.lang-zh,.gateway-copy p>.lang-en,.gateway-copy p>.lang-zh,.gateway-flow strong>.lang-en,.gateway-flow strong>.lang-zh{display:block}.gateway-copy p{max-width:630px;margin:0;color:var(--muted);line-height:1.7}.gateway-copy a{display:inline-block;margin-top:21px;color:var(--accent-strong);font-weight:800}.gateway-flow{border-top:1px solid var(--border)}.gateway-flow div{display:grid;grid-template-columns:48px 1fr;gap:12px;padding:11px 0;border-bottom:1px solid var(--border)}.gateway-flow span{font:700 .66rem var(--font-mono);color:var(--accent-strong)}.gateway-flow strong{font-size:.82rem}@media(max-width:800px){.reproduction-gateway{grid-template-columns:1fr;gap:30px;padding:24px}}
 </style>
