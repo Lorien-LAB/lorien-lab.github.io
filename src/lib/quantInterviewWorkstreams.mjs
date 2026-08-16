@@ -40,7 +40,6 @@ export function validateTopicWorkstream(workstream, context) {
   const mapEntries = context.sourceTopicMap?.entries;
   if (!Array.isArray(mapEntries)) throw new Error('Topic workstream context requires sourceTopicMap entries.');
   const mapByKey = new Map(mapEntries.map((entry) => [`${entry.source}::${entry.sourceSection}`, entry]));
-  const workstreamTopics = new Set(workstream.canonicalTopics);
   const seenSources = new Set();
 
   for (const scope of workstream.sourceScopes) {
@@ -58,13 +57,14 @@ export function validateTopicWorkstream(workstream, context) {
 
     for (const section of scope.sourceSections) {
       requireString(section, `Source section for ${scope.source}`);
-      const entry = mapByKey.get(`${scope.source}::${section}`);
-      if (!entry) throw new Error(`Source section absent from source-topic map: ${scope.source} ${section}`);
-      if (!entry.canonicalTopics?.some((topic) => workstreamTopics.has(topic))) {
-        throw new Error(`Source section has no topic intersection with workstream: ${scope.source} ${section}`);
+      if (!mapByKey.has(`${scope.source}::${section}`)) {
+        throw new Error(`Source section absent from source-topic map: ${scope.source} ${section}`);
       }
     }
 
+    // TOC sections can be editorially broad or mixed-topic. Registration verifies that
+    // the source section exists; exact topic membership is enforced later on item-level
+    // coverage rows, where individual questions/definitions can be classified precisely.
     validateRanges(scope.evidencePageRanges, `Source scope ${scope.source}`);
   }
 
