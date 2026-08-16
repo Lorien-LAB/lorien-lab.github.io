@@ -7,7 +7,7 @@ const { title, description = 'Quantitative research, systematic strategies, and 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 ---
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width" />
@@ -17,7 +17,27 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
   <link rel="canonical" href={canonicalURL} />
   <title>{title}</title>
   <script is:inline>
-    (() => { const stored = localStorage.getItem('theme'); const systemDark = matchMedia('(prefers-color-scheme: dark)').matches; document.documentElement.dataset.theme = stored || (systemDark ? 'dark' : 'light'); })();
+    (() => {
+      const root = document.documentElement;
+
+      try {
+        const storedLanguage = localStorage.getItem('site-language');
+        const language = storedLanguage === 'zh' ? 'zh' : 'en';
+        root.dataset.lang = language;
+        root.lang = language === 'zh' ? 'zh-CN' : 'en';
+      } catch {
+        root.dataset.lang = 'en';
+        root.lang = 'en';
+      }
+
+      try {
+        const storedTheme = localStorage.getItem('theme');
+        const systemDark = matchMedia('(prefers-color-scheme: dark)').matches;
+        root.dataset.theme = storedTheme || (systemDark ? 'dark' : 'light');
+      } catch {
+        root.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+    })();
   </script>
 </head>
 <body class={bodyClass}>
