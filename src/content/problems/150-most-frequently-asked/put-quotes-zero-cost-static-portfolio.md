@@ -5,7 +5,7 @@ description: Test whether two same-expiry put quotes are mutually consistent by 
 date: 2026-08-16
 originType: book
 source: 150-most-frequently-asked
-sourceSection: First Look: Ten Questions
+sourceSection: 'First Look: Ten Questions'
 sourceChapter: '1'
 sourceProblem: '1'
 sourceReference: 'Chapter 1 · First Look · Question 1 · printed pp. 1, 3–4'
