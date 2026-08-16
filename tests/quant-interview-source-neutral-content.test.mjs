@@ -17,6 +17,9 @@ const currentProblemSlugs = [
   'apply-matrix-via-eigenbasis',
   'trace-ab-equals-trace-ba',
   'commutator-cannot-equal-identity',
+  'least-squares-via-qr',
+  'matrix-square-root-and-cholesky-factor',
+  'generate-correlated-gaussians',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -34,7 +37,10 @@ const expectedKnowledgeTopics = new Map([
   ['principal-minor-feasibility', ['linear-algebra-matrix-methods', 'positive-semidefinite-matrices']],
   ['eigenvalues-eigenvectors', ['linear-algebra-matrix-methods', 'determinants-eigenvalues']],
   ['matrix-spectral-invariants', ['linear-algebra-matrix-methods', 'determinants-eigenvalues']],
-  ['eigenbasis-decomposition', ['linear-algebra-matrix-methods', 'determinants-eigenvalues']],
+  ['eigenbasis-decomposition', ['linear-algebra-matrix-methods', 'determinants-eigenvalues', 'matrix-decompositions']],
+  ['qr-decomposition', ['linear-algebra-matrix-methods', 'matrix-decompositions']],
+  ['lu-cholesky-decomposition', ['linear-algebra-matrix-methods', 'matrix-decompositions']],
+  ['singular-value-decomposition', ['linear-algebra-matrix-methods', 'matrix-decompositions']],
 ]);
 
 async function findProblem(slug) {
