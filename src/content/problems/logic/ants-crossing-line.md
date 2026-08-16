@@ -1,5 +1,5 @@
 ---
-problemId: 150-first-look-004
+problemId: logic-invariance-001
 title: Ant Collisions and Identity Swapping
 description: Count endpoint arrivals and pairwise collisions by replacing identical ants that bounce on contact with straight-through ghost trajectories.
 date: 2026-08-16
