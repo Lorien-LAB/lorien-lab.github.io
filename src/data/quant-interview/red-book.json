@@ -1,10 +1,22 @@
 {
   "source": "red-book",
   "canonicalTitle": "Quant Job Interview Questions and Answers",
-  "editionStatus": "work-identified",
-  "edition": null,
-  "isbn": null,
-  "sourceFile": null,
-  "ingestionStatus": "awaiting-source-file",
+  "editionStatus": "edition-pinned",
+  "edition": "Version 1.01 (2008)",
+  "isbn": "9781438217031",
+  "sourceFile": "sha256:09c5aac761bd71c4a6b9406f50dcfe73d8af3ce0a3ef9bb4fe2d65d0b27db6b1",
+  "sourceFileMeta": {
+    "verification": "source-file-verified",
+    "pdfPageCount": 329,
+    "verifiedAnchors": [
+      {"pdfPage": 2, "role": "back-cover-isbn"},
+      {"pdfPage": 3, "role": "title-page"},
+      {"pdfPage": 4, "role": "version-and-copyright-page"},
+      {"pdfPage": 5, "role": "toc-start"},
+      {"pdfPage": 328, "displayPage": 316, "role": "index-end"}
+    ],
+    "note": "User-supplied Version 1.01 file verified against cover ISBN, title, version/copyright page, TOC, and index end. Source bytes are not committed."
+  },
+  "ingestionStatus": "manifest-ready",
   "batches": []
 }

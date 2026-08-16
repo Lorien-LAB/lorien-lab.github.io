@@ -1,80 +1,78 @@
 # Quant Interview Source Catalog
 
-This catalog records **verification state**, not aspirational coverage. Never infer completion from the presence of a book or TOC.
+The three books are **internal inputs** to Lorien Lab's **Topic-first** Quant Interview Knowledge System. They are verification and coverage sources, not the public navigation hierarchy.
 
-## Verification vocabulary
-
-- `user-supplied`: structure or metadata supplied by the user; useful as a seed but not yet verified against the actual file.
-- `web-cross-checked`: corroborated with an external bibliographic/publisher source.
-- `source-file-verified`: inspected directly in the user's actual PDF/source file.
-- `edition-pinned`: an exact edition is identified strongly enough to bind edition-specific metadata.
-- `problem-indexed`: source-derived Problems have actually been created and validated.
+**Source-file verification is not problem coverage.** A verified edition/file only establishes which source is being inspected. Problem and Knowledge completeness is tracked separately through canonical topic workstreams and the hidden coverage ledger.
 
 ## Green Book — A Practical Guide to Quantitative Finance Interviews
 
 - Canonical title: *A Practical Guide to Quantitative Finance Interviews*
 - Author: Xinfeng Zhou
 - Repository source slug: `green-book`
-- Work identity: `web-cross-checked`
-- Edition state: `work-identified`
-- TOC state: `user-supplied`
-- Source file: **not source-file-verified**
-- Problem coverage: **not problem-indexed**
-- Edition: not pinned
-- Ingestion: `awaiting-source-file`
+- Edition: **First Edition (2008)**
+- Edition state: `edition-pinned`
+- ISBN-13: `9781438236667`
+- Source file: **source-file-verified**
+- Source-file identity: `sha256:89a637408fc57164c3ee4ef19fb36688a58dfb37b91ef1471d11df82d6d0e3f5`
+- File size in pages: **213 PDF pages**
+- TOC state: **source-file-verified**
+- Ingestion state: `manifest-ready`
+- Problem-level coverage: **not complete; hidden coverage entries are initially pending**
 
-The supplied TOC is a structural seed only. It must not be used to claim complete problem-level coverage, and chapter/problem numbering must not be treated as edition-safe until the actual source file is checked.
+Verification anchors include the First Edition title page, 2008 copyright page, TOC, index end, and back-cover ISBN. The copyrighted source file is not committed to this public repository.
 
 ## Red Book — Quant Job Interview Questions and Answers
 
 - Canonical title: *Quant Job Interview Questions and Answers*
 - Authors: Mark Joshi, Nicholas Denson, Andrew Downes
 - Repository source slug: `red-book`
-- Work identity: `web-cross-checked`
-- Edition state: `work-identified`
-- TOC state: `user-supplied`
-- Source file: **not source-file-verified**
-- Problem coverage: **not problem-indexed**
-- Edition: not pinned
-- Ingestion: `awaiting-source-file`
+- Edition/version: **Version 1.01 (2008)**
+- Edition state: `edition-pinned`
+- ISBN-13: `9781438217031`
+- Source file: **source-file-verified**
+- Source-file identity: `sha256:09c5aac761bd71c4a6b9406f50dcfe73d8af3ce0a3ef9bb4fe2d65d0b27db6b1`
+- File size in pages: **329 PDF pages**
+- TOC state: **source-file-verified**
+- Ingestion state: `manifest-ready`
+- Problem-level coverage: **not complete; hidden coverage entries are initially pending**
 
-The supplied chapter/page structure is retained as a seed, but no edition-specific question numbering or completeness claim is allowed before source-file verification.
+Verification anchors include the cover ISBN, title page, Version 1.01 / 2008 copyright page, TOC, and index end. The copyrighted source file is not committed to this public repository.
 
 ## 150 Questions — 150 Most Frequently Asked Questions on Quant Interviews
 
 - Canonical title: *150 Most Frequently Asked Questions on Quant Interviews*
 - Authors: Dan Stefanica, Rados Radoicic, Tai-Ho Wang
 - Repository source slug: `150-most-frequently-asked`
-- Publisher: Financial Engineering Press / FE Press
-- Year: 2013
-- Edition state: `edition-pinned`
 - Edition: **First edition (2013)**
+- Edition state: `edition-pinned`
 - ISBN-13: `9780979757648`
-- ISBN-10: `0979757649`
-- Publisher physical length: 224 pages
-- Work/edition metadata: `web-cross-checked`
-- TOC state: **source-file-verified**
 - Source file: **source-file-verified**
 - Source-file identity: `sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14`
-- User scan: 220 PDF pages; printed page 1 begins at PDF page 11; bibliography is printed page 209 at PDF page 219
-- Problem coverage: **problem-indexed for validated Q1–Q2 and Q4–Q5 only; the book is not complete**
-- Ingestion: `ingesting`
-- Completed batch: `150-first-look-q01-q02` — printed pages 1–6, Questions 1–2 only
-- Completed batch: `150-first-look-q04-q05` — printed pages 7–9, Questions 4–5 only
-- Q1–Q2 verification: commit `7151c59f8fa2222540e2527e52ab177319145cac`, Actions run `31935163167`
-- Q4–Q5 verification: commit `44f8710b12aa85085357e8ea04640b0acfde2d94`, Actions run `31936372883`
-- Publisher record: `https://www.fepress.org/150iqs/`
+- File size in pages: **220 PDF pages**
+- TOC state: **source-file-verified**
+- Ingestion state: `ingesting`
+- Existing authored canonical candidates: the previously validated Q1–Q2 and Q4–Q5 pilot content
+- Full problem-level coverage: **not complete; remaining material must be reconciled by Topic-first cross-book workstreams**
 
-The actual user-supplied scan has been inspected directly. The title page, copyright page, ISBN, first-edition publication statement, TOC, body numbering, and bibliography all align with the pinned 2013 first edition. The PDF itself is not committed to the repository.
+The existing pilot Problems and Knowledge remain valid content candidates, but source-number order is no longer the normal ingestion sequence. Their source evidence remains internal, and later cross-book workstreams may enrich or merge them when equivalent Green/Red material is inspected.
 
-Two bounded batches have now been independently authored and validated. The first contains Questions 1–2; the second contains Questions 4–5. Question 3 remains unindexed because its source evidence shares printed page 6 with the already-completed first batch while the current ingestion validator requires non-overlapping page ranges. Questions 6 onward also remain unindexed. No chapter-level or book-level completeness claim is made.
+## Internal routing and audit state
+
+Repository infrastructure now separates four responsibilities:
+
+- `src/data/quant-interview/toc/*.json` — verified source structure;
+- `src/data/quant-interview/topics/taxonomy.json` — canonical public topic taxonomy;
+- `src/data/quant-interview/topics/source-topic-map.json` — hidden source-section → canonical-topic routing;
+- `src/data/quant-interview/coverage/*.json` — hidden semantic coverage and dedup audit.
+
+Physical source pages may overlap as private evidence. Semantic source-item ownership remains explicit through the coverage and ingestion validators.
 
 ## Current truth table
 
-| Source | Work identity | TOC | Edition | Source file | Problems |
-|---|---|---|---|---|---|
-| Green Book | verified | user-supplied seed | work-identified | not source-file-verified | not problem-indexed |
-| Red Book | verified | user-supplied seed | work-identified | not source-file-verified | not problem-indexed |
-| 150 Questions | verified | source-file-verified | edition-pinned · 2013 first edition | source-file-verified | Q1–Q2 and Q4–Q5 problem-indexed · rest incomplete |
+| Source | Edition/version | Source file | TOC | Public/problem completeness |
+|---|---|---|---|---|
+| Green Book | First Edition (2008) | verified · 213 PDF pages | verified | incomplete / pending cross-book reconciliation |
+| Red Book | Version 1.01 (2008) | verified · 329 PDF pages | verified | incomplete / pending cross-book reconciliation |
+| 150 Questions | First edition (2013) | verified · 220 PDF pages | verified | pilot content only; remainder incomplete |
 
-A future Agent may advance a state only with corresponding evidence. Never downgrade uncertainty by wording alone.
+Never convert source-file verification, TOC verification, or a mapped chapter into an unsupported completeness percentage.

@@ -1,0 +1,702 @@
+{
+  "source": "red-book",
+  "version": 1,
+  "entries": [
+    {
+      "sourceSection": "1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.8",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.9",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.10",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-preparation"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.11",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-preparation"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.12",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "reasoning-communication"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "replication-hedging"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "trees-monte-carlo-options"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "incomplete-markets"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "replication-hedging"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "trees-monte-carlo-options"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "incomplete-markets"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-statistics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-statistics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "stochastic-processes-stochastic-calculus"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-statistics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.3.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "stochastic-processes-stochastic-calculus"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods",
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "calculus-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "data-structures",
+        "cpp-language-memory",
+        "object-oriented-cpp"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "8.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "8.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "8.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "9",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-strategy-communication"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "9.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "10",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "10.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "10.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "bibliography",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "index",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    }
+  ]
+}

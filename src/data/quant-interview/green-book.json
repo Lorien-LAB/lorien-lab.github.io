@@ -1,10 +1,22 @@
 {
   "source": "green-book",
   "canonicalTitle": "A Practical Guide to Quantitative Finance Interviews",
-  "editionStatus": "work-identified",
-  "edition": null,
-  "isbn": null,
-  "sourceFile": null,
-  "ingestionStatus": "awaiting-source-file",
+  "editionStatus": "edition-pinned",
+  "edition": "First Edition (2008)",
+  "isbn": "9781438236667",
+  "sourceFile": "sha256:89a637408fc57164c3ee4ef19fb36688a58dfb37b91ef1471d11df82d6d0e3f5",
+  "sourceFileMeta": {
+    "verification": "source-file-verified",
+    "pdfPageCount": 213,
+    "verifiedAnchors": [
+      {"pdfPage": 3, "role": "title-and-edition-page"},
+      {"pdfPage": 5, "role": "copyright-page"},
+      {"pdfPage": 7, "role": "toc-start"},
+      {"pdfPage": 211, "displayPage": 195, "role": "index-end"},
+      {"pdfPage": 213, "role": "back-cover-isbn"}
+    ],
+    "note": "User-supplied First Edition file verified against title/edition page, copyright, TOC, index end, and back-cover ISBN. Source bytes are not committed."
+  },
+  "ingestionStatus": "manifest-ready",
   "batches": []
 }

@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "topics": [
+    {"id":"interview-strategy-communication","title":"Interview Strategy & Communication","order":1,"children":[
+      {"id":"interview-preparation","title":"Interview Preparation","order":1},
+      {"id":"reasoning-communication","title":"Reasoning & Communication","order":2},
+      {"id":"interview-process-formats","title":"Interview Process & Formats","order":3},
+      {"id":"soft-interview","title":"Soft Interview","order":4}
+    ]},
+    {"id":"logic-brainteasers-discrete-reasoning","title":"Logic, Brainteasers & Discrete Reasoning","order":2,"children":[
+      {"id":"problem-simplification","title":"Problem Simplification","order":1},
+      {"id":"logical-deduction","title":"Logical Deduction","order":2},
+      {"id":"invariants-state-transformations","title":"Invariants & State Transformations","order":3},
+      {"id":"symmetry","title":"Symmetry","order":4},
+      {"id":"pigeonhole-principle","title":"Pigeonhole Principle","order":5},
+      {"id":"modular-arithmetic","title":"Modular Arithmetic","order":6},
+      {"id":"mathematical-induction","title":"Mathematical Induction","order":7},
+      {"id":"proof-by-contradiction","title":"Proof by Contradiction","order":8},
+      {"id":"summation-combinatorial-puzzles","title":"Summation & Combinatorial Puzzles","order":9}
+    ]},
+    {"id":"calculus-differential-equations","title":"Calculus & Differential Equations","order":3,"children":[
+      {"id":"limits-derivatives","title":"Limits & Derivatives","order":1},
+      {"id":"integration","title":"Integration","order":2},
+      {"id":"multivariable-calculus","title":"Multivariable Calculus","order":3},
+      {"id":"taylor-newton-optimization","title":"Taylor, Newton & Optimization","order":4},
+      {"id":"ordinary-differential-equations","title":"Ordinary Differential Equations","order":5}
+    ]},
+    {"id":"linear-algebra-matrix-methods","title":"Linear Algebra & Matrix Methods","order":4,"children":[
+      {"id":"vectors-linear-systems","title":"Vectors & Linear Systems","order":1},
+      {"id":"determinants-eigenvalues","title":"Determinants & Eigenvalues","order":2},
+      {"id":"positive-semidefinite-matrices","title":"Positive Semidefinite Matrices","order":3},
+      {"id":"covariance-correlation-matrices","title":"Covariance & Correlation Matrices","order":4},
+      {"id":"matrix-decompositions","title":"Matrix Decompositions","order":5}
+    ]},
+    {"id":"probability-statistics","title":"Probability & Statistics","order":5,"children":[
+      {"id":"probability-foundations","title":"Probability Foundations","order":1},
+      {"id":"combinatorial-probability","title":"Combinatorial Probability","order":2},
+      {"id":"conditional-probability-bayes","title":"Conditional Probability & Bayes","order":3},
+      {"id":"random-variables-distributions","title":"Random Variables & Distributions","order":4},
+      {"id":"expectation-variance-covariance","title":"Expectation, Variance & Covariance","order":5},
+      {"id":"order-statistics-extremes","title":"Order Statistics & Extremes","order":6}
+    ]},
+    {"id":"stochastic-processes-stochastic-calculus","title":"Stochastic Processes & Stochastic Calculus","order":6,"children":[
+      {"id":"random-walks-markov-chains","title":"Random Walks & Markov Chains","order":1},
+      {"id":"martingales-stopping-times","title":"Martingales & Stopping Times","order":2},
+      {"id":"brownian-motion","title":"Brownian Motion","order":3},
+      {"id":"ito-stochastic-calculus","title":"Ito & Stochastic Calculus","order":4},
+      {"id":"stochastic-differential-equations","title":"Stochastic Differential Equations","order":5}
+    ]},
+    {"id":"derivatives-options-no-arbitrage","title":"Derivatives, Options & No-Arbitrage","order":7,"children":[
+      {"id":"no-arbitrage-option-properties","title":"No-Arbitrage & Option Properties","order":1},
+      {"id":"replication-hedging","title":"Replication & Hedging","order":2},
+      {"id":"black-scholes","title":"Black-Scholes","order":3},
+      {"id":"option-greeks","title":"Option Greeks","order":4},
+      {"id":"trees-monte-carlo-options","title":"Trees & Monte Carlo for Options","order":5},
+      {"id":"option-portfolios-exotics","title":"Option Portfolios & Exotics","order":6},
+      {"id":"incomplete-markets","title":"Incomplete Markets","order":7}
+    ]},
+    {"id":"fixed-income-rates-general-finance","title":"Fixed Income, Rates & General Finance","order":8,"children":[
+      {"id":"bonds-yields-discounting","title":"Bonds, Yields & Discounting","order":1},
+      {"id":"duration-convexity","title":"Duration & Convexity","order":2},
+      {"id":"forwards-futures-swaps","title":"Forwards, Futures & Swaps","order":3},
+      {"id":"interest-rate-models","title":"Interest-Rate Models","order":4},
+      {"id":"portfolio-risk","title":"Portfolio & Risk","order":5}
+    ]},
+    {"id":"monte-carlo-numerical-methods","title":"Monte Carlo & Numerical Methods","order":9,"children":[
+      {"id":"monte-carlo-simulation","title":"Monte Carlo Simulation","order":1},
+      {"id":"root-finding-numerical-integration","title":"Root Finding & Numerical Integration","order":2},
+      {"id":"finite-difference-methods","title":"Finite-Difference Methods","order":3},
+      {"id":"variance-reduction-simulation-techniques","title":"Variance Reduction & Simulation Techniques","order":4}
+    ]},
+    {"id":"algorithms-data-structures-cpp","title":"Algorithms, Data Structures & C++","order":10,"children":[
+      {"id":"algorithmic-complexity","title":"Algorithmic Complexity","order":1},
+      {"id":"sorting-searching","title":"Sorting & Searching","order":2},
+      {"id":"dynamic-programming-algorithms","title":"Dynamic Programming","order":3},
+      {"id":"data-structures","title":"Data Structures","order":4},
+      {"id":"cpp-language-memory","title":"C++ Language & Memory","order":5},
+      {"id":"object-oriented-cpp","title":"Object-Oriented C++","order":6}
+    ]}
+  ]
+}

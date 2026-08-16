@@ -9,8 +9,7 @@ const q5Path = 'src/content/problems/150-most-frequently-asked/correlation-matri
 test('second bounded batch completes First Look Questions 4-5 only', async () => {
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
   const batch = manifest.batches.find((item) => item.id === '150-first-look-q04-q05');
-  assert.equal(batch.startPage, 7);
-  assert.equal(batch.endPage, 9);
+  assert.deepEqual(batch.evidencePageRanges, [{ startPage: 7, endPage: 9 }]);
   assert.equal(batch.sourceSection, '1 First Look: Ten Questions');
   assert.deepEqual(batch.expectedProblemScope, ['4', '5']);
   assert.deepEqual(batch.problemSlugs, ['ants-crossing-line', 'correlation-matrix-parameter-range']);
