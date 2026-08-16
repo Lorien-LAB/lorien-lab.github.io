@@ -29,6 +29,7 @@ test('second cross-book workstream is bounded to determinants and eigenvalues', 
 
 test('workstream validator accepts the registered verified three-source scope', async () => {
   const workstream = await readJson(workstreamPath);
+  const ctx = await context();
   const { validateTopicWorkstream } = await import('../src/lib/quantInterviewWorkstreams.mjs');
-  assert.doesNotThrow(() => validateTopicWorkstream(workstream, await context()));
+  assert.doesNotThrow(() => validateTopicWorkstream(workstream, ctx));
 });
