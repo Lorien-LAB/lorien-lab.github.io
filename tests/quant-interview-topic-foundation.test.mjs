@@ -47,3 +47,23 @@ test('duplicate semantic problem ownership is rejected even when evidence differ
     ],
   }), /duplicate source problem ownership/i);
 });
+
+test('canonical topic taxonomy is unique and structurally valid', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const { validateTopicTaxonomy, flattenTopics } = await import('../src/lib/quantInterviewTopics.mjs');
+  assert.doesNotThrow(() => validateTopicTaxonomy(taxonomy));
+  const flat = flattenTopics(taxonomy);
+  assert.equal(flat.length, new Set(flat.map((x) => x.id)).size);
+  assert.deepEqual(flat.filter((x) => x.parentId === null).map((x) => x.id), [
+    'interview-strategy-communication',
+    'logic-brainteasers-discrete-reasoning',
+    'calculus-differential-equations',
+    'linear-algebra-matrix-methods',
+    'probability-statistics',
+    'stochastic-processes-stochastic-calculus',
+    'derivatives-options-no-arbitrage',
+    'fixed-income-rates-general-finance',
+    'monte-carlo-numerical-methods',
+    'algorithms-data-structures-cpp',
+  ]);
+});
