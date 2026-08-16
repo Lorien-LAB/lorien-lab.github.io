@@ -4,4 +4,8 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import ResearchCard from '../../components/ResearchCard.astro';
 const entries = (await getCollection('research')).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf());
 ---
-<BaseLayout title="Research · Lorien Lab" description="Quantitative research tracks spanning alpha discovery, futures term structure, and market microstructure."><header class="page-hero"><div class="container"><div class="mono-label">Research</div><h1>Questions first.<br/>Models second.</h1><p>Research tracks are organized around economic questions, data-generating mechanisms, and validation discipline rather than a collection of isolated backtests.</p></div></header><section class="section"><div class="container card-grid">{entries.map(entry=><ResearchCard entry={entry}/>)}</div></section></BaseLayout>
+<BaseLayout title="Research · Lorien Lab" description="Quantitative research tracks spanning alpha discovery, futures term structure, and market microstructure.">
+  <header class="page-hero"><div class="container"><div class="mono-label"><span class="lang-en">Research</span><span class="lang-zh" lang="zh-CN">研究方向</span></div><h1><span class="lang-en">Questions first.<br/>Models second.</span><span class="lang-zh" lang="zh-CN">问题优先。<br/>模型其次。</span></h1><p><span class="lang-en">Research tracks are organized around economic questions, data-generating mechanisms, and validation discipline rather than a collection of isolated backtests.</span><span class="lang-zh" lang="zh-CN">研究方向围绕经济问题、数据生成机制与严格验证组织，而不是由一组彼此孤立的回测结果拼接而成。</span></p></div></header>
+  <section class="section"><div class="container card-grid">{entries.map(entry=><ResearchCard entry={entry}/>)}</div></section>
+</BaseLayout>
+<style>.page-hero h1>.lang-en,.page-hero h1>.lang-zh,.page-hero p>.lang-en,.page-hero p>.lang-zh{display:block}</style>
