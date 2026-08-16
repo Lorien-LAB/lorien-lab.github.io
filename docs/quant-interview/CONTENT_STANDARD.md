@@ -180,6 +180,8 @@ Typical states are:
 
 Terminal states must point to the canonical content that absorbed the item where applicable.
 
+A `knowledge-only` item must have its interview test visibly preserved in the target Knowledge as an **Interview Checks** prompt or equivalent self-test; it becomes terminal only after that public representation exists.
+
 ## 15. Review checklist
 
 A topic workstream is ready only if:
