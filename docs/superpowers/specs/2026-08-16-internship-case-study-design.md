@@ -114,18 +114,24 @@ Keep the current Internship Experience entry concise. Add a bilingual link after
 The CV should not duplicate the full case study.
 
 ## Portfolio integration
-- Add a project record with a stable slug such as `systematic-futures-calendar-spread-internship`.
+- Use the exact project slug `systematic-futures-calendar-spread-internship`.
 - Mark it `featured: true` so it can surface on the homepage.
 - Add a Chinese card title/description/status in `src/data/i18n/publicContentZh.ts`.
 - Classify the project with the strategy-research group in `/research-projects/` rather than leaving it under generic additional projects.
 - Do not add a public repository or documentation URL because the implementation is private.
 
 ## Date handling
-The public internship period is **May–Jul 2026**. Do not invent an exact completion day. If the existing project schema/layout requires a single Date for sorting, add an optional public `period` label to the project schema/layout and use the date field only as an internal sort key. The rendered page should show `May–Jul 2026`, not a fabricated day.
+The public internship period is **May–Jul 2026**. Do not invent an exact completion day in rendered content.
+
+- Add an optional `period` field to the project schema and `ProjectCaseStudyLayout`.
+- Set `period: May–Jul 2026` for this project and render that label in place of the formatted Date.
+- Use `date: 2026-07-31` only as a hidden sorting key for the collection; it is not presented as a factual completion date.
+- Existing projects without `period` continue to render their current formatted Date.
 
 ## Bilingual behavior
 - Portfolio card and CV link must support the existing English/Chinese toggle.
-- The detailed technical narrative may follow the current project-detail convention (English long-form content) unless a broader bilingual detail-page architecture is introduced separately. Do not create a one-off translation system solely for this page.
+- The detailed technical narrative will remain English long-form content, matching the current project-detail convention.
+- Do not create a one-off detail-page translation system solely for this project.
 
 ## Testing
 Add regression tests that verify:
