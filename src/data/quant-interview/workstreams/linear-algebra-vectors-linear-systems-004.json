@@ -10,6 +10,17 @@
     "linear-system-consistency-rref"
   ],
   "status": "complete",
+  "completedDate": "2026-08-17",
+  "verification": {
+    "commit": "d9bed1bb89de8ce81ae89971ce3fd31fdbe49343",
+    "runId": 31962131820,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
   "sourceScopes": [
     {
       "source": "green-book",
