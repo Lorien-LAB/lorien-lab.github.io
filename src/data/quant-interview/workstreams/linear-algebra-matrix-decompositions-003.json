@@ -1,0 +1,34 @@
+{
+  "id": "linear-algebra-matrix-decompositions-003",
+  "canonicalTopics": [
+    "linear-algebra-matrix-methods",
+    "matrix-decompositions"
+  ],
+  "status": "active",
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["3.6.2", "3.6.5"],
+      "evidencePageRanges": [
+        {"startPage": 68, "endPage": 69},
+        {"startPage": 73, "endPage": 74}
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["6.2.1", "6.3.1"],
+      "evidencePageRanges": [
+        {"startPage": 202, "endPage": 202},
+        {"startPage": 212, "endPage": 213}
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["2.2", "3.2"],
+      "evidencePageRanges": [
+        {"startPage": 29, "endPage": 29},
+        {"startPage": 72, "endPage": 76}
+      ]
+    }
+  ]
+}
