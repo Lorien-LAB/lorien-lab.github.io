@@ -5,14 +5,23 @@ const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const pathname = Astro.url.pathname;
 const links = [
-  { en: 'Home', zh: '首页', path: '/' },
-  { en: 'Research', zh: '研究', path: '/research/' },
-  { en: 'Projects', zh: '项目', path: '/projects/' },
-  { en: 'Knowledge', zh: '知识库', path: '/knowledge/' },
-  { en: 'Notes', zh: '笔记', path: '/notes/' },
-  { en: 'CV', zh: '简历', path: '/cv/' },
-  { en: 'About', zh: '关于', path: '/about/' },
+  ['Home', '/'],
+  ['Research', '/research/'],
+  ['Projects', '/projects/'],
+  ['Knowledge', '/knowledge/'],
+  ['Notes', '/notes/'],
+  ['CV', '/cv/'],
+  ['About', '/about/'],
 ] as const;
+const zhLabels: Record<(typeof links)[number][0], string> = {
+  Home: '首页',
+  Research: '研究',
+  Projects: '项目',
+  Knowledge: '知识库',
+  Notes: '笔记',
+  CV: '简历',
+  About: '关于',
+};
 const isActive = (path: string) => path === '/' ? pathname === base || pathname === base.replace(/\/$/, '') : pathname.startsWith(withBase(path));
 ---
 <header class="site-header">
@@ -26,9 +35,9 @@ const isActive = (path: string) => path === '/' ? pathname === base || pathname 
     </a>
 
     <nav class="desktop-nav" aria-label="Primary navigation / 主导航">
-      {links.map(({ en, zh, path }) => (
+      {links.map(([label, path]) => (
         <a href={withBase(path)} aria-current={isActive(path) ? 'page' : undefined}>
-          <span class="lang-en">{en}</span><span class="lang-zh" lang="zh-CN">{zh}</span>
+          <span class="lang-en">{label}</span><span class="lang-zh" lang="zh-CN">{zhLabels[label]}</span>
         </a>
       ))}
     </nav>
@@ -50,9 +59,9 @@ const isActive = (path: string) => path === '/' ? pathname === base || pathname 
   </div>
   <nav id="mobile-menu" class="mobile-nav" aria-label="Mobile navigation / 移动端导航" data-mobile-menu>
     <div class="container">
-      {links.map(({ en, zh, path }) => (
+      {links.map(([label, path]) => (
         <a href={withBase(path)} aria-current={isActive(path) ? 'page' : undefined}>
-          <span class="lang-en">{en}</span><span class="lang-zh" lang="zh-CN">{zh}</span>
+          <span class="lang-en">{label}</span><span class="lang-zh" lang="zh-CN">{zhLabels[label]}</span>
         </a>
       ))}
     </div>
