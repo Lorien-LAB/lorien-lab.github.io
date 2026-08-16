@@ -10,6 +10,9 @@ const currentProblemSlugs = [
   'correlation-matrix-parameter-range',
   'conditional-dice-expectation',
   'random-walk-boundary',
+  'covariance-matrix-positive-semidefinite-proof',
+  'covariance-to-correlation-matrix',
+  'equicorrelation-matrix-bounds',
 ];
 
 const expectedKnowledgeTopics = new Map([
