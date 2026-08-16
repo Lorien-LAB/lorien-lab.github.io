@@ -342,7 +342,6 @@
       "sourceSection": "2.2",
       "sourceItem": "4",
       "canonicalTopics": [
-        "linear-algebra-matrix-methods",
         "determinants-eigenvalues"
       ],
       "state": "needs-review",
@@ -353,7 +352,6 @@
       "sourceSection": "2.2",
       "sourceItem": "6",
       "canonicalTopics": [
-        "linear-algebra-matrix-methods",
         "determinants-eigenvalues"
       ],
       "state": "needs-review",
@@ -364,7 +362,6 @@
       "sourceSection": "2.2",
       "sourceItem": "7",
       "canonicalTopics": [
-        "linear-algebra-matrix-methods",
         "determinants-eigenvalues"
       ],
       "state": "needs-review",
@@ -375,7 +372,6 @@
       "sourceSection": "2.2",
       "sourceItem": "8",
       "canonicalTopics": [
-        "linear-algebra-matrix-methods",
         "determinants-eigenvalues"
       ],
       "state": "needs-review",

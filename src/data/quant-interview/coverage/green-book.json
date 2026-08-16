@@ -2003,7 +2003,6 @@
       "sourceSection": "3.6.3",
       "sourceItem": "determinant-properties",
       "canonicalTopics": [
-        "linear-algebra-matrix-methods",
         "determinants-eigenvalues"
       ],
       "state": "needs-review",
@@ -2014,7 +2013,6 @@
       "sourceSection": "3.6.3",
       "sourceItem": "eigenvalue-eigenvector-definitions",
       "canonicalTopics": [
-        "linear-algebra-matrix-methods",
         "determinants-eigenvalues"
       ],
       "state": "needs-review",
@@ -2025,7 +2023,6 @@
       "sourceSection": "3.6.3",
       "sourceItem": "trace-determinant-spectrum",
       "canonicalTopics": [
-        "linear-algebra-matrix-methods",
         "determinants-eigenvalues"
       ],
       "state": "needs-review",
@@ -2036,7 +2033,6 @@
       "sourceSection": "3.6.3",
       "sourceItem": "diagonalization",
       "canonicalTopics": [
-        "linear-algebra-matrix-methods",
         "determinants-eigenvalues"
       ],
       "state": "needs-review",
@@ -2047,7 +2043,6 @@
       "sourceSection": "3.6.3",
       "sourceItem": "two-by-two-eigensystem",
       "canonicalTopics": [
-        "linear-algebra-matrix-methods",
         "determinants-eigenvalues"
       ],
       "state": "needs-review",
