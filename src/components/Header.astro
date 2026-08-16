@@ -6,8 +6,7 @@ const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const pathname = Astro.url.pathname;
 const links = [
   ['Home', '/'],
-  ['Research', '/research/'],
-  ['Projects', '/projects/'],
+  ['Research & Projects', '/research-projects/'],
   ['Knowledge', '/knowledge/'],
   ['Notes', '/notes/'],
   ['CV', '/cv/'],
@@ -15,8 +14,7 @@ const links = [
 ] as const;
 const zhLabels: Record<(typeof links)[number][0], string> = {
   Home: '首页',
-  Research: '研究',
-  Projects: '项目',
+  'Research & Projects': '研究与项目',
   Knowledge: '知识库',
   Notes: '笔记',
   CV: '简历',
