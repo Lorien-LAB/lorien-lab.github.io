@@ -1,0 +1,66 @@
+<div class="language-toggle" role="group" aria-label="Language / 语言" data-language-toggle>
+  <button type="button" data-language-option="en" aria-pressed="true" aria-label="Use English">EN</button>
+  <button type="button" data-language-option="zh" aria-pressed="false" aria-label="使用中文">中文</button>
+</div>
+
+<script is:inline>
+  (() => {
+    const root = document.documentElement;
+    const options = [...document.querySelectorAll('[data-language-option]')];
+
+    const applyLanguage = (language, persist = true) => {
+      const next = language === 'zh' ? 'zh' : 'en';
+      root.dataset.lang = next;
+      root.lang = next === 'zh' ? 'zh-CN' : 'en';
+
+      options.forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.languageOption === next));
+      });
+
+      if (persist) {
+        try { localStorage.setItem('site-language', next); } catch {}
+      }
+
+      window.dispatchEvent(new CustomEvent('site-language-change', { detail: { language: next } }));
+    };
+
+    options.forEach((button) => {
+      button.addEventListener('click', () => applyLanguage(button.dataset.languageOption));
+    });
+
+    applyLanguage(root.dataset.lang, false);
+  })();
+</script>
+
+<style>
+  .language-toggle {
+    display: inline-grid;
+    grid-template-columns: 34px 46px;
+    align-items: center;
+    padding: 3px;
+    border: 1px solid rgba(255,255,255,.18);
+    border-radius: 9px;
+    background: rgba(255,255,255,.045);
+  }
+  .language-toggle button {
+    min-width: 0;
+    height: 30px;
+    padding: 0 7px;
+    border: 0;
+    border-radius: 6px;
+    background: transparent;
+    color: #aebcc6;
+    font: 700 .68rem var(--font-mono);
+    cursor: pointer;
+    transition: background .18s ease, color .18s ease;
+  }
+  .language-toggle button:hover { color: #fff; }
+  .language-toggle button[aria-pressed='true'] {
+    background: var(--accent);
+    color: #03140e;
+  }
+  @media(max-width: 480px) {
+    .language-toggle { grid-template-columns: 31px 42px; }
+    .language-toggle button { padding-inline: 5px; font-size: .64rem; }
+  }
+</style>
