@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
 
 const currentProblemSlugs = [
   'put-quotes-zero-cost-static-portfolio',
@@ -28,14 +29,14 @@ const expectedKnowledgeTopics = new Map([
 
 async function findProblem(slug) {
   const files = await readdir('src/content/problems', { recursive: true });
-  const match = files.find((path) => String(path).endsWith(`/${slug}.md`) || String(path) === `${slug}.md`);
+  const match = files.find((file) => String(file).endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
   assert.ok(match, `missing problem ${slug}`);
   return `src/content/problems/${match}`;
 }
 
 async function findKnowledge(slug) {
   const files = await readdir('src/content/knowledge', { recursive: true });
-  const match = files.find((path) => String(path).endsWith(`/${slug}.md`) || String(path) === `${slug}.md`);
+  const match = files.find((file) => String(file).endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
   assert.ok(match, `missing knowledge ${slug}`);
   return `src/content/knowledge/${match}`;
 }
@@ -44,6 +45,11 @@ function parseInlineArray(text, field) {
   const match = text.match(new RegExp(`^${field}:\\s*\\[([^\\]]*)\\]$`, 'm'));
   if (!match) return [];
   return match[1].split(',').map((item) => item.trim()).filter(Boolean);
+}
+
+async function markdownSlugs(root) {
+  const files = await readdir(root, { recursive: true });
+  return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
 }
 
 test('public Problem schema is source-neutral', async () => {
@@ -58,12 +64,12 @@ test('public Problem schema is source-neutral', async () => {
 
 test('all current interview problems have canonical topics and no source provenance', async () => {
   for (const slug of currentProblemSlugs) {
-    const path = await findProblem(slug);
-    const text = await readFile(path, 'utf8');
+    const file = await findProblem(slug);
+    const text = await readFile(file, 'utf8');
     assert.match(text, /^quantInterviewTopics:\s*\[[^\]]+\]$/m, `${slug} missing canonical topics`);
     assert.doesNotMatch(text, /^originType:/m, `${slug} still exposes originType`);
     assert.doesNotMatch(text, /^source(?:Section|Chapter|Problem|Reference|Url)?:/m, `${slug} still exposes source provenance`);
-    assert.doesNotMatch(path, /150-most-frequently-asked|\/original\//, `${slug} still lives in a source-oriented directory`);
+    assert.doesNotMatch(file, /150-most-frequently-asked|\/original\//, `${slug} still lives in a source-oriented directory`);
   }
 });
 
@@ -73,15 +79,15 @@ test('current reusable interview Knowledge has exact canonical topic assignments
   const validTopicIds = new Set(flattenTopics(taxonomy).map((topic) => topic.id));
 
   for (const [slug, expected] of expectedKnowledgeTopics) {
-    const path = await findKnowledge(slug);
-    const text = await readFile(path, 'utf8');
+    const file = await findKnowledge(slug);
+    const text = await readFile(file, 'utf8');
     const actual = parseInlineArray(text, 'quantInterviewTopics');
     assert.deepEqual(actual, expected, `${slug} has incorrect canonical topics`);
     for (const topic of actual) assert.ok(validTopicIds.has(topic), `${slug} uses unknown topic ${topic}`);
   }
 });
 
-test('current source-derived items remain auditable in hidden coverage', async () => {
+test('current source-derived items remain auditable in hidden coverage with resolved canonical targets', async () => {
   const ledger = JSON.parse(await readFile('src/data/quant-interview/coverage/150-most-frequently-asked.json', 'utf8'));
   const items = new Map(ledger.entries.filter((entry) => entry.sourceItem).map((entry) => [entry.sourceItem, entry]));
   const expected = new Map([
@@ -95,4 +101,15 @@ test('current source-derived items remain auditable in hidden coverage', async (
     assert.equal(entry?.state, 'canonical-problem', `source item ${id} is not terminal canonical-problem coverage`);
     assert.deepEqual(entry?.canonicalProblems, [slug], `source item ${id} is not mapped to ${slug}`);
   }
+
+  const taxonomy = JSON.parse(await readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'));
+  const sourceTopicMap = JSON.parse(await readFile('src/data/quant-interview/topics/source-topic-map.json', 'utf8'));
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+  assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+    sourceTopicMap,
+    taxonomy,
+    problemSlugs: await markdownSlugs('src/content/problems'),
+    knowledgeSlugs: await markdownSlugs('src/content/knowledge'),
+    allowUnresolvedCanonicalRefs: false,
+  }));
 });
