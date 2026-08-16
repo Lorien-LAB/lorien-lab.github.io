@@ -34,7 +34,7 @@ const inventory = {
 const semanticDecisions = {
   'green-book': {
     '3.6.4::psd-pd-criteria': ['knowledge-only', [], ['positive-semidefinite-matrix', 'principal-minor-feasibility']],
-    '3.6.1::correlation-range-0.8-0.8': ['variant', ['correlation-matrix-parameter-range'], ['correlation-matrix', 'positive-semidefinite-matrix', 'principal-minor-feasibility']],
+    '3.6.1::correlation-range-0.8-0.8': ['variant', ['correlation-matrix-parameter-range'], ['correlation-matrix', 'positive-semidefinite-matrix', 'principal-minor-feasibility', 'vector-geometry-inner-products']],
     '4.5::covariance-correlation-definitions': ['knowledge-only', [], ['correlation-matrix']],
   },
   'red-book': {

@@ -133,6 +133,6 @@ test('rank consistency parameter Problem classifies every a b regime correctly',
   assert.match(text, /\[0,?\s*0,?\s*a-5\s*\|\s*b-3\]/i);
   assert.match(text, /rank\(A\)\s*=\s*2/);
   assert.match(text, /rank[-– ]nullity/i);
-  assert.match(text, /one-dimensional null space|dim\s*N\(A\)\s*=\s*1/i);
+  assert.match(text, /one-dimensional null space|dim\s*N\(A\)[^\n]*=\s*1/i);
   assert.match(text, /determinant[\s\S]{0,600}(?:cannot|insufficient|does not)/i);
 });
