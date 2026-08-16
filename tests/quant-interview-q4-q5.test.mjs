@@ -6,17 +6,15 @@ const manifestPath = 'src/data/quant-interview/150-most-frequently-asked.json';
 const q4Path = 'src/content/problems/150-most-frequently-asked/ants-crossing-line.md';
 const q5Path = 'src/content/problems/150-most-frequently-asked/correlation-matrix-parameter-range.md';
 
-test('second bounded batch registers First Look Questions 4-5 only', async () => {
+test('second bounded batch completes First Look Questions 4-5 only', async () => {
   const manifest = JSON.parse(await readFile(manifestPath, 'utf8'));
   const batch = manifest.batches.find((item) => item.id === '150-first-look-q04-q05');
-  assert.deepEqual(batch, {
-    id: '150-first-look-q04-q05',
-    startPage: 7,
-    endPage: 9,
-    sourceSection: '1 First Look: Ten Questions',
-    expectedProblemScope: ['4', '5'],
-    status: 'active',
-  });
+  assert.equal(batch.startPage, 7);
+  assert.equal(batch.endPage, 9);
+  assert.equal(batch.sourceSection, '1 First Look: Ten Questions');
+  assert.deepEqual(batch.expectedProblemScope, ['4', '5']);
+  assert.deepEqual(batch.problemSlugs, ['ants-crossing-line', 'correlation-matrix-parameter-range']);
+  assert.equal(batch.status, 'complete');
 });
 
 test('Questions 4-5 are independently authored as S3-plus problem records', async () => {
