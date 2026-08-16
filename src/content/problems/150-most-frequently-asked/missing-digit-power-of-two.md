@@ -5,7 +5,7 @@ description: Determine a missing decimal digit from a large power using digit su
 date: 2026-08-16
 originType: book
 source: 150-most-frequently-asked
-sourceSection: First Look: Ten Questions
+sourceSection: 'First Look: Ten Questions'
 sourceChapter: '1'
 sourceProblem: '2'
 sourceReference: 'Chapter 1 · First Look · Question 2 · printed pp. 1, 4–6'
