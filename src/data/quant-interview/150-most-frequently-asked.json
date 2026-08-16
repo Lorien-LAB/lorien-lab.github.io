@@ -23,8 +23,7 @@
   "batches": [
     {
       "id": "150-first-look-q01-q02",
-      "startPage": 1,
-      "endPage": 6,
+      "evidencePageRanges": [{"startPage": 1, "endPage": 6}],
       "sourceSection": "1 First Look: Ten Questions",
       "expectedProblemScope": ["1", "2"],
       "problemSlugs": [
@@ -40,8 +39,7 @@
     },
     {
       "id": "150-first-look-q04-q05",
-      "startPage": 7,
-      "endPage": 9,
+      "evidencePageRanges": [{"startPage": 7, "endPage": 9}],
       "sourceSection": "1 First Look: Ten Questions",
       "expectedProblemScope": ["4", "5"],
       "problemSlugs": [
