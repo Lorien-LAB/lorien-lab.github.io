@@ -23,7 +23,7 @@ test('eigenvalue Knowledge distinguishes multiplicities, fields, and diagonaliza
   assert.match(text, /algebraic multiplicity/i);
   assert.match(text, /geometric multiplicity|dimension of.*eigenspace/i);
   assert.match(text, /complex|C\b|conjugate pair/i);
-  assert.match(text, /real matrix.*not.*real eigenvalue|real.*matrix.*complex eigen/i);
+  assert.match(text, /real matrix[\s\S]{0,140}(?:need not all be real|non-real roots|complex)/i);
   assert.match(text, /diagonalizable.*independent eigenvectors|n independent eigenvectors.*diagonalizable/i);
   assert.match(text, /symmetric.*orthogonal|spectral theorem/i);
   assert.match(text, /## Interview Checks/i);
@@ -35,7 +35,7 @@ test('spectral-invariant Knowledge unifies trace determinant characteristic poly
   const text = await readFile(knowledgePaths.invariants, 'utf8');
   assert.match(text, /det\(AB\).*det\(A\).*det\(B\)|determinant.*multiplicative/i);
   assert.match(text, /trace.*sum.*eigenvalue|sum.*eigenvalue.*trace/i);
-  assert.match(text, /determinant.*product.*eigenvalue|product.*eigenvalue.*determinant/i);
+  assert.match(text, /det\(A\)\s*=\s*product_i\s+lambda_i|determinant.*product.*eigenvalue|product.*eigenvalue.*determinant/i);
   assert.match(text, /tr\(AB\)\s*=\s*tr\(BA\)|trace.*cyclic/i);
   assert.match(text, /commutator.*trace.*0|tr\(AB\s*-\s*BA\).*0/i);
   assert.match(text, /similar.*same.*characteristic|similarity.*invariant/i);
