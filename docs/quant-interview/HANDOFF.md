@@ -4,55 +4,32 @@ Updated: 2026-08-16
 
 ## Current architecture state
 
-**Stage A — Topic-first foundation: complete.**  
-**Stage B — public Topic-first shell: complete.**  
-**Stage C — existing-content source-neutral migration: complete and integrated into the Topic-first integration branch.**  
-**Stage D — first bounded cross-book topic workstream: complete on the current Stage D branch; final integration remains gated by the repository verification suite.**
+**Stage A — Topic-first foundation: complete and integrated.**  
+**Stage B — public Topic-first shell: complete and integrated.**  
+**Stage C — existing-content source-neutral migration: complete and integrated.**  
+**Stage D — bounded cross-book topic ingestion: active as the durable content workflow; the first two Linear Algebra workstreams are complete.**
 
-The public system is now operating on the intended architecture: canonical Topics, Knowledge, techniques, and Problems are the user-facing model, while books, source question identifiers, and source page evidence remain hidden ingestion/audit data.
+The public system is now Topic-first. Canonical Topics, Knowledge, techniques, and Problems are user-facing; book names, source question identifiers, page evidence, and dedup provenance remain hidden ingestion/audit data.
 
 ## Stable architecture
 
 - Public Quant Interview navigation is **Topic-first**.
-- Public Knowledge contains reusable canonical concepts and Problem Solving Techniques.
-- Public Problems are canonical first-class practice records under `src/content/problems/`.
-- Canonical public Problems carry no book/source provenance in frontmatter or rendered content.
-- Public `problemId` values must also be source-neutral; source-shaped identifiers are not acceptable merely because the explicit source fields are hidden.
-- Books are internal evidence sources, not the public hierarchy.
+- Books are internal evidence sources, not public categories.
+- Canonical public Problems carry no source provenance in frontmatter, rendered prose, or source-shaped `problemId` values.
 - `src/data/quant-interview/topics/taxonomy.json` defines the canonical topic taxonomy.
-- `src/data/quant-interview/topics/source-topic-map.json` routes verified TOC nodes into canonical topics or explicit non-content/container roles.
-- The source-topic map contains **281 explicit source-TOC routing entries**.
-- `src/data/quant-interview/workstreams/*.json` registers bounded cross-book workstreams and their private evidence scopes.
-- `src/data/quant-interview/coverage/*.json` is the hidden coverage / semantic-dedup ledger.
-- Section-level coverage remains aligned with the source-topic map. Item-level coverage may refine a coarse editorial section; a cross-TOC refinement requires an explicit `topicOverrideReason`.
-- `evidencePageRanges` is private physical-page evidence and may overlap across distinct semantic items/workstreams.
-- Every inspected source item must resolve to an explicit coverage state; nothing disappears because it looked similar to another question.
-- A `knowledge-only` item is terminal only after its pedagogical test remains publicly visible through `Interview Checks` or an equivalent self-test.
+- `src/data/quant-interview/topics/source-topic-map.json` routes verified source structure into canonical topics.
+- `src/data/quant-interview/workstreams/*.json` registers one bounded cross-book topic at a time.
+- `src/data/quant-interview/coverage/*.json` is the hidden coverage and semantic-dedup ledger.
+- `evidencePageRanges` is private physical evidence and may overlap across distinct semantic workstreams.
+- Every inspected source item receives an explicit coverage state.
+- Semantic identity is decided from the mathematical/financial task, not text similarity.
+- A `knowledge-only` item is terminal only when its interview test remains publicly visible through `Interview Checks` or an equivalent self-test.
 - Public pages do not import hidden coverage data.
-- No source PDF/scan is committed to the public repository.
+- No source PDF/scan or copied answer key is committed to the public repository.
 
-## Stage C baseline retained
+## Completed cross-book workstream 1
 
-Before the first cross-book fusion workstream, six canonical Problems had already been migrated to source-neutral topic-oriented records:
-
-- `put-quotes-zero-cost-static-portfolio`
-- `missing-digit-power-of-two`
-- `ants-crossing-line`
-- `correlation-matrix-parameter-range`
-- `conditional-dice-expectation`
-- `random-walk-boundary`
-
-Twelve reusable interview Knowledge / technique nodes already carried canonical topic assignments, including the three nodes used as the starting ontology for the first Stage D workstream:
-
-- `correlation-matrix`
-- `positive-semidefinite-matrix`
-- `principal-minor-feasibility`
-
-Stage D preserved the canonical routes/slugs and enriched these records rather than creating book-specific alternatives.
-
-## Stage D completed workstream
-
-### Workstream identity
+### Identity
 
 `linear-algebra-covariance-correlation-psd-001`
 
@@ -62,176 +39,162 @@ Canonical scope:
 - **Covariance & Correlation Matrices**
 - **Positive Semidefinite Matrices**
 
-All three verified source files were inspected within one topic context before semantic decisions were finalized. Evidence pages and original source-item identifiers remain internal-only in the workstream registration and coverage ledgers.
+Content-complete verification:
 
-The content-complete Stage D tree at commit `fb8664b85ac1ea6a0d1d5145ce32143e0455a288` passed `npm run test`, `npm run check`, and `npm run build` in GitHub Actions run `31946376343`.
+- commit: `fb8664b85ac1ea6a0d1d5145ce32143e0455a288`
+- GitHub Actions run: `31946376343`
+- commands: `npm run test`, `npm run check`, `npm run build`
+- conclusion: success
 
-The machine-readable workstream record is now `status: complete` and stores this verification evidence.
+### Canonical outputs
 
-### Canonical Knowledge fusion
+Enriched Knowledge:
 
-The existing Knowledge nodes were expanded into fused, source-neutral explanations.
+- `correlation-matrix`
+- `positive-semidefinite-matrix`
+- `principal-minor-feasibility`
 
-#### `correlation-matrix`
+Canonical Problems represented by this workstream:
 
-Now includes:
+- enriched `correlation-matrix-parameter-range`
+- new `covariance-matrix-positive-semidefinite-proof`
+- new `covariance-to-correlation-matrix`
+- new `equicorrelation-matrix-bounds`
 
-- covariance and correlation definitions;
-- covariance-to-correlation normalization both elementwise and as `D^{-1/2} Sigma D^{-1/2}`;
-- preservation of PSD under the diagonal congruence transform;
-- the zero-variance / zero-standard-deviation boundary where ordinary correlation is undefined;
-- the fact that pairwise values in `[-1,1]` do not guarantee joint consistency;
-- equicorrelation structure and its two eigenvalue families;
-- singular boundary interpretation;
-- visible `Interview Checks` for conceptual source items absorbed as `knowledge-only`.
+The same parameterized correlation-matrix family appeared in multiple source forms. It remains one public Problem. Useful numerical changes and alternate methods were absorbed as variants/extensions rather than creating duplicate pages.
 
-#### `positive-semidefinite-matrix`
+The hidden coverage ledger uses `knowledge-only`, `variant`, `merged-duplicate`, and `canonical-problem` states as appropriate. All terminal canonical references resolve to real repository slugs.
 
-Now includes:
+A source discrepancy around positive semidefinite versus positive definite criteria was reconciled mathematically: for real symmetric PSD matrices all principal minors must be nonnegative, while the standard Sylvester criterion for positive definiteness uses positive leading principal minors.
 
-- quadratic-form, eigenvalue, Gram, and principal-minor views of PSD;
-- the covariance identity `a^T Sigma a = Var(a^T X) >= 0`;
-- the exact distinction between covariance PSD and strict positive definiteness;
-- zero-variance linear combinations / exact dependence as the singular case;
-- the correct distinction between **positive semidefinite** and **leading principal minors**: PSD requires all principal minors to be nonnegative, whereas the positive-definite Sylvester criterion uses positive leading principal minors;
-- visible `Interview Checks`.
+## Completed cross-book workstream 2
 
-#### `principal-minor-feasibility`
+### Identity
 
-Now distinguishes principal minors from leading principal minors and gives a reusable small-matrix workflow, together with Schur-complement, quadratic-form, and eigenvalue alternatives.
+`linear-algebra-determinants-eigenvalues-002`
 
-### Canonical Problems after fusion
+Canonical scope:
 
-The public Problem Bank now has nine current canonical interview Problems. This workstream contributed three genuinely distinct new Problems and enriched one existing Problem.
+- **Linear Algebra & Matrix Methods**
+- **Determinants & Eigenvalues**
 
-#### Enriched existing Problem
+All three verified sources were explicitly reviewed in the same topic context. Green and 150 Questions contributed direct material. Red was also inspected and is recorded as `no-new-direct-item` for this bounded topic: its 6.9 positive-definite material was already reconciled in the completed PSD workstream, while Red 6.10 is a matrix-square-root / Cholesky problem and is intentionally deferred to **Matrix Decompositions** rather than being forced into the determinant/eigenvalue corpus.
 
-`correlation-matrix-parameter-range`
+Content-complete verification:
 
-The same 3-variable correlation-feasibility family appeared in multiple source forms. It remains **one** public Problem. The canonical page now contains:
+- commit: `b070f6f9c318372dfcf0d942f3a67299a8e4a493`
+- GitHub Actions run: `31948322741`
+- commands: `npm run test`, `npm run check`, `npm run build`
+- conclusion: success
 
-- the existing exact interval `-0.9432 <= rho <= 0.5832`;
-- principal-minor and Schur-complement solutions;
-- a third completed-square family formula
-  `|rho-ab| <= sqrt((1-a^2)(1-b^2))`;
-- a meaningful variant with two fixed correlations equal to `0.8`, giving `0.28 <= rho <= 1`;
-- a joint-inconsistency variant with proposed correlations `0.9`, `0.8`, `0.1`, whose determinant is `-0.316`.
+The machine-readable workstream record is `status: complete` and stores the same real verification evidence.
 
-No book-specific duplicate page was created.
+### Canonical Knowledge
 
-#### New canonical Problems
+`eigenvalues-eigenvectors`
 
-`covariance-matrix-positive-semidefinite-proof`
+- `Ax = lambda x` and the characteristic polynomial;
+- algebraic versus geometric multiplicity;
+- distinct-eigenvalue linear independence;
+- the fact that real matrices need not have all-real eigenvalues;
+- diagonalizability and defective matrices;
+- symmetric-matrix spectral theorem connections;
+- public `Interview Checks`, including the source conceptual question about how many eigenvalues/eigenvectors a matrix may have.
 
-- proves covariance matrices are PSD from the variance of arbitrary linear combinations;
-- gives an outer-product proof as a second method;
-- characterizes when the covariance matrix is strictly PD rather than singular.
+`matrix-spectral-invariants`
 
-`covariance-to-correlation-matrix`
+- determinant identities and singularity;
+- `det(A)` as the product of eigenvalues;
+- trace as the sum of eigenvalues;
+- similarity invariance;
+- cyclic trace, including `tr(AB)=tr(BA)`;
+- commutators having trace zero;
+- invariant-first recognition before entrywise algebra;
+- public `Interview Checks`.
 
-- performs an explicit diagonal normalization;
-- derives the matrix congruence form;
-- explains PSD preservation;
-- handles the zero-variance degeneracy explicitly.
+`eigenbasis-decomposition`
 
-`equicorrelation-matrix-bounds`
+- decomposing `v` into an eigenbasis;
+- evaluating `Av`, `A^k v`, and polynomial matrix actions by scalar operations;
+- diagonalization interpretation;
+- defective-matrix boundary;
+- public `Interview Checks`.
 
-- uses `R=(1-rho)I+rho 11^T`;
-- derives eigenvalues `1-rho` with multiplicity `n-1` and `1+(n-1)rho` with multiplicity `1`;
-- obtains the exact bound `-1/(n-1) <= rho <= 1`;
-- explains singular/rank behavior at both endpoints.
+### Canonical Problems
 
-All are independently authored, S3+ solved records with progressive hints, reasoning, Common Mistakes, and Extensions.
+`two-by-two-eigensystem`
 
-### Semantic dedup / hidden coverage result
+- solves `[[2,1],[1,2]]` by symmetry and by the characteristic polynomial;
+- obtains eigenvalues `3` and `1` with eigendirections `(1,1)` and `(1,-1)`;
+- uses trace and determinant as a spectral cross-check.
 
-Every inspected in-scope source item has a terminal hidden coverage decision and a `resolutionNote`.
+`apply-matrix-via-eigenbasis`
 
-The workstream uses all three key semantic outcomes rather than treating every source question as a new page:
+- uses the supplied eigenpairs rather than reconstructing the matrix;
+- decomposes the target vector as `v=2v_1-v_2`;
+- obtains `Av=(1,17)`;
+- extends directly to `A^k v` and matrix polynomials.
 
-- `knowledge-only`: definitions / matrix criteria enrich canonical Knowledge and remain visible through `Interview Checks`;
-- `variant`: same canonical reasoning identity, but a useful numerical or conceptual variation is retained inside the canonical Problem;
-- `merged-duplicate`: a repeated problem contributes useful methods/insight but creates no second public Problem;
-- `canonical-problem`: a genuinely distinct reasoning identity receives one canonical page.
+`trace-ab-equals-trace-ba`
 
-All canonical Problem/Knowledge references in the three ledgers resolve against the real repository with unresolved targets disallowed for this completed workstream.
+- proves cyclicity by an index argument;
+- works for compatible rectangular matrices when both products are square;
+- adds the square-matrix spectral/characteristic-polynomial viewpoint;
+- distinguishes cyclic rotation from arbitrary factor reordering.
 
-### Source reconciliation notes
+`commutator-cannot-equal-identity`
 
-The sources are evidence, not unquestioned public truth. Two discrepancies were explicitly reconciled rather than silently copied:
+- recognizes `AB-BA` as a commutator;
+- uses `tr(AB-BA)=0` versus `tr(I_n)=n`;
+- rules out the equation for finite-dimensional real/complex matrices without entrywise algebra;
+- records the characteristic-zero assumption precisely.
 
-- one source section combines a correct quadratic-form PSD definition with an overbroad leading-principal-minor statement. Canonical Knowledge uses the mathematically correct rule: **positive semidefinite** matrices require all principal minors to be nonnegative; positive leading principal minors are the symmetric positive-definite Sylvester criterion;
-- another source question asks for positive definiteness of a covariance matrix, while its solution correctly recognizes that covariance matrices are guaranteed only positive semidefinite. The canonical Problem states and proves the PSD result, then separately characterizes strict PD.
+All four are independently authored, source-neutral S3+ Problems with progressive hints, explanations, realistic mistakes, and extensions.
 
-Both reconciliations are recorded internally in coverage `resolutionNote` fields.
+### Hidden coverage result
 
-### Source-neutrality cleanup discovered during Stage D
+Nine directly inspected Green/150 semantic units are terminal in hidden coverage. Definitions, determinant/eigenvalue facts, trace/determinant spectral relations, and diagonalization material became `knowledge-only` and remain visible through public self-tests. Distinct reasoning tasks became canonical Problems.
 
-Because `problemId` is rendered publicly, three older source-shaped IDs still leaked prior source ordering even after explicit provenance fields had been removed. They were replaced with canonical IDs:
+No book-named or source-number-named duplicate public Problem was created. Real Problem/Knowledge slug resolution is validated with unresolved canonical references disallowed.
 
-- `put-quotes-zero-cost-static-portfolio` → `derivatives-static-arbitrage-001`
-- `missing-digit-power-of-two` → `logic-modular-arithmetic-001`
-- `ants-crossing-line` → `logic-invariance-001`
+## Public corpus state after the two workstreams
 
-`correlation-matrix-parameter-range` now uses `linear-algebra-correlation-001`.
+The Quant Interview public corpus currently includes **13 canonical Problems** covered by the source-neutral global contract. The new determinant/eigenvalue workstream increased the reusable interview Knowledge/Technique set to **15 explicitly topic-classified nodes** covered by the same contract.
 
-The public route slugs did not change, and hidden provenance remains intact.
+These counts describe current repository records only; they are not claims of whole-book completion.
 
 ## Verified source state
 
-All three files remain edition-pinned and source-file-verified. This still does **not** imply whole-book problem completeness.
+All three files remain edition-pinned and source-file-verified. Source-file verification is not whole-book Knowledge/Problem coverage.
 
-### Green Book
-
-- edition: First Edition (2008)
-- ISBN-13: `9781438236667`
-- source file size: 213 PDF pages
-- ingestion state: `manifest-ready`
-- overall canonical coverage: incomplete; only explicitly completed topic items are terminal
-
-### Red Book
-
-- edition/version: Version 1.01 (2008)
-- ISBN-13: `9781438217031`
-- source file size: 329 PDF pages
-- ingestion state: `manifest-ready`
-- overall canonical coverage: incomplete; only explicitly completed topic items are terminal
-
-### 150 Questions
-
-- edition: First edition (2013)
-- ISBN-13: `9780979757648`
-- source file size: 220 PDF pages
-- ingestion state: `ingesting`
-- overall cross-book reconciliation: incomplete
-
-Source-file verification must never be confused with complete Knowledge/Problem coverage.
+- Green Book: First Edition (2008), ISBN-13 `9781438236667`, 213 PDF pages, overall coverage incomplete.
+- Red Book: Version 1.01 (2008), ISBN-13 `9781438217031`, 329 PDF pages, overall coverage incomplete.
+- 150 Questions: First edition (2013), ISBN-13 `9780979757648`, 220 PDF pages, overall cross-book reconciliation incomplete.
 
 ## Next action
 
-Continue with the next bounded **cross-book** workstream inside the same major area to preserve context continuity:
+Continue with the next bounded **cross-book** workstream while staying inside the same major topic for context continuity:
 
-**Linear Algebra & Matrix Methods → Determinants & Eigenvalues.**
+**Linear Algebra & Matrix Methods → Matrix Decompositions.**
 
-For that workstream, resolve all mapped material from every verified source before authoring, inventory the individual source items, perform semantic deduplication against the existing canonical Knowledge/Problems, update Knowledge first, create only genuinely distinct canonical Problems, and close every inspected hidden coverage row.
+Treat all verified sources as one evidence pool for this canonical subtopic. Resolve the mapped material first, inventory each meaningful source item, perform semantic deduplication, update/create canonical Knowledge before Problems, and close hidden coverage only after the canonical targets exist and pass repository verification.
 
-Do not switch to a book-by-book sequence and do not organize the next task by original question numbers.
+This workstream should cover the decomposition cluster that was deliberately deferred from earlier work, including QR-style orthogonal factorization, LU structure, Cholesky / positive-definite factorization, and matrix-square-root reasoning where supported by the verified source material. Do not process one book to completion before the others and do not organize the public corpus by original source question numbers.
 
 ## Non-negotiable invariants
 
 - Repository state wins over conversational memory.
 - Process one bounded canonical topic workstream at a time.
-- All relevant verified-source material must be considered before closing a topic workstream.
+- All relevant verified-source material must be considered before closing a topic workstream; a source with no new direct item still receives an explicit audit conclusion.
 - Semantic deduplication is mandatory; text similarity alone cannot merge Problems.
 - Every inspected source item must receive an explicit coverage-ledger state.
 - `knowledge-only` is terminal only when the public self-test remains visible.
 - No duplicate Concept/Technique merely because another source uses a synonym.
 - No answer-only entry may be treated as finished reviewed content.
-- No copied answer key, large verbatim source passage, or source PDF/scan is public.
-- Canonical public Problems do not carry source provenance in frontmatter, rendered content, or source-shaped public IDs.
-- Source book names, question numbers, and page numbers remain internal evidence only.
+- Canonical public Problems remain source-neutral in frontmatter, prose, and public IDs.
+- Source book names, source item numbers, and source page numbers remain internal evidence only.
 - No unsupported whole-book completeness percentages.
-- No merge before verification gates pass.
+- No merge before `npm run test`, `npm run check`, and `npm run build` pass.
 
 ## Verification gates
 
@@ -241,4 +204,4 @@ npm run check
 npm run build
 ```
 
-Also review the Stage D topic-only diff against the Topic-first integration branch before merging.
+Also review the topic-only diff against `chatgpt/quant-interview-topic-first-fusion-design-2026-08-16` before merging.
