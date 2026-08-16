@@ -1,0 +1,37 @@
+---
+import type { QuantInterviewTopic } from '../lib/quantInterviewPublicTopics';
+
+interface Props {
+  topic: QuantInterviewTopic;
+  knowledgeCount: number;
+  problemCount: number;
+}
+
+const { topic, knowledgeCount, problemCount } = Astro.props;
+const base = import.meta.env.BASE_URL;
+const problemHref = `${base}problems/?topic=${encodeURIComponent(topic.id)}`;
+---
+<article class="topic-card">
+  <div class="topic-card-head">
+    <h3>{topic.title}</h3>
+    <a href={problemHref} aria-label={`Practice ${topic.title} problems`}>Practice →</a>
+  </div>
+
+  {topic.children && topic.children.length > 0 && (
+    <ul class="subtopics" aria-label={`${topic.title} subtopics`}>
+      {topic.children
+        .slice()
+        .sort((a, b) => a.order - b.order)
+        .map((child) => <li>{child.title}</li>)}
+    </ul>
+  )}
+
+  <div class="topic-counts" aria-label={`${topic.title} content counts`}>
+    <span><strong>{knowledgeCount}</strong> Knowledge</span>
+    <span><strong>{problemCount}</strong> Problems</span>
+  </div>
+</article>
+
+<style>
+.topic-card{display:flex;min-height:238px;flex-direction:column;padding:22px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.topic-card:hover{transform:translateY(-2px);border-color:color-mix(in srgb,var(--accent) 44%,var(--border));box-shadow:var(--shadow)}.topic-card-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start}.topic-card h3{margin:0;max-width:290px;font-size:1.12rem;line-height:1.2;letter-spacing:-.025em}.topic-card-head a{flex:none;color:var(--accent-strong);font:700 .68rem var(--font-mono)}.subtopics{display:flex;flex-wrap:wrap;gap:6px 8px;margin:20px 0 0;padding:0;list-style:none}.subtopics li{padding:5px 8px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font:600 .64rem/1.25 var(--font-mono)}.topic-counts{display:flex;gap:18px;margin-top:auto;padding-top:20px;color:var(--muted);font:600 .66rem var(--font-mono);border-top:1px solid var(--border)}.topic-counts strong{color:var(--ink);font-size:.82rem}@media(max-width:640px){.topic-card{min-height:0}.topic-card-head{gap:12px}}
+</style>
