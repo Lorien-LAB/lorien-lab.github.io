@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
 
-const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
+const readJson = async (filePath) => JSON.parse(await readFile(filePath, 'utf8'));
 const workstreamPath = 'src/data/quant-interview/workstreams/linear-algebra-covariance-correlation-psd-001.json';
 const workstreamTopics = new Set([
   'linear-algebra-matrix-methods',
@@ -49,6 +50,11 @@ const semanticDecisions = {
     '2.2::10': ['merged-duplicate', ['correlation-matrix-parameter-range'], ['correlation-matrix', 'positive-semidefinite-matrix', 'principal-minor-feasibility']],
   },
 };
+
+async function markdownSlugs(root) {
+  const files = await readdir(root, { recursive: true });
+  return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
+}
 
 async function workstreamContext() {
   const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
@@ -135,4 +141,55 @@ test('semantic dedup decisions map all inspected items to canonical knowledge or
       assert.deepEqual(entry.canonicalKnowledge, knowledge, `${source} ${key} has wrong canonical knowledge mapping`);
     }
   }
+});
+
+test('knowledge-only is terminal only when the public self-test remains visible', async () => {
+  const standard = await readFile('docs/quant-interview/CONTENT_STANDARD.md', 'utf8');
+  assert.match(standard, /knowledge-only[\s\S]{0,240}(Interview Checks|self-test)[\s\S]{0,240}(terminal|only)/i);
+
+  const checked = new Set();
+  for (const [source, expected] of Object.entries(semanticDecisions)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    const entries = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
+    for (const [key, [state]] of Object.entries(expected)) {
+      if (state !== 'knowledge-only') continue;
+      const entry = entries.get(key);
+      for (const slug of entry.canonicalKnowledge) checked.add(slug);
+    }
+  }
+  for (const slug of checked) {
+    const text = await readFile(`src/content/knowledge/concepts/${slug}.md`, 'utf8');
+    assert.match(text, /## Interview Checks/i, `${slug} has knowledge-only coverage but no visible Interview Checks`);
+  }
+});
+
+test('completed workstream has resolved real targets and no unresolved in-scope inventory', async () => {
+  const workstream = await readJson(workstreamPath);
+  assert.equal(workstream.status, 'complete');
+
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const problemSlugs = await markdownSlugs('src/content/problems');
+  const knowledgeSlugs = await markdownSlugs('src/content/knowledge');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+
+  for (const [source, keys] of Object.entries(inventory)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+      sourceTopicMap, taxonomy, problemSlugs, knowledgeSlugs, allowUnresolvedCanonicalRefs: false,
+    }));
+    const entries = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
+    for (const [section, item] of keys) {
+      const entry = entries.get(`${section}::${item}`);
+      assert.ok(entry);
+      assert.doesNotMatch(entry.state, /^(pending|needs-review)$/);
+      assert.ok(entry.resolutionNote, `${source} ${section} ${item} missing resolution note`);
+    }
+  }
+});
+
+test('dedup produces no source-named duplicate correlation problems', async () => {
+  const files = (await readdir('src/content/problems', { recursive: true })).map(String);
+  assert.equal(files.filter((file) => /(?:green|red|150).*correlation/i.test(file)).length, 0);
+  assert.equal(files.filter((file) => /correlation-matrix-parameter-range\.md$/.test(file)).length, 1);
 });
