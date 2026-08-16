@@ -44,7 +44,8 @@ test('quant interview repository memory records a completed verified pilot batch
   assert.match(handoff, /Phase 2B/);
   assert.match(handoff, /150-first-look-q01-q02/);
   assert.match(handoff, /status: `complete`/);
-  assert.match(handoff, /31935080008/);
+  assert.match(handoff, /7151c59f8fa2222540e2527e52ab177319145cac/);
+  assert.match(handoff, /31935163167/);
 });
 
 test('source catalog reflects verified pilot coverage without implying book completeness', async () => {
@@ -87,8 +88,9 @@ test('150 Questions manifest records one completed verified bounded batch', asyn
     problemSlugs: ['put-quotes-zero-cost-static-portfolio', 'missing-digit-power-of-two'],
     status: 'complete',
     verificationStatus: 'passed',
-    verifiedCommit: '390f132e1d54c428d30d09e6b2f75dcd24e948d0',
-    verificationRunId: 31935080008,
+    completionCommit: '7151c59f8fa2222540e2527e52ab177319145cac',
+    verifiedCommit: '7151c59f8fa2222540e2527e52ab177319145cac',
+    verificationRunId: 31935163167,
     completedDate: '2026-08-16',
   }]);
   const { validateIngestionManifest } = await import('../src/lib/quantInterviewIngestion.mjs');

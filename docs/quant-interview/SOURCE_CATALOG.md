@@ -60,7 +60,7 @@ The supplied chapter/page structure is retained as a seed, but no edition-specif
 - Problem coverage: **problem-indexed for the validated Q1–Q2 pilot only; the book is not complete**
 - Ingestion: `ingesting`
 - Completed batch: `150-first-look-q01-q02` — printed pages 1–6, Questions 1–2 only
-- Verification: content commit `390f132e1d54c428d30d09e6b2f75dcd24e948d0`, Actions run `31935080008`
+- Verification: completion/verified commit `7151c59f8fa2222540e2527e52ab177319145cac`, Actions run `31935163167`
 - Publisher record: `https://www.fepress.org/150iqs/`
 
 The actual user-supplied scan has been inspected directly. The title page, copyright page, ISBN, first-edition publication statement, TOC, body numbering, and bibliography all align with the pinned 2013 first edition. The PDF itself is not committed to the repository. The validated pilot contains two independently formulated Problem records plus five reusable Knowledge nodes. No completeness claim is made for Questions 3–150 or for the rest of Chapter 1.

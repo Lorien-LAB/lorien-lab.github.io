@@ -70,8 +70,8 @@ The first real source file has passed identity/edition/TOC verification, and the
   - `modular-arithmetic`
   - `modular-invariants`
 - status: `complete`
-- verified content commit: `390f132e1d54c428d30d09e6b2f75dcd24e948d0`
-- GitHub Actions verification run: `31935080008`
+- completion / verified commit: `7151c59f8fa2222540e2527e52ab177319145cac`
+- GitHub Actions verification run: `31935163167`
 - gates: `npm run test` ✅ · `npm run check` ✅ · `npm run build` ✅
 
 Question 1 was independently derived with an explicit support condition for strict arbitrage. The public solution does not repeat the source answer's stronger-than-necessary claim that option prices must be strictly convex in strike; ordinary no-arbitrage convexity permits equality, while the concrete zero-cost portfolio becomes a strict arbitrage only when a positive-payoff terminal region is genuinely possible.
