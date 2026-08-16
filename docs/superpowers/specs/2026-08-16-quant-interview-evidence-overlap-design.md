@@ -1,7 +1,7 @@
 # Quant Interview Evidence-Overlap Infrastructure Design
 
 Date: 2026-08-16
-Status: Approved design; implementation not yet started
+Status: Approved design with public-provenance clarification; implementation not yet started
 Target phase: Quant Interview Knowledge System — Phase 2B
 
 ## 1. Problem
@@ -11,7 +11,7 @@ The current ingestion manifest uses `startPage` and `endPage` for each bounded b
 That conflates two different ideas:
 
 1. **Problem ownership / batch scope** — which source questions belong to a batch.
-2. **Source evidence** — which printed pages must be inspected to verify those questions and their solutions.
+2. **Source evidence** — which printed pages must be inspected internally to verify those questions and their solutions.
 
 In the 2013 first edition of *150 Most Frequently Asked Questions on Quant Interviews*, adjacent questions can share a printed page. This is already true for the next blocked items:
 
@@ -20,31 +20,38 @@ In the 2013 first edition of *150 Most Frequently Asked Questions on Quant Inter
 
 Those are legitimate evidence overlaps, not duplicated problem ingestion.
 
+A second concern is presentation. Physical page numbers are useful for internal verification, but they are not useful public Knowledge content. The public Quant Interview Knowledge System should prioritize complete, accurate, well-structured Problems and reusable Knowledge rather than exposing source-page bookkeeping.
+
 ## 2. Goals
 
 This infrastructure batch will make the ingestion model represent problem scope and physical evidence separately.
 
 The implementation must:
 
-- allow multiple bounded batches to cite the same printed evidence page;
+- allow multiple bounded batches to cite the same printed evidence page internally;
 - continue to prevent the same source problem from being owned by more than one batch within the same source section;
 - keep batch IDs unique;
 - keep evidence page ranges individually valid;
 - preserve the source-file and edition gates already enforced by `validateIngestionManifest`;
 - migrate existing completed 150 Questions batches without changing their semantic coverage;
 - unlock future content batches for Q3 and Q6 without ingesting either question in this infrastructure batch;
-- remain generic enough for Green Book, Red Book, and future sources.
+- remain generic enough for Green Book, Red Book, and future sources;
+- make source-page evidence an **internal ingestion concern only**;
+- ensure public Problem / Knowledge presentation does not need to expose original source page numbers.
 
 ## 3. Non-goals
 
 This batch will not:
 
 - author or publish any new Problem record;
+- add or modify the mathematical/financial substance of existing Problems;
 - add or modify Knowledge ontology nodes;
 - change source-file verification status for Green Book or Red Book;
-- redesign the public Problem frontmatter provenance model;
 - create a per-problem provenance database inside the manifest;
-- change copyright boundaries or content maturity requirements.
+- change copyright boundaries or content maturity requirements;
+- remove source identity, chapter identity, or source-problem identity needed for traceability.
+
+Metadata-only cleanup of existing Problem provenance is allowed when needed to remove public page-number references. It must not alter the question, solution, ontology mapping, difficulty, or interview guidance.
 
 ## 4. Chosen Data Model
 
@@ -68,7 +75,7 @@ Physical source evidence will be represented separately as:
 }
 ```
 
-A batch can contain one or more evidence ranges. Ranges describe printed source pages, not exclusive ownership.
+A batch can contain one or more evidence ranges. Ranges describe printed source pages used for internal verification, not exclusive ownership and not public content.
 
 Example future batches that must be valid after the change:
 
@@ -96,7 +103,21 @@ and
 
 These overlaps are legal even though completed batches already cite pages 6 and 9.
 
-## 5. Validator Rules
+## 5. Public Knowledge and Problem Provenance Boundary
+
+`evidencePageRanges` is repository-internal ingestion metadata.
+
+Public-facing rules:
+
+- **Knowledge entries do not need original source page numbers.** A Knowledge node should contain the reusable concept or technique itself: definition, intuition, derivation, recognition signals, examples, pitfalls, and related ideas as appropriate.
+- **Problem entries do not need original source page numbers either.** Public provenance may retain source identity, chapter/section, and source-problem identity, but not printed-page bookkeeping.
+- Page numbers must not be copied from the manifest into Knowledge bodies, Problem bodies, titles, descriptions, tags, or user-facing provenance strings.
+- The content priority is correctness, completeness, clarity, and reusable structure—not reproducing the source book's physical layout.
+- Internal evidence remains available in the manifest for Agents performing source verification and ingestion audits.
+
+For already-ingested Q1, Q2, Q4, and Q5, any frontmatter provenance string that currently includes `printed p.` / `printed pp.` should be normalized to source/chapter/problem identity without page numbers. This is metadata-only cleanup and must not alter the authored content.
+
+## 6. Validator Rules
 
 `validateIngestionManifest` will retain all existing edition and source-file gating rules.
 
@@ -115,7 +136,7 @@ For manifests with a verified source file, the batch validator will enforce:
 
 The validator will no longer compare one batch's evidence end page against another batch's evidence start page.
 
-## 6. Migration of Existing 150 Questions Manifest
+## 7. Migration of Existing 150 Questions Manifest
 
 The two existing completed batches will preserve exactly the same coverage and verification metadata.
 
@@ -144,7 +165,9 @@ Likewise `150-first-look-q04-q05` migrates from printed pages 7–9 to one evide
 
 No completed batch IDs, problem slugs, completion commits, verification runs, dates, or status fields change.
 
-## 7. Backward Compatibility Decision
+The physical page ranges remain internal manifest evidence and do not need to be repeated in the public Problem or Knowledge layer.
+
+## 8. Backward Compatibility Decision
 
 This infrastructure batch will perform an explicit manifest migration rather than supporting both schemas indefinitely.
 
@@ -157,30 +180,32 @@ Rationale:
 
 Work-identified or edition-pinned manifests with `batches: []` require no structural change beyond validator compatibility.
 
-## 8. Documentation Changes
+## 9. Documentation Changes
 
-The implementation will update repository memory so future Agents do not reintroduce the old exclusivity assumption.
+The implementation will update repository memory so future Agents do not reintroduce the old exclusivity assumption or surface internal page bookkeeping as Knowledge content.
 
 At minimum:
 
-- `docs/quant-interview/AGENT_PROTOCOL.md` will define batch problem scope as exclusive ownership and page ranges as reusable evidence.
+- `docs/quant-interview/AGENT_PROTOCOL.md` will define batch problem scope as exclusive ownership and page ranges as reusable internal evidence.
+- `docs/quant-interview/AGENT_PROTOCOL.md` will explicitly state that original page numbers are not required in public Problem / Knowledge content.
+- `docs/quant-interview/CONTENT_STANDARD.md` will state that source-derived content should be complete, accurate, independently written, and structurally clear without reproducing original page numbers.
 - `docs/quant-interview/HANDOFF.md` will remove the current warning that Q3/Q6 are blocked by overlapping pages and state that the infrastructure gate has been resolved.
 - `docs/quant-interview/README.md` will only change if needed to keep terminology consistent.
-- `SOURCE_CATALOG.md` should not gain new coverage claims because no new Problems are ingested in this batch.
+- `SOURCE_CATALOG.md` should not gain new problem-coverage claims because no new Problems are ingested in this batch.
 
-## 9. Test Design
+## 10. Test Design
 
 Tests will be written before production changes.
 
 Required regression cases:
 
-### 9.1 Existing source gates remain intact
+### 10.1 Existing source gates remain intact
 
 - unpinned editions cannot contain batches;
 - edition-pinned manifests without a verified source file cannot contain batches;
 - valid existing empty manifests still pass.
 
-### 9.2 Evidence overlap is allowed
+### 10.2 Evidence overlap is allowed
 
 A manifest containing all of the following must validate:
 
@@ -189,15 +214,15 @@ A manifest containing all of the following must validate:
 - Q4–Q5 evidence pp.7–9;
 - Q6 evidence pp.9–10.
 
-### 9.3 Problem ownership overlap is rejected
+### 10.3 Problem ownership overlap is rejected
 
 The validator must reject two batches in the same `sourceSection` that both claim source problem `3`, even if their evidence pages differ.
 
-### 9.4 Same problem label in different sections is allowed
+### 10.4 Same problem label in different sections is allowed
 
 If two different source sections both contain a problem labeled `1`, they may coexist because ownership keys include `sourceSection`.
 
-### 9.5 Evidence shape and ordering are validated
+### 10.5 Evidence shape and ordering are validated
 
 Reject:
 
@@ -209,11 +234,21 @@ Reject:
 - unsorted ranges within the same batch;
 - overlapping ranges within the same batch.
 
-### 9.6 Existing 150 Questions completed metadata survives migration
+### 10.6 Existing 150 Questions completed metadata survives migration
 
 Tests must assert that both current completed batches retain their IDs, `expectedProblemScope`, problem slugs, statuses, verification metadata, completion commits, and dates after replacing `startPage/endPage` with `evidencePageRanges`.
 
-## 10. Verification Gates
+### 10.7 Public content does not expose source page bookkeeping
+
+For the already-ingested Q1, Q2, Q4, and Q5 Problem records:
+
+- public provenance must retain source/chapter/problem identity;
+- frontmatter `sourceReference`, if retained, must not include `printed p.` or `printed pp.` page references;
+- mathematical/financial content and solution structure must remain unchanged.
+
+Knowledge content added from source-derived work must not require original source-page references.
+
+## 11. Verification Gates
 
 The completed infrastructure batch must pass:
 
@@ -223,21 +258,31 @@ npm run check
 npm run build
 ```
 
-The final diff against `main` must contain infrastructure, manifest migration, tests, and repository-memory documentation only. It must contain no new source-derived Problem or Knowledge content.
+The final diff against `main` may contain:
 
-## 11. Expected Follow-up
+- validator infrastructure;
+- manifest migration;
+- tests;
+- repository-memory documentation;
+- metadata-only cleanup of existing Problem provenance strings to remove page numbers.
+
+It must contain no new source-derived Problem or Knowledge content and no substantive rewrite of existing solutions.
+
+## 12. Expected Follow-up
 
 After this infrastructure batch is merged, the next content work should return to the skipped source order rather than continuing to jump ahead.
 
 Recommended sequence:
 
-1. bounded content batch for Q3 using evidence pp.6–7;
-2. bounded content batch for Q6 using evidence pp.9–10;
+1. bounded content batch for Q3 using internal evidence pp.6–7;
+2. bounded content batch for Q6 using internal evidence pp.9–10;
 3. continue with subsequent First Look questions in small bounded batches.
 
-Each of those remains a separate batch with its own ontology-first authoring and verification cycle.
+Those internal evidence pages are for Agent verification only and should not be surfaced in the public Knowledge / Problem content.
 
-## 12. Success Criteria
+Each follow-up remains a separate batch with its own ontology-first authoring and verification cycle.
+
+## 13. Success Criteria
 
 The infrastructure work is complete when:
 
@@ -245,7 +290,9 @@ The infrastructure work is complete when:
 - overlapping evidence pages validate across different batches;
 - duplicate problem ownership does not validate;
 - the existing two completed 150 Questions batches migrate without loss of metadata;
+- original source page numbers remain internal evidence rather than public Knowledge / Problem content;
+- existing Q1, Q2, Q4, and Q5 provenance is normalized without altering substantive content;
 - no new Problems or Knowledge nodes are introduced;
-- Agent Protocol and Handoff describe the new rule accurately;
+- Agent Protocol, Content Standard, and Handoff describe the new rule accurately;
 - tests, Astro check, and site build pass;
-- the branch diff is limited to this infrastructure concern.
+- the branch diff is limited to this infrastructure concern and metadata-only provenance cleanup.
