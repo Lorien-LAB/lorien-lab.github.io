@@ -1,0 +1,30 @@
+name: Quant Interview Stage A Source Transform
+
+on:
+  push:
+    branches:
+      - chatgpt/quant-interview-topic-first-stage-a-2026-08-16
+
+permissions:
+  contents: write
+
+jobs:
+  transform:
+    if: contains(github.event.head_commit.message, 'trigger source transform')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+      - run: node scripts/tmp-stage-a-source-transform.mjs
+      - name: Commit transformed metadata
+        run: |
+          git config user.name "Lorien"
+          git config user.email "2249297094@qq.com"
+          git add src/data/quant-interview/toc/green-book.json
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "data: mark Green Book TOC source-file verified"
+          git push
