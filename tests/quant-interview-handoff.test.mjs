@@ -67,9 +67,10 @@ test('source catalog records three verified source files without claiming proble
   assert.match(catalog, /Topic-first/i);
 });
 
-test('handoff records first Stage D cross-book fusion as complete and stays topic-first', async () => {
+test('handoff records two completed cross-book linear-algebra workstreams and stays topic-first', async () => {
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
   for (const stage of ['Stage A', 'Stage B', 'Stage C', 'Stage D']) assert.match(handoff, new RegExp(`${stage}[\\s\\S]*complete`, 'i'));
+
   assert.match(handoff, /linear-algebra-covariance-correlation-psd-001/);
   assert.match(handoff, /31946376343/);
   assert.match(handoff, /fb8664b85ac1ea6a0d1d5145ce32143e0455a288/);
@@ -79,17 +80,31 @@ test('handoff records first Stage D cross-book fusion as complete and stays topi
     'covariance-to-correlation-matrix',
     'equicorrelation-matrix-bounds',
   ]) assert.match(handoff, new RegExp(slug));
+
+  assert.match(handoff, /linear-algebra-determinants-eigenvalues-002/);
+  assert.match(handoff, /31948322741/);
+  assert.match(handoff, /b070f6f9c318372dfcf0d942f3a67299a8e4a493/);
+  for (const slug of [
+    'eigenvalues-eigenvectors',
+    'matrix-spectral-invariants',
+    'eigenbasis-decomposition',
+    'two-by-two-eigensystem',
+    'apply-matrix-via-eigenbasis',
+    'trace-ab-equals-trace-ba',
+    'commutator-cannot-equal-identity',
+  ]) assert.match(handoff, new RegExp(slug));
+  assert.match(handoff, /no-new-direct-item|no new direct/i);
+  assert.match(handoff, /6\.10[\s\S]{0,200}Matrix Decompositions|Matrix Decompositions[\s\S]{0,200}6\.10/i);
+
   assert.match(handoff, /knowledge-only/i);
-  assert.match(handoff, /variant/i);
-  assert.match(handoff, /merged-duplicate/i);
-  assert.match(handoff, /positive semidefinite[\s\S]*leading principal minors|leading principal minors[\s\S]*positive semidefinite/i);
   assert.match(handoff, /source-neutral/i);
   assert.match(handoff, /hidden coverage/i);
 
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
   assert.match(nextAction, /cross-book/i);
   assert.match(nextAction, /Linear Algebra & Matrix Methods/i);
-  assert.match(nextAction, /Determinants & Eigenvalues/i);
+  assert.match(nextAction, /Matrix Decompositions/i);
+  assert.doesNotMatch(nextAction, /Determinants & Eigenvalues[\s\S]{0,160}(?:execute|next|continue)/i);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);
   assert.doesNotMatch(nextAction, /Green[^\n]*(?:then|→)[^\n]*Red|Red[^\n]*(?:then|→)[^\n]*150/i);
 });
