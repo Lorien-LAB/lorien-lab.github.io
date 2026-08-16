@@ -30,6 +30,26 @@ const inventory = {
   ],
 };
 
+const semanticDecisions = {
+  'green-book': {
+    '3.6.4::psd-pd-criteria': ['knowledge-only', [], ['positive-semidefinite-matrix', 'principal-minor-feasibility']],
+    '3.6.4::correlation-range-0.8-0.8': ['variant', ['correlation-matrix-parameter-range'], ['correlation-matrix', 'positive-semidefinite-matrix', 'principal-minor-feasibility']],
+    '4.5::covariance-correlation-definitions': ['knowledge-only', [], ['correlation-matrix']],
+  },
+  'red-book': {
+    '3.2.1::3.26': ['variant', ['correlation-matrix-parameter-range'], ['correlation-matrix', 'positive-semidefinite-matrix', 'principal-minor-feasibility']],
+    '3.2.1::3.35': ['canonical-problem', ['covariance-matrix-positive-semidefinite-proof'], ['correlation-matrix', 'positive-semidefinite-matrix']],
+    '6.2.1::6.9': ['knowledge-only', [], ['positive-semidefinite-matrix', 'principal-minor-feasibility']],
+  },
+  '150-most-frequently-asked': {
+    '1::5': ['canonical-problem', ['correlation-matrix-parameter-range'], ['correlation-matrix', 'positive-semidefinite-matrix', 'principal-minor-feasibility']],
+    '2.2::1': ['variant', ['covariance-matrix-positive-semidefinite-proof'], ['correlation-matrix', 'positive-semidefinite-matrix']],
+    '2.2::2': ['canonical-problem', ['covariance-to-correlation-matrix'], ['correlation-matrix']],
+    '2.2::3': ['canonical-problem', ['equicorrelation-matrix-bounds'], ['correlation-matrix', 'positive-semidefinite-matrix']],
+    '2.2::10': ['merged-duplicate', ['correlation-matrix-parameter-range'], ['correlation-matrix', 'positive-semidefinite-matrix', 'principal-minor-feasibility']],
+  },
+};
+
 async function workstreamContext() {
   const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
   const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
@@ -99,11 +119,20 @@ test('every inspected covariance/correlation/PSD source item has an item-level c
       const entry = entries.get(`${section}::${item}`);
       assert.ok(entry, `missing inventory row ${source} ${section} ${item}`);
       assert.ok(entry.canonicalTopics.some((topic) => workstreamTopics.has(topic)), `${source} ${section} ${item} has no workstream topic`);
-      if (!(source === '150-most-frequently-asked' && section === '1' && item === '5')) {
-        assert.equal(entry.state, 'needs-review', `${source} ${section} ${item} should remain needs-review during inventory`);
-        assert.deepEqual(entry.canonicalProblems, []);
-        assert.deepEqual(entry.canonicalKnowledge, []);
-      }
+    }
+  }
+});
+
+test('semantic dedup decisions map all inspected items to canonical knowledge or problem identities', async () => {
+  for (const [source, expected] of Object.entries(semanticDecisions)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    const entries = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
+    for (const [key, [state, problems, knowledge]] of Object.entries(expected)) {
+      const entry = entries.get(key);
+      assert.ok(entry, `missing semantic decision ${source} ${key}`);
+      assert.equal(entry.state, state, `${source} ${key} has wrong semantic state`);
+      assert.deepEqual(entry.canonicalProblems, problems, `${source} ${key} has wrong canonical problem mapping`);
+      assert.deepEqual(entry.canonicalKnowledge, knowledge, `${source} ${key} has wrong canonical knowledge mapping`);
     }
   }
 });
