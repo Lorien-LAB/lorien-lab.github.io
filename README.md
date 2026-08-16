@@ -74,7 +74,7 @@ A source record may legitimately contain zero indexed Problems while the archite
 
 #### Edition-safe ingestion
 
-Before page- or problem-number-based ingestion, an exact edition must be pinned. Work-level identity is not sufficient because different editions can change pagination, ordering, and question counts.
+Before page- or problem-number-based ingestion, **pin an exact edition**. Work-level identity is not sufficient because different editions can change pagination, ordering, and question counts.
 
 Bibliographic edition pinning and source-file readiness are separate states. An edition may be pinned from reliable edition-distinguishing evidence while the manifest remains `awaiting-source-file` with `sourceFile: null` and `batches: []`. No ingestion batch may be created until the actual source file is available, inspected, and recorded in the manifest.
 
