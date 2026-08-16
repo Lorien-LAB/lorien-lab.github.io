@@ -1,0 +1,32 @@
+{
+  "source": "150-most-frequently-asked",
+  "canonicalTitle": "150 Most Frequently Asked Questions on Quant Interviews",
+  "tocStatus": "user-supplied",
+  "coverageClaim": "structure-seed-not-problem-complete",
+  "editionStatus": "edition-pinned",
+  "edition": "First edition (2013)",
+  "editionEvidence": "The supplied First Look: Ten Questions / Questions p.17 / Solutions p.41 structure matches the 2013 first edition and differs from later editions; publisher metadata corroborates the work and edition.",
+  "sections": [
+    {"id":"preface","title":"Preface","titleZh":"前言","startPage":1,"kind":"frontmatter","pageStatus":"user-supplied-display-page"},
+    {"id":"1","title":"First Look: Ten Questions","titleZh":"第一眼：十道题","startPage":1,"kind":"chapter"},
+    {"id":"2","title":"Questions","titleZh":"问题","startPage":17,"kind":"chapter","children":[
+      {"id":"2.1","title":"Mathematics, calculus, differential equations","titleZh":"数学、微积分、微分方程","startPage":18},
+      {"id":"2.2","title":"Covariance and correlation matrices, linear algebra","titleZh":"协方差与相关矩阵、线性代数","startPage":20},
+      {"id":"2.3","title":"Financial instruments: options, bonds, swaps, forwards, futures","titleZh":"金融工具：期权、债券、互换、远期、期货","startPage":22},
+      {"id":"2.4","title":"C++ data structures","titleZh":"C++ 数据结构","startPage":25},
+      {"id":"2.5","title":"Monte Carlo simulation, numerical methods","titleZh":"蒙特卡洛模拟、数值方法","startPage":29},
+      {"id":"2.6","title":"Probability, stochastic calculus","titleZh":"概率、随机微积分","startPage":31},
+      {"id":"2.7","title":"Brainteasers","titleZh":"脑筋急转弯","startPage":35}
+    ]},
+    {"id":"3","title":"Solutions","titleZh":"解答","startPage":41,"kind":"chapter","children":[
+      {"id":"3.1","title":"Mathematics, calculus, differential equations","titleZh":"数学、微积分、微分方程","startPage":41},
+      {"id":"3.2","title":"Covariance and correlation matrices, linear algebra","titleZh":"协方差与相关矩阵、线性代数","startPage":56},
+      {"id":"3.3","title":"Financial instruments: options, bonds, swaps, forwards, futures","titleZh":"金融工具：期权、债券、互换、远期、期货","startPage":76},
+      {"id":"3.4","title":"C++ data structures","titleZh":"C++ 数据结构","startPage":99},
+      {"id":"3.5","title":"Monte Carlo simulation, numerical methods","titleZh":"蒙特卡洛模拟、数值方法","startPage":115},
+      {"id":"3.6","title":"Probability, stochastic calculus","titleZh":"概率、随机微积分","startPage":125},
+      {"id":"3.7","title":"Brainteasers","titleZh":"脑筋急转弯","startPage":166}
+    ]},
+    {"id":"bibliography","title":"Bibliography","titleZh":"参考文献","kind":"backmatter","startPage":null,"note":"The user-supplied extraction reported page 5, which is internally inconsistent with the chapter sequence. Keep unpinned until the actual source file is inspected."}
+  ]
+}
