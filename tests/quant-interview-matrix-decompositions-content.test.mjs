@@ -10,6 +10,7 @@ const knowledgePaths = {
 };
 const problemPaths = {
   leastSquares: 'src/content/problems/linear-algebra/least-squares-via-qr.md',
+  squareRoot: 'src/content/problems/linear-algebra/matrix-square-root-and-cholesky-factor.md',
 };
 const s3Markers = ['## Problem','## Think Before Revealing','<summary>Hint 1</summary>','<summary>Show Solution</summary>','## Solution','## Why This Problem Matters','## Common Mistakes','## Extensions'];
 
@@ -120,4 +121,34 @@ test('least-squares-via-qr solves the worked system by direct QR and checks proj
   assert.match(text, /rank-deficient|rank deficient/i);
   assert.match(text, /SVD/i);
   assert.doesNotMatch(text, /\(X\^T\s*X\)\^-1\s*X\^T\s*y\s*(?:is|as)\s*(?:the|our)\s*(?:recommended|algorithm|implementation)/i);
+});
+
+test('matrix-square-root-and-cholesky-factor is one S3+ source-neutral canonical problem', async () => {
+  await access(problemPaths.squareRoot);
+  const text = await readFile(problemPaths.squareRoot, 'utf8');
+  assert.match(text, /^problemId:\s*linear-algebra-decomposition-002$/m);
+  assert.match(text, /^quantInterviewTopics:\s*\[[^\]]*matrix-decompositions[^\]]*\]$/m);
+  assert.match(text, /^status:\s*solved$/m);
+  for (const marker of s3Markers) assert.ok(text.includes(marker), `matrix-square-root-and-cholesky-factor missing ${marker}`);
+  assert.doesNotMatch(text, /^source(?:Section|Chapter|Problem|Reference|Url)?:/m);
+  assert.doesNotMatch(text, /Green Book|Red Book|150 Most Frequently|Question\s+\d+/i);
+});
+
+test('matrix square-root problem distinguishes spectral root, Gram factor, Cholesky uniqueness, and variant', async () => {
+  const text = await readFile(problemPaths.squareRoot, 'utf8');
+  assert.match(text, /\[\[5,\s*-3\],\s*\[-3,\s*5\]\]/);
+  assert.match(text, /eigenvalues?[\s\S]{0,160}\b2\b[\s\S]{0,80}\b8\b|\b2\b[\s\S]{0,80}\b8\b[\s\S]{0,160}eigenvalues?/i);
+  assert.match(text, /sqrt\(2\)\/2[\s\S]{0,100}\[\[3,\s*-1\],\s*\[-1,\s*3\]\]/i);
+  assert.match(text, /M\^2\s*=\s*A|\(A\^\{?1\/2\}?\)\^2\s*=\s*A/i);
+  assert.match(text, /L\s*=\s*\[\[sqrt\(5\),\s*0\],\s*\[-3\/sqrt\(5\),\s*4\/sqrt\(5\)\]\]/i);
+  assert.match(text, /A\s*=\s*L\s*L\^T/i);
+  assert.match(text, /M\^2[\s\S]{0,240}(?:C\^T\s*C|C\s*C\^T)|(?:C\^T\s*C|C\s*C\^T)[\s\S]{0,240}M\^2/i);
+  assert.match(text, /generic[\s\S]{0,220}(?:not unique|non-unique|nonunique)|Gram factor[\s\S]{0,220}(?:not unique|non-unique|nonunique)/i);
+  assert.match(text, /Cholesky[\s\S]{0,240}positive diagonal[\s\S]{0,220}unique|unique[\s\S]{0,220}Cholesky/i);
+  assert.match(text, /orthogonal[\s\S]{0,180}(?:another|other|family|non-unique|nonunique)/i);
+  assert.match(text, /principal[\s\S]{0,180}(?:PSD|positive[- ]semidefinite)[\s\S]{0,180}unique|unique[\s\S]{0,180}principal/i);
+  assert.match(text, /## Variant/i);
+  assert.match(text, /\[\[2,\s*-2\],\s*\[-2,\s*5\]\]/);
+  assert.match(text, /variant[\s\S]{0,400}eigenvalues?[\s\S]{0,160}\b1\b[\s\S]{0,80}\b6\b/i);
+  assert.match(text, /sqrt\(2\)[\s\S]{0,80}sqrt\(3\)|Cholesky[\s\S]{0,300}sqrt\(3\)/i);
 });
