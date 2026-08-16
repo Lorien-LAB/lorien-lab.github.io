@@ -13,6 +13,10 @@ const currentProblemSlugs = [
   'covariance-matrix-positive-semidefinite-proof',
   'covariance-to-correlation-matrix',
   'equicorrelation-matrix-bounds',
+  'two-by-two-eigensystem',
+  'apply-matrix-via-eigenbasis',
+  'trace-ab-equals-trace-ba',
+  'commutator-cannot-equal-identity',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -28,6 +32,9 @@ const expectedKnowledgeTopics = new Map([
   ['correlation-matrix', ['linear-algebra-matrix-methods', 'covariance-correlation-matrices']],
   ['positive-semidefinite-matrix', ['linear-algebra-matrix-methods', 'positive-semidefinite-matrices']],
   ['principal-minor-feasibility', ['linear-algebra-matrix-methods', 'positive-semidefinite-matrices']],
+  ['eigenvalues-eigenvectors', ['linear-algebra-matrix-methods', 'determinants-eigenvalues']],
+  ['matrix-spectral-invariants', ['linear-algebra-matrix-methods', 'determinants-eigenvalues']],
+  ['eigenbasis-decomposition', ['linear-algebra-matrix-methods', 'determinants-eigenvalues']],
 ]);
 
 async function findProblem(slug) {
