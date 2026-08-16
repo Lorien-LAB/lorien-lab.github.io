@@ -54,6 +54,7 @@ test('content standard makes canonical Problems source-neutral and deduplicated'
   assert.match(standard, /All source mappings live in hidden coverage data/i);
   assert.match(standard, /duplicate source question enriches a canonical Problem/i);
   assert.match(standard, /does not create a duplicate public page/i);
+  assert.match(standard, /knowledge-only[\s\S]*Interview Checks[\s\S]*terminal only/i);
 });
 
 test('source catalog records three verified source files without claiming problem completeness', async () => {
@@ -66,27 +67,29 @@ test('source catalog records three verified source files without claiming proble
   assert.match(catalog, /Topic-first/i);
 });
 
-test('handoff records Stages A-C and points to the first cross-book Stage D workstream', async () => {
+test('handoff records first Stage D cross-book fusion as complete and stays topic-first', async () => {
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
-  assert.match(handoff, /Stage A[\s\S]*complete/i);
-  assert.match(handoff, /Stage B[\s\S]*complete/i);
-  assert.match(handoff, /Stage C[\s\S]*complete/i);
+  for (const stage of ['Stage A', 'Stage B', 'Stage C', 'Stage D']) assert.match(handoff, new RegExp(`${stage}[\\s\\S]*complete`, 'i'));
+  assert.match(handoff, /linear-algebra-covariance-correlation-psd-001/);
+  assert.match(handoff, /31946376343/);
+  assert.match(handoff, /fb8664b85ac1ea6a0d1d5145ce32143e0455a288/);
+  for (const slug of [
+    'correlation-matrix-parameter-range',
+    'covariance-matrix-positive-semidefinite-proof',
+    'covariance-to-correlation-matrix',
+    'equicorrelation-matrix-bounds',
+  ]) assert.match(handoff, new RegExp(slug));
+  assert.match(handoff, /knowledge-only/i);
+  assert.match(handoff, /variant/i);
+  assert.match(handoff, /merged-duplicate/i);
+  assert.match(handoff, /positive semidefinite[\s\S]*leading principal minors|leading principal minors[\s\S]*positive semidefinite/i);
   assert.match(handoff, /source-neutral/i);
   assert.match(handoff, /hidden coverage/i);
-  assert.match(handoff, /put-quotes-zero-cost-static-portfolio/);
-  assert.match(handoff, /missing-digit-power-of-two/);
-  assert.match(handoff, /ants-crossing-line/);
-  assert.match(handoff, /correlation-matrix-parameter-range/);
-  assert.match(handoff, /conditional-dice-expectation/);
-  assert.match(handoff, /random-walk-boundary/);
 
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
-  assert.match(nextAction, /Stage D/i);
   assert.match(nextAction, /cross-book/i);
   assert.match(nextAction, /Linear Algebra & Matrix Methods/i);
-  assert.match(nextAction, /Covariance|Correlation/i);
-  assert.match(nextAction, /Positive Semidefinite|PSD/i);
-  assert.match(nextAction, /all three/i);
+  assert.match(nextAction, /Determinants & Eigenvalues/i);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);
   assert.doesNotMatch(nextAction, /Green[^\n]*(?:then|→)[^\n]*Red|Red[^\n]*(?:then|→)[^\n]*150/i);
 });
