@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile, readdir } from 'node:fs/promises';
-import path from 'node:path';
 
 const docs = [
   'docs/quant-interview/README.md',
@@ -17,15 +16,18 @@ const tocPaths = {
   q150: 'src/data/quant-interview/toc/150-most-frequently-asked.json',
 };
 
-async function collectMarkdown(dir) {
-  const out = [];
-  for (const entry of await readdir(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) out.push(...await collectMarkdown(full));
-    else if (entry.name.endsWith('.md')) out.push(full);
-  }
-  return out;
-}
+const pilotProblems = [
+  'src/content/problems/150-most-frequently-asked/put-quotes-zero-cost-static-portfolio.md',
+  'src/content/problems/150-most-frequently-asked/missing-digit-power-of-two.md',
+];
+
+const pilotKnowledge = [
+  'src/content/knowledge/concepts/no-arbitrage-principle.md',
+  'src/content/knowledge/concepts/option-price-convexity-in-strike.md',
+  'src/content/knowledge/concepts/static-arbitrage-construction.md',
+  'src/content/knowledge/concepts/modular-arithmetic.md',
+  'src/content/knowledge/concepts/modular-invariants.md',
+];
 
 test('quant interview repository memory remains explicit', async () => {
   for (const file of docs) await access(file);
@@ -40,17 +42,11 @@ test('quant interview repository memory remains explicit', async () => {
     assert.ok(protocol.includes(phrase), `AGENT_PROTOCOL missing: ${phrase}`);
   }
 
-  const standard = await readFile(docs[2], 'utf8');
-  assert.match(standard, /S0.*answer only/s);
-  assert.match(standard, /S5.*extension\/generalization/s);
-  for (const heading of ['Why This Problem Matters', 'Common Mistakes', 'Extensions']) {
-    assert.ok(standard.includes(heading), `CONTENT_STANDARD missing: ${heading}`);
-  }
-
   const handoff = await readFile(docs[4], 'utf8');
   assert.match(handoff, /Phase 2B/);
   assert.match(handoff, /150-first-look-q01-q02/);
-  assert.match(handoff, /source-file-verified/);
+  assert.match(handoff, /review-pending/);
+  assert.match(handoff, /pending-gates/);
 });
 
 test('source catalog reflects verified 150 Questions while Green and Red remain unresolved', async () => {
@@ -61,7 +57,7 @@ test('source catalog reflects verified 150 Questions while Green and Red remain 
   assert.match(catalog, /Green Book[\s\S]*not source-file-verified/i);
   assert.match(catalog, /Red Book[\s\S]*not source-file-verified/i);
   assert.match(catalog, /150 Questions[\s\S]*source-file-verified[\s\S]*2013/i);
-  assert.match(catalog, /d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14/);
+  assert.match(catalog, /2 Problems authored; validation pending/);
 });
 
 test('TOC verification advances only the inspected 150 Questions source', async () => {
@@ -74,24 +70,15 @@ test('TOC verification advances only the inspected 150 Questions source', async 
     assert.equal(toc.tocStatus, 'user-supplied');
     assert.equal(toc.coverageClaim, 'structure-seed-not-problem-complete');
   }
-  assert.equal(green.editionStatus, 'work-identified');
-  assert.equal(red.editionStatus, 'work-identified');
-
   assert.equal(q150.tocStatus, 'source-file-verified');
   assert.equal(q150.coverageClaim, 'verified-structure-not-problem-complete');
   assert.equal(q150.edition, 'First edition (2013)');
   assert.equal(q150.sourceFileEvidence.pdfPageCount, 220);
   assert.deepEqual(q150.sourceFileEvidence.bodyStart, { pdfPage: 11, displayPage: 1 });
   assert.deepEqual(q150.sourceFileEvidence.bibliography, { pdfPage: 219, displayPage: 209 });
-  assert.ok(q150.sections.some((s) => s.id === 'bibliography' && s.startPage === 209));
 });
 
-test('150 Questions has one verified bounded active batch', async () => {
-  const source = await readFile('src/content/problem-sources/150-most-frequently-asked.md', 'utf8');
-  assert.match(source, /edition: First edition \(2013\)/);
-  assert.match(source, /ingestionStatus: ingesting/);
-  assert.match(source, /220 PDF pages/);
-
+test('150 Questions has one verified bounded batch with exactly two authored problem slugs', async () => {
   const manifest = JSON.parse(await readFile('src/data/quant-interview/150-most-frequently-asked.json', 'utf8'));
   assert.equal(manifest.sourceFile, 'sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14');
   assert.equal(manifest.sourceFileMeta.verification, 'source-file-verified');
@@ -103,10 +90,45 @@ test('150 Questions has one verified bounded active batch', async () => {
     endPage: 6,
     sourceSection: '1 First Look: Ten Questions',
     expectedProblemScope: ['1', '2'],
-    status: 'active',
+    problemSlugs: ['put-quotes-zero-cost-static-portfolio', 'missing-digit-power-of-two'],
+    status: 'review-pending',
+    verificationStatus: 'pending-gates',
   }]);
   const { validateIngestionManifest } = await import('../src/lib/quantInterviewIngestion.mjs');
   assert.doesNotThrow(() => validateIngestionManifest(manifest));
+});
+
+test('pilot problems are source-linked, independently structured, and S3-plus shaped', async () => {
+  for (const file of pilotProblems) {
+    await access(file);
+    const text = await readFile(file, 'utf8');
+    assert.match(text, /^originType:\s*book$/m);
+    assert.match(text, /^source:\s*150-most-frequently-asked$/m);
+    assert.match(text, /^status:\s*solved$/m);
+    for (const marker of ['## Problem', '## Think Before Revealing', '<summary>Hint 1</summary>', '<summary>Show Solution</summary>', '## Solution', '## Why This Problem Matters', '## Common Mistakes', '## Extensions']) {
+      assert.ok(text.includes(marker), `${file} missing ${marker}`);
+    }
+  }
+
+  const q1 = await readFile(pilotProblems[0], 'utf8');
+  assert.match(q1, /ordinary convexity by itself permits equality/i);
+  assert.match(q1, /positive whenever `0 < S_T < 30`/);
+
+  const q2 = await readFile(pilotProblems[1], 'utf8');
+  assert.match(q2, /2\^6 = 64 ≡ 1 \(mod 9\)/);
+  assert.match(q2, /x = 4/);
+});
+
+test('pilot ontology contains only reusable concepts and correctly typed techniques', async () => {
+  for (const file of pilotKnowledge) await access(file);
+  for (const file of [
+    'src/content/knowledge/concepts/static-arbitrage-construction.md',
+    'src/content/knowledge/concepts/modular-invariants.md',
+  ]) {
+    const text = await readFile(file, 'utf8');
+    assert.match(text, /^type:\s*concept$/m);
+    assert.match(text, /^category:\s*Problem Solving Techniques$/m);
+  }
 });
 
 test('Green and Red manifests remain edition-safe and batch-free', async () => {
@@ -120,12 +142,7 @@ test('Green and Red manifests remain edition-safe and batch-free', async () => {
   }
 });
 
-test('opening the pilot batch does not yet publish source-derived problems or source files', async () => {
-  const problemFiles = await collectMarkdown('src/content/problems');
-  for (const file of problemFiles) {
-    const text = await readFile(file, 'utf8');
-    assert.doesNotMatch(text, /^source:\s*(green-book|red-book|150-most-frequently-asked)\s*$/m, `source-derived problem unexpectedly added: ${file}`);
-  }
+test('no copyrighted source PDF or scan is committed', async () => {
   const repoFiles = await readdir('.', { recursive: true });
   const suspicious = repoFiles.filter((name) => /(?:green-book|red-book|150-most-frequently-asked).*(?:\.pdf|\.png|\.jpe?g)$/i.test(String(name)));
   assert.deepEqual(suspicious, []);

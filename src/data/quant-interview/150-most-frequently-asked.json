@@ -27,7 +27,12 @@
       "endPage": 6,
       "sourceSection": "1 First Look: Ten Questions",
       "expectedProblemScope": ["1", "2"],
-      "status": "active"
+      "problemSlugs": [
+        "put-quotes-zero-cost-static-portfolio",
+        "missing-digit-power-of-two"
+      ],
+      "status": "review-pending",
+      "verificationStatus": "pending-gates"
     }
   ]
 }

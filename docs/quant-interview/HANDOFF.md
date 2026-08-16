@@ -6,7 +6,7 @@ Updated: 2026-08-16
 
 **Phase 2B — source-file verification and bounded book ingestion.**
 
-The first real source file has passed identity/edition/TOC verification and the first bounded ingestion batch is open.
+The first real source file has passed identity/edition/TOC verification. The first bounded ingestion batch has been authored and is now waiting on repository verification gates.
 
 ## Stable architecture
 
@@ -60,25 +60,33 @@ The first real source file has passed identity/edition/TOC verification and the 
 - source page range: printed pages 1–6
 - PDF page range used as evidence: 11–16
 - intended problem scope: Questions 1–2 only
-- status: active
+- authored Problems:
+  - `put-quotes-zero-cost-static-portfolio`
+  - `missing-digit-power-of-two`
+- reusable Knowledge added:
+  - `no-arbitrage-principle`
+  - `option-price-convexity-in-strike`
+  - `static-arbitrage-construction`
+  - `modular-arithmetic`
+  - `modular-invariants`
+- status: `review-pending`
+- verification status: `pending-gates`
 
 Do not expand this batch to Questions 3–10 merely because their statements also appear on printed pages 1–2.
 
+Question 1 was independently derived with an explicit support condition for strict arbitrage. The public solution does not repeat the source answer's stronger-than-necessary claim that option prices must be strictly convex in strike; ordinary no-arbitrage convexity permits equality, while the concrete zero-cost portfolio becomes a strict arbitrage only when a positive-payoff terminal region is genuinely possible.
+
 ## Next action
 
-For the active batch only:
+Do not author more book problems yet. For this batch only:
 
-1. identify the Concepts and Problem Solving Techniques actually used by Questions 1–2;
-2. search `src/content/knowledge/` semantically and reuse existing canonical slugs where equivalent;
-3. create only the missing reusable Knowledge nodes that are justified across problems;
-4. independently formulate and independently solve Questions 1–2 to S3+ maturity;
-5. record realistic hints, interview signals, Common Mistakes, and meaningful Extensions;
-6. validate source/Knowledge/problem relationships and the ingestion manifest;
-7. run `npm run test`, `npm run check`, and `npm run build`;
-8. review the branch diff against `main`;
-9. only after all gates pass, mark the batch complete and record its completion commit here and in the manifest.
-
-Question 1 deserves an explicit editorial check around the assumptions required for the zero-cost put portfolio to be a strict arbitrage; do not blindly copy the source answer's wording about strict convexity.
+1. validate source/Knowledge/problem relationships and the ingestion manifest;
+2. run `npm run test`;
+3. run `npm run check`;
+4. run `npm run build`;
+5. review the branch diff against `main`;
+6. resolve any failures without expanding scope;
+7. only after all gates pass, mark `150-first-look-q01-q02` complete and record its completion commit in the manifest and this handoff.
 
 For Green/Red, exact edition and actual source-file verification are still required before any page-bounded batch is created.
 
