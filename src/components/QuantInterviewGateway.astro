@@ -1,0 +1,18 @@
+---
+interface Props { href: string; }
+const { href } = Astro.props;
+---
+<section class="quant-interview-gateway" aria-labelledby="quant-interview-gateway-title">
+  <div>
+    <div class="mono-label">Quant Interview</div>
+    <h2 id="quant-interview-gateway-title">Quant Interview Knowledge & Problem Bank</h2>
+    <p>Probability · Statistics · Brain Teasers · Stochastic Processes · Markets · Programming</p>
+    <a href={href}>Explore problem bank →</a>
+  </div>
+  <div class="gateway-map" aria-hidden="true">
+    <span>Concept</span><i>→</i><span>Technique</span><i>→</i><span>Problem</span><i>→</i><span>Source</span>
+  </div>
+</section>
+<style>
+.quant-interview-gateway{display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;padding:30px;border:1px solid color-mix(in srgb,var(--accent) 32%,var(--border));border-radius:var(--radius-lg);background:linear-gradient(130deg,color-mix(in srgb,var(--accent-soft) 22%,var(--surface)),var(--surface));box-shadow:0 16px 48px rgba(16,40,55,.05)}.quant-interview-gateway h2{margin:8px 0 11px;font-size:clamp(1.8rem,4vw,3rem);line-height:1.04;letter-spacing:-.045em}.quant-interview-gateway p{margin:0;color:var(--muted);line-height:1.65}.quant-interview-gateway a{display:inline-block;margin-top:19px;color:var(--accent-strong);font-weight:800}.gateway-map{display:grid;grid-template-columns:auto 20px auto 20px auto 20px auto;gap:8px;align-items:center;justify-content:end}.gateway-map span{padding:9px 10px;border:1px solid var(--border);border-radius:8px;background:var(--surface);font:700 .68rem var(--font-mono);text-transform:uppercase;color:var(--muted)}.gateway-map i{font-style:normal;color:var(--accent-strong);font:800 .8rem var(--font-mono)}@media(max-width:840px){.quant-interview-gateway{grid-template-columns:1fr}.gateway-map{justify-content:start;grid-template-columns:auto 16px auto 16px auto 16px auto}}@media(max-width:560px){.gateway-map{grid-template-columns:1fr}.gateway-map i{display:none}}
+</style>
