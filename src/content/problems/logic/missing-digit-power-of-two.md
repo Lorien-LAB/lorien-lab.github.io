@@ -1,5 +1,5 @@
 ---
-problemId: 150-first-look-002
+problemId: logic-modular-arithmetic-001
 title: Missing Digit of a Power of Two
 description: Determine a missing decimal digit from a large power using digit sums and modular arithmetic instead of direct computation.
 date: 2026-08-16
