@@ -16,7 +16,7 @@ const research = defineCollection({
 const projects = defineCollection({
   loader: glob({ base: './src/content/projects', pattern: '**/*.md' }),
   schema: z.object({
-    title: z.string(), description: z.string(), status: z.string(), date: z.coerce.date(), tags: commonTags,
+    title: z.string(), description: z.string(), status: z.string(), date: z.coerce.date(), period: z.string().optional(), tags: commonTags,
     featured: z.boolean().default(false), repoUrl: z.string().url().optional(), docsUrl: z.string().url().optional(),
     metrics: z.record(z.string(), z.string()).optional(),
   }),

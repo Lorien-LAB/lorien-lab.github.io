@@ -10,7 +10,10 @@ const research = (await getCollection('research')).sort((a, b) => b.data.date.va
 const projects = (await getCollection('projects')).sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 
 const systemIds = new Set(['quant-research-harness', 'llm-factor-discovery']);
-const strategyIds = new Set(['cta-research-framework']);
+const strategyIds = new Set([
+  'cta-research-framework',
+  'systematic-futures-calendar-spread-internship',
+]);
 const systems = projects.filter((entry) => systemIds.has(entry.id));
 const strategies = projects.filter((entry) => strategyIds.has(entry.id));
 const otherProjects = projects.filter((entry) => !systemIds.has(entry.id) && !strategyIds.has(entry.id));

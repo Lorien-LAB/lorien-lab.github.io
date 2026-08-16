@@ -42,6 +42,11 @@ export const publicContentZh: Record<'research' | 'projects' | 'notes', Record<s
       description: '覆盖趋势、反转、波动率缩放、事件过滤与稳健验证的系统化期货策略研究框架。',
       status: '研究框架',
     },
+    'systematic-futures-calendar-spread-internship': {
+      title: '系统化期货跨期价差研究 — 实习案例',
+      description: '经脱敏处理的系统化期货跨期价差研究案例，重点展示时间一致性、合约状态质量、成本约束下的稳健验证与研究工程方法。',
+      status: '实习研究',
+    },
   },
   notes: {
     'research-system-design': {
