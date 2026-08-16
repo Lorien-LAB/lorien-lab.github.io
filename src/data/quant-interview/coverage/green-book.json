@@ -1947,6 +1947,43 @@
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.4",
+      "sourceItem": "psd-pd-criteria",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+    },
+    {
+      "sourceSection": "3.6.4",
+      "sourceItem": "correlation-range-0.8-0.8",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
+    },
+    {
+      "sourceSection": "4.5",
+      "sourceItem": "covariance-correlation-definitions",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary."
     }
   ]
 }
