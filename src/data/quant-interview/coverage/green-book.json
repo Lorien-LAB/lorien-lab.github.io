@@ -2075,9 +2075,12 @@
       "canonicalTopics": [
         "matrix-decompositions"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "qr-decomposition"
+      ],
+      "resolutionNote": "This source item defines reusable orthogonal-triangular factorization knowledge; it enriches canonical QR Knowledge and does not create a standalone public Problem."
     },
     {
       "sourceSection": "3.6.2",
@@ -2085,9 +2088,14 @@
       "canonicalTopics": [
         "matrix-decompositions"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "least-squares-via-qr"
+      ],
+      "canonicalKnowledge": [
+        "qr-decomposition"
+      ],
+      "resolutionNote": "This is a distinct interview reasoning task. The canonical Problem teaches direct QR on the design matrix; the source normal-equation-first presentation remains internal evidence rather than the recommended public algorithm."
     },
     {
       "sourceSection": "3.6.5",
@@ -2095,9 +2103,12 @@
       "canonicalTopics": [
         "matrix-decompositions"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "lu-cholesky-decomposition"
+      ],
+      "resolutionNote": "LU is reusable elimination and triangular-solve knowledge here, with no independent source reasoning task that warrants a separate canonical Problem."
     },
     {
       "sourceSection": "3.6.5",
@@ -2105,9 +2116,12 @@
       "canonicalTopics": [
         "matrix-decompositions"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "lu-cholesky-decomposition"
+      ],
+      "resolutionNote": "Cholesky belongs in the shared decomposition ontology with LU; the definition and factorization conditions enrich canonical Knowledge rather than creating a duplicate public Problem."
     },
     {
       "sourceSection": "3.6.5",
@@ -2115,9 +2129,15 @@
       "canonicalTopics": [
         "matrix-decompositions"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "generate-correlated-gaussians"
+      ],
+      "canonicalKnowledge": [
+        "lu-cholesky-decomposition",
+        "singular-value-decomposition"
+      ],
+      "resolutionNote": "Generating correlated normals is an independent simulation reasoning task. The canonical Problem generalizes the two-dimensional construction to SPD Cholesky and PSD spectral or SVD covariance factors."
     },
     {
       "sourceSection": "3.6.5",
@@ -2125,9 +2145,12 @@
       "canonicalTopics": [
         "matrix-decompositions"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "singular-value-decomposition"
+      ],
+      "resolutionNote": "This item contributes reusable rectangular, rank-aware SVD knowledge and does not define a separate canonical interview Problem."
     }
   ]
 }

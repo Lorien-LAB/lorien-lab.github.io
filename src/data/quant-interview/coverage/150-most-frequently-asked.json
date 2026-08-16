@@ -403,9 +403,15 @@
       "canonicalTopics": [
         "matrix-decompositions"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "variant",
+      "canonicalProblems": [
+        "matrix-square-root-and-cholesky-factor"
+      ],
+      "canonicalKnowledge": [
+        "eigenbasis-decomposition",
+        "lu-cholesky-decomposition"
+      ],
+      "resolutionNote": "This task has the same reasoning identity as the canonical matrix-square-root and factor Problem, but contributes a different matrix and useful spectral and Cholesky calculations, so it is retained as a meaningful variant inside the same public page."
     }
   ]
 }

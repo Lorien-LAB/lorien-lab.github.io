@@ -759,9 +759,15 @@
       "canonicalTopics": [
         "matrix-decompositions"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "matrix-square-root-and-cholesky-factor"
+      ],
+      "canonicalKnowledge": [
+        "eigenbasis-decomposition",
+        "lu-cholesky-decomposition"
+      ],
+      "resolutionNote": "This task is the semantic anchor for the canonical matrix-square-root and Gram-factor Problem. Its entrywise square-root route is retained as an alternative method while the canonical page foregrounds reusable spectral and Cholesky structure."
     }
   ]
 }
