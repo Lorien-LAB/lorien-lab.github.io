@@ -1,0 +1,39 @@
+name: Quant Interview Matrix Decompositions Frontmatter Fix
+
+on:
+  push:
+    branches:
+      - chatgpt/quant-interview-workstream-matrix-decompositions-2026-08-16
+
+permissions:
+  contents: write
+
+jobs:
+  fix:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 0
+      - name: Fix Gaussian Problem frontmatter indentation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('src/content/problems/linear-algebra/generate-correlated-gaussians.md')
+          text = path.read_text()
+          fixed = text.replace('\n description:', '\ndescription:', 1)
+          if fixed == text:
+              print('Frontmatter already normalized.')
+          else:
+              path.write_text(fixed)
+          PY
+      - name: Commit fix when needed
+        run: |
+          if git diff --quiet -- src/content/problems/linear-algebra/generate-correlated-gaussians.md; then
+            exit 0
+          fi
+          git config user.name "Lorien"
+          git config user.email "2249297094@qq.com"
+          git add src/content/problems/linear-algebra/generate-correlated-gaussians.md
+          git commit -m "fix: normalize Gaussian problem frontmatter"
+          git push
