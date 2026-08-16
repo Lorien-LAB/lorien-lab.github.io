@@ -27,3 +27,19 @@ export function flattenPublicQuantInterviewTopics() {
   visit(getQuantInterviewTaxonomy().topics, null);
   return rows;
 }
+
+export function expandTopicIdsWithAncestors(topicIds: string[]) {
+  const flat = flattenPublicQuantInterviewTopics();
+  const parentById = new Map(flat.map((topic) => [topic.id, topic.parentId]));
+  const expanded = new Set<string>();
+
+  for (const id of topicIds) {
+    let current: string | null | undefined = id;
+    while (current) {
+      expanded.add(current);
+      current = parentById.get(current);
+    }
+  }
+
+  return [...expanded];
+}
