@@ -6,6 +6,17 @@
     "positive-semidefinite-matrices"
   ],
   "status": "complete",
+  "completedDate": "2026-08-16",
+  "verification": {
+    "commit": "fb8664b85ac1ea6a0d1d5145ce32143e0455a288",
+    "runId": 31946376343,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
   "sourceScopes": [
     {
       "source": "green-book",
