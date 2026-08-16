@@ -9,6 +9,7 @@ featured: true
 metrics:
   Evaluation: 2023–2026 rolling test window
   Costs: 2 bp per leg per side
+  Annualized Return: "43.08%"
   Sharpe: "2.40"
   Max Drawdown: "5.28%"
 ---
@@ -133,11 +134,11 @@ A useful outcome of this process was not only identifying positive variants, but
 
 Under the public historical backtest record, the strategy was evaluated over a **2023–2026 rolling test window** with a **2 bp per leg per side** transaction-cost assumption.
 
-The recorded aggregate result was **Sharpe 2.40** with a **maximum drawdown of 5.28%**.
+The recorded aggregate result was an annualized return of **43.08%**, **Sharpe 2.40**, with a **maximum drawdown of 5.28%**.
 
-These figures summarize one historical research configuration under stated assumptions. They are included because they are already part of the public CV record. They are not a forecast, do not imply future performance, and should not be interpreted independently of the execution, cost, and validation assumptions described above.
+These figures summarize one historical research configuration under stated assumptions. They have been intentionally approved for public disclosure. They are not a forecast, do not imply future performance, and should not be interpreted independently of the execution, cost, and validation assumptions described above.
 
-No additional return, hit-rate, turnover, capacity, market-level, or sensitivity statistics are published in this sanitized version.
+No additional cumulative-return, hit-rate, turnover, capacity, market-level, or sensitivity statistics are published in this sanitized version.
 
 ## Failure modes and research lessons
 
