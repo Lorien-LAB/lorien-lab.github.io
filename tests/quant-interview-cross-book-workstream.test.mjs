@@ -72,6 +72,25 @@ test('workstream validator still rejects unknown source sections and invalid evi
   assert.throws(() => validateTopicWorkstream(overlappingEvidence, context), /sorted and non-overlapping/i);
 });
 
+test('coverage may override a coarse TOC topic only with an explicit item-level reason', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+  const sourceTopicMap = { version: 1, entries: [
+    { source: 'x', sourceSection: 'mixed', role: 'content', canonicalTopics: ['probability-statistics'] },
+  ] };
+  const context = { sourceTopicMap, taxonomy, problemSlugs: new Set(), knowledgeSlugs: new Set(), allowUnresolvedCanonicalRefs: true };
+  const baseEntry = {
+    sourceSection: 'mixed', sourceItem: 'covariance-definition',
+    canonicalTopics: ['linear-algebra-matrix-methods', 'covariance-correlation-matrices'],
+    state: 'needs-review', canonicalProblems: [], canonicalKnowledge: [],
+  };
+  assert.throws(() => validateCoverageLedger({ source: 'x', version: 1, entries: [baseEntry] }, context), /topic override reason/i);
+  assert.doesNotThrow(() => validateCoverageLedger({ source: 'x', version: 1, entries: [{
+    ...baseEntry,
+    topicOverrideReason: 'This item is a covariance/correlation definition embedded inside a broader probability chapter.',
+  }] }, context));
+});
+
 test('every inspected covariance/correlation/PSD source item has an item-level coverage row', async () => {
   for (const [source, keys] of Object.entries(inventory)) {
     const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
