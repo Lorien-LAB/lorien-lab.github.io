@@ -4,9 +4,9 @@ Updated: 2026-08-16
 
 ## Current phase
 
-**Agent handoff / source-catalog foundation.**
+**Phase 2B — source-file verification and bounded book ingestion.**
 
-Next content phase: **Phase 2B — source-file verification and bounded book ingestion**.
+The first real source file has passed identity/edition/TOC verification, and the first bounded ingestion batch has passed all repository verification gates.
 
 ## Stable architecture
 
@@ -25,7 +25,7 @@ Next content phase: **Phase 2B — source-file verification and bounded book ing
 - work identity: verified
 - TOC: user-supplied structural seed
 - edition: not pinned
-- source file: not verified
+- source file: not verified in repository state
 - ingestion batches: none
 
 ### Red Book
@@ -34,7 +34,7 @@ Next content phase: **Phase 2B — source-file verification and bounded book ing
 - work identity: verified
 - TOC: user-supplied structural seed
 - edition: not pinned
-- source file: not verified
+- source file: not verified in repository state
 - ingestion batches: none
 
 ### 150 Questions
@@ -43,29 +43,53 @@ Next content phase: **Phase 2B — source-file verification and bounded book ing
 - edition: First edition (2013)
 - ISBN-13: `9780979757648`
 - bibliographic edition: pinned
-- TOC: user-supplied structural seed matching first edition
-- source file: not yet verified in the ingestion workflow
-- ingestion batches: none
+- actual user source file: **source-file-verified**
+- source-file identity: `sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14`
+- scan size: 220 PDF pages
+- page alignment: printed page 1 = PDF page 11; printed bibliography page 209 = PDF page 219
+- TOC: source-file-verified
+- ingestion status: `ingesting`
+- completed ingestion batches: `150-first-look-q01-q02`
 
-## Active batch
+## Last completed batch
 
-None. Do not invent one until a real source file is available and inspected.
+`150-first-look-q01-q02`
+
+- source: `150-most-frequently-asked`
+- chapter/section: Chapter 1 — `First Look: Ten Questions`
+- source page range: printed pages 1–6
+- PDF page range used as evidence: 11–16
+- problem scope: Questions 1–2 only
+- Problems:
+  - `put-quotes-zero-cost-static-portfolio`
+  - `missing-digit-power-of-two`
+- reusable Knowledge added:
+  - `no-arbitrage-principle`
+  - `option-price-convexity-in-strike`
+  - `static-arbitrage-construction`
+  - `modular-arithmetic`
+  - `modular-invariants`
+- status: `complete`
+- completion / verified commit: `7151c59f8fa2222540e2527e52ab177319145cac`
+- GitHub Actions verification run: `31935163167`
+- gates: `npm run test` ✅ · `npm run check` ✅ · `npm run build` ✅
+
+Question 1 was independently derived with an explicit support condition for strict arbitrage. The public solution does not repeat the source answer's stronger-than-necessary claim that option prices must be strictly convex in strike; ordinary no-arbitrage convexity permits equality, while the concrete zero-cost portfolio becomes a strict arbitrage only when a positive-payoff terminal region is genuinely possible.
 
 ## Next action
 
-When the user provides a book PDF/source file:
+Start a **new bounded batch only after re-reading this handoff and the Agent Protocol**. Do not silently continue through the rest of Chapter 1 in the same batch.
 
-1. inspect title/copyright/TOC pages;
-2. verify the actual file against the source catalog and manifest;
-3. align the relevant machine-readable TOC;
-4. update `sourceFile` and source-file verification state;
-5. create the first small page-bounded batch;
-6. search/deduplicate Concepts and Techniques;
-7. ingest and independently solve only that batch;
-8. run full validation;
-9. update this handoff with the new current state.
+A natural next candidate is another small `150 Questions` First Look slice, but the next Agent must explicitly choose and register its page/problem bounds before authoring. Green/Red still require exact-edition and source-file verification in repository state before any batch is created for them.
 
-For Green/Red, the source file must also resolve exact edition before any page-bounded batch is created.
+For the next batch:
+
+1. select one source and one bounded problem/page range;
+2. register the batch in its manifest;
+3. perform ontology-first deduplication;
+4. author independent S3+ Problem records only for that range;
+5. run relationship/manifest validation plus `npm run test`, `npm run check`, and `npm run build`;
+6. review the diff and update this handoff before completion.
 
 ## Non-negotiable invariants
 

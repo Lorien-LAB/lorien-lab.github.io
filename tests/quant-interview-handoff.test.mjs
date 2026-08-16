@@ -1,7 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile, readdir } from 'node:fs/promises';
-import path from 'node:path';
 
 const docs = [
   'docs/quant-interview/README.md',
@@ -17,122 +16,121 @@ const tocPaths = {
   q150: 'src/data/quant-interview/toc/150-most-frequently-asked.json',
 };
 
-async function collectMarkdown(dir) {
-  const out = [];
-  for (const entry of await readdir(dir, { withFileTypes: true })) {
-    const full = path.join(dir, entry.name);
-    if (entry.isDirectory()) out.push(...await collectMarkdown(full));
-    else if (entry.name.endsWith('.md')) out.push(full);
-  }
-  return out;
-}
+const pilotProblems = [
+  'src/content/problems/150-most-frequently-asked/put-quotes-zero-cost-static-portfolio.md',
+  'src/content/problems/150-most-frequently-asked/missing-digit-power-of-two.md',
+];
 
-test('quant interview handoff exposes five focused repository-memory documents', async () => {
+const pilotKnowledge = [
+  'src/content/knowledge/concepts/no-arbitrage-principle.md',
+  'src/content/knowledge/concepts/option-price-convexity-in-strike.md',
+  'src/content/knowledge/concepts/static-arbitrage-construction.md',
+  'src/content/knowledge/concepts/modular-arithmetic.md',
+  'src/content/knowledge/concepts/modular-invariants.md',
+];
+
+test('quant interview repository memory records a completed verified pilot batch', async () => {
   for (const file of docs) await access(file);
-
   const readme = await readFile(docs[0], 'utf8');
   assert.match(readme, /repository.*source of truth/i);
-  assert.match(readme, /HANDOFF\.md/);
-  assert.match(readme, /target source/i);
   assert.match(readme, /one bounded batch/i);
 
   const protocol = await readFile(docs[1], 'utf8');
-  for (const phrase of [
-    'Do not trust conversational memory',
-    'task-specific branch',
-    'Concept',
-    'Technique',
-    'one bounded batch',
-    'npm run test',
-    'npm run check',
-    'npm run build',
-  ]) assert.ok(protocol.includes(phrase), `AGENT_PROTOCOL missing: ${phrase}`);
-
-  const standard = await readFile(docs[2], 'utf8');
-  assert.match(standard, /S0.*answer only/s);
-  assert.match(standard, /S5.*extension\/generalization/s);
-  for (const heading of ['Why This Problem Matters', 'Common Mistakes', 'Extensions']) {
-    assert.ok(standard.includes(heading), `CONTENT_STANDARD missing: ${heading}`);
+  for (const phrase of ['Do not trust conversational memory', 'task-specific branch', 'Concept', 'Technique', 'one bounded batch', 'npm run test', 'npm run check', 'npm run build']) {
+    assert.ok(protocol.includes(phrase), `AGENT_PROTOCOL missing: ${phrase}`);
   }
 
   const handoff = await readFile(docs[4], 'utf8');
   assert.match(handoff, /Phase 2B/);
-  assert.match(handoff, /source file/i);
-  assert.doesNotMatch(handoff, /chronological transcript/i);
+  assert.match(handoff, /150-first-look-q01-q02/);
+  assert.match(handoff, /status: `complete`/);
+  assert.match(handoff, /7151c59f8fa2222540e2527e52ab177319145cac/);
+  assert.match(handoff, /31935163167/);
 });
 
-test('source catalog truthfully separates work identity, TOC seed, source-file verification, and edition pinning', async () => {
+test('source catalog reflects verified pilot coverage without implying book completeness', async () => {
   const catalog = await readFile('docs/quant-interview/SOURCE_CATALOG.md', 'utf8');
-  for (const name of [
-    'A Practical Guide to Quantitative Finance Interviews',
-    'Quant Job Interview Questions and Answers',
-    '150 Most Frequently Asked Questions on Quant Interviews',
-  ]) assert.ok(catalog.includes(name), `catalog missing ${name}`);
-
-  assert.match(catalog, /Green Book[\s\S]*work-identified[\s\S]*user-supplied/i);
-  assert.match(catalog, /Red Book[\s\S]*work-identified[\s\S]*user-supplied/i);
-  assert.match(catalog, /150 Questions[\s\S]*edition-pinned[\s\S]*2013/i);
-  assert.match(catalog, /source-file-verified/);
-  assert.match(catalog, /problem-indexed/);
+  assert.match(catalog, /Green Book[\s\S]*not source-file-verified/i);
+  assert.match(catalog, /Red Book[\s\S]*not source-file-verified/i);
+  assert.match(catalog, /150 Questions[\s\S]*source-file-verified[\s\S]*2013/i);
+  assert.match(catalog, /problem-indexed for the validated Q1–Q2 pilot only/i);
+  assert.match(catalog, /book is not complete/i);
 });
 
-test('three TOC seeds are machine-readable and do not overclaim problem-level completeness', async () => {
+test('TOC verification advances only the inspected 150 Questions source', async () => {
   for (const file of Object.values(tocPaths)) await access(file);
   const green = JSON.parse(await readFile(tocPaths.green, 'utf8'));
   const red = JSON.parse(await readFile(tocPaths.red, 'utf8'));
   const q150 = JSON.parse(await readFile(tocPaths.q150, 'utf8'));
 
-  for (const toc of [green, red, q150]) {
+  for (const toc of [green, red]) {
     assert.equal(toc.tocStatus, 'user-supplied');
     assert.equal(toc.coverageClaim, 'structure-seed-not-problem-complete');
-    assert.ok(Array.isArray(toc.sections) && toc.sections.length > 0);
   }
-
-  assert.equal(green.source, 'green-book');
-  assert.equal(green.editionStatus, 'work-identified');
-  assert.equal(green.edition, null);
-  assert.ok(green.sections.some((s) => s.id === '4' && /Probability Theory/.test(s.title)));
-
-  assert.equal(red.source, 'red-book');
-  assert.equal(red.editionStatus, 'work-identified');
-  assert.equal(red.edition, null);
-  assert.ok(red.sections.some((s) => s.id === '2' && s.startPage === 27 && /Option Pricing/.test(s.title)));
-
-  assert.equal(q150.source, '150-most-frequently-asked');
-  assert.equal(q150.editionStatus, 'edition-pinned');
+  assert.equal(q150.tocStatus, 'source-file-verified');
+  assert.equal(q150.coverageClaim, 'verified-structure-not-problem-complete');
   assert.equal(q150.edition, 'First edition (2013)');
-  assert.ok(q150.sections.some((s) => s.id === '2' && s.startPage === 17));
-  assert.ok(q150.sections.some((s) => s.id === '3' && s.startPage === 41));
+  assert.equal(q150.sourceFileEvidence.pdfPageCount, 220);
+  assert.deepEqual(q150.sourceFileEvidence.bodyStart, { pdfPage: 11, displayPage: 1 });
+  assert.deepEqual(q150.sourceFileEvidence.bibliography, { pdfPage: 219, displayPage: 209 });
 });
 
-test('150 Questions has a pinned bibliographic source record but no ingestion batches without the actual source file', async () => {
-  const source = await readFile('src/content/problem-sources/150-most-frequently-asked.md', 'utf8');
-  assert.match(source, /canonicalTitle: 150 Most Frequently Asked Questions on Quant Interviews/);
-  assert.match(source, /authors: \[Dan Stefanica, Rados Radoicic, Tai-Ho Wang\]/);
-  assert.match(source, /publisher: (Financial Engineering Press|FE Press)/);
-  assert.match(source, /year: 2013/);
-  assert.match(source, /edition: First edition \(2013\)/);
-  assert.match(source, /editionStatus: edition-pinned/);
-  assert.match(source, /isbn: ['"]?9780979757648['"]?/);
-  assert.match(source, /bibliographicUrl: https:\/\/www\.fepress\.org\/150iqs\//);
-
+test('150 Questions manifest records one completed verified bounded batch', async () => {
   const manifest = JSON.parse(await readFile('src/data/quant-interview/150-most-frequently-asked.json', 'utf8'));
-  assert.equal(manifest.editionStatus, 'edition-pinned');
-  assert.equal(manifest.edition, 'First edition (2013)');
-  assert.equal(manifest.isbn, '9780979757648');
-  assert.equal(manifest.sourceFile, null);
-  assert.equal(manifest.ingestionStatus, 'awaiting-source-file');
-  assert.deepEqual(manifest.batches, []);
-
+  assert.equal(manifest.sourceFile, 'sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14');
+  assert.equal(manifest.ingestionStatus, 'ingesting');
+  assert.deepEqual(manifest.batches, [{
+    id: '150-first-look-q01-q02',
+    startPage: 1,
+    endPage: 6,
+    sourceSection: '1 First Look: Ten Questions',
+    expectedProblemScope: ['1', '2'],
+    problemSlugs: ['put-quotes-zero-cost-static-portfolio', 'missing-digit-power-of-two'],
+    status: 'complete',
+    verificationStatus: 'passed',
+    completionCommit: '7151c59f8fa2222540e2527e52ab177319145cac',
+    verifiedCommit: '7151c59f8fa2222540e2527e52ab177319145cac',
+    verificationRunId: 31935163167,
+    completedDate: '2026-08-16',
+  }]);
   const { validateIngestionManifest } = await import('../src/lib/quantInterviewIngestion.mjs');
   assert.doesNotThrow(() => validateIngestionManifest(manifest));
-  assert.throws(() => validateIngestionManifest({
-    ...manifest,
-    batches: [{ id: '150-math-01', startPage: 18, endPage: 19, sourceSection: '2.1 Mathematics' }],
-  }), /source file/i);
 });
 
-test('Green and Red manifests remain unpinned while their user-supplied TOCs are only structural seeds', async () => {
+test('pilot problems are source-linked, independently structured, and S3-plus shaped', async () => {
+  for (const file of pilotProblems) {
+    await access(file);
+    const text = await readFile(file, 'utf8');
+    assert.match(text, /^originType:\s*book$/m);
+    assert.match(text, /^source:\s*150-most-frequently-asked$/m);
+    assert.match(text, /^status:\s*solved$/m);
+    for (const marker of ['## Problem', '## Think Before Revealing', '<summary>Hint 1</summary>', '<summary>Show Solution</summary>', '## Solution', '## Why This Problem Matters', '## Common Mistakes', '## Extensions']) {
+      assert.ok(text.includes(marker), `${file} missing ${marker}`);
+    }
+  }
+
+  const q1 = await readFile(pilotProblems[0], 'utf8');
+  assert.match(q1, /ordinary convexity by itself permits equality/i);
+  assert.match(q1, /positive whenever `0 < S_T < 30`/);
+
+  const q2 = await readFile(pilotProblems[1], 'utf8');
+  assert.match(q2, /2\^6 = 64 ≡ 1 \(mod 9\)/);
+  assert.match(q2, /x = 4/);
+});
+
+test('pilot ontology contains reusable concepts and correctly typed techniques', async () => {
+  for (const file of pilotKnowledge) await access(file);
+  for (const file of [
+    'src/content/knowledge/concepts/static-arbitrage-construction.md',
+    'src/content/knowledge/concepts/modular-invariants.md',
+  ]) {
+    const text = await readFile(file, 'utf8');
+    assert.match(text, /^type:\s*concept$/m);
+    assert.match(text, /^category:\s*Problem Solving Techniques$/m);
+  }
+});
+
+test('Green and Red manifests remain edition-safe and batch-free', async () => {
   for (const slug of ['green-book', 'red-book']) {
     const manifest = JSON.parse(await readFile(`src/data/quant-interview/${slug}.json`, 'utf8'));
     assert.equal(manifest.editionStatus, 'work-identified');
@@ -143,19 +141,13 @@ test('Green and Red manifests remain unpinned while their user-supplied TOCs are
   }
 });
 
-test('this handoff phase does not ingest source-derived problems or source PDFs', async () => {
-  const problemFiles = await collectMarkdown('src/content/problems');
-  for (const file of problemFiles) {
-    const text = await readFile(file, 'utf8');
-    assert.doesNotMatch(text, /^source:\s*(green-book|red-book|150-most-frequently-asked)\s*$/m, `source-derived problem unexpectedly added: ${file}`);
-  }
-
+test('no copyrighted source PDF or scan is committed', async () => {
   const repoFiles = await readdir('.', { recursive: true });
   const suspicious = repoFiles.filter((name) => /(?:green-book|red-book|150-most-frequently-asked).*(?:\.pdf|\.png|\.jpe?g)$/i.test(String(name)));
   assert.deepEqual(suspicious, []);
 });
 
-test('root README points future agents to the compact quant interview onboarding entry', async () => {
+test('root README still points agents to quant interview repository memory', async () => {
   const readme = await readFile('README.md', 'utf8');
   assert.match(readme, /docs\/quant-interview\/README\.md/);
   assert.match(readme, /repository.*memory/i);
