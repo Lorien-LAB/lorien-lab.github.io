@@ -17,6 +17,13 @@ async function readProblem(slug) {
   return readFile(await findMarkdown('src/content/problems', slug), 'utf8');
 }
 
+function assertS3(text, slug) {
+  for (const heading of ['## Problem', '## Think Before Revealing', '## Solution', '## Why This Problem Matters', '## Common Mistakes', '## Extensions']) {
+    assert.match(text, new RegExp(heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')), `${slug} missing ${heading}`);
+  }
+  assert.match(text, /<summary>Hint 1<\/summary>/i, `${slug} missing progressive hint`);
+}
+
 test('vector geometry Knowledge covers inner products, projections, and the correlation bridge', async () => {
   const text = await readKnowledge('vector-geometry-inner-products');
   assert.match(text, /^quantInterviewTopics:\s*\[linear-algebra-matrix-methods, vectors-linear-systems\]$/m);
@@ -89,4 +96,43 @@ test('linear systems Knowledge distinguishes singular coefficient matrices from 
   const text = await readKnowledge('linear-systems-consistency');
   assert.match(text, /rank\(\[A\|b\]\)[\s\S]{0,200}>[\s\S]{0,120}rank\(A\)[\s\S]{0,250}no solution/i);
   assert.match(text, /singular[\s\S]{0,500}(?:no solution|infinitely many)/i);
+});
+
+test('row stochastic closure is an S3+ source-neutral canonical Problem', async () => {
+  const text = await readProblem('product-of-row-stochastic-matrices');
+  assert.match(text, /^problemId:\s*linear-algebra-stochastic-001$/m);
+  assert.match(text, /^quantInterviewTopics:\s*\[linear-algebra-matrix-methods, vectors-linear-systems\]$/m);
+  assert.doesNotMatch(text, /^source|Green Book|Red Book|150 Questions|Question 9/im);
+  assertS3(text, 'product-of-row-stochastic-matrices');
+});
+
+test('row stochastic proof preserves both the row-sum invariant and nonnegativity', async () => {
+  const text = await readProblem('product-of-row-stochastic-matrices');
+  assert.match(text, /all-ones|ones column vector/i);
+  assert.match(text, /A\s*1\s*=\s*1/);
+  assert.match(text, /B\s*1\s*=\s*1/);
+  assert.match(text, /\(AB\)\s*1\s*=\s*A\s*\(B\s*1\)/);
+  assert.match(text, /nonnegative/i);
+  assert.match(text, /sum of nonnegative products/i);
+});
+
+test('rank consistency parameter Problem is S3+ and source-neutral', async () => {
+  const text = await readProblem('rank-and-consistency-of-linear-system');
+  assert.match(text, /^problemId:\s*linear-algebra-systems-001$/m);
+  assert.match(text, /^concepts:\s*\[linear-independence-span-basis-rank, linear-systems-consistency\]$/m);
+  assert.match(text, /^quantInterviewTopics:\s*\[linear-algebra-matrix-methods, vectors-linear-systems\]$/m);
+  assert.doesNotMatch(text, /^source|Green Book|Red Book|150 Questions/im);
+  assertS3(text, 'rank-and-consistency-of-linear-system');
+});
+
+test('rank consistency parameter Problem classifies every a b regime correctly', async () => {
+  const text = await readProblem('rank-and-consistency-of-linear-system');
+  assert.match(text, /a\s*!=\s*5[\s\S]{0,800}unique/i);
+  assert.match(text, /a\s*=\s*5[\s\S]{0,700}b\s*=\s*3[\s\S]{0,700}infinitely many/i);
+  assert.match(text, /a\s*=\s*5[\s\S]{0,700}b\s*!=\s*3[\s\S]{0,700}no solution/i);
+  assert.match(text, /\[0,?\s*0,?\s*a-5\s*\|\s*b-3\]/i);
+  assert.match(text, /rank\(A\)\s*=\s*2/);
+  assert.match(text, /rank[-– ]nullity/i);
+  assert.match(text, /one-dimensional null space|dim\s*N\(A\)\s*=\s*1/i);
+  assert.match(text, /determinant[\s\S]{0,600}(?:cannot|insufficient|does not)/i);
 });
