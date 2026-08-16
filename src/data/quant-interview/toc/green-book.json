@@ -498,6 +498,12 @@
               "title": "Drunk passenger",
               "titleZh": "醉酒乘客",
               "kind": "problem-label"
+            },
+            {
+              "id": "4.1.n-points-on-a-circle",
+              "title": "N points on a circle",
+              "titleZh": "圆上的 N 个点",
+              "kind": "problem-label"
             }
           ]
         },
