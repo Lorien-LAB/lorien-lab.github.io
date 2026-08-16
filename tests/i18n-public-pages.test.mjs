@@ -6,9 +6,8 @@ const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('phase 2 public landing pages expose Chinese copy', async () => {
   const checks = [
-    ['src/pages/index.astro', /研究领域|精选项目|当前关注/],
-    ['src/pages/research/index.astro', /问题优先|研究方向/],
-    ['src/pages/projects/index.astro', /研究系统|策略框架|项目/],
+    ['src/pages/index.astro', /研究与项目|当前关注/],
+    ['src/pages/research-projects/index.astro', /研究与项目|研究方向|研究系统|策略框架/],
     ['src/pages/notes/index.astro', /研究笔记|工作中的想法/],
     ['src/pages/about.astro', /研究理念|当前主题/],
     ['src/pages/cv.astro', /教育经历|实习经历|技术技能/],
