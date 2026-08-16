@@ -1,0 +1,40 @@
+{
+  "source": "red-book",
+  "canonicalTitle": "Quant Job Interview Questions and Answers",
+  "tocStatus": "user-supplied",
+  "coverageClaim": "structure-seed-not-problem-complete",
+  "editionStatus": "work-identified",
+  "edition": null,
+  "sections": [
+    {"id":"1","title":"The Interview Process","startPage":1,"kind":"chapter","children":[
+      {"id":"1.1","title":"Introduction"},{"id":"1.2","title":"Getting an interview"},{"id":"1.3","title":"The standard interview"},{"id":"1.4","title":"The phone interview"},{"id":"1.5","title":"The take-home exam"},{"id":"1.6","title":"The exam"},{"id":"1.7","title":"Follow-up"},{"id":"1.8","title":"Dos and don'ts"},{"id":"1.9","title":"When to apply?"},{"id":"1.10","title":"The different roles"},{"id":"1.11","title":"Sorts of employers"},{"id":"1.12","title":"Where people go wrong"}
+    ]},
+    {"id":"2","title":"Option Pricing","startPage":27,"kind":"chapter","children":[
+      {"id":"2.1","title":"Introduction"},
+      {"id":"2.2","title":"Questions","children":[
+        {"id":"2.2.1","title":"Black-Scholes"},{"id":"2.2.2","title":"Option price properties"},{"id":"2.2.3","title":"Hedging and replication"},{"id":"2.2.4","title":"The Greeks"},{"id":"2.2.5","title":"General"},{"id":"2.2.6","title":"Trees and Monte Carlo"},{"id":"2.2.7","title":"Incomplete markets"}
+      ]},
+      {"id":"2.3","title":"Solutions","children":[
+        {"id":"2.3.1","title":"Black-Scholes"},{"id":"2.3.2","title":"Option price properties"},{"id":"2.3.3","title":"Hedging and replication"},{"id":"2.3.4","title":"The Greeks"},{"id":"2.3.5","title":"General"},{"id":"2.3.6","title":"Trees and Monte Carlo"},{"id":"2.3.7","title":"Incomplete markets"}
+      ]}
+    ]},
+    {"id":"3","title":"Probability","startPage":91,"kind":"chapter","children":[
+      {"id":"3.1","title":"Introduction"},
+      {"id":"3.2","title":"Questions","children":[{"id":"3.2.1","title":"General"},{"id":"3.2.2","title":"Stochastic processes"}]},
+      {"id":"3.3","title":"Solutions","children":[{"id":"3.3.1","title":"General"},{"id":"3.3.2","title":"Stochastic processes"}]}
+    ]},
+    {"id":"4","title":"Interest Rates","startPage":159,"kind":"chapter","children":[{"id":"4.1","title":"Introduction"},{"id":"4.2","title":"Questions"},{"id":"4.3","title":"Solutions"}]},
+    {"id":"5","title":"Numerical Techniques and Algorithms","startPage":169,"kind":"chapter","children":[{"id":"5.1","title":"Introduction"},{"id":"5.2","title":"Questions"},{"id":"5.3","title":"Solutions"}]},
+    {"id":"6","title":"Mathematics","startPage":201,"kind":"chapter","children":[
+      {"id":"6.1","title":"Introduction"},
+      {"id":"6.2","title":"Questions","children":[{"id":"6.2.1","title":"General"},{"id":"6.2.2","title":"Integration and differentiation"}]},
+      {"id":"6.3","title":"Solutions","children":[{"id":"6.3.1","title":"General"},{"id":"6.3.2","title":"Integration and differentiation"}]}
+    ]},
+    {"id":"7","title":"Coding in C++","startPage":223,"kind":"chapter","children":[{"id":"7.1","title":"Introduction"},{"id":"7.2","title":"Questions"},{"id":"7.3","title":"Solutions"}]},
+    {"id":"8","title":"Logic/Brainteasers","startPage":275,"kind":"chapter","children":[{"id":"8.1","title":"Introduction"},{"id":"8.2","title":"Questions"},{"id":"8.3","title":"Solutions"}]},
+    {"id":"9","title":"The Soft Interview","startPage":297,"kind":"chapter","children":[{"id":"9.1","title":"Introduction"},{"id":"9.2","title":"Soft questions and answers"},{"id":"9.3","title":"Finance data questions"}]},
+    {"id":"10","title":"Top Ten Questions","startPage":305,"kind":"chapter","children":[{"id":"10.1","title":"Introduction"},{"id":"10.2","title":"Questions"}]},
+    {"id":"bibliography","title":"Bibliography","startPage":307,"kind":"backmatter"},
+    {"id":"index","title":"Index","startPage":309,"kind":"backmatter"}
+  ]
+}
