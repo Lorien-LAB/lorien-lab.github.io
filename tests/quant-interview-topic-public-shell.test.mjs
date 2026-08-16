@@ -11,6 +11,18 @@ const legacySourcePages = [
   'src/pages/knowledge/quant-interview/sources/[...slug].astro',
 ];
 
+test('public topic primitives depend only on the canonical taxonomy', async () => {
+  const loader = await readFile('src/lib/quantInterviewPublicTopics.ts', 'utf8');
+  const card = await readFile('src/components/QuantInterviewTopicCard.astro', 'utf8');
+  assert.match(loader, /topics\/taxonomy\.json/);
+  assert.match(loader, /flattenPublicQuantInterviewTopics/);
+  assert.doesNotMatch(loader, /source-topic-map|quant-interview\/coverage|quantInterviewCoverage/);
+  assert.match(card, /knowledgeCount/);
+  assert.match(card, /problemCount/);
+  assert.match(card, /\?topic=/);
+  assert.doesNotMatch(card, /problemSources|quant-interview\/coverage|quantInterviewCoverage/);
+});
+
 test('Quant Interview hub is Topic-first and source-neutral', async () => {
   const text = await readFile(hub, 'utf8');
   assert.match(text, /Learn by Topic/i);
