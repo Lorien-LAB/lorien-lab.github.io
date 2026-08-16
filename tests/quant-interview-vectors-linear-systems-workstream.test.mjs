@@ -23,6 +23,18 @@ const sourceInventory = {
     ['2.2', '9'],
   ],
 };
+const semanticDecisions = {
+  'green-book': {
+    '3.6.1::vector-coordinate-representation': ['knowledge-only', [], ['vector-geometry-inner-products']],
+    '3.6.1::dot-product': ['knowledge-only', [], ['vector-geometry-inner-products']],
+    '3.6.1::euclidean-norm-distance': ['knowledge-only', [], ['vector-geometry-inner-products']],
+    '3.6.1::angle-orthogonality': ['knowledge-only', [], ['vector-geometry-inner-products']],
+    '3.6.1::correlation-as-cosine': ['knowledge-only', [], ['vector-geometry-inner-products', 'correlation-matrix']],
+  },
+  '150-most-frequently-asked': {
+    '2.2::9': ['canonical-problem', ['product-of-row-stochastic-matrices'], []],
+  },
+};
 
 async function context() {
   const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
@@ -85,4 +97,40 @@ test('Green correlation geometry variant is owned by the actual Vectors section'
   assert.equal(matches[0].sourceSection, '3.6.1');
   assert.deepEqual(matches[0].canonicalProblems, ['correlation-matrix-parameter-range']);
   assert.ok(matches[0].canonicalTopics.includes('vectors-linear-systems'));
+});
+
+test('semantic identity distinguishes source-derived vector knowledge from canonical extensions', async () => {
+  for (const [source, expected] of Object.entries(semanticDecisions)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    const byKey = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
+    for (const [key, [state, problems, knowledge]] of Object.entries(expected)) {
+      const entry = byKey.get(key);
+      assert.ok(entry, `missing semantic row ${source} ${key}`);
+      assert.equal(entry.state, state, `${source} ${key} has wrong semantic state`);
+      assert.deepEqual(entry.canonicalProblems, problems, `${source} ${key} has wrong problem targets`);
+      assert.deepEqual(entry.canonicalKnowledge, knowledge, `${source} ${key} has wrong knowledge targets`);
+      assert.match(entry.resolutionNote ?? '', /\S/, `${source} ${key} missing resolution note`);
+    }
+  }
+
+  const green = await readJson('src/data/quant-interview/coverage/green-book.json');
+  const correlation = green.entries.find((entry) => entry.sourceSection === '3.6.1' && entry.sourceItem === 'correlation-range-0.8-0.8');
+  assert.equal(correlation?.state, 'variant');
+  assert.deepEqual(correlation?.canonicalProblems, ['correlation-matrix-parameter-range']);
+  assert.ok(correlation?.canonicalKnowledge.includes('vector-geometry-inner-products'));
+  assert.match(correlation?.resolutionNote ?? '', /geometric|angle|Gram/i);
+});
+
+test('repository-authored canonical extensions do not masquerade as source coverage', async () => {
+  const forbiddenProblem = 'rank-and-consistency-of-linear-system';
+  const forbiddenKnowledge = new Set(['linear-independence-span-basis-rank', 'linear-systems-consistency']);
+  for (const source of ['green-book', 'red-book', '150-most-frequently-asked']) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    for (const entry of ledger.entries) {
+      assert.ok(!entry.canonicalProblems.includes(forbiddenProblem), `${source} fabricates source provenance for ${forbiddenProblem}`);
+      for (const slug of entry.canonicalKnowledge) {
+        assert.ok(!forbiddenKnowledge.has(slug), `${source} fabricates source provenance for ${slug}`);
+      }
+    }
+  }
 });
