@@ -136,7 +136,7 @@ test('coverage ledger validator enforces terminal targets and map-consistent top
   const base = { source: 'x', version: 1, entries: [] };
   assert.throws(() => validateCoverageLedger({ ...base, entries: [{ sourceSection: 's', sourceItem: '1', canonicalTopics: ['probability-statistics'], state: 'canonical-problem', canonicalProblems: [], canonicalKnowledge: [] }] }, context), /canonical problem target/i);
   assert.throws(() => validateCoverageLedger({ ...base, entries: [{ sourceSection: 's', sourceItem: '1', canonicalTopics: ['probability-statistics'], state: 'knowledge-only', canonicalProblems: [], canonicalKnowledge: [] }] }, context), /canonical knowledge target/i);
-  assert.throws(() => validateCoverageLedger({ ...base, entries: [{ sourceSection: 's', sourceItem: '1', canonicalTopics: ['black-scholes'], state: 'pending', canonicalProblems: [], canonicalKnowledge: [] }] }, context), /inconsistent with source-topic map/i);
+  assert.throws(() => validateCoverageLedger({ ...base, entries: [{ sourceSection: 's', sourceItem: '1', canonicalTopics: ['black-scholes'], state: 'pending', canonicalProblems: [], canonicalKnowledge: [] }] }, context), /topic override reason/i);
 });
 
 test('hidden coverage infrastructure is not imported by public pages or layouts', async () => {
