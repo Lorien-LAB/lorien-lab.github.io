@@ -10,6 +10,7 @@ const entries = (await getCollection('knowledge')).sort((a,b) => (b.data.updated
 const featured = entries.filter((entry) => entry.data.featured).slice(0, 3);
 const slugOf = (id: string) => id.split('/').pop() ?? id;
 const typeLabel = (type: string) => type === 'topic' ? 'Research Topic' : type[0].toUpperCase() + type.slice(1);
+
 const domains = [
   { name: 'Quantitative Finance', categories: ['Factor Investing','Asset Pricing','Portfolio Construction','Futures & Derivatives','CTA / Systematic Trading','Market Microstructure','Risk Management'] },
   { name: 'Mathematics & Statistics', categories: ['Probability','Stochastic Processes','Optimization','Time Series','Econometrics','Linear Algebra','Numerical Methods'] },
@@ -22,45 +23,82 @@ const typeCounts = Object.fromEntries(['concept','paper','tool','topic'].map((ty
 ---
 <BaseLayout title="Knowledge Base · Lorien Lab" description="A connected research library for quantitative finance, mathematics, machine learning, AI research agents, and quantitative research infrastructure.">
   <header class="knowledge-hero">
+    <div class="network-grid" aria-hidden="true"></div>
     <div class="container hero-layout">
-      <div>
-        <div class="mono-label">Knowledge Base</div>
+      <div class="hero-copy">
         <h1>A connected<br/>research library.</h1>
         <p>Structured concepts, papers, tools, and research topics across quantitative finance, mathematics, machine learning, and research systems.</p>
         <a class="button primary" href="#knowledge-index">Browse Knowledge →</a>
       </div>
       <div class="hero-side">
-        <div class="obsidian-preview" aria-label="Obsidian Knowledge Graph coming soon"><span class="mono-label">Obsidian Knowledge Graph</span><strong>Coming Soon</strong><p>The full research graph stays connected behind the public library.</p></div>
-        <div class="type-tally">{Object.entries(typeCounts).map(([type,count]) => <div><span>{typeLabel(type)}</span><strong>{count}</strong></div>)}</div>
+        <div class="obsidian-preview" aria-label="Obsidian Knowledge Graph coming soon">
+          <div class="preview-mark" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+          <div><span class="mono-label">Obsidian Knowledge Graph</span><strong>Coming Soon</strong><p>The full research graph is maintained in Obsidian. A public graph entry will appear here after Obsidian Publish is enabled.</p></div>
+        </div>
+        <div class="type-tally" aria-label="Current knowledge entry counts">
+          {Object.entries(typeCounts).map(([type,count]) => <div><span>{typeLabel(type)}</span><strong>{count}</strong></div>)}
+        </div>
       </div>
     </div>
   </header>
 
+  <section class="section domain-section">
+    <div class="container">
+      <div class="section-intro"><div><div class="mono-label">Knowledge Map</div><h2>Explore by domain</h2></div><p>Browse the library by research area, then narrow the index by type or search across titles, descriptions, tags, and categories.</p></div>
+      <div class="domain-rail">
+        {domains.map((domain, index) => <a class="domain-block" href="#knowledge-index" data-domain-jump={domain.name}>
+          <div class="domain-number">{String(index + 1).padStart(2,'0')}</div>
+          <div class="domain-copy"><h3>{domain.name}</h3><p>{domain.categories.join(' · ')}</p></div>
+          <div class="domain-count"><strong>{domainCounts[domain.name]}</strong><span>{domainCounts[domain.name] === 1 ? 'entry' : 'entries'}</span></div>
+          <span class="domain-arrow" aria-hidden="true">→</span>
+        </a>)}
+      </div>
+    </div>
+  </section>
+
   <section class="section"><div class="container"><QuantInterviewGateway href={`${base}knowledge/quant-interview/`} /></div></section>
   <section class="section"><div class="container"><LearningResourcesGateway href={`${base}knowledge/financial-engineering-learning-resources/`} /></div></section>
 
-  <section class="section domain-section"><div class="container">
-    <div class="section-intro"><div><div class="mono-label">Knowledge Map</div><h2>Explore by domain</h2></div><p>Browse the library by research area, then narrow the index by type or search across titles, descriptions, tags, and categories.</p></div>
-    <div class="domain-rail">{domains.map((domain, index) => <a class="domain-block" href="#knowledge-index" data-domain-jump={domain.name}><span>{String(index + 1).padStart(2,'0')}</span><div><h3>{domain.name}</h3><p>{domain.categories.join(' · ')}</p></div><strong>{domainCounts[domain.name]}</strong><i>→</i></a>)}</div>
-  </div></section>
-
-  {featured.length > 0 && <section class="section featured-section"><div class="container"><div class="section-intro"><div><div class="mono-label">Selected Knowledge</div><h2>Featured entries</h2></div><p>Compact, reusable knowledge objects connected to research and tooling across the portfolio.</p></div><div class="knowledge-grid">{featured.map((entry) => <KnowledgeCard entry={entry} />)}</div></div></section>}
-
-  <section id="knowledge-index" class="section"><div class="container">
-    <div class="section-intro"><div><div class="mono-label">Knowledge Index</div><h2>Search the library</h2></div><p>The general index remains focused on concepts, papers, tools, and research topics. Interview Problems live in the dedicated Problem Bank.</p></div>
-    <div class="filter-bar">
-      <label><span>Search knowledge</span><input type="search" placeholder="Search concepts, tools, tags…" data-knowledge-search /></label>
-      <label><span>Type</span><select data-type-filter><option value="">All types</option><option value="concept">Concepts</option><option value="paper">Papers</option><option value="tool">Tools</option><option value="topic">Research topics</option></select></label>
-      <label><span>Domain</span><select data-domain-filter><option value="">All domains</option>{domains.map((domain) => <option value={domain.name}>{domain.name}</option>)}</select></label>
-      <button type="button" data-filter-reset>Reset</button>
+  {featured.length > 0 && <section class="section featured-section">
+    <div class="container">
+      <div class="section-intro"><div><div class="mono-label">Selected Knowledge</div><h2>Featured entries</h2></div><p>Compact, reusable knowledge objects that connect directly to the research and tooling used across this portfolio.</p></div>
+      <div class="knowledge-grid">{featured.map((entry) => <KnowledgeCard entry={entry} />)}</div>
     </div>
-    <div class="index-list">{entries.map((entry) => {
-      const searchText = [entry.data.title,entry.data.description,entry.data.domain,entry.data.category,...entry.data.tags].join(' ').toLowerCase();
-      return <a class="index-row" href={`${base}knowledge/${slugOf(entry.id)}/`} data-knowledge-row data-type={entry.data.type} data-domain={entry.data.domain} data-search={searchText}><div><span>{typeLabel(entry.data.type)}</span><small>{entry.data.status}</small></div><div><h3>{entry.data.title}</h3><p>{entry.data.description}</p></div><div><strong>{entry.data.domain}</strong><span>{entry.data.category}</span></div><i>→</i></a>;
-    })}</div>
-    <p data-no-results hidden>No entries match the current filters.</p>
-  </div></section>
+  </section>}
+
+  <section id="knowledge-index" class="section index-section">
+    <div class="container">
+      <div class="section-intro"><div><div class="mono-label">Knowledge Index</div><h2>Search the library</h2></div><p>All entries remain visible without JavaScript. Search and filters progressively narrow the static index in your browser.</p></div>
+      <div class="filter-bar" data-knowledge-controls>
+        <label class="search-field"><span>Search knowledge</span><input type="search" placeholder="Search concepts, tools, tags…" data-knowledge-search /></label>
+        <label><span>Type</span><select data-type-filter><option value="">All types</option><option value="concept">Concepts</option><option value="paper">Papers</option><option value="tool">Tools</option><option value="topic">Research topics</option></select></label>
+        <label><span>Domain</span><select data-domain-filter><option value="">All domains</option>{domains.map((domain) => <option value={domain.name}>{domain.name}</option>)}</select></label>
+        <button class="reset-button" type="button" data-filter-reset>Reset</button>
+      </div>
+
+      <div class="index-list" data-knowledge-list>
+        {entries.map((entry) => {
+          const searchText = [entry.data.title,entry.data.description,entry.data.domain,entry.data.category,...entry.data.tags].join(' ').toLowerCase();
+          return <a class="index-row" href={`${base}knowledge/${slugOf(entry.id)}/`} data-knowledge-row data-type={entry.data.type} data-domain={entry.data.domain} data-search={searchText}>
+            <div class="row-type"><span>{typeLabel(entry.data.type)}</span><small>{entry.data.status}</small></div>
+            <div class="row-main"><h3>{entry.data.title}</h3><p>{entry.data.description}</p></div>
+            <div class="row-domain"><strong>{entry.data.domain}</strong><span>{entry.data.category}</span></div>
+            <span class="row-arrow" aria-hidden="true">→</span>
+          </a>;
+        })}
+      </div>
+      <p class="no-results" data-no-results hidden>No entries match the current filters.</p>
+    </div>
+  </section>
+
+  <section class="section obsidian-section">
+    <div class="container obsidian-wrap">
+      <div><div class="mono-label">Obsidian Knowledge Graph</div><h2>The deeper research graph stays connected behind the library.</h2></div>
+      <div class="obsidian-copy"><strong>Coming Soon</strong><p>Knowledge nodes, paper notes, research hypotheses, and project findings are maintained in Obsidian. When a public Obsidian Publish space is available, this section will become the bridge to the full graph.</p></div>
+    </div>
+  </section>
 </BaseLayout>
+
 <script is:inline>
 (() => {
   const search = document.querySelector('[data-knowledge-search]');
@@ -74,14 +112,19 @@ const typeCounts = Object.fromEntries(['concept','paper','tool','topic'].map((ty
     const type = typeFilter?.value || '';
     const domain = domainFilter?.value || '';
     let visible = 0;
-    rows.forEach((row) => { const matches = (!q || (row.dataset.search || '').includes(q)) && (!type || row.dataset.type === type) && (!domain || row.dataset.domain === domain); row.hidden = !matches; if (matches) visible += 1; });
+    rows.forEach((row) => {
+      const matches = (!q || row.dataset.search.includes(q)) && (!type || row.dataset.type === type) && (!domain || row.dataset.domain === domain);
+      row.hidden = !matches;
+      if (matches) visible += 1;
+    });
     if (noResults) noResults.hidden = visible !== 0;
   };
-  [search,typeFilter,domainFilter].forEach((control) => control?.addEventListener(control === search ? 'input' : 'change', apply));
-  reset?.addEventListener('click', () => { if (search) search.value=''; if (typeFilter) typeFilter.value=''; if (domainFilter) domainFilter.value=''; apply(); });
+  [search, typeFilter, domainFilter].forEach((control) => control?.addEventListener(control === search ? 'input' : 'change', apply));
+  reset?.addEventListener('click', () => { if (search) search.value=''; if (typeFilter) typeFilter.value=''; if (domainFilter) domainFilter.value=''; apply(); search?.focus(); });
   document.querySelectorAll('[data-domain-jump]').forEach((link) => link.addEventListener('click', () => { if (domainFilter) domainFilter.value = link.dataset.domainJump || ''; apply(); }));
 })();
 </script>
+
 <style>
-.knowledge-hero{padding:64px 0;background:radial-gradient(circle at 72% 28%,#0c2a3a 0,#071723 38%,var(--hero) 72%);color:var(--hero-ink)}.hero-layout{display:grid;grid-template-columns:1fr .85fr;gap:64px;align-items:center}.knowledge-hero h1{margin:10px 0 18px;font:700 clamp(3rem,6vw,5.5rem)/.94 var(--font-mono);letter-spacing:-.06em}.knowledge-hero p{max-width:690px;color:#bfd0da}.hero-side{display:grid;gap:15px}.obsidian-preview{padding:22px;border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);background:rgba(5,18,29,.65)}.obsidian-preview strong{display:block;margin:7px 0;color:#60a8ff}.type-tally{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)}.type-tally div{padding:12px}.type-tally span{display:block;color:#8fa5b2;font:600 .62rem var(--font-mono)}.type-tally strong{display:block;color:var(--accent);font:800 1.2rem var(--font-mono)}.section-intro{display:grid;grid-template-columns:1fr minmax(260px,520px);gap:45px;align-items:end;margin-bottom:26px}.section-intro h2{margin:6px 0 0;font-size:clamp(1.8rem,4vw,3rem)}.section-intro>p{margin:0;color:var(--muted)}.domain-rail,.index-list{border-top:1px solid var(--border)}.domain-block{display:grid;grid-template-columns:50px 1fr 60px 20px;gap:18px;align-items:center;padding:18px 3px;border-bottom:1px solid var(--border);color:var(--ink)}.domain-block>span,.domain-block i{color:var(--accent-strong);font:700 .68rem var(--font-mono)}.domain-block h3{margin:0 0 4px}.domain-block p{margin:0;color:var(--muted);font-size:.8rem}.domain-block>strong{text-align:right}.domain-block i{font-style:normal}.featured-section{background:color-mix(in srgb,var(--surface) 70%,transparent);border-block:1px solid var(--border)}.knowledge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.filter-bar{display:grid;grid-template-columns:1fr 180px 240px auto;gap:12px;align-items:end;padding:15px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);margin-bottom:20px}.filter-bar label{display:grid;gap:6px}.filter-bar label>span{color:var(--muted);font:700 .64rem var(--font-mono);text-transform:uppercase}.filter-bar input,.filter-bar select,.filter-bar button{height:42px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink);padding:0 10px}.index-row{display:grid;grid-template-columns:120px 1fr 230px 20px;gap:18px;align-items:center;padding:17px 3px;border-bottom:1px solid var(--border);color:var(--ink)}.index-row>div:first-child span{display:block;color:var(--accent-strong);font:700 .67rem var(--font-mono)}.index-row small{color:var(--muted)}.index-row h3{margin:0 0 4px}.index-row p{margin:0;color:var(--muted);font-size:.83rem}.index-row>div:nth-child(3){display:grid}.index-row>div:nth-child(3) span{color:var(--muted);font-size:.75rem}.index-row i{font-style:normal;color:var(--accent-strong)}@media(max-width:900px){.hero-layout,.section-intro{grid-template-columns:1fr}.knowledge-grid{grid-template-columns:repeat(2,1fr)}.filter-bar{grid-template-columns:1fr 1fr}.index-row{grid-template-columns:100px 1fr 20px}.index-row>div:nth-child(3){display:none}}@media(max-width:640px){.knowledge-grid,.filter-bar{grid-template-columns:1fr}.index-row{grid-template-columns:1fr 20px}.index-row>div:first-child{display:none}}
+.knowledge-hero{position:relative;overflow:hidden;background:radial-gradient(circle at 70% 30%,#0c2a3a 0,#071723 38%,var(--hero) 72%);color:var(--hero-ink);border-bottom:1px solid rgba(255,255,255,.08)}.network-grid{position:absolute;inset:0 0 0 45%;opacity:.28;background-image:radial-gradient(circle,#3cb6ff 1.2px,transparent 1.4px),linear-gradient(120deg,transparent 0 48%,rgba(56,153,255,.16) 49% 50%,transparent 51% 100%),linear-gradient(35deg,transparent 0 48%,rgba(80,222,177,.12) 49% 50%,transparent 51% 100%);background-size:76px 76px,180px 180px,220px 220px;mask-image:linear-gradient(to right,transparent,#000 22%,#000)}.hero-layout{position:relative;display:grid;grid-template-columns:1.05fr .95fr;gap:70px;align-items:center;min-height:420px;padding-top:60px;padding-bottom:60px}.hero-copy h1{margin:0;font:700 clamp(3rem,6vw,5.7rem)/.94 var(--font-mono);letter-spacing:-.065em}.hero-copy>p{max-width:690px;margin:24px 0 28px;color:#bfd0da;font:400 1.02rem/1.72 var(--font-mono)}.hero-side{display:grid;gap:16px}.obsidian-preview{display:grid;grid-template-columns:100px 1fr;gap:22px;align-items:center;padding:25px;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:rgba(5,18,29,.72);backdrop-filter:blur(12px)}.obsidian-preview strong,.obsidian-copy strong{display:block;margin:7px 0;color:#60a8ff;font:700 .85rem var(--font-mono);text-transform:uppercase;letter-spacing:.05em}.obsidian-preview p{margin:8px 0 0;color:#aebfc9;font-size:.85rem;line-height:1.55}.preview-mark{position:relative;width:90px;height:90px}.preview-mark i{position:absolute;width:11px;height:11px;border:2px solid #75a7e8;border-radius:50%}.preview-mark i:nth-child(1){left:39px;top:7px}.preview-mark i:nth-child(2){left:12px;top:32px}.preview-mark i:nth-child(3){right:10px;top:34px}.preview-mark i:nth-child(4){left:28px;bottom:9px}.preview-mark i:nth-child(5){right:22px;bottom:7px}.preview-mark:before,.preview-mark:after{content:'';position:absolute;inset:18px;border:1px solid #517cae;transform:rotate(35deg)}.preview-mark:after{transform:rotate(-35deg)}.type-tally{display:grid;grid-template-columns:repeat(4,1fr);border-top:1px solid rgba(255,255,255,.13);border-bottom:1px solid rgba(255,255,255,.13)}.type-tally div{padding:13px 10px;border-right:1px solid rgba(255,255,255,.1)}.type-tally div:last-child{border-right:0}.type-tally span{display:block;color:#8fa5b2;font:600 .62rem var(--font-mono);text-transform:uppercase}.type-tally strong{display:block;margin-top:4px;font:800 1.25rem var(--font-mono);color:var(--accent)}.section-intro{display:grid;grid-template-columns:1fr minmax(280px,520px);gap:50px;align-items:end;margin-bottom:30px}.section-intro h2{margin:7px 0 0;font-size:clamp(2rem,4vw,3.25rem);letter-spacing:-.05em}.section-intro>p{margin:0;color:var(--muted);line-height:1.65}.domain-rail{border-top:1px solid var(--border)}.domain-block{display:grid;grid-template-columns:54px minmax(0,1fr) 72px 24px;gap:20px;align-items:center;padding:21px 4px;border-bottom:1px solid var(--border);color:var(--ink);transition:background .18s ease,padding .18s ease}.domain-block:hover{padding-left:12px;padding-right:12px;background:color-mix(in srgb,var(--surface) 72%,transparent);color:var(--ink)}.domain-number{font:700 .7rem var(--font-mono);color:var(--accent-strong)}.domain-copy h3{margin:0 0 5px;font-size:1.02rem}.domain-copy p{margin:0;color:var(--muted);font-size:.82rem;line-height:1.55}.domain-count{text-align:right}.domain-count strong{display:block;font:800 1rem var(--font-mono)}.domain-count span{color:var(--muted);font-size:.67rem}.domain-arrow{font:800 1.05rem var(--font-mono);color:var(--accent-strong)}.featured-section{background:color-mix(in srgb,var(--surface) 70%,transparent);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.knowledge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.filter-bar{display:grid;grid-template-columns:minmax(240px,1fr) 180px minmax(200px,260px) auto;gap:12px;align-items:end;padding:16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);margin-bottom:22px}.filter-bar label{display:grid;gap:7px}.filter-bar label>span{font:700 .66rem var(--font-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}.filter-bar input,.filter-bar select{width:100%;height:42px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink);padding:0 12px;font:600 .82rem var(--font-sans)}.filter-bar input:focus,.filter-bar select:focus{outline:2px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:2px}.reset-button{height:42px;padding:0 16px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-weight:700;cursor:pointer}.reset-button:hover{color:var(--ink);border-color:var(--accent)}.index-list{border-top:1px solid var(--border)}.index-row{display:grid;grid-template-columns:130px minmax(0,1.3fr) minmax(190px,.7fr) 24px;gap:20px;align-items:center;padding:19px 3px;border-bottom:1px solid var(--border);color:var(--ink)}.index-row:hover{color:var(--ink);background:color-mix(in srgb,var(--surface) 68%,transparent)}.row-type span{display:block;font:700 .69rem var(--font-mono);text-transform:uppercase;color:var(--accent-strong)}.row-type small{color:var(--muted);text-transform:uppercase;font:600 .61rem var(--font-mono)}.row-main h3{margin:0 0 5px;font-size:1rem}.row-main p{margin:0;color:var(--muted);font-size:.83rem;line-height:1.5}.row-domain strong,.row-domain span{display:block}.row-domain strong{font-size:.77rem}.row-domain span{margin-top:3px;color:var(--muted);font-size:.7rem}.row-arrow{color:var(--accent-strong);font-weight:800}.no-results{padding:28px;text-align:center;color:var(--muted);border-bottom:1px solid var(--border)}.obsidian-section{padding-bottom:20px}.obsidian-wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start;padding-top:48px;border-top:1px solid var(--border)}.obsidian-wrap h2{max-width:620px;margin:8px 0 0;font-size:clamp(2rem,4vw,3.4rem);line-height:1.05;letter-spacing:-.05em}.obsidian-copy{padding-left:28px;border-left:2px solid var(--accent)}.obsidian-copy p{margin:8px 0 0;color:var(--muted);line-height:1.7}@media(max-width:960px){.hero-layout{grid-template-columns:1fr;min-height:auto}.network-grid{inset:45% 0 0}.knowledge-grid{grid-template-columns:1fr}.filter-bar{grid-template-columns:1fr 1fr}.search-field{grid-column:1/-1}.section-intro{grid-template-columns:1fr}.index-row{grid-template-columns:110px 1fr 24px}.row-domain{display:none}.obsidian-wrap{grid-template-columns:1fr;gap:28px}}@media(max-width:640px){.hero-layout{padding-top:48px;padding-bottom:45px}.hero-copy h1{font-size:clamp(2.7rem,14vw,4.6rem)}.obsidian-preview{grid-template-columns:1fr}.preview-mark{display:none}.type-tally{grid-template-columns:repeat(2,1fr)}.type-tally div:nth-child(2){border-right:0}.type-tally div:nth-child(-n+2){border-bottom:1px solid rgba(255,255,255,.1)}.domain-block{grid-template-columns:38px 1fr 22px}.domain-count{display:none}.filter-bar{grid-template-columns:1fr}.search-field{grid-column:auto}.index-row{grid-template-columns:1fr 22px;gap:12px}.row-type{grid-column:1}.row-main{grid-column:1}.row-arrow{grid-column:2;grid-row:1/3}.domain-copy p{font-size:.76rem}}
 </style>
