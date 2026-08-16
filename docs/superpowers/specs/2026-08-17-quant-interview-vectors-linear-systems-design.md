@@ -98,6 +98,8 @@ The corrected ledger row should therefore:
 - record that the Green item contributes a geometric / Gram-vector interpretation to the existing canonical family;
 - include `vectors-linear-systems` in its item-level topic classification while retaining any necessary cross-topic classification through an explicit `topicOverrideReason` rather than pretending the source section itself is a covariance/PSD section.
 
+Any earlier regression test that keyed this semantic item to Green `3.6.4` must be updated to the corrected source location while preserving the same canonical identity and dedup result.
+
 This is a repository provenance fix based on the supplied source, not a change to the source text.
 
 ### 4.3 Red Book — reviewed, no new direct vectors/linear-systems item
@@ -274,7 +276,7 @@ It may cross-link to completed decomposition Knowledge for numerical solution me
 
 The 150 source uses the term **probability matrix**.
 
-The canonical public Problem should use the more specific standard term **row-stochastic matrix** as its main name and explain in source-neutral prose that matrices of this form are also commonly called stochastic/probability transition matrices depending on context.
+The canonical public Problem should use the more specific standard term **row-stochastic matrix** as its main name and explain in source-neutral prose that matrices of this form are also commonly called stochastic or probability matrices depending on context.
 
 The proof must preserve both defining properties:
 
@@ -340,7 +342,7 @@ Suggested Interview Checks include:
 - what does a nontrivial null space imply?;
 - for an `m x n` matrix of rank `r`, what is `dim N(A)`?;
 - why can an overdetermined system still be consistent?;
-- why can an underdetermined system still have a unique solution only under special dimension/rank conditions?
+- why can a consistent system with fewer independent equations than unknowns not have a unique solution?
 
 ### 7.3 New Knowledge: `linear-systems-consistency`
 
@@ -488,6 +490,7 @@ Its workstream `sourceScope` must carry:
 
 Do **not** add source rows for:
 
+- Cauchy-Schwarz / projection if not present in the inspected Green source;
 - span / basis / rank;
 - null space / rank-nullity;
 - RREF consistency;
