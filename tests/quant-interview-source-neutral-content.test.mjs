@@ -73,6 +73,9 @@ test('all current interview problems have canonical topics and no source provena
     assert.doesNotMatch(text, /^originType:/m, `${slug} still exposes originType`);
     assert.doesNotMatch(text, /^source(?:Section|Chapter|Problem|Reference|Url)?:/m, `${slug} still exposes source provenance`);
     assert.doesNotMatch(file, /150-most-frequently-asked|\/original\//, `${slug} still lives in a source-oriented directory`);
+    const problemId = text.match(/^problemId:\s*(.+)$/m)?.[1]?.trim() ?? '';
+    assert.ok(problemId, `${slug} missing problemId`);
+    assert.doesNotMatch(problemId, /150|first[- ]look|green[- ]book|red[- ]book|frequently[- ]asked/i, `${slug} still exposes source identity through problemId`);
   }
 });
 
