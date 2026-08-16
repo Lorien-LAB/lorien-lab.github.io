@@ -8,9 +8,8 @@ import { expandTopicIdsWithAncestors, flattenPublicQuantInterviewTopics } from '
 const problems = (await getCollection('problems')).sort((a, b) =>
   a.data.problemId.localeCompare(b.data.problemId, undefined, { numeric: true })
 );
-const sources = await getCollection('problemSources');
 const knowledge = await getCollection('knowledge');
-validateProblemRelationships(problems, sources, knowledge);
+validateProblemRelationships(problems, knowledge);
 
 const knowledgeBySlug = new Map(knowledge.map((entry) => [slugOf(entry.id), entry]));
 const topicOptions = flattenPublicQuantInterviewTopics();
