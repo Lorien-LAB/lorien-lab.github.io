@@ -32,6 +32,16 @@ export function validateTopicWorkstream(workstream, context) {
   if (!Array.isArray(workstream.canonicalTopics) || workstream.canonicalTopics.length === 0) throw new Error('Topic workstream requires canonicalTopics.');
   if (!Array.isArray(workstream.sourceScopes) || workstream.sourceScopes.length === 0) throw new Error('Topic workstream requires sourceScopes.');
 
+  if (workstream.canonicalExtensions !== undefined) {
+    if (!Array.isArray(workstream.canonicalExtensions)) throw new Error('Topic workstream canonicalExtensions must be an array.');
+    const seenExtensions = new Set();
+    for (const extension of workstream.canonicalExtensions) {
+      requireString(extension, 'Topic workstream canonical extension');
+      if (seenExtensions.has(extension)) throw new Error(`Duplicate canonical extension in workstream: ${extension}`);
+      seenExtensions.add(extension);
+    }
+  }
+
   const topicIds = new Set(flattenTopics(context.taxonomy).map((topic) => topic.id));
   for (const topic of workstream.canonicalTopics) {
     if (!topicIds.has(topic)) throw new Error(`Unknown canonical topic in workstream: ${topic}`);
