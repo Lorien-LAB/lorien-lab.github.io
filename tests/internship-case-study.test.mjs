@@ -20,6 +20,8 @@ test('sanitized internship project publishes only approved public facts', async 
   assert.match(project, /period:\s*May–Jul 2026/);
   assert.match(project, /2023–2026 rolling test window/);
   assert.match(project, /2 bp per leg per side/);
+  assert.match(project, /Annualized Return:\s*"43\.08%"/);
+  assert.match(project, /annualized return of \*\*43\.08%\*\*/i);
   assert.match(project, /Sharpe[^\n]*2\.40/);
   assert.match(project, /maximum drawdown[^\n]*5\.28%/i);
   assert.match(project, /Confidentiality note|intentionally sanitized|intentionally omitted/i);
