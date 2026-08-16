@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   generate:
-    if: contains(github.event.head_commit.message, 'trigger topic map')
+    if: contains(github.event.head_commit.message, 'trigger coverage')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -19,12 +19,12 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
-      - run: node scripts/tmp-stage-a-topic-map.mjs
-      - name: Commit generated internal routing
+      - run: node scripts/tmp-stage-a-coverage.mjs
+      - name: Commit generated hidden coverage
         run: |
           git config user.name "Lorien"
           git config user.email "2249297094@qq.com"
-          git add src/data/quant-interview/toc/green-book.json src/data/quant-interview/topics/source-topic-map.json
+          git add src/data/quant-interview/coverage
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "data: map interview source TOCs into canonical topics"
+          git commit -m "feat: add hidden quant interview coverage ledger"
           git push
