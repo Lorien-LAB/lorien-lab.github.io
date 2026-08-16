@@ -58,6 +58,7 @@ The Quant Interview system separates reusable Knowledge from practice objects an
 src/content/knowledge/          reusable concepts and Problem Solving Techniques
 src/content/problems/           first-class Problem records
 src/content/problem-sources/    Green Book, Red Book, and future source containers
+src/data/quant-interview/       edition-safe ingestion manifests
 ```
 
 Canonical public Problem routes are `/problems/<slug>/`. Green Book and Red Book are **sources**, not Knowledge types. Problems never become a fifth `knowledge.type` value.
@@ -67,6 +68,16 @@ Problem-solving methods such as Conditioning, First-Step Analysis, and Recursion
 Every source-derived Problem must preserve provenance, but its public statement should use an **independent formulation** and its solution should be independently derived. Do not host source PDFs or scans. Do not copy answer keys or large verbatim book passages. Do not invent authors, publication years, ISBNs, official URLs, chapter labels, or source-problem identifiers when they have not been verified.
 
 Green Book and Red Book source records may legitimately contain zero indexed Problems while the architecture is being populated. All displayed Problem, Concept, Technique, and Source counts must be derived from actual content rather than hard-coded targets.
+
+#### Edition-safe ingestion
+
+Before bulk-ingesting any source-derived Problems, **pin an exact edition**. Work-level identity is not sufficient for chapter numbers, page ranges, or source-problem identifiers because different editions can change pagination, ordering, and question counts.
+
+Each book therefore has an ingestion manifest under `src/data/quant-interview/`. A manifest stays in `work-identified / awaiting-source-file` state until an actual source file is available and matched to a specific edition. Only then may an agent fill `edition`, `isbn` when available, `sourceFile`, and page-bounded ingestion batches, and move the source to `edition-pinned / manifest-ready`.
+
+The validator in `src/lib/quantInterviewIngestion.mjs` rejects ingestion batches when no exact edition is pinned, rejects duplicate batch IDs, and rejects invalid or overlapping page ranges. This gate must pass before source-derived Problem Markdown is created.
+
+A source file is used only as private ingestion evidence. Do not commit the copyrighted PDF or scans into the public website repository. Public output remains independently formulated Problem statements, original derivations, metadata, and provenance references.
 
 Hints and full solutions should use native disclosure markup so a reader can attempt the Problem before revealing help:
 
@@ -108,7 +119,7 @@ featured: false
 ---
 ```
 
-Before merge, schema validation, relationship validation, `npm run test`, `npm run check`, and `npm run build` must pass. Missing relationships should be fixed rather than rendered as dead links.
+Before merge, schema validation, relationship validation, ingestion-manifest validation, `npm run test`, `npm run check`, and `npm run build` must pass. Missing relationships should be fixed rather than rendered as dead links.
 
 ### Knowledge Base
 
