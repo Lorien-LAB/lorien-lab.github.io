@@ -6,97 +6,97 @@ const b = import.meta.env.BASE_URL;
   <header class="page-hero">
     <div class="container cv-head">
       <div>
-        <div class="mono-label">Curriculum Vitae</div>
-        <h1>Quantitative research,<br/>from hypothesis to system.</h1>
-        <p>Quantitative Finance student at The Chinese University of Hong Kong, Shenzhen, focused on factor research, systematic trading, asset pricing, and agent-assisted research infrastructure.</p>
+        <div class="mono-label"><span class="lang-en">Curriculum Vitae</span><span class="lang-zh" lang="zh-CN">个人简历</span></div>
+        <h1><span class="lang-en">Quantitative research,<br/>from hypothesis to system.</span><span class="lang-zh" lang="zh-CN">量化研究，<br/>从假设走向系统。</span></h1>
+        <p><span class="lang-en">Quantitative Finance student at The Chinese University of Hong Kong, Shenzhen, focused on factor research, systematic trading, asset pricing, and agent-assisted research infrastructure.</span><span class="lang-zh" lang="zh-CN">香港中文大学（深圳）量化金融专业学生，研究重点包括因子研究、系统化交易、资产定价与 Agent 辅助研究基础设施。</span></p>
       </div>
-      <a class="button primary" href={`${b}cv/Xiang-Luo-CV.pdf`} target="_blank" rel="noreferrer">Download PDF CV ↓</a>
+      <a class="button primary" href={`${b}cv/Xiang-Luo-CV.pdf`} target="_blank" rel="noreferrer"><span class="lang-en">Download PDF CV ↓</span><span class="lang-zh" lang="zh-CN">下载 PDF 简历 ↓</span></a>
     </div>
   </header>
 
   <div class="container cv-wrap">
     <section>
-      <h2>Education</h2>
+      <h2><span class="lang-en">Education</span><span class="lang-zh" lang="zh-CN">教育经历</span></h2>
       <div>
         <div class="cv-entry">
-          <div><strong>The Chinese University of Hong Kong, Shenzhen</strong><span>Shenzhen, China · Expected May 2028</span></div>
-          <p><b>Major:</b> Quantitative Finance · <b>CGPA:</b> 3.84 / 4.0 · <b>MGPA:</b> 3.89 / 4.0</p>
-          <p><b>Core coursework:</b> Calculus, Linear Algebra, Discrete Mathematics, Optimization, Ordinary Differential Equations, Probability & Statistics, Stochastic Processes, Data Structures, Machine Learning, Econometrics, Portfolio Analysis, Options & Futures Analysis.</p>
+          <div><strong><span class="lang-en">The Chinese University of Hong Kong, Shenzhen</span><span class="lang-zh" lang="zh-CN">香港中文大学（深圳）</span></strong><span><span class="lang-en">Shenzhen, China · Expected May 2028</span><span class="lang-zh" lang="zh-CN">中国深圳 · 预计 2028 年 5 月毕业</span></span></div>
+          <p><span class="lang-en"><b>Major:</b> Quantitative Finance · <b>CGPA:</b> 3.84 / 4.0 · <b>MGPA:</b> 3.89 / 4.0</span><span class="lang-zh" lang="zh-CN"><b>专业：</b>量化金融 · <b>CGPA：</b>3.84 / 4.0 · <b>MGPA：</b>3.89 / 4.0</span></p>
+          <p><span class="lang-en"><b>Core coursework:</b> Calculus, Linear Algebra, Discrete Mathematics, Optimization, Ordinary Differential Equations, Probability & Statistics, Stochastic Processes, Data Structures, Machine Learning, Econometrics, Portfolio Analysis, Options & Futures Analysis.</span><span class="lang-zh" lang="zh-CN"><b>核心课程：</b>微积分、线性代数、离散数学、优化、常微分方程、概率与统计、随机过程、数据结构、机器学习、计量经济学、投资组合分析、期权与期货分析。</span></p>
         </div>
       </div>
     </section>
 
     <section>
-      <h2>Internship Experience</h2>
+      <h2><span class="lang-en">Internship Experience</span><span class="lang-zh" lang="zh-CN">实习经历</span></h2>
       <div>
         <div class="cv-entry">
-          <div><strong>Systematic Futures Calendar-Spread Strategy Research</strong><span>May–Jul 2026</span></div>
-          <p>Built an end-to-end research and strategy pipeline covering contract screening, dominant / secondary contract identification, spread construction, signal generation, and evaluation. Added tradability constraints from open interest, volume, delivery proximity, and roll confirmation, then combined term-structure information with mean-reversion behavior.</p>
-          <p>Designed a multi-stage signal and risk-control framework using volatility-state identification, spread forecasting, convergence-space estimation, dynamic transaction-cost constraints, historical-percentile gating, and strict Walk-Forward validation.</p>
-          <p><b>Backtest:</b> 2023–2026 rolling test window, 2 bp transaction-cost assumption per leg per side, Sharpe 2.40, maximum drawdown 5.28%.</p>
+          <div><strong><span class="lang-en">Systematic Futures Calendar-Spread Strategy Research</span><span class="lang-zh" lang="zh-CN">系统化期货跨期价差策略研究</span></strong><span>May–Jul 2026</span></div>
+          <p><span class="lang-en">Built an end-to-end research and strategy pipeline covering contract screening, dominant / secondary contract identification, spread construction, signal generation, and evaluation. Added tradability constraints from open interest, volume, delivery proximity, and roll confirmation, then combined term-structure information with mean-reversion behavior.</span><span class="lang-zh" lang="zh-CN">构建端到端研究与策略管线，覆盖合约筛选、主力/次主力合约识别、价差构造、信号生成与评估；基于持仓量、成交量、临近交割与换月确认加入可交易性约束，并将期限结构信息与均值回归行为结合。</span></p>
+          <p><span class="lang-en">Designed a multi-stage signal and risk-control framework using volatility-state identification, spread forecasting, convergence-space estimation, dynamic transaction-cost constraints, historical-percentile gating, and strict Walk-Forward validation.</span><span class="lang-zh" lang="zh-CN">设计多阶段信号与风险控制框架，包括波动率状态识别、价差预测、收敛空间估计、动态交易成本约束、历史分位数门控，以及严格的 Walk-Forward 验证。</span></p>
+          <p><span class="lang-en"><b>Backtest:</b> 2023–2026 rolling test window, 2 bp transaction-cost assumption per leg per side, Sharpe 2.40, maximum drawdown 5.28%.</span><span class="lang-zh" lang="zh-CN"><b>回测：</b>2023–2026 滚动测试窗口，每条腿单边假设 2 bp 交易成本，Sharpe 2.40，最大回撤 5.28%。</span></p>
         </div>
       </div>
     </section>
 
     <section>
-      <h2>Projects & Research</h2>
+      <h2><span class="lang-en">Projects & Research</span><span class="lang-zh" lang="zh-CN">项目与研究</span></h2>
       <div>
         <div class="cv-entry">
-          <div><strong>S&amp;P 500 Dynamic Positioning Strategy</strong><span>Dec 2025</span></div>
-          <p>Kaggle Hull Tactical market-prediction project using Python, XGBoost, LSTM, and MSTL decomposition. Mined 94 financial features and selected 28 high-potential factors; combined multi-frequency decomposition with machine-learning models and grid search.</p>
-          <p>Reported 81.67% directional accuracy and R² 0.6191. Built a signal-to-position layer using signal-to-noise mapping and adaptive smoothing under a 2× leverage constraint, reaching a Top 10% / bronze-level competition result at the time recorded in the CV.</p>
+          <div><strong><span class="lang-en">S&amp;P 500 Dynamic Positioning Strategy</span><span class="lang-zh" lang="zh-CN">标普 500 动态仓位策略</span></strong><span>Dec 2025</span></div>
+          <p><span class="lang-en">Kaggle Hull Tactical market-prediction project using Python, XGBoost, LSTM, and MSTL decomposition. Mined 94 financial features and selected 28 high-potential factors; combined multi-frequency decomposition with machine-learning models and grid search.</span><span class="lang-zh" lang="zh-CN">参与 Kaggle Hull Tactical 市场预测项目，使用 Python、XGBoost、LSTM 与 MSTL 分解；挖掘 94 个金融特征并筛选 28 个高潜力因子，将多频率分解、机器学习模型与网格搜索结合。</span></p>
+          <p><span class="lang-en">Reported 81.67% directional accuracy and R² 0.6191. Built a signal-to-position layer using signal-to-noise mapping and adaptive smoothing under a 2× leverage constraint, reaching a Top 10% / bronze-level competition result at the time recorded in the CV.</span><span class="lang-zh" lang="zh-CN">记录的方向准确率为 81.67%，R² 为 0.6191；在 2× 杠杆约束下，以信噪比映射与自适应平滑构建信号到仓位的转换层，并在简历记录时取得 Top 10% / 铜牌级竞赛成绩。</span></p>
         </div>
 
         <div class="cv-entry">
-          <div><strong>Automated Factor Research &amp; Backtesting System</strong><span>2026–Present</span></div>
-          <p>Independent research project combining genetic search, LLM-based factor discovery, vectorized computation, an event-driven engine, and an Obsidian knowledge graph. Collected and reproduced 4,000+ factors, unified data interfaces and operators, and built a precomputed-matrix backtesting architecture with 14-dimensional performance ranking and Barra-style exposure analysis.</p>
-          <p>Connected the factor library, backtest engine, Notion, and Obsidian so validated factors can be written back into a persistent research knowledge base with full performance records.</p>
+          <div><strong><span class="lang-en">Automated Factor Research &amp; Backtesting System</span><span class="lang-zh" lang="zh-CN">自动化因子研究与回测系统</span></strong><span>2026–Present</span></div>
+          <p><span class="lang-en">Independent research project combining genetic search, LLM-based factor discovery, vectorized computation, an event-driven engine, and an Obsidian knowledge graph. Collected and reproduced 4,000+ factors, unified data interfaces and operators, and built a precomputed-matrix backtesting architecture with 14-dimensional performance ranking and Barra-style exposure analysis.</span><span class="lang-zh" lang="zh-CN">独立研究项目，融合遗传搜索、基于 LLM 的因子发现、向量化计算、事件驱动引擎与 Obsidian 知识图谱；收集并复现 4,000+ 因子，统一数据接口与算子体系，并构建预计算矩阵回测架构、14 维绩效排序和 Barra 风格暴露分析。</span></p>
+          <p><span class="lang-en">Connected the factor library, backtest engine, Notion, and Obsidian so validated factors can be written back into a persistent research knowledge base with full performance records.</span><span class="lang-zh" lang="zh-CN">连接因子库、回测引擎、Notion 与 Obsidian，使通过验证的因子能够连同完整绩效记录写回持久化研究知识库。</span></p>
         </div>
 
         <div class="cv-entry">
-          <div><strong>A-Share Bull-Market Review &amp; Bubble-Risk Analysis</strong><span>Mar 2026</span></div>
-          <p>Compared three A-share bull-market cycles through margin leverage, mutual-fund issuance, and high-beta brokerage-stock behavior; studied lead-lag relationships between micro liquidity peaks and index peaks. Built an HS300 equity-risk-premium and dividend-yield-spread valuation monitor.</p>
+          <div><strong><span class="lang-en">A-Share Bull-Market Review &amp; Bubble-Risk Analysis</span><span class="lang-zh" lang="zh-CN">A 股牛市复盘与泡沫风险分析</span></strong><span>Mar 2026</span></div>
+          <p><span class="lang-en">Compared three A-share bull-market cycles through margin leverage, mutual-fund issuance, and high-beta brokerage-stock behavior; studied lead-lag relationships between micro liquidity peaks and index peaks. Built an HS300 equity-risk-premium and dividend-yield-spread valuation monitor.</span><span class="lang-zh" lang="zh-CN">从融资杠杆、公募基金发行和高 Beta 券商股表现对比三轮 A 股牛市，并研究微观流动性峰值与指数峰值之间的领先滞后关系；构建沪深 300 股权风险溢价与股息率利差估值监控。</span></p>
         </div>
 
         <div class="cv-entry">
-          <div><strong>A-Share Cross-Segment Pair Trading &amp; Fundamental Survival Analysis</strong><span>Mar 2026</span></div>
-          <p>Cleaned more than 740,000 A-share observations and built a mean-reversion strategy around main-board vs growth-board P/E valuation premia, evaluated with five-year rolling windows. Separately studied 12-year persistence in corporate fundamentals, comparing high-ROA persistence (11.46%) with high-revenue-growth persistence (0.28%).</p>
+          <div><strong><span class="lang-en">A-Share Cross-Segment Pair Trading &amp; Fundamental Survival Analysis</span><span class="lang-zh" lang="zh-CN">A 股跨板块配对交易与基本面存续分析</span></strong><span>Mar 2026</span></div>
+          <p><span class="lang-en">Cleaned more than 740,000 A-share observations and built a mean-reversion strategy around main-board vs growth-board P/E valuation premia, evaluated with five-year rolling windows. Separately studied 12-year persistence in corporate fundamentals, comparing high-ROA persistence (11.46%) with high-revenue-growth persistence (0.28%).</span><span class="lang-zh" lang="zh-CN">清洗超过 740,000 条 A 股观测数据，围绕主板与成长板块 P/E 估值溢价构建均值回归策略，并使用五年滚动窗口评估；另研究企业基本面 12 年持续性，对比高 ROA 持续率 11.46% 与高营收增长持续率 0.28%。</span></p>
         </div>
 
         <div class="cv-entry">
-          <div><strong>A-Share CAPM &amp; Low-Beta Anomaly Study</strong><span>Apr 2026</span></div>
-          <p>Implemented a Fama–MacBeth two-pass regression framework on A-share main-board data, using time-series OLS to estimate systematic risk for 44 dynamic portfolios. The recorded model R² reached 0.84; cross-sectional tests also identified a positive zero-beta alpha consistent with a low-beta anomaly.</p>
+          <div><strong><span class="lang-en">A-Share CAPM &amp; Low-Beta Anomaly Study</span><span class="lang-zh" lang="zh-CN">A 股 CAPM 与低 Beta 异象研究</span></strong><span>Apr 2026</span></div>
+          <p><span class="lang-en">Implemented a Fama–MacBeth two-pass regression framework on A-share main-board data, using time-series OLS to estimate systematic risk for 44 dynamic portfolios. The recorded model R² reached 0.84; cross-sectional tests also identified a positive zero-beta alpha consistent with a low-beta anomaly.</span><span class="lang-zh" lang="zh-CN">在 A 股主板数据上实现 Fama–MacBeth 两步回归框架，以时间序列 OLS 估计 44 个动态投资组合的系统性风险；记录的模型 R² 达到 0.84，横截面检验同时识别出正的零 Beta Alpha，与低 Beta 异象一致。</span></p>
         </div>
       </div>
     </section>
 
     <section>
-      <h2>Technical Skills</h2>
+      <h2><span class="lang-en">Technical Skills</span><span class="lang-zh" lang="zh-CN">技术技能</span></h2>
       <div class="skill-lines">
-        <p><strong>Programming:</strong> Python (pandas, NumPy, SciPy, scikit-learn); C++, MATLAB, Stata, R</p>
-        <p><strong>AI &amp; workflows:</strong> OpenClaw, Hermes, Claude Code, Codex multi-agent collaboration, n8n, Notion, Obsidian</p>
-        <p><strong>Quant tooling:</strong> RQAlpha, VeighNa, Ricequant, WorldQuant Brain, self-built equity / futures multi-factor research and automated factor-discovery platforms, QMT integration</p>
-        <p><strong>Academic tooling:</strong> LaTeX, Microsoft Office</p>
+        <p><span class="lang-en"><strong>Programming:</strong> Python (pandas, NumPy, SciPy, scikit-learn); C++, MATLAB, Stata, R</span><span class="lang-zh" lang="zh-CN"><strong>编程：</strong>Python（pandas、NumPy、SciPy、scikit-learn）；C++、MATLAB、Stata、R</span></p>
+        <p><span class="lang-en"><strong>AI &amp; workflows:</strong> OpenClaw, Hermes, Claude Code, Codex multi-agent collaboration, n8n, Notion, Obsidian</span><span class="lang-zh" lang="zh-CN"><strong>AI 与工作流：</strong>OpenClaw、Hermes、Claude Code、Codex 多 Agent 协作、n8n、Notion、Obsidian</span></p>
+        <p><span class="lang-en"><strong>Quant tooling:</strong> RQAlpha, VeighNa, Ricequant, WorldQuant Brain, self-built equity / futures multi-factor research and automated factor-discovery platforms, QMT integration</span><span class="lang-zh" lang="zh-CN"><strong>量化工具：</strong>RQAlpha、VeighNa、Ricequant、WorldQuant Brain、自建股票/期货多因子研究与自动因子发现平台、QMT 接入</span></p>
+        <p><span class="lang-en"><strong>Academic tooling:</strong> LaTeX, Microsoft Office</span><span class="lang-zh" lang="zh-CN"><strong>学术工具：</strong>LaTeX、Microsoft Office</span></p>
       </div>
     </section>
 
     <section>
-      <h2>Honors &amp; Awards</h2>
+      <h2><span class="lang-en">Honors &amp; Awards</span><span class="lang-zh" lang="zh-CN">荣誉与奖项</span></h2>
       <div>
-        <div class="cv-entry compact"><div><strong>COMAP Mathematical Contest in Modeling — Honorable Mention</strong><span>Feb 2026</span></div></div>
-        <div class="cv-entry compact"><div><strong>Guangdong–Hong Kong–Macao Greater Bay Area International Programming Contest — First Prize</strong><span>Apr 2025</span></div></div>
-        <div class="cv-entry compact"><div><strong>National College Student Mathematics Competition — Second Prize</strong><span>Nov 2025</span></div></div>
-        <div class="cv-entry compact"><div><strong>China Undergraduate Mathematical Contest in Modeling — Third Prize</strong><span>Sep 2025</span></div></div>
+        <div class="cv-entry compact"><div><strong><span class="lang-en">COMAP Mathematical Contest in Modeling — Honorable Mention</span><span class="lang-zh" lang="zh-CN">美国大学生数学建模竞赛（MCM）— Honorable Mention</span></strong><span>Feb 2026</span></div></div>
+        <div class="cv-entry compact"><div><strong><span class="lang-en">Guangdong–Hong Kong–Macao Greater Bay Area International Programming Contest — First Prize</span><span class="lang-zh" lang="zh-CN">粤港澳大湾区国际编程竞赛 — 一等奖</span></strong><span>Apr 2025</span></div></div>
+        <div class="cv-entry compact"><div><strong><span class="lang-en">National College Student Mathematics Competition — Second Prize</span><span class="lang-zh" lang="zh-CN">全国大学生数学竞赛 — 二等奖</span></strong><span>Nov 2025</span></div></div>
+        <div class="cv-entry compact"><div><strong><span class="lang-en">China Undergraduate Mathematical Contest in Modeling — Third Prize</span><span class="lang-zh" lang="zh-CN">全国大学生数学建模竞赛 — 三等奖</span></strong><span>Sep 2025</span></div></div>
       </div>
     </section>
 
     <section>
-      <h2>Research Interests</h2>
-      <div class="interest-grid"><span>Alpha Discovery</span><span>Futures</span><span>Asset Pricing</span><span>Systematic Trading</span><span>Machine Learning</span><span>Agentic Research Systems</span></div>
+      <h2><span class="lang-en">Research Interests</span><span class="lang-zh" lang="zh-CN">研究兴趣</span></h2>
+      <div class="interest-grid"><span><span class="lang-en">Alpha Discovery</span><span class="lang-zh" lang="zh-CN">Alpha 发现</span></span><span><span class="lang-en">Futures</span><span class="lang-zh" lang="zh-CN">期货</span></span><span><span class="lang-en">Asset Pricing</span><span class="lang-zh" lang="zh-CN">资产定价</span></span><span><span class="lang-en">Systematic Trading</span><span class="lang-zh" lang="zh-CN">系统化交易</span></span><span><span class="lang-en">Machine Learning</span><span class="lang-zh" lang="zh-CN">机器学习</span></span><span><span class="lang-en">Agentic Research Systems</span><span class="lang-zh" lang="zh-CN">Agent 研究系统</span></span></div>
     </section>
   </div>
 </BaseLayout>
 
 <style>
-.cv-head{display:flex;justify-content:space-between;align-items:end;gap:40px}.cv-head>div{max-width:780px}.cv-head>.button{flex:0 0 auto}.cv-wrap{max-width:1080px;padding-top:52px}.cv-wrap section{display:grid;grid-template-columns:210px 1fr;gap:46px;padding:36px 0;border-bottom:1px solid var(--border)}.cv-wrap h2{margin:0;font-size:1rem;font-family:var(--font-mono);color:var(--accent-strong)}.cv-entry{margin-bottom:30px}.cv-entry:last-child{margin-bottom:0}.cv-entry.compact{margin-bottom:15px}.cv-entry>div{display:flex;justify-content:space-between;gap:24px;align-items:baseline}.cv-entry strong{font-size:1rem}.cv-entry span{color:var(--muted);font-size:.84rem;white-space:nowrap}.cv-entry p,.skill-lines p{margin:8px 0 0;color:var(--muted);line-height:1.72}.cv-entry p b{color:var(--ink);font-weight:700}.skill-lines p+ p{margin-top:12px}.interest-grid{display:flex;flex-wrap:wrap;gap:9px}.interest-grid span{padding:7px 11px;background:var(--surface);border:1px solid var(--border);border-radius:999px;font-size:.82rem}@media(max-width:760px){.cv-head{align-items:flex-start;flex-direction:column}.cv-wrap section{grid-template-columns:1fr;gap:16px}.cv-entry>div{flex-direction:column;align-items:flex-start;gap:3px}.cv-entry span{white-space:normal}}
+.cv-head{display:flex;justify-content:space-between;align-items:end;gap:40px}.cv-head>div{max-width:780px}.cv-head>.button{flex:0 0 auto}.cv-head h1>.lang-en,.cv-head h1>.lang-zh,.cv-head p>.lang-en,.cv-head p>.lang-zh,.cv-wrap h2>.lang-en,.cv-wrap h2>.lang-zh,.cv-entry strong>.lang-en,.cv-entry strong>.lang-zh,.cv-entry p>.lang-en,.cv-entry p>.lang-zh,.skill-lines p>.lang-en,.skill-lines p>.lang-zh{display:block}.cv-wrap{max-width:1080px;padding-top:52px}.cv-wrap section{display:grid;grid-template-columns:210px 1fr;gap:46px;padding:36px 0;border-bottom:1px solid var(--border)}.cv-wrap h2{margin:0;font-size:1rem;font-family:var(--font-mono);color:var(--accent-strong)}.cv-entry{margin-bottom:30px}.cv-entry:last-child{margin-bottom:0}.cv-entry.compact{margin-bottom:15px}.cv-entry>div{display:flex;justify-content:space-between;gap:24px;align-items:baseline}.cv-entry strong{font-size:1rem}.cv-entry span{color:var(--muted);font-size:.84rem;white-space:nowrap}.cv-entry strong span,.cv-entry p span,.skill-lines p span{color:inherit;font-size:inherit;white-space:normal}.cv-entry p,.skill-lines p{margin:8px 0 0;color:var(--muted);line-height:1.72}.cv-entry p b{color:var(--ink);font-weight:700}.skill-lines p+ p{margin-top:12px}.interest-grid{display:flex;flex-wrap:wrap;gap:9px}.interest-grid>span{padding:7px 11px;background:var(--surface);border:1px solid var(--border);border-radius:999px;font-size:.82rem}.interest-grid>span>.lang-en,.interest-grid>span>.lang-zh{color:inherit;font-size:inherit;white-space:normal}@media(max-width:760px){.cv-head{align-items:flex-start;flex-direction:column}.cv-wrap section{grid-template-columns:1fr;gap:16px}.cv-entry>div{flex-direction:column;align-items:flex-start;gap:3px}.cv-entry span{white-space:normal}}
 </style>
