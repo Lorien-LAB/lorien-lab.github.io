@@ -1965,9 +1965,10 @@
       "resolutionNote": "The source section mixes a correct PSD quadratic-form definition with an overbroad leading-principal-minor statement. Canonical Knowledge distinguishes PSD from the positive-definite Sylvester criterion."
     },
     {
-      "sourceSection": "3.6.4",
+      "sourceSection": "3.6.1",
       "sourceItem": "correlation-range-0.8-0.8",
       "canonicalTopics": [
+        "vectors-linear-systems",
         "linear-algebra-matrix-methods",
         "covariance-correlation-matrices",
         "positive-semidefinite-matrices"
@@ -1981,7 +1982,7 @@
         "positive-semidefinite-matrix",
         "principal-minor-feasibility"
       ],
-      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "topicOverrideReason": "The source item physically appears in the Vectors section 3.6.1, while its semantic destination also crosses into correlation/PSD topics already owned by the canonical correlation-matrix workstream.",
       "resolutionNote": "Same matrix-feasibility structure as the canonical parameter-range problem, with different fixed correlations and a different admissible interval."
     },
     {
@@ -2151,6 +2152,56 @@
         "singular-value-decomposition"
       ],
       "resolutionNote": "This item contributes reusable rectangular, rank-aware SVD knowledge and does not define a separate canonical interview Problem."
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "vector-coordinate-representation",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "dot-product",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "euclidean-norm-distance",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "angle-orthogonality",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "correlation-as-cosine",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
     }
   ]
 }
