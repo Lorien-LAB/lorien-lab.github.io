@@ -1,0 +1,38 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import ProblemLayout from '../../layouts/ProblemLayout.astro';
+import { getSourceForProblem, slugOf, validateProblemRelationships } from '../../lib/problemRelations';
+
+export async function getStaticPaths() {
+  const problems = await getCollection('problems');
+  return problems.map((problem) => ({
+    params: { slug: problem.id.split('/').pop() },
+    props: { problem },
+  }));
+}
+
+const { problem } = Astro.props as { problem: CollectionEntry<'problems'> };
+const problems = await getCollection('problems');
+const sources = await getCollection('problemSources');
+const knowledge = await getCollection('knowledge');
+validateProblemRelationships(problems, sources, knowledge);
+
+const knowledgeBySlug = new Map(knowledge.map((entry) => [slugOf(entry.id), entry]));
+const problemsBySlug = new Map(problems.map((entry) => [slugOf(entry.id), entry]));
+const source = getSourceForProblem(problem, sources);
+const concepts = problem.data.concepts.map((slug) => knowledgeBySlug.get(slug)).filter(Boolean) as CollectionEntry<'knowledge'>[];
+const techniques = problem.data.techniques.map((slug) => knowledgeBySlug.get(slug)).filter(Boolean) as CollectionEntry<'knowledge'>[];
+const prerequisites = problem.data.prerequisites.map((slug) => knowledgeBySlug.get(slug)).filter(Boolean) as CollectionEntry<'knowledge'>[];
+const relatedProblems = problem.data.relatedProblems.map((slug) => problemsBySlug.get(slug)).filter(Boolean) as CollectionEntry<'problems'>[];
+const { Content } = await render(problem);
+---
+<ProblemLayout
+  problem={problem}
+  source={source}
+  concepts={concepts}
+  techniques={techniques}
+  prerequisites={prerequisites}
+  relatedProblems={relatedProblems}
+>
+  <Content />
+</ProblemLayout>
