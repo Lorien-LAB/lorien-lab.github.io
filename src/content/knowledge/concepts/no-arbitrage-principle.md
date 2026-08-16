@@ -7,6 +7,7 @@ category: Derivatives & Pricing
 status: growing
 date: 2026-08-16
 tags: [No-Arbitrage, Derivatives, Pricing]
+quantInterviewTopics: [derivatives-options-no-arbitrage, no-arbitrage-option-properties]
 featured: false
 related: [option-price-convexity-in-strike, static-arbitrage-construction]
 relatedNotes: []

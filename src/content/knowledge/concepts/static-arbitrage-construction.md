@@ -7,6 +7,7 @@ category: Problem Solving Techniques
 status: growing
 date: 2026-08-16
 tags: [Problem Solving, Arbitrage, Options]
+quantInterviewTopics: [derivatives-options-no-arbitrage, no-arbitrage-option-properties]
 featured: false
 related: [no-arbitrage-principle, option-price-convexity-in-strike]
 relatedNotes: []

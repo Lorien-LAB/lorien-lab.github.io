@@ -7,6 +7,7 @@ category: Problem Solving Techniques
 status: growing
 date: 2026-08-16
 tags: [Probability, Problem Solving]
+quantInterviewTopics: [probability-statistics, conditional-probability-bayes]
 featured: false
 related: []
 relatedNotes: []

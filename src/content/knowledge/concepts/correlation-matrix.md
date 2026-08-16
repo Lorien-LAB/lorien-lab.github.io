@@ -7,6 +7,7 @@ category: Statistics
 status: growing
 date: 2026-08-16
 tags: [Correlation, Linear Algebra, Statistics]
+quantInterviewTopics: [linear-algebra-matrix-methods, covariance-correlation-matrices]
 featured: false
 related: [positive-semidefinite-matrix]
 relatedNotes: []

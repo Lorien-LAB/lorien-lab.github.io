@@ -7,6 +7,7 @@ category: Problem Solving Techniques
 status: growing
 date: 2026-08-16
 tags: [Linear Algebra, PSD, Problem Solving]
+quantInterviewTopics: [linear-algebra-matrix-methods, positive-semidefinite-matrices]
 featured: false
 related: [positive-semidefinite-matrix, correlation-matrix]
 relatedNotes: []

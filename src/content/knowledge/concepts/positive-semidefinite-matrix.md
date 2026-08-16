@@ -7,6 +7,7 @@ category: Linear Algebra
 status: growing
 date: 2026-08-16
 tags: [Linear Algebra, Matrices, PSD]
+quantInterviewTopics: [linear-algebra-matrix-methods, positive-semidefinite-matrices]
 featured: false
 related: [correlation-matrix]
 relatedNotes: []

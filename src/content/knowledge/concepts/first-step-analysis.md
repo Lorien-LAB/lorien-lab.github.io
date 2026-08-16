@@ -7,6 +7,7 @@ category: Problem Solving Techniques
 status: growing
 date: 2026-08-16
 tags: [Probability, Stochastic Processes, Problem Solving]
+quantInterviewTopics: [stochastic-processes-stochastic-calculus, random-walks-markov-chains]
 featured: false
 related: []
 relatedNotes: []
