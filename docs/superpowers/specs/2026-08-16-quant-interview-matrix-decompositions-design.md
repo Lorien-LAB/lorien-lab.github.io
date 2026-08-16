@@ -62,7 +62,7 @@ Verified direct material includes:
    - introduces a singular-value factorization for rectangular matrices;
    - relates covariance eigendecomposition to a square-root factor for Gaussian simulation.
 
-Internal physical-page evidence for the directly inspected Green material is the PDF range containing QR through SVD (physical pages 68-74 in the verified user-supplied file).
+Internal physical-page evidence in the verified user-supplied PDF is split into the actually inspected decomposition ranges: QR / least squares on physical pages 68-69, and LU / Cholesky / SVD on physical pages 73-74. Intervening determinant/eigenvalue/PSD pages belong to earlier completed workstreams and are not claimed as new decomposition evidence here.
 
 ### 3.2 Red Book
 
@@ -73,7 +73,7 @@ The directly relevant source task is **Question 6.10** in the General Mathematic
 
 The supplied solution first attacks the matrix square root through entries, then constructs one valid factor `C` and explicitly observes that the generic `C^T C` factor is not unique.
 
-Internal physical-page evidence is the verified question page around physical page 202 and solution pages around 212-213 of the supplied Red Book PDF.
+Internal physical-page evidence is the question on physical page 202 and the solution on physical pages 212-213 of the verified supplied Red Book PDF.
 
 ### 3.3 150 Questions
 
@@ -86,7 +86,7 @@ The directly relevant source task is the Linear Algebra item that asks, for
 
 Its solution uses the symmetric eigendecomposition to build a square root from square roots of the eigenvalues, then uses a Cholesky factor for the second part.
 
-Internal physical-page evidence includes the question on physical page 29 and the corresponding solution pages around physical pages 73-76 in the verified supplied PDF.
+Internal physical-page evidence is the question on physical page 29 and the corresponding solution beginning on physical page 72 and continuing through the Cholesky construction on physical pages 73-76 of the verified supplied PDF.
 
 ### 3.4 Source with no additional direct item
 
