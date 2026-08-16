@@ -105,11 +105,13 @@ test('current source-derived items remain auditable in hidden coverage with reso
   const taxonomy = JSON.parse(await readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'));
   const sourceTopicMap = JSON.parse(await readFile('src/data/quant-interview/topics/source-topic-map.json', 'utf8'));
   const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+  const problemSlugs = await markdownSlugs('src/content/problems');
+  const knowledgeSlugs = await markdownSlugs('src/content/knowledge');
   assert.doesNotThrow(() => validateCoverageLedger(ledger, {
     sourceTopicMap,
     taxonomy,
-    problemSlugs: await markdownSlugs('src/content/problems'),
-    knowledgeSlugs: await markdownSlugs('src/content/knowledge'),
+    problemSlugs,
+    knowledgeSlugs,
     allowUnresolvedCanonicalRefs: false,
   }));
 });
