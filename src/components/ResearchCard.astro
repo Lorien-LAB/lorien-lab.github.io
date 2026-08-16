@@ -1,15 +1,21 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import TagList from './TagList.astro';
+import { publicContentZh } from '../data/i18n/publicContentZh';
 interface Props { entry: CollectionEntry<'research'>; }
 const { entry } = Astro.props;
 const href = `${import.meta.env.BASE_URL}research/${entry.id}/`;
+const zh = publicContentZh.research[entry.id];
 ---
 <a class="card research-card" href={href}>
   <div class="card-body">
-    <div class="card-meta"><span>{entry.data.category}</span><span>{entry.data.status}</span></div>
-    <h3>{entry.data.title}</h3><p>{entry.data.description}</p>
+    <div class="card-meta">
+      <span><span class="lang-en">{entry.data.category}</span>{zh?.category && <span class="lang-zh" lang="zh-CN">{zh.category}</span>}</span>
+      <span><span class="lang-en">{entry.data.status}</span>{zh?.status && <span class="lang-zh" lang="zh-CN">{zh.status}</span>}</span>
+    </div>
+    <h3><span class="lang-en">{entry.data.title}</span>{zh?.title && <span class="lang-zh" lang="zh-CN">{zh.title}</span>}</h3>
+    <p><span class="lang-en">{entry.data.description}</span>{zh?.description && <span class="lang-zh" lang="zh-CN">{zh.description}</span>}</p>
     <TagList tags={entry.data.tags} />
   </div>
 </a>
-<style>.research-card{display:block;box-shadow:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.research-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));box-shadow:var(--shadow);color:var(--ink)}</style>
+<style>.research-card{display:block;box-shadow:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.research-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));box-shadow:var(--shadow);color:var(--ink)}.research-card h3>.lang-en,.research-card h3>.lang-zh,.research-card p>.lang-en,.research-card p>.lang-zh{display:block}</style>
