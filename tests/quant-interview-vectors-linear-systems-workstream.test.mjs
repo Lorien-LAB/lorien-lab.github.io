@@ -57,6 +57,13 @@ async function findKnowledge(slug) {
   return `src/content/knowledge/${match}`;
 }
 
+async function readPublicTree(root) {
+  const files = await readdir(root, { recursive: true });
+  const readable = files.filter((file) => /\.(?:astro|js|mjs|ts|tsx|jsx)$/.test(String(file)));
+  const chunks = await Promise.all(readable.map(async (file) => `${file}\n${await readFile(`${root}/${file}`, 'utf8')}`));
+  return chunks.join('\n');
+}
+
 test('fourth cross-book workstream is bounded to vectors and linear systems', async () => {
   const workstream = await readJson(workstreamPath);
   assert.equal(workstream.id, 'linear-algebra-vectors-linear-systems-004');
@@ -133,4 +140,11 @@ test('repository-authored canonical extensions do not masquerade as source cover
       }
     }
   }
+});
+
+test('canonical extension audit metadata is never a public rendering dependency', async () => {
+  const publicText = `${await readPublicTree('src/pages')}\n${await readPublicTree('src/layouts')}`;
+  assert.doesNotMatch(publicText, /canonicalExtensions/);
+  assert.doesNotMatch(publicText, /linear-algebra-vectors-linear-systems-004\.json/);
+  assert.doesNotMatch(publicText, /data\/quant-interview\/workstreams/);
 });
