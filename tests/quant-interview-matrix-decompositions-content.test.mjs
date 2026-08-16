@@ -8,6 +8,10 @@ const knowledgePaths = {
   svd: 'src/content/knowledge/concepts/singular-value-decomposition.md',
   eigenbasis: 'src/content/knowledge/concepts/eigenbasis-decomposition.md',
 };
+const problemPaths = {
+  leastSquares: 'src/content/problems/linear-algebra/least-squares-via-qr.md',
+};
+const s3Markers = ['## Problem','## Think Before Revealing','<summary>Hint 1</summary>','<summary>Show Solution</summary>','## Solution','## Why This Problem Matters','## Common Mistakes','## Extensions'];
 
 test('QR Knowledge covers dimensions, stable least squares, uniqueness, and rank boundaries', async () => {
   await access(knowledgePaths.qr);
@@ -87,4 +91,33 @@ test('eigenbasis Knowledge defines matrix functions and the principal PSD square
   assert.match(text, /non-principal|other square roots|generic square root/i);
   assert.match(text, /## Interview Checks[\s\S]*square root/i);
   assert.doesNotMatch(text, /Green Book|Red Book|150 Most Frequently|Question\s+\d+/i);
+});
+
+test('least-squares-via-qr is an S3+ source-neutral canonical problem', async () => {
+  await access(problemPaths.leastSquares);
+  const text = await readFile(problemPaths.leastSquares, 'utf8');
+  assert.match(text, /^problemId:\s*linear-algebra-decomposition-001$/m);
+  assert.match(text, /^quantInterviewTopics:\s*\[[^\]]*matrix-decompositions[^\]]*\]$/m);
+  assert.match(text, /^status:\s*solved$/m);
+  for (const marker of s3Markers) assert.ok(text.includes(marker), `least-squares-via-qr missing ${marker}`);
+  assert.doesNotMatch(text, /^source(?:Section|Chapter|Problem|Reference|Url)?:/m);
+  assert.doesNotMatch(text, /Green Book|Red Book|150 Most Frequently|Question\s+\d+/i);
+});
+
+test('least-squares-via-qr solves the worked system by direct QR and checks projection geometry', async () => {
+  const text = await readFile(problemPaths.leastSquares, 'utf8');
+  assert.match(text, /\[\[1,\s*0\],\s*\[1,\s*1\],\s*\[1,\s*-1\]\]/);
+  assert.match(text, /y\s*=\s*\[1,\s*2,\s*1\]/i);
+  assert.match(text, /q_?1[\s\S]{0,160}\(1,\s*1,\s*1\).*sqrt\(3\)|q_?1[\s\S]{0,160}1\/sqrt\(3\)/i);
+  assert.match(text, /q_?2[\s\S]{0,160}\(0,\s*1,\s*-1\).*sqrt\(2\)|q_?2[\s\S]{0,160}1\/sqrt\(2\)/i);
+  assert.match(text, /R[\s\S]{0,180}sqrt\(3\)[\s\S]{0,80}sqrt\(2\)/i);
+  assert.match(text, /Q\^T\s*y[\s\S]{0,180}4\/sqrt\(3\)[\s\S]{0,120}1\/sqrt\(2\)/i);
+  assert.match(text, /beta[\s\S]{0,120}4\/3[\s\S]{0,80}1\/2/i);
+  assert.match(text, /residual[\s\S]{0,180}-1\/3[\s\S]{0,80}1\/6[\s\S]{0,80}1\/6/i);
+  assert.match(text, /X\^T\s*r\s*=\s*0|orthogonal[\s\S]{0,160}column space/i);
+  assert.match(text, /normal equations/i);
+  assert.match(text, /condition number|conditioning|kappa|κ/i);
+  assert.match(text, /rank-deficient|rank deficient/i);
+  assert.match(text, /SVD/i);
+  assert.doesNotMatch(text, /\(X\^T\s*X\)\^-1\s*X\^T\s*y\s*(?:is|as)\s*(?:the|our)\s*(?:recommended|algorithm|implementation)/i);
 });
