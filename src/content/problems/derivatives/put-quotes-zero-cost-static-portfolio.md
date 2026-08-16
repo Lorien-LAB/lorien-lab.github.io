@@ -1,5 +1,5 @@
 ---
-problemId: 150-first-look-001
+problemId: derivatives-static-arbitrage-001
 title: Put Quotes and a Zero-Cost Static Portfolio
 description: Test whether two same-expiry put quotes are mutually consistent by constructing and checking a static option portfolio.
 date: 2026-08-16
