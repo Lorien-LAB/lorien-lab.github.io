@@ -94,13 +94,6 @@ const problems = defineCollection({
     description: z.string(),
     date: z.coerce.date(),
     updated: z.coerce.date().optional(),
-    originType: z.enum(['book', 'interview', 'original', 'public-archive']),
-    source: z.string().optional(),
-    sourceSection: z.string().optional(),
-    sourceChapter: z.string().optional(),
-    sourceProblem: z.string().optional(),
-    sourceReference: z.string().optional(),
-    sourceUrl: z.string().url().optional(),
     domain: z.string(),
     category: z.string(),
     subcategories: z.array(z.string()).default([]),
@@ -117,14 +110,6 @@ const problems = defineCollection({
     estimatedMinutes: z.number().int().positive().optional(),
     status: z.enum(['draft', 'reviewed', 'solved', 'extended']),
     featured: z.boolean().default(false),
-  }).superRefine((problem, ctx) => {
-    if (problem.originType !== 'original' && !problem.source) {
-      ctx.addIssue({
-        code: 'custom',
-        path: ['source'],
-        message: 'Source-derived problems require a source slug.',
-      });
-    }
   }),
 });
 

@@ -7,6 +7,7 @@ category: Problem Solving Techniques
 status: growing
 date: 2026-08-16
 tags: [Recursion, Dynamic Programming, Problem Solving]
+quantInterviewTopics: [logic-brainteasers-discrete-reasoning]
 featured: false
 related: []
 relatedNotes: []

@@ -18,8 +18,7 @@ const base = import.meta.env.BASE_URL;
 const knowledge = await getCollection('knowledge');
 const notes = await getCollection('notes', ({ data }) => !data.draft);
 const problems = await getCollection('problems');
-const sources = await getCollection('problemSources');
-validateProblemRelationships(problems, sources, knowledge);
+validateProblemRelationships(problems, knowledge);
 
 const knowledgeBySlug = new Map(knowledge.map((item) => [slugOf(item.id), item]));
 const notesBySlug = new Map(notes.map((item) => [slugOf(item.id), item]));

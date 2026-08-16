@@ -7,6 +7,7 @@ category: Problem Solving Techniques
 status: growing
 date: 2026-08-16
 tags: [Problem Solving, Invariants, Modular Arithmetic]
+quantInterviewTopics: [logic-brainteasers-discrete-reasoning, modular-arithmetic, invariants-state-transformations]
 featured: false
 related: [modular-arithmetic]
 relatedNotes: []

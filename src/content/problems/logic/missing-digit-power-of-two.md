@@ -3,16 +3,11 @@ problemId: 150-first-look-002
 title: Missing Digit of a Power of Two
 description: Determine a missing decimal digit from a large power using digit sums and modular arithmetic instead of direct computation.
 date: 2026-08-16
-originType: book
-source: 150-most-frequently-asked
-sourceSection: 'First Look: Ten Questions'
-sourceChapter: '1'
-sourceProblem: '2'
-sourceReference: 'Chapter 1 · First Look · Question 2 · printed pp. 1, 4–6'
 domain: Mathematics & Statistics
 category: Discrete Mathematics
 subcategories: [Number Theory, Digit Problems]
 tags: [Modular Arithmetic, Number Theory, Interview]
+quantInterviewTopics: [logic-brainteasers-discrete-reasoning, modular-arithmetic]
 concepts: [modular-arithmetic]
 techniques: [modular-invariants]
 prerequisites: []

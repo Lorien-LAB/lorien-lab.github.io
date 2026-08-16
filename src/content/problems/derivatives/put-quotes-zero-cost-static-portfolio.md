@@ -3,16 +3,11 @@ problemId: 150-first-look-001
 title: Put Quotes and a Zero-Cost Static Portfolio
 description: Test whether two same-expiry put quotes are mutually consistent by constructing and checking a static option portfolio.
 date: 2026-08-16
-originType: book
-source: 150-most-frequently-asked
-sourceSection: 'First Look: Ten Questions'
-sourceChapter: '1'
-sourceProblem: '1'
-sourceReference: 'Chapter 1 · First Look · Question 1 · printed pp. 1, 3–4'
 domain: Finance
 category: Options & Derivatives
 subcategories: [No-Arbitrage, Static Arbitrage]
 tags: [Options, Arbitrage, Convexity, Interview]
+quantInterviewTopics: [derivatives-options-no-arbitrage, no-arbitrage-option-properties]
 concepts: [no-arbitrage-principle, option-price-convexity-in-strike]
 techniques: [static-arbitrage-construction]
 prerequisites: []

@@ -20,6 +20,15 @@ function requireNonEmptyString(value, label) {
   if (typeof value !== 'string' || !value.trim()) throw new Error(`${label} must be a non-empty string.`);
 }
 
+function topicFallsUnderMappedBranch(topicId, mappedTopics, topicById) {
+  let current = topicById.get(topicId);
+  while (current) {
+    if (mappedTopics.has(current.id)) return true;
+    current = current.parentId ? topicById.get(current.parentId) : null;
+  }
+  return false;
+}
+
 export function validateCoverageLedger(ledger, context) {
   requireObject(ledger, 'Coverage ledger');
   requireObject(context, 'Coverage context');
@@ -27,7 +36,9 @@ export function validateCoverageLedger(ledger, context) {
   if (!Array.isArray(ledger.entries)) throw new Error('Coverage ledger requires an entries array.');
   if (!context.sourceTopicMap || !Array.isArray(context.sourceTopicMap.entries)) throw new Error('Coverage context requires sourceTopicMap.');
 
-  const topicIds = new Set(flattenTopics(context.taxonomy).map((topic) => topic.id));
+  const flatTopics = flattenTopics(context.taxonomy);
+  const topicIds = new Set(flatTopics.map((topic) => topic.id));
+  const topicById = new Map(flatTopics.map((topic) => [topic.id, topic]));
   const mapEntries = context.sourceTopicMap.entries.filter((entry) => entry.source === ledger.source);
   if (mapEntries.length === 0) throw new Error(`Coverage ledger source has no source-topic mappings: ${ledger.source}`);
   const mapBySection = new Map(mapEntries.map((entry) => [entry.sourceSection, entry]));
@@ -49,9 +60,13 @@ export function validateCoverageLedger(ledger, context) {
     const mapEntry = mapBySection.get(entry.sourceSection);
     if (!mapEntry) throw new Error(`Coverage section has no source-topic mapping: ${entry.sourceSection}`);
     if (!Array.isArray(entry.canonicalTopics)) throw new Error(`Coverage canonicalTopics must be an array at ${key}`);
+    const mappedTopics = new Set(mapEntry.canonicalTopics);
     for (const topic of entry.canonicalTopics) {
       if (!topicIds.has(topic)) throw new Error(`Unknown canonical topic ${topic} at ${key}`);
-      if (!mapEntry.canonicalTopics.includes(topic)) {
+      const isAllowed = entry.sourceItem === null
+        ? mappedTopics.has(topic)
+        : topicFallsUnderMappedBranch(topic, mappedTopics, topicById);
+      if (!isAllowed) {
         throw new Error(`Coverage topics are inconsistent with source-topic map at ${key}: ${topic}`);
       }
     }

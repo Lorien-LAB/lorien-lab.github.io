@@ -3,11 +3,11 @@ problemId: lorien-probability-001
 title: Conditional Dice Expectation
 description: An original expectation exercise designed to practice conditioning on the outcome of a first random experiment.
 date: 2026-08-16
-originType: original
 domain: Mathematics & Statistics
 category: Probability
 subcategories: [Expectation, Conditional Probability]
 tags: [Probability, Expectation, Interview]
+quantInterviewTopics: [probability-statistics, conditional-probability-bayes, expectation-variance-covariance]
 concepts: []
 techniques: [conditioning]
 prerequisites: []

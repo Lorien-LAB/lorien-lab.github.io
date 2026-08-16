@@ -3,16 +3,11 @@ problemId: 150-first-look-005
 title: Feasible Parameter Range in a Correlation Matrix
 description: Determine the admissible range of an unknown correlation by translating correlation-matrix validity into positive-semidefinite constraints.
 date: 2026-08-16
-originType: book
-source: 150-most-frequently-asked
-sourceSection: 'First Look: Ten Questions'
-sourceChapter: '1'
-sourceProblem: '5'
-sourceReference: 'Chapter 1 · First Look · Question 5 · printed pp. 8–9'
 domain: Mathematics & Statistics
 category: Linear Algebra
 subcategories: [Correlation Matrices, Positive Semidefinite Matrices]
 tags: [Linear Algebra, Correlation, PSD, Interview]
+quantInterviewTopics: [linear-algebra-matrix-methods, covariance-correlation-matrices, positive-semidefinite-matrices]
 concepts: [correlation-matrix, positive-semidefinite-matrix]
 techniques: [principal-minor-feasibility]
 prerequisites: []

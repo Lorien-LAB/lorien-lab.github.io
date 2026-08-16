@@ -16,6 +16,8 @@ Do not put original book bookkeeping into public content. Knowledge and Problem 
 - original page number;
 - source ordering.
 
+**Canonical public Problems do not carry source provenance in frontmatter or rendered content. All source mappings live in hidden coverage data. A duplicate source question enriches a canonical Problem; it does not create a duplicate public page.**
+
 Source page numbers are internal evidence only. Hidden source manifests, TOCs, source-topic mappings, evidence ranges, and coverage ledgers preserve auditability.
 
 ## 3. Canonical Knowledge structure

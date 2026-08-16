@@ -3,16 +3,11 @@ problemId: 150-first-look-004
 title: Ant Collisions and Identity Swapping
 description: Count endpoint arrivals and pairwise collisions by replacing identical ants that bounce on contact with straight-through ghost trajectories.
 date: 2026-08-16
-originType: book
-source: 150-most-frequently-asked
-sourceSection: 'First Look: Ten Questions'
-sourceChapter: '1'
-sourceProblem: '4'
-sourceReference: 'Chapter 1 · First Look · Question 4 · printed p. 7'
 domain: Mathematics & Statistics
 category: Brainteasers
 subcategories: [Invariants, Collision Problems]
 tags: [Brainteasers, Invariants, Collisions, Interview]
+quantInterviewTopics: [logic-brainteasers-discrete-reasoning, invariants-state-transformations]
 concepts: []
 techniques: [identity-swapping-invariance]
 prerequisites: []

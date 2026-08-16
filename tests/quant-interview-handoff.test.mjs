@@ -48,6 +48,14 @@ test('repository memory defines the Topic-first cross-book protocol', async () =
   ]) assert.ok(protocol.includes(phrase), `AGENT_PROTOCOL workflow missing: ${phrase}`);
 });
 
+test('content standard makes canonical Problems source-neutral and deduplicated', async () => {
+  const standard = await readFile('docs/quant-interview/CONTENT_STANDARD.md', 'utf8');
+  assert.match(standard, /Canonical public Problems do not carry source provenance in frontmatter or rendered content/i);
+  assert.match(standard, /All source mappings live in hidden coverage data/i);
+  assert.match(standard, /duplicate source question enriches a canonical Problem/i);
+  assert.match(standard, /does not create a duplicate public page/i);
+});
+
 test('source catalog records three verified source files without claiming problem completeness', async () => {
   const catalog = await readFile('docs/quant-interview/SOURCE_CATALOG.md', 'utf8');
   assert.match(catalog, /Green Book[\s\S]*First Edition \(2008\)[\s\S]*9781438236667[\s\S]*213 PDF pages/i);
@@ -58,16 +66,29 @@ test('source catalog records three verified source files without claiming proble
   assert.match(catalog, /Topic-first/i);
 });
 
-test('handoff records Stage B public shell and points to Stage C migration', async () => {
+test('handoff records Stages A-C and points to the first cross-book Stage D workstream', async () => {
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
-  assert.match(handoff, /Stage B.*public Topic-first shell.*implemented/is);
-  assert.match(handoff, /Problem Bank[\s\S]*Topic \/ Subtopic filter/is);
-  assert.match(handoff, /Legacy Source URLs[\s\S]*retired/is);
-  assert.match(handoff, /coverage/i);
-  assert.match(handoff, /all three sources/i);
+  assert.match(handoff, /Stage A[\s\S]*complete/i);
+  assert.match(handoff, /Stage B[\s\S]*complete/i);
+  assert.match(handoff, /Stage C[\s\S]*complete/i);
+  assert.match(handoff, /source-neutral/i);
+  assert.match(handoff, /hidden coverage/i);
+  assert.match(handoff, /put-quotes-zero-cost-static-portfolio/);
+  assert.match(handoff, /missing-digit-power-of-two/);
+  assert.match(handoff, /ants-crossing-line/);
+  assert.match(handoff, /correlation-matrix-parameter-range/);
+  assert.match(handoff, /conditional-dice-expectation/);
+  assert.match(handoff, /random-walk-boundary/);
+
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
-  assert.match(nextAction, /Stage C.*migrate existing authored content/is);
+  assert.match(nextAction, /Stage D/i);
+  assert.match(nextAction, /cross-book/i);
+  assert.match(nextAction, /Linear Algebra & Matrix Methods/i);
+  assert.match(nextAction, /Covariance|Correlation/i);
+  assert.match(nextAction, /Positive Semidefinite|PSD/i);
+  assert.match(nextAction, /all three/i);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);
+  assert.doesNotMatch(nextAction, /Green[^\n]*(?:then|→)[^\n]*Red|Red[^\n]*(?:then|→)[^\n]*150/i);
 });
 
 test('all three TOCs are source-file-verified without implying problem completeness', async () => {

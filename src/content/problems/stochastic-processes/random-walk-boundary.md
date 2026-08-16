@@ -3,11 +3,11 @@ problemId: lorien-stochastic-001
 title: Random Walk to a Boundary
 description: An original first-step-analysis exercise for the probability of reaching an upper boundary before a lower boundary.
 date: 2026-08-16
-originType: original
 domain: Mathematics & Statistics
 category: Stochastic Processes
 subcategories: [Random Walk, Recursion]
 tags: [Random Walk, Probability, Interview]
+quantInterviewTopics: [stochastic-processes-stochastic-calculus, random-walks-markov-chains]
 concepts: []
 techniques: [first-step-analysis, recursion-problem-solving]
 prerequisites: []
