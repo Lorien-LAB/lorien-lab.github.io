@@ -4,20 +4,26 @@ import { readFile } from 'node:fs/promises';
 
 const read = (path) => readFile(new URL(`../${path}`, import.meta.url), 'utf8');
 
-test('base layout initializes and persists a site language preference', async () => {
+test('base layout initializes a deterministic site language preference', async () => {
   const source = await read('src/layouts/BaseLayout.astro');
   assert.match(source, /data-lang="en"/);
   assert.match(source, /localStorage\.getItem\(['"]site-language['"]\)/);
-  assert.match(source, /document\.documentElement\.dataset\.lang/);
-  assert.match(source, /document\.documentElement\.lang/);
+  assert.match(source, /document\.documentElement/);
+  assert.match(source, /\.dataset\.lang\s*=/);
+  assert.match(source, /\.lang\s*=/);
 });
 
 test('header exposes an accessible English-Chinese language switch', async () => {
-  const source = await read('src/components/Header.astro');
-  assert.match(source, /LanguageToggle/);
-  assert.match(source, /中文/);
-  assert.match(source, /Home/);
-  assert.match(source, /首页/);
+  const header = await read('src/components/Header.astro');
+  const toggle = await read('src/components/LanguageToggle.astro');
+  assert.match(header, /LanguageToggle/);
+  assert.match(header, /Home/);
+  assert.match(header, /首页/);
+  assert.match(toggle, /中文/);
+  assert.match(toggle, /data-language-option="en"/);
+  assert.match(toggle, /data-language-option="zh"/);
+  assert.match(toggle, /localStorage\.setItem\(['"]site-language['"]/);
+  assert.match(toggle, /aria-pressed/);
 });
 
 test('shared shell and home hero provide bilingual copy', async () => {
