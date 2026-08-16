@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
 
 const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
 const workstreamPath = 'src/data/quant-interview/workstreams/linear-algebra-matrix-decompositions-003.json';
@@ -49,6 +50,18 @@ async function context() {
   return { taxonomy, sourceTopicMap, manifests };
 }
 
+async function markdownSlugs(root) {
+  const files = await readdir(root, { recursive: true });
+  return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
+}
+
+async function findKnowledge(slug) {
+  const files = await readdir('src/content/knowledge', { recursive: true });
+  const match = files.find((file) => String(file).endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
+  assert.ok(match, `missing knowledge ${slug}`);
+  return `src/content/knowledge/${match}`;
+}
+
 test('third cross-book workstream is bounded to matrix decompositions', async () => {
   const workstream = await readJson(workstreamPath);
   assert.equal(workstream.id, 'linear-algebra-matrix-decompositions-003');
@@ -56,7 +69,7 @@ test('third cross-book workstream is bounded to matrix decompositions', async ()
   assert.deepEqual(new Set(workstream.sourceScopes.map((scope) => scope.source)), new Set([
     'green-book', 'red-book', '150-most-frequently-asked',
   ]));
-  assert.equal(workstream.status, 'active');
+  assert.match(workstream.status, /^(?:active|complete)$/);
 });
 
 test('matrix decomposition workstream source scope validates against verified manifests', async () => {
@@ -101,4 +114,54 @@ test('red and 150 matrix square root tasks resolve to one canonical problem', as
   assert.deepEqual(redEntry.canonicalProblems, ['matrix-square-root-and-cholesky-factor']);
   assert.deepEqual(q150Entry.canonicalProblems, ['matrix-square-root-and-cholesky-factor']);
   assert.equal(q150Entry.state, 'variant');
+});
+
+test('knowledge-only matrix decomposition items remain visible as public Interview Checks', async () => {
+  const targets = new Set();
+  for (const sourceDecisions of Object.values(semanticDecisions)) {
+    for (const [state, , knowledge] of Object.values(sourceDecisions)) {
+      if (state === 'knowledge-only') for (const slug of knowledge) targets.add(slug);
+    }
+  }
+  assert.deepEqual(targets, new Set(['qr-decomposition', 'lu-cholesky-decomposition', 'singular-value-decomposition']));
+  for (const slug of targets) {
+    const file = await findKnowledge(slug);
+    const text = await readFile(file, 'utf8');
+    assert.match(text, /## Interview Checks/i, `${slug} hides knowledge-only source checks`);
+  }
+});
+
+test('completed matrix decomposition workstream has terminal resolved coverage', async () => {
+  const workstream = await readJson(workstreamPath);
+  assert.equal(workstream.status, 'complete');
+
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const problemSlugs = await markdownSlugs('src/content/problems');
+  const knowledgeSlugs = await markdownSlugs('src/content/knowledge');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+
+  for (const [source, keys] of Object.entries(inventory)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    const byKey = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
+    for (const [section, item] of keys) {
+      const entry = byKey.get(`${section}::${item}`);
+      assert.ok(entry);
+      assert.doesNotMatch(entry.state, /^(?:pending|needs-review)$/);
+      assert.match(entry.resolutionNote ?? '', /\S/);
+    }
+    assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+      taxonomy,
+      sourceTopicMap,
+      problemSlugs,
+      knowledgeSlugs,
+      allowUnresolvedCanonicalRefs: false,
+    }));
+  }
+});
+
+test('matrix decomposition public corpus contains no source-named duplicate pages', async () => {
+  const files = (await readdir('src/content/problems/linear-algebra')).filter((file) => String(file).endsWith('.md'));
+  assert.deepEqual(files.filter((file) => /green|red|150|frequently-asked|q6-10|question-5/i.test(String(file))), []);
+  assert.equal(files.filter((file) => /matrix-square-root-and-cholesky-factor\.md/.test(String(file))).length, 1);
 });
