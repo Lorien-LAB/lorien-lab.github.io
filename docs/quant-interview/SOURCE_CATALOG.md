@@ -57,12 +57,13 @@ The supplied chapter/page structure is retained as a seed, but no edition-specif
 - Source file: **source-file-verified**
 - Source-file identity: `sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14`
 - User scan: 220 PDF pages; printed page 1 begins at PDF page 11; bibliography is printed page 209 at PDF page 219
-- Problem coverage: **2 Problems authored; validation pending, so not yet `problem-indexed`**
+- Problem coverage: **problem-indexed for the validated Q1–Q2 pilot only; the book is not complete**
 - Ingestion: `ingesting`
-- Active batch: `150-first-look-q01-q02` — printed pages 1–6, Questions 1–2 only
+- Completed batch: `150-first-look-q01-q02` — printed pages 1–6, Questions 1–2 only
+- Verification: content commit `390f132e1d54c428d30d09e6b2f75dcd24e948d0`, Actions run `31935080008`
 - Publisher record: `https://www.fepress.org/150iqs/`
 
-The actual user-supplied scan has been inspected directly. The title page, copyright page, ISBN, first-edition publication statement, TOC, body numbering, and bibliography all align with the pinned 2013 first edition. The PDF itself is not committed to the repository. The open batch is deliberately narrower than the page range's incidental mentions of later First Look questions: only Questions 1–2 are in scope. Two independently formulated Problem records and their reusable Knowledge nodes have been authored on the active ingestion branch, but `problem-indexed` is intentionally withheld until validation gates pass.
+The actual user-supplied scan has been inspected directly. The title page, copyright page, ISBN, first-edition publication statement, TOC, body numbering, and bibliography all align with the pinned 2013 first edition. The PDF itself is not committed to the repository. The validated pilot contains two independently formulated Problem records plus five reusable Knowledge nodes. No completeness claim is made for Questions 3–150 or for the rest of Chapter 1.
 
 ## Current truth table
 
@@ -70,6 +71,6 @@ The actual user-supplied scan has been inspected directly. The title page, copyr
 |---|---|---|---|---|---|
 | Green Book | verified | user-supplied seed | work-identified | not source-file-verified | not problem-indexed |
 | Red Book | verified | user-supplied seed | work-identified | not source-file-verified | not problem-indexed |
-| 150 Questions | verified | source-file-verified | edition-pinned · 2013 first edition | source-file-verified | 2 authored · validation pending |
+| 150 Questions | verified | source-file-verified | edition-pinned · 2013 first edition | source-file-verified | Q1–Q2 problem-indexed · rest incomplete |
 
 A future Agent may advance a state only with corresponding evidence. Never downgrade uncertainty by wording alone.

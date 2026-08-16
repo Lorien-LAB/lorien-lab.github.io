@@ -6,7 +6,7 @@ Updated: 2026-08-16
 
 **Phase 2B — source-file verification and bounded book ingestion.**
 
-The first real source file has passed identity/edition/TOC verification. The first bounded ingestion batch has been authored and is now waiting on repository verification gates.
+The first real source file has passed identity/edition/TOC verification, and the first bounded ingestion batch has passed all repository verification gates.
 
 ## Stable architecture
 
@@ -49,9 +49,9 @@ The first real source file has passed identity/edition/TOC verification. The fir
 - page alignment: printed page 1 = PDF page 11; printed bibliography page 209 = PDF page 219
 - TOC: source-file-verified
 - ingestion status: `ingesting`
-- completed ingestion batches: none
+- completed ingestion batches: `150-first-look-q01-q02`
 
-## Active batch
+## Last completed batch
 
 `150-first-look-q01-q02`
 
@@ -59,8 +59,8 @@ The first real source file has passed identity/edition/TOC verification. The fir
 - chapter/section: Chapter 1 — `First Look: Ten Questions`
 - source page range: printed pages 1–6
 - PDF page range used as evidence: 11–16
-- intended problem scope: Questions 1–2 only
-- authored Problems:
+- problem scope: Questions 1–2 only
+- Problems:
   - `put-quotes-zero-cost-static-portfolio`
   - `missing-digit-power-of-two`
 - reusable Knowledge added:
@@ -69,26 +69,27 @@ The first real source file has passed identity/edition/TOC verification. The fir
   - `static-arbitrage-construction`
   - `modular-arithmetic`
   - `modular-invariants`
-- status: `review-pending`
-- verification status: `pending-gates`
-
-Do not expand this batch to Questions 3–10 merely because their statements also appear on printed pages 1–2.
+- status: `complete`
+- verified content commit: `390f132e1d54c428d30d09e6b2f75dcd24e948d0`
+- GitHub Actions verification run: `31935080008`
+- gates: `npm run test` ✅ · `npm run check` ✅ · `npm run build` ✅
 
 Question 1 was independently derived with an explicit support condition for strict arbitrage. The public solution does not repeat the source answer's stronger-than-necessary claim that option prices must be strictly convex in strike; ordinary no-arbitrage convexity permits equality, while the concrete zero-cost portfolio becomes a strict arbitrage only when a positive-payoff terminal region is genuinely possible.
 
 ## Next action
 
-Do not author more book problems yet. For this batch only:
+Start a **new bounded batch only after re-reading this handoff and the Agent Protocol**. Do not silently continue through the rest of Chapter 1 in the same batch.
 
-1. validate source/Knowledge/problem relationships and the ingestion manifest;
-2. run `npm run test`;
-3. run `npm run check`;
-4. run `npm run build`;
-5. review the branch diff against `main`;
-6. resolve any failures without expanding scope;
-7. only after all gates pass, mark `150-first-look-q01-q02` complete and record its completion commit in the manifest and this handoff.
+A natural next candidate is another small `150 Questions` First Look slice, but the next Agent must explicitly choose and register its page/problem bounds before authoring. Green/Red still require exact-edition and source-file verification in repository state before any batch is created for them.
 
-For Green/Red, exact edition and actual source-file verification are still required before any page-bounded batch is created.
+For the next batch:
+
+1. select one source and one bounded problem/page range;
+2. register the batch in its manifest;
+3. perform ontology-first deduplication;
+4. author independent S3+ Problem records only for that range;
+5. run relationship/manifest validation plus `npm run test`, `npm run check`, and `npm run build`;
+6. review the diff and update this handoff before completion.
 
 ## Non-negotiable invariants
 

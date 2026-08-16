@@ -31,8 +31,11 @@
         "put-quotes-zero-cost-static-portfolio",
         "missing-digit-power-of-two"
       ],
-      "status": "review-pending",
-      "verificationStatus": "pending-gates"
+      "status": "complete",
+      "verificationStatus": "passed",
+      "verifiedCommit": "390f132e1d54c428d30d09e6b2f75dcd24e948d0",
+      "verificationRunId": 31935080008,
+      "completedDate": "2026-08-16"
     }
   ]
 }

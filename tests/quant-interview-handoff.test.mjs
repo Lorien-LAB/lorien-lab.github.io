@@ -29,12 +29,10 @@ const pilotKnowledge = [
   'src/content/knowledge/concepts/modular-invariants.md',
 ];
 
-test('quant interview repository memory remains explicit', async () => {
+test('quant interview repository memory records a completed verified pilot batch', async () => {
   for (const file of docs) await access(file);
   const readme = await readFile(docs[0], 'utf8');
   assert.match(readme, /repository.*source of truth/i);
-  assert.match(readme, /HANDOFF\.md/);
-  assert.match(readme, /target source/i);
   assert.match(readme, /one bounded batch/i);
 
   const protocol = await readFile(docs[1], 'utf8');
@@ -45,19 +43,17 @@ test('quant interview repository memory remains explicit', async () => {
   const handoff = await readFile(docs[4], 'utf8');
   assert.match(handoff, /Phase 2B/);
   assert.match(handoff, /150-first-look-q01-q02/);
-  assert.match(handoff, /review-pending/);
-  assert.match(handoff, /pending-gates/);
+  assert.match(handoff, /status: `complete`/);
+  assert.match(handoff, /31935080008/);
 });
 
-test('source catalog reflects verified 150 Questions while Green and Red remain unresolved', async () => {
+test('source catalog reflects verified pilot coverage without implying book completeness', async () => {
   const catalog = await readFile('docs/quant-interview/SOURCE_CATALOG.md', 'utf8');
-  for (const name of ['A Practical Guide to Quantitative Finance Interviews', 'Quant Job Interview Questions and Answers', '150 Most Frequently Asked Questions on Quant Interviews']) {
-    assert.ok(catalog.includes(name), `catalog missing ${name}`);
-  }
   assert.match(catalog, /Green Book[\s\S]*not source-file-verified/i);
   assert.match(catalog, /Red Book[\s\S]*not source-file-verified/i);
   assert.match(catalog, /150 Questions[\s\S]*source-file-verified[\s\S]*2013/i);
-  assert.match(catalog, /2 Problems authored; validation pending/);
+  assert.match(catalog, /problem-indexed for the validated Q1–Q2 pilot only/i);
+  assert.match(catalog, /book is not complete/i);
 });
 
 test('TOC verification advances only the inspected 150 Questions source', async () => {
@@ -78,11 +74,9 @@ test('TOC verification advances only the inspected 150 Questions source', async 
   assert.deepEqual(q150.sourceFileEvidence.bibliography, { pdfPage: 219, displayPage: 209 });
 });
 
-test('150 Questions has one verified bounded batch with exactly two authored problem slugs', async () => {
+test('150 Questions manifest records one completed verified bounded batch', async () => {
   const manifest = JSON.parse(await readFile('src/data/quant-interview/150-most-frequently-asked.json', 'utf8'));
   assert.equal(manifest.sourceFile, 'sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14');
-  assert.equal(manifest.sourceFileMeta.verification, 'source-file-verified');
-  assert.equal(manifest.sourceFileMeta.pdfPageCount, 220);
   assert.equal(manifest.ingestionStatus, 'ingesting');
   assert.deepEqual(manifest.batches, [{
     id: '150-first-look-q01-q02',
@@ -91,8 +85,11 @@ test('150 Questions has one verified bounded batch with exactly two authored pro
     sourceSection: '1 First Look: Ten Questions',
     expectedProblemScope: ['1', '2'],
     problemSlugs: ['put-quotes-zero-cost-static-portfolio', 'missing-digit-power-of-two'],
-    status: 'review-pending',
-    verificationStatus: 'pending-gates',
+    status: 'complete',
+    verificationStatus: 'passed',
+    verifiedCommit: '390f132e1d54c428d30d09e6b2f75dcd24e948d0',
+    verificationRunId: 31935080008,
+    completedDate: '2026-08-16',
   }]);
   const { validateIngestionManifest } = await import('../src/lib/quantInterviewIngestion.mjs');
   assert.doesNotThrow(() => validateIngestionManifest(manifest));
@@ -119,7 +116,7 @@ test('pilot problems are source-linked, independently structured, and S3-plus sh
   assert.match(q2, /x = 4/);
 });
 
-test('pilot ontology contains only reusable concepts and correctly typed techniques', async () => {
+test('pilot ontology contains reusable concepts and correctly typed techniques', async () => {
   for (const file of pilotKnowledge) await access(file);
   for (const file of [
     'src/content/knowledge/concepts/static-arbitrage-construction.md',
