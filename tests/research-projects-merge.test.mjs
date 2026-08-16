@@ -12,6 +12,14 @@ test('research and projects share one canonical landing route', async () => {
   assert.match(header, /研究与项目/);
 });
 
+test('merged portfolio navigation stays active on research and project detail namespaces', async () => {
+  const header = await readFile('src/components/Header.astro', 'utf8');
+  assert.match(header, /research-projects\//);
+  assert.match(header, /research\//);
+  assert.match(header, /projects\//);
+  assert.match(header, /portfolioPrefixes|portfolio.*prefix/i);
+});
+
 test('unified landing composes research, projects, and reproductions without migrating detail namespaces', async () => {
   const page = await readFile('src/pages/research-projects/index.astro', 'utf8');
   assert.match(page, /getCollection\('research'\)/);
