@@ -29,6 +29,72 @@
       "canonicalKnowledge": []
     },
     {
+      "sourceSection": "1",
+      "sourceItem": "1",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "put-quotes-zero-cost-static-portfolio"
+      ],
+      "canonicalKnowledge": [
+        "no-arbitrage-principle",
+        "option-price-convexity-in-strike",
+        "static-arbitrage-construction"
+      ]
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": "2",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "modular-arithmetic"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "missing-digit-power-of-two"
+      ],
+      "canonicalKnowledge": [
+        "modular-arithmetic",
+        "modular-invariants"
+      ]
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": "4",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "invariants-state-transformations"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "ants-crossing-line"
+      ],
+      "canonicalKnowledge": [
+        "identity-swapping-invariance"
+      ]
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": "5",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "correlation-matrix-parameter-range"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ]
+    },
+    {
       "sourceSection": "2",
       "sourceItem": null,
       "canonicalTopics": [],
