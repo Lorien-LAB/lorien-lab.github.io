@@ -1,8 +1,9 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
 
-const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
+const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
 const workstreamPath = 'src/data/quant-interview/workstreams/linear-algebra-determinants-eigenvalues-002.json';
 const topicSet = new Set(['linear-algebra-matrix-methods', 'determinants-eigenvalues']);
 
@@ -45,6 +46,18 @@ async function context() {
     ['green-book', 'red-book', '150-most-frequently-asked'].map(async (source) => [source, await readJson(`src/data/quant-interview/${source}.json`)]),
   ));
   return { taxonomy, sourceTopicMap, manifests };
+}
+
+async function markdownSlugs(root) {
+  const files = await readdir(root, { recursive: true });
+  return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
+}
+
+async function findKnowledge(slug) {
+  const files = await readdir('src/content/knowledge', { recursive: true });
+  const match = files.find((file) => String(file).endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
+  assert.ok(match, `missing knowledge ${slug}`);
+  return `src/content/knowledge/${match}`;
 }
 
 test('second cross-book workstream is bounded to determinants and eigenvalues', async () => {
@@ -93,4 +106,52 @@ test('semantic identity decisions distinguish canonical problems from reusable k
       assert.match(entry.resolutionNote ?? '', /\S/, `${source} ${key} missing semantic resolution note`);
     }
   }
+});
+
+test('knowledge-only determinant/eigenvalue items remain visible as public Interview Checks', async () => {
+  const knowledgeOnlyTargets = new Set();
+  for (const expected of Object.values(semanticDecisions)) {
+    for (const [state, , knowledge] of Object.values(expected)) {
+      if (state === 'knowledge-only') for (const slug of knowledge) knowledgeOnlyTargets.add(slug);
+    }
+  }
+  assert.deepEqual(knowledgeOnlyTargets, new Set(['matrix-spectral-invariants', 'eigenvalues-eigenvectors', 'eigenbasis-decomposition']));
+  for (const slug of knowledgeOnlyTargets) {
+    const file = await findKnowledge(slug);
+    const text = await readFile(file, 'utf8');
+    assert.match(text, /## Interview Checks/i, `${slug} hides knowledge-only interview tests`);
+  }
+});
+
+test('completed determinant/eigenvalue workstream has terminal resolved coverage', async () => {
+  const workstream = await readJson(workstreamPath);
+  assert.equal(workstream.status, 'complete');
+
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const problemSlugs = await markdownSlugs('src/content/problems');
+  const knowledgeSlugs = await markdownSlugs('src/content/knowledge');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+
+  for (const [source, keys] of Object.entries(inventory)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    const byKey = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
+    for (const [section, item] of keys) {
+      const entry = byKey.get(`${section}::${item}`);
+      assert.ok(entry);
+      assert.doesNotMatch(entry.state, /^(?:pending|needs-review)$/);
+    }
+    assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+      taxonomy,
+      sourceTopicMap,
+      problemSlugs,
+      knowledgeSlugs,
+      allowUnresolvedCanonicalRefs: false,
+    }));
+  }
+});
+
+test('determinant/eigenvalue public corpus contains no source-named duplicate pages', async () => {
+  const files = (await readdir('src/content/problems/linear-algebra')).filter((file) => String(file).endsWith('.md'));
+  assert.deepEqual(files.filter((file) => /green|red|150|frequently-asked/i.test(String(file))), []);
 });
