@@ -1,0 +1,69 @@
+name: Quant Interview Stage C Knowledge Migration
+
+on:
+  push:
+    branches:
+      - chatgpt/quant-interview-topic-first-stage-c-2026-08-16
+
+permissions:
+  contents: write
+
+jobs:
+  migrate:
+    if: contains(github.event.head_commit.message, 'run Stage C knowledge migration')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Classify canonical interview Knowledge
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const path = require('node:path');
+          const root = 'src/content/knowledge';
+          const mapping = new Map([
+            ['conditioning', ['probability-statistics', 'conditional-probability-bayes']],
+            ['first-step-analysis', ['stochastic-processes-stochastic-calculus', 'random-walks-markov-chains']],
+            ['recursion-problem-solving', ['logic-brainteasers-discrete-reasoning']],
+            ['no-arbitrage-principle', ['derivatives-options-no-arbitrage', 'no-arbitrage-option-properties']],
+            ['option-price-convexity-in-strike', ['derivatives-options-no-arbitrage', 'no-arbitrage-option-properties']],
+            ['static-arbitrage-construction', ['derivatives-options-no-arbitrage', 'no-arbitrage-option-properties']],
+            ['modular-arithmetic', ['logic-brainteasers-discrete-reasoning', 'modular-arithmetic']],
+            ['modular-invariants', ['logic-brainteasers-discrete-reasoning', 'modular-arithmetic', 'invariants-state-transformations']],
+            ['identity-swapping-invariance', ['logic-brainteasers-discrete-reasoning', 'invariants-state-transformations']],
+            ['correlation-matrix', ['linear-algebra-matrix-methods', 'covariance-correlation-matrices']],
+            ['positive-semidefinite-matrix', ['linear-algebra-matrix-methods', 'positive-semidefinite-matrices']],
+            ['principal-minor-feasibility', ['linear-algebra-matrix-methods', 'positive-semidefinite-matrices']],
+          ]);
+          const files = [];
+          const walk = dir => {
+            for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+              const p = path.join(dir, entry.name);
+              if (entry.isDirectory()) walk(p);
+              else if (entry.isFile() && entry.name.endsWith('.md')) files.push(p);
+            }
+          };
+          walk(root);
+          for (const [slug, topics] of mapping) {
+            const file = files.find(p => path.basename(p) === `${slug}.md`);
+            if (!file) throw new Error(`missing Knowledge file: ${slug}`);
+            let text = fs.readFileSync(file, 'utf8');
+            const line = `quantInterviewTopics: [${topics.join(', ')}]`;
+            if (/^quantInterviewTopics:.*$/m.test(text)) {
+              text = text.replace(/^quantInterviewTopics:.*$/m, line);
+            } else if (/^tags:.*$/m.test(text)) {
+              text = text.replace(/^tags:.*$/m, match => `${match}\n${line}`);
+            } else {
+              throw new Error(`missing tags insertion point: ${slug}`);
+            }
+            fs.writeFileSync(file, text);
+          }
+          NODE
+      - name: Commit migration
+        run: |
+          git config user.name Lorien
+          git config user.email 2249297094@qq.com
+          git add src/content/knowledge
+          git diff --cached --check
+          test "$(git diff --cached --name-only | wc -l)" -eq 12
+          git commit -m "data: classify reusable interview knowledge [skip ci]"
+          git push
