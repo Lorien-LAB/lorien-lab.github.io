@@ -5,6 +5,7 @@ import { access, readFile } from 'node:fs/promises';
 const knowledgePaths = {
   qr: 'src/content/knowledge/concepts/qr-decomposition.md',
   luCholesky: 'src/content/knowledge/concepts/lu-cholesky-decomposition.md',
+  svd: 'src/content/knowledge/concepts/singular-value-decomposition.md',
   eigenbasis: 'src/content/knowledge/concepts/eigenbasis-decomposition.md',
 };
 
@@ -45,6 +46,32 @@ test('LU and Cholesky Knowledge separates pivoted elimination, SPD structure, an
   assert.match(text, /roughly[\s\S]{0,40}half[\s\S]{0,80}work|cheaper|less work/i);
   assert.match(text, /covariance/i);
   assert.match(text, /singular[\s\S]{0,200}(?:PSD|positive[- ]semidefinite)[\s\S]{0,260}(?:spectral|SVD)|(?:spectral|SVD)[\s\S]{0,260}singular[\s\S]{0,200}(?:PSD|positive[- ]semidefinite)/i);
+  assert.match(text, /## Interview Checks/i);
+  assert.doesNotMatch(text, /Green Book|Red Book|150 Most Frequently|Question\s+\d+/i);
+});
+
+test('SVD Knowledge states full and thin dimensions, spectral links, rank, and pseudoinverse', async () => {
+  await access(knowledgePaths.svd);
+  const text = await readFile(knowledgePaths.svd, 'utf8');
+  assert.match(text, /^quantInterviewTopics:\s*\[[^\]]*matrix-decompositions[^\]]*\]$/m);
+  assert.match(text, /A\s*(?:in|∈)\s*R\^\{?m\s*x\s*n\}?|m\s*[x×]\s*n/i);
+  assert.match(text, /full SVD/i);
+  assert.match(text, /U\s*(?:in|∈)[\s\S]{0,80}m\s*x\s*m/i);
+  assert.match(text, /V\s*(?:in|∈)[\s\S]{0,80}n\s*x\s*n/i);
+  assert.match(text, /Sigma[\s\S]{0,100}m\s*x\s*n|rectangular[\s\S]{0,100}Sigma/i);
+  assert.match(text, /thin SVD|compact SVD|rank-r/i);
+  assert.match(text, /U_r[\s\S]{0,80}m\s*x\s*r/i);
+  assert.match(text, /Sigma_r[\s\S]{0,80}r\s*x\s*r/i);
+  assert.match(text, /V_r[\s\S]{0,80}n\s*x\s*r/i);
+  assert.match(text, /A\^T\s*A[\s\S]{0,180}sigma_i\^2|sigma_i\^2[\s\S]{0,180}A\^T\s*A/i);
+  assert.match(text, /A\s*A\^T[\s\S]{0,180}sigma_i\^2|sigma_i\^2[\s\S]{0,180}A\s*A\^T/i);
+  assert.match(text, /rank[\s\S]{0,160}(?:positive|nonzero) singular values|(?:positive|nonzero) singular values[\s\S]{0,160}rank/i);
+  assert.match(text, /Moore-Penrose|pseudoinverse/i);
+  assert.match(text, /A\^\+\s*=\s*V_r\s*Sigma_r\^-1\s*U_r\^T|V_r[\s\S]{0,80}Sigma_r[\s\S]{0,80}U_r\^T/i);
+  assert.match(text, /rank-deficient|rank deficient|minimum-norm/i);
+  assert.match(text, /least squares/i);
+  assert.match(text, /non-square|rectangular[\s\S]{0,160}eigendecomposition|eigendecomposition[\s\S]{0,160}rectangular/i);
+  assert.match(text, /covariance|square-root factor|square root factor/i);
   assert.match(text, /## Interview Checks/i);
   assert.doesNotMatch(text, /Green Book|Red Book|150 Most Frequently|Question\s+\d+/i);
 });
