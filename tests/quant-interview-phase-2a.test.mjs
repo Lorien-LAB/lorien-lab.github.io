@@ -126,10 +126,24 @@ test('ingestion validator allows cross-batch evidence overlap for different sema
   ])));
 });
 
-test('source pages expose edition and ingestion state rather than implying completeness', async () => {
-  const page = await readFile('src/pages/knowledge/quant-interview/sources/[...slug].astro', 'utf8');
-  assert.match(page, /Edition status/);
-  assert.match(page, /Ingestion status/);
+test('source verification remains internal after public source routes retire', async () => {
+  for (const path of [
+    'src/data/quant-interview/green-book.json',
+    'src/data/quant-interview/red-book.json',
+    'src/data/quant-interview/150-most-frequently-asked.json',
+  ]) {
+    const manifest = JSON.parse(await readFile(path, 'utf8'));
+    assert.equal(manifest.editionStatus, 'edition-pinned');
+    assert.equal(manifest.sourceFileMeta.verification, 'source-file-verified');
+    assert.ok(manifest.sourceFile);
+    assert.ok(manifest.ingestionStatus);
+  }
+
+  await assert.rejects(access('src/pages/knowledge/quant-interview/sources/index.astro'));
+  await assert.rejects(access('src/pages/knowledge/quant-interview/sources/[...slug].astro'));
+  const astroConfig = await readFile('astro.config.mjs', 'utf8');
+  assert.match(astroConfig, /knowledge\/quant-interview\/sources/);
+  assert.match(astroConfig, /knowledge\/quant-interview/);
 });
 
 test('repository still documents source verification as a prerequisite to ingestion', async () => {
