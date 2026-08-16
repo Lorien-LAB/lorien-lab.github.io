@@ -89,17 +89,17 @@ test('current reusable interview Knowledge has exact canonical topic assignments
 
 test('current source-derived items remain auditable in hidden coverage with resolved canonical targets', async () => {
   const ledger = JSON.parse(await readFile('src/data/quant-interview/coverage/150-most-frequently-asked.json', 'utf8'));
-  const items = new Map(ledger.entries.filter((entry) => entry.sourceItem).map((entry) => [entry.sourceItem, entry]));
+  const items = new Map(ledger.entries.filter((entry) => entry.sourceItem).map((entry) => [`${entry.sourceSection}::${entry.sourceItem}`, entry]));
   const expected = new Map([
-    ['1', 'put-quotes-zero-cost-static-portfolio'],
-    ['2', 'missing-digit-power-of-two'],
-    ['4', 'ants-crossing-line'],
-    ['5', 'correlation-matrix-parameter-range'],
+    ['1::1', 'put-quotes-zero-cost-static-portfolio'],
+    ['1::2', 'missing-digit-power-of-two'],
+    ['1::4', 'ants-crossing-line'],
+    ['1::5', 'correlation-matrix-parameter-range'],
   ]);
-  for (const [id, slug] of expected) {
-    const entry = items.get(id);
-    assert.equal(entry?.state, 'canonical-problem', `source item ${id} is not terminal canonical-problem coverage`);
-    assert.deepEqual(entry?.canonicalProblems, [slug], `source item ${id} is not mapped to ${slug}`);
+  for (const [key, slug] of expected) {
+    const entry = items.get(key);
+    assert.equal(entry?.state, 'canonical-problem', `source item ${key} is not terminal canonical-problem coverage`);
+    assert.deepEqual(entry?.canonicalProblems, [slug], `source item ${key} is not mapped to ${slug}`);
   }
 
   const taxonomy = JSON.parse(await readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'));
