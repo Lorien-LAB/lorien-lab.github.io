@@ -9,7 +9,7 @@
     "span-basis-rank-nullity",
     "linear-system-consistency-rref"
   ],
-  "status": "active",
+  "status": "complete",
   "sourceScopes": [
     {
       "source": "green-book",
