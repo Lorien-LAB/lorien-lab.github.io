@@ -75,11 +75,12 @@ test('TOC verification advances only the inspected 150 Questions source', async 
   assert.deepEqual(q150.sourceFileEvidence.bibliography, { pdfPage: 219, displayPage: 209 });
 });
 
-test('150 Questions manifest records one completed verified bounded batch', async () => {
+test('150 Questions manifest preserves the completed verified pilot while allowing later bounded batches', async () => {
   const manifest = JSON.parse(await readFile('src/data/quant-interview/150-most-frequently-asked.json', 'utf8'));
   assert.equal(manifest.sourceFile, 'sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14');
   assert.equal(manifest.ingestionStatus, 'ingesting');
-  assert.deepEqual(manifest.batches, [{
+  assert.ok(manifest.batches.length >= 1);
+  assert.deepEqual(manifest.batches[0], {
     id: '150-first-look-q01-q02',
     startPage: 1,
     endPage: 6,
@@ -92,7 +93,7 @@ test('150 Questions manifest records one completed verified bounded batch', asyn
     verifiedCommit: '7151c59f8fa2222540e2527e52ab177319145cac',
     verificationRunId: 31935163167,
     completedDate: '2026-08-16',
-  }]);
+  });
   const { validateIngestionManifest } = await import('../src/lib/quantInterviewIngestion.mjs');
   assert.doesNotThrow(() => validateIngestionManifest(manifest));
 });
