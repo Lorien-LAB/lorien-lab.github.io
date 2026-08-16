@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
 
@@ -96,4 +96,43 @@ test('all three source TOCs are explicitly reconciled into the canonical topic m
   const { validateSourceTopicMap } = await import('../src/lib/quantInterviewTopics.mjs');
   assert.doesNotThrow(() => validateSourceTopicMap(topicMap, taxonomy, tocBySource));
   assert.equal(topicMap.entries.length, new Set(topicMap.entries.map((x) => `${x.source}::${x.sourceSection}`)).size);
+});
+
+test('hidden coverage ledgers are valid and start explicitly pending', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+  for (const source of ['green-book', 'red-book', '150-most-frequently-asked']) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+      sourceTopicMap, taxonomy, problemSlugs: new Set(), knowledgeSlugs: new Set(), allowUnresolvedCanonicalRefs: true,
+    }));
+    assert.ok(ledger.entries.length > 0);
+    assert.ok(ledger.entries.every((entry) => entry.state));
+  }
+});
+
+test('coverage ledger validator enforces terminal targets and map-consistent topics', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = { version: 1, entries: [
+    { source: 'x', sourceSection: 's', role: 'content', canonicalTopics: ['probability-statistics'] },
+  ]};
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+  const context = { sourceTopicMap, taxonomy, problemSlugs: new Set(['p']), knowledgeSlugs: new Set(['k']), allowUnresolvedCanonicalRefs: false };
+  const base = { source: 'x', version: 1, entries: [] };
+  assert.throws(() => validateCoverageLedger({ ...base, entries: [{ sourceSection: 's', sourceItem: '1', canonicalTopics: ['probability-statistics'], state: 'canonical-problem', canonicalProblems: [], canonicalKnowledge: [] }] }, context), /canonical problem target/i);
+  assert.throws(() => validateCoverageLedger({ ...base, entries: [{ sourceSection: 's', sourceItem: '1', canonicalTopics: ['probability-statistics'], state: 'knowledge-only', canonicalProblems: [], canonicalKnowledge: [] }] }, context), /canonical knowledge target/i);
+  assert.throws(() => validateCoverageLedger({ ...base, entries: [{ sourceSection: 's', sourceItem: '1', canonicalTopics: ['black-scholes'], state: 'pending', canonicalProblems: [], canonicalKnowledge: [] }] }, context), /inconsistent with source-topic map/i);
+});
+
+test('hidden coverage infrastructure is not imported by public pages or layouts', async () => {
+  const roots = ['src/pages/knowledge/quant-interview', 'src/pages/problems', 'src/layouts', 'src/components'];
+  for (const root of roots) {
+    for (const name of await readdir(root, { recursive: true })) {
+      const path = `${root}/${name}`;
+      if (!/\.(?:astro|ts|js|mjs)$/.test(path)) continue;
+      const text = await readFile(path, 'utf8');
+      assert.doesNotMatch(text, /quant-interview\/coverage|quantInterviewCoverage/);
+    }
+  }
 });
