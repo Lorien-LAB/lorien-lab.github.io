@@ -27,8 +27,16 @@ export function validateIngestionManifest(manifest) {
   if (!manifest.edition || typeof manifest.edition !== 'string') {
     throw new Error('Edition-pinned manifests require an exact edition label.');
   }
-  if (!manifest.sourceFile || typeof manifest.sourceFile !== 'string') {
-    throw new Error('Edition-pinned manifests require a source file identity.');
+
+  const hasSourceFile = typeof manifest.sourceFile === 'string' && manifest.sourceFile.trim().length > 0;
+  if (!hasSourceFile) {
+    if (manifest.batches.length > 0) {
+      throw new Error('A verified source file identity is required before adding ingestion batches.');
+    }
+    if (manifest.ingestionStatus !== 'awaiting-source-file') {
+      throw new Error('Edition-pinned manifests without a source file must remain awaiting-source-file.');
+    }
+    return true;
   }
 
   const ids = new Set();
