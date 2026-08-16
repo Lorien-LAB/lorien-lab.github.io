@@ -29,7 +29,7 @@ const pilotKnowledge = [
   'src/content/knowledge/concepts/modular-invariants.md',
 ];
 
-test('quant interview repository memory records a completed verified pilot batch', async () => {
+test('quant interview repository memory records verified bounded batches', async () => {
   for (const file of docs) await access(file);
   const readme = await readFile(docs[0], 'utf8');
   assert.match(readme, /repository.*source of truth/i);
@@ -43,18 +43,19 @@ test('quant interview repository memory records a completed verified pilot batch
   const handoff = await readFile(docs[4], 'utf8');
   assert.match(handoff, /Phase 2B/);
   assert.match(handoff, /150-first-look-q01-q02/);
-  assert.match(handoff, /status: `complete`/);
-  assert.match(handoff, /7151c59f8fa2222540e2527e52ab177319145cac/);
-  assert.match(handoff, /31935163167/);
+  assert.match(handoff, /150-first-look-q04-q05/);
+  assert.match(handoff, /44f8710b12aa85085357e8ea04640b0acfde2d94/);
+  assert.match(handoff, /31936372883/);
 });
 
-test('source catalog reflects verified pilot coverage without implying book completeness', async () => {
+test('source catalog reflects verified bounded coverage without implying book completeness', async () => {
   const catalog = await readFile('docs/quant-interview/SOURCE_CATALOG.md', 'utf8');
   assert.match(catalog, /Green Book[\s\S]*not source-file-verified/i);
   assert.match(catalog, /Red Book[\s\S]*not source-file-verified/i);
   assert.match(catalog, /150 Questions[\s\S]*source-file-verified[\s\S]*2013/i);
-  assert.match(catalog, /problem-indexed for the validated Q1–Q2 pilot only/i);
+  assert.match(catalog, /problem-indexed for validated Q1–Q2 and Q4–Q5 only/i);
   assert.match(catalog, /book is not complete/i);
+  assert.match(catalog, /Question 3 remains unindexed/i);
 });
 
 test('TOC verification advances only the inspected 150 Questions source', async () => {
@@ -75,25 +76,19 @@ test('TOC verification advances only the inspected 150 Questions source', async 
   assert.deepEqual(q150.sourceFileEvidence.bibliography, { pdfPage: 219, displayPage: 209 });
 });
 
-test('150 Questions manifest preserves the completed verified pilot while allowing later bounded batches', async () => {
+test('150 Questions manifest preserves completed verified bounded batches', async () => {
   const manifest = JSON.parse(await readFile('src/data/quant-interview/150-most-frequently-asked.json', 'utf8'));
   assert.equal(manifest.sourceFile, 'sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14');
   assert.equal(manifest.ingestionStatus, 'ingesting');
-  assert.ok(manifest.batches.length >= 1);
-  assert.deepEqual(manifest.batches[0], {
-    id: '150-first-look-q01-q02',
-    startPage: 1,
-    endPage: 6,
-    sourceSection: '1 First Look: Ten Questions',
-    expectedProblemScope: ['1', '2'],
-    problemSlugs: ['put-quotes-zero-cost-static-portfolio', 'missing-digit-power-of-two'],
-    status: 'complete',
-    verificationStatus: 'passed',
-    completionCommit: '7151c59f8fa2222540e2527e52ab177319145cac',
-    verifiedCommit: '7151c59f8fa2222540e2527e52ab177319145cac',
-    verificationRunId: 31935163167,
-    completedDate: '2026-08-16',
-  });
+  assert.equal(manifest.batches.length, 2);
+  assert.equal(manifest.batches[0].id, '150-first-look-q01-q02');
+  assert.equal(manifest.batches[0].status, 'complete');
+  assert.equal(manifest.batches[0].verificationStatus, 'passed');
+  assert.equal(manifest.batches[1].id, '150-first-look-q04-q05');
+  assert.equal(manifest.batches[1].status, 'complete');
+  assert.equal(manifest.batches[1].verificationStatus, 'passed');
+  assert.equal(manifest.batches[1].verifiedCommit, '44f8710b12aa85085357e8ea04640b0acfde2d94');
+  assert.equal(manifest.batches[1].verificationRunId, 31936372883);
   const { validateIngestionManifest } = await import('../src/lib/quantInterviewIngestion.mjs');
   assert.doesNotThrow(() => validateIngestionManifest(manifest));
 });

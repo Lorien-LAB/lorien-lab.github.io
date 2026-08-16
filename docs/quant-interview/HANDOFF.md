@@ -6,7 +6,7 @@ Updated: 2026-08-16
 
 **Phase 2B — source-file verification and bounded book ingestion.**
 
-The first real source file has passed identity/edition/TOC verification, and the first bounded ingestion batch has passed all repository verification gates.
+The 150 Questions source file is verified, and two bounded ingestion batches have passed all repository verification gates.
 
 ## Stable architecture
 
@@ -49,40 +49,45 @@ The first real source file has passed identity/edition/TOC verification, and the
 - page alignment: printed page 1 = PDF page 11; printed bibliography page 209 = PDF page 219
 - TOC: source-file-verified
 - ingestion status: `ingesting`
-- completed ingestion batches: `150-first-look-q01-q02`
+- completed ingestion batches:
+  - `150-first-look-q01-q02`
+  - `150-first-look-q04-q05`
 
 ## Last completed batch
 
-`150-first-look-q01-q02`
+`150-first-look-q04-q05`
 
 - source: `150-most-frequently-asked`
 - chapter/section: Chapter 1 — `First Look: Ten Questions`
-- source page range: printed pages 1–6
-- PDF page range used as evidence: 11–16
-- problem scope: Questions 1–2 only
+- source page range: printed pages 7–9
+- PDF page range used as evidence: 17–19
+- problem scope: Questions 4–5 only
 - Problems:
-  - `put-quotes-zero-cost-static-portfolio`
-  - `missing-digit-power-of-two`
+  - `ants-crossing-line`
+  - `correlation-matrix-parameter-range`
 - reusable Knowledge added:
-  - `no-arbitrage-principle`
-  - `option-price-convexity-in-strike`
-  - `static-arbitrage-construction`
-  - `modular-arithmetic`
-  - `modular-invariants`
+  - `identity-swapping-invariance`
+  - `correlation-matrix`
+  - `positive-semidefinite-matrix`
+  - `principal-minor-feasibility`
 - status: `complete`
-- completion / verified commit: `7151c59f8fa2222540e2527e52ab177319145cac`
-- GitHub Actions verification run: `31935163167`
+- completion / verified commit: `44f8710b12aa85085357e8ea04640b0acfde2d94`
+- GitHub Actions verification run: `31936372883`
 - gates: `npm run test` ✅ · `npm run check` ✅ · `npm run build` ✅
 
-Question 1 was independently derived with an explicit support condition for strict arbitrage. The public solution does not repeat the source answer's stronger-than-necessary claim that option prices must be strictly convex in strike; ordinary no-arbitrage convexity permits equality, while the concrete zero-cost portfolio becomes a strict arbitrage only when a positive-payoff terminal region is genuinely possible.
+Question 4 is independently formulated with explicit equal-speed, initial-ordering, and no-simultaneous-triple-collision assumptions so that endpoint and pairwise-collision counts are well-defined. Its solution teaches identity-swapping / straight-through trajectory invariance rather than collision-by-collision simulation.
+
+Question 5 is independently derived from correlation-matrix positive semidefiniteness. The public solution checks all principal minors and also gives a Schur-complement method. It deliberately avoids the common ambiguity of applying the positive-definite leading-principal-minor form of Sylvester's criterion to a semidefinite problem.
 
 ## Next action
 
-Start a **new bounded batch only after re-reading this handoff and the Agent Protocol**. Do not silently continue through the rest of Chapter 1 in the same batch.
+Start a **new bounded batch only after re-reading this handoff and the Agent Protocol**. Do not append more Questions to either completed batch.
 
-A natural next candidate is another small `150 Questions` First Look slice, but the next Agent must explicitly choose and register its page/problem bounds before authoring. Green/Red still require exact-edition and source-file verification in repository state before any batch is created for them.
+Under the current ingestion validator, page ranges may not overlap. That means Questions whose evidence shares a boundary page with a completed batch need an explicit infrastructure decision rather than silent ingestion. In particular, Question 3 shares printed page 6 with the first batch, and Question 6 begins on printed page 9, which is already part of the Q4–Q5 batch.
 
-For the next batch:
+A clean content-only next candidate is Question 7, whose solution occupies printed pages 10–12. If selected, the batch must be explicitly bounded to Question 7 even though printed page 12 also begins Question 8. Alternatively, a separate infrastructure batch can redesign source evidence so problem bounds and physical page evidence are not forced into mutually exclusive ranges.
+
+For every next batch:
 
 1. select one source and one bounded problem/page range;
 2. register the batch in its manifest;

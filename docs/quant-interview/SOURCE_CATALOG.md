@@ -57,13 +57,17 @@ The supplied chapter/page structure is retained as a seed, but no edition-specif
 - Source file: **source-file-verified**
 - Source-file identity: `sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14`
 - User scan: 220 PDF pages; printed page 1 begins at PDF page 11; bibliography is printed page 209 at PDF page 219
-- Problem coverage: **problem-indexed for the validated Q1–Q2 pilot only; the book is not complete**
+- Problem coverage: **problem-indexed for validated Q1–Q2 and Q4–Q5 only; the book is not complete**
 - Ingestion: `ingesting`
 - Completed batch: `150-first-look-q01-q02` — printed pages 1–6, Questions 1–2 only
-- Verification: completion/verified commit `7151c59f8fa2222540e2527e52ab177319145cac`, Actions run `31935163167`
+- Completed batch: `150-first-look-q04-q05` — printed pages 7–9, Questions 4–5 only
+- Q1–Q2 verification: commit `7151c59f8fa2222540e2527e52ab177319145cac`, Actions run `31935163167`
+- Q4–Q5 verification: commit `44f8710b12aa85085357e8ea04640b0acfde2d94`, Actions run `31936372883`
 - Publisher record: `https://www.fepress.org/150iqs/`
 
-The actual user-supplied scan has been inspected directly. The title page, copyright page, ISBN, first-edition publication statement, TOC, body numbering, and bibliography all align with the pinned 2013 first edition. The PDF itself is not committed to the repository. The validated pilot contains two independently formulated Problem records plus five reusable Knowledge nodes. No completeness claim is made for Questions 3–150 or for the rest of Chapter 1.
+The actual user-supplied scan has been inspected directly. The title page, copyright page, ISBN, first-edition publication statement, TOC, body numbering, and bibliography all align with the pinned 2013 first edition. The PDF itself is not committed to the repository.
+
+Two bounded batches have now been independently authored and validated. The first contains Questions 1–2; the second contains Questions 4–5. Question 3 remains unindexed because its source evidence shares printed page 6 with the already-completed first batch while the current ingestion validator requires non-overlapping page ranges. Questions 6 onward also remain unindexed. No chapter-level or book-level completeness claim is made.
 
 ## Current truth table
 
@@ -71,6 +75,6 @@ The actual user-supplied scan has been inspected directly. The title page, copyr
 |---|---|---|---|---|---|
 | Green Book | verified | user-supplied seed | work-identified | not source-file-verified | not problem-indexed |
 | Red Book | verified | user-supplied seed | work-identified | not source-file-verified | not problem-indexed |
-| 150 Questions | verified | source-file-verified | edition-pinned · 2013 first edition | source-file-verified | Q1–Q2 problem-indexed · rest incomplete |
+| 150 Questions | verified | source-file-verified | edition-pinned · 2013 first edition | source-file-verified | Q1–Q2 and Q4–Q5 problem-indexed · rest incomplete |
 
 A future Agent may advance a state only with corresponding evidence. Never downgrade uncertainty by wording alone.

@@ -48,7 +48,12 @@
         "ants-crossing-line",
         "correlation-matrix-parameter-range"
       ],
-      "status": "complete"
+      "status": "complete",
+      "verificationStatus": "passed",
+      "completionCommit": "44f8710b12aa85085357e8ea04640b0acfde2d94",
+      "verifiedCommit": "44f8710b12aa85085357e8ea04640b0acfde2d94",
+      "verificationRunId": 31936372883,
+      "completedDate": "2026-08-16"
     }
   ]
 }
