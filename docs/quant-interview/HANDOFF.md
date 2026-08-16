@@ -4,9 +4,9 @@ Updated: 2026-08-16
 
 ## Current phase
 
-**Agent handoff / source-catalog foundation.**
+**Phase 2B — source-file verification and bounded book ingestion.**
 
-Next content phase: **Phase 2B — source-file verification and bounded book ingestion**.
+The first real source file has passed identity/edition/TOC verification and the first bounded ingestion batch is open.
 
 ## Stable architecture
 
@@ -25,7 +25,7 @@ Next content phase: **Phase 2B — source-file verification and bounded book ing
 - work identity: verified
 - TOC: user-supplied structural seed
 - edition: not pinned
-- source file: not verified
+- source file: not verified in repository state
 - ingestion batches: none
 
 ### Red Book
@@ -34,7 +34,7 @@ Next content phase: **Phase 2B — source-file verification and bounded book ing
 - work identity: verified
 - TOC: user-supplied structural seed
 - edition: not pinned
-- source file: not verified
+- source file: not verified in repository state
 - ingestion batches: none
 
 ### 150 Questions
@@ -43,29 +43,44 @@ Next content phase: **Phase 2B — source-file verification and bounded book ing
 - edition: First edition (2013)
 - ISBN-13: `9780979757648`
 - bibliographic edition: pinned
-- TOC: user-supplied structural seed matching first edition
-- source file: not yet verified in the ingestion workflow
-- ingestion batches: none
+- actual user source file: **source-file-verified**
+- source-file identity: `sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14`
+- scan size: 220 PDF pages
+- page alignment: printed page 1 = PDF page 11; printed bibliography page 209 = PDF page 219
+- TOC: source-file-verified
+- ingestion status: `ingesting`
+- completed ingestion batches: none
 
 ## Active batch
 
-None. Do not invent one until a real source file is available and inspected.
+`150-first-look-q01-q02`
+
+- source: `150-most-frequently-asked`
+- chapter/section: Chapter 1 — `First Look: Ten Questions`
+- source page range: printed pages 1–6
+- PDF page range used as evidence: 11–16
+- intended problem scope: Questions 1–2 only
+- status: active
+
+Do not expand this batch to Questions 3–10 merely because their statements also appear on printed pages 1–2.
 
 ## Next action
 
-When the user provides a book PDF/source file:
+For the active batch only:
 
-1. inspect title/copyright/TOC pages;
-2. verify the actual file against the source catalog and manifest;
-3. align the relevant machine-readable TOC;
-4. update `sourceFile` and source-file verification state;
-5. create the first small page-bounded batch;
-6. search/deduplicate Concepts and Techniques;
-7. ingest and independently solve only that batch;
-8. run full validation;
-9. update this handoff with the new current state.
+1. identify the Concepts and Problem Solving Techniques actually used by Questions 1–2;
+2. search `src/content/knowledge/` semantically and reuse existing canonical slugs where equivalent;
+3. create only the missing reusable Knowledge nodes that are justified across problems;
+4. independently formulate and independently solve Questions 1–2 to S3+ maturity;
+5. record realistic hints, interview signals, Common Mistakes, and meaningful Extensions;
+6. validate source/Knowledge/problem relationships and the ingestion manifest;
+7. run `npm run test`, `npm run check`, and `npm run build`;
+8. review the branch diff against `main`;
+9. only after all gates pass, mark the batch complete and record its completion commit here and in the manifest.
 
-For Green/Red, the source file must also resolve exact edition before any page-bounded batch is created.
+Question 1 deserves an explicit editorial check around the assumptions required for the zero-cost put portfolio to be a strict arbitrage; do not blindly copy the source answer's wording about strict convexity.
+
+For Green/Red, exact edition and actual source-file verification are still required before any page-bounded batch is created.
 
 ## Non-negotiable invariants
 
