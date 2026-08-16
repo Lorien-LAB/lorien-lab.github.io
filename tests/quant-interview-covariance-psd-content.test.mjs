@@ -5,6 +5,7 @@ import { access, readFile } from 'node:fs/promises';
 const correlationPath = 'src/content/knowledge/concepts/correlation-matrix.md';
 const psdPath = 'src/content/knowledge/concepts/positive-semidefinite-matrix.md';
 const minorPath = 'src/content/knowledge/concepts/principal-minor-feasibility.md';
+const parameterRangePath = 'src/content/problems/linear-algebra/correlation-matrix-parameter-range.md';
 const problemPaths = {
   covariancePsd: 'src/content/problems/linear-algebra/covariance-matrix-positive-semidefinite-proof.md',
   covarianceToCorrelation: 'src/content/problems/linear-algebra/covariance-to-correlation-matrix.md',
@@ -90,4 +91,15 @@ test('equicorrelation problem derives the n-dimensional eigenvalues and exact rh
   assert.match(text, /-1\s*\/\s*\(n\s*-\s*1\).*<=.*rho.*<=.*1/i);
   assert.match(text, /multiplicity\s*n\s*-\s*1|multiplicity.*n-1/i);
   assert.match(text, /singular|rank/i);
+});
+
+test('existing correlation-parameter problem absorbs cross-book variants instead of duplicating pages', async () => {
+  const text = await readFile(parameterRangePath, 'utf8');
+  assert.match(text, /-0\.9432\s*<=\s*rho\s*<=\s*0\.5832/);
+  assert.match(text, /\(rho\s*-\s*a\s*\*?\s*b\)\^2|rho.*a.*b.*sqrt.*1.*a\^2.*1.*b\^2/is);
+  assert.match(text, /0\.28\s*<=\s*rho\s*<=\s*1/);
+  assert.match(text, /0\.9[\s\S]*0\.8[\s\S]*0\.1[\s\S]*-0\.316/);
+  assert.match(text, /### Method 3|completing the square|Gram/i);
+  assert.match(text, /## Variants/i);
+  assert.doesNotMatch(text, /Green Book|Red Book|150 Most Frequently|Question\s+\d+/i);
 });
