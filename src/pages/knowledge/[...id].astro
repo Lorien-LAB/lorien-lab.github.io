@@ -2,6 +2,7 @@
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import TagList from '../../components/TagList.astro';
+import { getProblemsForKnowledgeSlug, slugOf, validateProblemRelationships } from '../../lib/problemRelations';
 
 export async function getStaticPaths() {
   const entries = await getCollection('knowledge');
@@ -16,11 +17,15 @@ const { Content } = await render(entry);
 const base = import.meta.env.BASE_URL;
 const knowledge = await getCollection('knowledge');
 const notes = await getCollection('notes', ({ data }) => !data.draft);
-const slugOf = (id: string) => id.split('/').pop() ?? id;
+const problems = await getCollection('problems');
+const sources = await getCollection('problemSources');
+validateProblemRelationships(problems, sources, knowledge);
+
 const knowledgeBySlug = new Map(knowledge.map((item) => [slugOf(item.id), item]));
 const notesBySlug = new Map(notes.map((item) => [slugOf(item.id), item]));
 const relatedKnowledge = entry.data.related.map((slug) => knowledgeBySlug.get(slug)).filter(Boolean) as CollectionEntry<'knowledge'>[];
 const relatedNotes = entry.data.relatedNotes.map((slug) => notesBySlug.get(slug)).filter(Boolean) as CollectionEntry<'notes'>[];
+const relatedProblems = getProblemsForKnowledgeSlug(problems, slugOf(entry.id));
 const typeLabel = entry.data.type === 'topic' ? 'Research Topic' : entry.data.type[0].toUpperCase() + entry.data.type.slice(1);
 const lastUpdated = entry.data.updated ?? entry.data.date;
 const externalLinkCandidates = [
@@ -63,6 +68,7 @@ const externalLinks = externalLinkCandidates.filter(([, url]) => {
           <dl><div><dt>Type</dt><dd>{typeLabel}</dd></div><div><dt>Domain</dt><dd>{entry.data.domain}</dd></div><div><dt>Category</dt><dd>{entry.data.category}</dd></div><div><dt>Status</dt><dd>{entry.data.status}</dd></div></dl>
         </div>
         {relatedKnowledge.length > 0 && <div class="relation-block"><h2>Related Knowledge</h2>{relatedKnowledge.map((item) => <a href={`${base}knowledge/${slugOf(item.id)}/`}><span>{item.data.type}</span><strong>{item.data.title}</strong> →</a>)}</div>}
+        {relatedProblems.length > 0 && <div class="relation-block"><h2>Related Problems</h2>{relatedProblems.map((problem) => <a href={`${base}problems/${slugOf(problem.id)}/`}><span>{problem.data.problemId} · {problem.data.category}</span><strong>{problem.data.title}</strong> →</a>)}</div>}
         {relatedNotes.length > 0 && <div class="relation-block"><h2>Related Notes</h2>{relatedNotes.map((item) => <a href={`${base}notes/${item.id}/`}><span>Note</span><strong>{item.data.title}</strong> →</a>)}</div>}
         {externalLinks.length > 0 && <div class="relation-block"><h2>Sources & Links</h2>{externalLinks.map(([label,url]) => <a href={url} target="_blank" rel="noreferrer"><strong>{label}</strong> ↗</a>)}</div>}
       </aside>
