@@ -67,7 +67,7 @@ test('source catalog records three verified source files without claiming proble
   assert.match(catalog, /Topic-first/i);
 });
 
-test('handoff records three completed cross-book linear-algebra workstreams and stays topic-first', async () => {
+test('handoff records four completed cross-book linear-algebra workstreams and advances to probability foundations', async () => {
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
   for (const stage of ['Stage A', 'Stage B', 'Stage C', 'Stage D']) assert.match(handoff, new RegExp(`${stage}[\\s\\S]*complete`, 'i'));
 
@@ -105,20 +105,36 @@ test('handoff records three completed cross-book linear-algebra workstreams and 
     'matrix-square-root-and-cholesky-factor',
     'generate-correlated-gaussians',
   ]) assert.match(handoff, new RegExp(slug));
+
+  assert.match(handoff, /linear-algebra-vectors-linear-systems-004/);
+  assert.match(handoff, /31962131820/);
+  assert.match(handoff, /d9bed1bb89de8ce81ae89971ce3fd31fdbe49343/);
+  for (const slug of [
+    'vector-geometry-inner-products',
+    'linear-independence-span-basis-rank',
+    'linear-systems-consistency',
+    'product-of-row-stochastic-matrices',
+    'rank-and-consistency-of-linear-system',
+  ]) assert.match(handoff, new RegExp(slug));
+  assert.match(handoff, /canonical extension/i);
+  assert.match(handoff, /source-derived/i);
+  assert.match(handoff, /provenance/i);
+
   assert.match(handoff, /variant/i);
   assert.match(handoff, /one canonical Problem|one public Problem|same canonical Problem/i);
-  assert.match(handoff, /16 canonical Problems/i);
-  assert.match(handoff, /18 explicitly topic-classified|18 topic-classified/i);
+  assert.match(handoff, /18 canonical Problems/i);
+  assert.match(handoff, /21 explicitly topic-classified|21 topic-classified/i);
 
   assert.match(handoff, /knowledge-only/i);
   assert.match(handoff, /source-neutral/i);
   assert.match(handoff, /hidden coverage/i);
+  assert.match(handoff, /five|5[\s-]*child topics|all five/i);
 
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
   assert.match(nextAction, /cross-book/i);
-  assert.match(nextAction, /Linear Algebra & Matrix Methods/i);
-  assert.match(nextAction, /Vectors & Linear Systems/i);
-  assert.doesNotMatch(nextAction, /Matrix Decompositions[\s\S]{0,160}(?:execute|next|continue)/i);
+  assert.match(nextAction, /Probability & Statistics/i);
+  assert.match(nextAction, /Probability Foundations/i);
+  assert.doesNotMatch(nextAction, /Vectors & Linear Systems[\s\S]{0,180}(?:execute|next|continue)/i);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);
   assert.doesNotMatch(nextAction, /Green[^\n]*(?:then|→)[^\n]*Red|Red[^\n]*(?:then|→)[^\n]*150/i);
 });
