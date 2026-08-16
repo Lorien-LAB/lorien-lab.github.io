@@ -1,30 +1,40 @@
 ---
+import LanguageToggle from './LanguageToggle.astro';
+
 const base = import.meta.env.BASE_URL;
 const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const pathname = Astro.url.pathname;
 const links = [
-  ['Home', '/'],
-  ['Research', '/research/'],
-  ['Projects', '/projects/'],
-  ['Knowledge', '/knowledge/'],
-  ['Notes', '/notes/'],
-  ['CV', '/cv/'],
-  ['About', '/about/'],
+  { en: 'Home', zh: '首页', path: '/' },
+  { en: 'Research', zh: '研究', path: '/research/' },
+  { en: 'Projects', zh: '项目', path: '/projects/' },
+  { en: 'Knowledge', zh: '知识库', path: '/knowledge/' },
+  { en: 'Notes', zh: '笔记', path: '/notes/' },
+  { en: 'CV', zh: '简历', path: '/cv/' },
+  { en: 'About', zh: '关于', path: '/about/' },
 ] as const;
 const isActive = (path: string) => path === '/' ? pathname === base || pathname === base.replace(/\/$/, '') : pathname.startsWith(withBase(path));
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a class="brand" href={withBase('/')} aria-label="Lorien Lab home">
+    <a class="brand" href={withBase('/')} aria-label="Lorien Lab home / Lorien Lab 首页">
       <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span><strong>Lorien Lab</strong><small>Quant Research</small></span>
+      <span>
+        <strong>Lorien Lab</strong>
+        <small><span class="lang-en">Quant Research</span><span class="lang-zh" lang="zh-CN">量化研究</span></small>
+      </span>
     </a>
 
-    <nav class="desktop-nav" aria-label="Primary navigation">
-      {links.map(([label, path]) => <a href={withBase(path)} aria-current={isActive(path) ? 'page' : undefined}>{label}</a>)}
+    <nav class="desktop-nav" aria-label="Primary navigation / 主导航">
+      {links.map(({ en, zh, path }) => (
+        <a href={withBase(path)} aria-current={isActive(path) ? 'page' : undefined}>
+          <span class="lang-en">{en}</span><span class="lang-zh" lang="zh-CN">{zh}</span>
+        </a>
+      ))}
     </nav>
 
     <div class="header-actions">
+      <LanguageToggle />
       <a class="icon-link" href="https://github.com/Lorien-LAB" target="_blank" rel="noreferrer" aria-label="GitHub">
         <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.88c-2.78.6-3.37-1.18-3.37-1.18-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.9 1.53 2.35 1.09 2.92.83.09-.65.35-1.09.64-1.34-2.22-.25-4.56-1.11-4.56-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.64 0 0 .84-.27 2.75 1.02A9.6 9.6 0 0 1 12 6.82a9.6 9.6 0 0 1 2.5.34c1.91-1.29 2.75-1.02 2.75-1.02.55 1.37.2 2.39.1 2.64.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85V21c0 .27.18.58.69.48A10 10 0 0 0 12 2Z"/></svg>
       </a>
@@ -32,11 +42,20 @@ const isActive = (path: string) => path === '/' ? pathname === base || pathname 
         <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"/></svg>
         <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
       </button>
-      <button class="menu-button" type="button" data-menu-button aria-controls="mobile-menu" aria-expanded="false"><span></span><span></span><span></span><span class="sr-only">Open menu</span></button>
+      <button class="menu-button" type="button" data-menu-button aria-controls="mobile-menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+        <span class="sr-only lang-en">Open menu</span><span class="sr-only lang-zh" lang="zh-CN">打开菜单</span>
+      </button>
     </div>
   </div>
-  <nav id="mobile-menu" class="mobile-nav" aria-label="Mobile navigation" data-mobile-menu>
-    <div class="container">{links.map(([label, path]) => <a href={withBase(path)} aria-current={isActive(path) ? 'page' : undefined}>{label}</a>)}</div>
+  <nav id="mobile-menu" class="mobile-nav" aria-label="Mobile navigation / 移动端导航" data-mobile-menu>
+    <div class="container">
+      {links.map(({ en, zh, path }) => (
+        <a href={withBase(path)} aria-current={isActive(path) ? 'page' : undefined}>
+          <span class="lang-en">{en}</span><span class="lang-zh" lang="zh-CN">{zh}</span>
+        </a>
+      ))}
+    </div>
   </nav>
 </header>
 
@@ -51,16 +70,21 @@ const isActive = (path: string) => path === '/' ? pathname === base || pathname 
     });
 
     const themeButton = document.querySelector('[data-theme-toggle]');
-    const updateLabel = () => {
+    const updateThemeLabel = () => {
       const dark = document.documentElement.dataset.theme === 'dark';
-      themeButton?.setAttribute('aria-label', dark ? 'Switch to light theme' : 'Switch to dark theme');
+      const zh = document.documentElement.dataset.lang === 'zh';
+      themeButton?.setAttribute('aria-label', zh
+        ? (dark ? '切换到浅色主题' : '切换到深色主题')
+        : (dark ? 'Switch to light theme' : 'Switch to dark theme'));
     };
-    updateLabel();
+    updateThemeLabel();
+    window.addEventListener('site-language-change', updateThemeLabel);
+
     themeButton?.addEventListener('click', () => {
       const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
       document.documentElement.dataset.theme = next;
-      localStorage.setItem('theme', next);
-      updateLabel();
+      try { localStorage.setItem('theme', next); } catch {}
+      updateThemeLabel();
     });
   })();
 </script>
@@ -94,5 +118,6 @@ const isActive = (path: string) => path === '/' ? pathname === base || pathname 
   .mobile-nav .container { padding: 10px 0 16px; }
   .mobile-nav a { display: block; padding: 10px 0; color: #dbe5eb; font-weight: 650; }
   .mobile-nav a[aria-current='page'] { color: var(--accent); }
+  @media(max-width: 1080px) { .desktop-nav { gap: 18px; } .desktop-nav a { font-size: .8rem; } }
   @media(max-width: 980px) { .header-inner { grid-template-columns: 1fr auto; } .desktop-nav { display:none; } .menu-button { display:inline-grid; } .mobile-nav[data-open] { display:block; } }
 </style>
