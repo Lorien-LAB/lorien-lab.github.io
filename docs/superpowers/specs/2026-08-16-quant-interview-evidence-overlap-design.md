@@ -110,10 +110,10 @@ For manifests with a verified source file, the batch validator will enforce:
 6. A problem ownership key composed from `sourceSection + sourceProblem` may occur in only one batch.
 7. Every batch has a non-empty array `evidencePageRanges`.
 8. Every evidence range has integer `startPage` and `endPage`, both positive, with `endPage >= startPage`.
-9. Evidence ranges may overlap across batches.
-10. Evidence ranges within a batch may be normalized or required to be ordered/non-overlapping; the implementation should choose the simplest deterministic rule and test it explicitly.
+9. Within one batch, evidence ranges must be sorted by ascending `startPage` and must not overlap. A later range must satisfy `startPage > previousEndPage`. The validator does not normalize or merge ranges implicitly.
+10. Evidence ranges may overlap freely across different batches.
 
-The validator will no longer compare one batch's evidence end page against the next batch's evidence start page.
+The validator will no longer compare one batch's evidence end page against another batch's evidence start page.
 
 ## 6. Migration of Existing 150 Questions Manifest
 
@@ -197,7 +197,7 @@ The validator must reject two batches in the same `sourceSection` that both clai
 
 If two different source sections both contain a problem labeled `1`, they may coexist because ownership keys include `sourceSection`.
 
-### 9.5 Evidence shape is validated
+### 9.5 Evidence shape and ordering are validated
 
 Reject:
 
@@ -205,7 +205,9 @@ Reject:
 - empty evidence range list;
 - non-integer page values;
 - page numbers below 1;
-- reversed ranges.
+- reversed ranges;
+- unsorted ranges within the same batch;
+- overlapping ranges within the same batch.
 
 ### 9.6 Existing 150 Questions completed metadata survives migration
 
@@ -240,7 +242,7 @@ Each of those remains a separate batch with its own ontology-first authoring and
 The infrastructure work is complete when:
 
 - the canonical manifest schema separates `expectedProblemScope` from `evidencePageRanges`;
-- overlapping evidence pages validate;
+- overlapping evidence pages validate across different batches;
 - duplicate problem ownership does not validate;
 - the existing two completed 150 Questions batches migrate without loss of metadata;
 - no new Problems or Knowledge nodes are introduced;
