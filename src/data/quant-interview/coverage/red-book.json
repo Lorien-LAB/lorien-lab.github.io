@@ -752,6 +752,16 @@
       ],
       "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
       "resolutionNote": "Definition/properties material enriches canonical PSD/PD Knowledge and interview checks."
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": "6.10",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
     }
   ]
 }

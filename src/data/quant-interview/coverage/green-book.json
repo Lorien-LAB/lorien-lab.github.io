@@ -2068,6 +2068,66 @@
         "matrix-spectral-invariants"
       ],
       "resolutionNote": "A concrete 2x2 eigensystem has an independent reasoning task and supports multiple interview-ready solution routes."
+    },
+    {
+      "sourceSection": "3.6.2",
+      "sourceItem": "qr-decomposition",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.2",
+      "sourceItem": "least-squares-regression",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.5",
+      "sourceItem": "lu-decomposition",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.5",
+      "sourceItem": "cholesky-decomposition",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.5",
+      "sourceItem": "correlated-normal-generation",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.5",
+      "sourceItem": "singular-value-decomposition",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
     }
   ]
 }

@@ -396,6 +396,16 @@
         "matrix-spectral-invariants"
       ],
       "resolutionNote": "The commutator obstruction is a distinct invariant-recognition problem using trace."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "5",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
     }
   ]
 }
