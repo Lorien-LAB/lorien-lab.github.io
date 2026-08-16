@@ -1,0 +1,1952 @@
+{
+  "source": "green-book",
+  "version": 1,
+  "entries": [
+    {
+      "sourceSection": "preface",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-preparation"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-preparation"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "reasoning-communication"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "reasoning-communication"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "reasoning-communication"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.1.screwy-pirates",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.1.tiger-and-sheep",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.river-crossing",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.birthday-problem",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.card-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.burning-ropes",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.defective-ball",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.trailing-zeros",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.horse-race",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.infinite-sequence",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.box-packing",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.calendar-cubes",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.door-to-offer",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.message-delivery",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.last-ball",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.light-switches",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.quant-salary",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "symmetry"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.4.coin-piles",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "symmetry"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.4.mislabeled-bags",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "symmetry"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.4.wise-men",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "symmetry"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.5.clock-pieces",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.5.missing-integers",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.5.counterfeit-coins-i",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6.matching-socks",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6.handshakes",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6.have-we-met-before",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6.ants-on-a-square",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6.counterfeit-coins-ii",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.7.prisoner-problem",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.7.division-by-9",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.7.chameleon-colors",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.8",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "mathematical-induction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.8.coin-split-problem",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "mathematical-induction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.8.chocolate-bar-problem",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "mathematical-induction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.8.race-track",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "mathematical-induction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.9",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "proof-by-contradiction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.9.irrational-number",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "proof-by-contradiction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.9.rainbow-hats",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "proof-by-contradiction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "multivariable-calculus"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.4.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.4.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.4.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "positive-semidefinite-matrices"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1.coin-toss-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1.card-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1.drunk-passenger",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1.n-points-on-a-circle",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.poker-hands",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.hopping-rabbit",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.screwy-pirates-2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.chess-tournament",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.application-letters",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.birthday-problem",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.100th-digit",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.cubic-of-integer",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.boys-and-girls",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.all-girl-world",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.unfair-coin",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.fair-probability-from-unfair-coin",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.dart-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.birthday-line",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.dice-order",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.monty-hall",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.amoeba-population",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.candies-in-a-jar",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.coin-toss-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.russian-roulette-series",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.aces",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.gamblers-ruin",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.basketball-scores",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.cars-on-road",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.4.meeting-probability",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.4.probability-of-triangle",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.4.poisson-process-property",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.4.normal-moments",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.5.connecting-noodles",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.5.optimal-hedge-ratio",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.5.dice-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.5.card-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.5.sum-of-random-variables",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.5.coupon-collection",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.5.joint-default-probability",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.6.expected-max-min",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.6.correlation-max-min",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.6.random-ants",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1.gamblers-ruin",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1.dice-question",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1.coin-triplets",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1.color-balls",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2.drunk-man",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2.dice-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2.ticket-line",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2.coin-sequence",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3.dp-algorithm",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3.dice-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3.world-series",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3.dynamic-dice-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3.dynamic-card-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.4.brownian-motion",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.4.stopping-time",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.4.itos-lemma",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1.price-direction",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1.put-call-parity",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1.american-european",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1.bsm-pde",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1.black-scholes-formula",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.delta",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.gamma",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.theta",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.vega",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.bull-spread",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.straddle",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.binary-options",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.exchange-options",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4.portfolio-optimization",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4.value-at-risk",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4.duration-convexity",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4.forward-futures",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4.interest-rate-models",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.number-swap",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.unique-elements",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.horner",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.moving-average",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.sorting",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.random-permutation",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.search",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.fibonacci",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.max-subarray",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2.power-of-2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2.multiply-by-7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2.probability-simulation",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2.poisonous-wine",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.3.monte-carlo",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.3.finite-difference",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    }
+  ]
+}
