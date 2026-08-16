@@ -67,3 +67,20 @@ test('canonical topic taxonomy is unique and structurally valid', async () => {
     'algorithms-data-structures-cpp',
   ]);
 });
+
+test('topic taxonomy rejects duplicate ids, duplicate sibling order, and reused objects', async () => {
+  const { validateTopicTaxonomy } = await import('../src/lib/quantInterviewTopics.mjs');
+  assert.throws(() => validateTopicTaxonomy({ version: 1, topics: [
+    { id: 'x', title: 'X', order: 1 },
+    { id: 'x', title: 'X2', order: 2 },
+  ]}), /duplicate topic id/i);
+  assert.throws(() => validateTopicTaxonomy({ version: 1, topics: [
+    { id: 'x', title: 'X', order: 1 },
+    { id: 'y', title: 'Y', order: 1 },
+  ]}), /duplicate sibling topic order/i);
+  const shared = { id: 'shared', title: 'Shared', order: 1 };
+  assert.throws(() => validateTopicTaxonomy({ version: 1, topics: [
+    { id: 'a', title: 'A', order: 1, children: [shared] },
+    { id: 'b', title: 'B', order: 2, children: [shared] },
+  ]}), /reused or cyclic/i);
+});
