@@ -51,15 +51,18 @@ The supplied chapter/page structure is retained as a seed, but no edition-specif
 - Edition: **First edition (2013)**
 - ISBN-13: `9780979757648`
 - ISBN-10: `0979757649`
-- Physical length: 224 pages
+- Publisher physical length: 224 pages
 - Work/edition metadata: `web-cross-checked`
-- TOC state: `user-supplied` and edition-distinguishing
-- Source file: **not source-file-verified**
-- Problem coverage: **not problem-indexed**
-- Ingestion: `awaiting-source-file`
+- TOC state: **source-file-verified**
+- Source file: **source-file-verified**
+- Source-file identity: `sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14`
+- User scan: 220 PDF pages; printed page 1 begins at PDF page 11; bibliography is printed page 209 at PDF page 219
+- Problem coverage: **not yet problem-indexed**
+- Ingestion: `ingesting`
+- Active batch: `150-first-look-q01-q02` — printed pages 1–6, Questions 1–2 only
 - Publisher record: `https://www.fepress.org/150iqs/`
 
-The user's TOC contains `First Look: Ten Questions`, Questions beginning on page 17, and Solutions beginning on page 41. That pattern matches the 2013 first edition and differs from later editions, so the bibliographic edition is pinned. The actual user PDF has still not been inspected in the repository workflow, so no ingestion batch is opened yet.
+The actual user-supplied scan has been inspected directly. The title page, copyright page, ISBN, first-edition publication statement, TOC, body numbering, and bibliography all align with the pinned 2013 first edition. The PDF itself is not committed to the repository. The open batch is deliberately narrower than the page range's incidental mentions of later First Look questions: only Questions 1–2 are in scope.
 
 ## Current truth table
 
@@ -67,6 +70,6 @@ The user's TOC contains `First Look: Ten Questions`, Questions beginning on page
 |---|---|---|---|---|---|
 | Green Book | verified | user-supplied seed | work-identified | not source-file-verified | not problem-indexed |
 | Red Book | verified | user-supplied seed | work-identified | not source-file-verified | not problem-indexed |
-| 150 Questions | verified | user-supplied seed | edition-pinned · 2013 first edition | not source-file-verified | not problem-indexed |
+| 150 Questions | verified | source-file-verified | edition-pinned · 2013 first edition | source-file-verified | active batch; not yet problem-indexed |
 
 A future Agent may advance a state only with corresponding evidence. Never downgrade uncertainty by wording alone.
