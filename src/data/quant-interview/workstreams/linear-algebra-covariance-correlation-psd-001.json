@@ -5,7 +5,7 @@
     "covariance-correlation-matrices",
     "positive-semidefinite-matrices"
   ],
-  "status": "active",
+  "status": "complete",
   "sourceScopes": [
     {
       "source": "green-book",
