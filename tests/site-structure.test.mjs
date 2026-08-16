@@ -4,8 +4,7 @@ import { readFile, access } from 'node:fs/promises';
 
 const requiredFiles = [
   'src/pages/index.astro',
-  'src/pages/research/index.astro',
-  'src/pages/projects/index.astro',
+  'src/pages/research-projects/index.astro',
   'src/pages/notes/index.astro',
   'src/pages/cv.astro',
   'src/pages/about.astro',
@@ -42,11 +41,14 @@ test('portfolio exposes every required v1 surface', async () => {
   for (const file of requiredFiles) await access(file);
 });
 
-test('header contains the complete portfolio navigation', async () => {
+test('header contains the complete portfolio navigation with one merged research and projects entry', async () => {
   const source = await readFile('src/components/Header.astro', 'utf8');
-  for (const label of ['Home', 'Research', 'Projects', 'Knowledge', 'Notes', 'CV', 'About']) {
+  for (const label of ['Home', 'Research & Projects', 'Knowledge', 'Notes', 'CV', 'About']) {
     assert.ok(source.includes(`['${label}',`) || source.includes(`>${label}<`), `missing ${label} navigation item`);
   }
+  assert.ok(!source.includes("['Research', '/research/']"));
+  assert.ok(!source.includes("['Projects', '/projects/']"));
+  assert.match(source, /研究与项目/);
 });
 
 test('homepage positions the site around quantitative research without fabricated performance', async () => {
@@ -124,12 +126,13 @@ test('knowledge landing keeps learning resources and no longer owns reproduction
   assert.match(page, /entries\.map/);
 });
 
-test('projects landing is the first-class reproduction gateway', async () => {
-  const page = await readFile('src/pages/projects/index.astro', 'utf8');
+test('research and projects landing is the first-class reproduction gateway', async () => {
+  const page = await readFile('src/pages/research-projects/index.astro', 'utf8');
   assert.match(page, /import ReproductionGateway/);
   assert.match(page, /projects\/reproductions\//);
   assert.match(page, /<ReproductionGateway/);
   assert.match(page, /ProjectCard/);
+  assert.match(page, /ResearchCard/);
 });
 
 test('reproduction workbench canonical route files live under projects only', async () => {
@@ -158,9 +161,11 @@ test('reproduction cards and detail navigation use projects canonical URLs', asy
   assert.doesNotMatch(detail, /knowledge\/reproductions\//);
 });
 
-test('Astro redirects preserve legacy knowledge reproduction URLs', async () => {
+test('Astro redirects preserve legacy portfolio landing and knowledge reproduction URLs', async () => {
   const config = await readFile('astro.config.mjs', 'utf8');
   assert.match(config, /redirects\s*:/);
+  assert.match(config, /['"]\/research['"]\s*:\s*['"]\/research-projects['"]/);
+  assert.match(config, /['"]\/projects['"]\s*:\s*['"]\/research-projects['"]/);
   assert.match(config, /['"]\/knowledge\/reproductions['"]\s*:\s*['"]\/projects\/reproductions['"]/);
   assert.match(config, /['"]\/knowledge\/reproductions\/\[\.\.\.id\]['"]\s*:\s*['"]\/projects\/reproductions\/\[\.\.\.id\]['"]/);
   assert.match(config, /output:\s*'static'/);

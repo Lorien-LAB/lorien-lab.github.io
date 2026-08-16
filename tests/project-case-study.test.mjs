@@ -39,10 +39,13 @@ test('flagship project records read as research case studies', async () => {
   }
 });
 
-test('projects landing explains systems, strategies, and reproductions without changing canonical routing', async () => {
-  const page = await readFile('src/pages/projects/index.astro', 'utf8');
+test('merged portfolio landing explains systems, strategies, and reproductions without changing project canonical routing', async () => {
+  const page = await readFile('src/pages/research-projects/index.astro', 'utf8');
   assert.match(page, /Research Systems/);
   assert.match(page, /Strategy Frameworks/);
   assert.match(page, /ReproductionGateway/);
   assert.match(page, /projects\/reproductions\//);
+
+  const projectRoute = await readFile('src/pages/projects/[...slug].astro', 'utf8');
+  assert.match(projectRoute, /getCollection\('projects'\)/);
 });
