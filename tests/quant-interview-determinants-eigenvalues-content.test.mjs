@@ -37,7 +37,7 @@ test('spectral-invariant Knowledge unifies trace determinant characteristic poly
   assert.match(text, /trace.*sum.*eigenvalue|sum.*eigenvalue.*trace/i);
   assert.match(text, /det\(A\)\s*=\s*product_i\s+lambda_i|determinant.*product.*eigenvalue|product.*eigenvalue.*determinant/i);
   assert.match(text, /tr\(AB\)\s*=\s*tr\(BA\)|trace.*cyclic/i);
-  assert.match(text, /commutator.*trace.*0|tr\(AB\s*-\s*BA\).*0/i);
+  assert.match(text, /tr\(\[A,B\]\).*0|commutator[\s\S]{0,140}trace zero|trace[\s\S]{0,140}commutator[\s\S]{0,140}zero/i);
   assert.match(text, /similar.*same.*characteristic|similarity.*invariant/i);
   assert.match(text, /## Interview Checks/i);
   assert.doesNotMatch(text, /Green Book|Red Book|150 Most Frequently|Question\s+\d+/i);
