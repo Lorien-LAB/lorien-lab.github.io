@@ -28,6 +28,8 @@ Content lives in Markdown:
 - `src/content/projects/`
 - `src/content/notes/`
 - `src/content/knowledge/`
+- `src/content/problems/`
+- `src/content/problem-sources/`
 - `src/content/reproductions/`
 
 Schemas are defined in `src/content.config.ts`. Adding a Markdown file automatically creates a static detail page at build time when the corresponding collection has a route.
@@ -47,6 +49,66 @@ Ordinary project detail pages use `ProjectCaseStudyLayout` and are intended to r
 Flagship project pages should make the research problem, design thesis, architecture, validation discipline, limitations or failure modes, and current development priorities explicit. When maturity differs across modules, distinguish implemented or active work from experimental mechanisms and planned directions instead of presenting the entire architecture as production-complete.
 
 Empirical reproduction of an academic paper or broker report belongs in the **Reproduction Workbench** under `/projects/reproductions/`. Do not duplicate a source-grounded reproduction as an ordinary project merely to obtain a different presentation.
+
+### Quant Interview Problem Bank
+
+The Quant Interview system separates reusable Knowledge from practice objects and source provenance:
+
+```text
+src/content/knowledge/          reusable concepts and Problem Solving Techniques
+src/content/problems/           first-class Problem records
+src/content/problem-sources/    Green Book, Red Book, and future source containers
+```
+
+Canonical public Problem routes are `/problems/<slug>/`. Green Book and Red Book are **sources**, not Knowledge types. Problems never become a fifth `knowledge.type` value.
+
+Problem-solving methods such as Conditioning, First-Step Analysis, and Recursion are ordinary Knowledge entries with `type: concept` and `category: Problem Solving Techniques`. The Problem fields `concepts`, `techniques`, and `prerequisites` reference Knowledge slugs; `relatedProblems` references canonical Problem slugs.
+
+Every source-derived Problem must preserve provenance, but its public statement should use an **independent formulation** and its solution should be independently derived. Do not host source PDFs or scans. Do not copy answer keys or large verbatim book passages. Do not invent authors, publication years, ISBNs, official URLs, chapter labels, or source-problem identifiers when they have not been verified.
+
+Green Book and Red Book source records may legitimately contain zero indexed Problems while the architecture is being populated. All displayed Problem, Concept, Technique, and Source counts must be derived from actual content rather than hard-coded targets.
+
+Hints and full solutions should use native disclosure markup so a reader can attempt the Problem before revealing help:
+
+```html
+<details>
+<summary>Hint 1</summary>
+A progressively stronger hint.
+</details>
+
+<details>
+<summary>Show Solution</summary>
+An independently derived solution.
+</details>
+```
+
+Example original Problem frontmatter:
+
+```yaml
+---
+problemId: lorien-example-001
+title: Example Original Problem
+description: A short original problem used to demonstrate the authoring contract.
+date: 2026-08-16
+originType: original
+domain: Mathematics & Statistics
+category: Probability
+subcategories: []
+tags: [Interview]
+concepts: []
+techniques: [conditioning]
+prerequisites: []
+relatedProblems: []
+mathDifficulty: 2
+insightDifficulty: 2
+interviewDifficulty: 2
+estimatedMinutes: 8
+status: solved
+featured: false
+---
+```
+
+Before merge, schema validation, relationship validation, `npm run test`, `npm run check`, and `npm run build` must pass. Missing relationships should be fixed rather than rendered as dead links.
 
 ### Knowledge Base
 
