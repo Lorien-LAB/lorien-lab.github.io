@@ -1,0 +1,133 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProblemCard from '../../components/ProblemCard.astro';
+import { slugOf, validateProblemRelationships } from '../../lib/problemRelations';
+
+const problems = (await getCollection('problems')).sort((a, b) =>
+  a.data.problemId.localeCompare(b.data.problemId, undefined, { numeric: true })
+);
+const sources = await getCollection('problemSources');
+const knowledge = await getCollection('knowledge');
+validateProblemRelationships(problems, sources, knowledge);
+
+const sourceBySlug = new Map(sources.map((source) => [slugOf(source.id), source]));
+const knowledgeBySlug = new Map(knowledge.map((entry) => [slugOf(entry.id), entry]));
+const sourceOptions = [...new Set(problems.map((p) => p.data.source).filter((value): value is string => Boolean(value)))].sort();
+const categoryOptions = [...new Set(problems.map((p) => p.data.category))].sort();
+const conceptOptions = [...new Set(problems.flatMap((p) => p.data.concepts))].sort();
+const techniqueOptions = [...new Set(problems.flatMap((p) => p.data.techniques))].sort();
+---
+<BaseLayout title="Quant Interview Problem Bank · Lorien Lab" description="A structured quantitative interview problem bank connected to concepts, solution techniques, and source provenance.">
+  <header class="page-hero problem-hero">
+    <div class="container">
+      <div class="mono-label">Quant Interview</div>
+      <h1>Problems become<br/>reusable knowledge.</h1>
+      <p>Practice probability, stochastic processes, statistics, market reasoning, and other quantitative interview problems while keeping each problem connected to the concepts and techniques that solve it.</p>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="section-heading">
+        <div><div class="mono-label">Problem Bank</div><h2>Search and practice</h2><p>All published problems are rendered statically. Filters only narrow the already-visible library.</p></div>
+        <a class="section-link" href={`${import.meta.env.BASE_URL}knowledge/quant-interview/`}>Quant Interview Hub →</a>
+      </div>
+
+      {problems.length > 0 ? <>
+        <div class="filter-bar" data-problem-controls>
+          <label class="search-field"><span>Search</span><input type="search" placeholder="Search title, concept, technique…" data-problem-search /></label>
+          <label><span>Category</span><select data-category-filter><option value="">All categories</option>{categoryOptions.map((category) => <option value={category}>{category}</option>)}</select></label>
+          <label><span>Source</span><select data-source-filter><option value="">All sources</option><option value="original">Lorien Lab Original</option>{sourceOptions.map((source) => <option value={source}>{sourceBySlug.get(source)?.data.shortTitle ?? source}</option>)}</select></label>
+          <label><span>Interview difficulty</span><select data-difficulty-filter><option value="">All levels</option>{[1,2,3,4,5].map((value) => <option value={String(value)}>{value}/5</option>)}</select></label>
+          <label><span>Concept</span><select data-concept-filter><option value="">All concepts</option>{conceptOptions.map((slug) => <option value={slug}>{knowledgeBySlug.get(slug)?.data.title ?? slug}</option>)}</select></label>
+          <label><span>Technique</span><select data-technique-filter><option value="">All techniques</option>{techniqueOptions.map((slug) => <option value={slug}>{knowledgeBySlug.get(slug)?.data.title ?? slug}</option>)}</select></label>
+          <button class="reset-button" type="button" data-problem-reset>Reset</button>
+        </div>
+
+        <div class="problem-grid" data-problem-list>
+          {problems.map((problem) => {
+            const sourceSlug = problem.data.source ?? 'original';
+            const sourceTitle = problem.data.source ? sourceBySlug.get(problem.data.source)?.data.shortTitle : 'Lorien Lab Original';
+            const searchText = [
+              problem.data.title,
+              problem.data.description,
+              problem.data.problemId,
+              problem.data.domain,
+              problem.data.category,
+              ...problem.data.subcategories,
+              sourceSlug,
+              ...problem.data.concepts,
+              ...problem.data.techniques,
+              ...problem.data.tags,
+              problem.data.family ?? '',
+            ].join(' ').toLowerCase();
+            return <div
+              data-problem-row
+              data-search={searchText}
+              data-category={problem.data.category}
+              data-source={sourceSlug}
+              data-difficulty={String(problem.data.interviewDifficulty)}
+              data-concepts={problem.data.concepts.join('|')}
+              data-techniques={problem.data.techniques.join('|')}
+            ><ProblemCard entry={problem} sourceTitle={sourceTitle} /></div>;
+          })}
+        </div>
+        <p class="no-results" data-problem-no-results hidden>No problems match the current filters.</p>
+      </> : <div class="empty-state"><strong>The problem bank is initialized.</strong><p>Reviewed problems will appear here as they are added.</p></div>}
+    </div>
+  </section>
+</BaseLayout>
+
+<script is:inline>
+(() => {
+  const search = document.querySelector('[data-problem-search]');
+  const category = document.querySelector('[data-category-filter]');
+  const source = document.querySelector('[data-source-filter]');
+  const difficulty = document.querySelector('[data-difficulty-filter]');
+  const concept = document.querySelector('[data-concept-filter]');
+  const technique = document.querySelector('[data-technique-filter]');
+  const reset = document.querySelector('[data-problem-reset]');
+  const rows = [...document.querySelectorAll('[data-problem-row]')];
+  const noResults = document.querySelector('[data-problem-no-results]');
+
+  const apply = () => {
+    const q = (search?.value || '').trim().toLowerCase();
+    const categoryValue = category?.value || '';
+    const sourceValue = source?.value || '';
+    const difficultyValue = difficulty?.value || '';
+    const conceptValue = concept?.value || '';
+    const techniqueValue = technique?.value || '';
+    let visible = 0;
+
+    rows.forEach((row) => {
+      const concepts = (row.dataset.concepts || '').split('|').filter(Boolean);
+      const techniques = (row.dataset.techniques || '').split('|').filter(Boolean);
+      const matches =
+        (!q || (row.dataset.search || '').includes(q)) &&
+        (!categoryValue || row.dataset.category === categoryValue) &&
+        (!sourceValue || row.dataset.source === sourceValue) &&
+        (!difficultyValue || row.dataset.difficulty === difficultyValue) &&
+        (!conceptValue || concepts.includes(conceptValue)) &&
+        (!techniqueValue || techniques.includes(techniqueValue));
+      row.hidden = !matches;
+      if (matches) visible += 1;
+    });
+
+    if (noResults) noResults.hidden = visible !== 0;
+  };
+
+  [search, category, source, difficulty, concept, technique].forEach((control) =>
+    control?.addEventListener(control === search ? 'input' : 'change', apply)
+  );
+  reset?.addEventListener('click', () => {
+    [search, category, source, difficulty, concept, technique].forEach((control) => { if (control) control.value = ''; });
+    apply();
+    search?.focus();
+  });
+})();
+</script>
+
+<style>
+.problem-hero h1{max-width:940px}.filter-bar{display:grid;grid-template-columns:minmax(220px,1.5fr) repeat(5,minmax(130px,.72fr)) auto;gap:10px;align-items:end;padding:16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);margin-bottom:24px}.filter-bar label{display:grid;gap:7px}.filter-bar label>span{font:700 .62rem var(--font-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}.filter-bar input,.filter-bar select{width:100%;height:42px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink);padding:0 10px;font-size:.78rem}.reset-button{height:42px;padding:0 14px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-weight:700;cursor:pointer}.problem-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}.no-results,.empty-state{color:var(--muted)}.empty-state{padding:28px;border:1px dashed var(--border);border-radius:var(--radius);background:var(--surface)}.empty-state p{margin:6px 0 0}@media(max-width:1180px){.filter-bar{grid-template-columns:repeat(3,1fr)}.search-field{grid-column:span 2}}@media(max-width:760px){.filter-bar,.problem-grid{grid-template-columns:1fr}.search-field{grid-column:auto}}
+</style>
