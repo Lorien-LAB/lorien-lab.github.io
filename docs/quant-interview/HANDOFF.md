@@ -4,23 +4,63 @@ Updated: 2026-08-16
 
 ## Current architecture state
 
-**Stage A — Topic-first foundation is complete on the current task branch; final integration remains gated by the repository verification suite.**
+**Stage B — public Topic-first shell is implemented on the current task branch; final integration remains gated by the repository verification suite.**
 
-The system has moved from source-order ingestion to a canonical-topic architecture. Public content remains transitional until Stage B, but the internal foundation for cross-book processing is now in place.
+Stage A established the hidden cross-book ingestion foundation. Stage B now makes the public experience match that architecture: users navigate canonical topics, Knowledge, techniques, and Problems rather than books or source-question order.
+
+The Stage B business tree at commit `e06f83dd605c6b09e500d8373b4544334e0f25ee` passed `npm run test`, `npm run check`, and `npm run build` in GitHub Actions run `31941713726`.
 
 ## Stable architecture
 
 - Public Knowledge contains reusable canonical concepts and Problem Solving Techniques.
 - Public Problems are canonical first-class practice records under `src/content/problems/`.
-- Books are internal evidence sources, not the durable public hierarchy.
+- Public Quant Interview navigation is **Topic-first**.
+- Books are internal evidence sources, not the public hierarchy.
 - All three sources are source-file-verified and edition-pinned.
 - `src/data/quant-interview/topics/taxonomy.json` defines the canonical Topic-first taxonomy.
 - `src/data/quant-interview/topics/source-topic-map.json` explicitly routes every verified TOC node into canonical topics or an explicit container/non-content role.
-- The current map contains **281 explicit source-TOC routing entries**.
-- `src/data/quant-interview/coverage/*.json` is the hidden coverage ledger; source content begins pending until a canonical topic workstream reconciles it.
+- The current source-topic map contains **281 explicit source-TOC routing entries**.
+- `src/data/quant-interview/coverage/*.json` is the hidden coverage / semantic-dedup ledger.
 - `evidencePageRanges` separates private physical-page evidence from semantic source-item ownership; evidence may overlap across workstreams.
-- Source page numbers are internal evidence only.
+- Source book names, source question numbers, and source page numbers are not part of the public Knowledge/Problem presentation.
 - No source PDF/scan is committed to the public repository.
+
+## Public Stage B surfaces
+
+### Quant Interview Hub
+
+`/knowledge/quant-interview/` now presents the canonical topic taxonomy as the main navigation surface.
+
+- the primary journey is **Learn by Topic**;
+- the other primary journeys are **Practice Problems** and **Problem-Solving Techniques**;
+- the hub no longer loads or renders `problemSources`;
+- Topic cards show their subtopics and derive Knowledge / Problem counts from actual public content;
+- zero counts are allowed and truthful until Stage C classifies existing content.
+
+### Problem Bank
+
+`/problems/` is source-neutral.
+
+- the Source filter has been removed;
+- a canonical Topic / Subtopic filter replaces it;
+- `?topic=<canonical-topic-id>` opens the bank with that Topic preselected;
+- a Problem assigned to a subtopic also matches the appropriate parent Topic through public taxonomy ancestry;
+- search, category, difficulty, concept, and technique filters remain available;
+- Problem cards no longer display source-book labels.
+
+### Problem detail
+
+Canonical Problem routes remain `/problems/<slug>/`.
+
+- public Problem pages no longer render book/source labels, source references, source question numbers, or page references;
+- the route still loads source records internally only where needed for relationship validation;
+- Concepts, Techniques, Prerequisites, Related Problems, difficulty, and canonical classification remain public.
+
+### Legacy Source URLs
+
+The old public Source index/detail pages have been retired.
+
+Existing URLs for the three previously public source records redirect to `/knowledge/quant-interview/`. The underlying `problem-sources` collection, manifests, TOCs, source-topic map, and coverage ledgers remain intact as internal ingestion/audit infrastructure.
 
 ## Verified source state
 
@@ -58,41 +98,31 @@ The system has moved from source-order ingestion to a canonical-topic architectu
 - source file size: 220 PDF pages
 - TOC: source-file-verified
 - ingestion state: `ingesting`
-- existing authored content: the previously validated first two pilot batches remain canonical candidates
+- previously authored public candidates: Questions 1–2 and 4–5 from the two validated pilot batches
 - full cross-book reconciliation: incomplete
 
-## What Stage A changed
+## Stage boundaries
 
-- Green and Red source records/manifests were pinned to the actual supplied files.
-- All three TOCs are source-file-verified.
-- The old globally non-overlapping page-range rule was replaced by reusable `evidencePageRanges` plus exclusive semantic source-problem ownership.
-- A ten-domain canonical topic taxonomy and focused subtopics were introduced.
-- Every source TOC node was explicitly routed through the hidden source-topic map; the Green TOC seed was corrected with the verified `N points on a circle` item before mapping.
-- Hidden section-level coverage ledgers were initialized for all three sources.
-- Coverage, taxonomy, source-topic routing, and evidence validators were added.
-- Knowledge and Problem schemas now accept optional `quantInterviewTopics` arrays, but existing public content is not classified until Stage C.
+Stage B intentionally does **not** migrate existing public Problem/Knowledge records into canonical topic assignments. Their `quantInterviewTopics` fields remain at their current values until Stage C.
 
-## Important transition boundary
-
-The current public Quant Interview UI is still source-oriented in places. In particular, the landing page, Problem Bank source filter, Problem cards, Problem detail source line, and public source routes have not yet been migrated. That is deliberately deferred to Stage B rather than mixed into Stage A.
-
-Existing source-linked Problem frontmatter also remains transitional until Stage C moves provenance into the hidden ledger and makes public canonical Problems source-neutral.
+Stage B also does not perform new source-derived ingestion, cross-book semantic deduplication, or coverage-ledger reconciliation beyond preserving Stage A infrastructure.
 
 ## Next action
 
-Execute **Stage B — public Topic-first shell** as the next bounded implementation stage.
+Execute **Stage C — migrate existing authored content into the canonical Topic-first model** after Stage B is integrated.
 
-Stage B should:
+Stage C should:
 
-1. replace source-first Quant Interview landing navigation with canonical topic navigation;
-2. remove Sources as a primary public journey;
-3. remove public book/source display from Problem cards and Problem detail;
-4. replace the public source filter with Topic / Subtopic filtering;
-5. preserve canonical Problem routes and hidden source infrastructure;
-6. keep `src/data/quant-interview/coverage/`, source manifests, verified TOCs, and source-topic mappings private/internal;
-7. run `npm run test`, `npm run check`, and `npm run build` before integration.
+1. classify the existing Quant Interview Knowledge concepts/techniques into canonical `quantInterviewTopics`;
+2. classify the existing canonical Problems into canonical topics/subtopics;
+3. remove transitional public provenance fields from source-derived Problem frontmatter where the approved migration plan requires it;
+4. move/confirm source-item → canonical Problem/Knowledge provenance in the hidden coverage ledger;
+5. preserve the independently authored Problem statements and solutions unless an editorial correction is required;
+6. verify that no existing source-derived knowledge disappears during migration;
+7. keep semantic deduplication explicit rather than equating similar wording with identity;
+8. run `npm run test`, `npm run check`, and `npm run build` before integration.
 
-Do not start a source-number ingestion sequence. Stage C will migrate existing authored content into canonical topics and hidden provenance; Stage D will then begin bounded cross-book topic ingestion.
+Do **not** begin a new source-number ingestion sequence in Stage C. Stage D is the first bounded cross-book topic workstream.
 
 ## Non-negotiable invariants
 
@@ -104,7 +134,7 @@ Do not start a source-number ingestion sequence. Stage C will migrate existing a
 - No duplicate Concept/Technique merely because another source uses a synonym.
 - No answer-only entry may be treated as finished reviewed content.
 - No copied answer key, large verbatim source passage, or source PDF/scan is public.
-- Source page numbers remain internal evidence and do not belong in public Knowledge/Problem presentation.
+- Source book names, question numbers, and page numbers remain internal evidence and do not belong in public Knowledge/Problem presentation.
 - No unsupported completeness percentages.
 - No merge before verification gates pass.
 
