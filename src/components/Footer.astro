@@ -3,9 +3,17 @@ const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
   <div class="container footer-inner">
-    <div><strong>Lorien Lab</strong><p>Quantitative research, systematic strategies, and research infrastructure.</p></div>
+    <div>
+      <strong>Lorien Lab</strong>
+      <p>
+        <span class="lang-en">Quantitative research, systematic strategies, and research infrastructure.</span>
+        <span class="lang-zh" lang="zh-CN">量化研究、系统化策略与研究基础设施。</span>
+      </p>
+    </div>
     <div class="footer-links"><a href="https://github.com/Lorien-LAB" target="_blank" rel="noreferrer">GitHub</a></div>
-    <small>© {year} Lorien Lab. Built with Astro.</small>
+    <small>
+      © {year} Lorien Lab. <span class="lang-en">Built with Astro.</span><span class="lang-zh" lang="zh-CN">基于 Astro 构建。</span>
+    </small>
   </div>
 </footer>
 <style>
