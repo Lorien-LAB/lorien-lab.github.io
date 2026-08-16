@@ -22,6 +22,22 @@ const inventory = {
   ],
 };
 
+const semanticDecisions = {
+  'green-book': {
+    '3.6.3::determinant-properties': ['knowledge-only', [], ['matrix-spectral-invariants']],
+    '3.6.3::eigenvalue-eigenvector-definitions': ['knowledge-only', [], ['eigenvalues-eigenvectors']],
+    '3.6.3::trace-determinant-spectrum': ['knowledge-only', [], ['eigenvalues-eigenvectors', 'matrix-spectral-invariants']],
+    '3.6.3::diagonalization': ['knowledge-only', [], ['eigenvalues-eigenvectors', 'eigenbasis-decomposition']],
+    '3.6.3::two-by-two-eigensystem': ['canonical-problem', ['two-by-two-eigensystem'], ['eigenvalues-eigenvectors', 'matrix-spectral-invariants']],
+  },
+  '150-most-frequently-asked': {
+    '2.2::4': ['knowledge-only', [], ['eigenvalues-eigenvectors']],
+    '2.2::6': ['canonical-problem', ['apply-matrix-via-eigenbasis'], ['eigenvalues-eigenvectors', 'eigenbasis-decomposition']],
+    '2.2::7': ['canonical-problem', ['trace-ab-equals-trace-ba'], ['matrix-spectral-invariants']],
+    '2.2::8': ['canonical-problem', ['commutator-cannot-equal-identity'], ['matrix-spectral-invariants']],
+  },
+};
+
 async function context() {
   const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
   const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
@@ -51,18 +67,30 @@ test('workstream validator accepts the registered verified three-source scope', 
   assert.doesNotThrow(() => validateTopicWorkstream(workstream, ctx));
 });
 
-test('every inspected determinant/eigenvalue item is explicitly inventoried before semantic resolution', async () => {
+test('every inspected determinant/eigenvalue item is explicitly inventoried', async () => {
   for (const [source, keys] of Object.entries(inventory)) {
     const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
     const byKey = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
     for (const [section, item] of keys) {
       const entry = byKey.get(`${section}::${item}`);
       assert.ok(entry, `missing inventory row ${source} ${section} ${item}`);
-      assert.equal(entry.state, 'needs-review', `${source} ${section} ${item} must remain needs-review during inventory`);
-      assert.deepEqual(entry.canonicalProblems, []);
-      assert.deepEqual(entry.canonicalKnowledge, []);
       assert.ok(entry.canonicalTopics.every((topic) => topicSet.has(topic)), `${source} ${section} ${item} escaped workstream scope`);
       assert.ok(entry.canonicalTopics.includes('determinants-eigenvalues'), `${source} ${section} ${item} missing determinants/eigenvalues topic`);
+    }
+  }
+});
+
+test('semantic identity decisions distinguish canonical problems from reusable knowledge', async () => {
+  for (const [source, expected] of Object.entries(semanticDecisions)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    const byKey = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
+    for (const [key, [state, problems, knowledge]] of Object.entries(expected)) {
+      const entry = byKey.get(key);
+      assert.ok(entry, `missing semantic row ${source} ${key}`);
+      assert.equal(entry.state, state, `${source} ${key} has wrong state`);
+      assert.deepEqual(entry.canonicalProblems, problems, `${source} ${key} has wrong problem targets`);
+      assert.deepEqual(entry.canonicalKnowledge, knowledge, `${source} ${key} has wrong knowledge targets`);
+      assert.match(entry.resolutionNote ?? '', /\S/, `${source} ${key} missing semantic resolution note`);
     }
   }
 });
