@@ -1,0 +1,20 @@
+---
+interface Props { math: number; insight: number; interview: number; }
+const { math, insight, interview } = Astro.props;
+const rows = [['Math', math], ['Insight', insight], ['Interview', interview]] as const;
+const dots = (value: number) => Array.from({ length: 5 }, (_, i) => i < value);
+---
+<div class="difficulty" aria-label="Problem difficulty">
+  {rows.map(([label, value]) => (
+    <div class="difficulty-row">
+      <span>{label}</span>
+      <div aria-label={`${label} difficulty ${value} out of 5`}>
+        {dots(value).map((active) => <i class:list={{ active }}></i>)}
+      </div>
+      <strong>{value}/5</strong>
+    </div>
+  ))}
+</div>
+<style>
+.difficulty{display:grid;gap:8px}.difficulty-row{display:grid;grid-template-columns:76px 1fr 34px;gap:10px;align-items:center;font:600 .72rem var(--font-mono);color:var(--muted)}.difficulty-row>div{display:flex;gap:5px}.difficulty-row i{width:8px;height:8px;border-radius:50%;border:1px solid var(--border);background:transparent}.difficulty-row i.active{background:var(--accent);border-color:var(--accent)}.difficulty-row strong{color:var(--ink);text-align:right}
+</style>
