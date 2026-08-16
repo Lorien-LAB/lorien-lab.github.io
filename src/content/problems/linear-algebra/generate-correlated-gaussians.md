@@ -1,7 +1,7 @@
 ---
 problemId: linear-algebra-decomposition-003
 title: Generate Correlated Gaussian Variables
- description: Build correlated Gaussian variables from independent standard normals, verify the covariance exactly, and generalize through Cholesky and spectral/SVD covariance factors.
+description: Build correlated Gaussian variables from independent standard normals, verify the covariance exactly, and generalize through Cholesky and spectral/SVD covariance factors.
 date: 2026-08-16
 domain: Mathematics & Statistics
 category: Linear Algebra
