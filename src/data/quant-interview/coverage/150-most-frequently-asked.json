@@ -337,6 +337,50 @@
       ],
       "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
       "resolutionNote": "Repeats the First Look parameter matrix; its additional Schur/completing-square methods enrich the existing canonical problem rather than creating another page."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "4",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "6",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "7",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "8",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
     }
   ]
 }

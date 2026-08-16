@@ -1998,6 +1998,61 @@
       ],
       "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
       "resolutionNote": "Definitions and normalization identities enrich canonical covariance/correlation Knowledge rather than forming a standalone problem."
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": "determinant-properties",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": "eigenvalue-eigenvector-definitions",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": "trace-determinant-spectrum",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": "diagonalization",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": "two-by-two-eigensystem",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
     }
   ]
 }
