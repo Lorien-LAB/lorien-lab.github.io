@@ -1,74 +1,103 @@
 ---
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../../layouts/BaseLayout.astro';
-import { getProblemsForSource, slugOf, validateProblemRelationships } from '../../../lib/problemRelations';
+import QuantInterviewTopicCard from '../../../components/QuantInterviewTopicCard.astro';
+import { getQuantInterviewTaxonomy, type QuantInterviewTopic } from '../../../lib/quantInterviewPublicTopics';
+import { slugOf } from '../../../lib/problemRelations';
 
 const base = import.meta.env.BASE_URL;
 const problems = await getCollection('problems');
-const sources = await getCollection('problemSources');
 const knowledge = await getCollection('knowledge');
-validateProblemRelationships(problems, sources, knowledge);
+const taxonomy = getQuantInterviewTaxonomy();
 
 const techniqueEntries = knowledge
   .filter((entry) => entry.data.type === 'concept' && entry.data.category === 'Problem Solving Techniques')
   .sort((a, b) => a.data.title.localeCompare(b.data.title));
 const representedConceptSlugs = new Set(problems.flatMap((problem) => problem.data.concepts));
 const representedConcepts = knowledge.filter((entry) => representedConceptSlugs.has(slugOf(entry.id)));
-const sourceStats = sources
-  .map((source) => ({ source, count: getProblemsForSource(problems, slugOf(source.id)).length }))
-  .sort((a, b) => a.source.data.shortTitle.localeCompare(b.source.data.shortTitle));
+
+const descendantIds = (topic: QuantInterviewTopic): string[] => [
+  topic.id,
+  ...(topic.children ?? []).flatMap(descendantIds),
+];
+
+const topTopics = [...taxonomy.topics]
+  .sort((a, b) => a.order - b.order)
+  .map((topic) => {
+    const ids = new Set(descendantIds(topic));
+    return {
+      topic,
+      knowledgeCount: knowledge.filter((entry) => entry.data.quantInterviewTopics.some((id) => ids.has(id))).length,
+      problemCount: problems.filter((entry) => entry.data.quantInterviewTopics.some((id) => ids.has(id))).length,
+    };
+  });
 ---
-<BaseLayout title="Quant Interview Knowledge System · Lorien Lab" description="Concepts, problems, solution techniques, and source-linked learning for quantitative research and trading interviews.">
+<BaseLayout title="Quant Interview Knowledge System · Lorien Lab" description="A Topic-first quantitative interview knowledge system connecting concepts, techniques, and canonical practice problems.">
   <header class="interview-hero">
     <div class="container hero-grid">
       <div>
         <div class="mono-label">Knowledge · Quant Interview</div>
         <h1>Quant Interview<br/>Knowledge System.</h1>
-        <p>Learn the concept, recognize the technique, solve the problem, and keep the source provenance visible. The books are inputs; the knowledge graph is the durable structure.</p>
+        <p>Learn the concept, recognize the technique, solve the problem, and connect related ideas across one canonical quantitative-interview knowledge graph.</p>
         <div class="hero-actions">
-          <a class="button primary" href={`${base}problems/`}>Practice Problems →</a>
-          <a class="button" href={`${base}knowledge/#knowledge-index`}>Browse Concepts</a>
-          <a class="button" href={`${base}knowledge/quant-interview/sources/`}>Explore Sources</a>
+          <a class="button primary" href="#topics">Learn by Topic →</a>
+          <a class="button" href={`${base}problems/`}>Practice Problems</a>
+          <a class="button" href="#techniques">Problem-Solving Techniques</a>
         </div>
       </div>
-      <div class="stats" aria-label="Quant interview corpus counts">
+      <div class="stats" aria-label="Quant interview knowledge counts">
+        <div><strong>{taxonomy.topics.length}</strong><span>Topic Areas</span></div>
         <div><strong>{problems.length}</strong><span>Problems</span></div>
         <div><strong>{representedConcepts.length}</strong><span>Represented Concepts</span></div>
         <div><strong>{techniqueEntries.length}</strong><span>Techniques</span></div>
-        <div><strong>{sources.length}</strong><span>Sources</span></div>
       </div>
     </div>
   </header>
 
-  <section class="section">
+  <section class="section journey-section">
     <div class="container">
-      <div class="section-heading"><div><div class="mono-label">How to use it</div><h2>Four ways into the same graph.</h2><p>Concepts explain theory, Problems test transfer, Techniques capture reusable solution patterns, and Sources preserve provenance and original ordering.</p></div></div>
+      <div class="section-heading">
+        <div>
+          <div class="mono-label">How to use it</div>
+          <h2>Three paths through one graph.</h2>
+          <p>Study a topic systematically, practice canonical problems, or strengthen the reusable techniques that transfer across interviews.</p>
+        </div>
+      </div>
       <div class="mode-grid">
-        <a href={`${base}knowledge/#knowledge-index`}><span>01</span><strong>Learn</strong><p>Browse reusable concepts and prerequisites in the existing Knowledge Base.</p></a>
-        <a href={`${base}problems/`}><span>02</span><strong>Practice</strong><p>Attempt problems before opening hints and full solutions.</p></a>
-        <a href="#techniques"><span>03</span><strong>Techniques</strong><p>Study conditioning, recursion, first-step analysis, and future solution patterns.</p></a>
-        <a href={`${base}knowledge/quant-interview/sources/`}><span>04</span><strong>Sources</strong><p>Follow Green Book, Red Book, and future sources without duplicating the ontology.</p></a>
+        <a href="#topics"><span>01</span><strong>Learn by Topic</strong><p>Move from broad quantitative domains into focused subtopics and the knowledge connected to them.</p></a>
+        <a href={`${base}problems/`}><span>02</span><strong>Practice Problems</strong><p>Attempt canonical problems before revealing progressive hints and independently derived solutions.</p></a>
+        <a href="#techniques"><span>03</span><strong>Techniques</strong><p>Study reusable reasoning patterns such as symmetry, invariants, conditioning, and first-step analysis.</p></a>
       </div>
     </div>
   </section>
 
-  <section class="section source-section">
+  <section id="topics" class="section topic-section">
     <div class="container">
-      <div class="section-heading"><div><div class="mono-label">Sources</div><h2>Provenance, not hierarchy.</h2><p>Source pages preserve indexing context. A source with no reviewed public problems stays truthfully empty.</p></div><a class="section-link" href={`${base}knowledge/quant-interview/sources/`}>All sources →</a></div>
-      <div class="source-grid">
-        {sourceStats.map(({ source, count }) => <a href={`${base}knowledge/quant-interview/sources/${slugOf(source.id)}/`}>
-          <div class="source-top"><span>{source.data.sourceType}</span><strong>{count}</strong></div>
-          <h3>{source.data.shortTitle}</h3>
-          <p>{source.data.description}</p>
-          <small>{count} indexed {count === 1 ? 'problem' : 'problems'} →</small>
-        </a>)}
+      <div class="section-heading">
+        <div>
+          <div class="mono-label">Canonical Topic Map</div>
+          <h2>Learn by Topic.</h2>
+          <p>The interview library is organized around reusable knowledge domains. Each topic collects related concepts, techniques, and canonical problems into one coherent learning path.</p>
+        </div>
+        <a class="section-link" href={`${base}problems/`}>Open Problem Bank →</a>
+      </div>
+      <div class="topic-grid">
+        {topTopics.map(({ topic, knowledgeCount, problemCount }) => (
+          <QuantInterviewTopicCard topic={topic} knowledgeCount={knowledgeCount} problemCount={problemCount} />
+        ))}
       </div>
     </div>
   </section>
 
   <section id="techniques" class="section">
     <div class="container">
-      <div class="section-heading"><div><div class="mono-label">Problem Solving Techniques</div><h2>Reusable methods, not memorized answers.</h2><p>Techniques remain ordinary Knowledge concepts so they can connect to theory, problems, notes, and future learning paths.</p></div></div>
+      <div class="section-heading">
+        <div>
+          <div class="mono-label">Problem Solving Techniques</div>
+          <h2>Reusable methods, not memorized answers.</h2>
+          <p>Techniques remain ordinary Knowledge concepts so they can connect to theory, problems, notes, and future learning paths.</p>
+        </div>
+      </div>
       {techniqueEntries.length > 0 ? <div class="technique-list">
         {techniqueEntries.map((entry, index) => <a href={`${base}knowledge/${slugOf(entry.id)}/`}><span>{String(index + 1).padStart(2, '0')}</span><div><strong>{entry.data.title}</strong><p>{entry.data.description}</p></div><i>→</i></a>)}
       </div> : <p class="empty-note">Technique entries will appear after reviewed Knowledge concepts are added.</p>}
@@ -77,5 +106,5 @@ const sourceStats = sources
 </BaseLayout>
 
 <style>
-.interview-hero{padding:74px 0 62px;background:radial-gradient(circle at 78% 22%,#0d3140 0,#071a25 34%,var(--hero) 72%);color:var(--hero-ink);border-bottom:1px solid rgba(255,255,255,.08)}.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:70px;align-items:end}.interview-hero h1{margin:13px 0 20px;font-size:clamp(3rem,6vw,5.8rem);line-height:.94;letter-spacing:-.065em}.interview-hero p{max-width:760px;margin:0;color:#b9cbd5;font:400 1rem/1.7 var(--font-mono)}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:27px}.stats{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);background:rgba(4,16,25,.55)}.stats div{padding:20px;border-right:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}.stats div:nth-child(2n){border-right:0}.stats div:nth-last-child(-n+2){border-bottom:0}.stats strong{display:block;color:var(--accent);font:800 1.8rem var(--font-mono)}.stats span{display:block;margin-top:4px;color:#9db0bc;font:600 .65rem var(--font-mono);text-transform:uppercase}.mode-grid,.source-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.mode-grid>a,.source-grid>a{padding:21px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--ink)}.mode-grid>a:hover,.source-grid>a:hover{border-color:color-mix(in srgb,var(--accent) 48%,var(--border));color:var(--ink)}.mode-grid span{color:var(--accent-strong);font:700 .68rem var(--font-mono)}.mode-grid strong{display:block;margin:13px 0 7px;font-size:1.08rem}.mode-grid p,.source-grid p{margin:0;color:var(--muted);font-size:.86rem}.source-section{border-top:1px solid var(--border);border-bottom:1px solid var(--border);background:color-mix(in srgb,var(--surface) 68%,transparent)}.source-grid{grid-template-columns:repeat(2,1fr)}.source-top{display:flex;justify-content:space-between;color:var(--muted);font:700 .66rem var(--font-mono);text-transform:uppercase}.source-top strong{color:var(--accent-strong);font-size:1.1rem}.source-grid h3{margin:15px 0 8px;font-size:1.3rem}.source-grid small{display:block;margin-top:18px;color:var(--accent-strong);font-weight:800}.technique-list{border-top:1px solid var(--border)}.technique-list>a{display:grid;grid-template-columns:50px 1fr 24px;gap:16px;align-items:center;padding:18px 4px;border-bottom:1px solid var(--border);color:var(--ink)}.technique-list>a>span{color:var(--accent-strong);font:700 .68rem var(--font-mono)}.technique-list strong{font-size:.98rem}.technique-list p{margin:4px 0 0;color:var(--muted);font-size:.82rem}.technique-list i{font-style:normal;color:var(--accent-strong)}@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.stats{max-width:500px}.mode-grid{grid-template-columns:repeat(2,1fr)}}@media(max-width:640px){.mode-grid,.source-grid{grid-template-columns:1fr}}
+.interview-hero{padding:74px 0 62px;background:radial-gradient(circle at 78% 22%,#0d3140 0,#071a25 34%,var(--hero) 72%);color:var(--hero-ink);border-bottom:1px solid rgba(255,255,255,.08)}.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 370px;gap:70px;align-items:end}.interview-hero h1{margin:13px 0 20px;font-size:clamp(3rem,6vw,5.8rem);line-height:.94;letter-spacing:-.065em}.interview-hero p{max-width:760px;margin:0;color:#b9cbd5;font:400 1rem/1.7 var(--font-mono)}.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:27px}.stats{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);background:rgba(4,16,25,.55)}.stats div{padding:20px;border-right:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}.stats div:nth-child(2n){border-right:0}.stats div:nth-last-child(-n+2){border-bottom:0}.stats strong{display:block;color:var(--accent);font:800 1.8rem var(--font-mono)}.stats span{display:block;margin-top:4px;color:#9db0bc;font:600 .65rem var(--font-mono);text-transform:uppercase}.journey-section{border-bottom:1px solid var(--border)}.mode-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}.mode-grid>a{padding:21px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--ink)}.mode-grid>a:hover{border-color:color-mix(in srgb,var(--accent) 48%,var(--border));color:var(--ink)}.mode-grid span{color:var(--accent-strong);font:700 .68rem var(--font-mono)}.mode-grid strong{display:block;margin:13px 0 7px;font-size:1.08rem}.mode-grid p{margin:0;color:var(--muted);font-size:.86rem}.topic-section{background:color-mix(in srgb,var(--surface) 54%,transparent);border-bottom:1px solid var(--border)}.topic-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}.technique-list{border-top:1px solid var(--border)}.technique-list>a{display:grid;grid-template-columns:50px 1fr 24px;gap:16px;align-items:center;padding:18px 4px;border-bottom:1px solid var(--border);color:var(--ink)}.technique-list>a>span{color:var(--accent-strong);font:700 .68rem var(--font-mono)}.technique-list strong{font-size:.98rem}.technique-list p{margin:4px 0 0;color:var(--muted);font-size:.82rem}.technique-list i{font-style:normal;color:var(--accent-strong)}@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.stats{max-width:500px}.mode-grid{grid-template-columns:1fr}.topic-grid{grid-template-columns:1fr}}@media(max-width:640px){.interview-hero{padding-top:56px}.hero-grid{gap:38px}}
 </style>
