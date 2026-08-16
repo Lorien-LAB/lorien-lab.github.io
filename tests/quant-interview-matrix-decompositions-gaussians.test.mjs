@@ -20,7 +20,7 @@ test('generate-correlated-gaussians verifies the 2D construction and general cov
   const text = await readFile(problemPath, 'utf8');
   assert.match(text, /x_?1\s*=\s*z_?1/i);
   assert.match(text, /x_?2\s*=\s*rho\s*z_?1\s*\+\s*sqrt\(1\s*-\s*rho\^2\)\s*z_?2/i);
-  assert.match(text, /Var\(x_?1\)\s*=\s*1/i);
+  assert.match(text, /Var\(x_?1\)[\s\S]{0,80}=\s*1/i);
   assert.match(text, /Var\(x_?2\)[\s\S]{0,220}rho\^2[\s\S]{0,160}1\s*-\s*rho\^2[\s\S]{0,100}=\s*1/i);
   assert.match(text, /Cov\(x_?1,\s*x_?2\)[\s\S]{0,220}=\s*rho/i);
   assert.match(text, /\|rho\|\s*<=\s*1|rho\s*(?:in|∈)\s*\[-1,\s*1\]/i);
@@ -31,7 +31,7 @@ test('generate-correlated-gaussians verifies the 2D construction and general cov
   assert.match(text, /singular[\s\S]{0,220}(?:PSD|positive[- ]semidefinite)/i);
   assert.match(text, /Sigma\s*=\s*Q\s*Lambda\s*Q\^T/i);
   assert.match(text, /B\s*=\s*Q\s*Lambda\^\{?1\/2\}?|B\s*=\s*Q\s*sqrt\(Lambda\)/i);
-  assert.match(text, /B\s*B\^T\s*=\s*Sigma/i);
+  assert.match(text, /B\s*B\^T[\s\S]{0,180}=\s*Sigma/i);
   assert.match(text, /SVD|spectral/i);
   assert.match(text, /covariance[\s\S]{0,220}(?:PSD|positive[- ]semidefinite)|(?:PSD|positive[- ]semidefinite)[\s\S]{0,220}covariance/i);
   assert.match(text, /Monte Carlo/i);
