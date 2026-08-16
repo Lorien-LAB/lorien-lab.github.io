@@ -4,7 +4,7 @@
     "linear-algebra-matrix-methods",
     "matrix-decompositions"
   ],
-  "status": "active",
+  "status": "complete",
   "sourceScopes": [
     {
       "source": "green-book",
