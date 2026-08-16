@@ -1,0 +1,74 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import { getProblemsForSource, slugOf, validateProblemRelationships } from '../../../../lib/problemRelations';
+
+export async function getStaticPaths() {
+  const sources = await getCollection('problemSources');
+  return sources.map((source) => ({
+    params: { slug: source.id.split('/').pop() },
+    props: { source },
+  }));
+}
+
+const { source } = Astro.props as { source: CollectionEntry<'problemSources'> };
+const base = import.meta.env.BASE_URL;
+const problems = await getCollection('problems');
+const sources = await getCollection('problemSources');
+const knowledge = await getCollection('knowledge');
+validateProblemRelationships(problems, sources, knowledge);
+const sourceSlug = slugOf(source.id);
+const sourceProblems = getProblemsForSource(problems, sourceSlug);
+const grouped = new Map<string, CollectionEntry<'problems'>[]>();
+for (const problem of sourceProblems) {
+  const section = problem.data.sourceSection ?? 'Indexed Problems';
+  const bucket = grouped.get(section) ?? [];
+  bucket.push(problem);
+  grouped.set(section, bucket);
+}
+const { Content } = await render(source);
+---
+<BaseLayout title={`${source.data.shortTitle} · Quant Interview · Lorien Lab`} description={source.data.description}>
+  <header class="source-hero">
+    <div class="container source-head">
+      <div>
+        <a class="back" href={`${base}knowledge/quant-interview/sources/`}>← All Sources</a>
+        <div class="mono-label">Quant Interview · {source.data.sourceType}</div>
+        <h1>{source.data.shortTitle}</h1>
+        <p>{source.data.description}</p>
+      </div>
+      <div class="source-count"><strong>{sourceProblems.length}</strong><span>indexed {sourceProblems.length === 1 ? 'problem' : 'problems'}</span></div>
+    </div>
+  </header>
+
+  <section class="section"><div class="container source-grid">
+    <main>
+      {sourceProblems.length > 0 ? [...grouped.entries()].map(([section, items]) => <section class="source-section">
+        <div class="section-title"><div class="mono-label">Section</div><h2>{section}</h2><span>{items.length} {items.length === 1 ? 'problem' : 'problems'}</span></div>
+        <div class="problem-list">
+          {items.map((problem) => <a href={`${base}problems/${slugOf(problem.id)}/`}>
+            <span>{problem.data.sourceProblem ?? problem.data.problemId}</span>
+            <div><strong>{problem.data.title}</strong><p>{problem.data.description}</p></div>
+            <small>Q {problem.data.interviewDifficulty}/5 →</small>
+          </a>)}
+        </div>
+      </section>) : <div class="empty-state"><strong>No reviewed problems from this source have been published yet.</strong><p>The source container is ready for verified Phase 2 ingestion without inventing placeholder questions.</p></div>}
+    </main>
+    <aside>
+      <div class="source-note"><div class="mono-label">Source Record</div><div class="prose compact"><Content /></div></div>
+      {(source.data.authors?.length || source.data.year || source.data.edition || source.data.isbn) && <div class="source-note"><h2>Verified metadata</h2><dl>
+        {source.data.authors?.length && <div><dt>Authors</dt><dd>{source.data.authors.join(', ')}</dd></div>}
+        {source.data.year && <div><dt>Year</dt><dd>{source.data.year}</dd></div>}
+        {source.data.edition && <div><dt>Edition</dt><dd>{source.data.edition}</dd></div>}
+        {source.data.isbn && <div><dt>ISBN</dt><dd>{source.data.isbn}</dd></div>}
+      </dl></div>}
+      {(source.data.officialUrl || source.data.publisherUrl) && <div class="source-note"><h2>Links</h2>
+        {source.data.officialUrl && <a href={source.data.officialUrl} target="_blank" rel="noreferrer">Official resource ↗</a>}
+        {source.data.publisherUrl && <a href={source.data.publisherUrl} target="_blank" rel="noreferrer">Publisher ↗</a>}
+      </div>}
+    </aside>
+  </div></section>
+</BaseLayout>
+<style>
+.source-hero{padding:62px 0 48px;border-bottom:1px solid var(--border);background:linear-gradient(180deg,color-mix(in srgb,var(--surface) 86%,transparent),transparent)}.source-head{display:grid;grid-template-columns:minmax(0,1fr) 170px;gap:50px;align-items:end}.back{display:inline-block;margin-bottom:30px;color:var(--muted);font-weight:700;font-size:.86rem}.source-head h1{margin:10px 0 14px;font-size:clamp(2.8rem,6vw,5rem);line-height:.98;letter-spacing:-.06em}.source-head p{max-width:780px;margin:0;color:var(--muted)}.source-count{padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);text-align:right}.source-count strong{display:block;color:var(--accent-strong);font:800 2rem var(--font-mono)}.source-count span{color:var(--muted);font:650 .65rem var(--font-mono);text-transform:uppercase}.source-grid{display:grid;grid-template-columns:minmax(0,1fr) 280px;gap:70px;align-items:start}.source-section+.source-section{margin-top:42px}.section-title{display:grid;grid-template-columns:1fr auto;gap:5px 20px;align-items:end;margin-bottom:14px}.section-title .mono-label{grid-column:1/-1}.section-title h2{margin:0;font-size:1.5rem}.section-title>span{color:var(--muted);font:650 .67rem var(--font-mono)}.problem-list{border-top:1px solid var(--border)}.problem-list>a{display:grid;grid-template-columns:60px minmax(0,1fr) 70px;gap:18px;align-items:center;padding:16px 4px;border-bottom:1px solid var(--border);color:var(--ink)}.problem-list>a>span{color:var(--accent-strong);font:700 .68rem var(--font-mono)}.problem-list strong{font-size:.92rem}.problem-list p{margin:3px 0 0;color:var(--muted);font-size:.8rem}.problem-list small{text-align:right;color:var(--muted);font:650 .65rem var(--font-mono)}.source-grid aside{position:sticky;top:104px}.source-note{padding:18px 0;border-top:1px solid var(--border)}.source-note:last-child{border-bottom:1px solid var(--border)}.source-note h2{margin:0 0 10px;color:var(--muted);font:700 .72rem var(--font-mono);text-transform:uppercase}.source-note .compact{margin:10px 0 0;font-size:.82rem}.source-note dl{margin:0}.source-note dl div{display:flex;justify-content:space-between;gap:14px;padding:8px 0;border-top:1px solid var(--border);font-size:.75rem}.source-note dt{color:var(--muted)}.source-note dd{margin:0;text-align:right}.source-note>a{display:block;padding:8px 0;color:var(--accent-strong);font-weight:700;font-size:.8rem}.empty-state{padding:28px;border:1px dashed var(--border);border-radius:var(--radius);background:var(--surface)}.empty-state p{margin:7px 0 0;color:var(--muted)}@media(max-width:820px){.source-head,.source-grid{grid-template-columns:1fr}.source-count{max-width:220px;text-align:left}.source-grid aside{position:static}}
+</style>
