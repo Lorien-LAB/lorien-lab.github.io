@@ -37,6 +37,14 @@
       "verifiedCommit": "7151c59f8fa2222540e2527e52ab177319145cac",
       "verificationRunId": 31935163167,
       "completedDate": "2026-08-16"
+    },
+    {
+      "id": "150-first-look-q04-q05",
+      "startPage": 7,
+      "endPage": 9,
+      "sourceSection": "1 First Look: Ten Questions",
+      "expectedProblemScope": ["4", "5"],
+      "status": "active"
     }
   ]
 }
