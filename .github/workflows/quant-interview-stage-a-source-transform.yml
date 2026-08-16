@@ -1,4 +1,4 @@
-name: Quant Interview Stage A Source Transform
+name: Quant Interview Stage A Internal Generator
 
 on:
   push:
@@ -9,8 +9,8 @@ permissions:
   contents: write
 
 jobs:
-  transform:
-    if: contains(github.event.head_commit.message, 'trigger source transform')
+  generate:
+    if: contains(github.event.head_commit.message, 'trigger topic map')
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -19,12 +19,12 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
-      - run: node scripts/tmp-stage-a-source-transform.mjs
-      - name: Commit transformed files
+      - run: node scripts/tmp-stage-a-topic-map.mjs
+      - name: Commit generated internal routing
         run: |
           git config user.name "Lorien"
           git config user.email "2249297094@qq.com"
-          git add src/data/quant-interview/toc/green-book.json src/content.config.ts
+          git add src/data/quant-interview/toc/green-book.json src/data/quant-interview/topics/source-topic-map.json
           if git diff --cached --quiet; then exit 0; fi
-          git commit -m "feat: add quant interview topic fields"
+          git commit -m "data: map interview source TOCs into canonical topics"
           git push
