@@ -17,9 +17,9 @@ const otherProjects = entries.filter((entry) => !systemIds.has(entry.id) && !str
 <BaseLayout title="Projects · Lorien Lab" description="Research engineering projects for factor discovery, systematic futures, and quantitative experimentation.">
   <header class="page-hero">
     <div class="container">
-      <div class="mono-label">Projects</div>
-      <h1>Research systems<br/>built to compound.</h1>
-      <p>Infrastructure, search systems, strategy frameworks, and empirical reproductions organized around one principle: research should become more inspectable and reusable as the experiment count grows.</p>
+      <div class="mono-label"><span class="lang-en">Projects</span><span class="lang-zh" lang="zh-CN">项目</span></div>
+      <h1><span class="lang-en">Research systems<br/>built to compound.</span><span class="lang-zh" lang="zh-CN">让研究系统<br/>持续积累与复利。</span></h1>
+      <p><span class="lang-en">Infrastructure, search systems, strategy frameworks, and empirical reproductions organized around one principle: research should become more inspectable and reusable as the experiment count grows.</span><span class="lang-zh" lang="zh-CN">基础设施、搜索系统、策略框架与实证复现都围绕同一原则组织：随着实验数量增加，研究应该变得更可检查、更可复用，而不是更混乱。</span></p>
     </div>
   </header>
 
@@ -31,9 +31,9 @@ const otherProjects = entries.filter((entry) => !systemIds.has(entry.id) && !str
     <div class="container">
       <div class="section-heading">
         <div>
-          <div class="mono-label">Research Systems</div>
-          <h2 id="research-systems-title">Infrastructure for repeatable research.</h2>
-          <p>Workbenches, search loops, and interfaces designed to make quantitative research durable, inspectable, and extensible across both human and agent workflows.</p>
+          <div class="mono-label"><span class="lang-en">Research Systems</span><span class="lang-zh" lang="zh-CN">研究系统</span></div>
+          <h2 id="research-systems-title"><span class="lang-en">Infrastructure for repeatable research.</span><span class="lang-zh" lang="zh-CN">为可重复研究构建基础设施。</span></h2>
+          <p><span class="lang-en">Workbenches, search loops, and interfaces designed to make quantitative research durable, inspectable, and extensible across both human and agent workflows.</span><span class="lang-zh" lang="zh-CN">通过工作台、搜索闭环与统一接口，让量化研究在人类与 Agent 工作流中都具备持久性、可检查性与可扩展性。</span></p>
         </div>
       </div>
       <div class="card-grid two">{systems.map((entry) => <ProjectCard entry={entry} />)}</div>
@@ -44,9 +44,9 @@ const otherProjects = entries.filter((entry) => !systemIds.has(entry.id) && !str
     <div class="container">
       <div class="section-heading">
         <div>
-          <div class="mono-label">Strategy Frameworks</div>
-          <h2 id="strategy-frameworks-title">Reusable structures for systematic trading research.</h2>
-          <p>Strategy families evaluated under shared assumptions, risk controls, and validation discipline rather than isolated headline backtests.</p>
+          <div class="mono-label"><span class="lang-en">Strategy Frameworks</span><span class="lang-zh" lang="zh-CN">策略框架</span></div>
+          <h2 id="strategy-frameworks-title"><span class="lang-en">Reusable structures for systematic trading research.</span><span class="lang-zh" lang="zh-CN">面向系统化交易研究的可复用结构。</span></h2>
+          <p><span class="lang-en">Strategy families evaluated under shared assumptions, risk controls, and validation discipline rather than isolated headline backtests.</span><span class="lang-zh" lang="zh-CN">在统一假设、风险控制与验证纪律下评估策略族，而不是比较彼此条件不同的单次亮眼回测。</span></p>
         </div>
       </div>
       <div class="card-grid">{strategies.map((entry) => <ProjectCard entry={entry} />)}</div>
@@ -58,9 +58,9 @@ const otherProjects = entries.filter((entry) => !systemIds.has(entry.id) && !str
       <div class="container">
         <div class="section-heading">
           <div>
-            <div class="mono-label">Additional Projects</div>
-            <h2 id="other-projects-title">Research objects outside the current flagship groups.</h2>
-            <p>New project records remain visible even before they are assigned to a permanent portfolio category.</p>
+            <div class="mono-label"><span class="lang-en">Additional Projects</span><span class="lang-zh" lang="zh-CN">其他项目</span></div>
+            <h2 id="other-projects-title"><span class="lang-en">Research objects outside the current flagship groups.</span><span class="lang-zh" lang="zh-CN">尚未归入当前核心分组的研究对象。</span></h2>
+            <p><span class="lang-en">New project records remain visible even before they are assigned to a permanent portfolio category.</span><span class="lang-zh" lang="zh-CN">新项目即使尚未分配到长期分类，也会继续保留并展示。</span></p>
           </div>
         </div>
         <div class="card-grid">{otherProjects.map((entry) => <ProjectCard entry={entry} />)}</div>
@@ -70,6 +70,7 @@ const otherProjects = entries.filter((entry) => !systemIds.has(entry.id) && !str
 </BaseLayout>
 
 <style>
+  .page-hero h1>.lang-en,.page-hero h1>.lang-zh,.page-hero p>.lang-en,.page-hero p>.lang-zh,.project-group h2>.lang-en,.project-group h2>.lang-zh,.project-group p>.lang-en,.project-group p>.lang-zh{display:block}
   .reproduction-section { padding-bottom: 42px; }
   .project-group { border-top: 1px solid var(--border); }
   .project-group .section-heading { max-width: 850px; }
