@@ -20,7 +20,12 @@ const zhLabels: Record<(typeof links)[number][0], string> = {
   CV: '简历',
   About: '关于',
 };
-const isActive = (path: string) => path === '/' ? pathname === base || pathname === base.replace(/\/$/, '') : pathname.startsWith(withBase(path));
+const portfolioPrefixes = ['/research-projects/', '/research/', '/projects/'].map(withBase);
+const isActive = (path: string) => {
+  if (path === '/') return pathname === base || pathname === base.replace(/\/$/, '');
+  if (path === '/research-projects/') return portfolioPrefixes.some((prefix) => pathname.startsWith(prefix));
+  return pathname.startsWith(withBase(path));
+};
 ---
 <header class="site-header">
   <div class="container header-inner">
