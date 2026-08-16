@@ -1,0 +1,40 @@
+{
+  "id": "linear-algebra-vectors-linear-systems-004",
+  "canonicalTopics": [
+    "linear-algebra-matrix-methods",
+    "vectors-linear-systems"
+  ],
+  "canonicalExtensions": [
+    "inner-product-projection-core",
+    "span-basis-rank-nullity",
+    "linear-system-consistency-rref"
+  ],
+  "status": "active",
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["3.6.1"],
+      "evidencePageRanges": [
+        {"startPage": 66, "endPage": 67}
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["6.2.1", "6.3.1", "10.2"],
+      "evidencePageRanges": [
+        {"startPage": 201, "endPage": 222},
+        {"startPage": 317, "endPage": 318}
+      ],
+      "reviewOutcome": "no-new-direct-item",
+      "reviewNote": "Reviewed the General Mathematics questions/solutions and Top Ten question list for vector, basis, rank, and linear-system tasks. Matrix items found there are already owned by completed PSD/decomposition workstreams; no new direct vectors/linear-systems item is introduced here."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["2.2", "3.2"],
+      "evidencePageRanges": [
+        {"startPage": 30, "endPage": 30},
+        {"startPage": 79, "endPage": 80}
+      ]
+    }
+  ]
+}
