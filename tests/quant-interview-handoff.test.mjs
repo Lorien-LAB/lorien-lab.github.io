@@ -48,43 +48,42 @@ test('quant interview repository memory records verified bounded batches', async
   assert.match(handoff, /31936372883/);
 });
 
-test('source catalog reflects verified bounded coverage without implying book completeness', async () => {
+test('source catalog retains bounded-coverage truth until Stage A repository memory is rewritten', async () => {
   const catalog = await readFile('docs/quant-interview/SOURCE_CATALOG.md', 'utf8');
-  assert.match(catalog, /Green Book[\s\S]*not source-file-verified/i);
-  assert.match(catalog, /Red Book[\s\S]*not source-file-verified/i);
   assert.match(catalog, /150 Questions[\s\S]*source-file-verified[\s\S]*2013/i);
   assert.match(catalog, /problem-indexed for validated Q1–Q2 and Q4–Q5 only/i);
   assert.match(catalog, /book is not complete/i);
-  assert.match(catalog, /Question 3 remains unindexed/i);
 });
 
-test('TOC verification advances only the inspected 150 Questions source', async () => {
+test('all three source TOCs are now source-file-verified without implying problem completeness', async () => {
   for (const file of Object.values(tocPaths)) await access(file);
   const green = JSON.parse(await readFile(tocPaths.green, 'utf8'));
   const red = JSON.parse(await readFile(tocPaths.red, 'utf8'));
   const q150 = JSON.parse(await readFile(tocPaths.q150, 'utf8'));
 
-  for (const toc of [green, red]) {
-    assert.equal(toc.tocStatus, 'user-supplied');
-    assert.equal(toc.coverageClaim, 'structure-seed-not-problem-complete');
+  for (const toc of [green, red, q150]) {
+    assert.equal(toc.tocStatus, 'source-file-verified');
+    assert.equal(toc.coverageClaim, 'verified-structure-not-problem-complete');
   }
-  assert.equal(q150.tocStatus, 'source-file-verified');
-  assert.equal(q150.coverageClaim, 'verified-structure-not-problem-complete');
+  assert.equal(green.edition, 'First Edition (2008)');
+  assert.equal(green.sourceFileEvidence.pdfPageCount, 213);
+  assert.equal(red.edition, 'Version 1.01 (2008)');
+  assert.equal(red.sourceFileEvidence.pdfPageCount, 329);
   assert.equal(q150.edition, 'First edition (2013)');
   assert.equal(q150.sourceFileEvidence.pdfPageCount, 220);
-  assert.deepEqual(q150.sourceFileEvidence.bodyStart, { pdfPage: 11, displayPage: 1 });
-  assert.deepEqual(q150.sourceFileEvidence.bibliography, { pdfPage: 219, displayPage: 209 });
 });
 
-test('150 Questions manifest preserves completed verified bounded batches', async () => {
+test('150 Questions manifest preserves completed verified bounded batches with reusable evidence', async () => {
   const manifest = JSON.parse(await readFile('src/data/quant-interview/150-most-frequently-asked.json', 'utf8'));
   assert.equal(manifest.sourceFile, 'sha256:d753f3516ce06d8e7242bcdd7252d39ffbc33f9217c6cf8a7e826b658b533e14');
   assert.equal(manifest.ingestionStatus, 'ingesting');
   assert.equal(manifest.batches.length, 2);
   assert.equal(manifest.batches[0].id, '150-first-look-q01-q02');
+  assert.deepEqual(manifest.batches[0].evidencePageRanges, [{ startPage: 1, endPage: 6 }]);
   assert.equal(manifest.batches[0].status, 'complete');
   assert.equal(manifest.batches[0].verificationStatus, 'passed');
   assert.equal(manifest.batches[1].id, '150-first-look-q04-q05');
+  assert.deepEqual(manifest.batches[1].evidencePageRanges, [{ startPage: 7, endPage: 9 }]);
   assert.equal(manifest.batches[1].status, 'complete');
   assert.equal(manifest.batches[1].verificationStatus, 'passed');
   assert.equal(manifest.batches[1].verifiedCommit, '44f8710b12aa85085357e8ea04640b0acfde2d94');
@@ -126,13 +125,18 @@ test('pilot ontology contains reusable concepts and correctly typed techniques',
   }
 });
 
-test('Green and Red manifests remain edition-safe and batch-free', async () => {
-  for (const slug of ['green-book', 'red-book']) {
+test('Green and Red manifests are edition-pinned, verified, and batch-free before topic ingestion', async () => {
+  const expected = {
+    'green-book': ['First Edition (2008)', '9781438236667', 213],
+    'red-book': ['Version 1.01 (2008)', '9781438217031', 329],
+  };
+  for (const [slug, [edition, isbn, pages]] of Object.entries(expected)) {
     const manifest = JSON.parse(await readFile(`src/data/quant-interview/${slug}.json`, 'utf8'));
-    assert.equal(manifest.editionStatus, 'work-identified');
-    assert.equal(manifest.edition, null);
-    assert.equal(manifest.isbn, null);
-    assert.equal(manifest.sourceFile, null);
+    assert.equal(manifest.editionStatus, 'edition-pinned');
+    assert.equal(manifest.edition, edition);
+    assert.equal(manifest.isbn, isbn);
+    assert.equal(manifest.sourceFileMeta.verification, 'source-file-verified');
+    assert.equal(manifest.sourceFileMeta.pdfPageCount, pages);
     assert.deepEqual(manifest.batches, []);
   }
 });
