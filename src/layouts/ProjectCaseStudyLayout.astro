@@ -13,6 +13,7 @@ interface Props {
   title: string;
   description: string;
   date: Date;
+  period?: string;
   tags: string[];
   status: string;
   repoUrl?: string;
@@ -27,6 +28,7 @@ const {
   title,
   description,
   date,
+  period,
   tags,
   status,
   repoUrl,
@@ -52,9 +54,11 @@ const hasActions = Boolean(repoUrl || docsUrl);
         <p class="project-lede">{description}</p>
 
         <div class="project-meta">
-          <time datetime={date.toISOString()}>
-            {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </time>
+          {period ? <span>{period}</span> : (
+            <time datetime={date.toISOString()}>
+              {date.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+            </time>
+          )}
           <span>{status}</span>
         </div>
 
