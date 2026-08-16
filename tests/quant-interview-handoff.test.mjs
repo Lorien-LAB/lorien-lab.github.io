@@ -58,13 +58,15 @@ test('source catalog records three verified source files without claiming proble
   assert.match(catalog, /Topic-first/i);
 });
 
-test('handoff points to Stage B rather than a source-number range', async () => {
+test('handoff records Stage B public shell and points to Stage C migration', async () => {
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
-  assert.match(handoff, /Stage A.*foundation.*complete/is);
-  assert.match(handoff, /Stage B.*public Topic-first shell/is);
-  assert.match(handoff, /coverage ledger/i);
+  assert.match(handoff, /Stage B.*public Topic-first shell.*implemented/is);
+  assert.match(handoff, /Problem Bank[\s\S]*Topic \/ Subtopic filter/is);
+  assert.match(handoff, /Legacy Source URLs[\s\S]*retired/is);
+  assert.match(handoff, /coverage/i);
   assert.match(handoff, /all three sources/i);
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
+  assert.match(nextAction, /Stage C.*migrate existing authored content/is);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);
 });
 
