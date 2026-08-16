@@ -29,8 +29,9 @@ test('first cross-book workstream is bounded to covariance/correlation/PSD', asy
 
 test('workstream validator accepts verified mixed source sections before item-level topic inventory', async () => {
   const workstream = await readJson(workstreamPath);
+  const context = await workstreamContext();
   const { validateTopicWorkstream } = await import('../src/lib/quantInterviewWorkstreams.mjs');
-  assert.doesNotThrow(() => validateTopicWorkstream(workstream, await workstreamContext()));
+  assert.doesNotThrow(() => validateTopicWorkstream(workstream, context));
 });
 
 test('workstream validator still rejects unknown source sections and invalid evidence ranges', async () => {
