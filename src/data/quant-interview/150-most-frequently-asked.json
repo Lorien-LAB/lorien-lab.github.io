@@ -44,7 +44,11 @@
       "endPage": 9,
       "sourceSection": "1 First Look: Ten Questions",
       "expectedProblemScope": ["4", "5"],
-      "status": "active"
+      "problemSlugs": [
+        "ants-crossing-line",
+        "correlation-matrix-parameter-range"
+      ],
+      "status": "complete"
     }
   ]
 }
