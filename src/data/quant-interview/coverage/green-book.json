@@ -1980,10 +1980,11 @@
       "canonicalKnowledge": [
         "correlation-matrix",
         "positive-semidefinite-matrix",
-        "principal-minor-feasibility"
+        "principal-minor-feasibility",
+        "vector-geometry-inner-products"
       ],
       "topicOverrideReason": "The source item physically appears in the Vectors section 3.6.1, while its semantic destination also crosses into correlation/PSD topics already owned by the canonical correlation-matrix workstream.",
-      "resolutionNote": "Same matrix-feasibility structure as the canonical parameter-range problem, with different fixed correlations and a different admissible interval."
+      "resolutionNote": "Same canonical three-variable correlation-feasibility problem; this source variant contributes a geometric angle/Gram-vector derivation of the 0.28-to-1 interval rather than a new public Problem."
     },
     {
       "sourceSection": "4.5",
@@ -2159,9 +2160,12 @@
       "canonicalTopics": [
         "vectors-linear-systems"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "vector-geometry-inner-products"
+      ],
+      "resolutionNote": "Canonical vector geometry Knowledge absorbs the source coordinate interpretation as a reusable definition."
     },
     {
       "sourceSection": "3.6.1",
@@ -2169,9 +2173,12 @@
       "canonicalTopics": [
         "vectors-linear-systems"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "vector-geometry-inner-products"
+      ],
+      "resolutionNote": "Canonical vector geometry Knowledge absorbs the source dot-product definition and its interview-useful consequences."
     },
     {
       "sourceSection": "3.6.1",
@@ -2179,9 +2186,12 @@
       "canonicalTopics": [
         "vectors-linear-systems"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "vector-geometry-inner-products"
+      ],
+      "resolutionNote": "Canonical vector geometry Knowledge absorbs Euclidean norm and distance as reusable geometry."
     },
     {
       "sourceSection": "3.6.1",
@@ -2189,9 +2199,12 @@
       "canonicalTopics": [
         "vectors-linear-systems"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "vector-geometry-inner-products"
+      ],
+      "resolutionNote": "Canonical vector geometry Knowledge absorbs angle and orthogonality as reusable inner-product geometry."
     },
     {
       "sourceSection": "3.6.1",
@@ -2199,9 +2212,13 @@
       "canonicalTopics": [
         "vectors-linear-systems"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "vector-geometry-inner-products",
+        "correlation-matrix"
+      ],
+      "resolutionNote": "The source correlation-as-cosine bridge enriches canonical vector geometry while linking to the existing correlation-matrix Knowledge rather than duplicating correlation theory."
     }
   ]
 }
