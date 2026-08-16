@@ -112,6 +112,20 @@ test('hidden coverage ledgers are valid and start explicitly pending', async () 
   }
 });
 
+test('coverage item-level topics may refine a mapped ancestor topic', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = { version: 1, entries: [
+    { source: 'x', sourceSection: 's', role: 'content', canonicalTopics: ['probability-statistics'] },
+  ]};
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+  const ledger = { source: 'x', version: 1, entries: [
+    { sourceSection: 's', sourceItem: '1', canonicalTopics: ['conditional-probability-bayes'], state: 'pending', canonicalProblems: [], canonicalKnowledge: [] },
+  ]};
+  assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+    sourceTopicMap, taxonomy, problemSlugs: new Set(), knowledgeSlugs: new Set(), allowUnresolvedCanonicalRefs: true,
+  }));
+});
+
 test('coverage ledger validator enforces terminal targets and map-consistent topics', async () => {
   const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
   const sourceTopicMap = { version: 1, entries: [
