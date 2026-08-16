@@ -344,9 +344,12 @@
       "canonicalTopics": [
         "determinants-eigenvalues"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors"
+      ],
+      "resolutionNote": "The eigenvalue/eigenvector count question is best preserved as an Interview Check on multiplicity, eigenspaces, and defective matrices."
     },
     {
       "sourceSection": "2.2",
@@ -354,9 +357,15 @@
       "canonicalTopics": [
         "determinants-eigenvalues"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "apply-matrix-via-eigenbasis"
+      ],
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors",
+        "eigenbasis-decomposition"
+      ],
+      "resolutionNote": "Applying A to a vector from known eigenpairs is a distinct eigenbasis-decomposition reasoning problem."
     },
     {
       "sourceSection": "2.2",
@@ -364,9 +373,14 @@
       "canonicalTopics": [
         "determinants-eigenvalues"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "trace-ab-equals-trace-ba"
+      ],
+      "canonicalKnowledge": [
+        "matrix-spectral-invariants"
+      ],
+      "resolutionNote": "Trace cyclicity is a distinct proof task with direct index and stronger spectral interpretations."
     },
     {
       "sourceSection": "2.2",
@@ -374,9 +388,14 @@
       "canonicalTopics": [
         "determinants-eigenvalues"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "commutator-cannot-equal-identity"
+      ],
+      "canonicalKnowledge": [
+        "matrix-spectral-invariants"
+      ],
+      "resolutionNote": "The commutator obstruction is a distinct invariant-recognition problem using trace."
     }
   ]
 }

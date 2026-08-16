@@ -2005,9 +2005,12 @@
       "canonicalTopics": [
         "determinants-eigenvalues"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "matrix-spectral-invariants"
+      ],
+      "resolutionNote": "Determinant identities are reusable matrix facts rather than a distinct interview problem."
     },
     {
       "sourceSection": "3.6.3",
@@ -2015,9 +2018,12 @@
       "canonicalTopics": [
         "determinants-eigenvalues"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors"
+      ],
+      "resolutionNote": "Definitions, characteristic equations, multiplicities, and eigenspaces belong in canonical spectral Knowledge."
     },
     {
       "sourceSection": "3.6.3",
@@ -2025,9 +2031,13 @@
       "canonicalTopics": [
         "determinants-eigenvalues"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors",
+        "matrix-spectral-invariants"
+      ],
+      "resolutionNote": "Trace and determinant as spectral invariants enrich the shared concept layer."
     },
     {
       "sourceSection": "3.6.3",
@@ -2035,9 +2045,13 @@
       "canonicalTopics": [
         "determinants-eigenvalues"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors",
+        "eigenbasis-decomposition"
+      ],
+      "resolutionNote": "Diagonalization criteria and A^k in an eigenbasis are reusable concept/technique material."
     },
     {
       "sourceSection": "3.6.3",
@@ -2045,9 +2059,15 @@
       "canonicalTopics": [
         "determinants-eigenvalues"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "two-by-two-eigensystem"
+      ],
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors",
+        "matrix-spectral-invariants"
+      ],
+      "resolutionNote": "A concrete 2x2 eigensystem has an independent reasoning task and supports multiple interview-ready solution routes."
     }
   ]
 }
