@@ -3,6 +3,7 @@ import { glob } from 'astro/loaders';
 import { z } from 'astro/zod';
 
 const commonTags = z.array(z.string()).default([]);
+const difficulty = z.number().int().min(1).max(5);
 
 const research = defineCollection({
   loader: glob({ base: './src/content/research', pattern: '**/*.md' }),
@@ -51,6 +52,63 @@ const knowledge = defineCollection({
     paperUrl: z.string().url().optional(),
     language: z.string().optional(),
     toolUrl: z.string().url().optional(),
+  }),
+});
+
+const problemSources = defineCollection({
+  loader: glob({ base: './src/content/problem-sources', pattern: '**/*.md' }),
+  schema: z.object({
+    shortTitle: z.string(),
+    displayTitle: z.string(),
+    sourceType: z.enum(['book', 'interview', 'public-archive', 'original']),
+    description: z.string(),
+    authors: z.array(z.string()).optional(),
+    year: z.number().int().min(1900).max(2100).optional(),
+    edition: z.string().optional(),
+    officialUrl: z.string().url().optional(),
+    publisherUrl: z.string().url().optional(),
+    isbn: z.string().optional(),
+  }),
+});
+
+const problems = defineCollection({
+  loader: glob({ base: './src/content/problems', pattern: '**/*.md' }),
+  schema: z.object({
+    problemId: z.string().min(1),
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    updated: z.coerce.date().optional(),
+    originType: z.enum(['book', 'interview', 'original', 'public-archive']),
+    source: z.string().optional(),
+    sourceSection: z.string().optional(),
+    sourceChapter: z.string().optional(),
+    sourceProblem: z.string().optional(),
+    sourceReference: z.string().optional(),
+    sourceUrl: z.string().url().optional(),
+    domain: z.string(),
+    category: z.string(),
+    subcategories: z.array(z.string()).default([]),
+    tags: commonTags,
+    concepts: z.array(z.string()).default([]),
+    techniques: z.array(z.string()).default([]),
+    prerequisites: z.array(z.string()).default([]),
+    relatedProblems: z.array(z.string()).default([]),
+    family: z.string().optional(),
+    mathDifficulty: difficulty,
+    insightDifficulty: difficulty,
+    interviewDifficulty: difficulty,
+    estimatedMinutes: z.number().int().positive().optional(),
+    status: z.enum(['draft', 'reviewed', 'solved', 'extended']),
+    featured: z.boolean().default(false),
+  }).superRefine((problem, ctx) => {
+    if (problem.originType !== 'original' && !problem.source) {
+      ctx.addIssue({
+        code: 'custom',
+        path: ['source'],
+        message: 'Source-derived problems require a source slug.',
+      });
+    }
   }),
 });
 
@@ -160,4 +218,4 @@ const reproductions = defineCollection({
   schema: z.discriminatedUnion('sourceType', [academicReproduction, brokerReproduction]),
 });
 
-export const collections = { research, projects, notes, knowledge, reproductions };
+export const collections = { research, projects, notes, knowledge, reproductions, problems, problemSources };
