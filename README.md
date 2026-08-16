@@ -52,30 +52,35 @@ Empirical reproduction of an academic paper or broker report belongs in the **Re
 
 ### Quant Interview Problem Bank
 
+For all future Quant Interview chats and agents, the repository-memory entry point is **`docs/quant-interview/README.md`**. Treat that documentation plus the current machine-readable manifests/TOCs as authoritative rather than relying on prior conversation history.
+
 The Quant Interview system separates reusable Knowledge from practice objects and source provenance:
 
 ```text
 src/content/knowledge/          reusable concepts and Problem Solving Techniques
 src/content/problems/           first-class Problem records
 src/content/problem-sources/    Green Book, Red Book, and future source containers
-src/data/quant-interview/       edition-safe ingestion manifests
+src/data/quant-interview/       edition-safe ingestion manifests and TOC seeds
+docs/quant-interview/           repository memory and agent handoff protocol
 ```
 
-Canonical public Problem routes are `/problems/<slug>/`. Green Book and Red Book are **sources**, not Knowledge types. Problems never become a fifth `knowledge.type` value.
+Canonical public Problem routes are `/problems/<slug>/`. Books are **sources**, not Knowledge types. Problems never become a fifth `knowledge.type` value.
 
 Problem-solving methods such as Conditioning, First-Step Analysis, and Recursion are ordinary Knowledge entries with `type: concept` and `category: Problem Solving Techniques`. The Problem fields `concepts`, `techniques`, and `prerequisites` reference Knowledge slugs; `relatedProblems` references canonical Problem slugs.
 
 Every source-derived Problem must preserve provenance, but its public statement should use an **independent formulation** and its solution should be independently derived. Do not host source PDFs or scans. Do not copy answer keys or large verbatim book passages. Do not invent authors, publication years, ISBNs, official URLs, chapter labels, or source-problem identifiers when they have not been verified.
 
-Green Book and Red Book source records may legitimately contain zero indexed Problems while the architecture is being populated. All displayed Problem, Concept, Technique, and Source counts must be derived from actual content rather than hard-coded targets.
+A source record may legitimately contain zero indexed Problems while the architecture is being populated. All displayed Problem, Concept, Technique, and Source counts must be derived from actual content rather than hard-coded targets.
 
 #### Edition-safe ingestion
 
-Before bulk-ingesting any source-derived Problems, **pin an exact edition**. Work-level identity is not sufficient for chapter numbers, page ranges, or source-problem identifiers because different editions can change pagination, ordering, and question counts.
+Before page- or problem-number-based ingestion, an exact edition must be pinned. Work-level identity is not sufficient because different editions can change pagination, ordering, and question counts.
 
-Each book therefore has an ingestion manifest under `src/data/quant-interview/`. A manifest stays in `work-identified / awaiting-source-file` state until an actual source file is available and matched to a specific edition. Only then may an agent fill `edition`, `isbn` when available, `sourceFile`, and page-bounded ingestion batches, and move the source to `edition-pinned / manifest-ready`.
+Bibliographic edition pinning and source-file readiness are separate states. An edition may be pinned from reliable edition-distinguishing evidence while the manifest remains `awaiting-source-file` with `sourceFile: null` and `batches: []`. No ingestion batch may be created until the actual source file is available, inspected, and recorded in the manifest.
 
-The validator in `src/lib/quantInterviewIngestion.mjs` rejects ingestion batches when no exact edition is pinned, rejects duplicate batch IDs, and rejects invalid or overlapping page ranges. This gate must pass before source-derived Problem Markdown is created.
+Green Book and Red Book currently remain `work-identified`; their user-supplied TOCs are structural seeds only. The 2013 first edition of *150 Most Frequently Asked Questions on Quant Interviews* is bibliographically pinned, but still awaits the actual source file before batch ingestion.
+
+The validator in `src/lib/quantInterviewIngestion.mjs` rejects batches when the edition is not pinned, when the source file is not verified, when batch IDs duplicate, or when page ranges are invalid/overlapping. This gate must pass before source-derived Problem Markdown is created.
 
 A source file is used only as private ingestion evidence. Do not commit the copyrighted PDF or scans into the public website repository. Public output remains independently formulated Problem statements, original derivations, metadata, and provenance references.
 
