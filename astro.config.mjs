@@ -12,5 +12,7 @@ export default defineConfig({
   redirects: {
     '/knowledge/reproductions': '/projects/reproductions',
     '/knowledge/reproductions/[...id]': '/projects/reproductions/[...id]',
+    '/knowledge/quant-interview/sources': '/knowledge/quant-interview',
+    '/knowledge/quant-interview/sources/[...slug]': '/knowledge/quant-interview',
   },
 });
