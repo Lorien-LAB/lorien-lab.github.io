@@ -37,6 +37,148 @@
 - Final expected source-neutral regression counts if no unrelated corpus changes occur: 24 canonical Problems and 24 explicitly topic-classified Knowledge / Technique nodes.
 - Final verification gates: `npm run test`, `npm run check`, `npm run build`, plus topic-only diff review.
 
+## Exact Problem Metadata Matrix
+
+Tasks 6 and 7 consume this metadata directly; do not infer or rename fields.
+
+```json
+{
+  "more-heads-with-one-extra-coin": {
+    "problemId": "probability-foundations-001",
+    "title": "More Heads with One Extra Coin",
+    "description": "Use symmetry and a tie decomposition to compare n+1 fair coin tosses against n fair coin tosses without evaluating a binomial sum.",
+    "subcategories": ["Probability Foundations", "Symmetry"],
+    "tags": ["Probability", "Coins", "Symmetry", "Interview"],
+    "concepts": ["symmetry-equiprobability-geometric-probability"],
+    "family": "extra-trial-symmetry",
+    "mathDifficulty": 2,
+    "insightDifficulty": 3,
+    "interviewDifficulty": 3,
+    "estimatedMinutes": 10
+  },
+  "higher-card-by-symmetry": {
+    "problemId": "probability-foundations-002",
+    "title": "Higher Card by Symmetry",
+    "description": "Remove the equal-rank tie event, then use label symmetry to compute the probability that the first card has the higher rank.",
+    "subcategories": ["Probability Foundations", "Symmetry"],
+    "tags": ["Probability", "Cards", "Symmetry", "Interview"],
+    "concepts": ["symmetry-equiprobability-geometric-probability"],
+    "family": "tie-aware-symmetry",
+    "mathDifficulty": 1,
+    "insightDifficulty": 2,
+    "interviewDifficulty": 2,
+    "estimatedMinutes": 8
+  },
+  "drunk-passenger-last-seat": {
+    "problemId": "probability-foundations-003",
+    "title": "Displaced Passenger and the Last Seat",
+    "description": "Reduce the random-seat process to two absorbing special seats and use symmetry to find the last passenger's success probability.",
+    "subcategories": ["Probability Foundations", "Symmetry"],
+    "tags": ["Probability", "Symmetry", "State Reduction", "Interview"],
+    "concepts": ["symmetry-equiprobability-geometric-probability"],
+    "family": "displaced-passenger",
+    "mathDifficulty": 2,
+    "insightDifficulty": 3,
+    "interviewDifficulty": 3,
+    "estimatedMinutes": 12
+  },
+  "random-points-in-a-semicircle": {
+    "problemId": "probability-foundations-004",
+    "title": "Random Points in a Semicircle",
+    "description": "Partition the event by the unique sampled point that starts a covering semicircle and sum disjoint candidate-start probabilities.",
+    "subcategories": ["Probability Foundations", "Geometric Probability"],
+    "tags": ["Probability", "Circle", "Geometric Probability", "Events", "Interview"],
+    "concepts": ["probability-spaces-events", "symmetry-equiprobability-geometric-probability"],
+    "family": "covering-arc-probability",
+    "mathDifficulty": 2,
+    "insightDifficulty": 4,
+    "interviewDifficulty": 4,
+    "estimatedMinutes": 15
+  },
+  "minimum-trials-for-at-least-one-hit": {
+    "problemId": "probability-foundations-005",
+    "title": "Minimum Trials for At Least One Hit",
+    "description": "Use independence and a complement event to find the minimum number of uniform trials needed to exceed a target hit probability.",
+    "subcategories": ["Probability Foundations", "Independence"],
+    "tags": ["Probability", "Independence", "Complement", "Interview"],
+    "concepts": ["probability-axioms-derived-rules"],
+    "family": "at-least-one-success",
+    "mathDifficulty": 2,
+    "insightDifficulty": 2,
+    "interviewDifficulty": 2,
+    "estimatedMinutes": 8
+  },
+  "romeo-juliet-meeting-probability": {
+    "problemId": "probability-foundations-006",
+    "title": "Meeting Probability from Arrival Times",
+    "description": "Map two independent uniform arrival times to the unit square and compute the meeting event by geometric area.",
+    "subcategories": ["Probability Foundations", "Geometric Probability"],
+    "tags": ["Probability", "Uniform Distribution", "Geometric Probability", "Interview"],
+    "concepts": ["symmetry-equiprobability-geometric-probability"],
+    "family": "arrival-time-geometry",
+    "mathDifficulty": 2,
+    "insightDifficulty": 3,
+    "interviewDifficulty": 3,
+    "estimatedMinutes": 10
+  }
+}
+```
+
+Every Problem uses the remaining common frontmatter exactly:
+
+```yaml
+date: 2026-08-17
+domain: Mathematics & Statistics
+category: Probability
+quantInterviewTopics: [probability-statistics, probability-foundations]
+techniques: []
+prerequisites: []
+relatedProblems: []
+status: solved
+featured: false
+```
+
+Every Problem body uses this S3 shell; only the problem-specific prose, hints, solution, mistakes, and extension content vary:
+
+```markdown
+## Problem
+
+## Think Before Revealing
+
+<details>
+<summary>Hint 1</summary>
+...
+</details>
+
+<details>
+<summary>Hint 2</summary>
+...
+</details>
+
+<details>
+<summary>Show Solution</summary>
+
+## Solution
+
+...
+
+## Why This Problem Matters
+
+...
+
+## Common Mistakes
+
+...
+
+## Extensions & Variants
+
+...
+
+</details>
+```
+
+The ellipses above denote the exact problem-specific content supplied in Tasks 6 and 7; they are not repository placeholders and must not be written into the final Markdown files.
+
 ## File Map
 
 **Create**
@@ -1281,7 +1423,39 @@ symmetry-equiprobability-geometric-probability
 Probability & Statistics → Combinatorial Probability
 ```
 
-Require the actual verification commit SHA and run ID written in Task 10 rather than invented values.
+Bind the Handoff assertions to the machine-readable real verification evidence instead of hard-coding a future value:
+
+```js
+const foundationsWorkstream = JSON.parse(await readFile(
+  'src/data/quant-interview/workstreams/probability-statistics-probability-foundations-005.json',
+  'utf8',
+));
+assert.equal(foundationsWorkstream.status, 'complete');
+assert.ok(foundationsWorkstream.verification?.commit);
+assert.ok(Number.isInteger(foundationsWorkstream.verification?.runId));
+
+const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
+assert.match(handoff, /probability-statistics-probability-foundations-005/);
+assert.match(handoff, new RegExp(foundationsWorkstream.verification.commit));
+assert.match(handoff, new RegExp(String(foundationsWorkstream.verification.runId)));
+for (const slug of [
+  'probability-spaces-events',
+  'probability-axioms-derived-rules',
+  'symmetry-equiprobability-geometric-probability',
+  'more-heads-with-one-extra-coin',
+  'higher-card-by-symmetry',
+  'drunk-passenger-last-seat',
+  'random-points-in-a-semicircle',
+  'minimum-trials-for-at-least-one-hit',
+  'romeo-juliet-meeting-probability',
+]) assert.match(handoff, new RegExp(slug));
+assert.match(handoff, /24 canonical Problems/i);
+assert.match(handoff, /24 explicitly topic-classified|24 topic-classified/i);
+const nextAction = handoff.split(/## Next action/i)[1] ?? '';
+assert.match(nextAction, /Probability & Statistics/i);
+assert.match(nextAction, /Combinatorial Probability/i);
+assert.doesNotMatch(nextAction, /Probability Foundations[\s\S]{0,160}(?:execute|next|continue)/i);
+```
 
 Run:
 
