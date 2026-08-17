@@ -138,46 +138,31 @@ status: solved
 featured: false
 ```
 
-Every Problem body uses this S3 shell; only the problem-specific prose, hints, solution, mistakes, and extension content vary:
+Every Problem body must contain these exact structural elements in this order:
 
-```markdown
+```text
 ## Problem
-
 ## Think Before Revealing
-
-<details>
-<summary>Hint 1</summary>
-...
-</details>
-
-<details>
-<summary>Hint 2</summary>
-...
-</details>
-
-<details>
-<summary>Show Solution</summary>
-
+<details><summary>Hint 1</summary> ... </details>
+<details><summary>Hint 2</summary> ... </details>
+<details><summary>Show Solution</summary>
 ## Solution
-
-...
-
 ## Why This Problem Matters
-
-...
-
 ## Common Mistakes
-
-...
-
 ## Extensions & Variants
-
-...
-
 </details>
 ```
 
-The ellipses above denote the exact problem-specific content supplied in Tasks 6 and 7; they are not repository placeholders and must not be written into the final Markdown files.
+The two detail blocks above are structural notation, not final-file text. Tasks 6 and 7 provide the exact mathematical content to place inside the structure. The implementer must write substantive prose in every listed section; no literal ellipsis, bracket token, or empty details block may appear in a final Problem file.
+
+Problem-specific S3 responsibilities are fixed as follows:
+
+- `more-heads-with-one-extra-coin`: recognition cue = compare the first `n` tosses before touching the extra toss; Hint 1 introduces `p` and tie probability `q`; Hint 2 uses `2p+q=1`; Common Mistakes rejects binomial-sum brute force and forgetting the tie state; Extensions & Variants includes the heads/tails symmetry derivation.
+- `higher-card-by-symmetry`: recognition cue = remove equal ranks before symmetry; Hint 1 asks for the tie probability; Hint 2 splits non-tie mass equally; Common Mistakes rejects a raw `1/2` answer; Extensions & Variants explains the same method for `r` ranks with equal multiplicity.
+- `drunk-passenger-last-seat`: recognition cue = identify which free seats can permanently terminate the displacement chain; Hint 1 names seat 1 and the last seat; Hint 2 observes that intermediate choices reproduce a smaller instance; Common Mistakes rejects tracking all seat permutations; Extensions & Variants gives a small-state recursion check.
+- `random-points-in-a-semicircle`: recognition cue = anchor a candidate covering semicircle at a sampled point; Hint 1 fixes one starting point and computes `(1/2)^(N-1)`; Hint 2 asks why candidate-start events are disjoint almost surely; Common Mistakes addresses double-counting and endpoint degeneracies; Extensions & Variants gives `N x^(N-1)` for `x<=1/2`.
+- `minimum-trials-for-at-least-one-hit`: recognition cue = compute the easier all-miss event; Hint 1 gives single-trial miss probability `0.98`; Hint 2 invokes independence and logarithms; Common Mistakes addresses reversing the log inequality and rounding down; Extensions & Variants states the general minimum `ceil(log(1-p_target)/log(1-p_hit))` when `0<p_hit,p_target<1`.
+- `romeo-juliet-meeting-probability`: recognition cue = view the pair of arrival times as one point; Hint 1 maps to the unit square; Hint 2 uses the two complement triangles; Common Mistakes rejects one-dimensional interval counting; Extensions & Variants gives `2w-w^2` for waiting fraction `w in [0,1]`.
 
 ## File Map
 
