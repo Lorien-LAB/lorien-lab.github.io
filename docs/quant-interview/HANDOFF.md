@@ -7,7 +7,7 @@ Updated: 2026-08-17
 **Stage A — Topic-first foundation: complete and integrated.**  
 **Stage B — public Topic-first shell: complete and integrated.**  
 **Stage C — existing-content source-neutral migration: complete and integrated.**  
-**Stage D — bounded cross-book topic ingestion: active as the durable content workflow; four Linear Algebra workstreams are complete.**
+**Stage D — bounded cross-book topic ingestion: active as the durable content workflow; four Linear Algebra workstreams and the first Probability & Statistics workstream are complete.**
 
 The public system is Topic-first. Canonical Topics, Knowledge, techniques, and Problems are user-facing; book names, source item identifiers, page evidence, semantic-dedup provenance, and canonical-extension audit metadata remain internal.
 
@@ -21,16 +21,13 @@ The public system is Topic-first. Canonical Topics, Knowledge, techniques, and P
 - `src/data/quant-interview/workstreams/*.json` registers one bounded cross-book topic at a time.
 - `src/data/quant-interview/coverage/*.json` is the **hidden coverage** and semantic-dedup ledger.
 - `evidencePageRanges` is internal physical evidence only.
-- Every inspected source item receives an explicit coverage state and nonempty resolution note before a workstream closes.
-- Semantic identity is decided from the mathematical/financial task, not text similarity.
-- A `knowledge-only` item is terminal only when its interview test remains publicly visible through `Interview Checks` or an equivalent self-test.
-- Repository-authored **canonical extension** material is declared in the workstream record and never fabricated as source-derived coverage.
+- Every claimed source item receives an explicit coverage state and nonempty resolution note before a workstream closes.
+- `knowledge-only` is terminal only when its interview test remains publicly visible through `Interview Checks` or an equivalent self-test.
+- Repository-authored **canonical extension** material is declared separately and never fabricated as source-derived coverage.
 - Public pages and layouts do not depend on hidden coverage or workstream extension metadata.
 - No source PDF/scan or copied answer key is committed to the public repository.
 
 ## Completed cross-book workstream 1
-
-### Identity
 
 `linear-algebra-covariance-correlation-psd-001`
 
@@ -57,13 +54,9 @@ Canonical outputs include:
 - `covariance-to-correlation-matrix`
 - `equicorrelation-matrix-bounds`
 
-The same parameterized correlation-matrix family remains **one canonical Problem**. Numerical changes and alternate methods are absorbed as `variant` / `merged-duplicate` material instead of creating source-specific pages.
-
-The PSD/PD source discrepancy was reconciled mathematically: real symmetric PSD matrices require all principal minors to be nonnegative, while the standard positive-definite Sylvester criterion uses positive leading principal minors.
+The same parameterized correlation-matrix family remains **one canonical Problem**; useful numerical and method changes are stored as `variant` / `merged-duplicate` material instead of source-specific pages.
 
 ## Completed cross-book workstream 2
-
-### Identity
 
 `linear-algebra-determinants-eigenvalues-002`
 
@@ -92,11 +85,9 @@ Canonical Problems:
 - `trace-ab-equals-trace-ba`
 - `commutator-cannot-equal-identity`
 
-Definitions and reusable spectral facts became `knowledge-only` where appropriate and remain visible through public self-tests; distinct reasoning tasks became source-neutral canonical Problems.
+Definitions and reusable spectral facts became `knowledge-only` where appropriate and remain visible through public self-tests.
 
 ## Completed cross-book workstream 3
-
-### Identity
 
 `linear-algebra-matrix-decompositions-003`
 
@@ -125,11 +116,9 @@ Canonical Problems:
 - `matrix-square-root-and-cholesky-factor`
 - `generate-correlated-gaussians`
 
-The directly related Red and 150 Questions matrix-square-root tasks resolve to **one canonical Problem**. The second source task is retained as a meaningful `variant`, not a duplicate public page.
+The directly related matrix-square-root source tasks resolve to **one canonical Problem**; the second task is retained as a meaningful `variant`.
 
 ## Completed cross-book workstream 4
-
-### Identity
 
 `linear-algebra-vectors-linear-systems-004`
 
@@ -138,7 +127,7 @@ Canonical scope:
 - **Linear Algebra & Matrix Methods**
 - **Vectors & Linear Systems**
 
-This workstream used the explicitly approved **Source + canonical extension** model. Source-derived coverage remained strict, while standard rank/null-space/linear-system material was added as repository-authored canonical extension content without inventing source provenance.
+This workstream uses the approved **Source + canonical extension** model. Source-derived coverage is strict, while rank/null-space/linear-system additions are repository-authored extension content with separate provenance.
 
 Content-complete verification:
 
@@ -147,75 +136,18 @@ Content-complete verification:
 - commands: `npm run test`, `npm run check`, `npm run build`
 - conclusion: success
 
-The machine-readable workstream record is `status: complete` and stores the same real verification evidence.
+Canonical Knowledge:
 
-### Canonical extension audit boundary
+- `vector-geometry-inner-products`
+- `linear-independence-span-basis-rank`
+- `linear-systems-consistency`
 
-The workstream declares exactly these repository-authored extensions:
+Canonical Problems:
 
-- `inner-product-projection-core`
-- `span-basis-rank-nullity`
-- `linear-system-consistency-rref`
+- `product-of-row-stochastic-matrices`
+- `rank-and-consistency-of-linear-system`
 
-They are internal provenance/audit declarations only. They are not displayed publicly and do not create fake source coverage rows.
-
-### Canonical Knowledge
-
-`vector-geometry-inner-products`
-
-- vector coordinates and dot products;
-- Euclidean norm, distance, angle, and orthogonality;
-- Cauchy-Schwarz and projection geometry as canonical extensions;
-- correlation-as-cosine and Gram-matrix intuition;
-- public `Interview Checks`.
-
-`linear-independence-span-basis-rank`
-
-- linear combinations, span, independence, basis, and dimension;
-- row/column spaces, rank, null space, pivot columns;
-- full-row versus full-column rank;
-- rank-nullity and dimension constraints;
-- public `Interview Checks`.
-
-`linear-systems-consistency`
-
-- `Ax=b`, augmented matrices, Gaussian elimination, RREF, pivots, and free variables;
-- `rank(A)=rank([A|b])` consistency criterion;
-- unique / infinite / no-solution classification;
-- homogeneous null-space structure and `x_p + N(A)`;
-- links to QR/LU/SVD without duplicating decomposition algorithms;
-- public `Interview Checks`.
-
-### Canonical Problems
-
-`product-of-row-stochastic-matrices`
-
-- source-derived reasoning identity;
-- recognizes row sums through the all-ones vector invariant `M1=1`;
-- proves `(AB)1=A(B1)=1`;
-- separately preserves entrywise nonnegativity;
-- remains independently written and source-neutral.
-
-`rank-and-consistency-of-linear-system`
-
-- repository-authored canonical extension Problem with **no source coverage row**;
-- classifies a parameterized 3-by-3 system into unique, inconsistent, and infinite-solution regimes;
-- uses row dependence, RREF, coefficient/augmented ranks, and rank-nullity;
-- explains why a zero determinant alone cannot distinguish no solution from infinitely many solutions.
-
-### Existing canonical-family enrichment and provenance correction
-
-The Green geometric correlation item with two fixed correlations `0.8` and `0.8` was confirmed to belong physically to the **Vectors** section rather than the previously recorded PSD section. Hidden provenance was corrected from `3.6.4` to `3.6.1`.
-
-Its mathematical identity did not change: it remains a `variant` of `correlation-matrix-parameter-range`. The existing public Problem was enriched with the unit-vector / angle derivation `cos(2 theta)=2(0.8)^2-1=0.28`; no duplicate correlation Problem was created.
-
-### Source audit result
-
-- Green contributes the actual vector geometry, correlation-as-cosine bridge, and geometric correlation variant.
-- 150 Questions contributes the row-stochastic closure Problem.
-- Red was explicitly reviewed and records `no-new-direct-item`; matrix items encountered there were already owned by prior PSD/decomposition workstreams.
-- All inspected source rows are terminal in hidden coverage with real canonical targets and nonempty resolution notes.
-- Canonical extension Knowledge and the extension Problem do not masquerade as source-derived material.
+The workstream also corrected the hidden Green provenance of the geometric correlation variant from section `3.6.4` to its actual Vectors section `3.6.1` while preserving the existing `correlation-matrix-parameter-range` canonical identity.
 
 ## Linear Algebra canonical-topic state
 
@@ -227,13 +159,83 @@ The taxonomy has **five child topics** under **Linear Algebra & Matrix Methods**
 4. Covariance & Correlation Matrices
 5. Matrix Decompositions
 
-All five now have bounded cross-book canonical coverage through the four completed workstreams above. This does **not** claim whole-book completeness or exhaustive textbook coverage; it means the current canonical Linear Algebra taxonomy has no untouched child topic.
+All five have bounded cross-book canonical coverage through the four completed workstreams above. This is not a whole-book or exhaustive-textbook completeness claim.
 
-## Public corpus state after the four workstreams
+## Completed cross-book workstream 5
 
-The Quant Interview source-neutral regression contract currently covers **18 canonical Problems** and **21 explicitly topic-classified Knowledge / Technique nodes**.
+`probability-statistics-probability-foundations-005`
 
-These are current repository-record counts only. They are not whole-book completeness percentages.
+Canonical scope:
+
+- **Probability & Statistics**
+- **Probability Foundations**
+
+This workstream uses **Source + narrow canonical extension**. Actual source-derived event language and interview tasks remain in hidden coverage, while the repository-authored axiomatic layer is tracked separately through `canonicalExtensions` and never presented as source provenance.
+
+Content-complete verification:
+
+- commit: `a35de3269d3d8ecb3e9c9227e52e4203797f556b`
+- GitHub Actions run: `31992298949`
+- commands: `npm run test`, `npm run check`, `npm run build`
+- conclusion: success
+
+The machine-readable workstream is `status: complete` and stores this same real verification evidence.
+
+### Canonical extension audit boundary
+
+The workstream declares exactly:
+
+- `kolmogorov-probability-axioms`
+- `derived-event-probability-rules`
+- `mutual-exclusivity-vs-independence`
+
+These are audit-only extension declarations. A source row may point to a mixed Knowledge node only for the subset the source genuinely contributes; extension-only claims are never backfilled as source-derived evidence.
+
+### Canonical Knowledge
+
+- `probability-spaces-events` — outcomes, sample spaces, events, set operations, mutually exclusive events, and indicators, with public `Interview Checks`.
+- `probability-axioms-derived-rules` — axioms, complement/addition/monotonicity/De Morgan rules, and the explicit distinction between mutual exclusivity and independence.
+- `symmetry-equiprobability-geometric-probability` — finite equiprobable modeling, tie-aware symmetry, and continuous uniform geometric probability, with public `Interview Checks`.
+
+`conditioning` remains owned by **Conditional Probability & Bayes** and was not duplicated into Foundations.
+
+### Canonical Problems
+
+- `more-heads-with-one-extra-coin`
+- `higher-card-by-symmetry`
+- `drunk-passenger-last-seat`
+- `random-points-in-a-semicircle`
+- `minimum-trials-for-at-least-one-hit`
+- `romeo-juliet-meeting-probability`
+
+Each is independently written, source-neutral, solved, and S3+.
+
+### Cross-book semantic deduplication
+
+Three duplicate families resolve to one public canonical Problem each:
+
+- the extra-coin comparison from Green plus the 150 Brainteasers version → `more-heads-with-one-extra-coin`;
+- the two-card rank comparison from Green plus the Red version → `higher-card-by-symmetry`;
+- the displaced-passenger variants from Green and Red → `drunk-passenger-last-seat`.
+
+The secondary source rows are `merged-duplicate`, not duplicate public pages.
+
+### Item-level source ownership and provenance
+
+- Green contributes the event/set definitions plus the four direct Foundations problem families.
+- Red's broad General probability container was reviewed item-by-item. Only the weekday modeling check, card comparison, meeting-time geometry, and displaced-passenger task are claimed here; adjacent counting, distributions, expectation, order-statistic, CLT, and stochastic-process material remains for later canonical topics.
+- The Red weekday task is `knowledge-only` and remains visible as an Interview Check instead of becoming a low-value standalone Problem.
+- 150 First Look Q6 contributes `minimum-trials-for-at-least-one-hit` and specifically supports complement-event plus repeated-independence reasoning. Its resolution note explicitly states that it **does not source the repository-authored Kolmogorov-axiom extension**.
+- 150 `2.7::3` uses an explicit **item-level topic override**: although its editorial container is Brainteasers, its mathematical identity is Probability Foundations and it merges into `more-heads-with-one-extra-coin`.
+- The formal 150 Probability/Stochastic Calculus material inspected at the boundary is not falsely closed as Foundations coverage; its distributions, moments, LLN/CLT, and stochastic-calculus content remains for later bounded workstreams.
+
+All eleven claimed Foundations source rows are terminal in hidden coverage, have nonempty resolution notes, and resolve to real canonical targets.
+
+## Public corpus state after five workstreams
+
+The Quant Interview source-neutral regression contract currently covers **24 canonical Problems** and **24 explicitly topic-classified Knowledge / Technique nodes**.
+
+These are current repository-record counts only. They are not whole-book completeness percentages and do not imply that Probability & Statistics as a whole is complete.
 
 ## Verified source state
 
@@ -245,28 +247,27 @@ All three source files remain edition-pinned and source-file-verified. Source-fi
 
 ## Next action
 
-Continue with the next bounded **cross-book** workstream in the next major taxonomy area:
+Continue with the next bounded **cross-book** workstream inside Probability & Statistics:
 
-**Probability & Statistics → Probability Foundations.**
+**Probability & Statistics → Combinatorial Probability.**
 
-Treat all three verified sources as one evidence pool. Resolve the mapped Probability Foundations material before authoring, inventory each meaningful source item, perform semantic deduplication against the existing corpus, update/create canonical Knowledge first, create only genuinely distinct Problems, preserve conceptual source questions through public `Interview Checks`, and close hidden coverage only after all canonical targets exist and the repository gates pass.
+Treat all three verified sources as one evidence pool. Resolve the mapped combinatorial-probability material before authoring, inventory each meaningful source item, deduplicate by mathematical reasoning identity, update/create canonical Knowledge first, create only genuinely distinct Problems, and keep later conditional/Bayes, distributions, expectation/variance, and stochastic-process material outside the bounded scope.
 
-Do not process one book to completion before the others, do not organize the public corpus by source question numbering, and do not silently broaden the bounded Probability Foundations workstream into combinatorial probability, conditional probability/Bayes, distributions, expectation/variance, or order statistics.
+Do not process one book to completion before the others, do not organize the public corpus by source question numbering, and do not use a generic deferred state to avoid semantic decisions.
 
 ## Non-negotiable invariants
 
 - Repository state wins over conversational memory.
 - Process one bounded canonical topic workstream at a time.
-- Review all relevant verified-source material before closing a topic workstream; a source with no new direct item still receives an explicit audit conclusion.
+- Review all relevant verified-source material before closing a workstream; coarse source containers require item-level refinement when necessary.
 - Semantic deduplication is mandatory; text similarity alone cannot merge Problems.
-- Every inspected source item receives an explicit hidden coverage state and resolution note.
+- Every claimed source item receives an explicit hidden coverage state and resolution note.
 - `knowledge-only` is terminal only when the public self-test remains visible.
 - Repository-authored canonical extensions never generate fabricated source provenance.
-- No duplicate Concept/Technique merely because another source uses a synonym.
 - Canonical public Problems remain source-neutral in frontmatter, prose, routes, and public IDs.
 - Source book names, source item numbers, source page numbers, and audit-only extension metadata remain internal.
 - No unsupported whole-book completeness percentages.
-- No merge before `npm run test`, `npm run check`, and `npm run build` pass.
+- No integration before `npm run test`, `npm run check`, and `npm run build` pass.
 
 ## Verification gates
 
