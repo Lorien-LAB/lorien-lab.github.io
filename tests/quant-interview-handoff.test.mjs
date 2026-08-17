@@ -67,7 +67,7 @@ test('source catalog records three verified source files without claiming proble
   assert.match(catalog, /Topic-first/i);
 });
 
-test('handoff records four completed cross-book linear-algebra workstreams and advances to probability foundations', async () => {
+test('handoff records five completed cross-book workstreams and advances to combinatorial probability', async () => {
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
   for (const stage of ['Stage A', 'Stage B', 'Stage C', 'Stage D']) assert.match(handoff, new RegExp(`${stage}[\\s\\S]*complete`, 'i'));
 
@@ -116,14 +116,37 @@ test('handoff records four completed cross-book linear-algebra workstreams and a
     'product-of-row-stochastic-matrices',
     'rank-and-consistency-of-linear-system',
   ]) assert.match(handoff, new RegExp(slug));
+
+  const foundationsWorkstream = JSON.parse(await readFile(
+    'src/data/quant-interview/workstreams/probability-statistics-probability-foundations-005.json',
+    'utf8',
+  ));
+  assert.equal(foundationsWorkstream.status, 'complete');
+  assert.ok(foundationsWorkstream.verification?.commit);
+  assert.ok(Number.isInteger(foundationsWorkstream.verification?.runId));
+  assert.equal(foundationsWorkstream.verification?.conclusion, 'success');
+
+  assert.match(handoff, /probability-statistics-probability-foundations-005/);
+  assert.match(handoff, new RegExp(foundationsWorkstream.verification.commit));
+  assert.match(handoff, new RegExp(String(foundationsWorkstream.verification.runId)));
+  for (const slug of [
+    'probability-spaces-events',
+    'probability-axioms-derived-rules',
+    'symmetry-equiprobability-geometric-probability',
+    'more-heads-with-one-extra-coin',
+    'higher-card-by-symmetry',
+    'drunk-passenger-last-seat',
+    'random-points-in-a-semicircle',
+    'minimum-trials-for-at-least-one-hit',
+    'romeo-juliet-meeting-probability',
+  ]) assert.match(handoff, new RegExp(slug));
+  assert.match(handoff, /item-level/i);
   assert.match(handoff, /canonical extension/i);
   assert.match(handoff, /source-derived/i);
   assert.match(handoff, /provenance/i);
-
-  assert.match(handoff, /variant/i);
-  assert.match(handoff, /one canonical Problem|one public Problem|same canonical Problem/i);
-  assert.match(handoff, /18 canonical Problems/i);
-  assert.match(handoff, /21 explicitly topic-classified|21 topic-classified/i);
+  assert.match(handoff, /merged-duplicate|same canonical Problem|one canonical Problem/i);
+  assert.match(handoff, /24 canonical Problems/i);
+  assert.match(handoff, /24 explicitly topic-classified|24 topic-classified/i);
 
   assert.match(handoff, /knowledge-only/i);
   assert.match(handoff, /source-neutral/i);
@@ -133,8 +156,8 @@ test('handoff records four completed cross-book linear-algebra workstreams and a
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
   assert.match(nextAction, /cross-book/i);
   assert.match(nextAction, /Probability & Statistics/i);
-  assert.match(nextAction, /Probability Foundations/i);
-  assert.doesNotMatch(nextAction, /Vectors & Linear Systems[\s\S]{0,180}(?:execute|next|continue)/i);
+  assert.match(nextAction, /Combinatorial Probability/i);
+  assert.doesNotMatch(nextAction, /Probability Foundations[\s\S]{0,180}(?:execute|next|continue)/i);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);
   assert.doesNotMatch(nextAction, /Green[^\n]*(?:then|→)[^\n]*Red|Red[^\n]*(?:then|→)[^\n]*150/i);
 });
