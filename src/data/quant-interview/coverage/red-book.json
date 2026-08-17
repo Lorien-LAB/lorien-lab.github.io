@@ -775,9 +775,12 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Knowledge-only equiprobable weekday-modeling self-test retained in symmetry-equiprobability-geometric-probability; it does not warrant a separate S3+ Problem."
     },
     {
       "sourceSection": "3.2.1",
@@ -785,9 +788,14 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "higher-card-by-symmetry"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Merged duplicate of higher-card-by-symmetry; it contributes the same tie/non-tie partition and symmetry route."
     },
     {
       "sourceSection": "3.2.1",
@@ -795,9 +803,14 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "romeo-juliet-meeting-probability"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Distinct continuous geometric-probability task represented by romeo-juliet-meeting-probability and unit-square modeling Knowledge."
     },
     {
       "sourceSection": "3.2.1",
@@ -805,9 +818,14 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "drunk-passenger-last-seat"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Merged duplicate of drunk-passenger-last-seat; wording differs but the displacement process and two-special-seat reasoning identity are the same."
     }
   ]
 }

@@ -2226,9 +2226,12 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "probability-spaces-events"
+      ],
+      "resolutionNote": "Source-derived outcome, sample-space, event, union/intersection/complement, mutually-exclusive, and indicator language is preserved in probability-spaces-events and its Interview Checks."
     },
     {
       "sourceSection": "4.1",
@@ -2236,9 +2239,14 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "more-heads-with-one-extra-coin"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Primary source instance of the extra-coin symmetry family; equal-n tie decomposition resolves to the source-neutral more-heads-with-one-extra-coin Problem."
     },
     {
       "sourceSection": "4.1",
@@ -2246,9 +2254,14 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "higher-card-by-symmetry"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Primary source instance of the tie-aware rank-symmetry family; tie mass is removed before symmetry in higher-card-by-symmetry."
     },
     {
       "sourceSection": "4.1",
@@ -2256,9 +2269,14 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "drunk-passenger-last-seat"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Primary source instance of the displaced-passenger symmetry family; the two-special-seat state reduction resolves to drunk-passenger-last-seat."
     },
     {
       "sourceSection": "4.1",
@@ -2266,9 +2284,15 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "random-points-in-a-semicircle"
+      ],
+      "canonicalKnowledge": [
+        "probability-spaces-events",
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Distinct semicircle covering Problem using event partitioning plus geometric symmetry; public targets are random-points-in-a-semicircle and its supporting event/symmetry Knowledge."
     }
   ]
 }

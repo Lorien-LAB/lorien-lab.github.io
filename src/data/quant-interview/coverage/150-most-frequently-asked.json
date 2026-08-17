@@ -432,9 +432,14 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "minimum-trials-for-at-least-one-hit"
+      ],
+      "canonicalKnowledge": [
+        "probability-axioms-derived-rules"
+      ],
+      "resolutionNote": "This source item contributes complement-event and repeated-independence reasoning to the mixed canonical Knowledge node; it does not source or support the repository-authored Kolmogorov-axiom extension."
     },
     {
       "sourceSection": "2.7",
@@ -442,10 +447,15 @@
       "canonicalTopics": [
         "probability-foundations"
       ],
-      "state": "needs-review",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "topicOverrideReason": "Item-level mathematical identity is Probability Foundations even though the editorial source container is classified as brainteasers; item-level semantic ownership therefore overrides the coarse container mapping."
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "more-heads-with-one-extra-coin"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "topicOverrideReason": "Item-level mathematical identity is Probability Foundations even though the editorial source container is classified as brainteasers; item-level semantic ownership therefore overrides the coarse container mapping.",
+      "resolutionNote": "Merged duplicate of more-heads-with-one-extra-coin; it contributes an alternative symmetry derivation while retaining the same canonical reasoning identity."
     }
   ]
 }
