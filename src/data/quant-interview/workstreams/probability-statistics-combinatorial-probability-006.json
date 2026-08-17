@@ -4,7 +4,17 @@
     "probability-statistics",
     "combinatorial-probability"
   ],
-  "status": "active",
+  "status": "complete",
+  "verification": {
+    "commit": "cfb9609a36d281cb8da5906f9e0781c224cf3850",
+    "runId": 32002926175,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
   "sourceScopes": [
     {
       "source": "green-book",
