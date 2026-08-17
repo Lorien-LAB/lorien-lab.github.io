@@ -66,6 +66,8 @@ Direct source section:
 
 - `4.1 Basic Probability Definitions and Set Operations`
 
+Verified internal evidence range for the inspected section and four in-scope problems: physical PDF pages `75-80`.
+
 Verified source material inspected for this workstream includes:
 
 - outcome;
@@ -92,6 +94,8 @@ Reviewed container:
 
 - `3.2.1 General`
 
+Verified internal evidence ranges: question scan on physical PDF pages `92-96`; direct in-scope solution evidence on pages `112-119`.
+
 Direct in-scope items identified during item-level review:
 
 - Q3.16: fourth business day / equiprobable weekday modeling;
@@ -116,6 +120,8 @@ Direct in-scope source items identified:
 
 - First Look Q6: minimum number of independent `U[0,1]` samples required so that at least one lands in `[0.70, 0.72]` with probability at least 95%;
 - Brainteasers Q3: Alice tosses `n+1` fair coins, Bob tosses `n`; probability Alice has strictly more heads.
+
+Verified internal evidence ranges: First Look Q6 question/solution on physical PDF pages `12` and `19-20`; formal Probability/Stochastic Calculus boundary review on `40-43` and `134-140`; Brainteasers Q3 question/solution on `44` and `177-178`.
 
 The First Look Q6 solution uses the complement event:
 
@@ -442,6 +448,7 @@ The Red source scope must additionally record that the broader General container
   - state: `canonical-problem`
   - Problem: `minimum-trials-for-at-least-one-hit`
   - Knowledge: `probability-axioms-derived-rules`
+  - resolution note must state that this source item contributes complement-event and repeated-independence reasoning only; it does not source the repository-authored Kolmogorov-axiom extension.
 - `2.7::3`
   - state: `merged-duplicate`
   - Problem: `more-heads-with-one-extra-coin`
@@ -490,14 +497,39 @@ Required top-level structure:
   ],
   "status": "active",
   "sourceScopes": [
-    {"source": "green-book"},
-    {"source": "red-book"},
-    {"source": "150-most-frequently-asked"}
+    {
+      "source": "green-book",
+      "sourceSections": ["4.1"],
+      "evidencePageRanges": [{"startPage": 75, "endPage": 80}]
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["3.2.1"],
+      "evidencePageRanges": [
+        {"startPage": 92, "endPage": 96},
+        {"startPage": 112, "endPage": 119}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Only Q3.16, Q3.18, Q3.24, and Q3.25 are claimed by Probability Foundations; adjacent General questions remain for later canonical topics."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["1", "2.6", "2.7", "3.6"],
+      "evidencePageRanges": [
+        {"startPage": 12, "endPage": 12},
+        {"startPage": 19, "endPage": 20},
+        {"startPage": 40, "endPage": 44},
+        {"startPage": 134, "endPage": 140},
+        {"startPage": 177, "endPage": 178}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "First Look Q6 and Brainteasers Q3 are in scope; the formal Probability/Stochastic Calculus questions inspected here are deferred to their later canonical topics and are not falsely closed as Foundations coverage."
+    }
   ]
 }
 ```
 
-Exact evidence ranges and review notes must be filled from verified source inspection at implementation time. No placeholder values may remain in a completed workstream.
+The evidence ranges and boundary-review notes above are already verified internal design inputs. Implementation may refine wording but must not replace them with guessed or placeholder provenance.
 
 The record must eventually store real verification evidence only after the content-complete commit and successful fresh CI run exist.
 
@@ -611,7 +643,8 @@ Tests must ensure that this workstream does not absorb:
 Tests must ensure:
 
 - public pages/layouts do not depend on `canonicalExtensions` or the workstream JSON;
-- repository-authored extension Knowledge is not fabricated as source-derived ledger content;
+- a source row may target a mixed canonical Knowledge node only for the subset that the source truly contributes, and its `resolutionNote` must name that subset;
+- repository-authored extension declarations and extension-only claims are never attributed to a source;
 - extension declarations stay audit-only.
 
 ### 12.8 Completion RED
