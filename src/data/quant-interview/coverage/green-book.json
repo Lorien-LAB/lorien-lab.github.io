@@ -2371,6 +2371,96 @@
         "counting-permutations-combinations"
       ],
       "resolutionNote": "Distinct collision/complement-counting family represented by birthday-collision-threshold; the canonical page derives the no-collision product and verifies that 23 is the first group size above one-half collision probability."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "definitions-conditional-probability-bayes",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "conditioning",
+        "bayes-rule-base-rates"
+      ],
+      "resolutionNote": "Reusable conditional-probability, multiplication and chain-rule, total-probability, independence-boundary, and Bayes material is fused into canonical conditioning and Bayes/base-rate Knowledge; public Interview Checks preserve the source-derived interview tests."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "boys-and-girls",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "two-children-information-protocol"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Primary source instance of the two-child information-protocol family; the canonical page generalizes the conditioning event and makes the observation mechanism explicit."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "unfair-coin",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "hidden-coin-posterior-after-heads"
+      ],
+      "canonicalKnowledge": [
+        "conditioning",
+        "bayes-rule-base-rates"
+      ],
+      "resolutionNote": "Primary source instance of the latent double-headed-coin Bayes family; the canonical page generalizes the source instance to prior pi and n observed heads."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "monty-hall",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "monty-hall-switching"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Distinct informed-reveal conditioning family represented by the source-neutral Monty Hall page with the host information policy stated explicitly."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "candies-in-a-jar",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "candies-last-color-ordering"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Distinct last-occurrence conditioning family; the canonical page reduces the random removal sequence to mutually exclusive last-color orderings."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "russian-roulette-series",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "russian-roulette-after-survival"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Primary source instance of the survival-conditioning roulette family; the adjacent-bullet state is represented in one canonical public Problem."
     }
   ]
 }

@@ -869,6 +869,81 @@
         "counting-permutations-combinations"
       ],
       "resolutionNote": "The two-aces with/without-replacement task is preserved as a public Interview Check that contrasts changing denominators with the equivalent unordered combination model; it does not warrant a duplicate standalone Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.10",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "hidden-coin-posterior-after-heads"
+      ],
+      "canonicalKnowledge": [
+        "conditioning",
+        "bayes-rule-base-rates"
+      ],
+      "resolutionNote": "Merged duplicate of the latent double-headed-coin posterior family; its one-in-ten prior and three-head numerical case are retained as a variant inside the general canonical page."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.11",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "bayes-rule-base-rates",
+        "conditioning"
+      ],
+      "resolutionNote": "The repeated-heads question primarily tests prior and model ambiguity. Its interview value remains visible through Bayes and conditioning Interview Checks rather than creating a second coin Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.14",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "two-children-information-protocol"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Merged duplicate of the two-child information family; the canonical page handles the observation mechanism explicitly instead of preserving source-specific wording."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.15",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "variant",
+      "canonicalProblems": [
+        "two-children-information-protocol"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Named-child wording is observation-protocol dependent. The source shortcut is not copied blindly; the canonical Problem corrects the ambiguity by requiring a declared naming and information-generation mechanism before a numerical answer."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.17",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "russian-roulette-after-survival"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Merged duplicate of the adjacent-bullet survival-conditioning family; the survived-trigger information and one-quarter no-spin versus one-third spin comparison resolve to the shared canonical Problem."
     }
   ]
 }
