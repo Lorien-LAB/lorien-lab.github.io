@@ -4,7 +4,17 @@
     "probability-statistics",
     "conditional-probability-bayes"
   ],
-  "status": "active",
+  "status": "complete",
+  "verification": {
+    "commit": "2247fa3f48c83c102b23878eb520819d8c033b1e",
+    "runId": 32012105975,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
   "sourceScopes": [
     {
       "source": "green-book",
