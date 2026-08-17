@@ -1,0 +1,40 @@
+{
+  "id": "probability-statistics-conditional-probability-bayes-007",
+  "canonicalTopics": [
+    "probability-statistics",
+    "conditional-probability-bayes"
+  ],
+  "status": "active",
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["4.3"],
+      "evidencePageRanges": [
+        {"startPage": 88, "endPage": 102}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Conditional Probability & Bayes directly claims the definitions, multiplication/chain rule, law of total probability, Bayes formula, boys-and-girls, unfair-coin, Monty-Hall, candies-in-a-jar, and Russian-roulette-series material. All-girl world, fair extraction from an unfair coin, dart ranking, birthday line, dice order, amoeba population, recursive coin-toss game, aces allocation, gambler's ruin/random walk, basketball reinforcement, and cars-on-road are reviewed but remain outside this bounded workstream for later canonical topics."
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["3.2.1"],
+      "evidencePageRanges": [
+        {"startPage": 93, "endPage": 94},
+        {"startPage": 107, "endPage": 113}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Only Q3.10, Q3.11, Q3.14, Q3.15, and Q3.17 are claimed here. Q3.10 is the hidden double-headed-coin Bayes family; Q3.11 is a prior/model-ambiguity check; Q3.14-Q3.15 are two-child information variants; Q3.17 is Russian roulette after survival. The Q3.15 named-child wording is treated as observation-protocol dependent rather than copied mechanically. Adjacent General probability items remain for later canonical topics."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["2.6", "2.7"],
+      "evidencePageRanges": [
+        {"startPage": 40, "endPage": 44},
+        {"startPage": 134, "endPage": 150},
+        {"startPage": 176, "endPage": 177}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Brainteasers Question 2 is the only direct claimed item: observing a golden face reweights the latent object and is classified item-level as Conditional Probability & Bayes. The formal Probability/Stochastic Calculus boundary was also reviewed; its joint-normal conditional-probability Question 5 remains owned by Random Variables & Distributions, while distributions, LLN/CLT, martingales, and stochastic calculus remain outside this workstream."
+    }
+  ]
+}
