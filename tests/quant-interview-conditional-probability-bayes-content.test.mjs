@@ -116,4 +116,40 @@ test('Monty Hall problem states the informed-host policy before the 2/3 switch r
   assert.match(text, /^concepts:\s*\[conditioning\]$/m);
 });
 
+test('Russian roulette problem conditions on survival before comparing spin and no-spin actions', async () => {
+  const text = await assertSourceNeutralSolvedProblem('russian-roulette-after-survival', 'conditional-probability-bayes-004');
+  assert.match(text, /1\s*\/\s*3/);
+  assert.match(text, /1\s*\/\s*4/);
+  assert.match(text, /adjacent|consecutive/i);
+  assert.match(text, /condition.*surviv|surviv.*condition/i);
+  assert.match(text, /do not spin|don't spin/i);
+  assert.match(text, /four.*empty|4.*empty/i);
+  assert.match(text, /^concepts:\s*\[conditioning\]$/m);
+});
+
+test('candies problem conditions on mutually exclusive last-color orderings and obtains 7/12', async () => {
+  const text = await assertSourceNeutralSolvedProblem('candies-last-color-ordering', 'conditional-probability-bayes-005');
+  assert.match(text, /T_r/);
+  assert.match(text, /T_b/);
+  assert.match(text, /T_g/);
+  assert.match(text, /7\s*\/\s*12/);
+  assert.match(text, /30\s*\/\s*60/);
+  assert.match(text, /20\s*\/\s*30/);
+  assert.match(text, /20\s*\/\s*60/);
+  assert.match(text, /30\s*\/\s*40/);
+  assert.match(text, /mutually exclusive/i);
+  assert.match(text, /^concepts:\s*\[conditioning\]$/m);
+});
+
+test('golden-face problem reweights latent objects after conditioning on the observed face', async () => {
+  const text = await assertSourceNeutralSolvedProblem('golden-face-posterior', 'conditional-probability-bayes-006');
+  assert.match(text, /GG/);
+  assert.match(text, /GB/);
+  assert.match(text, /BB/);
+  assert.match(text, /2\s*\/\s*3/);
+  assert.match(text, /visible.*face|observed.*face/i);
+  assert.match(text, /selection.*bias|size[- ]bias|reweight/i);
+  assert.match(text, /^concepts:\s*\[conditioning, bayes-rule-base-rates\]$/m);
+});
+
 export { findKnowledge, findProblem, readKnowledge, assertConditionalBayesKnowledge, assertSourceNeutralSolvedProblem };
