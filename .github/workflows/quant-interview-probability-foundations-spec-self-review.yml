@@ -1,0 +1,82 @@
+name: Quant Interview Probability Foundations Spec Self Review
+
+on:
+  push:
+    branches:
+      - chatgpt/quant-interview-workstream-probability-foundations-2026-08-17
+    paths:
+      - .github/workflows/quant-interview-probability-foundations-spec-self-review.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Patch reviewed spec ambiguities
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('docs/superpowers/specs/2026-08-17-quant-interview-probability-foundations-design.md')
+          s = p.read_text()
+
+          old = "Direct source section:\n\n- `4.1 Basic Probability Definitions and Set Operations`\n"
+          new = "Direct source section:\n\n- `4.1 Basic Probability Definitions and Set Operations`\n\nVerified internal evidence range for the inspected section and four in-scope problems: physical PDF pages `75-80`.\n"
+          if old not in s:
+              raise SystemExit('green scope anchor not found')
+          s = s.replace(old, new, 1)
+
+          old = "Reviewed container:\n\n- `3.2.1 General`\n"
+          new = "Reviewed container:\n\n- `3.2.1 General`\n\nVerified internal evidence ranges: question scan on physical PDF pages `92-96`; direct in-scope solution evidence on pages `112-119`.\n"
+          if old not in s:
+              raise SystemExit('red scope anchor not found')
+          s = s.replace(old, new, 1)
+
+          old = "Direct in-scope source items identified:\n\n- First Look Q6: minimum number of independent `U[0,1]` samples required so that at least one lands in `[0.70, 0.72]` with probability at least 95%;\n- Brainteasers Q3: Alice tosses `n+1` fair coins, Bob tosses `n`; probability Alice has strictly more heads.\n"
+          new = "Direct in-scope source items identified:\n\n- First Look Q6: minimum number of independent `U[0,1]` samples required so that at least one lands in `[0.70, 0.72]` with probability at least 95%;\n- Brainteasers Q3: Alice tosses `n+1` fair coins, Bob tosses `n`; probability Alice has strictly more heads.\n\nVerified internal evidence ranges: First Look Q6 question/solution on physical PDF pages `12` and `19-20`; formal Probability/Stochastic Calculus boundary review on `40-43` and `134-140`; Brainteasers Q3 question/solution on `44` and `177-178`.\n"
+          if old not in s:
+              raise SystemExit('150 scope anchor not found')
+          s = s.replace(old, new, 1)
+
+          old = "- `1::6`\n  - state: `canonical-problem`\n  - Problem: `minimum-trials-for-at-least-one-hit`\n  - Knowledge: `probability-axioms-derived-rules`\n"
+          new = "- `1::6`\n  - state: `canonical-problem`\n  - Problem: `minimum-trials-for-at-least-one-hit`\n  - Knowledge: `probability-axioms-derived-rules`\n  - resolution note must state that this source item contributes complement-event and repeated-independence reasoning only; it does not source the repository-authored Kolmogorov-axiom extension.\n"
+          if old not in s:
+              raise SystemExit('150 Q6 decision anchor not found')
+          s = s.replace(old, new, 1)
+
+          old = '''  "sourceScopes": [\n    {"source": "green-book"},\n    {"source": "red-book"},\n    {"source": "150-most-frequently-asked"}\n  ]\n}'''
+          new = '''  "sourceScopes": [\n    {\n      "source": "green-book",\n      "sourceSections": ["4.1"],\n      "evidencePageRanges": [{"startPage": 75, "endPage": 80}]\n    },\n    {\n      "source": "red-book",\n      "sourceSections": ["3.2.1"],\n      "evidencePageRanges": [\n        {"startPage": 92, "endPage": 96},\n        {"startPage": 112, "endPage": 119}\n      ],\n      "reviewOutcome": "bounded-item-level-review",\n      "reviewNote": "Only Q3.16, Q3.18, Q3.24, and Q3.25 are claimed by Probability Foundations; adjacent General questions remain for later canonical topics."\n    },\n    {\n      "source": "150-most-frequently-asked",\n      "sourceSections": ["1", "2.6", "2.7", "3.6"],\n      "evidencePageRanges": [\n        {"startPage": 12, "endPage": 12},\n        {"startPage": 19, "endPage": 20},\n        {"startPage": 40, "endPage": 44},\n        {"startPage": 134, "endPage": 140},\n        {"startPage": 177, "endPage": 178}\n      ],\n      "reviewOutcome": "bounded-item-level-review",\n      "reviewNote": "First Look Q6 and Brainteasers Q3 are in scope; the formal Probability/Stochastic Calculus questions inspected here are deferred to their later canonical topics and are not falsely closed as Foundations coverage."\n    }\n  ]\n}'''
+          if old not in s:
+              raise SystemExit('workstream sourceScopes block not found')
+          s = s.replace(old, new, 1)
+
+          old = "Exact evidence ranges and review notes must be filled from verified source inspection at implementation time. No placeholder values may remain in a completed workstream.\n\nThe record must eventually store real verification evidence only after the content-complete commit and successful fresh CI run exist."
+          new = "The evidence ranges and boundary-review notes above are already verified internal design inputs. Implementation may refine wording but must not replace them with guessed or placeholder provenance.\n\nThe record must eventually store real verification evidence only after the content-complete commit and successful fresh CI run exist."
+          if old not in s:
+              raise SystemExit('evidence placeholder sentence not found')
+          s = s.replace(old, new, 1)
+
+          old = "- repository-authored extension Knowledge is not fabricated as source-derived ledger content;\n- extension declarations stay audit-only."
+          new = "- a source row may target a mixed canonical Knowledge node only for the subset that the source truly contributes, and its `resolutionNote` must name that subset;\n- repository-authored extension declarations and extension-only claims are never attributed to a source;\n- extension declarations stay audit-only."
+          if old not in s:
+              raise SystemExit('extension firewall sentence not found')
+          s = s.replace(old, new, 1)
+
+          p.write_text(s)
+          PY
+      - name: Self-review assertions
+        run: |
+          ! grep -E 'TBD|TODO|PLACEHOLDER' docs/superpowers/specs/2026-08-17-quant-interview-probability-foundations-design.md
+          grep -F 'physical PDF pages `75-80`' docs/superpowers/specs/2026-08-17-quant-interview-probability-foundations-design.md
+          grep -F 'does not source the repository-authored Kolmogorov-axiom extension' docs/superpowers/specs/2026-08-17-quant-interview-probability-foundations-design.md
+          grep -F 'extension-only claims are never attributed to a source' docs/superpowers/specs/2026-08-17-quant-interview-probability-foundations-design.md
+      - name: Commit spec corrections
+        run: |
+          git config user.name "Lorien"
+          git config user.email "2249297094@qq.com"
+          git add docs/superpowers/specs/2026-08-17-quant-interview-probability-foundations-design.md
+          git commit -m "docs: clarify probability foundations source audit boundary"
+          git push
