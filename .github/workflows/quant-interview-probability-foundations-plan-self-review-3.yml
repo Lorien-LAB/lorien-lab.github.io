@@ -1,0 +1,43 @@
+name: Quant Interview Probability Foundations Plan Self Review 3
+
+on:
+  push:
+    branches:
+      - chatgpt/quant-interview-workstream-probability-foundations-2026-08-17
+    paths:
+      - .github/workflows/quant-interview-probability-foundations-plan-self-review-3.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Remove final ellipsis notation
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md')
+          s = p.read_text()
+          s2 = s.replace('<details><summary>Hint 1</summary> ... </details>', '<details><summary>Hint 1</summary></details>')
+          s2 = s2.replace('<details><summary>Hint 2</summary> ... </details>', '<details><summary>Hint 2</summary></details>')
+          if s2 == s:
+              raise SystemExit('final ellipsis notation not found')
+          p.write_text(s2)
+          PY
+      - name: Verify plan self-review invariants
+        run: |
+          ! grep -E '\bTBD\b|\bTODO\b|PLACEHOLDER' docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+          ! grep -F ' ... ' docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+          grep -F '## Exact Problem Metadata Matrix' docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+          grep -F 'Problem-specific S3 responsibilities are fixed as follows:' docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+          grep -F 'const foundationsWorkstream = JSON.parse' docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+      - name: Commit final plan cleanup
+        run: |
+          git config user.name "Lorien"
+          git config user.email "2249297094@qq.com"
+          git add docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+          git commit -m "docs: finalize probability foundations implementation plan"
+          git push
