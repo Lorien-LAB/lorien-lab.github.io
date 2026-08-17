@@ -55,6 +55,9 @@ const expectedKnowledgeTopics = new Map([
   ['probability-spaces-events', ['probability-statistics', 'probability-foundations']],
   ['probability-axioms-derived-rules', ['probability-statistics', 'probability-foundations']],
   ['symmetry-equiprobability-geometric-probability', ['probability-statistics', 'probability-foundations']],
+  ['counting-permutations-combinations', ['probability-statistics', 'combinatorial-probability']],
+  ['finite-combinatorial-probability-modeling', ['probability-statistics', 'combinatorial-probability']],
+  ['inclusion-exclusion-derangements', ['probability-statistics', 'combinatorial-probability']],
 ]);
 
 async function findProblem(slug) {
@@ -82,9 +85,9 @@ async function markdownSlugs(root) {
   return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
 }
 
-test('source-neutral regression enumerates the current 24 Problem and 24 Knowledge contracts', () => {
+test('source-neutral regression enumerates the current 24 Problem and 27 Knowledge contracts', () => {
   assert.equal(currentProblemSlugs.length, 24);
-  assert.equal(expectedKnowledgeTopics.size, 24);
+  assert.equal(expectedKnowledgeTopics.size, 27);
 });
 
 test('public Problem schema is source-neutral', async () => {
