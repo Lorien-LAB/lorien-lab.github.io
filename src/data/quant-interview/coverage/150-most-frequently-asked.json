@@ -456,6 +456,40 @@
       ],
       "topicOverrideReason": "Item-level mathematical identity is Probability Foundations even though the editorial source container is classified as brainteasers; item-level semantic ownership therefore overrides the coarse container mapping.",
       "resolutionNote": "Merged duplicate of more-heads-with-one-extra-coin; it contributes an alternative symmetry derivation while retaining the same canonical reasoning identity."
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "7",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "no-consecutive-heads-in-n-tosses"
+      ],
+      "canonicalKnowledge": [
+        "counting-permutations-combinations",
+        "finite-combinatorial-probability-modeling"
+      ],
+      "topicOverrideReason": "Item-level mathematical identity is Combinatorial Probability even though the editorial source container is classified as brainteasers; item-level semantic ownership overrides the coarse container mapping.",
+      "resolutionNote": "Distinct forbidden-adjacency counting family represented by no-consecutive-heads-in-n-tosses. The canonical page derives the Fibonacci recurrence and the equivalent gap-counting identity inside a uniform 2^n sample space."
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "14",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "random-subsets-containment-probability"
+      ],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling",
+        "counting-permutations-combinations"
+      ],
+      "topicOverrideReason": "Item-level mathematical identity is Combinatorial Probability even though the editorial source container is classified as brainteasers; item-level semantic ownership overrides the coarse container mapping.",
+      "resolutionNote": "Distinct random-subset containment family represented by random-subsets-containment-probability. The canonical solution uses four elementwise membership states, forbids only membership in A without B, and obtains (3/4)^n."
     }
   ]
 }

@@ -2293,6 +2293,84 @@
         "symmetry-equiprobability-geometric-probability"
       ],
       "resolutionNote": "Distinct semicircle covering Problem using event partitioning plus geometric symmetry; public targets are random-points-in-a-semicircle and its supporting event/symmetry Knowledge."
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": "definitions-counting-principles",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "counting-permutations-combinations",
+        "finite-combinatorial-probability-modeling"
+      ],
+      "resolutionNote": "Reusable product-rule, factorial, permutation, combination, and finite equiprobable counting material is fused into canonical counting and finite-probability Knowledge; the source definitions remain publicly testable through Interview Checks."
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": "poker-hands",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "poker-hand-probabilities"
+      ],
+      "canonicalKnowledge": [
+        "counting-permutations-combinations",
+        "finite-combinatorial-probability-modeling"
+      ],
+      "resolutionNote": "Distinct finite-card counting family represented by poker-hand-probabilities; the canonical page keeps one unordered five-card sample space while deriving four-of-a-kind, full-house, and exactly-two-pair counts."
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": "chess-tournament",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "top-two-meet-in-knockout-final"
+      ],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling",
+        "counting-permutations-combinations"
+      ],
+      "resolutionNote": "Primary source instance of the random knockout-bracket placement family; fixing one top player and counting the other player’s opposite-half slots resolves to top-two-meet-in-knockout-final. The Red tournament task is merged into this same reasoning identity."
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": "application-letters",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "five-letters-all-misaddressed"
+      ],
+      "canonicalKnowledge": [
+        "inclusion-exclusion-derangements",
+        "counting-permutations-combinations"
+      ],
+      "resolutionNote": "Distinct fixed-point-avoidance family represented by five-letters-all-misaddressed; the public solution derives the five-object derangement count through inclusion-exclusion instead of memorizing a source-specific answer."
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": "birthday-problem",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "birthday-collision-threshold"
+      ],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling",
+        "counting-permutations-combinations"
+      ],
+      "resolutionNote": "Distinct collision/complement-counting family represented by birthday-collision-threshold; the canonical page derives the no-collision product and verifies that 23 is the first group size above one-half collision probability."
     }
   ]
 }

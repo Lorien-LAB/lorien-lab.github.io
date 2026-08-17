@@ -826,6 +826,49 @@
         "symmetry-equiprobability-geometric-probability"
       ],
       "resolutionNote": "Merged duplicate of drunk-passenger-last-seat; wording differs but the displacement process and two-special-seat reasoning identity are the same."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.19",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "top-two-meet-in-knockout-final"
+      ],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling",
+        "counting-permutations-combinations"
+      ],
+      "resolutionNote": "Merged cross-book duplicate of top-two-meet-in-knockout-final. Its mathematical identity is the same relative-placement question as the existing knockout-tournament family, so it enriches hidden evidence instead of creating a second public page."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.20",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling"
+      ],
+      "resolutionNote": "The matching-socks task is a compact finite-state check rather than a separate S3+ reasoning family. It remains publicly visible as an Interview Check in finite-combinatorial-probability-modeling."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.21",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling",
+        "counting-permutations-combinations"
+      ],
+      "resolutionNote": "The two-aces with/without-replacement task is preserved as a public Interview Check that contrasts changing denominators with the equivalent unordered combination model; it does not warrant a duplicate standalone Problem."
     }
   ]
 }
