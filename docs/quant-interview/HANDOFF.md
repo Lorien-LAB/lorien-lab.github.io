@@ -7,7 +7,7 @@ Updated: 2026-08-17
 **Stage A — Topic-first foundation: complete and integrated.**  
 **Stage B — public Topic-first shell: complete and integrated.**  
 **Stage C — existing-content source-neutral migration: complete and integrated.**  
-**Stage D — bounded cross-book topic ingestion: active as the durable content workflow; four Linear Algebra workstreams and the first Probability & Statistics workstream are complete.**
+**Stage D — bounded cross-book topic ingestion: active as the durable content workflow; four Linear Algebra workstreams and two Probability & Statistics workstreams are complete.**
 
 The public system is Topic-first. Canonical Topics, Knowledge, techniques, and Problems are user-facing; book names, source item identifiers, page evidence, semantic-dedup provenance, and canonical-extension audit metadata remain internal.
 
@@ -193,9 +193,9 @@ These are audit-only extension declarations. A source row may point to a mixed K
 
 ### Canonical Knowledge
 
-- `probability-spaces-events` — outcomes, sample spaces, events, set operations, mutually exclusive events, and indicators, with public `Interview Checks`.
-- `probability-axioms-derived-rules` — axioms, complement/addition/monotonicity/De Morgan rules, and the explicit distinction between mutual exclusivity and independence.
-- `symmetry-equiprobability-geometric-probability` — finite equiprobable modeling, tie-aware symmetry, and continuous uniform geometric probability, with public `Interview Checks`.
+- `probability-spaces-events`
+- `probability-axioms-derived-rules`
+- `symmetry-equiprobability-geometric-probability`
 
 `conditioning` remains owned by **Conditional Probability & Bayes** and was not duplicated into Foundations.
 
@@ -210,32 +210,73 @@ These are audit-only extension declarations. A source row may point to a mixed K
 
 Each is independently written, source-neutral, solved, and S3+.
 
-### Cross-book semantic deduplication
+### Cross-book semantic deduplication and provenance
 
 Three duplicate families resolve to one public canonical Problem each:
 
-- the extra-coin comparison from Green plus the 150 Brainteasers version → `more-heads-with-one-extra-coin`;
-- the two-card rank comparison from Green plus the Red version → `higher-card-by-symmetry`;
-- the displaced-passenger variants from Green and Red → `drunk-passenger-last-seat`.
+- the extra-coin comparison → `more-heads-with-one-extra-coin`;
+- the two-card rank comparison → `higher-card-by-symmetry`;
+- the displaced-passenger variants → `drunk-passenger-last-seat`.
 
-The secondary source rows are `merged-duplicate`, not duplicate public pages.
-
-### Item-level source ownership and provenance
-
-- Green contributes the event/set definitions plus the four direct Foundations problem families.
-- Red's broad General probability container was reviewed item-by-item. Only the weekday modeling check, card comparison, meeting-time geometry, and displaced-passenger task are claimed here; adjacent counting, distributions, expectation, order-statistic, CLT, and stochastic-process material remains for later canonical topics.
-- The Red weekday task is `knowledge-only` and remains visible as an Interview Check instead of becoming a low-value standalone Problem.
-- 150 First Look Q6 contributes `minimum-trials-for-at-least-one-hit` and specifically supports complement-event plus repeated-independence reasoning. Its resolution note explicitly states that it **does not source the repository-authored Kolmogorov-axiom extension**.
-- 150 `2.7::3` uses an explicit **item-level topic override**: although its editorial container is Brainteasers, its mathematical identity is Probability Foundations and it merges into `more-heads-with-one-extra-coin`.
-- The formal 150 Probability/Stochastic Calculus material inspected at the boundary is not falsely closed as Foundations coverage; its distributions, moments, LLN/CLT, and stochastic-calculus content remains for later bounded workstreams.
+The secondary source rows are `merged-duplicate`, not duplicate public pages. Red's broad General probability container was reviewed item-level, source-derived claims remain explicit in hidden coverage, and repository-authored canonical extension content remains separated from source provenance.
 
 All eleven claimed Foundations source rows are terminal in hidden coverage, have nonempty resolution notes, and resolve to real canonical targets.
 
-## Public corpus state after five workstreams
+## Completed cross-book workstream 6
 
-The Quant Interview source-neutral regression contract currently covers **24 canonical Problems** and **24 explicitly topic-classified Knowledge / Technique nodes**.
+`probability-statistics-combinatorial-probability-006`
 
-These are current repository-record counts only. They are not whole-book completeness percentages and do not imply that Probability & Statistics as a whole is complete.
+Canonical scope:
+
+- **Probability & Statistics**
+- **Combinatorial Probability**
+
+Content-complete verification:
+
+- commit: `cfb9609a36d281cb8da5906f9e0781c224cf3850`
+- GitHub Actions run: `32002926175`
+- commands: `npm run test`, `npm run check`, `npm run build`
+- conclusion: success
+
+The machine-readable workstream is `status: complete` and stores the same real verification evidence.
+
+### Canonical Knowledge
+
+- `counting-permutations-combinations` — product rule, factorials, ordered versus unordered selection, combinations, and binomial coefficients.
+- `finite-combinatorial-probability-modeling` — equiprobable finite spaces, with/without replacement, complement counting, and relative-placement arguments; low-complexity matching-socks and two-aces tasks remain visible through `Interview Checks`.
+- `inclusion-exclusion-derangements` — overlapping bad events, fixed points, inclusion–exclusion, and the derangement formula.
+
+### Canonical Problems
+
+- `poker-hand-probabilities`
+- `top-two-meet-in-knockout-final`
+- `five-letters-all-misaddressed`
+- `birthday-collision-threshold`
+- `no-consecutive-heads-in-n-tosses`
+- `random-subsets-containment-probability`
+
+All six are independently written, source-neutral, solved, and S3+.
+
+### Cross-book semantic deduplication
+
+The knockout-tournament material is **one canonical Problem**: the Green instance owns `top-two-meet-in-knockout-final`, while the Red instance is `merged-duplicate` hidden evidence for the same mathematical reasoning identity. Textual variation did not create a second public page.
+
+### Item-level ownership and bounded exclusions
+
+Exactly **10 claimed source rows** are terminal for this workstream: five Green rows, three Red rows, and two 150 Questions rows. Every row has a nonempty resolution note and resolves to real canonical Knowledge or Problem targets.
+
+- Green section 4.2 was reviewed item-level rather than treated as homogeneous. Poker hands, tournament grouping, misaddressed letters, birthday collision, and reusable counting definitions are claimed here. Hopping Rabbit, Screwy Pirates II, 100th Digit, and Cubic of Integer are deliberately left to their actual recurrence/discrete, design, algebraic, or modular topics.
+- Red Q3.19 merges into the same tournament Problem; Q3.20 and Q3.21 are `knowledge-only` and remain public through `Interview Checks`.
+- 150 items `2.7::7` and `2.7::14` use explicit **item-level topic overrides** because their mathematical identity is Combinatorial Probability even though their editorial container is a broader brainteaser section.
+- Conditional probability/Bayes, distributions, expectation/variance, order statistics, and stochastic-process material remain outside this bounded scope.
+
+## Public corpus state after six workstreams
+
+Before workstream 6, the regression contract recorded **24 canonical Problems** and **24 explicitly topic-classified Knowledge / Technique nodes**. That is retained here only as historical transition context.
+
+After workstream 6, the current source-neutral regression contract covers **30 canonical Problems** and **27 explicitly topic-classified Knowledge / Technique nodes**.
+
+These are repository-record counts, not whole-book completeness percentages and not a claim that Probability & Statistics as a whole is complete.
 
 ## Verified source state
 
@@ -247,11 +288,15 @@ All three source files remain edition-pinned and source-file-verified. Source-fi
 
 ## Next action
 
-Continue with the next bounded **cross-book** workstream inside Probability & Statistics:
+Most recently completed bounded topic: **Combinatorial Probability**.
 
-**Probability & Statistics → Combinatorial Probability.**
+The durable workflow remains cross-book and Topic-first: all three verified sources form one evidence pool; source numbering and book identity stay internal; public Knowledge and Problems remain canonical, source-neutral, semantically deduplicated, and bounded by the chosen mathematical topic rather than editorial chapter order.
 
-Treat all three verified sources as one evidence pool. Resolve the mapped combinatorial-probability material before authoring, inventory each meaningful source item, deduplicate by mathematical reasoning identity, update/create canonical Knowledge first, create only genuinely distinct Problems, and keep later conditional/Bayes, distributions, expectation/variance, and stochastic-process material outside the bounded scope.
+Target workstream:
+
+**Probability & Statistics → Conditional Probability & Bayes.**
+
+Proceed by resolving the mapped conditional-probability material across all three verified sources before authoring, refining coarse containers item-level where needed, reusing the existing `conditioning` Knowledge node rather than duplicating it, and keeping random-variable/distribution, expectation/variance, order-statistic, and stochastic-process material outside the bounded scope.
 
 Do not process one book to completion before the others, do not organize the public corpus by source question numbering, and do not use a generic deferred state to avoid semantic decisions.
 
@@ -277,4 +322,4 @@ npm run check
 npm run build
 ```
 
-Also review the topic-only diff against `chatgpt/quant-interview-topic-first-fusion-design-2026-08-16` before integration.
+Also review the topic-only diff against the preceding verified workstream branch before integration.
