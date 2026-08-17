@@ -10,6 +10,16 @@
     "mutual-exclusivity-vs-independence"
   ],
   "status": "complete",
+  "verification": {
+    "commit": "a35de3269d3d8ecb3e9c9227e52e4203797f556b",
+    "runId": 31992298949,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
   "sourceScopes": [
     {
       "source": "green-book",
