@@ -22,6 +22,12 @@ const currentProblemSlugs = [
   'generate-correlated-gaussians',
   'product-of-row-stochastic-matrices',
   'rank-and-consistency-of-linear-system',
+  'more-heads-with-one-extra-coin',
+  'higher-card-by-symmetry',
+  'drunk-passenger-last-seat',
+  'random-points-in-a-semicircle',
+  'minimum-trials-for-at-least-one-hit',
+  'romeo-juliet-meeting-probability',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -46,6 +52,9 @@ const expectedKnowledgeTopics = new Map([
   ['vector-geometry-inner-products', ['linear-algebra-matrix-methods', 'vectors-linear-systems']],
   ['linear-independence-span-basis-rank', ['linear-algebra-matrix-methods', 'vectors-linear-systems']],
   ['linear-systems-consistency', ['linear-algebra-matrix-methods', 'vectors-linear-systems']],
+  ['probability-spaces-events', ['probability-statistics', 'probability-foundations']],
+  ['probability-axioms-derived-rules', ['probability-statistics', 'probability-foundations']],
+  ['symmetry-equiprobability-geometric-probability', ['probability-statistics', 'probability-foundations']],
 ]);
 
 async function findProblem(slug) {
@@ -125,6 +134,7 @@ test('current source-derived items remain auditable in hidden coverage with reso
     ['1::4', 'ants-crossing-line'],
     ['1::5', 'correlation-matrix-parameter-range'],
     ['2.2::9', 'product-of-row-stochastic-matrices'],
+    ['1::6', 'minimum-trials-for-at-least-one-hit'],
   ]);
   for (const [key, slug] of expected) {
     const entry = items.get(key);
