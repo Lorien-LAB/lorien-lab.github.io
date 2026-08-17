@@ -128,3 +128,46 @@ test('150 First Look Q6 contributes only complement and repeated-independence re
   assert.match(entry?.resolutionNote ?? '', /does not source|not source|not support/i);
   assert.match(entry?.resolutionNote ?? '', /Kolmogorov|axiom/i);
 });
+
+test('all claimed probability foundations rows are terminal and resolve to real canonical slugs', async () => {
+  const terminal = new Set(['canonical-problem', 'merged-duplicate', 'variant', 'knowledge-only', 'interview-guidance', 'non-content-frontmatter']);
+  const problemSlugs = await markdownSlugs('src/content/problems');
+  const knowledgeSlugs = await markdownSlugs('src/content/knowledge');
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+
+  for (const [source, keys] of Object.entries(sourceInventory)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    const byKey = new Map(ledger.entries.map((entry) => [`${entry.sourceSection}::${entry.sourceItem ?? ''}`, entry]));
+    for (const [section, item] of keys) {
+      assert.ok(terminal.has(byKey.get(`${section}::${item}`)?.state), `${source} ${section} ${item} is not terminal`);
+    }
+    assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+      sourceTopicMap,
+      taxonomy,
+      problemSlugs,
+      knowledgeSlugs,
+      allowUnresolvedCanonicalRefs: false,
+    }));
+  }
+});
+
+test('knowledge-only foundations source material remains visible through Interview Checks', async () => {
+  for (const slug of ['probability-spaces-events', 'symmetry-equiprobability-geometric-probability']) {
+    const files = await readdir('src/content/knowledge', { recursive: true });
+    const match = files.find((file) => String(file).endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
+    assert.ok(match, `missing knowledge ${slug}`);
+    const text = await readFile(`src/content/knowledge/${match}`, 'utf8');
+    assert.match(text, /^## Interview Checks$/m);
+  }
+});
+
+test('probability foundations workstream closes only after every completion invariant holds', async () => {
+  const workstream = await readJson(workstreamPath);
+  const red = workstream.sourceScopes.find((scope) => scope.source === 'red-book');
+  const q150 = workstream.sourceScopes.find((scope) => scope.source === '150-most-frequently-asked');
+  assert.match(red?.reviewNote ?? '', /later canonical topics/i);
+  assert.match(q150?.reviewNote ?? '', /later canonical topics/i);
+  assert.equal(workstream.status, 'complete');
+});
