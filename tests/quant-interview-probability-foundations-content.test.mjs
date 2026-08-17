@@ -16,6 +16,21 @@ async function findProblem(slug) {
   return `src/content/problems/${match}`;
 }
 
+async function assertSourceNeutralSolvedProblem(slug, problemId) {
+  const file = await findProblem(slug);
+  const text = await readFile(file, 'utf8');
+  assert.match(text, new RegExp(`^problemId:\\s*${problemId}$`, 'm'));
+  assert.match(text, /^quantInterviewTopics:\s*\[probability-statistics, probability-foundations\]$/m);
+  assert.match(text, /^status:\s*solved$/m);
+  assert.match(text, /^## Problem$/m);
+  assert.match(text, /^## Think Before Revealing$/m);
+  assert.match(text, /<summary>Show Solution<\/summary>/);
+  assert.match(text, /^## Why This Problem Matters$/m);
+  assert.match(text, /^## Common Mistakes$/m);
+  assert.match(text, /^## Extensions & Variants$/m);
+  assert.doesNotMatch(text, /Green Book|Red Book|150 Questions|Q3\.\d+|First Look/i);
+}
+
 test('probability spaces Knowledge owns source-derived event and set language', async () => {
   const file = await findKnowledge('probability-spaces-events');
   const text = await readFile(file, 'utf8');
@@ -54,4 +69,26 @@ test('symmetry geometric probability Knowledge unifies finite and continuous uni
   assert.match(text, /^## Interview Checks$/m);
 });
 
-export { findKnowledge, findProblem };
+test('extra coin comparison is one canonical source-neutral problem', async () => {
+  await assertSourceNeutralSolvedProblem('more-heads-with-one-extra-coin', 'probability-foundations-001');
+  const text = await readFile(await findProblem('more-heads-with-one-extra-coin'), 'utf8');
+  assert.match(text, /2p\s*\+\s*q\s*=\s*1/i);
+  assert.match(text, /p\s*\+\s*q\s*\/\s*2\s*=\s*1\s*\/\s*2/i);
+});
+
+test('higher card comparison removes ties before symmetry', async () => {
+  await assertSourceNeutralSolvedProblem('higher-card-by-symmetry', 'probability-foundations-002');
+  const text = await readFile(await findProblem('higher-card-by-symmetry'), 'utf8');
+  assert.match(text, /3\s*\/\s*51/);
+  assert.match(text, /8\s*\/\s*17/);
+});
+
+test('displaced passenger problem resolves through two special seats', async () => {
+  await assertSourceNeutralSolvedProblem('drunk-passenger-last-seat', 'probability-foundations-003');
+  const text = await readFile(await findProblem('drunk-passenger-last-seat'), 'utf8');
+  assert.match(text, /seat 1|first passenger.?s seat/i);
+  assert.match(text, /last passenger.?s seat|last seat/i);
+  assert.match(text, /1\s*\/\s*2/);
+});
+
+export { findKnowledge, findProblem, assertSourceNeutralSolvedProblem };
