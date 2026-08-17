@@ -9,7 +9,7 @@
     "derived-event-probability-rules",
     "mutual-exclusivity-vs-independence"
   ],
-  "status": "active",
+  "status": "complete",
   "sourceScopes": [
     {
       "source": "green-book",
