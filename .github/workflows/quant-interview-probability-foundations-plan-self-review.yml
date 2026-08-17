@@ -1,0 +1,53 @@
+name: Quant Interview Probability Foundations Plan Self Review
+
+on:
+  push:
+    branches:
+      - chatgpt/quant-interview-workstream-probability-foundations-2026-08-17
+    paths:
+      - .github/workflows/quant-interview-probability-foundations-plan-self-review.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - name: Patch plan execution detail
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          p = Path('docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md')
+          s = p.read_text()
+
+          anchor = "- Final verification gates: `npm run test`, `npm run check`, `npm run build`, plus topic-only diff review.\n\n## File Map"
+          insert = '''- Final verification gates: `npm run test`, `npm run check`, `npm run build`, plus topic-only diff review.\n\n## Exact Problem Metadata Matrix\n\nTasks 6 and 7 consume this metadata directly; do not infer or rename fields.\n\n```json\n{\n  "more-heads-with-one-extra-coin": {\n    "problemId": "probability-foundations-001",\n    "title": "More Heads with One Extra Coin",\n    "description": "Use symmetry and a tie decomposition to compare n+1 fair coin tosses against n fair coin tosses without evaluating a binomial sum.",\n    "subcategories": ["Probability Foundations", "Symmetry"],\n    "tags": ["Probability", "Coins", "Symmetry", "Interview"],\n    "concepts": ["symmetry-equiprobability-geometric-probability"],\n    "family": "extra-trial-symmetry",\n    "mathDifficulty": 2,\n    "insightDifficulty": 3,\n    "interviewDifficulty": 3,\n    "estimatedMinutes": 10\n  },\n  "higher-card-by-symmetry": {\n    "problemId": "probability-foundations-002",\n    "title": "Higher Card by Symmetry",\n    "description": "Remove the equal-rank tie event, then use label symmetry to compute the probability that the first card has the higher rank.",\n    "subcategories": ["Probability Foundations", "Symmetry"],\n    "tags": ["Probability", "Cards", "Symmetry", "Interview"],\n    "concepts": ["symmetry-equiprobability-geometric-probability"],\n    "family": "tie-aware-symmetry",\n    "mathDifficulty": 1,\n    "insightDifficulty": 2,\n    "interviewDifficulty": 2,\n    "estimatedMinutes": 8\n  },\n  "drunk-passenger-last-seat": {\n    "problemId": "probability-foundations-003",\n    "title": "Displaced Passenger and the Last Seat",\n    "description": "Reduce the random-seat process to two absorbing special seats and use symmetry to find the last passenger's success probability.",\n    "subcategories": ["Probability Foundations", "Symmetry"],\n    "tags": ["Probability", "Symmetry", "State Reduction", "Interview"],\n    "concepts": ["symmetry-equiprobability-geometric-probability"],\n    "family": "displaced-passenger",\n    "mathDifficulty": 2,\n    "insightDifficulty": 3,\n    "interviewDifficulty": 3,\n    "estimatedMinutes": 12\n  },\n  "random-points-in-a-semicircle": {\n    "problemId": "probability-foundations-004",\n    "title": "Random Points in a Semicircle",\n    "description": "Partition the event by the unique sampled point that starts a covering semicircle and sum disjoint candidate-start probabilities.",\n    "subcategories": ["Probability Foundations", "Geometric Probability"],\n    "tags": ["Probability", "Circle", "Geometric Probability", "Events", "Interview"],\n    "concepts": ["probability-spaces-events", "symmetry-equiprobability-geometric-probability"],\n    "family": "covering-arc-probability",\n    "mathDifficulty": 2,\n    "insightDifficulty": 4,\n    "interviewDifficulty": 4,\n    "estimatedMinutes": 15\n  },\n  "minimum-trials-for-at-least-one-hit": {\n    "problemId": "probability-foundations-005",\n    "title": "Minimum Trials for At Least One Hit",\n    "description": "Use independence and a complement event to find the minimum number of uniform trials needed to exceed a target hit probability.",\n    "subcategories": ["Probability Foundations", "Independence"],\n    "tags": ["Probability", "Independence", "Complement", "Interview"],\n    "concepts": ["probability-axioms-derived-rules"],\n    "family": "at-least-one-success",\n    "mathDifficulty": 2,\n    "insightDifficulty": 2,\n    "interviewDifficulty": 2,\n    "estimatedMinutes": 8\n  },\n  "romeo-juliet-meeting-probability": {\n    "problemId": "probability-foundations-006",\n    "title": "Meeting Probability from Arrival Times",\n    "description": "Map two independent uniform arrival times to the unit square and compute the meeting event by geometric area.",\n    "subcategories": ["Probability Foundations", "Geometric Probability"],\n    "tags": ["Probability", "Uniform Distribution", "Geometric Probability", "Interview"],\n    "concepts": ["symmetry-equiprobability-geometric-probability"],\n    "family": "arrival-time-geometry",\n    "mathDifficulty": 2,\n    "insightDifficulty": 3,\n    "interviewDifficulty": 3,\n    "estimatedMinutes": 10\n  }\n}\n```\n\nEvery Problem uses the remaining common frontmatter exactly:\n\n```yaml\ndate: 2026-08-17\ndomain: Mathematics & Statistics\ncategory: Probability\nquantInterviewTopics: [probability-statistics, probability-foundations]\ntechniques: []\nprerequisites: []\nrelatedProblems: []\nstatus: solved\nfeatured: false\n```\n\nEvery Problem body uses this S3 shell; only the problem-specific prose, hints, solution, mistakes, and extension content vary:\n\n```markdown\n## Problem\n\n## Think Before Revealing\n\n<details>\n<summary>Hint 1</summary>\n...\n</details>\n\n<details>\n<summary>Hint 2</summary>\n...\n</details>\n\n<details>\n<summary>Show Solution</summary>\n\n## Solution\n\n...\n\n## Why This Problem Matters\n\n...\n\n## Common Mistakes\n\n...\n\n## Extensions & Variants\n\n...\n\n</details>\n```\n\nThe ellipses above denote the exact problem-specific content supplied in Tasks 6 and 7; they are not repository placeholders and must not be written into the final Markdown files.\n\n## File Map'''
+          if anchor not in s:
+              raise SystemExit('global constraints anchor not found')
+          s = s.replace(anchor, insert, 1)
+
+          old = '''Require the actual verification commit SHA and run ID written in Task 10 rather than invented values.\n\nRun:\n\n```bash\nnode --test tests/quant-interview-handoff.test.mjs\n```'''
+          new = '''Bind the Handoff assertions to the machine-readable real verification evidence instead of hard-coding a future value:\n\n```js\nconst foundationsWorkstream = JSON.parse(await readFile(\n  'src/data/quant-interview/workstreams/probability-statistics-probability-foundations-005.json',\n  'utf8',\n));\nassert.equal(foundationsWorkstream.status, 'complete');\nassert.ok(foundationsWorkstream.verification?.commit);\nassert.ok(Number.isInteger(foundationsWorkstream.verification?.runId));\n\nconst handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');\nassert.match(handoff, /probability-statistics-probability-foundations-005/);\nassert.match(handoff, new RegExp(foundationsWorkstream.verification.commit));\nassert.match(handoff, new RegExp(String(foundationsWorkstream.verification.runId)));\nfor (const slug of [\n  'probability-spaces-events',\n  'probability-axioms-derived-rules',\n  'symmetry-equiprobability-geometric-probability',\n  'more-heads-with-one-extra-coin',\n  'higher-card-by-symmetry',\n  'drunk-passenger-last-seat',\n  'random-points-in-a-semicircle',\n  'minimum-trials-for-at-least-one-hit',\n  'romeo-juliet-meeting-probability',\n]) assert.match(handoff, new RegExp(slug));\nassert.match(handoff, /24 canonical Problems/i);\nassert.match(handoff, /24 explicitly topic-classified|24 topic-classified/i);\nconst nextAction = handoff.split(/## Next action/i)[1] ?? '';\nassert.match(nextAction, /Probability & Statistics/i);\nassert.match(nextAction, /Combinatorial Probability/i);\nassert.doesNotMatch(nextAction, /Probability Foundations[\\s\\S]{0,160}(?:execute|next|continue)/i);\n```\n\nRun:\n\n```bash\nnode --test tests/quant-interview-handoff.test.mjs\n```'''
+          if old not in s:
+              raise SystemExit('handoff verification anchor not found')
+          s = s.replace(old, new, 1)
+
+          p.write_text(s)
+          PY
+      - name: Self-review plan
+        run: |
+          ! grep -E '\bTBD\b|\bTODO\b|PLACEHOLDER' docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+          grep -F '## Exact Problem Metadata Matrix' docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+          grep -F 'const foundationsWorkstream = JSON.parse' docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+          grep -F 'probability-foundations-006' docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+          grep -F '24 canonical Problems' docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+      - name: Commit plan corrections
+        run: |
+          git config user.name "Lorien"
+          git config user.email "2249297094@qq.com"
+          git add docs/superpowers/plans/2026-08-17-quant-interview-probability-foundations.md
+          git commit -m "docs: tighten probability foundations implementation plan"
+          git push
