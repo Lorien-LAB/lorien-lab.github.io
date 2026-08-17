@@ -41,4 +41,17 @@ test('probability axioms Knowledge derives event rules and distinguishes exclusi
   assert.match(text, /^## Interview Checks$/m);
 });
 
+test('symmetry geometric probability Knowledge unifies finite and continuous uniform models', async () => {
+  const file = await findKnowledge('symmetry-equiprobability-geometric-probability');
+  const text = await readFile(file, 'utf8');
+  assert.match(text, /^quantInterviewTopics:\s*\[probability-statistics, probability-foundations\]$/m);
+  assert.match(text, /equiprobable/i);
+  assert.match(text, /symmetry/i);
+  assert.match(text, /tie/i);
+  assert.match(text, /unit square|area/i);
+  assert.match(text, /uniform in a disk|area-uniform/i);
+  assert.match(text, /fourth business day|weekday/i);
+  assert.match(text, /^## Interview Checks$/m);
+});
+
 export { findKnowledge, findProblem };
