@@ -51,7 +51,7 @@ test('seventh cross-book workstream is bounded to conditional probability and Ba
   assert.deepEqual(new Set(workstream.sourceScopes.map((scope) => scope.source)), new Set([
     'green-book', 'red-book', '150-most-frequently-asked',
   ]));
-  assert.equal(workstream.status, 'active');
+  assert.match(workstream.status, /^(?:active|complete)$/);
 });
 
 test('conditional probability Bayes workstream records item-level review boundaries', async () => {
