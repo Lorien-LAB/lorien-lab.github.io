@@ -9,6 +9,13 @@ async function findKnowledge(slug) {
   return `src/content/knowledge/${match}`;
 }
 
+async function findProblem(slug) {
+  const files = await readdir('src/content/problems', { recursive: true });
+  const match = files.find((file) => String(file).endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
+  assert.ok(match, `missing problem ${slug}`);
+  return `src/content/problems/${match}`;
+}
+
 async function readKnowledge(slug) {
   return readFile(await findKnowledge(slug), 'utf8');
 }
@@ -19,6 +26,25 @@ async function assertConditionalBayesKnowledge(slug) {
   assert.match(text, /^quantInterviewTopics:\s*\[probability-statistics, conditional-probability-bayes\]$/m);
   assert.match(text, /^## Interview Checks$/m);
   assert.doesNotMatch(text, /Green Book|Red Book|150 Questions|Q3\.\d+|source page|page \d+/i);
+  return text;
+}
+
+async function assertSourceNeutralSolvedProblem(slug, problemId) {
+  const file = await findProblem(slug);
+  const text = await readFile(file, 'utf8');
+  assert.match(text, new RegExp(`^problemId:\\s*${problemId}$`, 'm'));
+  assert.match(text, /^quantInterviewTopics:\s*\[probability-statistics, conditional-probability-bayes\]$/m);
+  assert.match(text, /^status:\s*solved$/m);
+  assert.match(text, /^## Problem$/m);
+  assert.match(text, /^## Think Before Revealing$/m);
+  assert.match(text, /<summary>Hint 1<\/summary>/);
+  assert.match(text, /<summary>Hint 2<\/summary>/);
+  assert.match(text, /<summary>Show Solution<\/summary>/);
+  assert.match(text, /^## Solution$/m);
+  assert.match(text, /^## Why This Problem Matters$/m);
+  assert.match(text, /^## Common Mistakes$/m);
+  assert.match(text, /^## Extensions & Variants$/m);
+  assert.doesNotMatch(text, /Green Book|Red Book|150 Questions|Q3\.\d+|First Look|source page|page \d+/i);
   return text;
 }
 
@@ -55,4 +81,39 @@ test('Bayes Knowledge owns priors, likelihoods, base rates, odds, and model ambi
   assert.match(text, /2\^\{-?n\}|2\^-n|2\^{-n\}/i);
 });
 
-export { findKnowledge, readKnowledge, assertConditionalBayesKnowledge };
+test('hidden coin posterior problem updates a general prior and exposes model ambiguity', async () => {
+  const text = await assertSourceNeutralSolvedProblem('hidden-coin-posterior-after-heads', 'conditional-probability-bayes-001');
+  assert.match(text, /π|pi/i);
+  assert.match(text, /2\^\{-?n\}|2\^-n|2\^{-n\}/i);
+  assert.match(text, /8\s*\/\s*17/);
+  assert.match(text, /1024\s*\/\s*2023/);
+  assert.match(text, /without (?:a )?prior|prior.*not.*specified|model class/i);
+  assert.match(text, /posterior odds/i);
+  assert.match(text, /^concepts:\s*\[conditioning, bayes-rule-base-rates\]$/m);
+});
+
+test('two-child problem makes the information-generation protocol part of the model', async () => {
+  const text = await assertSourceNeutralSolvedProblem('two-children-information-protocol', 'conditional-probability-bayes-002');
+  assert.match(text, /1\s*\/\s*3/);
+  assert.match(text, /1\s*\/\s*2/);
+  assert.match(text, /at least one/i);
+  assert.match(text, /eldest|older/i);
+  assert.match(text, /uniformly selected|randomly selected|randomly observed/i);
+  assert.match(text, /named|name/i);
+  assert.match(text, /protocol|information generation|observation mechanism/i);
+  assert.match(text, /not uniquely|not enough information|model-dependent|depends on/i);
+  assert.match(text, /^concepts:\s*\[conditioning\]$/m);
+});
+
+test('Monty Hall problem states the informed-host policy before the 2/3 switch result', async () => {
+  const text = await assertSourceNeutralSolvedProblem('monty-hall-switching', 'conditional-probability-bayes-003');
+  assert.match(text, /1\s*\/\s*3/);
+  assert.match(text, /2\s*\/\s*3/);
+  assert.match(text, /host.*knows|knows.*prize/i);
+  assert.match(text, /always.*open|always.*reveal/i);
+  assert.match(text, /always.*offer|offer.*switch/i);
+  assert.match(text, /random.*open|uninformed/i);
+  assert.match(text, /^concepts:\s*\[conditioning\]$/m);
+});
+
+export { findKnowledge, findProblem, readKnowledge, assertConditionalBayesKnowledge, assertSourceNeutralSolvedProblem };
