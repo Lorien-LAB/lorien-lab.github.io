@@ -27,4 +27,18 @@ test('probability spaces Knowledge owns source-derived event and set language', 
   assert.doesNotMatch(text, /^## (?:Expectation|Conditional Probability|Bayes)/mi);
 });
 
+test('probability axioms Knowledge derives event rules and distinguishes exclusivity from independence', async () => {
+  const file = await findKnowledge('probability-axioms-derived-rules');
+  const text = await readFile(file, 'utf8');
+  assert.match(text, /^quantInterviewTopics:\s*\[probability-statistics, probability-foundations\]$/m);
+  assert.match(text, /P\(Omega\)\s*=\s*1/i);
+  assert.match(text, /countable additivity|pairwise disjoint/i);
+  assert.match(text, /P\(A\^c\)\s*=\s*1\s*-\s*P\(A\)/i);
+  assert.match(text, /P\(A union B\).*P\(A intersection B\)/i);
+  assert.match(text, /independent/i);
+  assert.match(text, /mutually exclusive/i);
+  assert.match(text, /positive probability/i);
+  assert.match(text, /^## Interview Checks$/m);
+});
+
 export { findKnowledge, findProblem };
