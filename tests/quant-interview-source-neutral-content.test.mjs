@@ -73,6 +73,11 @@ async function markdownSlugs(root) {
   return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
 }
 
+test('source-neutral regression enumerates the current 24 Problem and 24 Knowledge contracts', () => {
+  assert.equal(currentProblemSlugs.length, 24);
+  assert.equal(expectedKnowledgeTopics.size, 24);
+});
+
 test('public Problem schema is source-neutral', async () => {
   const config = await readFile('src/content.config.ts', 'utf8');
   const problemsSchema = config.split('const problems = defineCollection({')[1]?.split('const reproductionScore =')[0] ?? '';
