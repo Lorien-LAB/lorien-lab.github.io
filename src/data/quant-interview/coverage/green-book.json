@@ -2219,6 +2219,56 @@
         "correlation-matrix"
       ],
       "resolutionNote": "The source correlation-as-cosine bridge enriches canonical vector geometry while linking to the existing correlation-matrix Knowledge rather than duplicating correlation theory."
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": "definitions-set-operations",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": "coin-toss-game",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": "card-game",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": "drunk-passenger",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": "n-points-on-a-circle",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
     }
   ]
 }

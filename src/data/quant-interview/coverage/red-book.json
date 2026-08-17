@@ -768,6 +768,46 @@
         "lu-cholesky-decomposition"
       ],
       "resolutionNote": "This task is the semantic anchor for the canonical matrix-square-root and Gram-factor Problem. Its entrywise square-root route is retained as an alternative method while the canonical page foregrounds reusable spectral and Cholesky structure."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.16",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.18",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.24",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.25",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
     }
   ]
 }

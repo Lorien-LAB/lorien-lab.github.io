@@ -425,6 +425,27 @@
       ],
       "canonicalKnowledge": [],
       "resolutionNote": "Distinct matrix-invariant closure proof: row sums are preserved through the all-ones vector and entrywise nonnegativity is preserved under matrix multiplication."
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": "6",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "3",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "needs-review",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "topicOverrideReason": "Item-level mathematical identity is Probability Foundations even though the editorial source container is classified as brainteasers; item-level semantic ownership therefore overrides the coarse container mapping."
     }
   ]
 }
