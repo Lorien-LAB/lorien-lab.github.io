@@ -34,6 +34,12 @@ const currentProblemSlugs = [
   'birthday-collision-threshold',
   'no-consecutive-heads-in-n-tosses',
   'random-subsets-containment-probability',
+  'hidden-coin-posterior-after-heads',
+  'two-children-information-protocol',
+  'monty-hall-switching',
+  'russian-roulette-after-survival',
+  'candies-last-color-ordering',
+  'golden-face-posterior',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -64,6 +70,7 @@ const expectedKnowledgeTopics = new Map([
   ['counting-permutations-combinations', ['probability-statistics', 'combinatorial-probability']],
   ['finite-combinatorial-probability-modeling', ['probability-statistics', 'combinatorial-probability']],
   ['inclusion-exclusion-derangements', ['probability-statistics', 'combinatorial-probability']],
+  ['bayes-rule-base-rates', ['probability-statistics', 'conditional-probability-bayes']],
 ]);
 
 async function findProblem(slug) {
@@ -91,9 +98,9 @@ async function markdownSlugs(root) {
   return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
 }
 
-test('source-neutral regression enumerates the current 30 Problem and 27 Knowledge contracts', () => {
-  assert.equal(currentProblemSlugs.length, 30);
-  assert.equal(expectedKnowledgeTopics.size, 27);
+test('source-neutral regression enumerates the current 36 Problem and 28 Knowledge contracts', () => {
+  assert.equal(currentProblemSlugs.length, 36);
+  assert.equal(expectedKnowledgeTopics.size, 28);
 });
 
 test('public Problem schema is source-neutral', async () => {
@@ -146,6 +153,7 @@ test('current source-derived items remain auditable in hidden coverage with reso
     ['1::6', 'minimum-trials-for-at-least-one-hit'],
     ['2.7::7', 'no-consecutive-heads-in-n-tosses'],
     ['2.7::14', 'random-subsets-containment-probability'],
+    ['2.7::2', 'golden-face-posterior'],
   ]);
   for (const [key, slug] of expected) {
     const entry = items.get(key);
