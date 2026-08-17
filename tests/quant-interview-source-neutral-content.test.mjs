@@ -28,6 +28,12 @@ const currentProblemSlugs = [
   'random-points-in-a-semicircle',
   'minimum-trials-for-at-least-one-hit',
   'romeo-juliet-meeting-probability',
+  'poker-hand-probabilities',
+  'top-two-meet-in-knockout-final',
+  'five-letters-all-misaddressed',
+  'birthday-collision-threshold',
+  'no-consecutive-heads-in-n-tosses',
+  'random-subsets-containment-probability',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -85,8 +91,8 @@ async function markdownSlugs(root) {
   return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
 }
 
-test('source-neutral regression enumerates the current 24 Problem and 27 Knowledge contracts', () => {
-  assert.equal(currentProblemSlugs.length, 24);
+test('source-neutral regression enumerates the current 30 Problem and 27 Knowledge contracts', () => {
+  assert.equal(currentProblemSlugs.length, 30);
   assert.equal(expectedKnowledgeTopics.size, 27);
 });
 
@@ -138,6 +144,8 @@ test('current source-derived items remain auditable in hidden coverage with reso
     ['1::5', 'correlation-matrix-parameter-range'],
     ['2.2::9', 'product-of-row-stochastic-matrices'],
     ['1::6', 'minimum-trials-for-at-least-one-hit'],
+    ['2.7::7', 'no-consecutive-heads-in-n-tosses'],
+    ['2.7::14', 'random-subsets-containment-probability'],
   ]);
   for (const [key, slug] of expected) {
     const entry = items.get(key);
