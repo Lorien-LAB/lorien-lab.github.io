@@ -143,8 +143,8 @@ Every Problem body must contain these exact structural elements in this order:
 ```text
 ## Problem
 ## Think Before Revealing
-<details><summary>Hint 1</summary> ... </details>
-<details><summary>Hint 2</summary> ... </details>
+<details><summary>Hint 1</summary></details>
+<details><summary>Hint 2</summary></details>
 <details><summary>Show Solution</summary>
 ## Solution
 ## Why This Problem Matters
