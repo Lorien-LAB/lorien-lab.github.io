@@ -1,7 +1,7 @@
 ---
 title: Symmetry, Equiprobability & Geometric Probability
 description: A modeling toolkit for finite equiprobable spaces, exchangeability, tie-aware symmetry, and continuous uniform probability via geometric measure.
-type: technique
+type: concept
 domain: Mathematics & Statistics
 category: Probability
 status: growing
