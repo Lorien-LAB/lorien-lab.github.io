@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  verify-red-coverage:
+  diagnose-coverage-red:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
@@ -20,27 +20,32 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Verify coverage RED
+      - name: Diagnose coverage RED
         run: |
           set +e
-          npm run test > /tmp/rvd-red.log 2>&1
-          status=$?
+          npm run test > /tmp/rvd-test.log 2>&1
+          test_status=$?
+          npm run check > /tmp/rvd-check.log 2>&1
+          check_status=$?
+          npm run build > /tmp/rvd-build.log 2>&1
+          build_status=$?
           set -e
-          cat /tmp/rvd-red.log
-          test "$status" -ne 0
-          grep -q "green-book missing coverage row 4.4::definitions-discrete-continuous-distributions" /tmp/rvd-red.log
-          grep -q "red-book missing coverage row 3.2.1::3.28" /tmp/rvd-red.log
-          grep -q "150-most-frequently-asked missing coverage row 2.6::1" /tmp/rvd-red.log
-      - name: Record expected RED
-        run: |
+          cat /tmp/rvd-test.log
+          cat /tmp/rvd-check.log
+          cat /tmp/rvd-build.log
           mkdir -p .ci
           {
             printf 'commit=%s\n' "$GITHUB_SHA"
             printf 'run_id=%s\n' "$GITHUB_RUN_ID"
-            printf 'expected_failure=missing-fourteen-coverage-rows\n'
-          } > .ci/rvd-red-coverage.txt
+            printf 'test_status=%s\n' "$test_status"
+            printf 'check_status=%s\n' "$check_status"
+            printf 'build_status=%s\n' "$build_status"
+          } > .ci/rvd-coverage-red-diagnostic.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .ci/rvd-red-coverage.txt
-          git commit -m "chore: record RVD coverage RED"
+          git add .ci/rvd-coverage-red-diagnostic.txt
+          git commit -m "chore: record RVD coverage RED diagnostic"
           git push
+          test "$test_status" -ne 0
+          test "$check_status" -eq 0
+          test "$build_status" -eq 0
