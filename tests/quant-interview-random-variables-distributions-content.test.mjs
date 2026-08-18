@@ -5,6 +5,16 @@ import { readFile } from 'node:fs/promises';
 const read = (file) => readFile(file, 'utf8');
 const topicLine = /^quantInterviewTopics:\s*\[probability-statistics, random-variables-distributions\]$/m;
 
+function assertS3(text, id) {
+  assert.match(text, new RegExp(`^problemId:\\s*${id}$`, 'm'));
+  assert.match(text, topicLine);
+  for (const heading of ['## Problem', '## Think Before Revealing', '## Solution', '## Why This Matters', '## Common Mistakes', '## Extensions']) {
+    assert.ok(text.includes(heading), `${id} missing ${heading}`);
+  }
+  assert.ok((text.match(/<details>/g) ?? []).length >= 2, `${id} needs two progressive hints`);
+  assert.doesNotMatch(text, /Green Book|Red Book|150 Most|source page|PDF page/i);
+}
+
 test('CDF PMF PDF Knowledge separates support mass and density', async () => {
   const text = await read('src/content/knowledge/concepts/random-variables-cdf-pmf-pdf.md');
   assert.match(text, topicLine);
@@ -63,4 +73,31 @@ test('limit theorem Knowledge distinguishes LLN CLT and convergence modes', asyn
   assert.match(text, /sqrt\(n\)|√n/i);
   assert.match(text, /finite variance/i);
   assert.match(text, /^## Interview Checks$/m);
+});
+
+test('exponential race Problem uses rates and obtains four sevenths', async () => {
+  const text = await read('src/content/problems/probability/exponential-race-probability.md');
+  assertS3(text, 'random-variables-distributions-001');
+  assert.match(text, /4\/7/);
+  assert.match(text, /rate|lambda_X|λ_X/i);
+  assert.match(text, /lambda_X.*lambda_Y|λ_X.*λ_Y|sum of the rates/i);
+});
+
+test('memoryless bus Problem keeps the stochastic wrapper bounded', async () => {
+  const text = await read('src/content/problems/probability/exponential-memoryless-bus-wait.md');
+  assertS3(text, 'random-variables-distributions-002');
+  assert.match(text, /memoryless/i);
+  assert.match(text, /10\s*minutes/i);
+  assert.match(text, /residual|additional waiting/i);
+  assert.doesNotMatch(text, /^## .*Poisson Process|general Poisson process/im);
+});
+
+test('random variable transform Problem derives the density CDF-first', async () => {
+  const text = await read('src/content/problems/probability/density-under-random-variable-transform.md');
+  assertS3(text, 'random-variables-distributions-003');
+  assert.match(text, /CDF|F_Y/i);
+  assert.match(text, /inverse|g\^-1/i);
+  assert.match(text, /absolute|Jacobian/i);
+  assert.match(text, /many-to-one|multiple.*branch/i);
+  assert.match(text, /support/i);
 });
