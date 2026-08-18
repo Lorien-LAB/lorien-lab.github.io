@@ -1,4 +1,4 @@
-name: Quant Interview Random Variables Distributions Coverage Mutator
+name: Quant Interview Random Variables Distributions CI
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  reconcile-coverage:
+  verify:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
@@ -20,42 +20,22 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Apply and validate exact coverage mutation
+      - run: npm run test
+      - run: npm run check
+      - run: npm run build
+      - name: Record green verification
         run: |
-          set +e
-          node scripts/quant-interview-upsert-rvd-coverage.mjs > /tmp/mutator.log 2>&1
-          mutator_status=$?
-          npm run test > /tmp/test.log 2>&1
-          test_status=$?
-          npm run check > /tmp/check.log 2>&1
-          check_status=$?
-          npm run build > /tmp/build.log 2>&1
-          build_status=$?
-          set -e
-          cat /tmp/mutator.log
-          cat /tmp/test.log
-          cat /tmp/check.log
-          cat /tmp/build.log
           mkdir -p .ci
           {
             printf 'commit=%s\n' "$GITHUB_SHA"
             printf 'run_id=%s\n' "$GITHUB_RUN_ID"
-            printf 'mutator_status=%s\n' "$mutator_status"
-            printf 'test_status=%s\n' "$test_status"
-            printf 'check_status=%s\n' "$check_status"
-            printf 'build_status=%s\n' "$build_status"
-          } > .ci/rvd-coverage-mutator-result.txt
+            printf 'conclusion=success\n'
+          } > .ci/rvd-green-verification.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .ci/rvd-coverage-mutator-result.txt
-          if [ "$mutator_status" -eq 0 ] && [ "$test_status" -eq 0 ] && [ "$check_status" -eq 0 ] && [ "$build_status" -eq 0 ]; then
-            git add src/data/quant-interview/coverage/green-book.json \
-                    src/data/quant-interview/coverage/red-book.json \
-                    src/data/quant-interview/coverage/150-most-frequently-asked.json
-            git commit -m "feat: reconcile random variables distributions coverage"
-            git push
+          git add .ci/rvd-green-verification.txt
+          if git diff --cached --quiet; then
             exit 0
           fi
-          git commit -m "chore: record failed RVD coverage mutation"
+          git commit -m "chore: record RVD green verification"
           git push
-          exit 1
