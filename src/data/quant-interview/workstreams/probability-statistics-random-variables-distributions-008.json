@@ -4,7 +4,17 @@
     "probability-statistics",
     "random-variables-distributions"
   ],
-  "status": "active",
+  "status": "complete",
+  "verification": {
+    "commit": "a1865622bd6411ea89a87c30b4f631665b776f58",
+    "runId": 32102546083,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
   "sourceScopes": [
     {
       "source": "green-book",
