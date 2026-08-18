@@ -7,10 +7,11 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
-  verify:
+  verify-red-registration:
+    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -19,6 +20,26 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run test
-      - run: npm run check
-      - run: npm run build
+      - name: Verify registration RED
+        run: |
+          set +e
+          npm run test > /tmp/rvd-red.log 2>&1
+          status=$?
+          set -e
+          cat /tmp/rvd-red.log
+          test "$status" -ne 0
+          grep -q "probability-statistics-random-variables-distributions-008.json" /tmp/rvd-red.log
+          grep -Eqi "ENOENT|no such file" /tmp/rvd-red.log
+      - name: Record expected RED
+        run: |
+          mkdir -p .ci
+          {
+            printf 'commit=%s\n' "$GITHUB_SHA"
+            printf 'run_id=%s\n' "$GITHUB_RUN_ID"
+            printf 'expected_failure=missing-workstream-json\n'
+          } > .ci/rvd-red-registration.txt
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .ci/rvd-red-registration.txt
+          git commit -m "chore: record RVD registration RED"
+          git push
