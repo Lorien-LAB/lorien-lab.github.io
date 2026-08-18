@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  diagnose-green:
+  verify-red-problems-a:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
@@ -20,32 +20,28 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Run and record full verification
+      - name: Verify first Problem batch RED
         run: |
           set +e
-          npm run test > /tmp/rvd-test.log 2>&1
-          test_status=$?
-          npm run check > /tmp/rvd-check.log 2>&1
-          check_status=$?
-          npm run build > /tmp/rvd-build.log 2>&1
-          build_status=$?
+          npm run test > /tmp/rvd-red.log 2>&1
+          status=$?
           set -e
-          cat /tmp/rvd-test.log
-          cat /tmp/rvd-check.log
-          cat /tmp/rvd-build.log
+          cat /tmp/rvd-red.log
+          test "$status" -ne 0
+          grep -q "exponential-race-probability.md" /tmp/rvd-red.log
+          grep -q "exponential-memoryless-bus-wait.md" /tmp/rvd-red.log
+          grep -q "density-under-random-variable-transform.md" /tmp/rvd-red.log
+          grep -Eqi "ENOENT|no such file" /tmp/rvd-red.log
+      - name: Record expected RED
+        run: |
           mkdir -p .ci
           {
             printf 'commit=%s\n' "$GITHUB_SHA"
             printf 'run_id=%s\n' "$GITHUB_RUN_ID"
-            printf 'test_status=%s\n' "$test_status"
-            printf 'check_status=%s\n' "$check_status"
-            printf 'build_status=%s\n' "$build_status"
-          } > .ci/rvd-diagnostic.txt
+            printf 'expected_failure=missing-problems-001-003\n'
+          } > .ci/rvd-red-problems-a.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .ci/rvd-diagnostic.txt
-          git commit -m "chore: record RVD diagnostic verification"
+          git add .ci/rvd-red-problems-a.txt
+          git commit -m "chore: record RVD first Problem RED"
           git push
-          test "$test_status" -eq 0
-          test "$check_status" -eq 0
-          test "$build_status" -eq 0
