@@ -2,11 +2,11 @@
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** Complete the bounded `Probability & Statistics -> Random Variables & Distributions` cross-book workstream by fusing all three verified interview sources into five canonical Knowledge nodes, six source-neutral canonical Problems, and fourteen terminal hidden coverage rows.
+**Goal:** Complete the bounded `Probability & Statistics -> Random Variables & Distributions` cross-book workstream with five canonical Knowledge nodes, six source-neutral S3+ Problems, and fourteen terminal hidden coverage rows.
 
-**Architecture:** Preserve the existing Topic-first public model. Public Knowledge is authored before Problems; source provenance, page evidence, item identifiers, and semantic ownership remain internal in workstream/coverage JSON. This workstream owns distribution representation, common distributions, transformations/convolution, Gaussian/lognormal structure, and LLN/CLT, while expectation-heavy moments, order statistics, and stochastic-process material remain outside the bounded topic.
+**Architecture:** Keep the public system Topic-first and source-neutral. Author reusable Knowledge before Problems; keep source evidence and semantic ownership inside workstream/coverage JSON; fuse duplicate knowledge across all three sources while preserving distinct reasoning families. Expectation-heavy moments, order statistics, and stochastic-process material stay outside this bounded workstream.
 
-**Tech Stack:** Astro content collections, Markdown/YAML frontmatter, JSON source/workstream/coverage data, JavaScript ES modules, Node.js built-in test runner, GitHub Actions, npm.
+**Tech Stack:** Astro content collections, Markdown/YAML frontmatter, JSON workstream/coverage data, JavaScript ES modules, Node.js built-in test runner, GitHub Actions, npm.
 
 **Spec:** `docs/superpowers/specs/2026-08-18-quant-interview-random-variables-distributions-design.md`
 
@@ -16,37 +16,56 @@
 - Work branch: `chatgpt/quant-interview-workstream-random-variables-distributions-2026-08-18`.
 - Workstream id: `probability-statistics-random-variables-distributions-008`.
 - Canonical topics: `probability-statistics`, `random-variables-distributions`.
-- Create exactly five public Knowledge nodes: `random-variables-cdf-pmf-pdf`, `common-probability-distributions`, `random-variable-transformations-convolution`, `gaussian-lognormal-structure`, `limit-theorems-lln-clt`.
-- Create exactly six canonical Problems if semantic review remains unchanged: `exponential-race-probability`, `exponential-memoryless-bus-wait`, `density-under-random-variable-transform`, `sum-of-two-uniforms-triangular-density`, `joint-normal-quadrant-conditioning`, `when-is-a-product-lognormal`.
+- Create exactly these five Knowledge slugs: `random-variables-cdf-pmf-pdf`, `common-probability-distributions`, `random-variable-transformations-convolution`, `gaussian-lognormal-structure`, `limit-theorems-lln-clt`.
+- Create exactly these six Problem slugs: `exponential-race-probability`, `exponential-memoryless-bus-wait`, `density-under-random-variable-transform`, `sum-of-two-uniforms-triangular-density`, `joint-normal-quadrant-conditioning`, `when-is-a-product-lognormal`.
 - Green reviewed scope: section `4.4`, verified PDF pages `102-108`.
 - Red reviewed scope: `3.2.1`, question pages `95-96`, solution pages `120-128`.
-- 150 reviewed scope: `2.6`, verified solution pages `134-145`; stochastic material after item 9 is boundary-reviewed but excluded.
+- 150 reviewed scope: `2.6`, verified solution pages `134-145`.
 - Claimed terminal rows: exactly `14 = 2 Green + 5 Red + 7 150`.
-- Green bus/Poisson wrapper is owned only for exponential memorylessness/residual waiting time; do not broaden into general Poisson-process theory.
+- Green bus/Poisson wrapper is owned only for exponential waiting time, memorylessness, and residual waiting-time intuition; do not absorb general Poisson-process theory.
 - Green normal moments and Red expectation-heavy Gaussian calculations remain for `expectation-variance-covariance`.
 - Red `3.29` and `3.32` remain for `order-statistics-extremes`.
-- Meeting-time and broken-stick geometric-probability material remain outside this workstream even though they appear in Green section 4.4.
-- LLN and CLT are included in this workstream’s Knowledge layer; do not create standalone LLN/CLT Problems merely to increase counts.
-- MGF/characteristic-function material may support distribution characterization, but direct moment calculation is not this workstream’s responsibility.
-- Public content must expose no book names, source item numbers, PDF page numbers, source-shaped ids, coverage notes, or provenance.
-- Semantic deduplication is by mathematical reasoning identity, not wording similarity or shared formulas.
+- Green meeting-time and broken-stick triangle material remain geometric probability and are not reclassified here.
+- LLN and CLT live in this workstream’s Knowledge layer; do not create standalone LLN/CLT Problems.
+- MGF/characteristic-function material may support distribution characterization, but direct moment calculation is not this workstream’s primary responsibility.
+- Public content must contain no book names, source item numbers, PDF pages, source-shaped ids, provenance notes, or hidden coverage fields.
+- Semantic deduplication is by mathematical reasoning identity, not wording similarity.
 - Every claimed source row must be terminal with a nonempty `resolutionNote` and real canonical targets.
 - `knowledge-only` is terminal only when the corresponding source-derived interview test remains visible under public `## Interview Checks`.
-- Every new Problem is S3+: Problem, two progressive hints, full solution, why it matters, common mistakes, and extensions/variants.
-- Final gates: `npm run test`, `npm run check`, `npm run build`, followed by topic-only diff review and removal of temporary branch-only CI/mutator tooling.
+- Every new Problem is S3+: `## Problem`, two progressive hints, `## Solution`, `## Why This Matters`, `## Common Mistakes`, `## Extensions`.
+- Final gates: `npm run test`, `npm run check`, `npm run build`, followed by topic-only diff review and deletion of temporary CI/mutator tooling.
 - Planning corpus delta `36 -> 42 Problems` and `28 -> 33 Knowledge` is an expectation, not a quota.
 
-## Planned Public Outputs
+## Exact Public Metadata
 
-### Knowledge
+Use these Knowledge metadata values:
 
-1. `src/content/knowledge/concepts/random-variables-cdf-pmf-pdf.md`
-2. `src/content/knowledge/concepts/common-probability-distributions.md`
-3. `src/content/knowledge/concepts/random-variable-transformations-convolution.md`
-4. `src/content/knowledge/concepts/gaussian-lognormal-structure.md`
-5. `src/content/knowledge/concepts/limit-theorems-lln-clt.md`
+```js
+const knowledgeMeta = {
+  'random-variables-cdf-pmf-pdf': {
+    title: 'Random Variables, CDF, PMF, and PDF',
+    description: 'Represent discrete and continuous random variables through support, cumulative distribution functions, probability mass functions, and probability density functions.'
+  },
+  'common-probability-distributions': {
+    title: 'Common Probability Distributions',
+    description: 'Recognize standard discrete and continuous distributions from their generating mechanisms, supports, and defining probability functions.'
+  },
+  'random-variable-transformations-convolution': {
+    title: 'Random Variable Transformations and Convolution',
+    description: 'Derive distributions of transformed random variables and independent sums using CDF-first reasoning, Jacobians, and support-aware convolution.'
+  },
+  'gaussian-lognormal-structure': {
+    title: 'Gaussian and Lognormal Structure',
+    description: 'Use joint-normal structure, linear transformations, standardization, and logarithms to reason about Gaussian and lognormal random variables.'
+  },
+  'limit-theorems-lln-clt': {
+    title: 'Law of Large Numbers and Central Limit Theorem',
+    description: 'Distinguish the law of large numbers from the central limit theorem and reason about convergence of sums and sample averages.'
+  }
+};
+```
 
-All five use:
+Every Knowledge file uses:
 
 ```yaml
 type: concept
@@ -54,132 +73,133 @@ domain: Mathematics & Statistics
 category: Probability
 status: growing
 date: 2026-08-18
+tags: [Probability, Random Variables, Distributions]
 quantInterviewTopics: [probability-statistics, random-variables-distributions]
 featured: false
+related: []
+relatedNotes: []
 ```
 
-### Problems
+Use these Problem metadata values:
 
-1. `exponential-race-probability` — `random-variables-distributions-001`
-2. `exponential-memoryless-bus-wait` — `random-variables-distributions-002`
-3. `density-under-random-variable-transform` — `random-variables-distributions-003`
-4. `sum-of-two-uniforms-triangular-density` — `random-variables-distributions-004`
-5. `joint-normal-quadrant-conditioning` — `random-variables-distributions-005`
-6. `when-is-a-product-lognormal` — `random-variables-distributions-006`
+```js
+const problemMeta = {
+  'exponential-race-probability': {
+    problemId: 'random-variables-distributions-001',
+    title: 'Competing Exponential Waiting Times',
+    description: 'Compare two independent exponential waiting times and derive the probability that one event occurs before the other from their rates.',
+    concepts: ['common-probability-distributions'],
+    family: 'competing-exponential-waits'
+  },
+  'exponential-memoryless-bus-wait': {
+    problemId: 'random-variables-distributions-002',
+    title: 'Memoryless Bus Waiting Time',
+    description: 'Use exponential memorylessness to determine the remaining waiting time after arriving during an ongoing random arrival interval.',
+    concepts: ['common-probability-distributions'],
+    family: 'exponential-memorylessness'
+  },
+  'density-under-random-variable-transform': {
+    problemId: 'random-variables-distributions-003',
+    title: 'Density Under a Random Variable Transform',
+    description: 'Derive the distribution of a transformed random variable from its CDF and recover the Jacobian rule with the correct support and inverse branches.',
+    concepts: ['random-variables-cdf-pmf-pdf', 'random-variable-transformations-convolution'],
+    family: 'distribution-pushforward'
+  },
+  'sum-of-two-uniforms-triangular-density': {
+    problemId: 'random-variables-distributions-004',
+    title: 'Sum of Two Uniforms Has a Triangular Density',
+    description: 'Convolve two independent uniform densities and derive the support-dependent triangular density of their sum.',
+    concepts: ['common-probability-distributions', 'random-variable-transformations-convolution'],
+    family: 'independent-sum-convolution'
+  },
+  'joint-normal-quadrant-conditioning': {
+    problemId: 'random-variables-distributions-005',
+    title: 'Joint-Normal Quadrant Conditioning',
+    description: 'Use a decorrelating linear transformation and Gaussian symmetry to compute a conditional quadrant probability for jointly normal variables.',
+    concepts: ['gaussian-lognormal-structure', 'conditioning'],
+    family: 'joint-normal-decorrelation'
+  },
+  'when-is-a-product-lognormal': {
+    problemId: 'random-variables-distributions-006',
+    title: 'When Is a Product Lognormal?',
+    description: 'Determine which dependence assumptions make the product of two lognormal random variables lognormal and why marginal information alone is insufficient.',
+    concepts: ['gaussian-lognormal-structure'],
+    family: 'lognormal-product-closure'
+  }
+};
+```
 
-All six use:
+Every Problem also uses:
 
 ```yaml
 date: 2026-08-18
 domain: Mathematics & Statistics
 category: Probability
+subcategories: [Random Variables, Distributions]
+tags: [Probability, Random Variables, Distributions, Interview]
 quantInterviewTopics: [probability-statistics, random-variables-distributions]
+techniques: []
+prerequisites: []
+relatedProblems: []
+mathDifficulty: 2
+insightDifficulty: 3
+interviewDifficulty: 3
+estimatedMinutes: 12
 status: solved
 featured: false
 ```
 
-Canonical Knowledge links:
+## Exact Hidden Source Inventory
 
-```yaml
-exponential-race-probability: [common-probability-distributions]
-exponential-memoryless-bus-wait: [common-probability-distributions]
-density-under-random-variable-transform: [random-variables-cdf-pmf-pdf, random-variable-transformations-convolution]
-sum-of-two-uniforms-triangular-density: [common-probability-distributions, random-variable-transformations-convolution]
-joint-normal-quadrant-conditioning: [gaussian-lognormal-structure, conditioning]
-when-is-a-product-lognormal: [gaussian-lognormal-structure]
+```text
+Green
+4.4::definitions-discrete-continuous-distributions -> knowledge-only -> random-variables-cdf-pmf-pdf, common-probability-distributions
+4.4::poisson-process-property -> canonical-problem -> exponential-memoryless-bus-wait -> common-probability-distributions
+
+Red
+3.2.1::3.28 -> knowledge-only -> random-variables-cdf-pmf-pdf, common-probability-distributions
+3.2.1::3.30 -> knowledge-only -> common-probability-distributions
+3.2.1::3.31 -> canonical-problem -> density-under-random-variable-transform -> random-variables-cdf-pmf-pdf, random-variable-transformations-convolution
+3.2.1::3.33 -> canonical-problem -> sum-of-two-uniforms-triangular-density -> common-probability-distributions, random-variable-transformations-convolution
+3.2.1::3.34 -> knowledge-only -> limit-theorems-lln-clt
+
+150 Questions
+2.6::1 -> knowledge-only -> common-probability-distributions
+2.6::2 -> canonical-problem -> exponential-race-probability -> common-probability-distributions
+2.6::3 -> knowledge-only -> common-probability-distributions
+2.6::5 -> canonical-problem -> joint-normal-quadrant-conditioning -> gaussian-lognormal-structure, conditioning
+2.6::6 -> canonical-problem -> when-is-a-product-lognormal -> gaussian-lognormal-structure
+2.6::8 -> knowledge-only -> limit-theorems-lln-clt
+2.6::9 -> knowledge-only -> limit-theorems-lln-clt
 ```
-
-## Hidden Source Inventory
-
-### Green
-
-- `4.4::definitions-discrete-continuous-distributions` -> `knowledge-only` -> `random-variables-cdf-pmf-pdf`, `common-probability-distributions`.
-- `4.4::poisson-process-property` -> `canonical-problem` -> `exponential-memoryless-bus-wait`; Knowledge `common-probability-distributions`; resolution note must limit ownership to exponential waiting time/memorylessness and explicitly reject general Poisson-process absorption.
-
-### Red
-
-- `3.2.1::3.28` -> `knowledge-only` -> `random-variables-cdf-pmf-pdf`, `common-probability-distributions`.
-- `3.2.1::3.30` -> `knowledge-only` -> `common-probability-distributions`.
-- `3.2.1::3.31` -> `canonical-problem` -> `density-under-random-variable-transform`; Knowledge `random-variables-cdf-pmf-pdf`, `random-variable-transformations-convolution`.
-- `3.2.1::3.33` -> `canonical-problem` -> `sum-of-two-uniforms-triangular-density`; Knowledge `common-probability-distributions`, `random-variable-transformations-convolution`.
-- `3.2.1::3.34` -> `knowledge-only` -> `limit-theorems-lln-clt`.
-
-### 150 Questions
-
-- `2.6::1` -> `knowledge-only` -> `common-probability-distributions`.
-- `2.6::2` -> `canonical-problem` -> `exponential-race-probability`; Knowledge `common-probability-distributions`.
-- `2.6::3` -> `knowledge-only` -> `common-probability-distributions`.
-- `2.6::5` -> `canonical-problem` -> `joint-normal-quadrant-conditioning`; Knowledge `gaussian-lognormal-structure`, `conditioning`.
-- `2.6::6` -> `canonical-problem` -> `when-is-a-product-lognormal`; Knowledge `gaussian-lognormal-structure`.
-- `2.6::8` -> `knowledge-only` -> `limit-theorems-lln-clt`.
-- `2.6::9` -> `knowledge-only` -> `limit-theorems-lln-clt`.
 
 ## Mathematical Contracts
 
-### Exponential race
-
-For independent exponentials with rates `lambda_X` and `lambda_Y`:
-
 ```text
+Exponential race:
 P(Y > X) = lambda_X / (lambda_X + lambda_Y).
+Means 6 and 8 imply rates 1/6 and 1/8, hence P(Y>X)=4/7.
+
+Exponential memorylessness:
+P(T>s+t | T>s) = P(T>t) = exp(-lambda t).
+Mean 10 minutes implies expected additional wait 10 minutes under the exponential model.
+
+Monotone transformation:
+F_Y(y)=P(g(X)<=y)
+f_Y(y)=f_X(g^{-1}(y))*|d g^{-1}(y)/dy|
+For many-to-one transforms, sum valid inverse-branch contributions.
+
+Independent uniforms:
+f_{X+Y}(z)=z for 0<z<1; 2-z for 1<=z<2; 0 otherwise.
+
+Joint normal:
+W=sqrt(2)X-Y, Var(W)=1, Cov(W,Y)=0, and P(X>0 | Y<0)=1/4.
+Zero covariance yields independence here only because the pair is jointly normal.
+
+Lognormal product:
+If (log X, log Y) is jointly normal, log(XY)=log X+log Y is normal, so XY is lognormal.
+Independence is a sufficient special case; marginal lognormality alone is insufficient.
 ```
-
-For means 6 and 8, `lambda_X=1/6`, `lambda_Y=1/8`, so the answer is `4/7`.
-
-### Exponential memorylessness
-
-For `T ~ Exp(lambda)`:
-
-```text
-P(T > s+t | T > s) = P(T > t) = exp(-lambda t).
-```
-
-With mean `10`, the expected additional waiting time after any elapsed waiting is still `10` minutes. The source’s Poisson-process wrapper is context only.
-
-### Random-variable transformation
-
-For a differentiable monotone transform `Y=g(X)`:
-
-```text
-F_Y(y) = P(g(X) <= y)
-f_Y(y) = f_X(g^{-1}(y)) * |d g^{-1}(y)/dy|
-```
-
-For a many-to-one transform, sum contributions over all valid inverse branches.
-
-### Sum of two uniforms
-
-For independent `X,Y ~ U(0,1)`:
-
-```text
-f_{X+Y}(z) = 0         z <= 0
-             z         0 < z < 1
-             2-z       1 <= z < 2
-             0         z >= 2
-```
-
-### Joint-normal conditioning
-
-Given jointly normal standard `X,Y` with `Cov(X,Y)=1/sqrt(2)`:
-
-```text
-W = sqrt(2)X - Y
-Var(W)=1
-Cov(W,Y)=0
-P(X>0 | Y<0)=1/4
-```
-
-Independence of `W` and `Y` follows from joint normality plus zero covariance, not from zero covariance alone.
-
-### Product of lognormals
-
-If `log X` and `log Y` are jointly normal, then:
-
-```text
-log(XY) = log X + log Y
-```
-
-is normal, so `XY` is lognormal. Independent lognormals are a sufficient special case; marginal lognormality alone is insufficient.
 
 ---
 
@@ -191,12 +211,10 @@ is normal, so `XY` is lognormal. Independent lognormals are a sufficient special
 - Create: `src/data/quant-interview/workstreams/probability-statistics-random-variables-distributions-008.json`
 
 **Interfaces:**
-- Consumes: existing taxonomy, source-topic map, verified source manifests, and `validateTopicWorkstream`.
-- Produces: active workstream registration consumed by coverage/completion tasks.
+- Consumes: taxonomy, source-topic map, verified source manifests, `validateTopicWorkstream`.
+- Produces: active workstream registration used by Tasks 6 and 8.
 
-- [ ] **Step 1: Add temporary branch-only CI and verify inherited baseline**
-
-Create:
+- [ ] **Step 1: Add temporary branch-only CI**
 
 ```yaml
 name: Quant Interview Random Variables Distributions CI
@@ -222,11 +240,9 @@ jobs:
       - run: npm run build
 ```
 
-Push only this workflow first. Expected baseline: all inherited `test/check/build` gates succeed before any new RED contract is introduced.
+Commit only this workflow first and confirm inherited `test/check/build` all succeed.
 
-- [ ] **Step 2: Write the failing registration test**
-
-Create `tests/quant-interview-random-variables-distributions-workstream.test.mjs` beginning with:
+- [ ] **Step 2: Write registration RED**
 
 ```js
 import test from 'node:test';
@@ -242,40 +258,34 @@ test('eighth cross-book workstream is bounded to random variables and distributi
   assert.deepEqual(workstream.canonicalTopics, ['probability-statistics', 'random-variables-distributions']);
   assert.ok(['active', 'complete'].includes(workstream.status));
   assert.deepEqual(new Set(workstream.sourceScopes.map((scope) => scope.source)), new Set([
-    'green-book', 'red-book', '150-most-frequently-asked',
+    'green-book', 'red-book', '150-most-frequently-asked'
   ]));
 });
 ```
 
-Add exact boundary assertions:
+Add exact scope assertions:
 
 ```js
 assert.deepEqual(green.sourceSections, ['4.4']);
 assert.deepEqual(green.evidencePageRanges, [{ startPage: 102, endPage: 108 }]);
-
 assert.deepEqual(red.sourceSections, ['3.2.1']);
 assert.deepEqual(red.evidencePageRanges, [
   { startPage: 95, endPage: 96 },
-  { startPage: 120, endPage: 128 },
+  { startPage: 120, endPage: 128 }
 ]);
-
 assert.deepEqual(q150.sourceSections, ['2.6']);
 assert.deepEqual(q150.evidencePageRanges, [{ startPage: 134, endPage: 145 }]);
 ```
 
-- [ ] **Step 3: Run the registration RED**
-
-Run:
+- [ ] **Step 3: Run RED**
 
 ```bash
 npm run test
 ```
 
-Expected: new workstream tests fail because `probability-statistics-random-variables-distributions-008.json` does not exist; inherited tests remain green.
+Expected failure: only the new workstream registration contract fails because the JSON file does not exist.
 
-- [ ] **Step 4: Implement the minimal active workstream JSON**
-
-Create the JSON with:
+- [ ] **Step 4: Create active registration**
 
 ```json
 {
@@ -287,42 +297,34 @@ Create the JSON with:
       "source": "green-book",
       "sourceSections": ["4.4"],
       "evidencePageRanges": [{"startPage": 102, "endPage": 108}],
-      "reviewOutcome": "bounded-item-level-review"
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Claim distribution definitions and the exponential-memorylessness bus problem only; meeting probability, broken-stick geometry, normal moments, and section 4.5 expectation material remain outside this workstream."
     },
     {
       "source": "red-book",
       "sourceSections": ["3.2.1"],
       "evidencePageRanges": [{"startPage": 95, "endPage": 96}, {"startPage": 120, "endPage": 128}],
-      "reviewOutcome": "bounded-item-level-review"
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Claim items 3.28, 3.30, 3.31, 3.33, and 3.34 only; order statistics 3.29/3.32, PSD 3.35, change of measure 3.36, expectation-heavy 3.37/3.38, and stochastic-process items remain outside this workstream."
     },
     {
       "source": "150-most-frequently-asked",
       "sourceSections": ["2.6"],
       "evidencePageRanges": [{"startPage": 134, "endPage": 145}],
-      "reviewOutcome": "bounded-item-level-review"
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Claim items 1, 2, 3, 5, 6, 8, and 9 from the Probability/Stochastic Calculus section; disk expectation item 4, expectation/tower item 7, and martingale/Brownian/Ito material remain outside this workstream."
     }
   ]
 }
 ```
 
-Each source scope must also contain a nonempty `reviewNote` explicitly naming claimed items and excluded neighboring identities from the spec.
+- [ ] **Step 5: Validate and turn GREEN**
 
-- [ ] **Step 5: Add validator coverage and run GREEN**
-
-Add:
-
-```js
-const { validateTopicWorkstream } = await import('../src/lib/quantInterviewWorkstreams.mjs');
-assert.doesNotThrow(() => validateTopicWorkstream(workstream, context));
-```
-
-Run:
+Add a test that calls `validateTopicWorkstream(workstream, context)` and expects no throw. Then run:
 
 ```bash
 npm run test && npm run check && npm run build
 ```
-
-Expected: all commands succeed.
 
 - [ ] **Step 6: Commit**
 
@@ -333,7 +335,7 @@ git commit -m "feat: register random variables distributions workstream"
 
 ---
 
-### Task 2: Build Foundational Distribution Knowledge
+### Task 2: Build CDF, Common-Distribution, and Transformation Knowledge
 
 **Files:**
 - Create: `tests/quant-interview-random-variables-distributions-content.test.mjs`
@@ -342,12 +344,9 @@ git commit -m "feat: register random variables distributions workstream"
 - Create: `src/content/knowledge/concepts/random-variable-transformations-convolution.md`
 
 **Interfaces:**
-- Consumes: canonical topic ids and Knowledge frontmatter schema.
-- Produces: three Knowledge slugs used by Problems and hidden coverage.
+- Produces the three foundational Knowledge slugs used by Tasks 4-7.
 
-- [ ] **Step 1: Write failing Knowledge contracts**
-
-Create tests with the helper:
+- [ ] **Step 1: Write RED contracts**
 
 ```js
 import test from 'node:test';
@@ -356,46 +355,32 @@ import { readFile } from 'node:fs/promises';
 
 const read = (file) => readFile(file, 'utf8');
 const topicLine = /^quantInterviewTopics:\s*\[probability-statistics, random-variables-distributions\]$/m;
-```
 
-CDF/PMF/PDF contract:
-
-```js
-test('random variable representation Knowledge separates CDF PMF PDF and support', async () => {
+test('CDF PMF PDF Knowledge separates support mass and density', async () => {
   const text = await read('src/content/knowledge/concepts/random-variables-cdf-pmf-pdf.md');
   assert.match(text, topicLine);
-  assert.match(text, /F_X|CDF|cumulative distribution/i);
+  assert.match(text, /CDF|cumulative distribution/i);
   assert.match(text, /PMF|probability mass/i);
   assert.match(text, /PDF|probability density/i);
   assert.match(text, /support/i);
-  assert.match(text, /P\(X\s*=\s*x\).*0|point probability/i);
+  assert.match(text, /point probability|P\(X\s*=\s*x\).*0/i);
   assert.match(text, /^## Interview Checks$/m);
   assert.match(text, /U\(a,b\)|uniform/i);
 });
-```
 
-Common-distributions contract:
-
-```js
-test('common distributions Knowledge is recognition-first and includes heavy-tail boundaries', async () => {
+test('common distributions Knowledge is recognition-first', async () => {
   const text = await read('src/content/knowledge/concepts/common-probability-distributions.md');
   assert.match(text, topicLine);
-  for (const family of ['binomial', 'poisson', 'geometric', 'negative binomial', 'normal', 'exponential', 'gamma', 'beta', 'cauchy']) {
-    assert.match(text, new RegExp(family, 'i'));
-  }
+  for (const family of ['binomial', 'poisson', 'geometric', 'negative binomial', 'normal', 'exponential', 'gamma', 'beta', 'cauchy']) assert.match(text, new RegExp(family, 'i'));
   assert.match(text, /memoryless/i);
   assert.match(text, /principal value|moment.*exist|expectation.*exist/i);
   assert.match(text, /^## Interview Checks$/m);
 });
-```
 
-Transform/convolution contract:
-
-```js
-test('transformation Knowledge derives pushforwards and support-aware convolution', async () => {
+test('transformation Knowledge derives pushforwards and convolution bounds', async () => {
   const text = await read('src/content/knowledge/concepts/random-variable-transformations-convolution.md');
   assert.match(text, topicLine);
-  assert.match(text, /F_Y|CDF-first|distribution function/i);
+  assert.match(text, /CDF-first|distribution function|F_Y/i);
   assert.match(text, /Jacobian|inverse/i);
   assert.match(text, /many-to-one|multiple.*branch/i);
   assert.match(text, /convolution/i);
@@ -404,38 +389,19 @@ test('transformation Knowledge derives pushforwards and support-aware convolutio
 });
 ```
 
-- [ ] **Step 2: Run Knowledge RED**
+- [ ] **Step 2: Run RED**
 
 ```bash
 npm run test
 ```
 
-Expected: exactly these new Knowledge contracts fail because the three files are missing.
+Expected: exactly the three new Knowledge files are missing/failing.
 
-- [ ] **Step 3: Implement the three Knowledge nodes**
+- [ ] **Step 3: Implement the three Knowledge files**
 
-Each file must use this frontmatter shape:
+Use the exact titles/descriptions from `knowledgeMeta`. Include the Spec’s required sections and Interview Checks. `random-variable-transformations-convolution` must introduce the CDF-first method before the Jacobian rule and must explain how support determines convolution limits.
 
-```yaml
----
-title: <canonical public title>
-description: <source-neutral one-sentence description>
-type: concept
-domain: Mathematics & Statistics
-category: Probability
-status: growing
-date: 2026-08-18
-tags: [Probability, Random Variables, Distributions]
-quantInterviewTopics: [probability-statistics, random-variables-distributions]
-featured: false
-related: []
-relatedNotes: []
----
-```
-
-Use the exact responsibilities and Interview Checks from the Spec. `random-variable-transformations-convolution` must teach the CDF-first method before the Jacobian formula and must explicitly derive convolution bounds from support.
-
-- [ ] **Step 4: Run GREEN and commit**
+- [ ] **Step 4: Verify and commit**
 
 ```bash
 npm run test && npm run check && npm run build
@@ -445,7 +411,7 @@ git commit -m "feat: build foundational distribution knowledge"
 
 ---
 
-### Task 3: Build Gaussian and Limit-Theorem Knowledge
+### Task 3: Build Gaussian/Lognormal and LLN/CLT Knowledge
 
 **Files:**
 - Modify: `tests/quant-interview-random-variables-distributions-content.test.mjs`
@@ -453,15 +419,12 @@ git commit -m "feat: build foundational distribution knowledge"
 - Create: `src/content/knowledge/concepts/limit-theorems-lln-clt.md`
 
 **Interfaces:**
-- Consumes: Knowledge schema and topic contract from Task 2.
-- Produces: Gaussian/lognormal and LLN/CLT Knowledge targets used by Problems and coverage.
+- Produces the final two Knowledge slugs used by Tasks 5-7.
 
 - [ ] **Step 1: Add RED contracts**
 
-Gaussian/lognormal:
-
 ```js
-test('Gaussian Knowledge separates marginal normality joint normality and lognormal closure', async () => {
+test('Gaussian Knowledge separates joint normality independence and lognormal closure', async () => {
   const text = await read('src/content/knowledge/concepts/gaussian-lognormal-structure.md');
   assert.match(text, topicLine);
   assert.match(text, /jointly normal|joint normal/i);
@@ -469,24 +432,20 @@ test('Gaussian Knowledge separates marginal normality joint normality and lognor
   assert.match(text, /independent/i);
   assert.match(text, /marginal.*normal.*not|does not imply.*joint/i);
   assert.match(text, /lognormal/i);
-  assert.match(text, /log X.*log Y|log\(XY\)/i);
+  assert.match(text, /log\(XY\)|log X.*log Y/i);
   assert.match(text, /^## Interview Checks$/m);
 });
-```
 
-LLN/CLT:
-
-```js
 test('limit theorem Knowledge distinguishes LLN CLT and convergence modes', async () => {
   const text = await read('src/content/knowledge/concepts/limit-theorems-lln-clt.md');
   assert.match(text, topicLine);
   assert.match(text, /weak law/i);
   assert.match(text, /strong law/i);
-  assert.match(text, /almost surely|almost sure/i);
+  assert.match(text, /almost sure|almost surely/i);
   assert.match(text, /convergence in probability/i);
   assert.match(text, /convergence in distribution/i);
   assert.match(text, /central limit theorem|CLT/i);
-  assert.match(text, /sqrt\(?n\)?|√n/i);
+  assert.match(text, /sqrt\(n\)|√n/i);
   assert.match(text, /finite variance/i);
   assert.match(text, /^## Interview Checks$/m);
 });
@@ -498,13 +457,13 @@ test('limit theorem Knowledge distinguishes LLN CLT and convergence modes', asyn
 npm run test
 ```
 
-Expected: only the two newly introduced Knowledge files are missing/failing.
+Expected: only the two new Knowledge files are missing/failing.
 
-- [ ] **Step 3: Implement both Knowledge nodes**
+- [ ] **Step 3: Implement both files**
 
-Use the same frontmatter contract as Task 2. `gaussian-lognormal-structure` must state that zero covariance implies independence only inside the jointly normal class. `limit-theorems-lln-clt` must state LLN versus CLT roles, `sqrt(n)` scaling, and the classical iid finite-variance assumptions without turning the page into a proof chapter.
+Use the exact titles/descriptions from `knowledgeMeta`. State explicitly that zero covariance implies independence only for jointly normal variables. Explain LLN versus CLT roles and classical iid finite-variance assumptions without turning the page into a long proof chapter.
 
-- [ ] **Step 4: Run GREEN and commit**
+- [ ] **Step 4: Verify and commit**
 
 ```bash
 npm run test && npm run check && npm run build
@@ -514,7 +473,7 @@ git commit -m "feat: add Gaussian and limit theorem knowledge"
 
 ---
 
-### Task 4: Add Exponential and Transformation Problems
+### Task 4: Add Exponential Race, Memorylessness, and Transformation Problems
 
 **Files:**
 - Modify: `tests/quant-interview-random-variables-distributions-content.test.mjs`
@@ -523,96 +482,52 @@ git commit -m "feat: add Gaussian and limit theorem knowledge"
 - Create: `src/content/problems/probability/density-under-random-variable-transform.md`
 
 **Interfaces:**
-- Consumes: `common-probability-distributions`, `random-variables-cdf-pmf-pdf`, `random-variable-transformations-convolution`.
-- Produces: canonical Problem slugs `001-003` used by coverage.
+- Consumes the Knowledge from Task 2.
+- Produces canonical Problems `random-variables-distributions-001` through `003`.
 
-- [ ] **Step 1: Add common S3+ RED helper**
+- [ ] **Step 1: Add S3+ helper and RED assertions**
 
 ```js
-function assertS3(text, slug, id) {
+function assertS3(text, id) {
   assert.match(text, new RegExp(`^problemId:\\s*${id}$`, 'm'));
   assert.match(text, /^quantInterviewTopics:\s*\[probability-statistics, random-variables-distributions\]$/m);
-  for (const heading of ['## Problem', '## Think Before Revealing', '## Solution', '## Why This Matters', '## Common Mistakes', '## Extensions']) {
-    assert.match(text, new RegExp(`^${heading.replace(/[.*+?^${}()|[\\]\\]/g, '\\$&')}`, 'm'), `${slug} missing ${heading}`);
-  }
-  assert.doesNotMatch(text, /Green Book|Red Book|150 Most|Question\s+3\.|source page|PDF page/i);
+  for (const heading of ['## Problem', '## Think Before Revealing', '## Solution', '## Why This Matters', '## Common Mistakes', '## Extensions']) assert.ok(text.includes(heading), `missing ${heading}`);
+  assert.doesNotMatch(text, /Green Book|Red Book|150 Most|source page|PDF page/i);
 }
-```
 
-- [ ] **Step 2: Add problem-specific RED tests**
-
-Exponential race:
-
-```js
 const race = await read('src/content/problems/probability/exponential-race-probability.md');
-assertS3(race, 'exponential-race-probability', 'random-variables-distributions-001');
+assertS3(race, 'random-variables-distributions-001');
 assert.match(race, /4\/7/);
-assert.match(race, /lambda_X|λ_X|rate/i);
-assert.match(race, /lambda_X.*lambda_Y|λ_X.*λ_Y/i);
-```
+assert.match(race, /rate|lambda_X|λ_X/i);
 
-Bus memorylessness:
-
-```js
 const bus = await read('src/content/problems/probability/exponential-memoryless-bus-wait.md');
-assertS3(bus, 'exponential-memoryless-bus-wait', 'random-variables-distributions-002');
+assertS3(bus, 'random-variables-distributions-002');
 assert.match(bus, /memoryless/i);
 assert.match(bus, /10\s*minutes/i);
 assert.match(bus, /residual|additional waiting/i);
 assert.doesNotMatch(bus, /## .*Poisson Process|general Poisson process/i);
-```
 
-Transformation:
-
-```js
 const transform = await read('src/content/problems/probability/density-under-random-variable-transform.md');
-assertS3(transform, 'density-under-random-variable-transform', 'random-variables-distributions-003');
-assert.match(transform, /F_Y|CDF/i);
-assert.match(transform, /g\^-1|inverse/i);
+assertS3(transform, 'random-variables-distributions-003');
+assert.match(transform, /CDF|F_Y/i);
+assert.match(transform, /inverse|g\^-1/i);
 assert.match(transform, /absolute|Jacobian/i);
 assert.match(transform, /many-to-one|multiple.*branch/i);
 ```
 
-- [ ] **Step 3: Run RED**
+- [ ] **Step 2: Run RED**
 
 ```bash
 npm run test
 ```
 
-Expected: only the three new Problem contracts fail because files do not exist.
+Expected: only Problems `001-003` are missing/failing.
 
-- [ ] **Step 4: Implement Problems 001-003**
+- [ ] **Step 3: Implement Problems `001-003`**
 
-Use frontmatter pattern:
+Use exact metadata from `problemMeta`. Each page includes two `<details>` hints and the six S3+ sections. `exponential-memoryless-bus-wait` may mention the arrival-process background only as context; it must not create a general Poisson-process teaching section.
 
-```yaml
----
-problemId: random-variables-distributions-00N
-title: <source-neutral title>
-description: <source-neutral description>
-date: 2026-08-18
-domain: Mathematics & Statistics
-category: Probability
-subcategories: [Random Variables, Distributions]
-tags: [Probability, Random Variables, Distributions, Interview]
-quantInterviewTopics: [probability-statistics, random-variables-distributions]
-concepts: [<exact Knowledge slugs from Planned Public Outputs>]
-techniques: []
-prerequisites: []
-relatedProblems: []
-family: <source-neutral mathematical family>
-mathDifficulty: 2
-insightDifficulty: 3
-interviewDifficulty: 3
-estimatedMinutes: 12
-status: solved
-featured: false
----
-```
-
-Every page must include two `<details>` hints and the six S3+ sections in the RED helper.
-
-- [ ] **Step 5: Run GREEN and commit**
+- [ ] **Step 4: Verify and commit**
 
 ```bash
 npm run test && npm run check && npm run build
@@ -631,43 +546,34 @@ git commit -m "feat: add exponential and transformation problems"
 - Create: `src/content/problems/probability/when-is-a-product-lognormal.md`
 
 **Interfaces:**
-- Consumes: `random-variable-transformations-convolution`, `common-probability-distributions`, `gaussian-lognormal-structure`, and existing `conditioning`.
-- Produces: canonical Problem slugs `004-006` used by coverage.
+- Consumes Knowledge from Tasks 2-3 plus existing `conditioning`.
+- Produces canonical Problems `random-variables-distributions-004` through `006`.
 
-- [ ] **Step 1: Add RED contracts**
-
-Convolution:
+- [ ] **Step 1: Add RED assertions**
 
 ```js
 const sum = await read('src/content/problems/probability/sum-of-two-uniforms-triangular-density.md');
-assertS3(sum, 'sum-of-two-uniforms-triangular-density', 'random-variables-distributions-004');
+assertS3(sum, 'random-variables-distributions-004');
 assert.match(sum, /convolution/i);
 assert.match(sum, /0\s*<\s*z\s*<\s*1/);
 assert.match(sum, /2\s*-\s*z/);
 assert.match(sum, /support.*bound|integration.*bound/i);
-```
 
-Joint normal:
-
-```js
 const joint = await read('src/content/problems/probability/joint-normal-quadrant-conditioning.md');
-assertS3(joint, 'joint-normal-quadrant-conditioning', 'random-variables-distributions-005');
+assertS3(joint, 'random-variables-distributions-005');
 assert.match(joint, /1\/4/);
 assert.match(joint, /sqrt\(2\).*X.*Y|√2.*X.*Y/i);
 assert.match(joint, /joint.*normal/i);
-assert.match(joint, /uncorrelated.*independent|zero covariance.*independent/i);
-assert.match(joint, /not.*general|outside.*normal/i);
-```
+assert.match(joint, /zero covariance|uncorrelated/i);
+assert.match(joint, /independent/i);
+assert.match(joint, /not.*general|outside.*joint.*normal/i);
 
-Lognormal product:
-
-```js
 const lognormal = await read('src/content/problems/probability/when-is-a-product-lognormal.md');
-assertS3(lognormal, 'when-is-a-product-lognormal', 'random-variables-distributions-006');
+assertS3(lognormal, 'random-variables-distributions-006');
 assert.match(lognormal, /log\(XY\)|log X.*log Y/i);
 assert.match(lognormal, /jointly normal|joint normal/i);
 assert.match(lognormal, /independent.*sufficient|independent lognormal/i);
-assert.match(lognormal, /marginal.*not sufficient|marginal.*insufficient/i);
+assert.match(lognormal, /marginal.*insufficient|marginal.*not sufficient/i);
 ```
 
 - [ ] **Step 2: Run RED**
@@ -678,11 +584,11 @@ npm run test
 
 Expected: only Problems `004-006` are missing/failing.
 
-- [ ] **Step 3: Implement Problems 004-006**
+- [ ] **Step 3: Implement Problems `004-006`**
 
-Use the same S3+ frontmatter/body contract as Task 4. The joint-normal page may link to existing `conditioning` as a concept, but its canonical topic remains only `random-variables-distributions`. The lognormal page must distinguish marginal assumptions from the joint law.
+Use exact metadata from `problemMeta`. The convolution page must derive integration limits from simultaneous support restrictions. The joint-normal page must make `joint normal + zero covariance => independence` explicit. The lognormal page must distinguish marginal distributions from the joint law.
 
-- [ ] **Step 4: Run GREEN and commit**
+- [ ] **Step 4: Verify and commit**
 
 ```bash
 npm run test && npm run check && npm run build
@@ -692,7 +598,7 @@ git commit -m "feat: add convolution and Gaussian distribution problems"
 
 ---
 
-### Task 6: Reconcile Fourteen Hidden Coverage Rows
+### Task 6: Reconcile the Fourteen Hidden Coverage Rows
 
 **Files:**
 - Modify: `tests/quant-interview-random-variables-distributions-workstream.test.mjs`
@@ -701,32 +607,21 @@ git commit -m "feat: add convolution and Gaussian distribution problems"
 - Modify: `src/data/quant-interview/coverage/150-most-frequently-asked.json`
 
 **Interfaces:**
-- Consumes: five real Knowledge slugs and six real Problem slugs.
-- Produces: terminal auditable source coverage for completion gate.
+- Consumes all five Knowledge and six Problem slugs.
+- Produces terminal auditable source coverage for Task 8.
 
-- [ ] **Step 1: Add exact 14-row RED inventory**
+- [ ] **Step 1: Add exact inventory RED**
 
 ```js
 const expectedCoverageKeys = {
-  'green-book': [
-    '4.4::definitions-discrete-continuous-distributions',
-    '4.4::poisson-process-property',
-  ],
-  'red-book': [
-    '3.2.1::3.28',
-    '3.2.1::3.30',
-    '3.2.1::3.31',
-    '3.2.1::3.33',
-    '3.2.1::3.34',
-  ],
-  '150-most-frequently-asked': [
-    '2.6::1', '2.6::2', '2.6::3', '2.6::5', '2.6::6', '2.6::8', '2.6::9',
-  ],
+  'green-book': ['4.4::definitions-discrete-continuous-distributions', '4.4::poisson-process-property'],
+  'red-book': ['3.2.1::3.28', '3.2.1::3.30', '3.2.1::3.31', '3.2.1::3.33', '3.2.1::3.34'],
+  '150-most-frequently-asked': ['2.6::1', '2.6::2', '2.6::3', '2.6::5', '2.6::6', '2.6::8', '2.6::9']
 };
 assert.equal(Object.values(expectedCoverageKeys).flat().length, 14);
 ```
 
-For every key require a row to exist, have canonical topic `random-variables-distributions`, terminal state in `canonical-problem | merged-duplicate | variant | knowledge-only`, nonempty `resolutionNote`, and at least one real canonical target.
+For each key assert: row exists; `canonicalTopics` contains `random-variables-distributions`; state is one of `canonical-problem`, `merged-duplicate`, `variant`, `knowledge-only`; `resolutionNote` is nonempty; canonical Problem/Knowledge targets resolve to real files.
 
 - [ ] **Step 2: Add semantic-ownership assertions**
 
@@ -750,11 +645,11 @@ assert.equal(q150.get('2.6::6')?.state, 'canonical-problem');
 assert.deepEqual(q150.get('2.6::6')?.canonicalProblems, ['when-is-a-product-lognormal']);
 ```
 
-Add boundary checks that `3.29`, `3.32`, `3.37`, `3.38` are not newly terminalized as `random-variables-distributions` by this workstream; if those rows already exist for another topic, require that their canonical topics do not claim this topic.
+Also assert Red `3.29`, `3.32`, `3.37`, and `3.38` are not newly terminalized under `random-variables-distributions`.
 
-- [ ] **Step 3: Add knowledge-only public self-test assertions**
+- [ ] **Step 3: Add `knowledge-only` public self-test assertions**
 
-Require `## Interview Checks` and matching source-derived checks in:
+Require `## Interview Checks` and source-derived checks in:
 
 ```js
 'random-variables-cdf-pmf-pdf'
@@ -762,7 +657,7 @@ Require `## Interview Checks` and matching source-derived checks in:
 'limit-theorems-lln-clt'
 ```
 
-Specifically assert Uniform CDF, Cauchy/moment-existence, Exponential, Poisson distribution, LLN, and CLT terms are present.
+The assertions must explicitly find Uniform CDF, Cauchy/moment existence, Exponential, Poisson distribution, LLN, and CLT language.
 
 - [ ] **Step 4: Run coverage RED**
 
@@ -770,15 +665,13 @@ Specifically assert Uniform CDF, Cauchy/moment-existence, Exponential, Poisson d
 npm run test
 ```
 
-Expected: new coverage tests fail because the fourteen rows do not yet exist; all public content tests remain green.
+Expected: coverage tests fail because the fourteen claimed rows are absent; public content tests remain green.
 
-- [ ] **Step 5: Upsert the fourteen ledger rows only**
+- [ ] **Step 5: Upsert only the fourteen exact rows**
 
-Use the exact source inventory above. Do not edit unrelated rows. If direct GitHub contents edits are impractical for large JSON ledgers, use the same temporary branch-only validated ledger-mutator pattern as workstreams 006/007: the mutator may only upsert the exact fourteen `(sourceSection, sourceItem)` keys, must run `npm run test`, `npm run check`, `npm run build` before committing, and must be deleted immediately after the committed ledgers receive a subsequent read-only GREEN CI run.
+Use the inventory in this plan verbatim. Do not mutate unrelated coverage rows. If direct contents editing of large JSON ledgers is unsafe, use the same temporary branch-only validated ledger-mutator pattern used by workstreams 006/007: the script is allowed to upsert only these fourteen `(sourceSection, sourceItem)` keys, runs `npm run test`, `npm run check`, and `npm run build` before committing, and is deleted after a subsequent read-only GREEN CI confirms the committed ledger state.
 
-- [ ] **Step 6: Validate all ledgers and run GREEN**
-
-In tests call:
+- [ ] **Step 6: Validate all ledgers**
 
 ```js
 validateCoverageLedger(ledger, {
@@ -786,7 +679,7 @@ validateCoverageLedger(ledger, {
   taxonomy,
   problemSlugs,
   knowledgeSlugs,
-  allowUnresolvedCanonicalRefs: false,
+  allowUnresolvedCanonicalRefs: false
 });
 ```
 
@@ -795,8 +688,6 @@ Run:
 ```bash
 npm run test && npm run check && npm run build
 ```
-
-Expected: all commands succeed.
 
 - [ ] **Step 7: Commit**
 
@@ -813,12 +704,12 @@ git commit -m "feat: reconcile random variables distributions coverage"
 - Modify: `tests/quant-interview-source-neutral-content.test.mjs`
 
 **Interfaces:**
-- Consumes: all five Knowledge and six Problem slugs.
-- Produces: corpus-wide public provenance/source-neutral regression.
+- Consumes all new public slugs and terminal coverage.
+- Produces the content-complete verification commit whose successful Actions run is recorded by Task 8.
 
-- [ ] **Step 1: Extend exact public enumeration**
+- [ ] **Step 1: Extend exact Problem enumeration**
 
-Append to `currentProblemSlugs`:
+Append:
 
 ```js
 'exponential-race-probability',
@@ -829,7 +720,9 @@ Append to `currentProblemSlugs`:
 'when-is-a-product-lognormal',
 ```
 
-Append to `expectedKnowledgeTopics`:
+- [ ] **Step 2: Extend exact Knowledge topic map**
+
+Append:
 
 ```js
 ['random-variables-cdf-pmf-pdf', ['probability-statistics', 'random-variables-distributions']],
@@ -839,7 +732,7 @@ Append to `expectedKnowledgeTopics`:
 ['limit-theorems-lln-clt', ['probability-statistics', 'random-variables-distributions']],
 ```
 
-Update the exact count contract to:
+Update the count contract:
 
 ```js
 test('source-neutral regression enumerates the current 42 Problem and 33 Knowledge contracts', () => {
@@ -848,9 +741,9 @@ test('source-neutral regression enumerates the current 42 Problem and 33 Knowled
 });
 ```
 
-- [ ] **Step 2: Extend hidden-audit regression for 150 distribution rows**
+- [ ] **Step 3: Extend hidden-audit mapping**
 
-Add at least these canonical source mappings to the existing hidden-audit test:
+Require these 150 rows to be `canonical-problem` and map exactly:
 
 ```js
 ['2.6::2', 'exponential-race-probability'],
@@ -858,9 +751,7 @@ Add at least these canonical source mappings to the existing hidden-audit test:
 ['2.6::6', 'when-is-a-product-lognormal'],
 ```
 
-Require their state to be `canonical-problem` and their canonical Problem arrays to match exactly.
-
-- [ ] **Step 3: Run full regression and commit**
+- [ ] **Step 4: Verify and commit**
 
 ```bash
 npm run test && npm run check && npm run build
@@ -868,26 +759,24 @@ git add tests/quant-interview-source-neutral-content.test.mjs
 git commit -m "test: extend source-neutral regression for distributions"
 ```
 
-Record this successful commit SHA and Actions run ID as the workstream’s **content-complete verification evidence**. Do not invent or pre-fill these values.
+After GitHub Actions reports success for this exact commit, record the commit SHA and the successful run’s integer database/run id externally for Task 8. Do not write them into repository files until the successful run has actually completed.
 
 ---
 
-### Task 8: Seal Workstream 008, Update Durable Handoff, and Clean Temporary Tooling
+### Task 8: Seal Workstream 008, Update HANDOFF, and Remove Temporary Tooling
 
 **Files:**
 - Create: `tests/quant-interview-random-variables-distributions-completion.test.mjs`
 - Modify: `src/data/quant-interview/workstreams/probability-statistics-random-variables-distributions-008.json`
 - Modify: `docs/quant-interview/HANDOFF.md`
-- Delete before final branch state: `.github/workflows/quant-interview-random-variables-distributions-ci.yml`
-- Delete any temporary ledger mutator script/workflow created in Task 6.
+- Delete from final tree: `.github/workflows/quant-interview-random-variables-distributions-ci.yml`
+- Delete from final tree: any temporary coverage-mutator file/workflow created in Task 6.
 
 **Interfaces:**
-- Consumes: real successful content-complete commit/run evidence from Task 7.
-- Produces: sealed `status: complete` workstream and durable next-topic handoff.
+- Consumes the real successful Task 7 commit SHA and Actions run id.
+- Produces sealed durable repository memory and the next bounded topic.
 
 - [ ] **Step 1: Write completion RED**
-
-Create:
 
 ```js
 import test from 'node:test';
@@ -902,14 +791,11 @@ test('random variables distributions workstream closes only with real verificati
   assert.equal(workstream.status, 'complete');
   assert.match(workstream.verification?.commit ?? '', /^[0-9a-f]{40}$/);
   assert.ok(Number.isInteger(workstream.verification?.runId));
+  assert.ok(workstream.verification.runId > 0);
   assert.deepEqual(workstream.verification?.commands, ['npm run test', 'npm run check', 'npm run build']);
   assert.equal(workstream.verification?.conclusion, 'success');
 });
-```
 
-Handoff contract:
-
-```js
 test('handoff records workstream 008 and advances to expectation variance covariance', async () => {
   const workstream = await readJson(workstreamPath);
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
@@ -932,25 +818,40 @@ test('handoff records workstream 008 and advances to expectation variance covari
 npm run test
 ```
 
-Expected: completion tests fail because status is still `active` and HANDOFF still points to Random Variables & Distributions.
+Expected: completion tests fail because workstream status is still `active` and HANDOFF still points to Random Variables & Distributions.
 
-- [ ] **Step 3: Seal using real evidence only**
+- [ ] **Step 3: Read the real Task 7 verification evidence**
 
-Update workstream JSON:
+Use the repository/Actions tooling available in the execution environment to inspect the exact Task 7 commit and its successful Actions run. Before writing repository state, enforce these runtime checks:
 
-```json
-"status": "complete",
-"verification": {
-  "commit": "<copy the exact successful Task 7 content commit SHA>",
-  "runId": 0,
-  "commands": ["npm run test", "npm run check", "npm run build"],
-  "conclusion": "success"
-}
+```js
+assert.match(contentCommit, /^[0-9a-f]{40}$/);
+assert.ok(Number.isInteger(successfulRunId));
+assert.ok(successfulRunId > 0);
+assert.equal(successfulRunConclusion, 'success');
 ```
 
-Before committing, replace the illustrative `runId: 0` with the exact integer GitHub Actions run ID for that successful Task 7 commit. The final repository must contain neither `0` nor any placeholder text.
+`contentCommit`, `successfulRunId`, and `successfulRunConclusion` are values returned by the actual VCS/Actions read in this step, not literals stored in this plan.
 
-Update `docs/quant-interview/HANDOFF.md` to record:
+- [ ] **Step 4: Seal the machine-readable workstream**
+
+Write those exact runtime values into:
+
+```js
+workstream.status = 'complete';
+workstream.verification = {
+  commit: contentCommit,
+  runId: successfulRunId,
+  commands: ['npm run test', 'npm run check', 'npm run build'],
+  conclusion: successfulRunConclusion
+};
+```
+
+No synthetic SHA, zero run id, or illustrative evidence value may enter the committed JSON.
+
+- [ ] **Step 5: Update durable HANDOFF**
+
+Preserve prior workstream history and add:
 
 ```text
 Completed cross-book workstream 8
@@ -962,9 +863,9 @@ probability-statistics-random-variables-distributions-008
 next bounded topic: Probability & Statistics -> Expectation, Variance & Covariance
 ```
 
-Also preserve prior workstream verification history; do not replace HANDOFF with only the newest workstream.
+Also record the exact Task 7 commit/run evidence and the boundary decisions: bus problem owns exponential memorylessness only; normal moments and order statistics remain deferred; LLN/CLT are one Knowledge node.
 
-- [ ] **Step 4: Run closure verification**
+- [ ] **Step 6: Run closure verification**
 
 ```bash
 npm run test && npm run check && npm run build
@@ -972,58 +873,70 @@ npm run test && npm run check && npm run build
 
 Expected: all commands succeed, including historical handoff regressions.
 
-- [ ] **Step 5: Review topic-only diff**
+- [ ] **Step 7: Review topic-only diff**
 
-Compare against `chatgpt/quant-interview-workstream-combinatorial-probability-2026-08-17`. Allowed final product changes are limited to:
+Compare against `chatgpt/quant-interview-workstream-combinatorial-probability-2026-08-17`. The final product diff may contain only:
 
 ```text
 docs/quant-interview/HANDOFF.md
 docs/superpowers/specs/2026-08-18-quant-interview-random-variables-distributions-design.md
 docs/superpowers/plans/2026-08-18-quant-interview-random-variables-distributions.md
-src/content/knowledge/concepts/<five approved Knowledge files>
-src/content/problems/probability/<six approved Problem files>
-src/data/quant-interview/coverage/<three ledgers>
+src/content/knowledge/concepts/random-variables-cdf-pmf-pdf.md
+src/content/knowledge/concepts/common-probability-distributions.md
+src/content/knowledge/concepts/random-variable-transformations-convolution.md
+src/content/knowledge/concepts/gaussian-lognormal-structure.md
+src/content/knowledge/concepts/limit-theorems-lln-clt.md
+src/content/problems/probability/exponential-race-probability.md
+src/content/problems/probability/exponential-memoryless-bus-wait.md
+src/content/problems/probability/density-under-random-variable-transform.md
+src/content/problems/probability/sum-of-two-uniforms-triangular-density.md
+src/content/problems/probability/joint-normal-quadrant-conditioning.md
+src/content/problems/probability/when-is-a-product-lognormal.md
+src/data/quant-interview/coverage/green-book.json
+src/data/quant-interview/coverage/red-book.json
+src/data/quant-interview/coverage/150-most-frequently-asked.json
 src/data/quant-interview/workstreams/probability-statistics-random-variables-distributions-008.json
-tests/quant-interview-random-variables-distributions-*.test.mjs
+tests/quant-interview-random-variables-distributions-workstream.test.mjs
+tests/quant-interview-random-variables-distributions-content.test.mjs
+tests/quant-interview-random-variables-distributions-completion.test.mjs
 tests/quant-interview-source-neutral-content.test.mjs
 ```
 
 No Home, Projects, UI, deployment, or unrelated Knowledge-topic changes are allowed.
 
-- [ ] **Step 6: Remove temporary CI/mutator tooling and prove cleanup-only delta**
+- [ ] **Step 8: Remove temporary tooling and prove cleanup-only delta**
 
-Delete branch-only CI and any Task 6 mutator. Compare the last fully green product commit to final branch head; the only post-verification file deltas may be removal of those temporary tooling files.
+Delete branch CI and any Task 6 mutator. Compare the last fully green product commit with the final branch head; post-verification changes may only remove those temporary tooling files.
 
-- [ ] **Step 7: Commit final closure**
+- [ ] **Step 9: Commit closure and cleanup**
 
 ```bash
 git add src/data/quant-interview/workstreams/probability-statistics-random-variables-distributions-008.json docs/quant-interview/HANDOFF.md tests/quant-interview-random-variables-distributions-completion.test.mjs
 git commit -m "docs: complete random variables distributions workstream"
 ```
 
-If temporary cleanup creates an additional commit, use:
+If cleanup is a second commit:
 
 ```bash
+git add -u
 git commit -m "chore: remove random variables distributions workstream tooling"
 ```
 
 ## Completion Checklist
 
-Before presenting branch-integration options, verify all of the following from repository state rather than conversational memory:
-
 ```text
 [ ] workstream 008 status is complete
-[ ] verification commit is a real 40-character SHA
-[ ] verification runId is a real successful Actions run integer
+[ ] verification commit is a real 40-character SHA from the successful content-complete run
+[ ] verification runId is a real positive integer from the successful content-complete run
 [ ] five fixed Knowledge slugs exist and are source-neutral
 [ ] six fixed Problem slugs exist, solved, S3+, and source-neutral
 [ ] exactly fourteen claimed rows are terminal with resolution notes and real targets
-[ ] all knowledge-only rows are publicly testable through Interview Checks
+[ ] every knowledge-only row remains publicly testable through Interview Checks
 [ ] Green bus row explicitly limits ownership to exponential memorylessness
-[ ] Red 3.29 / 3.32 remain outside this topic
+[ ] Red 3.29 and 3.32 remain outside this topic
 [ ] expectation-heavy normal moments remain outside this topic
 [ ] LLN and CLT are fused into one public Knowledge node
-[ ] global source-neutral regression records 42 Problems / 33 Knowledge if the approved structure remained unchanged
+[ ] global source-neutral regression records 42 Problems and 33 Knowledge if the approved structure remained unchanged
 [ ] npm run test succeeds
 [ ] npm run check succeeds
 [ ] npm run build succeeds
