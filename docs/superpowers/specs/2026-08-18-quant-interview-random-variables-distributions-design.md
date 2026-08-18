@@ -101,7 +101,7 @@ The current taxonomy has no separate Limit Theorems topic. They belong here beca
 
 ## 4. Public Knowledge architecture
 
-Create exactly five canonical Knowledge responsibilities unless implementation evidence shows that one can be cleanly merged without losing clarity.
+Create exactly five canonical Knowledge nodes with the responsibilities below. Implementation must not merge them without a new explicit design decision.
 
 ### 4.1 `random-variables-cdf-pmf-pdf`
 
@@ -337,7 +337,7 @@ This Problem must train model-assumption discipline rather than memorizing a clo
 
 ### 6.1 Green source
 
-Primary evidence scope: section 4.4, PDF pages approximately 102–108 in the verified source file.
+Primary evidence scope: section 4.4, verified PDF pages **102–108**.
 
 Claim exactly two current-workstream rows:
 
