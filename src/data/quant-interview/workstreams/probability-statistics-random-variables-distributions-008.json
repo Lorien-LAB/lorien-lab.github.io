@@ -1,0 +1,38 @@
+{
+  "id": "probability-statistics-random-variables-distributions-008",
+  "canonicalTopics": [
+    "probability-statistics",
+    "random-variables-distributions"
+  ],
+  "status": "active",
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["4.4"],
+      "evidencePageRanges": [
+        {"startPage": 102, "endPage": 108}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Claim distribution definitions and the exponential-memorylessness bus problem only; meeting probability, broken-stick geometry, normal moments, and section 4.5 expectation material remain outside this workstream."
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["3.2.1"],
+      "evidencePageRanges": [
+        {"startPage": 95, "endPage": 96},
+        {"startPage": 120, "endPage": 128}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Claim items 3.28, 3.30, 3.31, 3.33, and 3.34 only; order statistics 3.29/3.32, PSD 3.35, change of measure 3.36, expectation-heavy 3.37/3.38, and stochastic-process items remain outside this workstream."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["2.6"],
+      "evidencePageRanges": [
+        {"startPage": 134, "endPage": 145}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Claim items 1, 2, 3, 5, 6, 8, and 9 from the Probability/Stochastic Calculus section; disk expectation item 4, expectation/tower item 7, and martingale, Brownian, and Ito material remain outside this workstream."
+    }
+  ]
+}
