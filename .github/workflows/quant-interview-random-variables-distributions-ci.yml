@@ -7,11 +7,10 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 jobs:
   verify:
-    if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v6
@@ -23,12 +22,3 @@ jobs:
       - run: npm run test
       - run: npm run check
       - run: npm run build
-      - name: Record baseline success
-        run: |
-          mkdir -p .ci
-          printf '%s\n' "$GITHUB_SHA" > .ci/quant-interview-rvd-baseline-success.txt
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .ci/quant-interview-rvd-baseline-success.txt
-          git commit -m "chore: record RVD baseline CI success"
-          git push
