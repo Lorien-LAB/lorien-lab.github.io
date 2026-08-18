@@ -38,3 +38,29 @@ test('transformation Knowledge derives pushforwards and convolution bounds', asy
   assert.match(text, /support.*bound|integration.*bound/i);
   assert.match(text, /^## Interview Checks$/m);
 });
+
+test('Gaussian Knowledge separates joint normality independence and lognormal closure', async () => {
+  const text = await read('src/content/knowledge/concepts/gaussian-lognormal-structure.md');
+  assert.match(text, topicLine);
+  assert.match(text, /jointly normal|joint normal/i);
+  assert.match(text, /zero covariance|uncorrelated/i);
+  assert.match(text, /independent/i);
+  assert.match(text, /marginal.*normal.*not|does not imply.*joint/i);
+  assert.match(text, /lognormal/i);
+  assert.match(text, /log\(XY\)|log X.*log Y/i);
+  assert.match(text, /^## Interview Checks$/m);
+});
+
+test('limit theorem Knowledge distinguishes LLN CLT and convergence modes', async () => {
+  const text = await read('src/content/knowledge/concepts/limit-theorems-lln-clt.md');
+  assert.match(text, topicLine);
+  assert.match(text, /weak law/i);
+  assert.match(text, /strong law/i);
+  assert.match(text, /almost sure|almost surely/i);
+  assert.match(text, /convergence in probability/i);
+  assert.match(text, /convergence in distribution/i);
+  assert.match(text, /central limit theorem|CLT/i);
+  assert.match(text, /sqrt\(n\)|√n/i);
+  assert.match(text, /finite variance/i);
+  assert.match(text, /^## Interview Checks$/m);
+});
