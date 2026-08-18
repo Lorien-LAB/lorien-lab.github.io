@@ -29,7 +29,7 @@ jobs:
           cat /tmp/rvd-red.log
           test "$status" -ne 0
           grep -q "green-book missing coverage row 4.4::definitions-discrete-continuous-distributions" /tmp/rvd-red.log
-          grep -q "red-book missing coverage row 3.2.1::3.31" /tmp/rvd-red.log
+          grep -q "red-book missing coverage row 3.2.1::3.28" /tmp/rvd-red.log
           grep -q "150-most-frequently-asked missing coverage row 2.6::1" /tmp/rvd-red.log
       - name: Record expected RED
         run: |
