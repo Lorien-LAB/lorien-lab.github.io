@@ -507,6 +507,104 @@
       ],
       "topicOverrideReason": "Item-level mathematical identity is Conditional Probability & Bayes even though the editorial source container is Brainteasers; observing a golden face reweights the latent object posterior.",
       "resolutionNote": "Distinct latent-object selection-conditioning family represented by golden-face-posterior; visible-face weighting gives posterior two-thirds."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "1",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "The exponential density, support, and parameterization are reusable distribution Knowledge; the source-derived definition remains visible through public Interview Checks instead of becoming a standalone Problem."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "2",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "exponential-race-probability"
+      ],
+      "canonicalKnowledge": [
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "Distinct competing-independent-exponential family represented by exponential-race-probability; the canonical page generalizes the numerical means to the rate-share formula lambda_X/(lambda_X+lambda_Y)."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "3",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "The Poisson random-variable PMF and count-distribution recognition rule are fused into common-probability-distributions. This row does not claim general Poisson-process theory."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "5",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "joint-normal-quadrant-conditioning"
+      ],
+      "canonicalKnowledge": [
+        "gaussian-lognormal-structure",
+        "conditioning"
+      ],
+      "resolutionNote": "Distinct jointly-normal decorrelation and quadrant-conditioning family represented by joint-normal-quadrant-conditioning; the canonical solution makes the joint-normal requirement for zero-covariance independence explicit."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "6",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "when-is-a-product-lognormal"
+      ],
+      "canonicalKnowledge": [
+        "gaussian-lognormal-structure"
+      ],
+      "resolutionNote": "Distinct lognormal-product closure family represented by when-is-a-product-lognormal; the canonical page distinguishes independent lognormals from the more general jointly-normal-log condition and rejects marginal lognormality alone."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "8",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "limit-theorems-lln-clt"
+      ],
+      "resolutionNote": "Weak and strong laws of large numbers are fused into the canonical limit-theorem Knowledge node, where convergence modes and public Interview Checks preserve the source-derived interview value."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "9",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "limit-theorems-lln-clt"
+      ],
+      "resolutionNote": "The classical central limit theorem is fused with the Red CLT material into one canonical limit-theorem Knowledge node, including sqrt(n) scaling, convergence in distribution, and finite-variance boundaries."
     }
   ]
 }

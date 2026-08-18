@@ -944,6 +944,78 @@
         "conditioning"
       ],
       "resolutionNote": "Merged duplicate of the adjacent-bullet survival-conditioning family; the survived-trigger information and one-quarter no-spin versus one-third spin comparison resolve to the shared canonical Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.28",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "random-variables-cdf-pmf-pdf",
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "The uniform-distribution CDF task is a compact representation check preserved in the CDF/PMF/PDF and common-distributions Interview Checks; it does not require a separate canonical Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.30",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "The Cauchy example is preserved as a heavy-tail and moment-existence boundary check in common-probability-distributions, including the distinction between symmetry/principal value and a proper finite expectation."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.31",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "density-under-random-variable-transform"
+      ],
+      "canonicalKnowledge": [
+        "random-variables-cdf-pmf-pdf",
+        "random-variable-transformations-convolution"
+      ],
+      "resolutionNote": "Distinct distribution-pushforward reasoning family represented by density-under-random-variable-transform. The canonical page derives the transformed CDF first, then the inverse-Jacobian rule and many-to-one branch correction."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.33",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "sum-of-two-uniforms-triangular-density"
+      ],
+      "canonicalKnowledge": [
+        "common-probability-distributions",
+        "random-variable-transformations-convolution"
+      ],
+      "resolutionNote": "Distinct independent-sum convolution family represented by sum-of-two-uniforms-triangular-density; the canonical solution derives the piecewise integration bounds from the simultaneous support restrictions."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.34",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "limit-theorems-lln-clt"
+      ],
+      "resolutionNote": "The classical central-limit-theorem statement is fused with the corresponding limit-theorem material into one canonical LLN/CLT Knowledge node and remains publicly testable through Interview Checks."
     }
   ]
 }

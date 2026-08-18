@@ -2461,6 +2461,35 @@
         "conditioning"
       ],
       "resolutionNote": "Primary source instance of the survival-conditioning roulette family; the adjacent-bullet state is represented in one canonical public Problem."
+    },
+    {
+      "sourceSection": "4.4",
+      "sourceItem": "definitions-discrete-continuous-distributions",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "random-variables-cdf-pmf-pdf",
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "The reusable random-variable, support, CDF/PMF/PDF, and standard distribution material is fused into canonical public Knowledge. Source-derived definition and recognition checks remain visible through Interview Checks rather than creating a standalone Problem."
+    },
+    {
+      "sourceSection": "4.4",
+      "sourceItem": "poisson-process-property",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "exponential-memoryless-bus-wait"
+      ],
+      "canonicalKnowledge": [
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "This row owns only the exponential waiting-time, memoryless, residual-wait, and stationary-age reasoning represented by exponential-memoryless-bus-wait. The source uses an arrival-process wrapper, but this workstream does not claim general Poisson-process or broader stochastic-process theory."
     }
   ]
 }
