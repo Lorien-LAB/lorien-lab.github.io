@@ -1,0 +1,3 @@
+commit=da689d51b96bd540085fd69756d5c34061987e39
+run_id=32100781972
+expected_failure=missing-foundational-knowledge
