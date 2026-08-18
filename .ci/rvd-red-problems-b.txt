@@ -1,3 +1,0 @@
-commit=c779790c7d7324f4dc6603dc42b0313e3d4f45b6
-run_id=32101675519
-expected_failure=missing-problems-004-006

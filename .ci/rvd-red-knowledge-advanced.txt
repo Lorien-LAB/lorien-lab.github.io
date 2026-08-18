@@ -1,3 +1,0 @@
-commit=187fef0275e126b051c20a8a7d99be81b7f14fbd
-run_id=32101092983
-expected_failure=missing-gaussian-limit-knowledge

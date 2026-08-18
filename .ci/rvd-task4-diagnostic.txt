@@ -1,5 +1,0 @@
-commit=78cdcd30bee82700ed3f958c4a29c205c04105fa
-run_id=32101638395
-test_status=1
-check_status=0
-build_status=0
