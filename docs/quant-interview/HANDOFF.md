@@ -1,13 +1,13 @@
 # Quant Interview — Current Handoff
 
-Updated: 2026-08-17
+Updated: 2026-08-18
 
 ## Current architecture state
 
 **Stage A — Topic-first foundation: complete and integrated.**  
 **Stage B — public Topic-first shell: complete and integrated.**  
 **Stage C — existing-content source-neutral migration: complete and integrated.**  
-**Stage D — bounded cross-book topic ingestion: active as the durable workflow; four Linear Algebra workstreams and three Probability & Statistics workstreams are now complete.**
+**Stage D — bounded cross-book topic ingestion: active as the durable workflow; four Linear Algebra workstreams and four Probability & Statistics workstreams are now complete.**
 
 The public system is Topic-first. Canonical Topics, Knowledge, techniques, and Problems are user-facing. Book identity, source item ids, page evidence, semantic-dedup provenance, and canonical-extension audit metadata remain internal.
 
@@ -230,11 +230,63 @@ All six are independently authored, source-neutral, solved, and S3+.
 
 Exactly **12 claimed terminal source rows** are closed for this workstream: 6 Green, 5 Red, and 1 from the 150-question source. Every claimed row has a nonempty resolution note and resolves to real canonical Knowledge or Problem targets.
 
-Boundary-reviewed material remains correctly outside this workstream. In particular, the **joint-normal** conditional-probability task remains owned by Random Variables & Distributions because its core reasoning load is joint Gaussian structure; branching-process, random-walk, order-statistic, distribution, expectation/variance, and stochastic-calculus material is likewise not falsely absorbed into Conditional Probability & Bayes.
+Boundary-reviewed material remains correctly outside this workstream. In particular, the **joint-normal** conditional-probability task remained for Random Variables & Distributions because its core reasoning load is joint Gaussian structure; branching-process, random-walk, order-statistic, distribution, expectation/variance, and stochastic-calculus material was not falsely absorbed into Conditional Probability & Bayes.
 
-## Public corpus state after seven workstreams
+Historical corpus checkpoint after workstream 7: **36 canonical Problems** and **28 explicitly topic-classified Knowledge / Technique nodes**.
 
-The current source-neutral regression contract covers **36 canonical Problems** and **28 explicitly topic-classified Knowledge / Technique nodes**.
+## Completed cross-book workstream 8
+
+`probability-statistics-random-variables-distributions-008`
+
+Scope: **Probability & Statistics → Random Variables & Distributions**.
+
+Content-complete verification:
+
+- commit `a1865622bd6411ea89a87c30b4f631665b776f58`
+- GitHub Actions run `32102546083`
+- commands: `npm run test`, `npm run check`, `npm run build`
+- conclusion: success
+
+The machine-readable workstream is `status: complete` and stores exactly this real verification evidence.
+
+### Canonical Knowledge
+
+- `random-variables-cdf-pmf-pdf` — support, CDF, PMF, PDF, discrete/continuous distinctions, point-mass boundaries, and CDF-first reasoning.
+- `common-probability-distributions` — recognition-first treatment of Uniform, Binomial, Poisson, Geometric, Negative Binomial, Normal, Exponential, Gamma, Beta, and Cauchy.
+- `random-variable-transformations-convolution` — distribution pushforwards, inverse Jacobians, many-to-one branches, and support-aware convolution.
+- `gaussian-lognormal-structure` — affine Gaussian closure, joint normality, zero-covariance independence inside the Gaussian class, and lognormal structure.
+- `limit-theorems-lln-clt` — Weak/Strong LLN, convergence modes, classical CLT, `sqrt(n)` scaling, and finite-variance boundaries.
+
+All five are source-neutral canonical Knowledge nodes with public `Interview Checks` for terminal `knowledge-only` source material.
+
+### Canonical Problems
+
+- `exponential-race-probability`
+- `exponential-memoryless-bus-wait`
+- `density-under-random-variable-transform`
+- `sum-of-two-uniforms-triangular-density`
+- `joint-normal-quadrant-conditioning`
+- `when-is-a-product-lognormal`
+
+All six are independently authored, source-neutral, solved, and S3+.
+
+### Cross-book semantic decisions and boundaries
+
+Exactly **14 terminal claimed source rows** are closed for this workstream: 2 Green, 5 Red, and 7 from the 150-question source. Every claimed row has a nonempty resolution note and resolves to real canonical Knowledge or Problem targets.
+
+- The bus/arrival wrapper resolves to `exponential-memoryless-bus-wait` only for **Exponential memorylessness, residual waiting time, and stationary age intuition**. General Poisson-process theory remains outside this workstream and is not inferred from the wrapper.
+- Independent-exponential competition resolves to `exponential-race-probability`, generalized to the rate-share identity rather than preserving one numerical source instance.
+- Random-variable transformation and independent-sum convolution remain distinct reasoning families: `density-under-random-variable-transform` and `sum-of-two-uniforms-triangular-density`.
+- The jointly normal conditional-probability item now resolves to `joint-normal-quadrant-conditioning`; its solution explicitly uses joint normality before concluding that zero covariance implies independence.
+- Lognormal-product closure resolves to `when-is-a-product-lognormal`; independent lognormals are only a sufficient special case, while joint normality of the log variables is the more general sufficient condition.
+- LLN and CLT are fused into one reusable `limit-theorems-lln-clt` Knowledge node rather than duplicated across sources or inflated into standalone Problems.
+- **Order statistics** material remains outside this topic for **Order Statistics & Extremes**.
+- **Normal moments and expectation-heavy Gaussian calculations** remain outside this topic for **Expectation, Variance & Covariance**.
+- Meeting-time and broken-stick geometry remain under their actual geometric-probability identity instead of being reclassified merely because they appeared inside a distributions chapter.
+
+## Public corpus state after eight workstreams
+
+The current source-neutral regression contract covers **42 canonical Problems** and **33 explicitly topic-classified Knowledge / Technique nodes**.
 
 These are repository-record counts only. They are not whole-book completeness percentages and do not imply that Probability & Statistics as a whole is complete.
 
@@ -250,15 +302,17 @@ All three source files remain edition-pinned and source-file-verified. Source-fi
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
 
-Historical transition marker: **Combinatorial Probability** is already closed and remains here only to preserve repository lineage for agents and regression checks. Its canonical Knowledge, six public Problems, ten terminal hidden source rows, real verification evidence, and semantic merges are complete; no new authoring decision should be inferred from this historical marker or used to reopen that bounded topic.
+Historical transition marker: **Combinatorial Probability** is already closed and remains here only to preserve repository lineage for agents and regression checks. Its canonical Knowledge, six public Problems, ten terminal hidden source rows, real verification evidence, and semantic merges are complete. This paragraph is historical context only and does not authorize reopening or source-ordered reprocessing of that bounded topic.
 
-Historical transition marker: **Conditional Probability & Bayes** is also already closed. Its expanded conditioning layer, Bayes/base-rate Knowledge, six canonical Problems, twelve terminal hidden source rows, protocol corrections, semantic merges, and verified public source-neutral contract are durable repository state. This paragraph records lineage only and does not authorize reopening the completed topic under a different source ordering or wording.
+Historical transition marker: **Conditional Probability & Bayes** is already closed. Its expanded conditioning layer, Bayes/base-rate Knowledge, six canonical Problems, twelve terminal hidden source rows, protocol corrections, semantic merges, and verified public source-neutral contract are durable repository state. This paragraph records lineage only and does not authorize reopening or source-ordered reprocessing of that bounded topic.
+
+Historical transition marker: **Random Variables & Distributions** is fully closed. Its five canonical Knowledge nodes, six S3+ Problems, fourteen terminal hidden source rows, Exponential-memorylessness boundary, Gaussian/lognormal structure, LLN/CLT consolidation, and verified source-neutral corpus contract are durable repository state. This paragraph exists only to preserve chronological handoff evidence and explicitly forbids reopening the bounded topic merely because adjacent source chapters contain related expectation, order-statistic, or stochastic-process material.
 
 Current bounded topic:
 
-**Probability & Statistics → Random Variables & Distributions.**
+**Probability & Statistics → Expectation, Variance & Covariance.**
 
-Proceed by resolving the mapped distribution material across all three verified sources before authoring, refining coarse source containers item-level where necessary, reusing existing canonical Knowledge when appropriate, and keeping expectation/variance, order statistics, and stochastic processes outside the bounded scope unless a source item’s primary mathematical identity truly belongs to Random Variables & Distributions.
+Proceed by resolving the expectation/variance/covariance material across all three verified sources before authoring. Reuse existing canonical Knowledge where appropriate, preserve covariance/PSD material already owned by Linear Algebra, and keep order statistics and stochastic processes outside this bounded scope unless a source item’s primary mathematical identity genuinely belongs to expectation, variance, or covariance.
 
 Do not process one book to completion before the others. Do not organize the public corpus by source numbering. Do not use a generic deferred state to avoid semantic decisions.
 
