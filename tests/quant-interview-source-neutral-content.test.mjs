@@ -40,6 +40,12 @@ const currentProblemSlugs = [
   'russian-roulette-after-survival',
   'candies-last-color-ordering',
   'golden-face-posterior',
+  'exponential-race-probability',
+  'exponential-memoryless-bus-wait',
+  'density-under-random-variable-transform',
+  'sum-of-two-uniforms-triangular-density',
+  'joint-normal-quadrant-conditioning',
+  'when-is-a-product-lognormal',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -71,6 +77,11 @@ const expectedKnowledgeTopics = new Map([
   ['finite-combinatorial-probability-modeling', ['probability-statistics', 'combinatorial-probability']],
   ['inclusion-exclusion-derangements', ['probability-statistics', 'combinatorial-probability']],
   ['bayes-rule-base-rates', ['probability-statistics', 'conditional-probability-bayes']],
+  ['random-variables-cdf-pmf-pdf', ['probability-statistics', 'random-variables-distributions']],
+  ['common-probability-distributions', ['probability-statistics', 'random-variables-distributions']],
+  ['random-variable-transformations-convolution', ['probability-statistics', 'random-variables-distributions']],
+  ['gaussian-lognormal-structure', ['probability-statistics', 'random-variables-distributions']],
+  ['limit-theorems-lln-clt', ['probability-statistics', 'random-variables-distributions']],
 ]);
 
 async function findProblem(slug) {
@@ -98,9 +109,9 @@ async function markdownSlugs(root) {
   return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
 }
 
-test('source-neutral regression enumerates the current 36 Problem and 28 Knowledge contracts', () => {
-  assert.equal(currentProblemSlugs.length, 36);
-  assert.equal(expectedKnowledgeTopics.size, 28);
+test('source-neutral regression enumerates the current 42 Problem and 33 Knowledge contracts', () => {
+  assert.equal(currentProblemSlugs.length, 42);
+  assert.equal(expectedKnowledgeTopics.size, 33);
 });
 
 test('public Problem schema is source-neutral', async () => {
@@ -154,6 +165,9 @@ test('current source-derived items remain auditable in hidden coverage with reso
     ['2.7::7', 'no-consecutive-heads-in-n-tosses'],
     ['2.7::14', 'random-subsets-containment-probability'],
     ['2.7::2', 'golden-face-posterior'],
+    ['2.6::2', 'exponential-race-probability'],
+    ['2.6::5', 'joint-normal-quadrant-conditioning'],
+    ['2.6::6', 'when-is-a-product-lognormal'],
   ]);
   for (const [key, slug] of expected) {
     const entry = items.get(key);
