@@ -1,4 +1,4 @@
-name: Quant Interview Random Variables Distributions Closure Verify
+name: Quant Interview Random Variables Distributions Closure Diagnostic
 
 on:
   push:
@@ -10,7 +10,7 @@ permissions:
   contents: write
 
 jobs:
-  verify-closure:
+  diagnose-closure:
     if: github.actor != 'github-actions[bot]'
     runs-on: ubuntu-latest
     steps:
@@ -20,19 +20,32 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - run: npm run test
-      - run: npm run check
-      - run: npm run build
-      - name: Record closure verification
+      - name: Diagnose sealed workstream
         run: |
+          set +e
+          npm run test > /tmp/test.log 2>&1
+          test_status=$?
+          npm run check > /tmp/check.log 2>&1
+          check_status=$?
+          npm run build > /tmp/build.log 2>&1
+          build_status=$?
+          set -e
+          cat /tmp/test.log
+          cat /tmp/check.log
+          cat /tmp/build.log
           mkdir -p .ci
           {
             printf 'commit=%s\n' "$GITHUB_SHA"
             printf 'run_id=%s\n' "$GITHUB_RUN_ID"
-            printf 'conclusion=success\n'
-          } > .ci/rvd-closure-green.txt
+            printf 'test_status=%s\n' "$test_status"
+            printf 'check_status=%s\n' "$check_status"
+            printf 'build_status=%s\n' "$build_status"
+          } > .ci/rvd-closure-diagnostic.txt
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .ci/rvd-closure-green.txt
-          git commit -m "chore: record RVD closure verification"
+          git add .ci/rvd-closure-diagnostic.txt
+          git commit -m "chore: record RVD closure diagnostic"
           git push
+          test "$test_status" -eq 0
+          test "$check_status" -eq 0
+          test "$build_status" -eq 0
