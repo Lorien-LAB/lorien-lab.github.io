@@ -101,3 +101,33 @@ test('random variable transform Problem derives the density CDF-first', async ()
   assert.match(text, /many-to-one|multiple.*branch/i);
   assert.match(text, /support/i);
 });
+
+test('sum of uniforms Problem derives the triangular density from support-aware convolution', async () => {
+  const text = await read('src/content/problems/probability/sum-of-two-uniforms-triangular-density.md');
+  assertS3(text, 'random-variables-distributions-004');
+  assert.match(text, /convolution/i);
+  assert.match(text, /0\s*<\s*z\s*<\s*1/);
+  assert.match(text, /2\s*-\s*z/);
+  assert.match(text, /support.*bound|integration.*bound/i);
+  assert.match(text, /triangular/i);
+});
+
+test('joint normal Problem uses decorrelation and limits independence to the Gaussian class', async () => {
+  const text = await read('src/content/problems/probability/joint-normal-quadrant-conditioning.md');
+  assertS3(text, 'random-variables-distributions-005');
+  assert.match(text, /1\/4/);
+  assert.match(text, /sqrt\(2\).*X\s*-\s*Y|√2.*X\s*-\s*Y/i);
+  assert.match(text, /joint.*normal/i);
+  assert.match(text, /zero covariance|uncorrelated/i);
+  assert.match(text, /independent/i);
+  assert.match(text, /not.*general|outside.*joint.*normal|arbitrary random variables/i);
+});
+
+test('lognormal product Problem makes the joint-law condition explicit', async () => {
+  const text = await read('src/content/problems/probability/when-is-a-product-lognormal.md');
+  assertS3(text, 'random-variables-distributions-006');
+  assert.match(text, /log\(XY\)|log X.*log Y/i);
+  assert.match(text, /jointly normal|joint normal/i);
+  assert.match(text, /independent.*sufficient|independent lognormal/i);
+  assert.match(text, /marginal.*insufficient|marginal.*not sufficient|marginal.*alone/i);
+});
