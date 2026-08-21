@@ -1,6 +1,6 @@
 ---
 problemId: expectation-variance-covariance-006
-title: Geometric Waiting Time: Mean and Variance
+title: "Geometric Waiting Time: Mean and Variance"
 description: Derive the mean and variance of the trial number of the first success from series identities and first-step expectation recursion.
 date: 2026-08-19
 domain: Mathematics & Statistics
