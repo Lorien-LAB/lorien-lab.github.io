@@ -9,6 +9,16 @@ function assertInterviewChecks(text, id) {
   assert.match(text, /^## Interview Checks$/m, `${id} missing Interview Checks`);
 }
 
+function assertS3(text, id) {
+  assert.match(text, new RegExp(`^problemId:\\s*${id}$`, 'm'));
+  assert.match(text, topicLine);
+  for (const heading of ['## Problem', '## Think Before Revealing', '## Solution', '## Why This Matters', '## Common Mistakes', '## Extensions']) {
+    assert.ok(text.includes(heading), `${id} missing ${heading}`);
+  }
+  assert.ok((text.match(/<details>/g) ?? []).length >= 2, `${id} needs two progressive hints`);
+  assert.doesNotMatch(text, /Green Book|Red Book|150 Most|source page|PDF page|source item/i);
+}
+
 test('expectation Knowledge separates linearity from independence', async () => {
   const text = await read('src/content/knowledge/concepts/expectation-linearity-indicators.md');
   assert.match(text, topicLine);
@@ -64,4 +74,40 @@ test('moments MGF Knowledge includes existence conditions and Normal example', a
   assert.match(text, /Cauchy/i);
   assert.match(text, /Normal|Gaussian/i);
   assertInterviewChecks(text, 'moments-moment-generating-functions');
+});
+
+test('pattern-count Problem uses indicators without requiring independence', async () => {
+  const text = await read('src/content/problems/probability/expected-pattern-count-by-indicators.md');
+  assertS3(text, 'expectation-variance-covariance-001');
+  assert.match(text, /indicator/i);
+  assert.match(text, /overlap/i);
+  assert.match(text, /does not require independence|linearity.*independ/i);
+  assert.match(text, /n\s*-\s*m\s*\+\s*1|starting positions/i);
+});
+
+test('first-special Problem derives the general expected position', async () => {
+  const text = await read('src/content/problems/probability/expected-position-of-first-special-card.md');
+  assertS3(text, 'expectation-variance-covariance-002');
+  assert.match(text, /1\s*\+\s*m\s*\/\s*\(n\s*\+\s*1\)|m\+n\+1/i);
+  assert.match(text, /10\.6/);
+  assert.match(text, /symmetr|indicator/i);
+});
+
+test('coupon collector Problem contains both canonical expectations', async () => {
+  const text = await read('src/content/problems/probability/coupon-collector-expectations.md');
+  assertS3(text, 'expectation-variance-covariance-003');
+  assert.match(text, /H_N|harmonic/i);
+  assert.match(text, /N.*H_N|N H_N/i);
+  assert.match(text, /1\s*-\s*\(1\s*-\s*1\s*\/\s*N\).*k|distinct/i);
+  assert.match(text, /geometric/i);
+  assert.match(text, /indicator/i);
+});
+
+test('fair-box Problem derives the general fair price and explains stopping boundary', async () => {
+  const text = await read('src/content/problems/probability/fair-box-opening-price-by-expectation.md');
+  assertS3(text, 'expectation-variance-covariance-012');
+  assert.match(text, /\(n\s*\+\s*1\)\s*\/\s*2/);
+  assert.match(text, /2\s*V\s*\/\s*\(n\s*\+\s*1\)|fair/i);
+  assert.match(text, /continue|continuation/i);
+  assert.match(text, /optimal stopping/i);
 });
