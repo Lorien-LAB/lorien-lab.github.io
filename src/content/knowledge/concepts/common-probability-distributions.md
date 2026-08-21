@@ -9,7 +9,7 @@ date: 2026-08-18
 tags: [Probability, Random Variables, Distributions]
 quantInterviewTopics: [probability-statistics, random-variables-distributions]
 featured: false
-related: []
+related: [expectation-variance-covariance-algebra, moments-moment-generating-functions]
 relatedNotes: []
 ---
 
