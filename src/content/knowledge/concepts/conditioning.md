@@ -9,7 +9,7 @@ date: 2026-08-16
 tags: [Probability, Conditional Probability, Problem Solving]
 quantInterviewTopics: [probability-statistics, conditional-probability-bayes]
 featured: false
-related: []
+related: [conditional-expectation-tower-property]
 relatedNotes: []
 ---
 
@@ -92,6 +92,8 @@ If the mechanism is missing, a unique numerical answer may not be justified.
 **First-step conditioning** is a reusable method: condition on the first random event or next state, write a self-consistency equation, and solve it. This can simplify stopping-time, game, and recursive probability questions.
 
 The method does not determine topic ownership by itself. If the main mathematical structure is a random walk, branching process, Markov chain, or expectation recursion, that problem should remain with its canonical stochastic-process or expectation topic even though conditioning appears inside the solution.
+
+Expectation-side conditioning, the law of total expectation, and the tower property are developed separately in `conditional-expectation-tower-property`.
 
 ## Recognition Pattern
 
