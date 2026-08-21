@@ -42,6 +42,7 @@ test('handoff records workstream 009 and advances to order statistics extremes',
     'fair-box-opening-price-by-expectation',
     'multiplicative-wealth-expected-growth',
   ]) assert.match(handoff, new RegExp(slug));
+  assert.match(handoff, /Historical corpus checkpoint after workstream 8:[^\n]*42 canonical Problems[^\n]*33 explicitly topic-classified/i);
   assert.match(handoff, /18[^\n]*(?:claimed|terminal|source|coverage)/i);
   assert.match(handoff, /55 canonical Problems/i);
   assert.match(handoff, /37 explicitly topic-classified|37 topic-classified/i);
