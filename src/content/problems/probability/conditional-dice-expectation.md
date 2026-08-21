@@ -8,10 +8,10 @@ category: Probability
 subcategories: [Expectation, Conditional Probability]
 tags: [Probability, Expectation, Interview]
 quantInterviewTopics: [probability-statistics, conditional-probability-bayes, expectation-variance-covariance]
-concepts: []
+concepts: [conditional-expectation-tower-property]
 techniques: [conditioning]
 prerequisites: []
-relatedProblems: []
+relatedProblems: [recursive-dice-game-expected-payoff]
 family: conditional-expectation
 mathDifficulty: 2
 insightDifficulty: 2
@@ -48,6 +48,8 @@ Therefore E[X] = 0.5 × 3.5 + 0.5 × 2 = 2.75.
 ## Why this problem matters
 
 The computation is elementary; the useful habit is recognizing that conditioning creates two simple branches immediately.
+
+This is a one-step conditional-expectation exercise. The related recursive dice problem returns to the same probabilistic state and therefore requires a fixed-point expectation equation.
 
 ## Common mistakes
 
