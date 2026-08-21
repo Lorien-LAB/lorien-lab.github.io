@@ -37,3 +37,31 @@ test('conditional expectation Knowledge teaches total expectation and tower prop
   assert.match(text, /Markov|stochastic process/i);
   assertInterviewChecks(text, 'conditional-expectation-tower-property');
 });
+
+test('variance covariance Knowledge owns scalar algebra but not matrix PSD', async () => {
+  const text = await read('src/content/knowledge/concepts/expectation-variance-covariance-algebra.md');
+  assert.match(text, topicLine);
+  assert.match(text, /Var\(X\).*E\[X\^2\]|E\[X\^2\].*E\[X\]/i);
+  assert.match(text, /Cov\(X,Y\)|Cov\(X,\s*Y\)/i);
+  assert.match(text, /E\[XY\].*E\[X\].*E\[Y\]/i);
+  assert.match(text, /bilinear|bilinearity/i);
+  assert.match(text, /Var\(X\+Y\)|2.*Cov/i);
+  assert.match(text, /independ.*zero covariance|zero covariance.*independ/i);
+  assert.match(text, /does not imply independence|not.*converse/i);
+  assert.match(text, /correlation/i);
+  assert.match(text, /matrix|PSD|positive semidefinite/i);
+  assertInterviewChecks(text, 'expectation-variance-covariance-algebra');
+});
+
+test('moments MGF Knowledge includes existence conditions and Normal example', async () => {
+  const text = await read('src/content/knowledge/concepts/moments-moment-generating-functions.md');
+  assert.match(text, topicLine);
+  assert.match(text, /raw moment/i);
+  assert.match(text, /central moment/i);
+  assert.match(text, /M_X|moment generating function|MGF/i);
+  assert.match(text, /derivative|M_X.*0/i);
+  assert.match(text, /neighborhood.*zero|exist.*near.*zero/i);
+  assert.match(text, /Cauchy/i);
+  assert.match(text, /Normal|Gaussian/i);
+  assertInterviewChecks(text, 'moments-moment-generating-functions');
+});
