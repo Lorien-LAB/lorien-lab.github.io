@@ -46,6 +46,19 @@ const currentProblemSlugs = [
   'sum-of-two-uniforms-triangular-density',
   'joint-normal-quadrant-conditioning',
   'when-is-a-product-lognormal',
+  'expected-pattern-count-by-indicators',
+  'expected-position-of-first-special-card',
+  'coupon-collector-expectations',
+  'recursive-dice-game-expected-payoff',
+  'expected-loops-from-random-pairings',
+  'geometric-waiting-time-mean-variance',
+  'normal-mgf-and-moments',
+  'expected-normal-cdf-of-normal-variable',
+  'optimal-hedge-ratio-by-variance-minimization',
+  'bernoulli-default-correlation-bounds',
+  'expected-radius-of-uniform-disk-point',
+  'fair-box-opening-price-by-expectation',
+  'multiplicative-wealth-expected-growth',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -82,6 +95,10 @@ const expectedKnowledgeTopics = new Map([
   ['random-variable-transformations-convolution', ['probability-statistics', 'random-variables-distributions']],
   ['gaussian-lognormal-structure', ['probability-statistics', 'random-variables-distributions']],
   ['limit-theorems-lln-clt', ['probability-statistics', 'random-variables-distributions']],
+  ['expectation-linearity-indicators', ['probability-statistics', 'expectation-variance-covariance']],
+  ['conditional-expectation-tower-property', ['probability-statistics', 'expectation-variance-covariance']],
+  ['expectation-variance-covariance-algebra', ['probability-statistics', 'expectation-variance-covariance']],
+  ['moments-moment-generating-functions', ['probability-statistics', 'expectation-variance-covariance']],
 ]);
 
 async function findProblem(slug) {
@@ -109,9 +126,9 @@ async function markdownSlugs(root) {
   return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
 }
 
-test('source-neutral regression enumerates the current 42 Problem and 33 Knowledge contracts', () => {
-  assert.equal(currentProblemSlugs.length, 42);
-  assert.equal(expectedKnowledgeTopics.size, 33);
+test('source-neutral regression enumerates the current 55 Problem and 37 Knowledge contracts', () => {
+  assert.equal(currentProblemSlugs.length, 55);
+  assert.equal(expectedKnowledgeTopics.size, 37);
 });
 
 test('public Problem schema is source-neutral', async () => {
@@ -168,12 +185,17 @@ test('current source-derived items remain auditable in hidden coverage with reso
     ['2.6::2', 'exponential-race-probability'],
     ['2.6::5', 'joint-normal-quadrant-conditioning'],
     ['2.6::6', 'when-is-a-product-lognormal'],
+    ['2.6::7', 'expected-normal-cdf-of-normal-variable'],
   ]);
   for (const [key, slug] of expected) {
     const entry = items.get(key);
     assert.equal(entry?.state, 'canonical-problem', `source item ${key} is not terminal canonical-problem coverage`);
     assert.deepEqual(entry?.canonicalProblems, [slug], `source item ${key} is not mapped to ${slug}`);
   }
+
+  const disk = items.get('2.6::4');
+  assert.equal(disk?.state, 'merged-duplicate');
+  assert.deepEqual(disk?.canonicalProblems, ['expected-radius-of-uniform-disk-point']);
 
   const taxonomy = JSON.parse(await readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'));
   const sourceTopicMap = JSON.parse(await readFile('src/data/quant-interview/topics/source-topic-map.json', 'utf8'));
