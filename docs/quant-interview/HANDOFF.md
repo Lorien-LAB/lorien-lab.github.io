@@ -284,6 +284,8 @@ Exactly **14 terminal claimed source rows** are closed for this workstream: 2 Gr
 - **Normal moments and expectation-heavy Gaussian calculations** remain outside this topic for **Expectation, Variance & Covariance**.
 - Meeting-time and broken-stick geometry remain under their actual geometric-probability identity instead of being reclassified merely because they appeared inside a distributions chapter.
 
+Historical corpus checkpoint after workstream 8: **42 canonical Problems** and **33 explicitly topic-classified Knowledge / Technique nodes**. This checkpoint is retained for repository lineage only.
+
 ## Completed cross-book workstream 9
 
 `probability-statistics-expectation-variance-covariance-009`
