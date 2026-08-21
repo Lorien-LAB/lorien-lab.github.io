@@ -178,3 +178,23 @@ test('Bernoulli default Problem derives feasible correlation from fixed marginal
   assert.match(text, /-1.*1|\[-1,\s*1\]/);
   assert.match(text, /not.*achievable|fixed marginals/i);
 });
+
+test('uniform-disk Problem derives radial density and expected radius', async () => {
+  const text = await read('src/content/problems/probability/expected-radius-of-uniform-disk-point.md');
+  assertS3(text, 'expectation-variance-covariance-011');
+  assert.match(text, /2\s*r\s*\/\s*R\^?2|radial density/i);
+  assert.match(text, /2\s*R\s*\/\s*3/);
+  assert.match(text, /polar|area/i);
+  assert.match(text, /unit disk|R\s*=\s*1/i);
+});
+
+test('multiplicative wealth Problem separates expected wealth from log growth', async () => {
+  const text = await read('src/content/problems/probability/multiplicative-wealth-expected-growth.md');
+  assertS3(text, 'expectation-variance-covariance-013');
+  assert.match(text, /product/i);
+  assert.match(text, /independent/i);
+  assert.match(text, /5\s*\/\s*4/);
+  assert.match(text, /\(5\s*\/\s*4\).*n|expected wealth/i);
+  assert.match(text, /log growth|geometric growth/i);
+  assert.match(text, /Kelly/i);
+});
