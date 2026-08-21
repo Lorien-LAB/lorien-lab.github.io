@@ -4,7 +4,7 @@
     "probability-statistics",
     "expectation-variance-covariance"
   ],
-  "status": "active",
+  "status": "complete",
   "sourceScopes": [
     {
       "source": "green-book",
@@ -49,5 +49,15 @@
       "reviewOutcome": "bounded-item-level-review",
       "reviewNote": "Claim items 4 and 7 only for disk expectation and the Normal-CDF expectation. Items 1, 2, 3, 5, 6, 8, and 9 are already terminal in workstream 008 and must not be re-owned; martingale, Brownian, Ito, and related stochastic-process material remains outside this workstream."
     }
-  ]
+  ],
+  "verification": {
+    "commit": "19064a55b4bbc6b7136b0494b0002e6c1113ca70",
+    "runId": 32509048173,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  }
 }
