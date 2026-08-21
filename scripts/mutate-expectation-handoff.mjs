@@ -79,6 +79,13 @@ if (!text.includes('## Completed cross-book workstream 9')) {
   text = text.replace(oldCorpus, section9);
 }
 
+const historical8 = 'Historical corpus checkpoint after workstream 8: **42 canonical Problems** and **33 explicitly topic-classified Knowledge / Technique nodes**. This checkpoint is retained for repository lineage only.\n\n';
+if (!text.includes('Historical corpus checkpoint after workstream 8:')) {
+  const marker = '## Completed cross-book workstream 9\n';
+  if (!text.includes(marker)) throw new Error('Could not find workstream 9 marker for historical checkpoint');
+  text = text.replace(marker, `${historical8}${marker}`);
+}
+
 const historyMarker = `Historical transition marker: **Expectation, Variance & Covariance** is fully closed. Its four canonical Knowledge nodes, thirteen new S3+ Problems, upgraded conditional-dice linkage, eighteen terminal hidden source rows, indicator/tower/scalar-covariance boundaries, and verified 55/37 source-neutral corpus contract are durable repository state. This paragraph records lineage only and does not authorize reopening that bounded topic.
 
 `;
