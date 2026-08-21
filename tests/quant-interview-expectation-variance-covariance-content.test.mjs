@@ -137,3 +137,44 @@ test('geometric moment Problem derives mean and variance by two routes', async (
   assert.match(text, /series|generating/i);
   assert.match(text, /first-step|recurs/i);
 });
+
+test('Normal MGF Problem derives the general MGF and standard moments', async () => {
+  const text = await read('src/content/problems/probability/normal-mgf-and-moments.md');
+  assertS3(text, 'expectation-variance-covariance-007');
+  assert.match(text, /exp\(|e\^/i);
+  assert.match(text, /mu.*t|μ.*t/i);
+  assert.match(text, /sigma.*t.*2|σ.*t/i);
+  assert.match(text, /mu.*2.*sigma.*2|variance.*mean/i);
+  assert.match(text, /E\[Z\^4\].*3|fourth.*moment.*3/i);
+});
+
+test('Normal-CDF expectation Problem derives the general tower-property formula', async () => {
+  const text = await read('src/content/problems/probability/expected-normal-cdf-of-normal-variable.md');
+  assertS3(text, 'expectation-variance-covariance-008');
+  assert.match(text, /Phi|Φ/);
+  assert.match(text, /sqrt\(1\s*\+\s*sigma|√.*1.*σ/i);
+  assert.match(text, /independent.*normal|independent.*Z/i);
+  assert.match(text, /tower|conditional expectation/i);
+  assert.match(text, /1\/2/);
+  assert.match(text, /probability integral transform|PIT/i);
+});
+
+test('hedge-ratio Problem derives the covariance over variance minimizer', async () => {
+  const text = await read('src/content/problems/probability/optimal-hedge-ratio-by-variance-minimization.md');
+  assertS3(text, 'expectation-variance-covariance-009');
+  assert.match(text, /Var\(R_A\s*-\s*h\s*R_B\)|variance.*hedg/i);
+  assert.match(text, /Cov.*Var|covariance.*variance/i);
+  assert.match(text, /rho|ρ/i);
+  assert.match(text, /sigma_A|σ_A/i);
+});
+
+test('Bernoulli default Problem derives feasible correlation from fixed marginals', async () => {
+  const text = await read('src/content/problems/probability/bernoulli-default-correlation-bounds.md');
+  assertS3(text, 'expectation-variance-covariance-010');
+  assert.match(text, /Bernoulli|indicator/i);
+  assert.match(text, /P\(A.*B\)|joint probability|intersection/i);
+  assert.match(text, /Frechet|Fréchet|lower bound.*upper bound/i);
+  assert.match(text, /Cov/i);
+  assert.match(text, /-1.*1|\[-1,\s*1\]/);
+  assert.match(text, /not.*achievable|fixed marginals/i);
+});
