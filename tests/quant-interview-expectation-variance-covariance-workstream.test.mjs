@@ -8,6 +8,24 @@ const workstreamPath = 'src/data/quant-interview/workstreams/probability-statist
 const keyOf = (entry) => `${entry.sourceSection}::${entry.sourceItem ?? ''}`;
 const terminalStates = new Set(['canonical-problem', 'merged-duplicate', 'variant', 'knowledge-only']);
 
+const expectedCoverageKeys = {
+  'green-book': [
+    '4.4.normal-moments::',
+    '4.5::',
+    '4.5.connecting-noodles::',
+    '4.5.optimal-hedge-ratio::',
+    '4.5.dice-game::',
+    '4.5.card-game::',
+    '4.5.coupon-collection::',
+    '4.5.joint-default-probability::',
+  ],
+  'red-book': [
+    '3.2.1::3.1', '3.2.1::3.3', '3.2.1::3.5', '3.2.1::3.6',
+    '3.2.1::3.12', '3.2.1::3.13', '3.2.1::3.37', '3.2.1::3.38',
+  ],
+  '150-most-frequently-asked': ['2.6::4', '2.6::7'],
+};
+
 async function context() {
   const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
   const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
@@ -66,6 +84,66 @@ test('existing workstream validator accepts workstream 009 registration', async 
   assert.doesNotThrow(() => validateTopicWorkstream(workstream, ctx));
 });
 
-void keyOf;
-void terminalStates;
-void markdownSlugs;
+test('Green normal moments map to expectation variance covariance at source-section level', async () => {
+  const map = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const row = map.entries.find((entry) => entry.source === 'green-book' && entry.sourceSection === '4.4.normal-moments');
+  assert.ok(row);
+  assert.deepEqual(row.canonicalTopics, ['expectation-variance-covariance']);
+});
+
+test('exactly eighteen source rows are claimed by workstream 009', async () => {
+  assert.equal(Object.values(expectedCoverageKeys).flat().length, 18);
+  for (const [source, keys] of Object.entries(expectedCoverageKeys)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    const rows = new Map(ledger.entries.map((entry) => [keyOf(entry), entry]));
+    for (const key of keys) assert.ok(rows.has(key), `${source} missing ${key}`);
+  }
+});
+
+test('claimed 009 rows have the approved terminal state distribution', async () => {
+  const counts = new Map();
+  for (const [source, keys] of Object.entries(expectedCoverageKeys)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    const rows = new Map(ledger.entries.map((entry) => [keyOf(entry), entry]));
+    for (const key of keys) {
+      const row = rows.get(key);
+      assert.ok(row);
+      assert.ok(terminalStates.has(row.state), `${source} ${key} is not terminal`);
+      assert.ok((row.resolutionNote ?? '').trim(), `${source} ${key} lacks resolutionNote`);
+      assert.ok(row.canonicalTopics.includes('expectation-variance-covariance'));
+      counts.set(row.state, (counts.get(row.state) ?? 0) + 1);
+    }
+  }
+  assert.equal(counts.get('canonical-problem'), 13);
+  assert.equal(counts.get('knowledge-only'), 2);
+  assert.equal(counts.get('variant'), 2);
+  assert.equal(counts.get('merged-duplicate'), 1);
+});
+
+test('workstream 008 terminal 150 rows remain outside expectation ownership', async () => {
+  const ledger = await readJson('src/data/quant-interview/coverage/150-most-frequently-asked.json');
+  const rows = new Map(ledger.entries.map((entry) => [keyOf(entry), entry]));
+  for (const key of ['2.6::1', '2.6::2', '2.6::3', '2.6::5', '2.6::6', '2.6::8', '2.6::9']) {
+    const row = rows.get(key);
+    assert.ok(row, `missing prior 008 row ${key}`);
+    assert.ok(!row.canonicalTopics.includes('expectation-variance-covariance'), `${key} was incorrectly re-owned by 009`);
+  }
+});
+
+test('coverage ledgers remain structurally valid while future Problem targets are staged', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const problemSlugs = await markdownSlugs('src/content/problems');
+  const knowledgeSlugs = await markdownSlugs('src/content/knowledge');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+  for (const source of Object.keys(expectedCoverageKeys)) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+      sourceTopicMap,
+      taxonomy,
+      problemSlugs,
+      knowledgeSlugs,
+      allowUnresolvedCanonicalRefs: true,
+    }));
+  }
+});
