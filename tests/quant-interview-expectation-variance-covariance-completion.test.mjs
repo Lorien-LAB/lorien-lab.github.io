@@ -8,6 +8,8 @@ const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
 test('expectation variance covariance workstream closes only with real verification evidence', async () => {
   const workstream = await readJson(workstreamPath);
   assert.equal(workstream.status, 'complete');
+  assert.equal(workstream.verification?.commit, '19064a55b4bbc6b7136b0494b0002e6c1113ca70');
+  assert.equal(workstream.verification?.runId, 32509048173);
   assert.match(workstream.verification?.commit ?? '', /^[0-9a-f]{40}$/);
   assert.ok(Number.isInteger(workstream.verification?.runId));
   assert.ok(workstream.verification.runId > 0);
