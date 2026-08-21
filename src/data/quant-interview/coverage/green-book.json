@@ -1134,11 +1134,16 @@
       "sourceSection": "4.4.normal-moments",
       "sourceItem": null,
       "canonicalTopics": [
-        "random-variables-distributions"
+        "expectation-variance-covariance"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "variant",
+      "canonicalProblems": [
+        "normal-mgf-and-moments"
+      ],
+      "canonicalKnowledge": [
+        "moments-moment-generating-functions"
+      ],
+      "resolutionNote": "Standard-normal MGF and moment calculations enrich the general Normal MGF/moments canonical Problem; workstream 008 intentionally left this expectation-heavy identity for the Expectation, Variance & Covariance workstream."
     },
     {
       "sourceSection": "4.5",
@@ -1146,9 +1151,14 @@
       "canonicalTopics": [
         "expectation-variance-covariance"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators",
+        "conditional-expectation-tower-property",
+        "expectation-variance-covariance-algebra"
+      ],
+      "resolutionNote": "The section-level theory is fused into reusable expectation, conditional-expectation, and scalar variance/covariance Knowledge. Its low-complexity interview tests remain publicly visible through Interview Checks rather than thin source-specific Problems."
     },
     {
       "sourceSection": "4.5.connecting-noodles",
@@ -1156,9 +1166,14 @@
       "canonicalTopics": [
         "expectation-variance-covariance"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "expected-loops-from-random-pairings"
+      ],
+      "canonicalKnowledge": [
+        "conditional-expectation-tower-property"
+      ],
+      "resolutionNote": "Ordinary size-reduction expectation recursion; no Markov-chain, martingale, or other stochastic-process machinery is required."
     },
     {
       "sourceSection": "4.5.optimal-hedge-ratio",
@@ -1166,9 +1181,14 @@
       "canonicalTopics": [
         "expectation-variance-covariance"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "optimal-hedge-ratio-by-variance-minimization"
+      ],
+      "canonicalKnowledge": [
+        "expectation-variance-covariance-algebra"
+      ],
+      "resolutionNote": "Scalar variance/covariance minimization defines the canonical identity; covariance-matrix PSD and spectral feasibility remain Linear Algebra ownership."
     },
     {
       "sourceSection": "4.5.dice-game",
@@ -1176,9 +1196,14 @@
       "canonicalTopics": [
         "expectation-variance-covariance"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "recursive-dice-game-expected-payoff"
+      ],
+      "canonicalKnowledge": [
+        "conditional-expectation-tower-property"
+      ],
+      "resolutionNote": "A self-consistency expectation equation creates a distinct recursive-payoff identity from the repository-authored one-step conditional-dice seed."
     },
     {
       "sourceSection": "4.5.card-game",
@@ -1186,9 +1211,14 @@
       "canonicalTopics": [
         "expectation-variance-covariance"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "expected-position-of-first-special-card"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators"
+      ],
+      "resolutionNote": "Random-permutation symmetry plus indicators determines the first-special position and remains distinct from pattern-count and coupon-count indicator constructions."
     },
     {
       "sourceSection": "4.5.sum-of-random-variables",
@@ -1206,9 +1236,15 @@
       "canonicalTopics": [
         "expectation-variance-covariance"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "coupon-collector-expectations"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators",
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "Geometric waiting increments give the full-collection time while indicators give the expected distinct-count formula; no process-level state machinery is required."
     },
     {
       "sourceSection": "4.5.joint-default-probability",
@@ -1216,9 +1252,15 @@
       "canonicalTopics": [
         "expectation-variance-covariance"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "bernoulli-default-correlation-bounds"
+      ],
+      "canonicalKnowledge": [
+        "expectation-variance-covariance-algebra",
+        "probability-axioms-derived-rules"
+      ],
+      "resolutionNote": "Fixed-marginal Bernoulli joint-probability bounds determine scalar covariance/correlation feasibility; matrix PSD remains a separate Linear Algebra identity."
     },
     {
       "sourceSection": "4.6",

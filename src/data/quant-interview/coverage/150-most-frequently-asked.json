@@ -605,6 +605,38 @@
         "limit-theorems-lln-clt"
       ],
       "resolutionNote": "The classical central limit theorem is fused with the Red CLT material into one canonical limit-theorem Knowledge node, including sqrt(n) scaling, convergence in distribution, and finite-variance boundaries."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "4",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "expected-radius-of-uniform-disk-point"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators",
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "The unit-disk expected-radius item is the R=1 instance of the general radius-R canonical Problem and contributes no separate reasoning identity."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "7",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "expected-normal-cdf-of-normal-variable"
+      ],
+      "canonicalKnowledge": [
+        "conditional-expectation-tower-property",
+        "gaussian-lognormal-structure"
+      ],
+      "resolutionNote": "The general Normal E[Phi(X)] identity owns the canonical Problem; the standard-normal special case from another source is retained as a variant and alternative method."
     }
   ]
 }

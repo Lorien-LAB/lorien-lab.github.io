@@ -1016,6 +1016,130 @@
         "limit-theorems-lln-clt"
       ],
       "resolutionNote": "The classical central-limit-theorem statement is fused with the corresponding limit-theorem material into one canonical LLN/CLT Knowledge node and remains publicly testable through Interview Checks."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.1",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators"
+      ],
+      "resolutionNote": "The fair-die expected value is a low-complexity expectation check and remains publicly testable through the canonical expectation Knowledge Interview Checks rather than a thin standalone Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.3",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "fair-box-opening-price-by-expectation"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators"
+      ],
+      "resolutionNote": "Once the symmetric box game is worth starting, continuation only improves after misses; the canonical mathematical load is expected winning position and fair value."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.5",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "multiplicative-wealth-expected-growth"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators"
+      ],
+      "resolutionNote": "Independent multiplicative factors give a product-expectation identity; expected wealth growth is kept distinct from log/geometric growth and Kelly optimization."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.6",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "geometric-waiting-time-mean-variance"
+      ],
+      "canonicalKnowledge": [
+        "expectation-variance-covariance-algebra",
+        "common-probability-distributions",
+        "conditional-expectation-tower-property"
+      ],
+      "resolutionNote": "The item asks for first-principles derivation of geometric mean and variance, not merely recognition of the Geometric distribution."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.12",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "expected-pattern-count-by-indicators"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators"
+      ],
+      "resolutionNote": "Overlapping pattern indicators can be dependent, but linearity of expectation still gives the expected count; this dependence boundary is the canonical insight."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.13",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "expected-radius-of-uniform-disk-point"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators",
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "The canonical page generalizes the disk to radius R and derives the expected radius; the betting wrapper is retained only as an extension."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.37",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "normal-mgf-and-moments"
+      ],
+      "canonicalKnowledge": [
+        "moments-moment-generating-functions",
+        "expectation-variance-covariance-algebra",
+        "gaussian-lognormal-structure"
+      ],
+      "resolutionNote": "The general Normal MGF and second-moment calculation owns the canonical identity and absorbs the standard-normal moment variant from another source."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.38",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "variant",
+      "canonicalProblems": [
+        "expected-normal-cdf-of-normal-variable"
+      ],
+      "canonicalKnowledge": [
+        "conditional-expectation-tower-property",
+        "gaussian-lognormal-structure"
+      ],
+      "resolutionNote": "The standard-normal E[Phi(X)]=1/2 case is a special case and alternative symmetry/PIT perspective inside the general Normal canonical Problem."
     }
   ]
 }
