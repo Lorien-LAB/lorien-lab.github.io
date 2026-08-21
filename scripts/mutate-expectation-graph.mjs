@@ -1,5 +1,6 @@
 import { readFile, writeFile } from 'node:fs/promises';
 
+// Temporary, idempotent branch helper. Removed before durable integration.
 const changes = new Map([
   ['src/content/knowledge/concepts/common-probability-distributions.md',
     '[expectation-variance-covariance-algebra, moments-moment-generating-functions]'],
