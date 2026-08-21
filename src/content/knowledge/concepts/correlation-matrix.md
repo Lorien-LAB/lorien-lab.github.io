@@ -9,7 +9,7 @@ date: 2026-08-16
 tags: [Correlation, Covariance, Linear Algebra, Statistics]
 quantInterviewTopics: [linear-algebra-matrix-methods, covariance-correlation-matrices]
 featured: false
-related: [positive-semidefinite-matrix]
+related: [positive-semidefinite-matrix, expectation-variance-covariance-algebra]
 relatedNotes: []
 ---
 
@@ -24,6 +24,8 @@ If both standard deviations are nonzero, their correlation is
 `Corr(X,Y) = Cov(X,Y) / (sigma_X sigma_Y)`.
 
 Correlation removes units and rescales covariance into the interval `[-1,1]`. Independence implies zero covariance, but zero covariance alone does not generally imply independence.
+
+The scalar expectation/variance/covariance identities behind these entries are developed in `expectation-variance-covariance-algebra`; this page owns the matrix-level normalization and joint-validity layer.
 
 ## From a covariance matrix to a correlation matrix
 
