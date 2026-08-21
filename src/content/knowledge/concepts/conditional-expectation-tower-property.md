@@ -9,7 +9,7 @@ date: 2026-08-19
 tags: [Probability, Expectation, Variance, Covariance]
 quantInterviewTopics: [probability-statistics, expectation-variance-covariance]
 featured: false
-related: []
+related: [conditioning, first-step-analysis]
 relatedNotes: []
 ---
 
@@ -61,7 +61,7 @@ $$
 E[X\mid Y]
 $$
 
-is itself a random variable: once the value of $Y$ is known, it becomes a function of that observed value.
+is itself a random variable: once the value of $Y$ is known, it becomes a function of that observed value. In plain notation this is often written `E[X | Y]`.
 
 In a discrete case one may write
 
