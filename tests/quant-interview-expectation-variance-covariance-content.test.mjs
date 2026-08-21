@@ -111,3 +111,29 @@ test('fair-box Problem derives the general fair price and explains stopping boun
   assert.match(text, /continue|continuation/i);
   assert.match(text, /optimal stopping/i);
 });
+
+test('recursive dice Problem solves a fixed-point expectation with value seven', async () => {
+  const text = await read('src/content/problems/probability/recursive-dice-game-expected-payoff.md');
+  assertS3(text, 'expectation-variance-covariance-004');
+  assert.match(text, /self-consistency|fixed-point|recurs/i);
+  assert.match(text, /7/);
+  assert.match(text, /conditional-dice-expectation|one-step/i);
+});
+
+test('random-pairing Problem derives the odd-harmonic expectation recurrence', async () => {
+  const text = await read('src/content/problems/probability/expected-loops-from-random-pairings.md');
+  assertS3(text, 'expectation-variance-covariance-005');
+  assert.match(text, /E_n|E\[.*n.*\]/i);
+  assert.match(text, /2n\s*-\s*1|2\s*n\s*-\s*1/i);
+  assert.match(text, /1\/3|odd.*harmonic|sum/i);
+  assert.match(text, /n\s*-\s*1|smaller/i);
+});
+
+test('geometric moment Problem derives mean and variance by two routes', async () => {
+  const text = await read('src/content/problems/probability/geometric-waiting-time-mean-variance.md');
+  assertS3(text, 'expectation-variance-covariance-006');
+  assert.match(text, /1\s*\/\s*p/);
+  assert.match(text, /1\s*-\s*p.*p\^?2|variance/i);
+  assert.match(text, /series|generating/i);
+  assert.match(text, /first-step|recurs/i);
+});
