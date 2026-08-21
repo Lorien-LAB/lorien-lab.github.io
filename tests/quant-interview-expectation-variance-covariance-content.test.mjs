@@ -198,3 +198,26 @@ test('multiplicative wealth Problem separates expected wealth from log growth', 
   assert.match(text, /log growth|geometric growth/i);
   assert.match(text, /Kelly/i);
 });
+
+test('existing conditional dice seed links to the new tower Knowledge and recursive dice Problem', async () => {
+  const text = await read('src/content/problems/probability/conditional-dice-expectation.md');
+  assert.match(text, /^concepts:\s*\[[^\]]*conditional-expectation-tower-property[^\]]*\]$/m);
+  assert.match(text, /^relatedProblems:\s*\[[^\]]*recursive-dice-game-expected-payoff[^\]]*\]$/m);
+  assert.match(text, /2\.75/);
+});
+
+test('existing Knowledge keeps original canonical ownership while linking to 009', async () => {
+  const cases = [
+    ['conditioning', /conditional-probability-bayes/, /conditional-expectation-tower-property/],
+    ['correlation-matrix', /covariance-correlation-matrices/, /expectation-variance-covariance-algebra/],
+    ['common-probability-distributions', /random-variables-distributions/, /moments-moment-generating-functions|expectation-variance-covariance-algebra/],
+    ['gaussian-lognormal-structure', /random-variables-distributions/, /moments-moment-generating-functions|conditional-expectation-tower-property/],
+    ['random-variable-transformations-convolution', /random-variables-distributions/, /conditional-expectation-tower-property|expectation-linearity-indicators/],
+    ['first-step-analysis', /random-walks-markov-chains/, /conditional-expectation-tower-property/],
+  ];
+  for (const [slug, ownership, related] of cases) {
+    const text = await read(`src/content/knowledge/concepts/${slug}.md`);
+    assert.match(text, ownership, `${slug} lost prior ownership`);
+    assert.match(text, related, `${slug} missing 009 related link`);
+  }
+});
