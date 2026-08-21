@@ -120,6 +120,20 @@ test('claimed 009 rows have the approved terminal state distribution', async () 
   assert.equal(counts.get('merged-duplicate'), 1);
 });
 
+test('semantic merge and variant rows resolve to the approved canonical Problems', async () => {
+  const green = await readJson('src/data/quant-interview/coverage/green-book.json');
+  const red = await readJson('src/data/quant-interview/coverage/red-book.json');
+  const q150 = await readJson('src/data/quant-interview/coverage/150-most-frequently-asked.json');
+  const greenRows = new Map(green.entries.map((entry) => [keyOf(entry), entry]));
+  const redRows = new Map(red.entries.map((entry) => [keyOf(entry), entry]));
+  const q150Rows = new Map(q150.entries.map((entry) => [keyOf(entry), entry]));
+
+  assert.deepEqual(greenRows.get('4.4.normal-moments::')?.canonicalProblems, ['normal-mgf-and-moments']);
+  assert.deepEqual(redRows.get('3.2.1::3.38')?.canonicalProblems, ['expected-normal-cdf-of-normal-variable']);
+  assert.deepEqual(q150Rows.get('2.6::4')?.canonicalProblems, ['expected-radius-of-uniform-disk-point']);
+  assert.deepEqual(q150Rows.get('2.6::7')?.canonicalProblems, ['expected-normal-cdf-of-normal-variable']);
+});
+
 test('workstream 008 terminal 150 rows remain outside expectation ownership', async () => {
   const ledger = await readJson('src/data/quant-interview/coverage/150-most-frequently-asked.json');
   const rows = new Map(ledger.entries.map((entry) => [keyOf(entry), entry]));
@@ -130,7 +144,7 @@ test('workstream 008 terminal 150 rows remain outside expectation ownership', as
   }
 });
 
-test('coverage ledgers remain structurally valid while future Problem targets are staged', async () => {
+test('all claimed 009 coverage rows resolve to real public targets', async () => {
   const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
   const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
   const problemSlugs = await markdownSlugs('src/content/problems');
@@ -143,7 +157,18 @@ test('coverage ledgers remain structurally valid while future Problem targets ar
       taxonomy,
       problemSlugs,
       knowledgeSlugs,
-      allowUnresolvedCanonicalRefs: true,
+      allowUnresolvedCanonicalRefs: false,
     }));
   }
+});
+
+test('009 knowledge-only rows remain publicly testable through Interview Checks', async () => {
+  const expectation = await readFile('src/content/knowledge/concepts/expectation-linearity-indicators.md', 'utf8');
+  const conditional = await readFile('src/content/knowledge/concepts/conditional-expectation-tower-property.md', 'utf8');
+  const algebra = await readFile('src/content/knowledge/concepts/expectation-variance-covariance-algebra.md', 'utf8');
+  for (const text of [expectation, conditional, algebra]) assert.match(text, /^## Interview Checks$/m);
+  assert.match(expectation, /fair die|six-sided die/i);
+  assert.match(expectation, /indicator/i);
+  assert.match(conditional, /tower|total expectation/i);
+  assert.match(algebra, /variance|covariance/i);
 });
