@@ -74,3 +74,5 @@ jobs:
           if [ "$CONCLUSION" != success ]; then
             exit 1
           fi
+
+# manual rerun marker: 2026-08-22 finishing verification
