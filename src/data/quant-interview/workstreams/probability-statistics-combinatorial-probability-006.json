@@ -1,0 +1,49 @@
+{
+  "id": "probability-statistics-combinatorial-probability-006",
+  "canonicalTopics": [
+    "probability-statistics",
+    "combinatorial-probability"
+  ],
+  "status": "complete",
+  "verification": {
+    "commit": "cfb9609a36d281cb8da5906f9e0781c224cf3850",
+    "runId": 32002926175,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["4.2"],
+      "evidencePageRanges": [
+        {"startPage": 80, "endPage": 88}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Combinatorial Probability directly claims the counting definitions plus poker hands, chess tournament, application letters, and birthday collision material. Hopping rabbit is recurrence/discrete counting, Screwy pirates 2 is combinatorial design, 100th digit is an algebra/binomial-expansion task, and Cubic of integer is modular/digit arithmetic; those reviewed items stay outside this bounded workstream for other canonical topics."
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["3.2.1"],
+      "evidencePageRanges": [
+        {"startPage": 95, "endPage": 96},
+        {"startPage": 112, "endPage": 119}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Only Q3.19, Q3.20, and Q3.21 are claimed here: knockout-tournament grouping, matching-sock finite counting, and two-aces sampling with or without replacement. Adjacent General probability items belong to Probability Foundations, Conditional Probability & Bayes, later Probability & Statistics topics, or Stochastic Processes and remain for those later canonical topics."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["2.7"],
+      "evidencePageRanges": [
+        {"startPage": 40, "endPage": 44},
+        {"startPage": 177, "endPage": 190}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Question 7 (no two consecutive heads) and Question 14 (random subset containment) are claimed through item-level mathematical-identity overrides from the broad Brainteasers editorial container. Neighboring recurrence-only, expectation, geometry, stochastic-process, and logic tasks are not absorbed into Combinatorial Probability."
+    }
+  ]
+}

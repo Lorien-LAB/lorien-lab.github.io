@@ -1,0 +1,55 @@
+{
+  "id": "probability-statistics-probability-foundations-005",
+  "canonicalTopics": [
+    "probability-statistics",
+    "probability-foundations"
+  ],
+  "canonicalExtensions": [
+    "kolmogorov-probability-axioms",
+    "derived-event-probability-rules",
+    "mutual-exclusivity-vs-independence"
+  ],
+  "status": "complete",
+  "verification": {
+    "commit": "a35de3269d3d8ecb3e9c9227e52e4203797f556b",
+    "runId": 31992298949,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["4.1"],
+      "evidencePageRanges": [
+        {"startPage": 75, "endPage": 80}
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["3.2.1"],
+      "evidencePageRanges": [
+        {"startPage": 92, "endPage": 96},
+        {"startPage": 112, "endPage": 119}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Only Q3.16, Q3.18, Q3.24, and Q3.25 are claimed by Probability Foundations; adjacent General questions remain for later canonical topics."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["1", "2.6", "2.7", "3.6"],
+      "evidencePageRanges": [
+        {"startPage": 12, "endPage": 12},
+        {"startPage": 19, "endPage": 20},
+        {"startPage": 40, "endPage": 44},
+        {"startPage": 134, "endPage": 140},
+        {"startPage": 177, "endPage": 178}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "First Look Q6 and Brainteasers Q3 are in scope; the formal Probability/Stochastic Calculus questions inspected here remain for later canonical topics and are not falsely closed as Foundations coverage."
+    }
+  ]
+}

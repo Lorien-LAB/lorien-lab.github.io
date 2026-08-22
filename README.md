@@ -52,37 +52,33 @@ Empirical reproduction of an academic paper or broker report belongs in the **Re
 
 ### Quant Interview Problem Bank
 
-For all future Quant Interview chats and agents, the repository-memory entry point is **`docs/quant-interview/README.md`**. Treat that documentation plus the current machine-readable manifests/TOCs as authoritative rather than relying on prior conversation history.
+For all future Quant Interview chats and agents, the repository-memory entry point is **`docs/quant-interview/README.md`**. Treat that documentation and the current machine-readable state as authoritative repository memory rather than relying on prior conversation history.
 
-The Quant Interview system separates reusable Knowledge from practice objects and source provenance:
+The Quant Interview system is now **Topic-first**. Green Book, Red Book, and 150 Questions are internal evidence sources processed together by canonical topic workstream; they are not the public hierarchy.
 
 ```text
-src/content/knowledge/          reusable concepts and Problem Solving Techniques
-src/content/problems/           first-class Problem records
-src/content/problem-sources/    Green Book, Red Book, and future source containers
-src/data/quant-interview/       edition-safe ingestion manifests and TOC seeds
-docs/quant-interview/           repository memory and agent handoff protocol
+src/content/knowledge/                         canonical concepts and Problem Solving Techniques
+src/content/problems/                          canonical Problem records
+src/data/quant-interview/topics/               canonical taxonomy + hidden source-topic routing
+src/data/quant-interview/coverage/             hidden source coverage / dedup audit
+src/data/quant-interview/toc/                  verified source TOCs
+src/data/quant-interview/*.json                source-file verification + ingestion manifests
+docs/quant-interview/                          durable repository memory and Agent Protocol
 ```
 
-Canonical public Problem routes are `/problems/<slug>/`. Books are **sources**, not Knowledge types. Problems never become a fifth `knowledge.type` value.
+Canonical public Problem routes remain `/problems/<slug>/`. Problems never become a fifth Knowledge type. Problem-solving methods such as Conditioning, First-Step Analysis, Symmetry, and Recursion remain ordinary Knowledge entries with `type: concept` and `category: Problem Solving Techniques`.
 
-Problem-solving methods such as Conditioning, First-Step Analysis, and Recursion are ordinary Knowledge entries with `type: concept` and `category: Problem Solving Techniques`. The Problem fields `concepts`, `techniques`, and `prerequisites` reference Knowledge slugs; `relatedProblems` references canonical Problem slugs.
+Every source-derived public Problem uses an **independent formulation** and independently derived solution. Do not host source PDFs or scans. Do not copy answer keys or large verbatim book passages. Public Knowledge and Problems should not expose original book, chapter, question-number, or page-number provenance; that evidence lives in hidden repository infrastructure.
 
-Every source-derived Problem must preserve provenance, but its public statement should use an **independent formulation** and its solution should be independently derived. Do not host source PDFs or scans. Do not copy answer keys or large verbatim book passages. Do not invent authors, publication years, ISBNs, official URLs, chapter labels, or source-problem identifiers when they have not been verified.
+#### Edition-safe, Topic-first ingestion
 
-A source record may legitimately contain zero indexed Problems while the architecture is being populated. All displayed Problem, Concept, Technique, and Source counts must be derived from actual content rather than hard-coded targets.
+Before a source can contribute to problem-level ingestion, **pin an exact edition**, inspect the actual source file, and record its cryptographic identity in the ingestion manifest. Source-file verification establishes source identity and structure; it does not establish complete problem coverage.
 
-#### Edition-safe ingestion
+All three current sources are source-file-verified and edition-pinned. Completeness is tracked separately through the hidden coverage ledger. Source page evidence is stored as `evidencePageRanges`; those ranges may overlap between semantically distinct source items because physical evidence is reusable while semantic ownership remains explicit.
 
-Before page- or problem-number-based ingestion, **pin an exact edition**. Work-level identity is not sufficient because different editions can change pagination, ordering, and question counts.
+The canonical ingestion unit is one bounded topic/subtopic workstream across all mapped verified sources. For each workstream: resolve the source-topic mappings, read all relevant source material, inventory concepts/problems/variants/guidance, perform semantic deduplication, update canonical Knowledge first, update canonical Problems only when genuinely distinct, reconcile every inspected source item in the hidden coverage ledger, then run validation and review the topic-only diff.
 
-Bibliographic edition pinning and source-file readiness are separate states. An edition may be pinned from reliable edition-distinguishing evidence while the manifest remains `awaiting-source-file` with `sourceFile: null` and `batches: []`. No ingestion batch may be created until the actual source file is available, inspected, and recorded in the manifest.
-
-Green Book and Red Book currently remain `work-identified`; their user-supplied TOCs are structural seeds only. The 2013 first edition of *150 Most Frequently Asked Questions on Quant Interviews* is bibliographically pinned, but still awaits the actual source file before batch ingestion.
-
-The validator in `src/lib/quantInterviewIngestion.mjs` rejects batches when the edition is not pinned, when the source file is not verified, when batch IDs duplicate, or when page ranges are invalid/overlapping. This gate must pass before source-derived Problem Markdown is created.
-
-A source file is used only as private ingestion evidence. Do not commit the copyrighted PDF or scans into the public website repository. Public output remains independently formulated Problem statements, original derivations, metadata, and provenance references.
+Text similarity alone is not sufficient to merge Problems. Compare state, target, constraints, underlying structure, and solution insight. Equivalent questions become one canonical Problem; useful differences become alternate methods, Interview Checks, or Variants / Extensions rather than duplicate public pages.
 
 Hints and full solutions should use native disclosure markup so a reader can attempt the Problem before revealing help:
 
@@ -98,33 +94,7 @@ An independently derived solution.
 </details>
 ```
 
-Example original Problem frontmatter:
-
-```yaml
----
-problemId: lorien-example-001
-title: Example Original Problem
-description: A short original problem used to demonstrate the authoring contract.
-date: 2026-08-16
-originType: original
-domain: Mathematics & Statistics
-category: Probability
-subcategories: []
-tags: [Interview]
-concepts: []
-techniques: [conditioning]
-prerequisites: []
-relatedProblems: []
-mathDifficulty: 2
-insightDifficulty: 2
-interviewDifficulty: 2
-estimatedMinutes: 8
-status: solved
-featured: false
----
-```
-
-Before merge, schema validation, relationship validation, ingestion-manifest validation, `npm run test`, `npm run check`, and `npm run build` must pass. Missing relationships should be fixed rather than rendered as dead links.
+Before integration, schema validation, relationship validation, ingestion-manifest validation, taxonomy/source-topic/coverage validation, `npm run test`, `npm run check`, and `npm run build` must pass. Missing relationships or pending coverage must be fixed or left explicitly pending rather than hidden.
 
 ### Knowledge Base
 

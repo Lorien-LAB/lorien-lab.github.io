@@ -4,10 +4,9 @@ import { slugOf } from '../lib/problemRelations';
 
 interface Props {
   entry: CollectionEntry<'problems'>;
-  sourceTitle?: string;
 }
 
-const { entry, sourceTitle } = Astro.props;
+const { entry } = Astro.props;
 const base = import.meta.env.BASE_URL;
 const href = `${base}problems/${slugOf(entry.id)}/`;
 const secondary = entry.data.subcategories[0];
@@ -15,7 +14,7 @@ const secondary = entry.data.subcategories[0];
 <a class="problem-card" href={href}>
   <div class="problem-card-top">
     <span>{entry.data.problemId}</span>
-    {sourceTitle && <span>{sourceTitle}</span>}
+    <span>{entry.data.status}</span>
   </div>
   <h3>{entry.data.title}</h3>
   <p>{entry.data.description}</p>
@@ -28,5 +27,5 @@ const secondary = entry.data.subcategories[0];
   </div>}
 </a>
 <style>
-.problem-card{display:block;padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--ink);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.problem-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 48%,var(--border));box-shadow:var(--shadow);color:var(--ink)}.problem-card-top,.problem-meta{display:flex;justify-content:space-between;gap:14px;color:var(--muted);font:600 .66rem var(--font-mono);text-transform:uppercase;letter-spacing:.04em}.problem-card h3{margin:12px 0 8px;font-size:1.08rem;letter-spacing:-.02em}.problem-card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}.problem-meta{margin-top:16px;padding-top:12px;border-top:1px solid var(--border);text-transform:none}.techniques{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.techniques span{padding:4px 7px;border-radius:999px;background:var(--surface-2);color:var(--muted);font:600 .64rem var(--font-mono)}
+.problem-card{display:block;padding:20px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);color:var(--ink);transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease}.problem-card:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 48%,var(--border));box-shadow:var(--shadow);color:var(--ink)}.problem-card-top,.problem-meta{display:flex;justify-content:space-between;gap:14px;color:var(--muted);font:600 .66rem var(--font-mono);text-transform:uppercase;letter-spacing:.04em}.problem-card h3{margin:12px 0 8px;font-size:1.08rem;letter-spacing:-.02em}.problem-card p{margin:0;color:var(--muted);font-size:.9rem;line-height:1.55}.problem-meta{margin-top:16px;padding-top:12px;border-top:1px solid var(--border);text-transform:none}.techniques{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}.techniques span{padding:4px 7px;border-radius:999px;background:var(--surface-2);color:var(--muted);font:600 .64rem var(--font-mono)}@media(max-width:520px){.problem-meta{flex-direction:column;gap:7px}.problem-meta span:last-child{white-space:nowrap}}
 </style>

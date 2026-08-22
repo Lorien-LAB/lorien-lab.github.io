@@ -14,5 +14,9 @@ export default defineConfig({
     '/projects': '/research-projects',
     '/knowledge/reproductions': '/projects/reproductions',
     '/knowledge/reproductions/[...id]': '/projects/reproductions/[...id]',
+    '/knowledge/quant-interview/sources': '/knowledge/quant-interview',
+    '/knowledge/quant-interview/sources/green-book': '/knowledge/quant-interview',
+    '/knowledge/quant-interview/sources/red-book': '/knowledge/quant-interview',
+    '/knowledge/quant-interview/sources/150-most-frequently-asked': '/knowledge/quant-interview',
   },
 });

@@ -4,11 +4,14 @@ displayTitle: A Practical Guide to Quantitative Finance Interviews
 canonicalTitle: A Practical Guide to Quantitative Finance Interviews
 aliases: [Green Book, 绿皮书]
 sourceType: book
-description: Work-level source record for Xinfeng Zhou's quantitative-finance interview guide. The work identity is verified, but no exact edition is pinned yet, so chapter and problem numbering must not be ingested until the source file is matched to a specific edition.
+description: Verified source record for Xinfeng Zhou's quantitative-finance interview guide. The user-supplied file is the First Edition (2008); source provenance is retained for internal ingestion and audit rather than public hierarchy.
 authors: [Xinfeng Zhou]
-editionStatus: work-identified
-ingestionStatus: source-only
+year: 2008
+edition: First Edition (2008)
+editionStatus: edition-pinned
+ingestionStatus: manifest-ready
 bibliographicUrl: https://books.google.com/books?id=QYSMzQEACAAJ
+isbn: '9781438236667'
 ---
 
-This source record identifies the book commonly called the Green Book while deliberately keeping edition-specific fields empty. Bulk ingestion begins only after an exact edition and source file are pinned in the ingestion manifest.
+The user-supplied source file has been verified against the title/edition page, copyright notice, table of contents, index end, and back-cover ISBN. The copyrighted PDF is not committed to the public repository. Problem-level coverage remains incomplete until Topic-first cross-book workstreams reconcile the mapped source material.

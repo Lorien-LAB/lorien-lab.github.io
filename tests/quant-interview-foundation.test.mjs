@@ -11,8 +11,6 @@ const requiredFiles = [
   'src/pages/problems/index.astro',
   'src/pages/problems/[...slug].astro',
   'src/pages/knowledge/quant-interview/index.astro',
-  'src/pages/knowledge/quant-interview/sources/index.astro',
-  'src/pages/knowledge/quant-interview/sources/[...slug].astro',
 ];
 
 test('quant interview foundation exposes all required surfaces', async () => {
@@ -50,14 +48,15 @@ test('knowledge detail reverse-links associated problems', async () => {
   assert.match(page, /Related Problems/);
 });
 
-test('problem bank provides static rows and progressive filters', async () => {
+test('problem bank provides static rows and progressive topic filters', async () => {
   const page = await readFile('src/pages/problems/index.astro', 'utf8');
   for (const marker of [
     'data-problem-row',
     'data-problem-search',
-    'data-source-filter',
+    'data-topic-filter',
     'data-difficulty-filter',
     'data-concept-filter',
     'data-technique-filter',
   ]) assert.ok(page.includes(marker), `missing ${marker}`);
+  assert.doesNotMatch(page, /data-source-filter/);
 });

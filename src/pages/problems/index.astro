@@ -3,27 +3,26 @@ import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import ProblemCard from '../../components/ProblemCard.astro';
 import { slugOf, validateProblemRelationships } from '../../lib/problemRelations';
+import { expandTopicIdsWithAncestors, flattenPublicQuantInterviewTopics } from '../../lib/quantInterviewPublicTopics';
 
 const problems = (await getCollection('problems')).sort((a, b) =>
   a.data.problemId.localeCompare(b.data.problemId, undefined, { numeric: true })
 );
-const sources = await getCollection('problemSources');
 const knowledge = await getCollection('knowledge');
-validateProblemRelationships(problems, sources, knowledge);
+validateProblemRelationships(problems, knowledge);
 
-const sourceBySlug = new Map(sources.map((source) => [slugOf(source.id), source]));
 const knowledgeBySlug = new Map(knowledge.map((entry) => [slugOf(entry.id), entry]));
-const sourceOptions = [...new Set(problems.map((p) => p.data.source).filter((value): value is string => Boolean(value)))].sort();
+const topicOptions = flattenPublicQuantInterviewTopics();
 const categoryOptions = [...new Set(problems.map((p) => p.data.category))].sort();
 const conceptOptions = [...new Set(problems.flatMap((p) => p.data.concepts))].sort();
 const techniqueOptions = [...new Set(problems.flatMap((p) => p.data.techniques))].sort();
 ---
-<BaseLayout title="Quant Interview Problem Bank · Lorien Lab" description="A structured quantitative interview problem bank connected to concepts, solution techniques, and source provenance.">
+<BaseLayout title="Quant Interview Problem Bank · Lorien Lab" description="A structured quantitative interview problem bank connected to canonical topics, concepts, and reusable solution techniques.">
   <header class="page-hero problem-hero">
     <div class="container">
       <div class="mono-label">Quant Interview</div>
       <h1>Problems become<br/>reusable knowledge.</h1>
-      <p>Practice probability, stochastic processes, statistics, market reasoning, and other quantitative interview problems while keeping each problem connected to the concepts and techniques that solve it.</p>
+      <p>Practice quantitative interview problems through the same canonical topic structure used by the Knowledge System, with each problem connected to the concepts and techniques that solve it.</p>
     </div>
   </header>
 
@@ -37,8 +36,8 @@ const techniqueOptions = [...new Set(problems.flatMap((p) => p.data.techniques))
       {problems.length > 0 ? <>
         <div class="filter-bar" data-problem-controls>
           <label class="search-field"><span>Search</span><input type="search" placeholder="Search title, concept, technique…" data-problem-search /></label>
+          <label><span>Topic</span><select data-topic-filter><option value="">All topics</option>{topicOptions.map((topic) => <option value={topic.id}>{topic.parentId ? `— ${topic.title}` : topic.title}</option>)}</select></label>
           <label><span>Category</span><select data-category-filter><option value="">All categories</option>{categoryOptions.map((category) => <option value={category}>{category}</option>)}</select></label>
-          <label><span>Source</span><select data-source-filter><option value="">All sources</option><option value="original">Lorien Lab Original</option>{sourceOptions.map((source) => <option value={source}>{sourceBySlug.get(source)?.data.shortTitle ?? source}</option>)}</select></label>
           <label><span>Interview difficulty</span><select data-difficulty-filter><option value="">All levels</option>{[1,2,3,4,5].map((value) => <option value={String(value)}>{value}/5</option>)}</select></label>
           <label><span>Concept</span><select data-concept-filter><option value="">All concepts</option>{conceptOptions.map((slug) => <option value={slug}>{knowledgeBySlug.get(slug)?.data.title ?? slug}</option>)}</select></label>
           <label><span>Technique</span><select data-technique-filter><option value="">All techniques</option>{techniqueOptions.map((slug) => <option value={slug}>{knowledgeBySlug.get(slug)?.data.title ?? slug}</option>)}</select></label>
@@ -47,8 +46,7 @@ const techniqueOptions = [...new Set(problems.flatMap((p) => p.data.techniques))
 
         <div class="problem-grid" data-problem-list>
           {problems.map((problem) => {
-            const sourceSlug = problem.data.source ?? 'original';
-            const sourceTitle = problem.data.source ? sourceBySlug.get(problem.data.source)?.data.shortTitle : 'Lorien Lab Original';
+            const expandedTopics = expandTopicIdsWithAncestors(problem.data.quantInterviewTopics);
             const searchText = [
               problem.data.title,
               problem.data.description,
@@ -56,7 +54,7 @@ const techniqueOptions = [...new Set(problems.flatMap((p) => p.data.techniques))
               problem.data.domain,
               problem.data.category,
               ...problem.data.subcategories,
-              sourceSlug,
+              ...expandedTopics,
               ...problem.data.concepts,
               ...problem.data.techniques,
               ...problem.data.tags,
@@ -65,12 +63,12 @@ const techniqueOptions = [...new Set(problems.flatMap((p) => p.data.techniques))
             return <div
               data-problem-row
               data-search={searchText}
+              data-topics={expandedTopics.join('|')}
               data-category={problem.data.category}
-              data-source={sourceSlug}
               data-difficulty={String(problem.data.interviewDifficulty)}
               data-concepts={problem.data.concepts.join('|')}
               data-techniques={problem.data.techniques.join('|')}
-            ><ProblemCard entry={problem} sourceTitle={sourceTitle} /></div>;
+            ><ProblemCard entry={problem} /></div>;
           })}
         </div>
         <p class="no-results" data-problem-no-results hidden>No problems match the current filters.</p>
@@ -82,8 +80,8 @@ const techniqueOptions = [...new Set(problems.flatMap((p) => p.data.techniques))
 <script is:inline>
 (() => {
   const search = document.querySelector('[data-problem-search]');
+  const topic = document.querySelector('[data-topic-filter]');
   const category = document.querySelector('[data-category-filter]');
-  const source = document.querySelector('[data-source-filter]');
   const difficulty = document.querySelector('[data-difficulty-filter]');
   const concept = document.querySelector('[data-concept-filter]');
   const technique = document.querySelector('[data-technique-filter]');
@@ -93,20 +91,21 @@ const techniqueOptions = [...new Set(problems.flatMap((p) => p.data.techniques))
 
   const apply = () => {
     const q = (search?.value || '').trim().toLowerCase();
+    const topicValue = topic?.value || '';
     const categoryValue = category?.value || '';
-    const sourceValue = source?.value || '';
     const difficultyValue = difficulty?.value || '';
     const conceptValue = concept?.value || '';
     const techniqueValue = technique?.value || '';
     let visible = 0;
 
     rows.forEach((row) => {
+      const topics = (row.dataset.topics || '').split('|').filter(Boolean);
       const concepts = (row.dataset.concepts || '').split('|').filter(Boolean);
       const techniques = (row.dataset.techniques || '').split('|').filter(Boolean);
       const matches =
         (!q || (row.dataset.search || '').includes(q)) &&
+        (!topicValue || topics.includes(topicValue)) &&
         (!categoryValue || row.dataset.category === categoryValue) &&
-        (!sourceValue || row.dataset.source === sourceValue) &&
         (!difficultyValue || row.dataset.difficulty === difficultyValue) &&
         (!conceptValue || concepts.includes(conceptValue)) &&
         (!techniqueValue || techniques.includes(techniqueValue));
@@ -117,14 +116,22 @@ const techniqueOptions = [...new Set(problems.flatMap((p) => p.data.techniques))
     if (noResults) noResults.hidden = visible !== 0;
   };
 
-  [search, category, source, difficulty, concept, technique].forEach((control) =>
+  const requestedTopic = new URLSearchParams(window.location.search).get('topic');
+  if (requestedTopic && topic && [...topic.options].some((option) => option.value === requestedTopic)) {
+    topic.value = requestedTopic;
+  }
+
+  [search, topic, category, difficulty, concept, technique].forEach((control) =>
     control?.addEventListener(control === search ? 'input' : 'change', apply)
   );
   reset?.addEventListener('click', () => {
-    [search, category, source, difficulty, concept, technique].forEach((control) => { if (control) control.value = ''; });
+    [search, topic, category, difficulty, concept, technique].forEach((control) => { if (control) control.value = ''; });
+    const cleanUrl = `${window.location.pathname}${window.location.hash}`;
+    window.history.replaceState({}, '', cleanUrl);
     apply();
     search?.focus();
   });
+  apply();
 })();
 </script>
 

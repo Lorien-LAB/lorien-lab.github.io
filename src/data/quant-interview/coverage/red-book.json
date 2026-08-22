@@ -1,0 +1,1145 @@
+{
+  "source": "red-book",
+  "version": 1,
+  "entries": [
+    {
+      "sourceSection": "1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.8",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.9",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-process-formats"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.10",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-preparation"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.11",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-preparation"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.12",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "reasoning-communication"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "replication-hedging"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "trees-monte-carlo-options"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "incomplete-markets"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "replication-hedging"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "trees-monte-carlo-options"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "incomplete-markets"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-statistics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-statistics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "stochastic-processes-stochastic-calculus"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-statistics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.3.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "stochastic-processes-stochastic-calculus"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods",
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "calculus-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "data-structures",
+        "cpp-language-memory",
+        "object-oriented-cpp"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "8.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "8.2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "8.3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "9",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-strategy-communication"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "9.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "10",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "10.1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "10.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "bibliography",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "index",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.26",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "variant",
+      "canonicalProblems": [
+        "correlation-matrix-parameter-range"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Same joint-correlation feasibility family, posed as validity of a fully specified triple and naturally generalizable to an admissible interval."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.35",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "covariance-matrix-positive-semidefinite-proof"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "The question says positive definite, while its solution correctly observes covariance matrices are only guaranteed positive semidefinite. Canonical wording uses the correct PSD claim."
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": "6.9",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Definition/properties material enriches canonical PSD/PD Knowledge and interview checks."
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": "6.10",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "matrix-square-root-and-cholesky-factor"
+      ],
+      "canonicalKnowledge": [
+        "eigenbasis-decomposition",
+        "lu-cholesky-decomposition"
+      ],
+      "resolutionNote": "This task is the semantic anchor for the canonical matrix-square-root and Gram-factor Problem. Its entrywise square-root route is retained as an alternative method while the canonical page foregrounds reusable spectral and Cholesky structure."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.16",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Knowledge-only equiprobable weekday-modeling self-test retained in symmetry-equiprobability-geometric-probability; it does not warrant a separate S3+ Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.18",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "higher-card-by-symmetry"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Merged duplicate of higher-card-by-symmetry; it contributes the same tie/non-tie partition and symmetry route."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.24",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "romeo-juliet-meeting-probability"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Distinct continuous geometric-probability task represented by romeo-juliet-meeting-probability and unit-square modeling Knowledge."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.25",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "drunk-passenger-last-seat"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Merged duplicate of drunk-passenger-last-seat; wording differs but the displacement process and two-special-seat reasoning identity are the same."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.19",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "top-two-meet-in-knockout-final"
+      ],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling",
+        "counting-permutations-combinations"
+      ],
+      "resolutionNote": "Merged cross-book duplicate of top-two-meet-in-knockout-final. Its mathematical identity is the same relative-placement question as the existing knockout-tournament family, so it enriches hidden evidence instead of creating a second public page."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.20",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling"
+      ],
+      "resolutionNote": "The matching-socks task is a compact finite-state check rather than a separate S3+ reasoning family. It remains publicly visible as an Interview Check in finite-combinatorial-probability-modeling."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.21",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling",
+        "counting-permutations-combinations"
+      ],
+      "resolutionNote": "The two-aces with/without-replacement task is preserved as a public Interview Check that contrasts changing denominators with the equivalent unordered combination model; it does not warrant a duplicate standalone Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.10",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "hidden-coin-posterior-after-heads"
+      ],
+      "canonicalKnowledge": [
+        "conditioning",
+        "bayes-rule-base-rates"
+      ],
+      "resolutionNote": "Merged duplicate of the latent double-headed-coin posterior family; its one-in-ten prior and three-head numerical case are retained as a variant inside the general canonical page."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.11",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "bayes-rule-base-rates",
+        "conditioning"
+      ],
+      "resolutionNote": "The repeated-heads question primarily tests prior and model ambiguity. Its interview value remains visible through Bayes and conditioning Interview Checks rather than creating a second coin Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.14",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "two-children-information-protocol"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Merged duplicate of the two-child information family; the canonical page handles the observation mechanism explicitly instead of preserving source-specific wording."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.15",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "variant",
+      "canonicalProblems": [
+        "two-children-information-protocol"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Named-child wording is observation-protocol dependent. The source shortcut is not copied blindly; the canonical Problem corrects the ambiguity by requiring a declared naming and information-generation mechanism before a numerical answer."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.17",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "russian-roulette-after-survival"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Merged duplicate of the adjacent-bullet survival-conditioning family; the survived-trigger information and one-quarter no-spin versus one-third spin comparison resolve to the shared canonical Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.28",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "random-variables-cdf-pmf-pdf",
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "The uniform-distribution CDF task is a compact representation check preserved in the CDF/PMF/PDF and common-distributions Interview Checks; it does not require a separate canonical Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.30",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "The Cauchy example is preserved as a heavy-tail and moment-existence boundary check in common-probability-distributions, including the distinction between symmetry/principal value and a proper finite expectation."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.31",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "density-under-random-variable-transform"
+      ],
+      "canonicalKnowledge": [
+        "random-variables-cdf-pmf-pdf",
+        "random-variable-transformations-convolution"
+      ],
+      "resolutionNote": "Distinct distribution-pushforward reasoning family represented by density-under-random-variable-transform. The canonical page derives the transformed CDF first, then the inverse-Jacobian rule and many-to-one branch correction."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.33",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "sum-of-two-uniforms-triangular-density"
+      ],
+      "canonicalKnowledge": [
+        "common-probability-distributions",
+        "random-variable-transformations-convolution"
+      ],
+      "resolutionNote": "Distinct independent-sum convolution family represented by sum-of-two-uniforms-triangular-density; the canonical solution derives the piecewise integration bounds from the simultaneous support restrictions."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.34",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "limit-theorems-lln-clt"
+      ],
+      "resolutionNote": "The classical central-limit-theorem statement is fused with the corresponding limit-theorem material into one canonical LLN/CLT Knowledge node and remains publicly testable through Interview Checks."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.1",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators"
+      ],
+      "resolutionNote": "The fair-die expected value is a low-complexity expectation check and remains publicly testable through the canonical expectation Knowledge Interview Checks rather than a thin standalone Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.3",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "fair-box-opening-price-by-expectation"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators"
+      ],
+      "resolutionNote": "Once the symmetric box game is worth starting, continuation only improves after misses; the canonical mathematical load is expected winning position and fair value."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.5",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "multiplicative-wealth-expected-growth"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators"
+      ],
+      "resolutionNote": "Independent multiplicative factors give a product-expectation identity; expected wealth growth is kept distinct from log/geometric growth and Kelly optimization."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.6",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "geometric-waiting-time-mean-variance"
+      ],
+      "canonicalKnowledge": [
+        "expectation-variance-covariance-algebra",
+        "common-probability-distributions",
+        "conditional-expectation-tower-property"
+      ],
+      "resolutionNote": "The item asks for first-principles derivation of geometric mean and variance, not merely recognition of the Geometric distribution."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.12",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "expected-pattern-count-by-indicators"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators"
+      ],
+      "resolutionNote": "Overlapping pattern indicators can be dependent, but linearity of expectation still gives the expected count; this dependence boundary is the canonical insight."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.13",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "expected-radius-of-uniform-disk-point"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators",
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "The canonical page generalizes the disk to radius R and derives the expected radius; the betting wrapper is retained only as an extension."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.37",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "normal-mgf-and-moments"
+      ],
+      "canonicalKnowledge": [
+        "moments-moment-generating-functions",
+        "expectation-variance-covariance-algebra",
+        "gaussian-lognormal-structure"
+      ],
+      "resolutionNote": "The general Normal MGF and second-moment calculation owns the canonical identity and absorbs the standard-normal moment variant from another source."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.38",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "variant",
+      "canonicalProblems": [
+        "expected-normal-cdf-of-normal-variable"
+      ],
+      "canonicalKnowledge": [
+        "conditional-expectation-tower-property",
+        "gaussian-lognormal-structure"
+      ],
+      "resolutionNote": "The standard-normal E[Phi(X)]=1/2 case is a special case and alternative symmetry/PIT perspective inside the general Normal canonical Problem."
+    }
+  ]
+}

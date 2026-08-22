@@ -4,11 +4,14 @@ displayTitle: Quant Job Interview Questions and Answers
 canonicalTitle: Quant Job Interview Questions and Answers
 aliases: [Red Book, 红宝书, 量化面试红宝书]
 sourceType: book
-description: Work-level source record for the quantitative interview question book by Mark Joshi, Nicholas Denson, and Andrew Downes. The work identity is verified, but no exact edition is pinned yet, so chapter and problem numbering must not be ingested until the source file is matched to a specific edition.
+description: Verified source record for the quantitative interview question book by Mark Joshi, Nicholas Denson, and Andrew Downes. The user-supplied file is Version 1.01 (2008); source provenance is retained for internal ingestion and audit rather than public hierarchy.
 authors: [Mark Joshi, Nicholas Denson, Andrew Downes]
-editionStatus: work-identified
-ingestionStatus: source-only
+year: 2008
+edition: Version 1.01 (2008)
+editionStatus: edition-pinned
+ingestionStatus: manifest-ready
 bibliographicUrl: https://books.google.com/books?id=uCRLmwEACAAJ
+isbn: '9781438217031'
 ---
 
-This source record identifies the book commonly referred to here as the Red Book while deliberately keeping edition-specific fields empty. Bulk ingestion begins only after an exact edition and source file are pinned in the ingestion manifest.
+The user-supplied source file has been verified against the cover ISBN, title page, version/copyright page, table of contents, and index end. The copyrighted PDF is not committed to the public repository. Problem-level coverage remains incomplete until Topic-first cross-book workstreams reconcile the mapped source material.

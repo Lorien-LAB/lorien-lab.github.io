@@ -1,0 +1,2537 @@
+{
+  "source": "green-book",
+  "version": 1,
+  "entries": [
+    {
+      "sourceSection": "preface",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-preparation"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "interview-preparation"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "reasoning-communication"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "reasoning-communication"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "reasoning-communication"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.1.screwy-pirates",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.1.tiger-and-sheep",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.river-crossing",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.birthday-problem",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.card-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.burning-ropes",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.defective-ball",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.trailing-zeros",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.horse-race",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2.infinite-sequence",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.box-packing",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.calendar-cubes",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.door-to-offer",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.message-delivery",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.last-ball",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.light-switches",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3.quant-salary",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "symmetry"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.4.coin-piles",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "symmetry"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.4.mislabeled-bags",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "symmetry"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.4.wise-men",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "symmetry"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.5.clock-pieces",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.5.missing-integers",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.5.counterfeit-coins-i",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6.matching-socks",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6.handshakes",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6.have-we-met-before",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6.ants-on-a-square",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6.counterfeit-coins-ii",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.7.prisoner-problem",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.7.division-by-9",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.7.chameleon-colors",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.8",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "mathematical-induction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.8.coin-split-problem",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "mathematical-induction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.8.chocolate-bar-problem",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "mathematical-induction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.8.race-track",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "mathematical-induction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.9",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "proof-by-contradiction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.9.irrational-number",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "proof-by-contradiction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.9.rainbow-hats",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "proof-by-contradiction"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "integration"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "multivariable-calculus"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.4.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.4.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.4.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "positive-semidefinite-matrices"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1.coin-toss-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1.card-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1.drunk-passenger",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.1.n-points-on-a-circle",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.poker-hands",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.hopping-rabbit",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.screwy-pirates-2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.chess-tournament",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.application-letters",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.birthday-problem",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.100th-digit",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.2.cubic-of-integer",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.boys-and-girls",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.all-girl-world",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.unfair-coin",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.fair-probability-from-unfair-coin",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.dart-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.birthday-line",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.dice-order",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.monty-hall",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.amoeba-population",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.candies-in-a-jar",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.coin-toss-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.russian-roulette-series",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.aces",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.gamblers-ruin",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.basketball-scores",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.3.cars-on-road",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.4.meeting-probability",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.4.probability-of-triangle",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.4.poisson-process-property",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.4.normal-moments",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "variant",
+      "canonicalProblems": [
+        "normal-mgf-and-moments"
+      ],
+      "canonicalKnowledge": [
+        "moments-moment-generating-functions"
+      ],
+      "resolutionNote": "Standard-normal MGF and moment calculations enrich the general Normal MGF/moments canonical Problem; workstream 008 intentionally left this expectation-heavy identity for the Expectation, Variance & Covariance workstream."
+    },
+    {
+      "sourceSection": "4.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators",
+        "conditional-expectation-tower-property",
+        "expectation-variance-covariance-algebra"
+      ],
+      "resolutionNote": "The section-level theory is fused into reusable expectation, conditional-expectation, and scalar variance/covariance Knowledge. Its low-complexity interview tests remain publicly visible through Interview Checks rather than thin source-specific Problems."
+    },
+    {
+      "sourceSection": "4.5.connecting-noodles",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "expected-loops-from-random-pairings"
+      ],
+      "canonicalKnowledge": [
+        "conditional-expectation-tower-property"
+      ],
+      "resolutionNote": "Ordinary size-reduction expectation recursion; no Markov-chain, martingale, or other stochastic-process machinery is required."
+    },
+    {
+      "sourceSection": "4.5.optimal-hedge-ratio",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "optimal-hedge-ratio-by-variance-minimization"
+      ],
+      "canonicalKnowledge": [
+        "expectation-variance-covariance-algebra"
+      ],
+      "resolutionNote": "Scalar variance/covariance minimization defines the canonical identity; covariance-matrix PSD and spectral feasibility remain Linear Algebra ownership."
+    },
+    {
+      "sourceSection": "4.5.dice-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "recursive-dice-game-expected-payoff"
+      ],
+      "canonicalKnowledge": [
+        "conditional-expectation-tower-property"
+      ],
+      "resolutionNote": "A self-consistency expectation equation creates a distinct recursive-payoff identity from the repository-authored one-step conditional-dice seed."
+    },
+    {
+      "sourceSection": "4.5.card-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "expected-position-of-first-special-card"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators"
+      ],
+      "resolutionNote": "Random-permutation symmetry plus indicators determines the first-special position and remains distinct from pattern-count and coupon-count indicator constructions."
+    },
+    {
+      "sourceSection": "4.5.sum-of-random-variables",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.5.coupon-collection",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "coupon-collector-expectations"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators",
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "Geometric waiting increments give the full-collection time while indicators give the expected distinct-count formula; no process-level state machinery is required."
+    },
+    {
+      "sourceSection": "4.5.joint-default-probability",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "bernoulli-default-correlation-bounds"
+      ],
+      "canonicalKnowledge": [
+        "expectation-variance-covariance-algebra",
+        "probability-axioms-derived-rules"
+      ],
+      "resolutionNote": "Fixed-marginal Bernoulli joint-probability bounds determine scalar covariance/correlation feasibility; matrix PSD remains a separate Linear Algebra identity."
+    },
+    {
+      "sourceSection": "4.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.6.expected-max-min",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.6.correlation-max-min",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "4.6.random-ants",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1.gamblers-ruin",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1.dice-question",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1.coin-triplets",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.1.color-balls",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2.drunk-man",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2.dice-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2.ticket-line",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.2.coin-sequence",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3.dp-algorithm",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3.dice-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3.world-series",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3.dynamic-dice-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.3.dynamic-card-game",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.4.brownian-motion",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.4.stopping-time",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "5.4.itos-lemma",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1.price-direction",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1.put-call-parity",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1.american-european",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1.bsm-pde",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.1.black-scholes-formula",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.delta",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.gamma",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.theta",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.2.vega",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-greeks"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.bull-spread",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.straddle",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.binary-options",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.3.exchange-options",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4.portfolio-optimization",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4.value-at-risk",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4.duration-convexity",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4.forward-futures",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "6.4.interest-rate-models",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.number-swap",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.unique-elements",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.horner",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.moving-average",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.sorting",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.random-permutation",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.search",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.fibonacci",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.1.max-subarray",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2.power-of-2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2.multiply-by-7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2.probability-simulation",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.2.poisonous-wine",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.3.monte-carlo",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "7.3.finite-difference",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6.4",
+      "sourceItem": "psd-pd-criteria",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "The source section mixes a correct PSD quadratic-form definition with an overbroad leading-principal-minor statement. Canonical Knowledge distinguishes PSD from the positive-definite Sylvester criterion."
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "correlation-range-0.8-0.8",
+      "canonicalTopics": [
+        "vectors-linear-systems",
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "variant",
+      "canonicalProblems": [
+        "correlation-matrix-parameter-range"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility",
+        "vector-geometry-inner-products"
+      ],
+      "topicOverrideReason": "The source item physically appears in the Vectors section 3.6.1, while its semantic destination also crosses into correlation/PSD topics already owned by the canonical correlation-matrix workstream.",
+      "resolutionNote": "Same canonical three-variable correlation-feasibility problem; this source variant contributes a geometric angle/Gram-vector derivation of the 0.28-to-1 interval rather than a new public Problem."
+    },
+    {
+      "sourceSection": "4.5",
+      "sourceItem": "covariance-correlation-definitions",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "correlation-matrix"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Definitions and normalization identities enrich canonical covariance/correlation Knowledge rather than forming a standalone problem."
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": "determinant-properties",
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "matrix-spectral-invariants"
+      ],
+      "resolutionNote": "Determinant identities are reusable matrix facts rather than a distinct interview problem."
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": "eigenvalue-eigenvector-definitions",
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors"
+      ],
+      "resolutionNote": "Definitions, characteristic equations, multiplicities, and eigenspaces belong in canonical spectral Knowledge."
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": "trace-determinant-spectrum",
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors",
+        "matrix-spectral-invariants"
+      ],
+      "resolutionNote": "Trace and determinant as spectral invariants enrich the shared concept layer."
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": "diagonalization",
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors",
+        "eigenbasis-decomposition"
+      ],
+      "resolutionNote": "Diagonalization criteria and A^k in an eigenbasis are reusable concept/technique material."
+    },
+    {
+      "sourceSection": "3.6.3",
+      "sourceItem": "two-by-two-eigensystem",
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "two-by-two-eigensystem"
+      ],
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors",
+        "matrix-spectral-invariants"
+      ],
+      "resolutionNote": "A concrete 2x2 eigensystem has an independent reasoning task and supports multiple interview-ready solution routes."
+    },
+    {
+      "sourceSection": "3.6.2",
+      "sourceItem": "qr-decomposition",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "qr-decomposition"
+      ],
+      "resolutionNote": "This source item defines reusable orthogonal-triangular factorization knowledge; it enriches canonical QR Knowledge and does not create a standalone public Problem."
+    },
+    {
+      "sourceSection": "3.6.2",
+      "sourceItem": "least-squares-regression",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "least-squares-via-qr"
+      ],
+      "canonicalKnowledge": [
+        "qr-decomposition"
+      ],
+      "resolutionNote": "This is a distinct interview reasoning task. The canonical Problem teaches direct QR on the design matrix; the source normal-equation-first presentation remains internal evidence rather than the recommended public algorithm."
+    },
+    {
+      "sourceSection": "3.6.5",
+      "sourceItem": "lu-decomposition",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "lu-cholesky-decomposition"
+      ],
+      "resolutionNote": "LU is reusable elimination and triangular-solve knowledge here, with no independent source reasoning task that warrants a separate canonical Problem."
+    },
+    {
+      "sourceSection": "3.6.5",
+      "sourceItem": "cholesky-decomposition",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "lu-cholesky-decomposition"
+      ],
+      "resolutionNote": "Cholesky belongs in the shared decomposition ontology with LU; the definition and factorization conditions enrich canonical Knowledge rather than creating a duplicate public Problem."
+    },
+    {
+      "sourceSection": "3.6.5",
+      "sourceItem": "correlated-normal-generation",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "generate-correlated-gaussians"
+      ],
+      "canonicalKnowledge": [
+        "lu-cholesky-decomposition",
+        "singular-value-decomposition"
+      ],
+      "resolutionNote": "Generating correlated normals is an independent simulation reasoning task. The canonical Problem generalizes the two-dimensional construction to SPD Cholesky and PSD spectral or SVD covariance factors."
+    },
+    {
+      "sourceSection": "3.6.5",
+      "sourceItem": "singular-value-decomposition",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "singular-value-decomposition"
+      ],
+      "resolutionNote": "This item contributes reusable rectangular, rank-aware SVD knowledge and does not define a separate canonical interview Problem."
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "vector-coordinate-representation",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "vector-geometry-inner-products"
+      ],
+      "resolutionNote": "Canonical vector geometry Knowledge absorbs the source coordinate interpretation as a reusable definition."
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "dot-product",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "vector-geometry-inner-products"
+      ],
+      "resolutionNote": "Canonical vector geometry Knowledge absorbs the source dot-product definition and its interview-useful consequences."
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "euclidean-norm-distance",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "vector-geometry-inner-products"
+      ],
+      "resolutionNote": "Canonical vector geometry Knowledge absorbs Euclidean norm and distance as reusable geometry."
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "angle-orthogonality",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "vector-geometry-inner-products"
+      ],
+      "resolutionNote": "Canonical vector geometry Knowledge absorbs angle and orthogonality as reusable inner-product geometry."
+    },
+    {
+      "sourceSection": "3.6.1",
+      "sourceItem": "correlation-as-cosine",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "vector-geometry-inner-products",
+        "correlation-matrix"
+      ],
+      "resolutionNote": "The source correlation-as-cosine bridge enriches canonical vector geometry while linking to the existing correlation-matrix Knowledge rather than duplicating correlation theory."
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": "definitions-set-operations",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "probability-spaces-events"
+      ],
+      "resolutionNote": "Source-derived outcome, sample-space, event, union/intersection/complement, mutually-exclusive, and indicator language is preserved in probability-spaces-events and its Interview Checks."
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": "coin-toss-game",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "more-heads-with-one-extra-coin"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Primary source instance of the extra-coin symmetry family; equal-n tie decomposition resolves to the source-neutral more-heads-with-one-extra-coin Problem."
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": "card-game",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "higher-card-by-symmetry"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Primary source instance of the tie-aware rank-symmetry family; tie mass is removed before symmetry in higher-card-by-symmetry."
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": "drunk-passenger",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "drunk-passenger-last-seat"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Primary source instance of the displaced-passenger symmetry family; the two-special-seat state reduction resolves to drunk-passenger-last-seat."
+    },
+    {
+      "sourceSection": "4.1",
+      "sourceItem": "n-points-on-a-circle",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "random-points-in-a-semicircle"
+      ],
+      "canonicalKnowledge": [
+        "probability-spaces-events",
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "Distinct semicircle covering Problem using event partitioning plus geometric symmetry; public targets are random-points-in-a-semicircle and its supporting event/symmetry Knowledge."
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": "definitions-counting-principles",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "counting-permutations-combinations",
+        "finite-combinatorial-probability-modeling"
+      ],
+      "resolutionNote": "Reusable product-rule, factorial, permutation, combination, and finite equiprobable counting material is fused into canonical counting and finite-probability Knowledge; the source definitions remain publicly testable through Interview Checks."
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": "poker-hands",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "poker-hand-probabilities"
+      ],
+      "canonicalKnowledge": [
+        "counting-permutations-combinations",
+        "finite-combinatorial-probability-modeling"
+      ],
+      "resolutionNote": "Distinct finite-card counting family represented by poker-hand-probabilities; the canonical page keeps one unordered five-card sample space while deriving four-of-a-kind, full-house, and exactly-two-pair counts."
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": "chess-tournament",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "top-two-meet-in-knockout-final"
+      ],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling",
+        "counting-permutations-combinations"
+      ],
+      "resolutionNote": "Primary source instance of the random knockout-bracket placement family; fixing one top player and counting the other player’s opposite-half slots resolves to top-two-meet-in-knockout-final. The Red tournament task is merged into this same reasoning identity."
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": "application-letters",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "five-letters-all-misaddressed"
+      ],
+      "canonicalKnowledge": [
+        "inclusion-exclusion-derangements",
+        "counting-permutations-combinations"
+      ],
+      "resolutionNote": "Distinct fixed-point-avoidance family represented by five-letters-all-misaddressed; the public solution derives the five-object derangement count through inclusion-exclusion instead of memorizing a source-specific answer."
+    },
+    {
+      "sourceSection": "4.2",
+      "sourceItem": "birthday-problem",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "birthday-collision-threshold"
+      ],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling",
+        "counting-permutations-combinations"
+      ],
+      "resolutionNote": "Distinct collision/complement-counting family represented by birthday-collision-threshold; the canonical page derives the no-collision product and verifies that 23 is the first group size above one-half collision probability."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "definitions-conditional-probability-bayes",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "conditioning",
+        "bayes-rule-base-rates"
+      ],
+      "resolutionNote": "Reusable conditional-probability, multiplication and chain-rule, total-probability, independence-boundary, and Bayes material is fused into canonical conditioning and Bayes/base-rate Knowledge; public Interview Checks preserve the source-derived interview tests."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "boys-and-girls",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "two-children-information-protocol"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Primary source instance of the two-child information-protocol family; the canonical page generalizes the conditioning event and makes the observation mechanism explicit."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "unfair-coin",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "hidden-coin-posterior-after-heads"
+      ],
+      "canonicalKnowledge": [
+        "conditioning",
+        "bayes-rule-base-rates"
+      ],
+      "resolutionNote": "Primary source instance of the latent double-headed-coin Bayes family; the canonical page generalizes the source instance to prior pi and n observed heads."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "monty-hall",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "monty-hall-switching"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Distinct informed-reveal conditioning family represented by the source-neutral Monty Hall page with the host information policy stated explicitly."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "candies-in-a-jar",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "candies-last-color-ordering"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Distinct last-occurrence conditioning family; the canonical page reduces the random removal sequence to mutually exclusive last-color orderings."
+    },
+    {
+      "sourceSection": "4.3",
+      "sourceItem": "russian-roulette-series",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "russian-roulette-after-survival"
+      ],
+      "canonicalKnowledge": [
+        "conditioning"
+      ],
+      "resolutionNote": "Primary source instance of the survival-conditioning roulette family; the adjacent-bullet state is represented in one canonical public Problem."
+    },
+    {
+      "sourceSection": "4.4",
+      "sourceItem": "definitions-discrete-continuous-distributions",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "random-variables-cdf-pmf-pdf",
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "The reusable random-variable, support, CDF/PMF/PDF, and standard distribution material is fused into canonical public Knowledge. Source-derived definition and recognition checks remain visible through Interview Checks rather than creating a standalone Problem."
+    },
+    {
+      "sourceSection": "4.4",
+      "sourceItem": "poisson-process-property",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "exponential-memoryless-bus-wait"
+      ],
+      "canonicalKnowledge": [
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "This row owns only the exponential waiting-time, memoryless, residual-wait, and stationary-age reasoning represented by exponential-memoryless-bus-wait. The source uses an arrival-process wrapper, but this workstream does not claim general Poisson-process or broader stochastic-process theory."
+    }
+  ]
+}

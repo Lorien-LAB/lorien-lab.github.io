@@ -7,6 +7,7 @@ category: Discrete Mathematics
 status: growing
 date: 2026-08-16
 tags: [Number Theory, Modular Arithmetic, Interview]
+quantInterviewTopics: [logic-brainteasers-discrete-reasoning, modular-arithmetic]
 featured: false
 related: [modular-invariants]
 relatedNotes: []

@@ -1,0 +1,46 @@
+{
+  "id": "linear-algebra-determinants-eigenvalues-002",
+  "canonicalTopics": [
+    "linear-algebra-matrix-methods",
+    "determinants-eigenvalues"
+  ],
+  "status": "complete",
+  "completedDate": "2026-08-16",
+  "verification": {
+    "commit": "b070f6f9c318372dfcf0d942f3a67299a8e4a493",
+    "runId": 31948322741,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["3.6.3"],
+      "evidencePageRanges": [
+        {"startPage": 53, "endPage": 55}
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["6.2.1", "6.3.1"],
+      "evidencePageRanges": [
+        {"startPage": 189, "endPage": 190},
+        {"startPage": 199, "endPage": 200}
+      ],
+      "reviewOutcome": "no-new-direct-item",
+      "reviewNote": "The Mathematics General question index was inspected for determinant/eigenvalue material. Question 6.9 on positive-definite matrices was already reconciled in the completed covariance/PSD workstream. Question 6.10 is a matrix-square-root and Cholesky/decomposition problem and is deferred to the Matrix Decompositions workstream. No additional direct determinant/eigenvalue item is introduced here."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["2.2", "3.2"],
+      "evidencePageRanges": [
+        {"startPage": 20, "endPage": 21},
+        {"startPage": 62, "endPage": 70}
+      ]
+    }
+  ]
+}

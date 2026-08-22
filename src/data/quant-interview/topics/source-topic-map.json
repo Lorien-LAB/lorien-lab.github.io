@@ -1,0 +1,2279 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "source": "green-book",
+      "sourceSection": "preface",
+      "role": "non-content",
+      "canonicalTopics": []
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "1",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "1.1",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-preparation"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "1.2",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-preparation"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "1.3",
+      "role": "content",
+      "canonicalTopics": [
+        "reasoning-communication"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "1.4",
+      "role": "content",
+      "canonicalTopics": [
+        "reasoning-communication"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "1.5",
+      "role": "content",
+      "canonicalTopics": [
+        "reasoning-communication"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.1",
+      "role": "content",
+      "canonicalTopics": [
+        "problem-simplification"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.1.screwy-pirates",
+      "role": "content",
+      "canonicalTopics": [
+        "problem-simplification"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.1.tiger-and-sheep",
+      "role": "content",
+      "canonicalTopics": [
+        "problem-simplification"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.2",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.2.river-crossing",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.2.birthday-problem",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.2.card-game",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.2.burning-ropes",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.2.defective-ball",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.2.trailing-zeros",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.2.horse-race",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.2.infinite-sequence",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.3",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.3.box-packing",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.3.calendar-cubes",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.3.door-to-offer",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.3.message-delivery",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.3.last-ball",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.3.light-switches",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.3.quant-salary",
+      "role": "content",
+      "canonicalTopics": [
+        "logical-deduction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.4",
+      "role": "content",
+      "canonicalTopics": [
+        "symmetry"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.4.coin-piles",
+      "role": "content",
+      "canonicalTopics": [
+        "symmetry"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.4.mislabeled-bags",
+      "role": "content",
+      "canonicalTopics": [
+        "symmetry"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.4.wise-men",
+      "role": "content",
+      "canonicalTopics": [
+        "symmetry"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.5",
+      "role": "content",
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.5.clock-pieces",
+      "role": "content",
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.5.missing-integers",
+      "role": "content",
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.5.counterfeit-coins-i",
+      "role": "content",
+      "canonicalTopics": [
+        "summation-combinatorial-puzzles"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.6",
+      "role": "content",
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.6.matching-socks",
+      "role": "content",
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.6.handshakes",
+      "role": "content",
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.6.have-we-met-before",
+      "role": "content",
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.6.ants-on-a-square",
+      "role": "content",
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.6.counterfeit-coins-ii",
+      "role": "content",
+      "canonicalTopics": [
+        "pigeonhole-principle"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.7",
+      "role": "content",
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.7.prisoner-problem",
+      "role": "content",
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.7.division-by-9",
+      "role": "content",
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.7.chameleon-colors",
+      "role": "content",
+      "canonicalTopics": [
+        "modular-arithmetic"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.8",
+      "role": "content",
+      "canonicalTopics": [
+        "mathematical-induction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.8.coin-split-problem",
+      "role": "content",
+      "canonicalTopics": [
+        "mathematical-induction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.8.chocolate-bar-problem",
+      "role": "content",
+      "canonicalTopics": [
+        "mathematical-induction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.8.race-track",
+      "role": "content",
+      "canonicalTopics": [
+        "mathematical-induction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.9",
+      "role": "content",
+      "canonicalTopics": [
+        "proof-by-contradiction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.9.irrational-number",
+      "role": "content",
+      "canonicalTopics": [
+        "proof-by-contradiction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "2.9.rainbow-hats",
+      "role": "content",
+      "canonicalTopics": [
+        "proof-by-contradiction"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.1",
+      "role": "content",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.1.1",
+      "role": "content",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.1.2",
+      "role": "content",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.1.3",
+      "role": "content",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.2",
+      "role": "content",
+      "canonicalTopics": [
+        "integration"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.2.1",
+      "role": "content",
+      "canonicalTopics": [
+        "integration"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.2.2",
+      "role": "content",
+      "canonicalTopics": [
+        "integration"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.2.3",
+      "role": "content",
+      "canonicalTopics": [
+        "integration"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.3",
+      "role": "content",
+      "canonicalTopics": [
+        "multivariable-calculus"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.4",
+      "role": "content",
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.4.1",
+      "role": "content",
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.4.2",
+      "role": "content",
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.4.3",
+      "role": "content",
+      "canonicalTopics": [
+        "taylor-newton-optimization"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.5",
+      "role": "content",
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.5.1",
+      "role": "content",
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.5.2",
+      "role": "content",
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.5.3",
+      "role": "content",
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.5.4",
+      "role": "content",
+      "canonicalTopics": [
+        "ordinary-differential-equations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.6",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.6.1",
+      "role": "content",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.6.2",
+      "role": "content",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.6.3",
+      "role": "content",
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.6.4",
+      "role": "content",
+      "canonicalTopics": [
+        "positive-semidefinite-matrices"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "3.6.5",
+      "role": "content",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.1",
+      "role": "content",
+      "canonicalTopics": [
+        "probability-foundations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.1.coin-toss-game",
+      "role": "content",
+      "canonicalTopics": [
+        "probability-foundations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.1.card-game",
+      "role": "content",
+      "canonicalTopics": [
+        "probability-foundations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.1.drunk-passenger",
+      "role": "content",
+      "canonicalTopics": [
+        "probability-foundations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.1.n-points-on-a-circle",
+      "role": "content",
+      "canonicalTopics": [
+        "probability-foundations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.2",
+      "role": "content",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.2.poker-hands",
+      "role": "content",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.2.hopping-rabbit",
+      "role": "content",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.2.screwy-pirates-2",
+      "role": "content",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.2.chess-tournament",
+      "role": "content",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.2.application-letters",
+      "role": "content",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.2.birthday-problem",
+      "role": "content",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.2.100th-digit",
+      "role": "content",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.2.cubic-of-integer",
+      "role": "content",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.boys-and-girls",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.all-girl-world",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.unfair-coin",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.fair-probability-from-unfair-coin",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.dart-game",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.birthday-line",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.dice-order",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.monty-hall",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.amoeba-population",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.candies-in-a-jar",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.coin-toss-game",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.russian-roulette-series",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.aces",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.gamblers-ruin",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.basketball-scores",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.3.cars-on-road",
+      "role": "content",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.4",
+      "role": "content",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.4.meeting-probability",
+      "role": "content",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.4.probability-of-triangle",
+      "role": "content",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.4.poisson-process-property",
+      "role": "content",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.4.normal-moments",
+      "role": "content",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.5",
+      "role": "content",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.5.connecting-noodles",
+      "role": "content",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.5.optimal-hedge-ratio",
+      "role": "content",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.5.dice-game",
+      "role": "content",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.5.card-game",
+      "role": "content",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.5.sum-of-random-variables",
+      "role": "content",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.5.coupon-collection",
+      "role": "content",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.5.joint-default-probability",
+      "role": "content",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.6",
+      "role": "content",
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.6.expected-max-min",
+      "role": "content",
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.6.correlation-max-min",
+      "role": "content",
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "4.6.random-ants",
+      "role": "content",
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.1",
+      "role": "content",
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.1.gamblers-ruin",
+      "role": "content",
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.1.dice-question",
+      "role": "content",
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.1.coin-triplets",
+      "role": "content",
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.1.color-balls",
+      "role": "content",
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.2",
+      "role": "content",
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.2.drunk-man",
+      "role": "content",
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.2.dice-game",
+      "role": "content",
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.2.ticket-line",
+      "role": "content",
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.2.coin-sequence",
+      "role": "content",
+      "canonicalTopics": [
+        "martingales-stopping-times"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.3",
+      "role": "content",
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.3.dp-algorithm",
+      "role": "content",
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.3.dice-game",
+      "role": "content",
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.3.world-series",
+      "role": "content",
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.3.dynamic-dice-game",
+      "role": "content",
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.3.dynamic-card-game",
+      "role": "content",
+      "canonicalTopics": [
+        "dynamic-programming-algorithms"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.4",
+      "role": "content",
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.4.brownian-motion",
+      "role": "content",
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.4.stopping-time",
+      "role": "content",
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "5.4.itos-lemma",
+      "role": "content",
+      "canonicalTopics": [
+        "brownian-motion",
+        "ito-stochastic-calculus",
+        "stochastic-differential-equations"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.1",
+      "role": "content",
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.1.price-direction",
+      "role": "content",
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.1.put-call-parity",
+      "role": "content",
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.1.american-european",
+      "role": "content",
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.1.bsm-pde",
+      "role": "content",
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.1.black-scholes-formula",
+      "role": "content",
+      "canonicalTopics": [
+        "no-arbitrage-option-properties",
+        "black-scholes"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.2",
+      "role": "content",
+      "canonicalTopics": [
+        "option-greeks"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.2.delta",
+      "role": "content",
+      "canonicalTopics": [
+        "option-greeks"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.2.gamma",
+      "role": "content",
+      "canonicalTopics": [
+        "option-greeks"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.2.theta",
+      "role": "content",
+      "canonicalTopics": [
+        "option-greeks"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.2.vega",
+      "role": "content",
+      "canonicalTopics": [
+        "option-greeks"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.3",
+      "role": "content",
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.3.bull-spread",
+      "role": "content",
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.3.straddle",
+      "role": "content",
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.3.binary-options",
+      "role": "content",
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.3.exchange-options",
+      "role": "content",
+      "canonicalTopics": [
+        "option-portfolios-exotics"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.4",
+      "role": "content",
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.4.portfolio-optimization",
+      "role": "content",
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.4.value-at-risk",
+      "role": "content",
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.4.duration-convexity",
+      "role": "content",
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.4.forward-futures",
+      "role": "content",
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "6.4.interest-rate-models",
+      "role": "content",
+      "canonicalTopics": [
+        "portfolio-risk",
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.1",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.1.number-swap",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.1.unique-elements",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.1.horner",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.1.moving-average",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.1.sorting",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.1.random-permutation",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.1.search",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.1.fibonacci",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.1.max-subarray",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity",
+        "sorting-searching",
+        "data-structures"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.2",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.2.power-of-2",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.2.multiply-by-7",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.2.probability-simulation",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.2.poisonous-wine",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithmic-complexity"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.3",
+      "role": "content",
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.3.monte-carlo",
+      "role": "content",
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods"
+      ]
+    },
+    {
+      "source": "green-book",
+      "sourceSection": "7.3.finite-difference",
+      "role": "content",
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.1",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-process-formats"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.2",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-process-formats"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.3",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-process-formats"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.4",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-process-formats"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.5",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-process-formats"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.6",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-process-formats"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.7",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-process-formats"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.8",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-process-formats"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.9",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-process-formats"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.10",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-preparation"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.11",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-preparation"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "1.12",
+      "role": "content",
+      "canonicalTopics": [
+        "reasoning-communication"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.1",
+      "role": "content",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.2",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.2.1",
+      "role": "content",
+      "canonicalTopics": [
+        "black-scholes"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.2.2",
+      "role": "content",
+      "canonicalTopics": [
+        "no-arbitrage-option-properties"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.2.3",
+      "role": "content",
+      "canonicalTopics": [
+        "replication-hedging"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.2.4",
+      "role": "content",
+      "canonicalTopics": [
+        "option-greeks"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.2.5",
+      "role": "content",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.2.6",
+      "role": "content",
+      "canonicalTopics": [
+        "trees-monte-carlo-options"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.2.7",
+      "role": "content",
+      "canonicalTopics": [
+        "incomplete-markets"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.3",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.3.1",
+      "role": "content",
+      "canonicalTopics": [
+        "black-scholes"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.3.2",
+      "role": "content",
+      "canonicalTopics": [
+        "no-arbitrage-option-properties"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.3.3",
+      "role": "content",
+      "canonicalTopics": [
+        "replication-hedging"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.3.4",
+      "role": "content",
+      "canonicalTopics": [
+        "option-greeks"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.3.5",
+      "role": "content",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.3.6",
+      "role": "content",
+      "canonicalTopics": [
+        "trees-monte-carlo-options"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "2.3.7",
+      "role": "content",
+      "canonicalTopics": [
+        "incomplete-markets"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "3",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "3.1",
+      "role": "content",
+      "canonicalTopics": [
+        "probability-statistics"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "3.2",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "3.2.1",
+      "role": "content",
+      "canonicalTopics": [
+        "probability-statistics"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "3.2.2",
+      "role": "content",
+      "canonicalTopics": [
+        "stochastic-processes-stochastic-calculus"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "3.3",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "3.3.1",
+      "role": "content",
+      "canonicalTopics": [
+        "probability-statistics"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "3.3.2",
+      "role": "content",
+      "canonicalTopics": [
+        "stochastic-processes-stochastic-calculus"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "4",
+      "role": "content",
+      "canonicalTopics": [
+        "bonds-yields-discounting",
+        "duration-convexity",
+        "forwards-futures-swaps",
+        "interest-rate-models"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "4.1",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "4.2",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "4.3",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "5",
+      "role": "content",
+      "canonicalTopics": [
+        "monte-carlo-simulation",
+        "root-finding-numerical-integration",
+        "finite-difference-methods",
+        "algorithmic-complexity"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "5.1",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "5.2",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "5.3",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "6",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "6.1",
+      "role": "content",
+      "canonicalTopics": [
+        "calculus-differential-equations"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "6.2",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "6.2.1",
+      "role": "content",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "6.2.2",
+      "role": "content",
+      "canonicalTopics": [
+        "integration"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "6.3",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "6.3.1",
+      "role": "content",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "6.3.2",
+      "role": "content",
+      "canonicalTopics": [
+        "integration"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "7",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "data-structures",
+        "cpp-language-memory",
+        "object-oriented-cpp"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "7.1",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "7.2",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "7.3",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "8",
+      "role": "content",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "8.1",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "8.2",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "8.3",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "9",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-strategy-communication"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "9.1",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "9.2",
+      "role": "content",
+      "canonicalTopics": [
+        "soft-interview"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "9.3",
+      "role": "content",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "10",
+      "role": "content",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "10.1",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "10.2",
+      "role": "content",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "bibliography",
+      "role": "non-content",
+      "canonicalTopics": []
+    },
+    {
+      "source": "red-book",
+      "sourceSection": "index",
+      "role": "non-content",
+      "canonicalTopics": []
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "preface",
+      "role": "non-content",
+      "canonicalTopics": []
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "role": "content",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "role": "content",
+      "canonicalTopics": [
+        "calculus-differential-equations"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "role": "content",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "role": "content",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "role": "content",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "role": "content",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "role": "content",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3",
+      "role": "container",
+      "canonicalTopics": []
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.1",
+      "role": "content",
+      "canonicalTopics": [
+        "calculus-differential-equations"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.2",
+      "role": "content",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.3",
+      "role": "content",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.4",
+      "role": "content",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.5",
+      "role": "content",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.6",
+      "role": "content",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.7",
+      "role": "content",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning"
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSection": "bibliography",
+      "role": "non-content",
+      "canonicalTopics": []
+    }
+  ]
+}

@@ -7,6 +7,7 @@ category: Problem Solving Techniques
 status: growing
 date: 2026-08-16
 tags: [Invariants, Brainteasers, Collisions]
+quantInterviewTopics: [logic-brainteasers-discrete-reasoning, invariants-state-transformations]
 featured: false
 related: []
 relatedNotes: []

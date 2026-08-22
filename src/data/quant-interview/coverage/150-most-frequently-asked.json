@@ -1,0 +1,642 @@
+{
+  "source": "150-most-frequently-asked",
+  "version": 1,
+  "entries": [
+    {
+      "sourceSection": "preface",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": "1",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "put-quotes-zero-cost-static-portfolio"
+      ],
+      "canonicalKnowledge": [
+        "no-arbitrage-principle",
+        "option-price-convexity-in-strike",
+        "static-arbitrage-construction"
+      ]
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": "2",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "modular-arithmetic"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "missing-digit-power-of-two"
+      ],
+      "canonicalKnowledge": [
+        "modular-arithmetic",
+        "modular-invariants"
+      ]
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": "4",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "invariants-state-transformations"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "ants-crossing-line"
+      ],
+      "canonicalKnowledge": [
+        "identity-swapping-invariance"
+      ]
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": "5",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "correlation-matrix-parameter-range"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ],
+      "resolutionNote": "Existing canonical parameter-range problem."
+    },
+    {
+      "sourceSection": "2",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "calculus-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.1",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "calculus-differential-equations"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.2",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.3",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.4",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.5",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.6",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "3.7",
+      "sourceItem": null,
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning"
+      ],
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "bibliography",
+      "sourceItem": null,
+      "canonicalTopics": [],
+      "state": "non-content-frontmatter",
+      "canonicalProblems": [],
+      "canonicalKnowledge": []
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "1",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "variant",
+      "canonicalProblems": [
+        "covariance-matrix-positive-semidefinite-proof"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Same covariance-PSD proof identity, extended to show the correlation matrix is PSD as well."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "2",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "covariance-to-correlation-matrix"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Distinct normalization/congruence-transform problem."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "3",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "equicorrelation-matrix-bounds"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Distinct n-dimensional equicorrelation eigenvalue/bound problem."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "10",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices",
+        "positive-semidefinite-matrices"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "correlation-matrix-parameter-range"
+      ],
+      "canonicalKnowledge": [
+        "correlation-matrix",
+        "positive-semidefinite-matrix",
+        "principal-minor-feasibility"
+      ],
+      "topicOverrideReason": "Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.",
+      "resolutionNote": "Repeats the First Look parameter matrix; its additional Schur/completing-square methods enrich the existing canonical problem rather than creating another page."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "4",
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors"
+      ],
+      "resolutionNote": "The eigenvalue/eigenvector count question is best preserved as an Interview Check on multiplicity, eigenspaces, and defective matrices."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "6",
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "apply-matrix-via-eigenbasis"
+      ],
+      "canonicalKnowledge": [
+        "eigenvalues-eigenvectors",
+        "eigenbasis-decomposition"
+      ],
+      "resolutionNote": "Applying A to a vector from known eigenpairs is a distinct eigenbasis-decomposition reasoning problem."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "7",
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "trace-ab-equals-trace-ba"
+      ],
+      "canonicalKnowledge": [
+        "matrix-spectral-invariants"
+      ],
+      "resolutionNote": "Trace cyclicity is a distinct proof task with direct index and stronger spectral interpretations."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "8",
+      "canonicalTopics": [
+        "determinants-eigenvalues"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "commutator-cannot-equal-identity"
+      ],
+      "canonicalKnowledge": [
+        "matrix-spectral-invariants"
+      ],
+      "resolutionNote": "The commutator obstruction is a distinct invariant-recognition problem using trace."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "5",
+      "canonicalTopics": [
+        "matrix-decompositions"
+      ],
+      "state": "variant",
+      "canonicalProblems": [
+        "matrix-square-root-and-cholesky-factor"
+      ],
+      "canonicalKnowledge": [
+        "eigenbasis-decomposition",
+        "lu-cholesky-decomposition"
+      ],
+      "resolutionNote": "This task has the same reasoning identity as the canonical matrix-square-root and factor Problem, but contributes a different matrix and useful spectral and Cholesky calculations, so it is retained as a meaningful variant inside the same public page."
+    },
+    {
+      "sourceSection": "2.2",
+      "sourceItem": "9",
+      "canonicalTopics": [
+        "vectors-linear-systems"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "product-of-row-stochastic-matrices"
+      ],
+      "canonicalKnowledge": [],
+      "resolutionNote": "Distinct matrix-invariant closure proof: row sums are preserved through the all-ones vector and entrywise nonnegativity is preserved under matrix multiplication."
+    },
+    {
+      "sourceSection": "1",
+      "sourceItem": "6",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "minimum-trials-for-at-least-one-hit"
+      ],
+      "canonicalKnowledge": [
+        "probability-axioms-derived-rules"
+      ],
+      "resolutionNote": "This source item contributes complement-event and repeated-independence reasoning to the mixed canonical Knowledge node; it does not source or support the repository-authored Kolmogorov-axiom extension."
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "3",
+      "canonicalTopics": [
+        "probability-foundations"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "more-heads-with-one-extra-coin"
+      ],
+      "canonicalKnowledge": [
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "topicOverrideReason": "Item-level mathematical identity is Probability Foundations even though the editorial source container is classified as brainteasers; item-level semantic ownership therefore overrides the coarse container mapping.",
+      "resolutionNote": "Merged duplicate of more-heads-with-one-extra-coin; it contributes an alternative symmetry derivation while retaining the same canonical reasoning identity."
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "7",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "no-consecutive-heads-in-n-tosses"
+      ],
+      "canonicalKnowledge": [
+        "counting-permutations-combinations",
+        "finite-combinatorial-probability-modeling"
+      ],
+      "topicOverrideReason": "Item-level mathematical identity is Combinatorial Probability even though the editorial source container is classified as brainteasers; item-level semantic ownership overrides the coarse container mapping.",
+      "resolutionNote": "Distinct forbidden-adjacency counting family represented by no-consecutive-heads-in-n-tosses. The canonical page derives the Fibonacci recurrence and the equivalent gap-counting identity inside a uniform 2^n sample space."
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "14",
+      "canonicalTopics": [
+        "combinatorial-probability"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "random-subsets-containment-probability"
+      ],
+      "canonicalKnowledge": [
+        "finite-combinatorial-probability-modeling",
+        "counting-permutations-combinations"
+      ],
+      "topicOverrideReason": "Item-level mathematical identity is Combinatorial Probability even though the editorial source container is classified as brainteasers; item-level semantic ownership overrides the coarse container mapping.",
+      "resolutionNote": "Distinct random-subset containment family represented by random-subsets-containment-probability. The canonical solution uses four elementwise membership states, forbids only membership in A without B, and obtains (3/4)^n."
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "2",
+      "canonicalTopics": [
+        "conditional-probability-bayes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "golden-face-posterior"
+      ],
+      "canonicalKnowledge": [
+        "conditioning",
+        "bayes-rule-base-rates"
+      ],
+      "topicOverrideReason": "Item-level mathematical identity is Conditional Probability & Bayes even though the editorial source container is Brainteasers; observing a golden face reweights the latent object posterior.",
+      "resolutionNote": "Distinct latent-object selection-conditioning family represented by golden-face-posterior; visible-face weighting gives posterior two-thirds."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "1",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "The exponential density, support, and parameterization are reusable distribution Knowledge; the source-derived definition remains visible through public Interview Checks instead of becoming a standalone Problem."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "2",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "exponential-race-probability"
+      ],
+      "canonicalKnowledge": [
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "Distinct competing-independent-exponential family represented by exponential-race-probability; the canonical page generalizes the numerical means to the rate-share formula lambda_X/(lambda_X+lambda_Y)."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "3",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "common-probability-distributions"
+      ],
+      "resolutionNote": "The Poisson random-variable PMF and count-distribution recognition rule are fused into common-probability-distributions. This row does not claim general Poisson-process theory."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "5",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "joint-normal-quadrant-conditioning"
+      ],
+      "canonicalKnowledge": [
+        "gaussian-lognormal-structure",
+        "conditioning"
+      ],
+      "resolutionNote": "Distinct jointly-normal decorrelation and quadrant-conditioning family represented by joint-normal-quadrant-conditioning; the canonical solution makes the joint-normal requirement for zero-covariance independence explicit."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "6",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "when-is-a-product-lognormal"
+      ],
+      "canonicalKnowledge": [
+        "gaussian-lognormal-structure"
+      ],
+      "resolutionNote": "Distinct lognormal-product closure family represented by when-is-a-product-lognormal; the canonical page distinguishes independent lognormals from the more general jointly-normal-log condition and rejects marginal lognormality alone."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "8",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "limit-theorems-lln-clt"
+      ],
+      "resolutionNote": "Weak and strong laws of large numbers are fused into the canonical limit-theorem Knowledge node, where convergence modes and public Interview Checks preserve the source-derived interview value."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "9",
+      "canonicalTopics": [
+        "random-variables-distributions"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "limit-theorems-lln-clt"
+      ],
+      "resolutionNote": "The classical central limit theorem is fused with the Red CLT material into one canonical limit-theorem Knowledge node, including sqrt(n) scaling, convergence in distribution, and finite-variance boundaries."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "4",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "expected-radius-of-uniform-disk-point"
+      ],
+      "canonicalKnowledge": [
+        "expectation-linearity-indicators",
+        "symmetry-equiprobability-geometric-probability"
+      ],
+      "resolutionNote": "The unit-disk expected-radius item is the R=1 instance of the general radius-R canonical Problem and contributes no separate reasoning identity."
+    },
+    {
+      "sourceSection": "2.6",
+      "sourceItem": "7",
+      "canonicalTopics": [
+        "expectation-variance-covariance"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "expected-normal-cdf-of-normal-variable"
+      ],
+      "canonicalKnowledge": [
+        "conditional-expectation-tower-property",
+        "gaussian-lognormal-structure"
+      ],
+      "resolutionNote": "The general Normal E[Phi(X)] identity owns the canonical Problem; the standard-normal special case from another source is retained as a variant and alternative method."
+    }
+  ]
+}

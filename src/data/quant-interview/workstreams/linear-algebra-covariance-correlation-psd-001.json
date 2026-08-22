@@ -1,0 +1,50 @@
+{
+  "id": "linear-algebra-covariance-correlation-psd-001",
+  "canonicalTopics": [
+    "linear-algebra-matrix-methods",
+    "covariance-correlation-matrices",
+    "positive-semidefinite-matrices"
+  ],
+  "status": "complete",
+  "completedDate": "2026-08-16",
+  "verification": {
+    "commit": "fb8664b85ac1ea6a0d1d5145ce32143e0455a288",
+    "runId": 31946376343,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["3.6.4", "4.5"],
+      "evidencePageRanges": [
+        {"startPage": 56, "endPage": 58},
+        {"startPage": 92, "endPage": 98}
+      ]
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["3.2.1", "3.3.1", "6.2.1", "6.3.1"],
+      "evidencePageRanges": [
+        {"startPage": 83, "endPage": 84},
+        {"startPage": 107, "endPage": 107},
+        {"startPage": 116, "endPage": 117},
+        {"startPage": 190, "endPage": 190},
+        {"startPage": 199, "endPage": 200}
+      ]
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["1", "2.2", "3.2"],
+      "evidencePageRanges": [
+        {"startPage": 8, "endPage": 9},
+        {"startPage": 20, "endPage": 21},
+        {"startPage": 56, "endPage": 75}
+      ]
+    }
+  ]
+}
