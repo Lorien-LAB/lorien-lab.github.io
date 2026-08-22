@@ -75,4 +75,4 @@ jobs:
             exit 1
           fi
 
-# manual rerun marker: 2026-08-22 finishing verification
+# manual rerun marker: 2026-08-22 post-integration verification
