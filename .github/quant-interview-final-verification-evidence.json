@@ -1,7 +1,0 @@
-{
-  "verifiedCommit": "8b52b8f4a4f9ab305e52dc2eeae45f3a193f9fc2",
-  "triggerSha": "ba985897f9a70c9a8110721bb4d5f20f3bf0b294",
-  "runId": 32572635486,
-  "commands": ["npm run test", "npm run check", "npm run build"],
-  "conclusion": "success"
-}
