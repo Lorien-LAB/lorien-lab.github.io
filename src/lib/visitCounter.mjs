@@ -1,4 +1,6 @@
 const GOATCOUNTER_CODE_PATTERN = /^(?:[a-z0-9]|[a-z0-9][a-z0-9-]{0,61}[a-z0-9])$/;
+const VISIT_COUNTER_START_DATE = '2026-08-01';
+const TRACKING_SETTINGS = JSON.stringify({ no_session: true });
 
 export function getGoatCounterConfig(value) {
   if (typeof value !== 'string') return null;
@@ -11,7 +13,8 @@ export function getGoatCounterConfig(value) {
   return {
     code,
     trackingEndpoint: `${origin}/count`,
-    totalEndpoint: `${origin}/counter/TOTAL.json`,
+    trackingSettings: TRACKING_SETTINGS,
+    totalEndpoint: `${origin}/counter/TOTAL.json?start=${VISIT_COUNTER_START_DATE}`,
   };
 }
 

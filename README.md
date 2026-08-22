@@ -243,7 +243,7 @@ This repository deploys through GitHub Actions. The workflow in `.github/workflo
 
 ### Public visit counter
 
-The optional footer counter uses GoatCounter while the website remains hosted on GitHub Pages. It records page views after the integration date and displays the site-wide `TOTAL`; historical GitHub Pages traffic is not reconstructed.
+The optional footer counter uses GoatCounter while the website remains hosted on GitHub Pages. It records every page load without session deduplication and displays the site-wide `TOTAL` from `2026-08-01`; historical GitHub Pages traffic is not reconstructed.
 
 1. Create a GoatCounter site and enable **Allow adding visitor counts on your website** in its settings.
 2. The GitHub Pages workflow defaults to the confirmed public site code `lorien-lab`. Add the repository Actions variable `PUBLIC_GOATCOUNTER_CODE` only if the GoatCounter site code changes later.

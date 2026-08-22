@@ -15,7 +15,8 @@ test('visit counter builds canonical HTTPS endpoints from the configured site co
   assert.deepEqual(getGoatCounterConfig('  Lorien-Lab  '), {
     code: 'lorien-lab',
     trackingEndpoint: 'https://lorien-lab.goatcounter.com/count',
-    totalEndpoint: 'https://lorien-lab.goatcounter.com/counter/TOTAL.json',
+    trackingSettings: '{"no_session":true}',
+    totalEndpoint: 'https://lorien-lab.goatcounter.com/counter/TOTAL.json?start=2026-08-01',
   });
 });
 
@@ -76,4 +77,27 @@ test('visit counter reveals both language labels only after a total is loaded', 
 
   assert.equal(counter.hidden, false);
   assert.deepEqual(labels.map(({ textContent }) => textContent), ['9,876', '9,876']);
+});
+
+test('visit counter keeps existing labels hidden when loading fails', async () => {
+  const labels = [{ textContent: 'Loading' }, { textContent: '加载中' }];
+  const counter = {
+    dataset: {
+      totalEndpoint: 'https://lorien-lab.goatcounter.com/counter/TOTAL.json?start=2026-08-01',
+    },
+    hidden: true,
+    querySelectorAll() {
+      return labels;
+    },
+  };
+  const root = {
+    querySelectorAll() {
+      return [counter];
+    },
+  };
+
+  await visitCounter.hydrateVisitCounters(root, async () => ({ ok: false }));
+
+  assert.equal(counter.hidden, true);
+  assert.deepEqual(labels.map(({ textContent }) => textContent), ['Loading', '加载中']);
 });
