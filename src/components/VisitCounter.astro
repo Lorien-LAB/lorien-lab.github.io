@@ -1,0 +1,46 @@
+---
+import { getGoatCounterConfig } from '../lib/visitCounter.mjs';
+
+const config = getGoatCounterConfig(import.meta.env.PUBLIC_GOATCOUNTER_CODE);
+---
+
+{config && (
+  <div
+    class="visit-counter"
+    data-visit-counter
+    data-total-endpoint={config.totalEndpoint}
+    role="status"
+    aria-live="polite"
+    hidden
+  >
+    <span class="visit-counter-dot" aria-hidden="true"></span>
+    <span class="lang-en"><strong data-visit-count></strong> views since Aug 2026</span>
+    <span class="lang-zh" lang="zh-CN">自 2026 年 8 月累计访问 <strong data-visit-count></strong> 次</span>
+  </div>
+)}
+
+<script>
+  import { hydrateVisitCounters } from '../lib/visitCounter.mjs';
+
+  await hydrateVisitCounters(document, fetch);
+</script>
+
+<style>
+  .visit-counter {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--muted);
+    font: 600 .72rem/1.4 var(--font-mono);
+    white-space: nowrap;
+  }
+  .visit-counter[hidden] { display: none; }
+  .visit-counter-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 16%, transparent);
+  }
+  .visit-counter strong { color: var(--ink); font: inherit; }
+</style>

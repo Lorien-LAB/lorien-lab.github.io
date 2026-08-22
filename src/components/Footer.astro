@@ -1,4 +1,6 @@
 ---
+import VisitCounter from './VisitCounter.astro';
+
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
@@ -10,12 +12,15 @@ const year = new Date().getFullYear();
         <span class="lang-zh" lang="zh-CN">量化研究、系统化策略与研究基础设施。</span>
       </p>
     </div>
-    <div class="footer-links"><a href="https://github.com/Lorien-LAB" target="_blank" rel="noreferrer">GitHub</a></div>
+    <div class="footer-meta">
+      <VisitCounter />
+      <a href="https://github.com/Lorien-LAB" target="_blank" rel="noreferrer">GitHub</a>
+    </div>
     <small>
       © {year} Lorien Lab. <span class="lang-en">Built with Astro.</span><span class="lang-zh" lang="zh-CN">基于 Astro 构建。</span>
     </small>
   </div>
 </footer>
 <style>
-.site-footer{margin-top:80px;border-top:1px solid var(--border);background:var(--surface);padding:42px 0}.footer-inner{display:grid;grid-template-columns:1.4fr auto auto;gap:30px;align-items:end}.site-footer strong{letter-spacing:-.02em}.site-footer p{margin:6px 0 0;color:var(--muted);font-size:.88rem;max-width:520px}.footer-links{display:flex;gap:18px}.footer-links a{font-weight:700;font-size:.88rem;color:var(--muted)}.site-footer small{color:var(--muted);font-size:.75rem}@media(max-width:760px){.footer-inner{grid-template-columns:1fr;align-items:start}.site-footer{margin-top:50px}}
+.site-footer{margin-top:80px;border-top:1px solid var(--border);background:var(--surface);padding:42px 0}.footer-inner{display:grid;grid-template-columns:1.4fr auto auto;gap:30px;align-items:end}.site-footer strong{letter-spacing:-.02em}.site-footer p{margin:6px 0 0;color:var(--muted);font-size:.88rem;max-width:520px}.footer-meta{display:flex;flex-direction:column;align-items:flex-start;gap:9px}.footer-meta>a{font-weight:700;font-size:.88rem;color:var(--muted)}.site-footer small{color:var(--muted);font-size:.75rem}@media(max-width:760px){.footer-inner{grid-template-columns:1fr;align-items:start}.site-footer{margin-top:50px}}
 </style>

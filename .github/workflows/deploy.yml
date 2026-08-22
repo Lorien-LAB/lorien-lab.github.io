@@ -28,6 +28,7 @@ jobs:
         env:
           SITE_URL: ${{ vars.SITE_URL || 'https://lorien-lab.github.io' }}
           BASE_PATH: ${{ vars.BASE_PATH || '/' }}
+          PUBLIC_GOATCOUNTER_CODE: ${{ vars.PUBLIC_GOATCOUNTER_CODE || '' }}
 
   deploy:
     needs: build

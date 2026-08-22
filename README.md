@@ -241,6 +241,16 @@ Executable reproduction code, reusable research infrastructure, templates, and a
 
 This repository deploys through GitHub Actions. The workflow in `.github/workflows/deploy.yml` builds the site and publishes `dist/` whenever `main` is updated.
 
+### Public visit counter
+
+The optional footer counter uses GoatCounter while the website remains hosted on GitHub Pages. It records page views after the integration date and displays the site-wide `TOTAL`; historical GitHub Pages traffic is not reconstructed.
+
+1. Create a GoatCounter site and enable **Allow adding visitor counts on your website** in its settings.
+2. Add the repository Actions variable `PUBLIC_GOATCOUNTER_CODE` with only the public site code, for example `lorien-lab` for `lorien-lab.goatcounter.com`.
+3. Deploy `main`. Leaving the variable empty disables tracking and omits the counter without affecting the site.
+
+For local verification, copy `.env.example` to `.env` and set the same public code. This value is a public identifier, not a secret.
+
 For a user site (`username.github.io`):
 
 - `SITE_URL=https://username.github.io`
