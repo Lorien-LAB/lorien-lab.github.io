@@ -1,10 +1,12 @@
 ---
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import { getGoatCounterConfig } from '../lib/visitCounter.mjs';
 import '../styles/global.css';
 interface Props { title: string; description?: string; class?: string; }
 const { title, description = 'Quantitative research, systematic strategies, and research infrastructure by Lorien Lab.', class: bodyClass } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+const goatCounterConfig = getGoatCounterConfig(import.meta.env.PUBLIC_GOATCOUNTER_CODE);
 ---
 <!doctype html>
 <html lang="en" data-lang="en" data-theme="light">
@@ -16,6 +18,15 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
   <link rel="icon" type="image/svg+xml" href={`${import.meta.env.BASE_URL}favicon.svg`} />
   <link rel="canonical" href={canonicalURL} />
   <title>{title}</title>
+  {goatCounterConfig && (
+    <script
+      is:inline
+      data-goatcounter={goatCounterConfig.trackingEndpoint}
+      data-goatcounter-settings={goatCounterConfig.trackingSettings}
+      async
+      src="https://gc.zgo.at/count.js"
+    ></script>
+  )}
   <script is:inline>
     (() => {
       const root = document.documentElement;
