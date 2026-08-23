@@ -81,21 +81,110 @@ for (const name of ['README', 'design', 'plan']) {
   });
 }
 
-const sharedEditContradictions = [
-  /candidate source-map and coverage-ledger changes/i,
-  /(?:candidate|module) branches? may carry candidate (?:edits|changes) to shared files/i,
-  /(?:candidate|module) (?:agents?|branches?|workstreams?) (?:may|can|are allowed to|are permitted to) (?:produce|make|edit|modify|update|carry|commit)[^.]{0,300}(?:shared files|shared coverage|coverage-ledger|source-topic map|source-map|global-count|HANDOFF|completion metadata|CI workflow)/i,
+const candidateSubject = /\b(?:candidates?|module (?:agents?|branch(?:es)?|workstreams?))\b/i;
+const sharedSurface = /\b(?:shared (?:files?|coverage|coverage ledgers?)|coverage-ledgers?|source-topic map|source-map|global-(?:registry\/)?count regressions?|HANDOFF|(?:workstream\/)?completion metadata|CI workflow paths?|CI workflows?)\b/i;
+const directEditAuthorization = /\b(?:may|can)\s+(?:directly\s+)?(?:produce|make|edit|modify|update|write|commit|carry)\b/i;
+const explicitEditAuthorization = /\b(?:is|are)\s+(?:explicitly\s+)?(?:allowed|permitted|authorized)\s+to\s+(?:directly\s+)?(?:produce|make|edit|modify|update|write|commit|carry)\b/i;
+const candidateActivityProhibitions = [
+  /\b(?:is|are)\s+(?:explicitly\s+)?(?:prohibited|forbidden|disallowed|barred)\s+from\s+being\s+active\b/i,
+  /\b(?:is|are)\s+not\s+(?:allowed|permitted|authorized)\s+to\s+(?:be|remain)\s+active\b/i,
+  /\b(?:must not|may not|cannot|can't|can not|never)\s+(?:be|remain)\s+active\b/i,
+  /\b(?:does not|do not|cannot|can't|must not|may not|never)\b[^.]{0,100}\bup to three\b|\bup to three\b[^.]{0,100}\b(?:not|never|cannot|can't|must not|may not)\b/i,
 ];
-const negatedConcurrency = /\b(?:not|never|cannot|can't|must not|may not)\b[^.]{0,100}\bup to three\b|\bup to three\b[^.]{0,100}\b(?:not|never|cannot|can't|must not|may not)\b/i;
+const numberValues = new Map([
+  ['one', 1],
+  ['two', 2],
+  ['three', 3],
+  ['four', 4],
+  ['five', 5],
+  ['six', 6],
+  ['seven', 7],
+  ['eight', 8],
+  ['nine', 9],
+  ['ten', 10],
+]);
 const obsoleteGlobalSerialRule = /process one bounded canonical topic workstream at a time across every mapped verified source|one canonical workstream globally at a time/i;
+
+const policySentences = (policy) => normalizePolicy(policy).split(/(?<=[.!?])\s+/);
+
+function grantsCandidateSharedEdit(policy) {
+  return policySentences(policy).some((sentence) => (
+    candidateSubject.test(sentence)
+    && sharedSurface.test(sentence)
+    && (directEditAuthorization.test(sentence) || explicitEditAuthorization.test(sentence))
+  ));
+}
+
+function candidateLimit(value) {
+  return /^\d+$/.test(value) ? Number(value) : numberValues.get(value.toLowerCase());
+}
+
+function hasIncompatibleCandidateCap(sentence) {
+  const capPattern = /\b(?:up to|at most|no more than|only|maximum(?: of)?)\s+(\d+|one|two|three|four|five|six|seven|eight|nine|ten)\s+(?:isolated\s+)?(?:module\s+)?(?:candidate\s+)?(?:canonical topic\s+)?(?:candidates?|agents?|branch(?:es)?|workstreams?)(?:\/worktrees)?\b[^.]{0,120}\bactive\b/gi;
+  return [...sentence.matchAll(capPattern)].some(([, value]) => candidateLimit(value) !== 3);
+}
+
+function contradictsCandidateConcurrency(policy) {
+  return policySentences(policy).some((sentence) => (
+    hasIncompatibleCandidateCap(sentence)
+    || (
+      candidateSubject.test(sentence)
+      && /\bactive\b/i.test(sentence)
+      && candidateActivityProhibitions.some((prohibition) => prohibition.test(sentence))
+    )
+  ));
+}
+
+test('shared-edit detector catches ordinary candidate permission reversals', () => {
+  const mutations = [
+    'Candidates may edit shared coverage.',
+    'A candidate may edit the source-topic map.',
+    'Module agents are authorized to edit shared coverage.',
+    'A module branch is permitted to update HANDOFF.',
+    'A candidate workstream can modify completion metadata.',
+    'Candidate branches are allowed to commit CI workflow changes.',
+  ];
+
+  for (const mutation of mutations) {
+    assert.ok(
+      grantsCandidateSharedEdit(mutation),
+      `shared-edit reversal was not detected: ${mutation}`,
+    );
+  }
+});
+
+test('concurrency detector catches prohibitions and incompatible numeric caps', () => {
+  const mutations = [
+    'Up to three candidates are prohibited from being active.',
+    'At most two candidates may be active despite the up to three reservation.',
+    'Only one module branch may be active at once.',
+  ];
+
+  for (const mutation of mutations) {
+    assert.ok(
+      contradictsCandidateConcurrency(mutation),
+      `concurrency reversal was not detected: ${mutation}`,
+    );
+  }
+});
+
+test('contradiction detectors accept approved candidate restrictions and capacity', () => {
+  const approved = normalizePolicy(`
+    Up to three isolated module candidate branches/worktrees may be active at once.
+    Candidate agents must not edit shared coverage, source-topic map, exact global-registry/count regressions,
+    HANDOFF, workstream/completion metadata, or CI workflow paths.
+    At most three candidates may be active.
+  `);
+
+  assert.equal(grantsCandidateSharedEdit(approved), false);
+  assert.equal(contradictsCandidateConcurrency(approved), false);
+});
 
 for (const [name, path] of Object.entries(governanceEntrypoints)) {
   test(`${name} rejects contradictory candidate permissions and concurrency negation`, async () => {
     const policy = await readPolicy(path);
-    for (const contradiction of sharedEditContradictions) {
-      assert.doesNotMatch(policy, contradiction, `${name} grants candidates shared-file edit authority`);
-    }
-    assert.doesNotMatch(policy, negatedConcurrency, `${name} negates the up-to-three candidate allowance`);
+    assert.equal(grantsCandidateSharedEdit(policy), false, `${name} grants candidates shared-file edit authority`);
+    assert.equal(contradictsCandidateConcurrency(policy), false, `${name} contradicts the up-to-three candidate allowance`);
     assert.doesNotMatch(policy, obsoleteGlobalSerialRule, `${name} restores globally serial candidate development`);
   });
 }
