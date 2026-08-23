@@ -1,5 +1,11 @@
 # Quant Interview Agent Protocol
 
+<!-- parallel-workstream-policy-reference:start -->
+> Canonical parallel-workstream policy: `quant-interview.parallel-workstream-governance` at `docs/quant-interview/parallel-workstream-policy.json`.
+>
+> The JSON policy is normative and the sole source of truth for parallel-workstream governance. Surrounding prose is explanatory and cannot override it.
+<!-- parallel-workstream-policy-reference:end -->
+
 ## 1. Authority
 
 **Do not trust conversational memory** as the source of truth. Current repository files and verified source evidence are authoritative.
@@ -24,13 +30,13 @@ One branch must still implement one bounded infrastructure stage or one bounded 
 
 A single coordinator may authorize up to three isolated canonical topic workstreams to be active at once. Each candidate uses its own branch and worktree from the same frozen durable base. Candidate branches never share a checkout, never edit another candidate branch, and never force-update shared history.
 
-Module implementation may not begin until its written module spec is approved.
+Module implementation may not begin until its written module spec is approved. Design and source audit may precede approval.
 
 ### Parallel workstream governance
 
 Parallelism applies to isolated design and implementation only. A single coordinator owns ordinal reservation, cross-module source-row ownership, semantic reconciliation of coverage and source-topic mappings, exact global counts, the authoritative HANDOFF, integration order, and completion evidence.
 
-Candidate agents must not edit shared coverage, source-topic map, global-count regression, HANDOFF, completion metadata, or CI workflow paths. Candidates may only submit local module content and test changes allowed by their approved spec.
+Candidate agents must not edit shared coverage, source-topic map, global-count regression, HANDOFF, completion metadata, or CI workflow paths. Candidates may only submit local module content and test changes allowed by their approved spec, plus a report with precise proposed shared-file deltas for the coordinator.
 
 Candidate workstreams remain `active` after module-local verification. Only the coordinator may mark an integrated workstream `complete`. Integration, completion metadata, real CI evidence, exact corpus regression, and HANDOFF closure are serialized one workstream at a time.
 

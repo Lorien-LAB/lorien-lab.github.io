@@ -1,0 +1,71 @@
+{
+  "policyId": "quant-interview.parallel-workstream-governance",
+  "version": "1.0.0",
+  "authority": {
+    "status": "normative",
+    "sourceOfTruth": "sole",
+    "scope": "parallel-workstream-governance"
+  },
+  "repository": {
+    "main": {
+      "protected": true,
+      "mayBeModified": false
+    }
+  },
+  "candidates": {
+    "maxActive": 3,
+    "isolationRequired": true,
+    "approvedModulesPerBranch": 1,
+    "approvedModulesPerWorktree": 1,
+    "implementationRequiresApprovedWrittenDesignSpec": true,
+    "preApprovalActivities": [
+      "design",
+      "source-audit"
+    ],
+    "allowedResponsibilities": [
+      "module-scoped-public-knowledge-content",
+      "module-scoped-public-problem-content",
+      "module-specific-tests",
+      "report-proposed-shared-file-deltas"
+    ],
+    "forbiddenSharedResponsibilities": [
+      "coverage-ledgers",
+      "source-topic-map",
+      "exact-global-registry-count-regressions",
+      "handoff",
+      "workstream-completion-metadata-manifests",
+      "ci-workflows"
+    ],
+    "postVerificationState": "active",
+    "activeStateIsCompletion": false,
+    "mayDeclareCompletion": false
+  },
+  "coordinator": {
+    "ownsAllSharedState": true,
+    "reconciliationBase": "latest-durable-base",
+    "integrationMode": "serialized-one-at-a-time",
+    "closureMode": "serialized-one-at-a-time",
+    "queue": [
+      "011",
+      "012",
+      "013"
+    ]
+  },
+  "reservations": [
+    {
+      "ordinal": "011",
+      "topic": "random-walks-markov-chains",
+      "branch": "chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23"
+    },
+    {
+      "ordinal": "012",
+      "topic": "limits-derivatives",
+      "branch": "chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23"
+    },
+    {
+      "ordinal": "013",
+      "topic": "reasoning-communication",
+      "branch": "chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23"
+    }
+  ]
+}

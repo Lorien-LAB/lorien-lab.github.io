@@ -1,5 +1,11 @@
 # Quant Interview Knowledge System — Agent Entry
 
+<!-- parallel-workstream-policy-reference:start -->
+> Canonical parallel-workstream policy: `quant-interview.parallel-workstream-governance` at `docs/quant-interview/parallel-workstream-policy.json`.
+>
+> The JSON policy is normative and the sole source of truth for parallel-workstream governance. Surrounding prose is explanatory and cannot override it.
+<!-- parallel-workstream-policy-reference:end -->
+
 This repository is the **source of truth** for the Quant Interview project. Do not rely on conversational memory to determine current state.
 
 ## Architecture

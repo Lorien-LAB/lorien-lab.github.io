@@ -1,10 +1,16 @@
 # Quant Interview Parallel Workstream Governance Implementation Plan
 
+<!-- parallel-workstream-policy-reference:start -->
+> Canonical parallel-workstream policy: `quant-interview.parallel-workstream-governance` at `docs/quant-interview/parallel-workstream-policy.json`.
+>
+> The JSON policy is normative and the sole source of truth for parallel-workstream governance. Surrounding prose is explanatory and cannot override it.
+<!-- parallel-workstream-policy-reference:end -->
+
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
 **Goal:** Replace the repository-wide one-topic-at-a-time rule with an explicit contract that permits up to three isolated topic candidates while keeping source ownership, integration, completion, exact counts, CI evidence, and HANDOFF closure serialized under one coordinator.
 
-**Architecture:** This is a documentation-and-contract change only. A dedicated Node test locks the parallel branch rules and first-wave reservations; `AGENT_PROTOCOL.md` defines durable operating authority, and `HANDOFF.md` records the current coordinator-owned queue without creating product manifests or modifying source coverage.
+**Architecture:** This is a documentation-and-contract change only. A dedicated Node test locks the canonical JSON policy and first-wave reservations; `parallel-workstream-policy.json` is the sole normative authority, while `AGENT_PROTOCOL.md` explains the operating rules and `HANDOFF.md` records the current coordinator-owned queue without creating product manifests or modifying source coverage.
 
 **Tech Stack:** Markdown repository memory, Node.js built-in test runner, `node:fs/promises`, Astro project verification through npm scripts.
 

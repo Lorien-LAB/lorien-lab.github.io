@@ -1,5 +1,11 @@
 # Quant Interview Parallel Workstream Governance — Design Spec
 
+<!-- parallel-workstream-policy-reference:start -->
+> Canonical parallel-workstream policy: `quant-interview.parallel-workstream-governance` at `docs/quant-interview/parallel-workstream-policy.json`.
+>
+> The JSON policy is normative and the sole source of truth for parallel-workstream governance. Surrounding prose is explanatory and cannot override it.
+<!-- parallel-workstream-policy-reference:end -->
+
 **Date:** 2026-08-23
 **Status:** Approved (consistency-corrected 2026-08-23; approval remains in force)
 **Pre-governance content base:** `18879f087cd344e10e8fbe6aeb585774438a579d`

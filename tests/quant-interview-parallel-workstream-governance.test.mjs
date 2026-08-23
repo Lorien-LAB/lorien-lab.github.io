@@ -1,11 +1,23 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
+import { extname, join } from 'node:path';
+import { isDeepStrictEqual } from 'node:util';
 
 const protocolPath = 'docs/quant-interview/AGENT_PROTOCOL.md';
 const readmePath = 'docs/quant-interview/README.md';
 const designPath = 'docs/superpowers/specs/2026-08-23-quant-interview-parallel-workstream-governance-design.md';
 const planPath = 'docs/superpowers/plans/2026-08-23-quant-interview-parallel-workstream-governance.md';
+const policyPath = 'docs/quant-interview/parallel-workstream-policy.json';
+const policyId = 'quant-interview.parallel-workstream-governance';
+const policyVersion = '1.0.0';
+const policyReferenceStart = '<!-- parallel-workstream-policy-reference:start -->';
+const policyReferenceEnd = '<!-- parallel-workstream-policy-reference:end -->';
+const policyReferenceBlock = `<!-- parallel-workstream-policy-reference:start -->
+> Canonical parallel-workstream policy: \`${policyId}\` at \`${policyPath}\`.
+>
+> The JSON policy is normative and the sole source of truth for parallel-workstream governance. Surrounding prose is explanatory and cannot override it.
+<!-- parallel-workstream-policy-reference:end -->`;
 
 const governanceEntrypoints = {
   AGENT_PROTOCOL: protocolPath,
@@ -14,180 +26,205 @@ const governanceEntrypoints = {
   plan: planPath,
 };
 
-const normalizePolicy = (markdown) => markdown
-  .replace(/<!--[\s\S]*?-->/g, ' ')
-  .replace(/[`*_>#|]/g, ' ')
-  .replace(/[–—]/g, '-')
-  .replace(/\s+/g, ' ')
-  .trim();
+const expectedPolicy = {
+  policyId,
+  version: policyVersion,
+  authority: {
+    status: 'normative',
+    sourceOfTruth: 'sole',
+    scope: 'parallel-workstream-governance',
+  },
+  repository: {
+    main: {
+      protected: true,
+      mayBeModified: false,
+    },
+  },
+  candidates: {
+    maxActive: 3,
+    isolationRequired: true,
+    approvedModulesPerBranch: 1,
+    approvedModulesPerWorktree: 1,
+    implementationRequiresApprovedWrittenDesignSpec: true,
+    preApprovalActivities: [
+      'design',
+      'source-audit',
+    ],
+    allowedResponsibilities: [
+      'module-scoped-public-knowledge-content',
+      'module-scoped-public-problem-content',
+      'module-specific-tests',
+      'report-proposed-shared-file-deltas',
+    ],
+    forbiddenSharedResponsibilities: [
+      'coverage-ledgers',
+      'source-topic-map',
+      'exact-global-registry-count-regressions',
+      'handoff',
+      'workstream-completion-metadata-manifests',
+      'ci-workflows',
+    ],
+    postVerificationState: 'active',
+    activeStateIsCompletion: false,
+    mayDeclareCompletion: false,
+  },
+  coordinator: {
+    ownsAllSharedState: true,
+    reconciliationBase: 'latest-durable-base',
+    integrationMode: 'serialized-one-at-a-time',
+    closureMode: 'serialized-one-at-a-time',
+    queue: [
+      '011',
+      '012',
+      '013',
+    ],
+  },
+  reservations: [
+    {
+      ordinal: '011',
+      topic: 'random-walks-markov-chains',
+      branch: 'chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23',
+    },
+    {
+      ordinal: '012',
+      topic: 'limits-derivatives',
+      branch: 'chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23',
+    },
+    {
+      ordinal: '013',
+      topic: 'reasoning-communication',
+      branch: 'chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23',
+    },
+  ],
+};
 
-const readPolicy = async (path) => normalizePolicy(await readFile(path, 'utf8'));
+const occurrenceCount = (text, needle) => text.split(needle).length - 1;
+const policyIsExact = (policy) => isDeepStrictEqual(policy, expectedPolicy);
+const clonePolicy = () => JSON.parse(JSON.stringify(expectedPolicy));
 
-for (const [name, path] of Object.entries(governanceEntrypoints)) {
-  test(`${name} permits bounded candidates and serializes closure`, async () => {
-    const policy = await readPolicy(path);
-    assert.match(
-      policy,
-      /up to three isolated (?:module )?(?:candidate )?(?:branches(?:\/worktrees)?|canonical topic workstreams)[^.]{0,80}\bactive\b/i,
-      `${name} must permit up to three isolated active candidates`,
-    );
-    assert.match(
-      policy,
-      /(?:one branch must still implement one bounded (?:infrastructure stage or one bounded )?canonical topic workstream|each candidate branch owns exactly one approved module)/i,
-      `${name} must limit each candidate branch to one approved module`,
-    );
-    assert.match(
-      policy,
-      /module implementation may not begin until[^.]{0,160}(?:written )?module (?:design )?spec[^.]{0,80}approved/i,
-      `${name} must gate module implementation on an approved written design`,
-    );
-    assert.match(
-      policy,
-      /candidate agents must not edit shared coverage, source-topic map, (?:exact )?global-(?:registry\/)?count regressions?, HANDOFF, (?:workstream\/)?completion metadata, or CI workflow paths/i,
-      `${name} must reserve every shared governance surface for the coordinator`,
-    );
-    assert.match(
-      policy,
-      /(?:candidates may only submit local module content and test changes allowed by their approved spec|may implement only module-scoped public Knowledge\/Problem content plus module-specific tests explicitly allowed by that approved module spec)/i,
-      `${name} must limit candidate edits to approved module-local content and tests`,
-    );
-    assert.match(policy, /(?:single|only the|the) coordinator/i, `${name} must name one coordinator`);
-    assert.match(
-      policy,
-      /(?:integration|closure)[^.]{0,220}serial|serial[^.]{0,220}(?:integration|closure)/i,
-      `${name} must serialize integration or closure`,
-    );
-  });
+function hasExactlyOneCanonicalReference(text) {
+  return occurrenceCount(text, policyReferenceBlock) === 1
+    && occurrenceCount(text, policyReferenceStart) === 1
+    && occurrenceCount(text, policyReferenceEnd) === 1
+    && occurrenceCount(text, policyId) === 1
+    && occurrenceCount(text, policyPath) === 1;
 }
 
-for (const name of ['README', 'design', 'plan']) {
-  test(`${name} requires reports, audit gating, and ordered coordinator updates`, async () => {
-    const policy = await readPolicy(governanceEntrypoints[name]);
-    assert.match(
-      policy,
-      /candidates hand the coordinator precise proposed shared-file deltas in their reports/i,
-      `${name} must route proposed shared-file deltas through candidate reports`,
-    );
-    assert.match(
-      policy,
-      /design and source audit may precede approval/i,
-      `${name} must allow audit but not implementation before design approval`,
-    );
-    assert.match(
-      policy,
-      /coordinator serializes reconciliation, integration, and closure in the order 011[^.]{0,40}012[^.]{0,40}013 on the latest durable base and updates shared files/i,
-      `${name} must lock coordinator-owned integration order and shared-file updates`,
-    );
-  });
-}
-
-const candidateSubject = /\b(?:candidates?|module (?:agents?|branch(?:es)?|workstreams?))\b/i;
-const sharedSurface = /\b(?:shared (?:files?|coverage|coverage ledgers?)|coverage-ledgers?|source-topic map|source-map|global-(?:registry\/)?count regressions?|HANDOFF|(?:workstream\/)?completion metadata|CI workflow paths?|CI workflows?)\b/i;
-const directEditAuthorization = /\b(?:may|can)\s+(?:directly\s+)?(?:produce|make|edit|modify|update|write|commit|carry)\b/i;
-const explicitEditAuthorization = /\b(?:is|are)\s+(?:explicitly\s+)?(?:allowed|permitted|authorized)\s+to\s+(?:directly\s+)?(?:produce|make|edit|modify|update|write|commit|carry)\b/i;
-const candidateActivityProhibitions = [
-  /\b(?:is|are)\s+(?:explicitly\s+)?(?:prohibited|forbidden|disallowed|barred)\s+from\s+being\s+active\b/i,
-  /\b(?:is|are)\s+not\s+(?:allowed|permitted|authorized)\s+to\s+(?:be|remain)\s+active\b/i,
-  /\b(?:must not|may not|cannot|can't|can not|never)\s+(?:be|remain)\s+active\b/i,
-  /\b(?:does not|do not|cannot|can't|must not|may not|never)\b[^.]{0,100}\bup to three\b|\bup to three\b[^.]{0,100}\b(?:not|never|cannot|can't|must not|may not)\b/i,
-];
-const numberValues = new Map([
-  ['one', 1],
-  ['two', 2],
-  ['three', 3],
-  ['four', 4],
-  ['five', 5],
-  ['six', 6],
-  ['seven', 7],
-  ['eight', 8],
-  ['nine', 9],
-  ['ten', 10],
+const excludedPolicyScanDirectories = new Set([
+  '.git',
+  '.superpowers',
+  '.astro',
+  'coverage',
+  'dist',
+  'node_modules',
 ]);
-const obsoleteGlobalSerialRule = /process one bounded canonical topic workstream at a time across every mapped verified source|one canonical workstream globally at a time/i;
 
-const policySentences = (policy) => normalizePolicy(policy).split(/(?<=[.!?])\s+/);
-
-function grantsCandidateSharedEdit(policy) {
-  return policySentences(policy).some((sentence) => (
-    candidateSubject.test(sentence)
-    && sharedSurface.test(sentence)
-    && (directEditAuthorization.test(sentence) || explicitEditAuthorization.test(sentence))
-  ));
+async function repositoryTextArtifacts(directory = '.') {
+  const entries = await readdir(directory, { withFileTypes: true });
+  const nested = await Promise.all(entries.map(async (entry) => {
+    const path = join(directory, entry.name);
+    if (entry.isDirectory()) {
+      return excludedPolicyScanDirectories.has(entry.name)
+        ? []
+        : repositoryTextArtifacts(path);
+    }
+    return ['.json', '.md'].includes(extname(entry.name).toLowerCase())
+      ? [{ path: path.replaceAll('\\', '/').replace(/^\.\//, ''), text: await readFile(path, 'utf8') }]
+      : [];
+  }));
+  return nested.flat();
 }
 
-function candidateLimit(value) {
-  return /^\d+$/.test(value) ? Number(value) : numberValues.get(value.toLowerCase());
-}
-
-function hasIncompatibleCandidateCap(sentence) {
-  const capPattern = /\b(?:up to|at most|no more than|only|maximum(?: of)?)\s+(\d+|one|two|three|four|five|six|seven|eight|nine|ten)\s+(?:isolated\s+)?(?:module\s+)?(?:candidate\s+)?(?:canonical topic\s+)?(?:candidates?|agents?|branch(?:es)?|workstreams?)(?:\/worktrees)?\b[^.]{0,120}\bactive\b/gi;
-  return [...sentence.matchAll(capPattern)].some(([, value]) => candidateLimit(value) !== 3);
-}
-
-function contradictsCandidateConcurrency(policy) {
-  return policySentences(policy).some((sentence) => (
-    hasIncompatibleCandidateCap(sentence)
-    || (
-      candidateSubject.test(sentence)
-      && /\bactive\b/i.test(sentence)
-      && candidateActivityProhibitions.some((prohibition) => prohibition.test(sentence))
-    )
-  ));
-}
-
-test('shared-edit detector catches ordinary candidate permission reversals', () => {
-  const mutations = [
-    'Candidates may edit shared coverage.',
-    'A candidate may edit the source-topic map.',
-    'Module agents are authorized to edit shared coverage.',
-    'A module branch is permitted to update HANDOFF.',
-    'A candidate workstream can modify completion metadata.',
-    'Candidate branches are allowed to commit CI workflow changes.',
-  ];
-
-  for (const mutation of mutations) {
-    assert.ok(
-      grantsCandidateSharedEdit(mutation),
-      `shared-edit reversal was not detected: ${mutation}`,
-    );
+function parsedJson(text) {
+  try {
+    return JSON.parse(text);
+  } catch {
+    return null;
   }
-});
+}
 
-test('concurrency detector catches prohibitions and incompatible numeric caps', () => {
-  const mutations = [
-    'Up to three candidates are prohibited from being active.',
-    'At most two candidates may be active despite the up to three reservation.',
-    'Only one module branch may be active at once.',
-  ];
+function policyTopologyIsValid(files) {
+  const expectedArtifactPaths = [policyPath, ...Object.values(governanceEntrypoints)].sort();
+  const artifactPaths = files
+    .filter(({ text }) => text.includes(policyId) || text.includes(policyReferenceStart) || text.includes(policyReferenceEnd))
+    .map(({ path }) => path)
+    .sort();
+  const normativeDeclarations = files
+    .filter(({ path }) => extname(path).toLowerCase() === '.json')
+    .filter(({ text }) => {
+      const value = parsedJson(text);
+      return value?.policyId === policyId
+        || (value?.authority?.status === 'normative' && value?.authority?.scope === 'parallel-workstream-governance');
+    })
+    .map(({ path }) => path)
+    .sort();
+  const referencePaths = files
+    .filter(({ text }) => text.includes(policyReferenceStart) || text.includes(policyReferenceEnd))
+    .map(({ path }) => path)
+    .sort();
 
-  for (const mutation of mutations) {
-    assert.ok(
-      contradictsCandidateConcurrency(mutation),
-      `concurrency reversal was not detected: ${mutation}`,
-    );
-  }
-});
+  return isDeepStrictEqual(artifactPaths, expectedArtifactPaths)
+    && isDeepStrictEqual(normativeDeclarations, [policyPath])
+    && isDeepStrictEqual(referencePaths, Object.values(governanceEntrypoints).sort())
+    && Object.values(governanceEntrypoints).every((path) => {
+      const entrypoint = files.find((file) => file.path === path);
+      return entrypoint && hasExactlyOneCanonicalReference(entrypoint.text);
+    });
+}
 
-test('contradiction detectors accept approved candidate restrictions and capacity', () => {
-  const approved = normalizePolicy(`
-    Up to three isolated module candidate branches/worktrees may be active at once.
-    Candidate agents must not edit shared coverage, source-topic map, exact global-registry/count regressions,
-    HANDOFF, workstream/completion metadata, or CI workflow paths.
-    At most three candidates may be active.
-  `);
+test('canonical parallel-workstream policy exactly matches the complete typed contract', async () => {
+  const policy = JSON.parse(await readFile(policyPath, 'utf8'));
 
-  assert.equal(grantsCandidateSharedEdit(approved), false);
-  assert.equal(contradictsCandidateConcurrency(approved), false);
+  assert.deepEqual(policy, expectedPolicy);
 });
 
 for (const [name, path] of Object.entries(governanceEntrypoints)) {
-  test(`${name} rejects contradictory candidate permissions and concurrency negation`, async () => {
-    const policy = await readPolicy(path);
-    assert.equal(grantsCandidateSharedEdit(policy), false, `${name} grants candidates shared-file edit authority`);
-    assert.equal(contradictsCandidateConcurrency(policy), false, `${name} contradicts the up-to-three candidate allowance`);
-    assert.doesNotMatch(policy, obsoleteGlobalSerialRule, `${name} restores globally serial candidate development`);
+  test(`${name} contains exactly one canonical policy reference block`, async () => {
+    const entrypoint = await readFile(path, 'utf8');
+
+    assert.equal(hasExactlyOneCanonicalReference(entrypoint), true);
   });
 }
+
+test('deterministic policy validation rejects typed invariant and reservation mutations', () => {
+  const alteredMax = clonePolicy();
+  alteredMax.candidates.maxActive = 2;
+  const reorderedReservations = clonePolicy();
+  reorderedReservations.reservations.reverse();
+  const mismatchedReservation = clonePolicy();
+  mismatchedReservation.reservations[1].branch = 'chatgpt/wrong-branch';
+
+  assert.equal(policyIsExact(expectedPolicy), true);
+  assert.equal(policyIsExact(alteredMax), false);
+  assert.equal(policyIsExact(reorderedReservations), false);
+  assert.equal(policyIsExact(mismatchedReservation), false);
+});
+
+test('repository declares one normative policy and only the four canonical references', async () => {
+  assert.equal(policyTopologyIsValid(await repositoryTextArtifacts()), true);
+});
+
+test('deterministic topology validation rejects duplicate declarations and references', () => {
+  const canonicalFiles = [
+    { path: policyPath, text: JSON.stringify(expectedPolicy) },
+    ...Object.values(governanceEntrypoints).map((path) => ({ path, text: policyReferenceBlock })),
+  ];
+  const duplicateDeclaration = [
+    ...canonicalFiles,
+    { path: 'docs/quant-interview/duplicate-policy.json', text: JSON.stringify(expectedPolicy) },
+  ];
+  const duplicateReference = canonicalFiles.map((file) => (
+    file.path === readmePath ? { ...file, text: `${file.text}\n${policyReferenceBlock}` } : file
+  ));
+  const mismatchedReference = canonicalFiles.map((file) => (
+    file.path === designPath ? { ...file, text: file.text.replace(policyId, 'wrong.policy-id') } : file
+  ));
+
+  assert.equal(policyTopologyIsValid(canonicalFiles), true);
+  assert.equal(policyTopologyIsValid(duplicateDeclaration), false);
+  assert.equal(policyTopologyIsValid(duplicateReference), false);
+  assert.equal(policyTopologyIsValid(mismatchedReference), false);
+});
 
 const handoffPath = 'docs/quant-interview/HANDOFF.md';
 
