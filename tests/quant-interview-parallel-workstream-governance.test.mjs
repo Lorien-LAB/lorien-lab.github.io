@@ -9,11 +9,16 @@ test('protocol permits bounded isolated candidates and serializes shared closure
 
   assert.match(protocol, /up to three isolated canonical topic workstreams/i);
   assert.match(protocol, /one branch[^\n]*one bounded canonical topic/i);
+  assert.match(protocol, /module implementation may not begin until[^\n]*written module spec[^\n]*approved/i);
+  assert.match(protocol, /each candidate uses its own branch and worktree from the same frozen durable base/i);
+  assert.match(protocol, /candidate branches[^\n]*never share a checkout[^\n]*never edit another candidate branch/i);
   assert.match(protocol, /single coordinator/i);
   assert.match(protocol, /ordinal reservation/i);
   assert.match(protocol, /coverage[^\n]*source-topic[^\n]*exact global counts[^\n]*HANDOFF/i);
+  assert.match(protocol, /candidate agents must not edit[^\n]*shared coverage[^\n]*source-topic map[^\n]*global-count regression[^\n]*HANDOFF[^\n]*completion metadata[^\n]*CI workflow paths/i);
+  assert.match(protocol, /candidates may only submit local module content and test changes allowed by their approved spec/i);
   assert.match(protocol, /candidate[^\n]*remain[^\n]*active/i);
   assert.match(protocol, /only the coordinator[^\n]*complete/i);
   assert.match(protocol, /integration[^\n]*completion[^\n]*HANDOFF closure[^\n]*serial/i);
-  assert.match(protocol, /force[^\n]*push|force-update/i);
+  assert.match(protocol, /candidate branches[^\n]*(?:never|must not)[^\n]*force-update shared history/i);
 });

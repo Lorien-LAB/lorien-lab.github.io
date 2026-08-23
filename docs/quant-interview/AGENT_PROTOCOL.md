@@ -24,11 +24,13 @@ One branch must still implement one bounded infrastructure stage or one bounded 
 
 A single coordinator may authorize up to three isolated canonical topic workstreams to be active at once. Each candidate uses its own branch and worktree from the same frozen durable base. Candidate branches never share a checkout, never edit another candidate branch, and never force-update shared history.
 
+Module implementation may not begin until its written module spec is approved.
+
 ### Parallel workstream governance
 
 Parallelism applies to isolated design and implementation only. A single coordinator owns ordinal reservation, cross-module source-row ownership, semantic reconciliation of coverage and source-topic mappings, exact global counts, the authoritative HANDOFF, integration order, and completion evidence.
 
-Module branches may carry candidate edits to shared files for local review. The coordinator reapplies or semantically merges those deltas against the latest durable base; replacing a newer shared file with an older branch copy is forbidden.
+Candidate agents must not edit shared coverage, source-topic map, global-count regression, HANDOFF, completion metadata, or CI workflow paths. Candidates may only submit local module content and test changes allowed by their approved spec.
 
 Candidate workstreams remain `active` after module-local verification. Only the coordinator may mark an integrated workstream `complete`. Integration, completion metadata, real CI evidence, exact corpus regression, and HANDOFF closure are serialized one workstream at a time.
 
