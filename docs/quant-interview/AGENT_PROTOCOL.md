@@ -20,7 +20,17 @@ The public system is **Topic-first**. Books are internal evidence sources, not p
 
 Use a **task-specific branch** unless the user explicitly authorizes direct integration. Never force-update `main`.
 
-One branch should implement one bounded infrastructure stage or one bounded canonical topic workstream.
+One branch must still implement one bounded infrastructure stage or one bounded canonical topic workstream.
+
+A single coordinator may authorize up to three isolated canonical topic workstreams to be active at once. Each candidate uses its own branch and worktree from the same frozen durable base. Candidate branches never share a checkout, never edit another candidate branch, and never force-update shared history.
+
+### Parallel workstream governance
+
+Parallelism applies to isolated design and implementation only. A single coordinator owns ordinal reservation, cross-module source-row ownership, semantic reconciliation of coverage and source-topic mappings, exact global counts, the authoritative HANDOFF, integration order, and completion evidence.
+
+Module branches may carry candidate edits to shared files for local review. The coordinator reapplies or semantically merges those deltas against the latest durable base; replacing a newer shared file with an older branch copy is forbidden.
+
+Candidate workstreams remain `active` after module-local verification. Only the coordinator may mark an integrated workstream `complete`. Integration, completion metadata, real CI evidence, exact corpus regression, and HANDOFF closure are serialized one workstream at a time.
 
 ## 4. Canonical topic workstream discipline
 
@@ -146,7 +156,9 @@ Before completing a topic workstream:
 5. run `npm run test`;
 6. run `npm run check`;
 7. run `npm run build`;
-8. review the diff against `main`;
-9. update `docs/quant-interview/HANDOFF.md` with factual current state only.
+8. when parallel candidates exist, reconcile shared-file deltas against the latest durable base instead of accepting whole-file conflict resolution;
+9. keep the candidate `active` until the coordinator verifies the integrated commit and records its completion evidence;
+10. review the diff against `main`;
+11. update `docs/quant-interview/HANDOFF.md` with factual current state only.
 
 Do not claim completion when any verification gate fails.
