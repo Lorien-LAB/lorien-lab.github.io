@@ -23,7 +23,7 @@ featured: false
 
 ## Problem
 
-Let \(X_1,\ldots,X_n\) be iid observations from a continuous distribution with CDF \(F\) and density \(f\). Write
+Let \(X_1,\ldots,X_n\) be iid observations from a continuous distribution with CDF \(F\) and density \(f\). Fix an integer \(k\) with \(1\le k\le n\). Write
 
 \[
 X_{(1)}\le\cdots\le X_{(n)}.

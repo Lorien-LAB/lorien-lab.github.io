@@ -8,13 +8,36 @@ const workstreamPath = 'src/data/quant-interview/workstreams/probability-statist
 const keyOf = (entry) => `${entry.sourceSection}::${entry.sourceItem ?? ''}`;
 const terminalStates = new Set(['canonical-problem', 'merged-duplicate', 'variant', 'knowledge-only']);
 
-const expectedCoverageKeys = {
-  'green-book': [
-    '4.6.expected-max-min::',
-    '4.6.correlation-max-min::',
-    '4.6.random-ants::',
-  ],
-  'red-book': ['3.2.1::3.29', '3.2.1::3.32'],
+const expectedCoverage = {
+  'green-book': {
+    '4.6.expected-max-min::': {
+      state: 'canonical-problem',
+      canonicalProblems: ['uniform-sample-extremes-and-range'],
+      canonicalKnowledge: ['order-statistics-basics', 'joint-extremes-and-range'],
+    },
+    '4.6.correlation-max-min::': {
+      state: 'canonical-problem',
+      canonicalProblems: ['joint-min-max-correlation-of-uniforms'],
+      canonicalKnowledge: ['joint-extremes-and-range', 'expectation-variance-covariance-algebra'],
+    },
+    '4.6.random-ants::': {
+      state: 'canonical-problem',
+      canonicalProblems: ['random-ants-last-fall-time'],
+      canonicalKnowledge: ['order-statistics-basics'],
+    },
+  },
+  'red-book': {
+    '3.2.1::3.29': {
+      state: 'merged-duplicate',
+      canonicalProblems: ['uniform-sample-extremes-and-range'],
+      canonicalKnowledge: ['order-statistics-basics', 'joint-extremes-and-range'],
+    },
+    '3.2.1::3.32': {
+      state: 'canonical-problem',
+      canonicalProblems: ['kth-order-statistic-distribution'],
+      canonicalKnowledge: ['order-statistics-basics'],
+    },
+  },
 };
 
 async function context() {
@@ -71,17 +94,21 @@ test('exactly five rows are newly owned by workstream 010', async () => {
   const red = await readJson('src/data/quant-interview/coverage/red-book.json');
   const ledgers = { 'green-book': green, 'red-book': red };
   const expected = [];
-  for (const [source, keys] of Object.entries(expectedCoverageKeys)) {
+  for (const [source, expectedRows] of Object.entries(expectedCoverage)) {
     const rows = new Map(ledgers[source].entries.map((entry) => [keyOf(entry), entry]));
-    for (const key of keys) {
+    for (const [key, expectedRow] of Object.entries(expectedRows)) {
       assert.ok(rows.has(key), `${source} missing ${key}`);
-      expected.push(rows.get(key));
+      const row = rows.get(key);
+      assert.equal(row.state, expectedRow.state, `${source} ${key} has incorrect state`);
+      assert.deepEqual(row.canonicalProblems, expectedRow.canonicalProblems, `${source} ${key} has incorrect Problem targets`);
+      assert.deepEqual(row.canonicalKnowledge, expectedRow.canonicalKnowledge, `${source} ${key} has incorrect Knowledge targets`);
+      expected.push(row);
     }
     const ownedKeys = ledgers[source].entries
       .filter((entry) => entry.canonicalTopics?.includes('order-statistics-extremes') && terminalStates.has(entry.state))
       .map(keyOf)
       .sort();
-    assert.deepEqual(ownedKeys, [...keys].sort(), `${source} has unexpected terminal order-statistics ownership`);
+    assert.deepEqual(ownedKeys, Object.keys(expectedRows).sort(), `${source} has unexpected terminal order-statistics ownership`);
   }
   assert.equal(expected.length, 5);
   assert.equal(expected.filter((row) => row.state === 'canonical-problem').length, 4);
@@ -92,31 +119,13 @@ test('exactly five rows are newly owned by workstream 010', async () => {
   }
 });
 
-test('five coverage rows resolve to the approved semantic owners', async () => {
-  const green = await readJson('src/data/quant-interview/coverage/green-book.json');
-  const red = await readJson('src/data/quant-interview/coverage/red-book.json');
-  const greenRows = new Map(green.entries.map((entry) => [keyOf(entry), entry]));
-  const redRows = new Map(red.entries.map((entry) => [keyOf(entry), entry]));
-
-  assert.deepEqual(greenRows.get('4.6.expected-max-min::')?.canonicalProblems, ['uniform-sample-extremes-and-range']);
-  assert.deepEqual(greenRows.get('4.6.expected-max-min::')?.canonicalKnowledge, ['order-statistics-basics', 'joint-extremes-and-range']);
-  assert.deepEqual(greenRows.get('4.6.correlation-max-min::')?.canonicalProblems, ['joint-min-max-correlation-of-uniforms']);
-  assert.deepEqual(greenRows.get('4.6.correlation-max-min::')?.canonicalKnowledge, ['joint-extremes-and-range', 'expectation-variance-covariance-algebra']);
-  assert.deepEqual(greenRows.get('4.6.random-ants::')?.canonicalProblems, ['random-ants-last-fall-time']);
-  assert.deepEqual(greenRows.get('4.6.random-ants::')?.canonicalKnowledge, ['order-statistics-basics']);
-  assert.deepEqual(redRows.get('3.2.1::3.29')?.canonicalProblems, ['uniform-sample-extremes-and-range']);
-  assert.deepEqual(redRows.get('3.2.1::3.29')?.canonicalKnowledge, ['order-statistics-basics', 'joint-extremes-and-range']);
-  assert.deepEqual(redRows.get('3.2.1::3.32')?.canonicalProblems, ['kth-order-statistic-distribution']);
-  assert.deepEqual(redRows.get('3.2.1::3.32')?.canonicalKnowledge, ['order-statistics-basics']);
-});
-
 test('all claimed rows resolve to real public targets and 150 gains no order-statistics row', async () => {
   const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
   const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
   const problemSlugs = await markdownSlugs('src/content/problems');
   const knowledgeSlugs = await markdownSlugs('src/content/knowledge');
   const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
-  for (const source of Object.keys(expectedCoverageKeys)) {
+  for (const source of Object.keys(expectedCoverage)) {
     const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
     assert.doesNotThrow(() => validateCoverageLedger(ledger, { sourceTopicMap, taxonomy, problemSlugs, knowledgeSlugs, allowUnresolvedCanonicalRefs: false }));
   }

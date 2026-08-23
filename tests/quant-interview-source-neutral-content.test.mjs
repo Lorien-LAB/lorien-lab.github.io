@@ -132,9 +132,27 @@ async function markdownSlugs(root) {
   return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
 }
 
-test('source-neutral regression enumerates the current 59 Problem and 39 Knowledge contracts', () => {
-  assert.equal(currentProblemSlugs.length, 59);
-  assert.equal(expectedKnowledgeTopics.size, 39);
+async function classifiedMarkdownSlugs(root) {
+  const files = await readdir(root, { recursive: true });
+  const slugs = [];
+  for (const file of files.filter((entry) => String(entry).endsWith('.md'))) {
+    const text = await readFile(path.join(root, String(file)), 'utf8');
+    if (parseInlineArray(text, 'quantInterviewTopics').length > 0) slugs.push(path.basename(String(file), '.md'));
+  }
+  assert.equal(new Set(slugs).size, slugs.length, `${root} has duplicate classified Markdown slugs`);
+  return slugs.sort();
+}
+
+test('source-neutral regression discovers exactly the current 59 Problem and 39 Knowledge contracts', async () => {
+  const actualProblemSlugs = await classifiedMarkdownSlugs('src/content/problems');
+  const actualKnowledgeSlugs = await classifiedMarkdownSlugs('src/content/knowledge');
+  const expectedProblemSlugs = [...currentProblemSlugs].sort();
+  const expectedKnowledgeSlugs = [...expectedKnowledgeTopics.keys()].sort();
+
+  assert.equal(actualProblemSlugs.length, 59);
+  assert.equal(actualKnowledgeSlugs.length, 39);
+  assert.deepEqual(actualProblemSlugs, expectedProblemSlugs);
+  assert.deepEqual(actualKnowledgeSlugs, expectedKnowledgeSlugs);
 });
 
 test('public Problem schema is source-neutral', async () => {

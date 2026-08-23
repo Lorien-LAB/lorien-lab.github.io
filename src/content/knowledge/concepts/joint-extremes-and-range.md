@@ -25,7 +25,7 @@ Knowing the marginal laws of \(L\) and \(U\) is enough for quantities such as \(
 
 ## Joint Distribution of the Minimum and Maximum
 
-Assume the sample is iid from a continuous CDF \(F\) with density \(f\). For \(l<u\), the joint density of the minimum and maximum is
+Assume \(n\ge 2\) and the sample is iid from a continuous CDF \(F\) with density \(f\). For \(l<u\), the joint density of the minimum and maximum is
 
 \[
 f_{L,U}(l,u)

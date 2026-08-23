@@ -340,4 +340,136 @@ Required fields follow existing workstream contracts:
 - `verification` only after real evidence exists;
 - three source scopes with bounded evidence ranges, `reviewOutcome`, and `reviewNote`.
 
-Green scope must identify section 4.6 and all three
+Green scope must identify section 4.6 and all three approved labels. Red scope must identify section 3.2.1 and items 3.29 and 3.32. The 150 Questions scope must record the bounded review and its `reviewed-no-new-ownership` outcome.
+
+The workstream remains `active` until its content-complete commit passes the full local gates and a real GitHub Actions run. Completion metadata must not be guessed or written in advance.
+
+## 11. Graph links and ownership boundaries
+
+The new nodes should join the existing public graph without changing earlier topic ownership:
+
+- `order-statistics-basics` links reciprocally with the relevant probability foundations, common distributions, transformations, symmetry, and expectation-linearity Knowledge;
+- `joint-extremes-and-range` links reciprocally with scalar expectation/variance/covariance algebra;
+- `random-ants-last-fall-time` and the existing `ants-crossing-line` link to one another as related Problems;
+- `ants-crossing-line` keeps its Logic / invariants canonical topics and does not become an Order Statistics Problem;
+- existing pages do not gain `order-statistics-extremes` ownership merely because they are useful prerequisites.
+
+## 12. Files and test contracts
+
+Create during implementation:
+
+- `tests/quant-interview-order-statistics-extremes-workstream.test.mjs`;
+- `tests/quant-interview-order-statistics-extremes-content.test.mjs`;
+- `tests/quant-interview-order-statistics-extremes-completion.test.mjs`;
+- `.github/workflows/quant-interview-order-statistics-extremes-ci.yml` as temporary branch-only CI.
+
+Update `tests/quant-interview-source-neutral-content.test.mjs` to discover and exactly enumerate the public corpus at **59 Problems / 39 Knowledge nodes**. Do not weaken the regression to “at least N.”
+
+### 12.1 Workstream tests
+
+Verify:
+
+- exact workstream ID, topics, and three bounded source scopes;
+- exact five-row ownership inventory;
+- exact per-row state, canonical Problem targets, and canonical Knowledge targets;
+- terminal state distribution `4 canonical-problem + 1 merged-duplicate`;
+- nonempty resolution notes and real canonical targets;
+- workstream and coverage validators pass with unresolved references forbidden;
+- 150 Questions gains no Order Statistics row.
+
+### 12.2 Content and graph tests
+
+Verify:
+
+- both Knowledge pages contain their required distribution identities, boundary conditions, and interview checks;
+- all four Problems satisfy the existing S3+ source-neutral structure;
+- the Uniform max/min/range, joint correlation, random-ants maximum, and kth-order formulas are explicitly regression-tested;
+- the existing ant puzzle remains a distinct invariance Problem;
+- every approved reciprocal graph edge exists without changing canonical topic ownership.
+
+### 12.3 Completion tests
+
+Verify that a completed workstream contains:
+
+- a real 40-hex content-complete commit;
+- a real positive GitHub Actions run ID;
+- exact commands `npm run test`, `npm run check`, and `npm run build`;
+- `conclusion: success`;
+- a matching factual HANDOFF entry;
+- exact corpus totals 59 Problems / 39 Knowledge nodes;
+- the next bounded topic `Stochastic Processes & Stochastic Calculus -> Random Walks & Markov Chains`.
+
+## 13. TDD and verification order
+
+The implementation plan must enforce RED-to-GREEN steps for workstream registration, Knowledge, Problems, coverage, graph links, the exact global regression, and closure metadata.
+
+Before the content-complete commit is pushed, run:
+
+1. `npm run test`;
+2. `npm run check`;
+3. `npm run build`.
+
+Push the content-complete commit to the named implementation branch, obtain a real successful GitHub Actions run for that exact SHA, and only then mark the workstream complete and update HANDOFF. Remove the temporary branch workflow before final handoff and run a fresh full local verification on the final tree.
+
+## 14. Public source-neutrality and copyright boundary
+
+Public Knowledge and Problems must not expose:
+
+- book names as provenance;
+- original chapter, section, question, or page numbers;
+- source-specific ordering;
+- source-shaped `problemId` values;
+- copied source passages or answer keys.
+
+Internal design, workstream, and coverage files may retain source names, item IDs, and page evidence for audit integrity. Public explanations must be independently formulated and independently derived.
+
+## 15. Failure and rollback rules
+
+### 15.1 Semantic collision
+
+If implementation discovers that an approved new Problem is the same reasoning identity as an existing canonical Problem, stop creating it. Reclassify the source row as `variant` or `merged-duplicate`, revise the spec, plan, and exact corpus count, and preserve one public page.
+
+### 15.2 Mathematical or coverage uncertainty
+
+Do not publish an unchecked result or invent a canonical target. If ownership is genuinely unclear, leave the workstream `active` and amend the approved design before expanding scope.
+
+### 15.3 Test or CI failure
+
+Do not weaken validators or write fake evidence to make an incorrect tree appear complete. Fix the content, graph, coverage, metadata, or stale exact regression. If real CI is unavailable, leave the workstream active.
+
+### 15.4 Scope and branch safety
+
+Do not absorb stochastic-process, optimal-stopping, asymptotic extreme-value, covariance-matrix PSD, or unrelated probability material. Compare against the then-current durable base before integration, reconcile shared-file changes semantically, never force-push over other work, and do not touch `main`.
+
+After integration, prefer corrective commits over history rewrites.
+
+## 16. Completion gate
+
+The workstream may be marked `complete` only when all of the following are true:
+
+1. exactly two Knowledge pages and four Problem pages satisfy their content contracts;
+2. exactly five approved source rows are terminal and explained;
+3. the exact state split is four canonical Problems and one merged duplicate;
+4. every claimed row resolves to the approved real public targets;
+5. 150 Questions has no invented Order Statistics ownership;
+6. reciprocal graph links exist while earlier topic ownership remains intact;
+7. the exact source-neutral regression discovers 59 Problems and 39 Knowledge nodes;
+8. strict workstream, content, and completion tests pass;
+9. `npm run test`, `npm run check`, and `npm run build` pass;
+10. topic-only diff review is clean;
+11. a real CI run succeeds on the content-complete SHA;
+12. the workstream stores factual verification metadata;
+13. HANDOFF records the completed state and advances to Random Walks & Markov Chains;
+14. temporary CI is removed and fresh closure verification passes.
+
+No failed gate may be described as complete.
+
+## 17. Branch and integration strategy
+
+This design is committed on its docs-only spec branch. After written-spec approval and a writing-plans pass, implementation proceeds on `chatgpt/quant-interview-workstream-order-statistics-extremes-2026-08-23` while preserving the durable-base ancestry and the reviewed design history.
+
+Do not touch `main`. At implementation finish, keep the verified feature branch available for the user's chosen safe integration path.
+
+## 18. Next process gate
+
+This document captures the fully approved design. The next gate after spec approval is the implementation plan; no product implementation belongs on the spec-only branch before those approvals exist.

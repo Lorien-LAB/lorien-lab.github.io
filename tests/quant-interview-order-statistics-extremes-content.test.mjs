@@ -28,6 +28,7 @@ test('order statistics basics contains max min kth and Beta identities', async (
 test('joint extremes Knowledge contains joint density range and dependence boundary', async () => {
   const text = await read('src/content/knowledge/concepts/joint-extremes-and-range.md');
   assert.match(text, topicLine);
+  assert.match(text, /n\s*\\ge\s*2/);
   assert.match(text, /n\(n-1\)|joint density/i);
   assert.match(text, /n-1.*n\+1|range/i);
   assert.match(text, /YZ=X_1X_2|product identity/i);
@@ -67,6 +68,7 @@ test('random ants Problem reduces collision dynamics to a Uniform maximum', asyn
 test('kth order statistic Problem derives CDF PDF and Beta representation', async () => {
   const text = await read('src/content/problems/probability/kth-order-statistic-distribution.md');
   assertS3(text, 'order-statistics-extremes-004');
+  assert.match(text, /1\s*\\le\s*k\s*\\le\s*n/);
   assert.match(text, /Binomial/i);
   assert.match(text, /j=k|at least.*k/i);
   assert.match(text, /n!|factorial|\(k-1\)!/i);
