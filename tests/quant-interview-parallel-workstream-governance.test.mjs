@@ -44,6 +44,7 @@ const expectedPolicy = {
       candidateRewriteSharedOrDurableHistoryAllowed: false,
       integrationOwner: 'coordinator',
       coordinatorIntegrationForceUpdateAllowed: false,
+      coordinatorRewriteSharedOrDurableHistoryAllowed: false,
     },
   },
   candidates: {
@@ -291,6 +292,13 @@ test('deterministic policy validation rejects weakened history safety', () => {
   historyRewriteAllowed.repository.historySafety.candidateRewriteSharedOrDurableHistoryAllowed = true;
 
   assert.equal(policyIsExact(historyRewriteAllowed), false);
+});
+
+test('deterministic policy validation rejects coordinator history rewriting', () => {
+  const coordinatorHistoryRewriteAllowed = clonePolicy();
+  coordinatorHistoryRewriteAllowed.repository.historySafety.coordinatorRewriteSharedOrDurableHistoryAllowed = true;
+
+  assert.equal(policyIsExact(coordinatorHistoryRewriteAllowed), false);
 });
 
 test('deterministic policy validation rejects a changed coordinator-only surface path', () => {

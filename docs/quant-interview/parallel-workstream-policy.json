@@ -15,7 +15,8 @@
       "candidateForceUpdateSharedOrDurableHistoryAllowed": false,
       "candidateRewriteSharedOrDurableHistoryAllowed": false,
       "integrationOwner": "coordinator",
-      "coordinatorIntegrationForceUpdateAllowed": false
+      "coordinatorIntegrationForceUpdateAllowed": false,
+      "coordinatorRewriteSharedOrDurableHistoryAllowed": false
     }
   },
   "candidates": {
