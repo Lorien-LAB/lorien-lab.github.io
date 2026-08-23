@@ -1,0 +1,31 @@
+{
+  "id": "probability-statistics-order-statistics-extremes-010",
+  "canonicalTopics": [
+    "probability-statistics",
+    "order-statistics-extremes"
+  ],
+  "status": "active",
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["4.6"],
+      "evidencePageRanges": [{"startPage": 114, "endPage": 119}],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Claim Green 4.6 expected-max-min, correlation-max-min, and random-ants. Uniform extrema/range is fused across sources; joint min/max dependence remains distinct; Random Ants reduces collision relabeling to a maximum order statistic."
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["3.2.1"],
+      "evidencePageRanges": [{"startPage": 120, "endPage": 125}],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Claim Red items 3.29 and 3.32 only for this bounded workstream. Item 3.29 is the same iid Uniform maximum/minimum/range family as Green expected-max-min; item 3.32 is the general kth-order-statistic distribution identity."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["2.6"],
+      "evidencePageRanges": [{"startPage": 134, "endPage": 145}],
+      "reviewOutcome": "reviewed-no-new-ownership",
+      "reviewNote": "Reviewed the relevant probability material and found no independent unclaimed order-statistics identity requiring new ownership in workstream 010. Existing terminal rows retain their prior workstream ownership."
+    }
+  ]
+}
