@@ -4,7 +4,7 @@
     "probability-statistics",
     "order-statistics-extremes"
   ],
-  "status": "active",
+  "status": "complete",
   "sourceScopes": [
     {
       "source": "green-book",
@@ -27,5 +27,15 @@
       "reviewOutcome": "reviewed-no-new-ownership",
       "reviewNote": "Reviewed the relevant probability material and found no independent unclaimed order-statistics identity requiring new ownership in workstream 010. Existing terminal rows retain their prior workstream ownership."
     }
-  ]
+  ],
+  "verification": {
+    "commit": "2a7c7c7e245e9d6c4959640394e28eb0d2f2edf5",
+    "runId": 32633618700,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  }
 }

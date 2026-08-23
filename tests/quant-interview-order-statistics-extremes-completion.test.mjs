@@ -4,31 +4,23 @@ import { readFile } from 'node:fs/promises';
 
 const workstreamPath = 'src/data/quant-interview/workstreams/probability-statistics-order-statistics-extremes-010.json';
 const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
+const expectedCommit = '2a7c7c7e245e9d6c4959640394e28eb0d2f2edf5';
+const expectedRunId = 32633618700;
 
 test('order statistics extremes workstream closes only with real verification evidence', async () => {
   const workstream = await readJson(workstreamPath);
-  assert.match(workstream.status, /^(?:active|complete)$/);
-  if (workstream.status === 'active') {
-    assert.equal(workstream.verification, undefined);
-    return;
-  }
-  assert.match(workstream.verification?.commit ?? '', /^[0-9a-f]{40}$/);
-  assert.ok(Number.isInteger(workstream.verification?.runId));
-  assert.ok(workstream.verification.runId > 0);
+  assert.equal(workstream.status, 'complete');
+  assert.equal(workstream.verification?.commit, expectedCommit);
+  assert.equal(workstream.verification?.runId, expectedRunId);
   assert.deepEqual(workstream.verification?.commands, ['npm run test', 'npm run check', 'npm run build']);
   assert.equal(workstream.verification?.conclusion, 'success');
 });
 
 test('handoff records workstream 010 and advances to random walks and Markov chains', async () => {
-  const workstream = await readJson(workstreamPath);
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
-  if (workstream.status === 'active') {
-    assert.doesNotMatch(handoff, /probability-statistics-order-statistics-extremes-010/);
-    return;
-  }
   assert.match(handoff, /probability-statistics-order-statistics-extremes-010/);
-  assert.match(handoff, new RegExp(workstream.verification.commit));
-  assert.match(handoff, new RegExp(String(workstream.verification.runId)));
+  assert.match(handoff, new RegExp(expectedCommit));
+  assert.match(handoff, new RegExp(String(expectedRunId)));
   for (const slug of [
     'order-statistics-basics',
     'joint-extremes-and-range',

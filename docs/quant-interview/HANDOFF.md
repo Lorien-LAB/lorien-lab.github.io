@@ -1,13 +1,13 @@
 # Quant Interview — Current Handoff
 
-Updated: 2026-08-22
+Updated: 2026-08-23
 
 ## Current architecture state
 
 **Stage A — Topic-first foundation: complete and integrated.**  
 **Stage B — public Topic-first shell: complete and integrated.**  
 **Stage C — existing-content source-neutral migration: complete and integrated.**  
-**Stage D — bounded cross-book topic ingestion: active as the durable workflow; four Linear Algebra workstreams and five Probability & Statistics workstreams are now complete.**
+**Stage D — bounded cross-book topic ingestion: active as the durable workflow; four Linear Algebra workstreams and six Probability & Statistics workstreams are now complete.**
 
 The public system is Topic-first. Canonical Topics, Knowledge, techniques, and Problems are user-facing. Book identity, source item ids, page evidence, semantic-dedup provenance, and canonical-extension audit metadata remain internal.
 
@@ -342,9 +342,52 @@ Exactly **18 terminal claimed source rows** are closed for this workstream: 8 Gr
 - **Order statistics and expected extrema**, including Random Ants, remain outside this bounded topic for **Order Statistics & Extremes**.
 - Green's simplex `sum-of-random-variables` probability remains geometric-probability material rather than being misclassified as expectation solely by editorial placement.
 
-## Public corpus state after nine workstreams
+Historical corpus checkpoint after workstream 9: **55 canonical Problems** and **37 explicitly topic-classified Knowledge / Technique nodes**. This checkpoint is retained for repository lineage only.
 
-The current source-neutral regression contract covers **55 canonical Problems** and **37 explicitly topic-classified Knowledge / Technique nodes**.
+## Completed cross-book workstream 10
+
+`probability-statistics-order-statistics-extremes-010`
+
+Scope: **Probability & Statistics → Order Statistics & Extremes**.
+
+Content-complete verification:
+
+- commit `2a7c7c7e245e9d6c4959640394e28eb0d2f2edf5`
+- GitHub Actions run `32633618700`
+- commands: `npm run test`, `npm run check`, `npm run build`
+- conclusion: success
+
+The machine-readable workstream is `status: complete` and stores exactly this real verification evidence.
+
+### Canonical Knowledge
+
+- `order-statistics-basics` — minimum/maximum CDFs, kth-order CDF/PDF, Uniform/Beta representation, expected Uniform order statistics, and scope boundaries.
+- `joint-extremes-and-range` — joint minimum/maximum density for `n >= 2`, sample range, the two-sample product identity, and the boundary between marginals and dependence.
+
+### Canonical Problems
+
+- `uniform-sample-extremes-and-range`
+- `joint-min-max-correlation-of-uniforms`
+- `random-ants-last-fall-time`
+- `kth-order-statistic-distribution`
+
+All four are independently authored, source-neutral, solved, and S3+.
+
+### Cross-book semantic decisions and graph boundaries
+
+Exactly **5 terminal claimed source rows** are closed for this workstream: 3 Green and 2 Red. The state distribution is **4 `canonical-problem`** and **1 `merged-duplicate`**. Every claimed row has a nonempty resolution note and resolves to the approved real public targets.
+
+- Green expected max/min and Red 3.29 resolve to one canonical `uniform-sample-extremes-and-range` Problem; the Red row is the merged duplicate.
+- Joint minimum/maximum correlation remains the distinct `joint-min-max-correlation-of-uniforms` dependence problem.
+- `random-ants-last-fall-time` uses collision relabeling to reduce Random Ants to a maximum of iid Uniform distances.
+- `kth-order-statistic-distribution` owns the general kth-order CDF/PDF and Uniform/Beta identity.
+- The existing `ants-crossing-line` page remains a Logic / invariants Problem, linked reciprocally to Random Ants but not re-owned by Order Statistics.
+- Existing distribution, symmetry, transformation, expectation, and covariance Knowledge links into the new nodes while retaining its prior canonical ownership.
+- The 150-question source received a bounded review with **no new independent ownership**; no synthetic Order Statistics row was invented.
+
+## Public corpus state after ten workstreams
+
+The current source-neutral regression contract discovers exactly **59 canonical Problems** and **39 explicitly topic-classified Knowledge / Technique nodes**.
 
 These are repository-record counts only. They are not whole-book completeness percentages and do not imply that Probability & Statistics as a whole is complete.
 
@@ -368,11 +411,13 @@ Historical transition marker: **Random Variables & Distributions** is fully clos
 
 Historical transition marker: **Expectation, Variance & Covariance** is fully closed. Its four canonical Knowledge nodes, thirteen new S3+ Problems, upgraded conditional-dice linkage, eighteen terminal hidden source rows, indicator/tower/scalar-covariance boundaries, and verified 55/37 source-neutral corpus contract are durable repository state. This paragraph records lineage only and does not authorize reopening that bounded topic.
 
+Historical transition marker: **Order Statistics & Extremes** is fully closed. Its two canonical Knowledge nodes, four S3+ Problems, five terminal hidden source rows, four-canonical-plus-one-merged state split, cross-source uniform-extrema merge, Random Ants collision-relabeling boundary, reciprocal public graph links, exact 59/39 source-neutral corpus contract, and real verification evidence are durable repository state. This paragraph records lineage only and does not authorize reopening that bounded topic.
+
 Current bounded topic:
 
-**Probability & Statistics → Order Statistics & Extremes.**
+**Stochastic Processes & Stochastic Calculus → Random Walks & Markov Chains.**
 
-Proceed by resolving order-statistics and extremes material across all three verified sources before authoring. Reuse existing distribution, expectation, symmetry, and Gaussian Knowledge where appropriate; distinguish genuine order-statistic/extreme-value reasoning from ordinary expectation algebra or stochastic-process wrappers; preserve prior semantic ownership instead of reopening closed workstreams.
+Proceed by resolving random-walk and Markov-chain material across all three verified sources before authoring. Reuse existing conditioning and first-step-analysis Knowledge where appropriate; distinguish genuine state-transition machinery from one-step expectation recursions, martingales, and continuous-time process wrappers; preserve prior semantic ownership instead of reopening closed workstreams.
 
 Do not process one book to completion before the others. Do not organize the public corpus by source numbering. Do not use a generic deferred state to avoid semantic decisions.
 

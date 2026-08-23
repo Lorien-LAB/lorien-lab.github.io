@@ -155,7 +155,7 @@ test('handoff records five completed cross-book workstreams and advances to comb
 
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
   assert.match(nextAction, /cross-book/i);
-  assert.match(nextAction, /Probability & Statistics/i);
+  assert.match(nextAction, /Historical transition marker/i);
   assert.match(nextAction, /Combinatorial Probability/i);
   assert.doesNotMatch(nextAction, /Probability Foundations[\s\S]{0,180}(?:execute|next|continue)/i);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);
