@@ -1,9 +1,11 @@
 # Quant Interview Parallel Workstream Governance — Design Spec
 
 **Date:** 2026-08-23
-**Status:** Approved
+**Status:** Approved (consistency-corrected 2026-08-23; approval remains in force)
 **Pre-governance content base:** `18879f087cd344e10e8fbe6aeb585774438a579d`
 **Protected branch:** `main` must not be modified
+
+**Amendment:** This is a consistency correction, not a design reversal. It removes contradictory candidate shared-file permissions while preserving the approved coordinator-only shared-state intent.
 
 ## 1. Goal
 
@@ -15,7 +17,7 @@ Parallelism applies to isolated module development. Global repository closure re
 
 The current protocol says to process one bounded canonical topic at a time. That rule protected shared coverage ledgers, source-topic routing, exact corpus counts, and HANDOFF while all work happened on one branch.
 
-The requested execution model allows up to three modules to be active concurrently. Treating those branches as if each were the only active workstream would create four predictable failures:
+The requested execution model allows up to three isolated module candidate branches/worktrees to be active at once. Treating those branches as if each were the only active workstream would create four predictable failures:
 
 1. competing workstream ordinals;
 2. conflicting edits to shared coverage and routing files;
@@ -60,15 +62,11 @@ The coordinator does not let one module's branch overwrite another module's shar
 
 ### 4.2 Module agent
 
-Each module agent owns one bounded canonical topic in one isolated worktree. It may produce:
+Each candidate branch owns exactly one approved module in one isolated worktree. Module implementation may not begin until its written module design spec is approved. Design and source audit may precede approval.
 
-- the approved module design and implementation plan;
-- module-specific workstream, content, and completion tests;
-- module-specific Knowledge and Problem Markdown;
-- graph-link changes justified by that module;
-- candidate source-map and coverage-ledger changes;
-- an `active` workstream manifest;
-- local test, check, and build evidence.
+During implementation, a candidate branch may implement only module-scoped public Knowledge/Problem content plus module-specific tests explicitly allowed by that approved module spec. It may also record local test, check, and build evidence in its report.
+
+Candidate agents must not edit shared coverage, source-topic map, exact global-registry/count regressions, HANDOFF, workstream/completion metadata, or CI workflow paths. Candidates hand the coordinator precise proposed shared-file deltas in their reports.
 
 A module agent must not:
 
@@ -125,7 +123,7 @@ Before module implementation begins, each worktree must have:
 
 ## 8. Shared-file policy
 
-The following are integration hotspots:
+The following are coordinator-only integration hotspots:
 
 - `src/data/quant-interview/coverage/green-book.json`;
 - `src/data/quant-interview/coverage/red-book.json`;
@@ -137,7 +135,7 @@ The following are integration hotspots:
 - `docs/quant-interview/HANDOFF.md`;
 - reciprocal links in pre-existing shared Knowledge or Problem pages.
 
-Module branches may carry candidate changes to these files so their local contracts can be reviewed. During integration, the coordinator reapplies or semantically merges each candidate delta against the current durable base. Whole-file replacement from an older branch is forbidden.
+Candidate agents do not modify these files. They record precise proposed shared-file deltas in their reports, and the coordinator applies or semantically reconciles those proposals against the latest durable base. Whole-file replacement from an older branch is forbidden.
 
 ## 9. Count contracts
 
@@ -158,7 +156,7 @@ If all three evidence reviews confirm those identities, serialized integration p
 2. after 012: 70 Problems / 45 Knowledge;
 3. after 013: 70 Problems / 47 Knowledge.
 
-These are not quotas. Source inspection or semantic deduplication may change a module delta. Every branch records its additive delta, while the coordinator rebases the absolute exact regression at integration time. Exact slug enumeration must never be weakened to a lower-bound assertion.
+These are not quotas. Source inspection or semantic deduplication may change a module delta. Every candidate report records its proposed additive delta, while the coordinator updates the absolute exact regression at integration time. Exact slug enumeration must never be weakened to a lower-bound assertion.
 
 ## 10. Workstream status and completion
 
@@ -180,7 +178,7 @@ Parallel development therefore never creates several simultaneously authoritativ
 
 ## 11. Integration queue
 
-The initial queue is 011, then 012, then 013.
+The initial queue is 011, then 012, then 013. The coordinator serializes reconciliation, integration, and closure in the order 011 → 012 → 013 on the latest durable base and updates shared files.
 
 For each queued module, the coordinator:
 

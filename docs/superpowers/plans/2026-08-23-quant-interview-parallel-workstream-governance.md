@@ -8,14 +8,19 @@
 
 **Tech Stack:** Markdown repository memory, Node.js built-in test runner, `node:fs/promises`, Astro project verification through npm scripts.
 
+**Approved consistency correction:** This amendment preserves the approved coordinator-only shared-state intent and removes earlier candidate shared-file permissions that contradicted `AGENT_PROTOCOL.md`.
+
 ## Global Constraints
 
 - Pre-governance content base is exactly `18879f087cd344e10e8fbe6aeb585774438a579d`.
 - `main` must not be modified.
-- One branch still implements exactly one bounded canonical topic.
-- At most three isolated candidate workstreams may be active under one coordinator.
+- Each candidate branch owns exactly one approved module. Up to three isolated module candidate branches/worktrees may be active at once under one coordinator.
+- Module implementation may not begin until its written module design spec is approved. Design and source audit may precede approval.
+- During implementation, a candidate branch may implement only module-scoped public Knowledge/Problem content plus module-specific tests explicitly allowed by that approved module spec.
+- Candidate agents must not edit shared coverage, source-topic map, exact global-registry/count regressions, HANDOFF, workstream/completion metadata, or CI workflow paths. Candidates hand the coordinator precise proposed shared-file deltas in their reports.
 - Parallelism applies to design and implementation; integration, exact corpus regression, completion metadata, real CI evidence, and HANDOFF closure remain serialized.
 - The coordinator exclusively owns ordinal reservation and semantic reconciliation of shared coverage, source-topic mapping, exact global counts, HANDOFF, and completion evidence.
+- The coordinator serializes reconciliation, integration, and closure in the order 011 → 012 → 013 on the latest durable base and updates shared files.
 - Candidate module branches remain `active`; only the coordinator may mark an integrated workstream `complete`.
 - Reserve 011 for `random-walks-markov-chains`, 012 for `limits-derivatives`, and 013 for `reasoning-communication`.
 - Integration order is exactly 011, then 012, then 013.
@@ -28,7 +33,10 @@
 
 - `tests/quant-interview-parallel-workstream-governance.test.mjs` — executable contract for bounded parallelism, coordinator ownership, reservations, queue order, current topic, and absence of premature manifests.
 - `docs/quant-interview/AGENT_PROTOCOL.md` — durable rules for isolated candidates and serialized closure.
+- `docs/quant-interview/README.md` — durable startup summary of candidate scope and coordinator-only closure.
 - `docs/quant-interview/HANDOFF.md` — factual first-wave reservations and integration queue while preserving Random Walks as the current bounded topic.
+- `docs/superpowers/specs/2026-08-23-quant-interview-parallel-workstream-governance-design.md` — approved governance authority and candidate/coordinator ownership boundary.
+- `docs/superpowers/plans/2026-08-23-quant-interview-parallel-workstream-governance.md` — execution contract aligned with the approved design and protocol.
 
 ---
 
@@ -97,7 +105,7 @@ Immediately after branch discipline, add a subsection that states all of the fol
 
 Parallelism applies to isolated design and implementation only. A single coordinator owns ordinal reservation, cross-module source-row ownership, semantic reconciliation of coverage and source-topic mappings, exact global counts, the authoritative HANDOFF, integration order, and completion evidence.
 
-Module branches may carry candidate edits to shared files for local review. The coordinator reapplies or semantically merges those deltas against the latest durable base; replacing a newer shared file with an older branch copy is forbidden.
+Candidate agents must not edit shared coverage, source-topic map, global-count regression, HANDOFF, completion metadata, or CI workflow paths. Candidates may only submit local module content and test changes allowed by their approved spec. They hand the coordinator precise proposed shared-file deltas in their reports; the coordinator applies or semantically reconciles those proposals against the latest durable base.
 
 Candidate workstreams remain `active` after module-local verification. Only the coordinator may mark an integrated workstream `complete`. Integration, completion metadata, real CI evidence, exact corpus regression, and HANDOFF closure are serialized one workstream at a time.
 ```
