@@ -1,7 +1,7 @@
 # Quant Interview Parallel Workstream Governance — Design Spec
 
 **Date:** 2026-08-23  
-**Status:** Approved direction; written-spec review pending  
+**Status:** Approved
 **Pre-governance content base:** `18879f087cd344e10e8fbe6aeb585774438a579d`  
 **Protected branch:** `main` must not be modified
 
