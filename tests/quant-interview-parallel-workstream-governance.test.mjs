@@ -39,6 +39,12 @@ const expectedPolicy = {
       protected: true,
       mayBeModified: false,
     },
+    historySafety: {
+      candidateForceUpdateSharedOrDurableHistoryAllowed: false,
+      candidateRewriteSharedOrDurableHistoryAllowed: false,
+      integrationOwner: 'coordinator',
+      coordinatorIntegrationForceUpdateAllowed: false,
+    },
   },
   candidates: {
     maxActive: 3,
@@ -56,6 +62,24 @@ const expectedPolicy = {
       'module-specific-tests',
       'report-proposed-shared-file-deltas',
     ],
+    responsibilityConstraints: {
+      moduleScopedPublicContent: {
+        creationOrigin: 'candidate-created',
+        moduleScope: 'approved-module-only',
+      },
+      moduleSpecificTests: {
+        moduleScope: 'approved-module-only',
+        excludedCoordinatorSurfaceIds: [
+          'exact-global-registry-count-regression-tests',
+          'handoff-and-handoff-tests',
+          'prior-workstream-completion-tests',
+        ],
+      },
+      sharedSurfaceDeltas: {
+        mode: 'report-proposal-only',
+        candidateEditAllowed: false,
+      },
+    },
     forbiddenSharedResponsibilities: [
       'coverage-ledgers',
       'source-topic-map',
@@ -73,6 +97,68 @@ const expectedPolicy = {
     reconciliationBase: 'latest-durable-base',
     integrationMode: 'serialized-one-at-a-time',
     closureMode: 'serialized-one-at-a-time',
+    sharedState: {
+      ownership: 'coordinator-only',
+      candidateEditAllowed: false,
+      candidateProposalMode: 'report-only',
+      surfaces: [
+        {
+          id: 'coverage-ledgers',
+          pathPatterns: [
+            'src/data/quant-interview/coverage/*.json',
+          ],
+        },
+        {
+          id: 'source-topic-map',
+          pathPatterns: [
+            'src/data/quant-interview/topics/source-topic-map.json',
+          ],
+        },
+        {
+          id: 'exact-global-registry-count-regression-tests',
+          pathPatterns: [
+            'tests/quant-interview-source-neutral-content.test.mjs',
+          ],
+        },
+        {
+          id: 'handoff-and-handoff-tests',
+          pathPatterns: [
+            'docs/quant-interview/HANDOFF.md',
+            'tests/quant-interview-handoff.test.mjs',
+          ],
+        },
+        {
+          id: 'workstream-completion-metadata-manifests',
+          pathPatterns: [
+            'src/data/quant-interview/workstreams/*.json',
+          ],
+        },
+        {
+          id: 'prior-workstream-completion-tests',
+          pathPatterns: [
+            'tests/quant-interview-*-completion.test.mjs',
+          ],
+        },
+        {
+          id: 'ci-workflows',
+          pathPatterns: [
+            '.github/workflows/*.yml',
+            '.github/workflows/*.yaml',
+          ],
+        },
+        {
+          id: 'base-existing-knowledge-problem-reciprocal-links',
+          pathPatterns: [
+            'src/content/knowledge/**/*.md',
+            'src/content/problems/**/*.md',
+          ],
+          selection: {
+            existenceAtCandidateBase: true,
+            editKind: 'reciprocal-link',
+          },
+        },
+      ],
+    },
     queue: [
       '011',
       '012',
@@ -198,6 +284,22 @@ test('deterministic policy validation rejects typed invariant and reservation mu
   assert.equal(policyIsExact(alteredMax), false);
   assert.equal(policyIsExact(reorderedReservations), false);
   assert.equal(policyIsExact(mismatchedReservation), false);
+});
+
+test('deterministic policy validation rejects weakened history safety', () => {
+  const historyRewriteAllowed = clonePolicy();
+  historyRewriteAllowed.repository.historySafety.candidateRewriteSharedOrDurableHistoryAllowed = true;
+
+  assert.equal(policyIsExact(historyRewriteAllowed), false);
+});
+
+test('deterministic policy validation rejects a changed coordinator-only surface path', () => {
+  const missingHandoffTest = clonePolicy();
+  const handoffSurface = missingHandoffTest.coordinator.sharedState.surfaces
+    .find(({ id }) => id === 'handoff-and-handoff-tests');
+  handoffSurface.pathPatterns = ['docs/quant-interview/HANDOFF.md'];
+
+  assert.equal(policyIsExact(missingHandoffTest), false);
 });
 
 test('repository declares one normative policy and only the four canonical references', async () => {
