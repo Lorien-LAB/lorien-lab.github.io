@@ -9,8 +9,8 @@ date: 2026-08-18
 tags: [Probability, Random Variables, Distributions]
 quantInterviewTopics: [probability-statistics, random-variables-distributions]
 featured: false
-related: [expectation-variance-covariance-algebra, moments-moment-generating-functions]
-relatedNotes: []
+related: [expectation-variance-covariance-algebra, moments-moment-generating-functions, order-statistics-basics]
+relatedNotes: [Scalar moment identities organize distribution summaries., Moment-generating functions provide a systematic route to higher moments when they exist., Uniform and Beta families recur naturally in order-statistic distributions.]
 ---
 
 ## Core Idea

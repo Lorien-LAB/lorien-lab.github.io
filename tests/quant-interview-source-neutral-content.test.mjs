@@ -59,6 +59,10 @@ const currentProblemSlugs = [
   'expected-radius-of-uniform-disk-point',
   'fair-box-opening-price-by-expectation',
   'multiplicative-wealth-expected-growth',
+  'uniform-sample-extremes-and-range',
+  'joint-min-max-correlation-of-uniforms',
+  'random-ants-last-fall-time',
+  'kth-order-statistic-distribution',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -99,6 +103,8 @@ const expectedKnowledgeTopics = new Map([
   ['conditional-expectation-tower-property', ['probability-statistics', 'expectation-variance-covariance']],
   ['expectation-variance-covariance-algebra', ['probability-statistics', 'expectation-variance-covariance']],
   ['moments-moment-generating-functions', ['probability-statistics', 'expectation-variance-covariance']],
+  ['order-statistics-basics', ['probability-statistics', 'order-statistics-extremes']],
+  ['joint-extremes-and-range', ['probability-statistics', 'order-statistics-extremes']],
 ]);
 
 async function findProblem(slug) {
@@ -126,9 +132,9 @@ async function markdownSlugs(root) {
   return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
 }
 
-test('source-neutral regression enumerates the current 55 Problem and 37 Knowledge contracts', () => {
-  assert.equal(currentProblemSlugs.length, 55);
-  assert.equal(expectedKnowledgeTopics.size, 37);
+test('source-neutral regression enumerates the current 59 Problem and 39 Knowledge contracts', () => {
+  assert.equal(currentProblemSlugs.length, 59);
+  assert.equal(expectedKnowledgeTopics.size, 39);
 });
 
 test('public Problem schema is source-neutral', async () => {

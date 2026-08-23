@@ -1278,9 +1278,15 @@
       "canonicalTopics": [
         "order-statistics-extremes"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "uniform-sample-extremes-and-range"
+      ],
+      "canonicalKnowledge": [
+        "order-statistics-basics",
+        "joint-extremes-and-range"
+      ],
+      "resolutionNote": "The iid Uniform maximum, minimum, and range family is represented once by uniform-sample-extremes-and-range and also absorbs the equivalent Red 3.29 source item."
     },
     {
       "sourceSection": "4.6.correlation-max-min",
@@ -1288,9 +1294,15 @@
       "canonicalTopics": [
         "order-statistics-extremes"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "joint-min-max-correlation-of-uniforms"
+      ],
+      "canonicalKnowledge": [
+        "joint-extremes-and-range",
+        "expectation-variance-covariance-algebra"
+      ],
+      "resolutionNote": "Joint minimum/maximum dependence is a distinct order-statistics identity. The canonical solution uses scalar covariance algebra, while covariance-matrix PSD remains Linear Algebra ownership."
     },
     {
       "sourceSection": "4.6.random-ants",
@@ -1298,9 +1310,14 @@
       "canonicalTopics": [
         "order-statistics-extremes"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "random-ants-last-fall-time"
+      ],
+      "canonicalKnowledge": [
+        "order-statistics-basics"
+      ],
+      "resolutionNote": "Collision relabeling reduces the random physical system to the maximum of iid Uniform remaining distances. The existing deterministic ants-crossing-line puzzle remains a separate invariance Problem."
     },
     {
       "sourceSection": "5",

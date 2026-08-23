@@ -9,8 +9,8 @@ date: 2026-08-18
 tags: [Probability, Random Variables, Distributions]
 quantInterviewTopics: [probability-statistics, random-variables-distributions]
 featured: false
-related: [conditional-expectation-tower-property, expectation-linearity-indicators]
-relatedNotes: []
+related: [conditional-expectation-tower-property, expectation-linearity-indicators, order-statistics-basics]
+relatedNotes: [Conditioning and tower arguments complement distribution transformations., LOTUS can compute expectations without deriving a transformed density., The probability integral transform maps continuous order statistics to Beta variables.]
 ---
 
 ## Core Idea

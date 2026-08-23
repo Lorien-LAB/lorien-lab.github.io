@@ -1140,6 +1140,37 @@
         "gaussian-lognormal-structure"
       ],
       "resolutionNote": "The standard-normal E[Phi(X)]=1/2 case is a special case and alternative symmetry/PIT perspective inside the general Normal canonical Problem."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.29",
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "uniform-sample-extremes-and-range"
+      ],
+      "canonicalKnowledge": [
+        "order-statistics-basics",
+        "joint-extremes-and-range"
+      ],
+      "resolutionNote": "This is the same iid Uniform maximum, minimum, and range reasoning family as Green expected-max-min, so one source-neutral canonical Problem owns both sources."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.32",
+      "canonicalTopics": [
+        "order-statistics-extremes"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "kth-order-statistic-distribution"
+      ],
+      "canonicalKnowledge": [
+        "order-statistics-basics"
+      ],
+      "resolutionNote": "The general kth-order-statistic distribution and density form a distinct canonical identity that was intentionally left outside workstream 009."
     }
   ]
 }

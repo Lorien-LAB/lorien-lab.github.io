@@ -9,8 +9,8 @@ status: growing
 tags: [Probability, Statistics, Order Statistics, Extremes]
 quantInterviewTopics: [probability-statistics, order-statistics-extremes]
 featured: false
-related: [random-variables-cdf-pmf-pdf, random-variable-transformations-convolution, joint-extremes-and-range]
-relatedNotes: [Order statistics are random variables built by sorting a sample., Probability transforms turn continuous order statistics into Beta variables., Joint extremes extend marginal min/max formulas to dependence and range questions.]
+related: [random-variables-cdf-pmf-pdf, common-probability-distributions, random-variable-transformations-convolution, symmetry-equiprobability-geometric-probability, expectation-linearity-indicators, joint-extremes-and-range]
+relatedNotes: [Order statistics are random variables built by sorting a sample., Standard Uniform and Beta families make common order-statistic laws recognizable., Probability transforms turn continuous order statistics into Beta variables., Symmetry and uniform modeling supply many canonical order-statistic examples., Linearity turns separate minimum and maximum expectations into a range expectation., Joint extremes extend marginal min/max formulas to dependence and range questions.]
 ---
 
 ## Core Idea

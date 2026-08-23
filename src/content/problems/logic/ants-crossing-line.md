@@ -11,7 +11,7 @@ quantInterviewTopics: [logic-brainteasers-discrete-reasoning, invariants-state-t
 concepts: []
 techniques: [identity-swapping-invariance]
 prerequisites: []
-relatedProblems: []
+relatedProblems: [random-ants-last-fall-time]
 family: particle-collision-invariance
 mathDifficulty: 1
 insightDifficulty: 3

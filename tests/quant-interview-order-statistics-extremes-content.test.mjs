@@ -49,7 +49,7 @@ test('joint min max Problem derives correlation one half', async () => {
   assertS3(text, 'order-statistics-extremes-002');
   assert.match(text, /1\/36/);
   assert.match(text, /1\/18/);
-  assert.match(text, /1\/2/);
+  assert.match(text, /\\frac(?:\{1\}\{2\}|12)/);
   assert.match(text, /YZ=X_1X_2|YZ.*X_1X_2/);
 });
 
@@ -60,7 +60,7 @@ test('random ants Problem reduces collision dynamics to a Uniform maximum', asyn
   assert.match(text, /identity|label/i);
   assert.match(text, /T_n=.*max|max\(D_1/i);
   assert.match(text, /n\/(n\+1)|n.*n\+1/);
-  assert.match(text, /500\/501/);
+  assert.match(text, /\\frac\{500\}\{501\}/);
   assert.match(text, /ants-crossing-line/);
 });
 
@@ -79,4 +79,26 @@ test('existing ant puzzle remains a distinct invariance Problem', async () => {
   assert.match(text, /^problemId:\s*logic-invariance-001$/m);
   assert.match(text, /^quantInterviewTopics:\s*\[logic-brainteasers-discrete-reasoning, invariants-state-transformations\]$/m);
   assert.match(text, /identity-swapping-invariance/);
+});
+
+test('existing probability graph links into order statistics without changing ownership', async () => {
+  const expected = new Map([
+    ['expectation-linearity-indicators', ['expectation-variance-covariance', 'order-statistics-basics']],
+    ['expectation-variance-covariance-algebra', ['expectation-variance-covariance', 'joint-extremes-and-range']],
+    ['common-probability-distributions', ['random-variables-distributions', 'order-statistics-basics']],
+    ['random-variable-transformations-convolution', ['random-variables-distributions', 'order-statistics-basics']],
+    ['symmetry-equiprobability-geometric-probability', ['probability-foundations', 'order-statistics-basics']],
+  ]);
+  for (const [slug, [retainedTopic, relatedSlug]] of expected) {
+    const text = await read(`src/content/knowledge/concepts/${slug}.md`);
+    assert.match(text, new RegExp(`^quantInterviewTopics:.*\\b${retainedTopic}\\b.*$`, 'm'));
+    assert.match(text, new RegExp(`^related:.*\\b${relatedSlug}\\b.*$`, 'm'), `${slug} does not link to ${relatedSlug}`);
+  }
+
+  const covariance = await read('src/content/knowledge/concepts/expectation-variance-covariance-algebra.md');
+  assert.match(covariance, /^related:.*\bjoint-extremes-and-range\b.*$/m);
+
+  const ant = await read('src/content/problems/logic/ants-crossing-line.md');
+  assert.match(ant, /^relatedProblems:.*\brandom-ants-last-fall-time\b.*$/m);
+  assert.match(ant, /^quantInterviewTopics:\s*\[logic-brainteasers-discrete-reasoning, invariants-state-transformations\]$/m);
 });

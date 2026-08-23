@@ -9,8 +9,8 @@ date: 2026-08-19
 tags: [Probability, Expectation, Variance, Covariance]
 quantInterviewTopics: [probability-statistics, expectation-variance-covariance]
 featured: false
-related: []
-relatedNotes: []
+related: [joint-extremes-and-range]
+relatedNotes: [Joint minimum and maximum moments provide a concrete scalar covariance and correlation application without changing matrix-PSD ownership.]
 ---
 
 ## Core Idea
