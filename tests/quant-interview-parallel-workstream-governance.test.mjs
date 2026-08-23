@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 
 const protocolPath = 'docs/quant-interview/AGENT_PROTOCOL.md';
 
@@ -30,18 +30,32 @@ const reservations = [
     ordinal: '011',
     topic: 'random-walks-markov-chains',
     branch: 'chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23',
+    state: 'design-audit',
   },
   {
     ordinal: '012',
     topic: 'limits-derivatives',
     branch: 'chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23',
+    state: 'design-audit',
   },
   {
     ordinal: '013',
     topic: 'reasoning-communication',
     branch: 'chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23',
+    state: 'design-audit',
   },
 ];
+
+const normalizeCell = (cell) => cell.trim().replace(/^`|`$/g, '').replace(/\s+/g, ' ');
+
+function reservationRows(coordination) {
+  return coordination
+    .split(/\r?\n/)
+    .map((line) => line.trim())
+    .filter((line) => /^\|\s*\d+\s*\|\s*\d{3}\s*\|/.test(line))
+    .map((line) => line.split('|').slice(1, -1).map(normalizeCell))
+    .map(([queue, ordinal, topic, branch, state]) => ({ queue, ordinal, topic, branch, state }));
+}
 
 test('handoff reserves the first parallel wave without claiming candidate completion', async () => {
   const handoff = await readFile(handoffPath, 'utf8');
@@ -50,12 +64,11 @@ test('handoff reserves the first parallel wave without claiming candidate comple
   assert.ok(coordination, 'HANDOFF missing parallel workstream coordination');
   assert.match(coordination, /maximum active candidates[^\n]*3/i);
   assert.match(coordination, /integration queue[^\n]*011[^\n]*012[^\n]*013/i);
-  assert.match(coordination, /candidate[^\n]*not[^\n]*complete/i);
-  for (const reservation of reservations) {
-    assert.match(coordination, new RegExp(reservation.ordinal));
-    assert.match(coordination, new RegExp(reservation.topic));
-    assert.match(coordination, new RegExp(reservation.branch.replaceAll('-', '\\-')));
-  }
+  assert.match(coordination, /candidate[^\n]*active[^\n]*not[^\n]*complete/i);
+  assert.deepEqual(
+    reservationRows(coordination),
+    reservations.map((reservation, index) => ({ queue: String(index + 1), ...reservation })),
+  );
 });
 
 test('parallel reservations preserve Random Walks as the authoritative current topic', async () => {
@@ -67,14 +80,12 @@ test('parallel reservations preserve Random Walks as the authoritative current t
 });
 
 test('governance does not create product workstream manifests early', async () => {
-  for (const reservation of reservations) {
-    const domain = reservation.ordinal === '011'
-      ? 'stochastic-processes-random-walks-markov-chains'
-      : reservation.ordinal === '012'
-        ? 'calculus-differential-equations-limits-derivatives'
-        : 'interview-strategy-communication-reasoning-communication';
-    await assert.rejects(
-      access(`src/data/quant-interview/workstreams/${domain}-${reservation.ordinal}.json`),
-    );
-  }
+  const files = await readdir('src/data/quant-interview/workstreams');
+  const reservedOrdinals = new Set(reservations.map(({ ordinal }) => ordinal));
+  const prematureManifests = files.filter((file) => {
+    const suffix = file.match(/(\d{3})\.json$/)?.[1];
+    return suffix && reservedOrdinals.has(suffix);
+  });
+
+  assert.deepEqual(prematureManifests, []);
 });
