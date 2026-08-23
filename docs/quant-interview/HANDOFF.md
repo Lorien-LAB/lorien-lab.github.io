@@ -421,10 +421,22 @@ Proceed by resolving random-walk and Markov-chain material across all three veri
 
 Do not process one book to completion before the others. Do not organize the public corpus by source numbering. Do not use a generic deferred state to avoid semantic decisions.
 
+## Parallel workstream coordination
+
+Maximum active candidates: **3**. Parallel candidates are isolated design and implementation branches; they are not authoritative completion state. The coordinator alone owns ordinal reservation, integration order, shared-file reconciliation, exact corpus counts, completion metadata, real CI evidence, and HANDOFF closure.
+
+| Queue | Reservation | Canonical topic | Candidate branch | State |
+|---:|---:|---|---|---|
+| 1 | 011 | `random-walks-markov-chains` | `chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23` | design-audit |
+| 2 | 012 | `limits-derivatives` | `chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23` | design-audit |
+| 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | design-audit |
+
+Integration queue: **011 → 012 → 013**. A candidate stays `active` during implementation and is not `complete` until the coordinator integrates it on the latest durable base, reconciles shared state, obtains fresh local and real CI verification for the exact commit, and records factual closure here.
+
 ## Non-negotiable invariants
 
 - Repository state wins over conversational memory.
-- Process one bounded canonical topic workstream at a time.
+- Each branch processes one bounded canonical topic; the coordinator may run up to three isolated candidates while integration and closure remain serialized.
 - Review all relevant verified-source material before closing a workstream; coarse containers require item-level refinement.
 - Semantic deduplication is mandatory; text similarity alone cannot merge Problems.
 - Every claimed source item receives explicit hidden coverage and a resolution note.
