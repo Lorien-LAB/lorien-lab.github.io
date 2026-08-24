@@ -23,15 +23,13 @@ featured: false
 
 ## Problem
 
-Let $F$ be the CDF of a Normal random variable with location $\mu\in\mathbb R$ and scale $\sigma>0$:
+Let `F` be the CDF of a Normal random variable with location `μ ∈ ℝ` and scale `σ > 0`:
 
-\[
-F(x)=\int_{-\infty}^{x}
-\frac{1}{\sigma\sqrt{2\pi}}
-\exp\left(-\frac{(t-\mu)^2}{2\sigma^2}\right)dt.
-\]
+```text
+F(x) = ∫ from −∞ to x [1/(σ√(2π))] exp(−(t − μ)²/(2σ²)) dt
+```
 
-Find and prove the unique inflection point of $F$.
+Find and prove the unique inflection point of `F`.
 
 ## Think Before Revealing
 
@@ -40,14 +38,14 @@ An inflection point is established by a change of concavity, not merely by solvi
 <details>
 <summary>Hint 1</summary>
 
-The fundamental theorem of calculus makes $F'$ the Normal density. Differentiate that density with the chain rule.
+The fundamental theorem of calculus makes `F′` the Normal density. Differentiate that density with the chain rule.
 
 </details>
 
 <details>
 <summary>Hint 2</summary>
 
-After differentiating, every factor in $F''$ except $-(x-\mu)$ is strictly positive because $\sigma>0$. Make a left/right sign table around $\mu$.
+After differentiating, every factor in `F″` except `−(x − μ)` is strictly positive because `σ > 0`. Make a left/right sign table around `μ`.
 
 </details>
 
@@ -58,33 +56,30 @@ After differentiating, every factor in $F''$ except $-(x-\mu)$ is strictly posit
 
 By the fundamental theorem of calculus,
 
-\[
-F'(x)=\frac{1}{\sigma\sqrt{2\pi}}
-\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right).
-\]
+```text
+F′(x) = [1/(σ√(2π))] exp(−(x − μ)²/(2σ²))
+```
 
-Differentiate once more. The derivative of the exponent is $-(x-\mu)/\sigma^2$, so
+Differentiate once more. The derivative of the exponent is `−(x − μ)/σ²`, so
 
-\[
-F''(x)=-\frac{x-\mu}{\sigma^3\sqrt{2\pi}}
-\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right).
-\]
+```text
+F″(x) = −[(x − μ)/(σ³√(2π))] exp(−(x − μ)²/(2σ²))
+```
 
-Since $\sigma>0$, the denominator is positive, and the exponential factor is positive for every real $x$. Thus the sign of $F''$ is the sign of $-(x-\mu)$:
+Since `σ > 0`, the denominator is positive, and the exponential factor is positive for every real `x`. Thus the sign of `F″` is the sign of `−(x − μ)`:
 
-\[
-F''(x)>0\quad\text{for }x<\mu,
-\qquad
-F''(x)<0\quad\text{for }x>\mu.
-\]
+```text
+F″(x) > 0 for x < μ
+F″(x) < 0 for x > μ
+```
 
-Therefore $F$ is convex to the left of $\mu$ and concave to the right. This actual positive-to-negative sign change proves
+Therefore `F` is convex to the left of `μ` and concave to the right. This actual positive-to-negative sign change proves
 
-\[
-\boxed{x=\mu\text{ is the unique inflection point}}.
-\]
+```text
+x = μ is the unique inflection point
+```
 
-The proof is not merely the observation $F''(\mu)=0$; that equation supplies a candidate, while the sign change establishes the inflection and its uniqueness.
+The proof is not merely the observation `F″(μ) = 0`; that equation supplies a candidate, while the sign change establishes the inflection and its uniqueness.
 
 ## Why This Matters
 
@@ -92,13 +87,13 @@ The calculation ties distribution shape to calculus: the density is largest at t
 
 ## Common Mistakes
 
-- Omitting the condition $\sigma>0$.
-- Losing a factor of $\sigma^2$ and writing the wrong $\sigma^3$ denominator.
-- Solving only $F''=0$ and calling that an inflection proof.
+- Omitting the condition `σ > 0`.
+- Losing a factor of `σ²` and writing the wrong `σ³` denominator.
+- Solving only `F″ = 0` and calling that an inflection proof.
 - Forgetting that the exponential factor is strictly positive and therefore cannot create another sign change.
 
 ## Extensions
 
-Show that $F'$ has its unique maximum at $\mu$. Then standardize with $z=(x-\mu)/\sigma$ and explain why changing $\sigma$ alters horizontal scale but not the standardized sign pattern.
+Show that `F′` has its unique maximum at `μ`. Then standardize with `z = (x − μ)/σ` and explain why changing `σ` alters horizontal scale but not the standardized sign pattern.
 
 </details>

@@ -27,8 +27,8 @@ Partition the domain at critical numbers and points of nondifferentiability. On 
 
 - $f'>0$ implies that $f$ is increasing;
 - $f'<0$ implies that $f$ is decreasing;
-- a change $+\to-$ gives a local maximum;
-- a change $-\to+$ gives a local minimum;
+- a change $+ → -$ gives a local maximum;
+- a change $- → +$ gives a local minimum;
 - no sign change gives neither.
 
 The full-interval sign chart supplies the proof. Evaluating $f'$ at one point without justifying that its sign persists on the interval does not.
@@ -50,28 +50,26 @@ On an interval, $f''>0$ gives strict convexity and $f''<0$ gives strict concavit
 Because $(e^x)''=e^x>0$, the exponential is strictly convex. Hence, for real $a,b$,
 
 \[
-\frac{e^a+e^b}{2}\ge e^{(a+b)/2},
+(e^a + e^b)/2 ≥ e^((a+b)/2),
 \]
 
 with equality exactly when $a=b$.
 
 ## Normal CDF Curvature Example
 
-For $\sigma>0$, a Normal CDF has density
+For $σ>0$, a Normal CDF has density
 
 \[
-F'(x)=\frac{1}{\sigma\sqrt{2\pi}}
-\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)
+F'(x) = 1/(σ√(2π)) exp(-((x-μ)^2)/(2σ^2))
 \]
 
 and second derivative
 
 \[
-F''(x)=-\frac{x-\mu}{\sigma^3\sqrt{2\pi}}
-\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right).
+F''(x) = -(x-μ)/(σ^3√(2π)) exp(-((x-μ)^2)/(2σ^2)).
 \]
 
-Every factor except $-(x-\mu)$ is positive. Therefore $F''>0$ for $x<\mu$ and $F''<0$ for $x>\mu$: the positive-to-negative sign change proves a unique inflection at $\mu$.
+Every factor except $-(x-μ)$ is positive. Therefore $F''>0$ for $x<μ$ and $F''<0$ for $x>μ$: the positive-to-negative sign change proves a unique inflection at $μ$.
 
 ## Recognition Signals
 
@@ -90,10 +88,10 @@ Every factor except $-(x-\mu)$ is positive. Therefore $F''>0$ for $x<\mu$ and $F
 
 ## Interview Checks
 
-For $f(x)=\ln x/x$, compute
+For $f(x)=(ln x)/x$, compute
 
 \[
-f'(x)=\frac{1-\ln x}{x^2}
+f'(x) = (1 - ln x)/x^2
 \]
 
 and identify its increase/decrease intervals. For the Normal CDF above, explain why solving $F''(x)=0$ is not the proof: the sign change on both sides is.

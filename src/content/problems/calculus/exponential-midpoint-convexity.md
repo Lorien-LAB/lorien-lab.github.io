@@ -23,29 +23,29 @@ featured: false
 
 ## Problem
 
-For real numbers $a$ and $b$, prove
+For real numbers `a` and `b`, prove
 
-\[
-\frac{e^a+e^b}{2}\ge e^{(a+b)/2},
-\]
+```text
+(eᵃ + eᵇ)/2 ≥ exp((a + b)/2),
+```
 
 and determine exactly when equality holds.
 
 ## Think Before Revealing
 
-The right side is the exponential evaluated at the midpoint of $a$ and $b$. Which curvature property compares a function at a midpoint with the midpoint of its values?
+The right side is the exponential evaluated at the midpoint of `a` and `b`. Which curvature property compares a function at a midpoint with the midpoint of its values?
 
 <details>
 <summary>Hint 1</summary>
 
-Use $f(x)=e^x$ and compute its second derivative on all of $\mathbb R$.
+Use `f(x) = eˣ` and compute its second derivative on all of `ℝ`.
 
 </details>
 
 <details>
 <summary>Hint 2</summary>
 
-Strict convexity gives the midpoint inequality $f((a+b)/2)\le(f(a)+f(b))/2$. Its equality clause is strict unless the two input points coincide.
+Strict convexity gives the midpoint inequality `f((a + b)/2) ≤ [f(a) + f(b)]/2`. Its equality clause is strict unless the two input points coincide.
 
 </details>
 
@@ -54,32 +54,31 @@ Strict convexity gives the midpoint inequality $f((a+b)/2)\le(f(a)+f(b))/2$. Its
 
 ## Solution
 
-Let $f(x)=e^x$. For every real $x$,
+Let `f(x) = eˣ`. For every real `x`,
 
-\[
-f''(x)=e^x>0,
-\]
+```text
+f″(x) = eˣ > 0,
+```
 
-so $f$ is strictly convex on $\mathbb R$. Applying midpoint convexity,
+so `f` is strictly convex on `ℝ`. Applying midpoint convexity,
 
-\[
-f\left(\frac{a+b}{2}\right)
-\le\frac{f(a)+f(b)}2.
-\]
+```text
+f((a + b)/2) ≤ [f(a) + f(b)]/2.
+```
 
 Substitution gives
 
-\[
-\boxed{\frac{e^a+e^b}{2}\ge e^{(a+b)/2}}.
-\]
+```text
+(eᵃ + eᵇ)/2 ≥ exp((a + b)/2).
+```
 
 Because the convexity is strict, equality holds exactly when the two midpoint inputs agree, namely
 
-\[
-\boxed{a=b}.
-\]
+```text
+a = b.
+```
 
-As a separate algebraic check, set $A=e^{a/2}$ and $B=e^{b/2}$. Then $(A-B)^2\ge0$ gives $e^a+e^b\ge2e^{(a+b)/2}$, with equality exactly when $A=B$, equivalently $a=b$.
+As a separate algebraic check, set `A = exp(a/2)` and `B = exp(b/2)`. Then `(A − B)² ≥ 0` gives `eᵃ + eᵇ ≥ 2 exp((a + b)/2)`, with equality exactly when `A = B`, equivalently `a = b`.
 
 ## Why This Matters
 
@@ -89,18 +88,17 @@ Convexity converts a derivative sign into a global inequality and supplies the e
 
 - Saying only that the exponential is convex without proving strict convexity.
 - Omitting the equality condition.
-- Claiming $f''=0$ is enough to decide convexity or an inflection; here the decisive fact is $f''>0$ everywhere.
+- Claiming `f″ = 0` is enough to decide convexity or an inflection; here the decisive fact is `f″ > 0` everywhere.
 - Using AM-GM without noting that the substituted quantities are positive.
 
 ## Extensions
 
-For $0\le\lambda\le1$, strict convexity gives
+For `0 ≤ λ ≤ 1`, strict convexity gives
 
-\[
-e^{\lambda a+(1-\lambda)b}
-\le\lambda e^a+(1-\lambda)e^b,
-\]
+```text
+exp(λa + (1 − λ)b) ≤ λeᵃ + (1 − λ)eᵇ,
+```
 
-with equality for interior $\lambda$ exactly when $a=b$.
+with equality for interior `λ` exactly when `a = b`.
 
 </details>

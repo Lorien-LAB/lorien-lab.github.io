@@ -25,9 +25,9 @@ featured: false
 
 Evaluate the one-sided limit
 
-\[
-\lim_{x\to0^+}x^2\ln x.
-\]
+```text
+lim (x → 0⁺) x² ln x.
+```
 
 State whether the expression approaches zero from above or below, and justify every hypothesis of any theorem you invoke.
 
@@ -38,14 +38,14 @@ The displayed expression is a product, so L'Hôpital's rule does not apply to it
 <details>
 <summary>Hint 1</summary>
 
-Rewrite the product as the quotient $x^2\ln x=\ln x/x^{-2}$. Determine the signs and extended-real limits of numerator and denominator as $x\to0^+$.
+Rewrite the product as the quotient `x² ln x = (ln x)/x⁻²`. Determine the signs and extended-real limits of numerator and denominator as `x → 0⁺`.
 
 </details>
 
 <details>
 <summary>Hint 2</summary>
 
-On $0<x<\delta$, differentiate numerator and denominator. The derivative quotient simplifies exactly to $-x^2/2$.
+On `0 < x < δ`, differentiate numerator and denominator. The derivative quotient simplifies exactly to `−x²/2`.
 
 </details>
 
@@ -58,21 +58,21 @@ On $0<x<\delta$, differentiate numerator and denominator. The derivative quotien
 
 First transform the product:
 
-\[
-x^2\ln x=\frac{\ln x}{x^{-2}}.
-\]
+```text
+x² ln x = (ln x)/x⁻².
+```
 
-As $x\to0^+$, the numerator tends to $-\infty$ and the denominator to $+\infty$, so this is an extended-real infinity-over-infinity quotient. On a punctured right neighborhood $0<x<\delta$, the functions $\ln x$ and $x^{-2}$ are differentiable. The denominator derivative is
+As `x → 0⁺`, the numerator tends to `−∞` and the denominator to `+∞`, so this is an extended-real infinity-over-infinity quotient. On a punctured right neighborhood `0 < x < δ`, the functions `ln x` and `x⁻²` are differentiable. The denominator derivative is
 
-\[
--2x^{-3}\ne0
-\]
+```text
+−2x⁻³ ≠ 0
+```
 
 throughout that neighborhood. Finally, the derivative quotient has the ordinary limit
 
-\[
-\lim_{x\to0^+}\frac{1/x}{-2x^{-3}}=0.
-\]
+```text
+lim (x → 0⁺) (1/x)/(−2x⁻³) = 0.
+```
 
 Thus the full one-sided gate is satisfied.
 
@@ -80,27 +80,27 @@ Thus the full one-sided gate is satisfied.
 
 L'Hôpital's rule yields
 
-\[
-\lim_{x\to0^+}\frac{\ln x}{x^{-2}}
-=\lim_{x\to0^+}\frac{1/x}{-2x^{-3}}
-=\lim_{x\to0^+}-\frac{x^2}{2}=0.
-\]
+```text
+lim (x → 0⁺) (ln x)/x⁻²
+= lim (x → 0⁺) (1/x)/(−2x⁻³)
+= lim (x → 0⁺) −x²/2 = 0.
+```
 
 Equivalently, the exact derivative quotient is
 
-\[
-\frac{1/x}{-2x^{-3}}=-\frac{x^2}{2}\to0.
-\]
+```text
+(1/x)/(−2x⁻³) = −x²/2 → 0.
+```
 
 ### Recover the sign
 
-For $0<x<1$, we have $x^2>0$ and $\ln x<0$, so the original product is negative. Therefore it approaches zero from below:
+For `0 < x < 1`, we have `x² > 0` and `ln x < 0`, so the original product is negative. Therefore it approaches zero from below:
 
-\[
-\boxed{0^-}.
-\]
+```text
+0⁻.
+```
 
-The real limit is still the number $0$; the superscript records the one-sided sign of nearby values.
+The real limit is still the number `0`; the superscript records the one-sided sign of nearby values.
 
 ## Why This Matters
 
@@ -108,13 +108,13 @@ This is a compact test of form recognition, one-sided domains, theorem hypothese
 
 ## Common Mistakes
 
-- Applying L'Hôpital directly to the product $x^2\ln x$.
-- Calling $(-\infty)/(+\infty)$ a determined value instead of an infinity-over-infinity form.
-- Omitting differentiability or the condition $-2x^{-3}\ne0$ on the punctured right neighborhood.
-- Reporting only unsigned $0$ when approach direction was requested.
+- Applying L'Hôpital directly to the product `x² ln x`.
+- Calling `(−∞)/(+∞)` a determined value instead of an infinity-over-infinity form.
+- Omitting differentiability or the condition `−2x⁻³ ≠ 0` on the punctured right neighborhood.
+- Reporting only unsigned `0` when approach direction was requested.
 
 ## Extensions
 
-For any $a>0$, the same quotient gate or the substitution $x=e^{-t}$ proves $x^a\ln x\to0^-$ as $x\to0^+$.
+For any `a > 0`, the same quotient gate or the substitution `x = exp(−t)` proves `x^(a) ln x → 0⁻` as `x → 0⁺`.
 
 </details>

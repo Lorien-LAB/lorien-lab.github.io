@@ -23,29 +23,29 @@ featured: false
 
 ## Problem
 
-Find the positive base $x$ for which the infinite power tower is intended to have value $2$:
+Find the positive base `x` for which the infinite power tower is intended to have value `2`:
 
-\[
-x^{x^{x^{\cdot^{\cdot}}}}=2.
-\]
+```text
+x ^ (x ^ (x ^ ⋯)) = 2
+```
 
-Then define the finite towers and prove that, for your base, they really converge to $2$. Distinguish the requested base from the tower limit and address every fixed-point branch.
+Then define the finite towers and prove that, for your base, they really converge to `2`. Distinguish the requested base from the tower limit and address every fixed-point branch.
 
 ## Think Before Revealing
 
-If a tower limit were $2$, the outermost relation would impose an equation on the base. That equation produces a candidate base; finite-tower convergence must still be proved independently.
+If a tower limit were `2`, the outermost relation would impose an equation on the base. That equation produces a candidate base; finite-tower convergence must still be proved independently.
 
 <details>
 <summary>Hint 1</summary>
 
-Conditionally set the tail equal to $2$ to obtain $2=x^2$. Keep the positive root, then define $t_0=\sqrt2$ and $t_{n+1}=(\sqrt2)^{t_n}$.
+Conditionally set the tail equal to `2` to obtain `2 = x²`. Keep the positive root, then define `t₀ = √2` and `tₙ₊₁ = (√2) ^ tₙ`.
 
 </details>
 
 <details>
 <summary>Hint 2</summary>
 
-Prove $t_n$ is increasing using the increasing map $y\mapsto(\sqrt2)^y$. Separately prove $t_n<2$ by comparing $(\sqrt2)^{t_n}$ with $(\sqrt2)^2$.
+Prove `tₙ` is increasing using the increasing map `y ↦ (√2) ^ y`. Separately prove `tₙ < 2` by comparing `(√2) ^ tₙ` with `(√2)²`.
 
 </details>
 
@@ -56,86 +56,83 @@ Prove $t_n$ is increasing using the increasing map $y\mapsto(\sqrt2)^y$. Separat
 
 ### Determine the base
 
-If the tower has value $2$, removing its first base leaves the same tail value, so necessarily
+If the tower has value `2`, removing its first base leaves the same tail value, so necessarily
 
-\[
-2=x^2.
-\]
+```text
+2 = x²
+```
 
 The requested base is positive, hence
 
-\[
-\boxed{x=\sqrt2}.
-\]
+```text
+x = √2
+```
 
-This is only a candidate base. It is not yet a convergence proof, and the base $\sqrt2$ is not the claimed limit $2$.
+This is only a candidate base. It is not yet a convergence proof, and the base `√2` is not the claimed limit `2`.
 
 ### Monotonicity by induction
 
 Define finite towers by
 
-\[
-t_0=\sqrt2,
-\qquad
-t_{n+1}=(\sqrt2)^{t_n}.
-\]
+```text
+t₀ = √2
+tₙ₊₁ = (√2) ^ tₙ
+```
 
-Because $\sqrt2>1$ and $t_0>1$,
+Because `√2 > 1` and `t₀ > 1`,
 
-\[
-t_1=(\sqrt2)^{t_0}>\sqrt2=t_0.
-\]
+```text
+t₁ = (√2) ^ t₀ > √2 = t₀
+```
 
-Assume $t_n>t_{n-1}$. The function $y\mapsto(\sqrt2)^y$ is strictly increasing, so
+Assume `tₙ > tₙ₋₁`. The function `y ↦ (√2) ^ y` is strictly increasing, so
 
-\[
-t_{n+1}=(\sqrt2)^{t_n}
->(\sqrt2)^{t_{n-1}}=t_n.
-\]
+```text
+tₙ₊₁ = (√2) ^ tₙ > (√2) ^ tₙ₋₁ = tₙ
+```
 
-Thus $(t_n)$ is increasing.
+Thus `(tₙ)` is increasing.
 
 ### Upper bound by induction
 
-The base case is $t_0=\sqrt2<2$. If $t_n<2$, monotonicity of the exponential gives
+The base case is `t₀ = √2 < 2`. If `tₙ < 2`, monotonicity of the exponential gives
 
-\[
-t_{n+1}=(\sqrt2)^{t_n}<(\sqrt2)^2=2.
-\]
+```text
+tₙ₊₁ = (√2) ^ tₙ < (√2)² = 2
+```
 
-Therefore every finite tower satisfies $t_n<2$.
+Therefore every finite tower satisfies `tₙ < 2`.
 
 ### Convergence and branch selection
 
-The sequence is increasing and bounded above by $2$, so bounded monotone convergence gives a limit $L\le2$. Continuity now permits
+The sequence is increasing and bounded above by `2`, so bounded monotone convergence gives a limit `L ≤ 2`. Continuity now permits
 
-\[
-L=(\sqrt2)^L.
-\]
+```text
+L = (√2) ^ L
+```
 
-Both $L=2$ and $L=4$ satisfy this fixed-point equation:
+Both `L = 2` and `L = 4` satisfy this fixed-point equation:
 
-\[
-(\sqrt2)^2=2,
-\qquad
-(\sqrt2)^4=4.
-\]
+```text
+(√2)² = 2
+(√2)⁴ = 4
+```
 
-To exclude any additional fixed point in the interval allowed by the sequence, define $g(y)=(\sqrt2)^y-y$. On $[0,2]$,
+To exclude any additional fixed point in the interval allowed by the sequence, define `g(y) = (√2) ^ y − y`. On `[0, 2]`,
 
-\[
-g'(y)=(\sqrt2)^y\ln\sqrt2-1
-\le2\ln\sqrt2-1
-=\ln2-1<0.
-\]
+```text
+g′(y) = (√2) ^ y ln(√2) − 1
+      ≤ 2 ln(√2) − 1
+      = ln 2 − 1 < 0
+```
 
-Thus $g$ is strictly decreasing on $[0,2]$. Since $g(2)=0$, the value $2$ is the unique fixed point in that interval. The fixed-point equation alone therefore does not choose a branch globally. The proved bound $L\le2$ rejects branch $4$, while positivity places the limit in the interval where the fixed point is unique. Hence
+Thus `g` is strictly decreasing on `[0, 2]`. Since `g(2) = 0`, the value `2` is the unique fixed point in that interval. The fixed-point equation alone therefore does not choose a branch globally. The proved bound `L ≤ 2` rejects branch `4`, while positivity places the limit in the interval where the fixed point is unique. Hence
 
-\[
-\boxed{L=2}.
-\]
+```text
+L = 2
+```
 
-The requested base is $\sqrt2$; the separately proved finite-tower limit is $2$. They must not be conflated.
+The requested base is `√2`; the separately proved finite-tower limit is `2`. They must not be conflated.
 
 ## Why This Matters
 
@@ -143,14 +140,14 @@ Power towers make the “fixed points are candidates” warning concrete. Even a
 
 ## Common Mistakes
 
-- Reporting $2$ as the base instead of $\sqrt2$.
+- Reporting `2` as the base instead of `√2`.
 - Assuming the candidate base automatically defines a convergent infinite tower.
-- Passing to $L=(\sqrt2)^L$ before proving convergence.
-- Ignoring the second fixed-point branch $4$.
-- Rejecting $4$ by intuition rather than the proved upper bound.
+- Passing to `L = (√2) ^ L` before proving convergence.
+- Ignoring the second fixed-point branch `4`.
+- Rejecting `4` by intuition rather than the proved upper bound.
 
 ## Extensions
 
-For a general positive base $b$, study finite towers $t_{n+1}=b^{t_n}$ and ask which invariant intervals make a selected fixed point dynamically attainable.
+For a general positive base `b`, study finite towers `tₙ₊₁ = b ^ tₙ` and ask which invariant intervals make a selected fixed point dynamically attainable.
 
 </details>

@@ -19,22 +19,18 @@ A limit method is valid only after the expression's form and domain are identifi
 
 ## Indeterminate Forms versus Determined Behavior
 
-The quotient forms $0/0$ and extended-real infinity-over-infinity are indeterminate: different functions with those forms can have different limits. Forms such as a nonzero finite number divided by $0^+$ are determined in sign and magnitude. Products such as $0\cdot(-\infty)$ are not quotient forms and must first be transformed.
+The quotient forms $0/0$ and extended-real infinity-over-infinity are indeterminate: different functions with those forms can have different limits. Forms such as a nonzero finite number divided by $0^+$ are determined in sign and magnitude. Products such as $0 · (-∞)$ are not quotient forms and must first be transformed.
 
 ## Simplify Before Differentiating
 
-Use algebraic simplification before differentiating: factor and cancel only on a punctured neighborhood, rationalize conjugate differences, use trigonometric identities, and substitute when a standard limit is hidden. For example, if $u=x^2$ and $x\to0^+$, then $u\to0^+$; substitution exposes the power-log pattern before any L'Hôpital step.
+Use algebraic simplification before differentiating: factor and cancel only on a punctured neighborhood, rationalize conjugate differences, use trigonometric identities, and substitute when a standard limit is hidden. For example, if $u=x^2$ and $x → 0^+$, then $u → 0^+$; substitution exposes the power-log pattern before any L'Hôpital step.
 
 ## Three Standard Limits
 
 The reusable elementary limits are
 
 \[
-\lim_{x\to0}\frac{\sin x}{x}=1,
-\qquad
-\lim_{x\to0}\frac{e^x-1}{x}=1,
-\qquad
-\lim_{x\to0}\frac{\ln(1+x)}{x}=1.
+lim(x → 0) (sin x)/x = 1; lim(x → 0) (e^x - 1)/x = 1; lim(x → 0) (ln(1+x))/x = 1.
 \]
 
 ## The Full L'Hopital Gate
@@ -42,11 +38,11 @@ The reusable elementary limits are
 For a one-sided or two-sided limit of $f/g$, check all of the following on an appropriate punctured neighborhood:
 
 1. $f$ and $g$ are differentiable there;
-2. $g'(x)$ is nonzero there, equivalently $g'(x)\ne0$;
+2. $g'(x)$ is nonzero there, equivalently $g'(x) ≠ 0$;
 3. $f/g$ has form $0/0$ or extended-real infinity-over-infinity;
 4. the ordinary or extended-real limit of $f'(x)/g'(x)$ exists.
 
-Only then may the quotient limit be replaced by the derivative-quotient limit. A product such as $x^2\ln x$ must be rewritten as a quotient, or handled by substitution, before L'Hôpital can be considered.
+Only then may the quotient limit be replaced by the derivative-quotient limit. A product such as $x^2 ln x$ must be rewritten as a quotient, or handled by substitution, before L'Hôpital can be considered.
 
 ## Repeated Applications Require Renewed Checks
 
@@ -57,8 +53,7 @@ After one differentiation the quotient has changed. Recheck its form, differenti
 On the positive tail, for $a>0$ and $b>0$,
 
 \[
-\ln x\ll x^a\ll e^{bx},
-\qquad x\to+\infty.
+ln x ≪ x^a ≪ e^(bx) as x → +∞.
 \]
 
 The notation means the ratio of each earlier term to the following term tends to $0$. This hierarchy is a conclusion to prove from permitted tools, not a substitute for checking a quotient's hypotheses.
@@ -68,11 +63,10 @@ The notation means the ratio of each earlier term to the following term tends to
 For $a>0$,
 
 \[
-x^a\ln x\to0^-,
-\qquad x\to0^+.
+x^a ln x → 0^- as x → 0^+.
 \]
 
-The real limit is $0$, while the superscript records that the expression is negative for $0<x<1$. Substituting $x=e^{-t}$ converts the magnitude to $te^{-at}\to0$ as $t\to+\infty$.
+The real limit is $0$, while the superscript records that the expression is negative for $0<x<1$. Substituting $x=e^(-t)$ converts the magnitude to $t e^(-at) → 0$ as $t → +∞$.
 
 ## Recognition Signals
 
@@ -85,16 +79,16 @@ The real limit is $0$, while the superscript records that the expression is nega
 
 - Calling every appearance of zero or infinity indeterminate.
 - Applying L'Hôpital directly to a product or difference.
-- Forgetting the punctured-neighborhood differentiability and $g'\ne0$ conditions.
+- Forgetting the punctured-neighborhood differentiability and $g' ≠ 0$ conditions.
 - Reusing the first gate for a second differentiation.
 - Reporting unsigned $0$ when the requested behavior is specifically approach from below.
 
 ## Interview Checks
 
-Before evaluating $\lim_{x\to0^+}x^2\ln x$, rewrite it as
+Before evaluating $lim(x → 0^+) x^2 ln x$, rewrite it as
 
 \[
-\frac{\ln x}{x^{-2}}
+(ln x)/(x^(-2))
 \]
 
-and state every gate condition. Explain separately why the final approach is from below. On the positive tail, justify why $e^x/x^2\to+\infty$ rather than quoting the growth hierarchy without proof.
+and state every gate condition. Explain separately why the final approach is from below. On the positive tail, justify why $e^x/x^2 → +∞$ rather than quoting the growth hierarchy without proof.

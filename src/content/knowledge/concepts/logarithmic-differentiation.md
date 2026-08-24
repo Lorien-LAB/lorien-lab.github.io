@@ -15,64 +15,60 @@ relatedNotes: []
 
 ## Core Idea
 
-Let $I$ be an interval, let $u:I\to(0,+\infty)$ be differentiable, and let $v:I\to\mathbb R$ be differentiable. For
+Let $I$ be an interval, let $u: I → (0, +∞)$ be differentiable, and let $v: I → ℝ$ be differentiable. For
 
 \[
-y=u(x)^{v(x)},
+y = u(x)^(v(x)),
 \]
 
 the positive-base condition makes the real logarithm legitimate. Taking logarithms gives
 
 \[
-\ln y=v\ln u.
+ln y = v ln u.
 \]
 
 Differentiate and restore $y=u^v$:
 
 \[
-\frac{y'}y=v'\ln u+v\frac{u'}u,
+y'/y = v' ln u + v(u'/u),
 \]
 
 so
 
 \[
-\boxed{y'=u^v\left(v'\ln u+v\frac{u'}{u}\right)}.
+y' = u^v(v' ln u + v(u'/u)).
 \]
 
 ## Why the Hypotheses Come First
 
-The derivation uses $\ln u(x)$ and divides by $u(x)$, so $u(x)>0$ is not cosmetic. Differentiability of $v$ is independent of differentiability of $u$; both terms in the final formula need their own hypotheses.
+The derivation uses $ln u(x)$ and divides by $u(x)$, so $u(x)>0$ is not cosmetic. Differentiability of $v$ is independent of differentiability of $u$; both terms in the final formula need their own hypotheses.
 
 Zero or negative bases require a separate real-domain analysis. A negative base with a varying real exponent generally does not define a real differentiable function on an interval.
 
 ## Products and Quotients of Many Factors
 
-Let $u_j:I\to(0,+\infty)$ be differentiable for every $j=1,\dots,m$. Thus every individual factor satisfies $u_j(x)>0$ on $I$. For the product
+Let $u\_j: I → (0, +∞)$ be differentiable for every $j=1,…,m$. Thus every individual factor satisfies $u\_j(x)>0$ on $I$. For the product
 
 \[
-y=\prod_{j=1}^m u_j(x),
+y = ∏(j = 1 to m) u\_j(x),
 \]
 
 the logarithm is justified factor by factor:
 
 \[
-\ln y=\sum_{j=1}^m\ln u_j,
-\qquad
-\frac{y'}y=\sum_{j=1}^m\frac{u_j'}{u_j}.
+ln y = ∑(j = 1 to m) ln u\_j; y'/y = ∑(j = 1 to m) (u\_j'/u\_j).
 \]
 
 For the quotient
 
 \[
-q(x)=\frac{\prod_{j=1}^m a_j(x)}{\prod_{k=1}^n b_k(x)},
+q(x) = (∏(j = 1 to m) a\_j(x))/(∏(k = 1 to n) b\_k(x)),
 \]
 
-assume every numerator factor $a_j:I\to(0,+\infty)$ is differentiable and every denominator factor $b_k:I\to(0,+\infty)$ is differentiable. Consequently each $a_j(x)>0$ and each $b_k(x)>0$ on $I$. Only then do logarithms give
+assume every numerator factor $a\_j: I → (0, +∞)$ is differentiable and every denominator factor $b\_k: I → (0, +∞)$ is differentiable. Consequently each $a\_j(x)>0$ and each $b\_k(x)>0$ on $I$. Only then do logarithms give
 
 \[
-\ln q=\sum_{j=1}^m\ln a_j-\sum_{k=1}^n\ln b_k,
-\qquad
-\frac{q'}q=\sum_{j=1}^m\frac{a_j'}{a_j}-\sum_{k=1}^n\frac{b_k'}{b_k}.
+ln q = ∑(j = 1 to m) ln a\_j - ∑(k = 1 to n) ln b\_k; q'/q = ∑(j = 1 to m) (a\_j'/a\_j) - ∑(k = 1 to n) (b\_k'/b\_k).
 \]
 
 Only denominator-factor terms enter with a minus sign. Always multiply the logarithmic derivative by the original function at the end.
@@ -82,34 +78,31 @@ Only denominator-factor terms enter with a minus sign. Always multiply the logar
 For $y=x^x$, the real positive domain is $x>0$. Since
 
 \[
-\ln y=x\ln x,
-\qquad
-\frac{y'}y=\ln x+1,
+ln y = x ln x; y'/y = ln x + 1,
 \]
 
 we obtain
 
 \[
-\boxed{\frac{d}{dx}x^x=x^x(\ln x+1)},\qquad x>0.
+d/dx (x^x) = x^x(ln x + 1) for x > 0.
 \]
 
-For $y=(\ln x)^{\ln x}$, the base $\ln x$ must be positive, so $x>1$. Then
+For $y=(ln x)^(ln x)$, the base $ln x$ must be positive, so $x>1$. Then
 
 \[
-\ln y=(\ln x)(\ln\ln x)
+ln y = (ln x)(ln ln x)
 \]
 
 and
 
 \[
-\frac{y'}y=\frac1x\ln\ln x+\frac1x.
+y'/y = (ln ln x)/x + 1/x.
 \]
 
 Therefore
 
 \[
-\boxed{\frac{d}{dx}(\ln x)^{\ln x}
-=\frac{(\ln x)^{\ln x}}{x}(\ln\ln x+1)},\qquad x>1.
+d/dx ((ln x)^(ln x)) = (((ln x)^(ln x))/x)(ln ln x + 1) for x > 1.
 \]
 
 ## Recognition Signals
@@ -120,25 +113,24 @@ Therefore
 
 ## Common Mistakes
 
-- Taking $\ln u$ before proving $u>0$.
+- Taking $ln u$ before proving $u>0$.
 - Assuming differentiability of $u$ somehow supplies differentiability of $v$.
 - Forgetting to multiply the logarithmic derivative by $y=u^v$.
 - Applying the result unchanged to zero or negative bases.
-- Using $x>0$ for $(\ln x)^{\ln x}$; the positive-base requirement actually gives $x>1$.
+- Using $x>0$ for $(ln x)^(ln x)$; the positive-base requirement actually gives $x>1$.
 
 ## Interview Checks
 
 Derive, rather than quote,
 
 \[
-\boxed{\frac{d}{dx}x^x=x^x(\ln x+1)},\qquad x>0,
+d/dx (x^x) = x^x(ln x + 1) for x > 0,
 \]
 
 and
 
 \[
-\boxed{\frac{d}{dx}(\ln x)^{\ln x}
-=\frac{(\ln x)^{\ln x}}x(\ln\ln x+1)},\qquad x>1.
+d/dx ((ln x)^(ln x)) = (((ln x)^(ln x))/x)(ln ln x + 1) for x > 1.
 \]
 
 For each expression, say exactly which positivity condition made the logarithm valid.

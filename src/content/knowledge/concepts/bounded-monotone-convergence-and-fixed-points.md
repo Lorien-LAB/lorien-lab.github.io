@@ -23,18 +23,18 @@ Every bounded monotone real sequence converges: every increasing real sequence b
 
 ## Invariant Intervals and Induction
 
-For $x_{n+1}=F(x_n)$, an interval $I$ is invariant if $F(I)\subseteq I$. Prove $x_0\in I$ and the implication $x_n\in I\Rightarrow x_{n+1}\in I$. This supplies bounds but not necessarily monotonicity.
+For $x\_(n+1) = F(x\_n)$, an interval $I$ is invariant if $F(I) ⊆ I$. Prove $x\_0 ∈ I$ and the implication $x\_n ∈ I ⇒ x\_(n+1) ∈ I$. A bounded (in particular compact) invariant interval supplies both finite upper and lower bounds. For an increasing sequence, only a finite upper endpoint is needed; for a decreasing sequence, only a finite lower endpoint is needed. An unbounded invariant interval by itself does not supply the missing bound. None of these bounds establishes monotonicity.
 
 ## Alternating Recurrences and Even/Odd Subsequences
 
-If $F$ is decreasing, consecutive terms can oscillate. Study $x_{2n}$ and $x_{2n+1}$ separately. If the even terms increase, the odd terms decrease, and both remain in a common compact interval, they have limits $a$ and $b$. The recurrence then relates $a$ and $b$; a separate argument must prove $a=b$ before the full sequence converges.
+If $F$ is decreasing, consecutive terms can oscillate. Study $x\_(2n)$ and $x\_(2n+1)$ separately. If the even terms increase, the odd terms decrease, and both remain in a common compact interval, they have limits $a$ and $b$. The recurrence then relates $a$ and $b$; a separate argument must prove $a=b$ before the full sequence converges.
 
 ## Continuity after Convergence
 
-Once $x_n\to L$ is proved and $F$ is continuous at $L$,
+Once $x\_n → L$ is proved and $F$ is continuous at $L$,
 
 \[
-L=\lim x_{n+1}=\lim F(x_n)=F(L).
+L = lim(n → ∞) x\_(n+1) = lim(n → ∞) F(x\_n) = F(L).
 \]
 
 This step comes after convergence. Reversing that order is circular.
@@ -48,36 +48,34 @@ The equation $L=F(L)$ can have several roots, roots outside the invariant interv
 For
 
 \[
-c_0=2,
-\qquad
-c_{n+1}=2+\frac2{c_n},
+c\_0 = 2; c\_(n+1) = 2 + 2/(c\_n),
 \]
 
 the map is decreasing and preserves $[2,3]$. The even subsequence increases and the odd subsequence decreases; their limits coincide. Only then does
 
 \[
-L=2+\frac2L
+L = 2 + 2/L
 \]
 
 give the admissible limit
 
 \[
-L=1+\sqrt3.
+L = 1 + √3.
 \]
 
 ## Nested-Radical Safeguard
 
-For $a_1=\sqrt2$ and $a_{n+1}=\sqrt{2+a_n}$, prove by induction that the sequence is increasing and that $a_n<2$. Bounded monotone convergence then permits the fixed-point equation, whose positive solution is $L=2$.
+For $a\_1 = √2$ and $a\_(n+1) = √(2 + a\_n)$, prove by induction that the sequence is increasing and that $a\_n < 2$. Bounded monotone convergence then permits the fixed-point equation, whose positive solution is $L=2$.
 
 ## Power-Tower Safeguard
 
 If an infinite tower is requested to equal $2$, the positive base is
 
 \[
-x=\sqrt2.
+x = √2.
 \]
 
-For the finite towers $t_0=\sqrt2$ and $t_{n+1}=(\sqrt2)^{t_n}$, prove increasing behavior and the invariant upper bound $t_n<2$. The proved limit is $L=2$. Both $2$ and $4$ satisfy the fixed-point equation, so branch $4$ must be rejected using $L\le2$.
+For the finite towers $t\_0 = √2$ and $t\_(n+1) = (√2)^(t\_n)$, prove increasing behavior and the invariant upper bound $t\_n < 2$. The proved limit is $L=2$. Both $2$ and $4$ satisfy the fixed-point equation, so branch $4$ must be rejected using $L ≤ 2$.
 
 ## Recognition Signals
 

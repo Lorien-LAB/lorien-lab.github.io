@@ -25,13 +25,12 @@ featured: false
 
 Define the finite continued-fraction convergents by
 
-\[
-c_0=2,
-\qquad
-c_{n+1}=2+\frac2{c_n}.
-\]
+```text
+c₀ = 2
+cₙ₊₁ = 2 + 2/cₙ
+```
 
-Prove that $(c_n)$ converges and find its limit. A fixed-point equation without a convergence proof is not sufficient.
+Prove that `(cₙ)` converges and find its limit. A fixed-point equation without a convergence proof is not sufficient.
 
 ## Think Before Revealing
 
@@ -40,14 +39,14 @@ The update map is decreasing, so the full sequence oscillates. Look for an invar
 <details>
 <summary>Hint 1</summary>
 
-Show that $F(x)=2+2/x$ maps $[2,3]$ into itself. Compute $c_0<c_2$ and use the monotonicity of two applications of $F$.
+Show that `F(x) = 2 + 2/x` maps `[2, 3]` into itself. Compute `c₀ < c₂` and use the monotonicity of two applications of `F`.
 
 </details>
 
 <details>
 <summary>Hint 2</summary>
 
-Let the even and odd subsequence limits be $a$ and $b$. Continuity gives $b=2+2/a$ and $a=2+2/b$; subtract these equations before solving any fixed point.
+Let the even and odd subsequence limits be `a` and `b`. Continuity gives `b = 2 + 2/a` and `a = 2 + 2/b`; subtract these equations before solving any fixed point.
 
 </details>
 
@@ -56,101 +55,97 @@ Let the even and odd subsequence limits be $a$ and $b$. Continuity gives $b=2+2/
 
 ## Solution
 
-Let $F(x)=2+2/x$ for $x>0$.
+Let `F(x) = 2 + 2/x` for `x > 0`.
 
 ### Invariant interval
 
 We have
 
-\[
-c_0=2,
-\qquad
-c_1=F(2)=3.
-\]
+```text
+c₀ = 2
+c₁ = F(2) = 3
+```
 
-If $2\le x\le3$, then $2/3\le2/x\le1$, so
+If `2 ≤ x ≤ 3`, then `2/3 ≤ 2/x ≤ 1`, so
 
-\[
-2\le F(x)\le3.
-\]
+```text
+2 ≤ F(x) ≤ 3
+```
 
-Thus $F$ maps $[2,3]$ into itself. By induction,
+Thus `F` maps `[2, 3]` into itself. By induction,
 
-\[
-2\le c_n\le3
-\]
+```text
+2 ≤ cₙ ≤ 3
+```
 
-for every $n$.
+for every `n`.
 
 ### Alternating subsequences
 
-The map $F$ is strictly decreasing. Directly,
+The map `F` is strictly decreasing. Directly,
 
-\[
-c_0=2<c_2=2+\frac23=\frac83.
-\]
+```text
+c₀ = 2 < c₂ = 2 + 2/3 = 8/3
+```
 
-Since $F\circ F$ is increasing, applying it repeatedly preserves this inequality:
+Since `F ∘ F` is increasing, applying it repeatedly preserves this inequality:
 
-\[
-c_{2n}<c_{2n+2}.
-\]
+```text
+c₂ₙ < c₂ₙ₊₂
+```
 
-Hence the even subsequence is increasing. Applying the decreasing map $F$ to $c_{2n}<c_{2n+2}$ reverses the inequality:
+Hence the even subsequence is increasing. Applying the decreasing map `F` to `c₂ₙ < c₂ₙ₊₂` reverses the inequality:
 
-\[
-c_{2n+1}>c_{2n+3},
-\]
+```text
+c₂ₙ₊₁ > c₂ₙ₊₃
+```
 
-so the odd subsequence is decreasing. Both subsequences remain in $[2,3]$, hence both converge.
+so the odd subsequence is decreasing. Both subsequences remain in `[2, 3]`, hence both converge.
 
 ### A single limit
 
 Write
 
-\[
-a=\lim_{n\to+\infty}c_{2n},
-\qquad
-b=\lim_{n\to+\infty}c_{2n+1}.
-\]
+```text
+a = lim (n → +∞) c₂ₙ
+b = lim (n → +∞) c₂ₙ₊₁
+```
 
-Continuity of $F$ on $[2,3]$ gives
+Continuity of `F` on `[2, 3]` gives
 
-\[
-b=2+\frac2a,
-\qquad
-a=2+\frac2b.
-\]
+```text
+b = 2 + 2/a
+a = 2 + 2/b
+```
 
 Subtracting,
 
-\[
-(b-a)\left(1-\frac2{ab}\right)=0.
-\]
+```text
+(b − a)(1 − 2/(ab)) = 0
+```
 
-Because $a,b\ge2$, we have $ab\ge4$, so $ab=2$ is impossible. Therefore $a=b$. The even and odd subsequences have the same limit, so the full sequence converges.
+Because `a, b ≥ 2`, we have `ab ≥ 4`, so `ab = 2` is impossible. Therefore `a = b`. The even and odd subsequences have the same limit, so the full sequence converges.
 
 ### Fixed point and selection
 
-Only now let the full limit be $L$. Passing to the recurrence gives
+Only now let the full limit be `L`. Passing to the recurrence gives
 
-\[
-L=2+\frac2L,
-\qquad
-L^2-2L-2=0.
-\]
+```text
+L = 2 + 2/L
+L² − 2L − 2 = 0
+```
 
 The candidates are
 
-\[
-L=1\pm\sqrt3.
-\]
+```text
+L = 1 ± √3
+```
 
-Every $c_n$ is positive, so the negative candidate $1-\sqrt3$ is rejected. Hence
+Every `cₙ` is positive, so the negative candidate `1 − √3` is rejected. Hence
 
-\[
-\boxed{L=1+\sqrt3}.
-\]
+```text
+L = 1 + √3
+```
 
 ## Why This Matters
 
@@ -161,10 +156,10 @@ The sequence illustrates why an oscillating recurrence may converge even though 
 - Claiming the continued fraction “clearly converges.”
 - Solving the quadratic before proving existence of a limit.
 - Proving that even and odd subsequences converge but not that their limits agree.
-- Selecting $1+\sqrt3$ solely because it looks plausible, without the positivity argument.
+- Selecting `1 + √3` solely because it looks plausible, without the positivity argument.
 
 ## Extensions
 
-For $c_{n+1}=p+q/c_n$ with positive $p,q$, identify an invariant interval and determine when the same alternating-subsequence strategy applies.
+For `cₙ₊₁ = p + q/cₙ` with positive `p, q`, identify an invariant interval and determine when the same alternating-subsequence strategy applies.
 
 </details>

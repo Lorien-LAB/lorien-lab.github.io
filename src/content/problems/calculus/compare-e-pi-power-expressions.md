@@ -23,23 +23,23 @@ featured: false
 
 ## Problem
 
-Which is larger, $e^\pi$ or $\pi^e$? Prove the comparison by analyzing a single real function on full intervals.
+Which is larger, `e^(π)` or `π^(e)`? Prove the comparison by analyzing a single real function on full intervals.
 
 ## Think Before Revealing
 
-Taking logarithms turns the two powers into $\pi$ and $e\ln\pi$. Can both sides be compared through the same one-variable ratio?
+Taking logarithms turns the two powers into `π` and `e ln π`. Can both sides be compared through the same one-variable ratio?
 
 <details>
 <summary>Hint 1</summary>
 
-Study $f(x)=\ln x/x$ for $x>0$. Its derivative changes sign at one familiar constant.
+Study `f(x) = (ln x)/x` for `x > 0`. Its derivative changes sign at one familiar constant.
 
 </details>
 
 <details>
 <summary>Hint 2</summary>
 
-Compute $f'(x)=(1-\ln x)/x^2$. Since $\pi>e$, use the decreasing interval $(e,+\infty)$ to compare $f(\pi)$ with $f(e)$.
+Compute `f'(x) = (1 − ln x)/x²`. Since `π > e`, use the decreasing interval `(e, +∞)` to compare `f(π)` with `f(e)`.
 
 </details>
 
@@ -50,59 +50,59 @@ Compute $f'(x)=(1-\ln x)/x^2$. Since $\pi>e$, use the decreasing interval $(e,+\
 
 Define
 
-\[
-f(x)=\frac{\ln x}{x},\qquad x>0.
-\]
+```text
+f(x) = (ln x)/x,   x > 0.
+```
 
 Then
 
-\[
-f'(x)=\frac{1-\ln x}{x^2}.
-\]
+```text
+f'(x) = (1 − ln x)/x².
+```
 
-Because $x^2>0$, the sign comes entirely from $1-\ln x$:
+Because `x² > 0`, the sign comes entirely from `1 − ln x`:
 
-- $f'(x)>0$ on $(0,e)$;
-- $f'(e)=0$;
-- $f'(x)<0$ on $(e,+\infty)$.
+- `f'(x) > 0` on `(0, e)`;
+- `f'(e) = 0`;
+- `f'(x) < 0` on `(e, +∞)`.
 
-Thus $f$ increases on $(0,e)$ and decreases on $(e,+\infty)$. Therefore, $f$ has its global maximum at $e$. Since $\pi>e$,
+Thus `f` increases on `(0, e)` and decreases on `(e, +∞)`. Therefore, `f` has its global maximum at `e`. Since `π > e`,
 
-\[
-\frac{\ln\pi}{\pi}=f(\pi)<f(e)=\frac1e.
-\]
+```text
+(ln π)/π = f(π) < f(e) = 1/e.
+```
 
-Multiplying by the positive number $e\pi$ yields
+Multiplying by the positive number `eπ` yields
 
-\[
-e\ln\pi<\pi.
-\]
+```text
+e ln π < π.
+```
 
 Exponentiation preserves this strict inequality:
 
-\[
-\pi^e<e^\pi.
-\]
+```text
+π^(e) < e^(π).
+```
 
 Therefore
 
-\[
-\boxed{e^\pi>\pi^e}.
-\]
+```text
+e^(π) > π^(e).
+```
 
 ## Why This Matters
 
-The key is not numerical approximation but choosing a ratio whose derivative gives a complete interval argument. The same device compares many expressions of the form $a^b$ and $b^a$.
+The key is not numerical approximation but choosing a ratio whose derivative gives a complete interval argument. The same device compares many expressions of the form `a^(b)` and `b^(a)`.
 
 ## Common Mistakes
 
 - Comparing decimal approximations instead of proving the inequality.
-- Checking only $f'(e)=0$ without proving the sign on both intervals.
+- Checking only `f'(e) = 0` without proving the sign on both intervals.
 - Reversing the final implication when exponentiating.
-- Treating $f''=0$ as decisive; a zero second derivative is inconclusive without the relevant sign information.
+- Treating `f″ = 0` as decisive; a zero second derivative is inconclusive without the relevant sign information.
 
 ## Extensions
 
-For $0<a<b$, compare $a^b$ and $b^a$ by locating $a$ and $b$ relative to the maximizer $e$ of $\ln x/x$.
+For `0 < a < b`, compare `a^(b)` and `b^(a)` by locating `a` and `b` relative to the maximizer `e` of `(ln x)/x`.
 
 </details>
