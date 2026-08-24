@@ -369,3 +369,100 @@ test('Problem 009 proves the unique Normal-CDF inflection by a sign change', asy
   assertMath(solution, String.raw`\boxed{x=\mu\text{ is the unique inflection point}}`, 'unique inflection');
   assert.match(solution, /not merely.*F''|F''.*zero.*not.*enough|sign change.*not merely/i);
 });
+
+test('indeterminate-limits Knowledge states the full gate, renewed checks, hierarchy, and signed origin limit', async () => {
+  const page = await readPage('src/content/knowledge/concepts/indeterminate-limits-and-growth-rates.md');
+  assertKnowledgePage(page, {
+    slug: 'indeterminate-limits-and-growth-rates',
+    title: 'Indeterminate Limits and Growth Rates',
+    description: "Evaluate elementary indeterminate limits with algebra, standard limits, and properly gated L'Hopital arguments while comparing logarithmic, polynomial, and exponential growth.",
+    category: 'Calculus',
+    tags: ['Calculus', 'Limits', 'Asymptotic Growth'],
+    related: ['derivative-definition-and-core-rules', 'bounded-monotone-convergence-and-fixed-points', 'positive-series-convergence'],
+  });
+  assert.match(page.text, /indeterminate.*determined|determined.*indeterminate/i);
+  assert.match(page.text, /algebraic simplification/i);
+  assert.match(page.text, /rationaliz/i);
+  assertMath(page.text, String.raw`\lim_{x\to0}\frac{\sin x}{x}=1`, 'sine limit');
+  assertMath(page.text, String.raw`\lim_{x\to0}\frac{e^x-1}{x}=1`, 'exponential limit');
+  assertMath(page.text, String.raw`\lim_{x\to0}\frac{\ln(1+x)}{x}=1`, 'logarithm limit');
+  for (const gate of [/punctured neighborhood/i, /g'.*(?:nonzero|not equal to zero)/i, /0\s*\/\s*0|zero-over-zero/i, /infinity.*infinity/i, /derivative-quotient limit/i]) assert.match(page.text, gate);
+  assert.match(page.text, /renew|recheck/i);
+  assert.match(page.text, /substitut.*before.*L'H[oô]pital|L'H[oô]pital.*after.*substitut/i);
+  assertMath(page.text, String.raw`\ln x\ll x^a\ll e^{bx}`, 'positive-tail growth hierarchy');
+  assertMath(page.text, String.raw`x\to+\infty`, 'positive-tail direction');
+  assertMath(page.text, String.raw`a>0`, 'positive power parameter');
+  assertMath(page.text, String.raw`b>0`, 'positive exponential parameter');
+  assertMath(page.text, String.raw`x^a\ln x\to0^-`, 'signed power-log identity');
+  assertMath(page.text, String.raw`x\to0^+`, 'signed power-log direction');
+  assertMath(page.text, String.raw`a>0`, 'signed power-log domain');
+});
+
+test('Problem 003 checks and renews the infinity-over-infinity gate before both differentiations', async () => {
+  const page = await readPage('src/content/problems/calculus/exponential-over-polynomial-limit.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-003',
+    title: 'Exponential Growth over a Polynomial',
+    description: "Evaluate exponential growth over a quadratic by checking and renewing every hypothesis for two L'Hopital steps.",
+    subcategories: ['Limits', 'Asymptotic Growth'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['indeterminate-limits-and-growth-rates'],
+    techniques: [],
+    prerequisites: ['derivative-definition-and-core-rules'],
+    relatedProblems: ['logarithm-power-limit-at-zero'],
+    family: 'deterministic-growth-rate-limits',
+    mathDifficulty: 2,
+    insightDifficulty: 2,
+    interviewDifficulty: 2,
+    estimatedMinutes: 8,
+  });
+  const solution = solutionBody(page.text);
+  assertBefore(solution, /^### First gate$/m, /^### First application$/m, 'Problem 003 first gate must precede first application');
+  assertBefore(solution, /^### First application$/m, /^### Renew the gate$/m, 'Problem 003 must renew after the first application');
+  assertBefore(solution, /^### Renew the gate$/m, /^### Second application$/m, 'Problem 003 renewed gate must precede second application');
+  const firstGate = subsectionBody(solution, 'First gate');
+  assert.match(firstGate, /infinity-over-infinity|\+\\infty\s*\/\s*\+\\infty/i);
+  assert.match(firstGate, /positive tail|x\s*>\s*0/i);
+  assert.match(firstGate, /e\^x.*x\^2.*differentiable|differentiable.*e\^x.*x\^2/is);
+  assert.match(firstGate, /2x.*(?:nonzero|\\ne\s*0)/i);
+  assertMath(firstGate, String.raw`\lim_{x\to+\infty}\frac{e^x}{2x}=+\infty`, 'Problem 003 first derivative-quotient limit');
+  const renewedGate = subsectionBody(solution, 'Renew the gate');
+  assert.match(renewedGate, /infinity-over-infinity|\+\\infty\s*\/\s*\+\\infty/i);
+  assert.match(renewedGate, /e\^x.*2x.*differentiable|differentiable.*e\^x.*2x/is);
+  assert.match(renewedGate, /denominator derivative.*2.*(?:nonzero|\\ne\s*0)|2\s*\\ne\s*0/i);
+  assertMath(renewedGate, String.raw`\lim_{x\to+\infty}\frac{e^x}{2}=+\infty`, 'Problem 003 second derivative-quotient limit');
+  assertMath(solution, String.raw`\lim_{x\to+\infty}\frac{e^x}{x^2}=\lim_{x\to+\infty}\frac{e^x}{2x}=\lim_{x\to+\infty}\frac{e^x}{2}=\boxed{+\infty}`, 'Problem 003 exact result');
+});
+
+test('Problem 004 converts the product to a gated quotient and preserves zero from below', async () => {
+  const page = await readPage('src/content/problems/calculus/logarithm-power-limit-at-zero.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-004',
+    title: 'A Logarithm-Power Limit at Zero',
+    description: "Evaluate a one-sided power-logarithm limit with a valid quotient transformation and preserve the sign of the approach to zero.",
+    subcategories: ['Limits', 'Asymptotic Growth'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['indeterminate-limits-and-growth-rates'],
+    techniques: [],
+    prerequisites: ['derivative-definition-and-core-rules'],
+    relatedProblems: ['exponential-over-polynomial-limit'],
+    family: 'deterministic-growth-rate-limits',
+    mathDifficulty: 2,
+    insightDifficulty: 3,
+    interviewDifficulty: 3,
+    estimatedMinutes: 10,
+  });
+  const solution = solutionBody(page.text);
+  assertMath(page.text, String.raw`\lim_{x\to0^+}x^2\ln x`, 'Problem 004 prompt');
+  assertBefore(solution, /^### Rewrite and right-neighborhood gate$/m, /^### Apply the rule$/m, 'Problem 004 gate must precede application');
+  const gate = subsectionBody(solution, 'Rewrite and right-neighborhood gate');
+  assertMath(gate, String.raw`\frac{\ln x}{x^{-2}}`, 'Problem 004 quotient');
+  assert.match(gate, /-\\infty.*\+\\infty|infinity-over-infinity/i);
+  assert.match(gate, /0\s*<\s*x\s*<\s*\\delta|punctured right neighborhood/i);
+  assert.match(gate, /\\ln x.*x\^\{-2\}.*differentiable|differentiable.*\\ln x.*x\^\{-2\}/is);
+  assert.match(gate, /-2x\^\{-3\}.*(?:nonzero|\\ne\s*0)|denominator derivative.*nonzero/i);
+  assertMath(gate, String.raw`\lim_{x\to0^+}\frac{1/x}{-2x^{-3}}=0`, 'Problem 004 derivative-quotient limit exists');
+  assertMath(solution, String.raw`\frac{1/x}{-2x^{-3}}=-\frac{x^2}{2}\to0`, 'Problem 004 derivative quotient');
+  assert.match(solution, /negative.*0\s*<\s*x\s*<\s*1|0\s*<\s*x\s*<\s*1.*negative/is);
+  assertMath(solution, String.raw`\boxed{0^-}`, 'Problem 004 signed result');
+});
