@@ -121,7 +121,15 @@ Both $L=2$ and $L=4$ satisfy this fixed-point equation:
 (\sqrt2)^4=4.
 \]
 
-The fixed-point equation alone therefore does not choose a branch. The proved bound $L\le2$ rejects branch $4$, while the increasing sequence is positive. Hence
+To exclude any additional fixed point in the interval allowed by the sequence, define $g(y)=(\sqrt2)^y-y$. On $[0,2]$,
+
+\[
+g'(y)=(\sqrt2)^y\ln\sqrt2-1
+\le2\ln\sqrt2-1
+=\ln2-1<0.
+\]
+
+Thus $g$ is strictly decreasing on $[0,2]$. Since $g(2)=0$, the value $2$ is the unique fixed point in that interval. The fixed-point equation alone therefore does not choose a branch globally. The proved bound $L\le2$ rejects branch $4$, while positivity places the limit in the interval where the fixed point is unique. Hence
 
 \[
 \boxed{L=2}.

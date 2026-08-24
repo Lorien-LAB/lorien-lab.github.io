@@ -718,6 +718,7 @@ test('Problem 012 distinguishes requested base sqrt two from tower limit two and
   assert.match(closure, /increasing.*bounded above.*converges|bounded monotone convergence/is);
   assertMath(closure, String.raw`L=(\sqrt2)^L`, 'Problem 012 fixed point');
   assert.match(closure, /both.*2.*4|2 and 4.*fixed/i);
+  assert.match(closure, /\[0,\s*2\].*g'\(y\).*\\le.*\\ln\s*2\s*-\s*1\s*<\s*0.*strictly decreasing.*unique fixed point/is, 'Problem 012 must prove uniqueness on [0,2] from a strict derivative bound');
   assert.match(closure, /L\s*\\le\s*2.*reject.*4|upper bound.*reject.*4/is);
   assertMath(closure, String.raw`\boxed{L=2}`, 'Problem 012 proved tower limit');
   assert.match(solution, /base.*not.*limit|must not be conflated|distinguish.*base.*limit/i);
