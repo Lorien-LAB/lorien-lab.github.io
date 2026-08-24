@@ -339,3 +339,33 @@ test('Problem 007 proves exponential midpoint convexity with the exact equality 
   assertMath(page.text, String.raw`f''(x)=e^x>0`, 'strict convexity');
   assert.match(page.text, /equality.*(?:if and only if|iff|exactly when).*a\s*=\s*b/i);
 });
+
+test('Problem 009 proves the unique Normal-CDF inflection by a sign change', async () => {
+  const page = await readPage('src/content/problems/calculus/normal-cdf-inflection-point.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-009',
+    title: 'Inflection Point of a Normal CDF',
+    description: 'Differentiate a Normal cumulative distribution function and prove its unique inflection point through the sign change of its second derivative.',
+    subcategories: ['Derivatives', 'Convexity', 'Probability Functions'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['monotonicity-convexity-critical-points-and-inflection', 'derivative-definition-and-core-rules'],
+    techniques: [],
+    prerequisites: [],
+    relatedProblems: [],
+    family: 'curvature-and-inflection',
+    mathDifficulty: 2,
+    insightDifficulty: 2,
+    interviewDifficulty: 3,
+    estimatedMinutes: 10,
+  });
+  const solution = solutionBody(page.text);
+  assertMath(page.text, String.raw`\sigma>0`, 'Normal scale domain');
+  assertMath(solution, String.raw`F'(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)`, 'Normal density');
+  assertMath(solution, String.raw`F''(x)=-\frac{x-\mu}{\sigma^3\sqrt{2\pi}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)`, 'Normal CDF second derivative');
+  const signChart = solution.match(/\\\[[\s\S]*?F''\(x\)>0[\s\S]*?F''\(x\)<0[\s\S]*?\\\]/)?.[0];
+  assert.ok(signChart, 'Normal CDF Solution missing displayed left/right sign chart');
+  assert.match(signChart, /F''(?:\(x\))?\s*>\s*0.*x\s*<\s*\\mu/is);
+  assert.match(signChart, /F''(?:\(x\))?\s*<\s*0.*x\s*>\s*\\mu/is);
+  assertMath(solution, String.raw`\boxed{x=\mu\text{ is the unique inflection point}}`, 'unique inflection');
+  assert.match(solution, /not merely.*F''|F''.*zero.*not.*enough|sign change.*not merely/i);
+});
