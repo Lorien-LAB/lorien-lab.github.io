@@ -245,6 +245,17 @@ function subsectionBody(text, heading) {
   return (next < 0 ? tail : tail.slice(0, next)).trim();
 }
 
+function sectionBody(text, heading) {
+  const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const marker = new RegExp(`^## ${escaped}\\s*$`, 'm');
+  const start = text.search(marker);
+  assert.ok(start >= 0, `missing section ${heading}`);
+  const bodyStart = text.indexOf('\n', start) + 1;
+  const tail = text.slice(bodyStart);
+  const next = tail.search(/^## /m);
+  return (next < 0 ? tail : tail.slice(0, next)).trim();
+}
+
 function assertPublicBoundary(text, frontmatter, slug) {
   assert.doesNotMatch(text, publicBoundary, `${slug} exposes private source/audit identity`);
   assert.doesNotMatch(
@@ -326,7 +337,7 @@ test('core derivative Knowledge freezes first-principles rules and the x ln x In
   assert.match(page.text, /differentiability implies continuity/i);
   assert.match(page.text, /not conversely|converse.*false/i);
   assert.match(page.text, /one-sided|endpoint/i);
-  for (const rule of [/linearity/i, /product rule/i, /quotient rule/i, /chain rule/i, /fixed-power/i, /generalized-power/i]) assert.match(page.text, rule);
+  for (const rule of [/linearity/i, /product rule/i, /quotient rule/i, /chain rule/i, /fixed-power/i, /generalized[ -]power/i]) assert.match(page.text, rule);
   assert.match(page.text, /denominator.*nonzero|g\(x\).*not.*0/i);
   assertMath(page.text, String.raw`\frac{d}{dx}e^x=e^x`, 'exponential derivative');
   assertMath(page.text, String.raw`\frac{d}{dx}\ln x=\frac1x,\qquad x>0`, 'logarithm derivative and domain');
@@ -348,8 +359,11 @@ test('logarithmic differentiation Knowledge freezes the positive-base domain and
     tags: ['Calculus', 'Derivatives', 'Problem Solving'],
     related: ['derivative-definition-and-core-rules'],
   });
-  assertBefore(page.text, /u:I.*\(0,\s*\+\\infty\)|u.*positive/i, /\\ln y\s*=\s*v\\ln u/, 'u>0 must precede logarithms');
-  assertBefore(page.text, /v:I.*\\mathbb\{R\}|v.*differentiable/i, /\\ln y\s*=\s*v\\ln u/, 'v differentiability must precede logarithms');
+  const logIdentity = /\\ln y\s*=\s*v\\ln u/;
+  assertBefore(page.text, /u:I\\to\(0,\s*\+\\infty\)/, logIdentity, 'u:I to positive reals must precede logarithms');
+  assertBefore(page.text, /u:I\\to\(0,\s*\+\\infty\)\$?\s+(?:is|be)\s+differentiable/i, logIdentity, 'u differentiability must independently precede logarithms');
+  assertBefore(page.text, /v:I\\to\\mathbb\s*R/, logIdentity, 'v:I to real values must precede logarithms');
+  assertBefore(page.text, /v:I\\to\\mathbb\s*R\$?\s+(?:is|be)\s+differentiable/i, logIdentity, 'v differentiability must independently precede logarithms');
   assertMath(page.text, String.raw`\boxed{y'=u^v\left(v'\ln u+v\frac{u'}{u}\right)}`, 'general logarithmic derivative');
   assertMath(page.text, String.raw`\boxed{\frac{d}{dx}x^x=x^x(\ln x+1)},\qquad x>0`, 'x^x derivative and domain');
   assertMath(page.text, String.raw`\boxed{\frac{d}{dx}(\ln x)^{\ln x}=\frac{(\ln x)^{\ln x}}{x}(\ln\ln x+1)},\qquad x>1`, 'log-power derivative and domain');
@@ -375,8 +389,11 @@ test('Problem 001 derives u^v, visibly asks x^x, and preserves the log-power spe
     estimatedMinutes: 12,
   });
   const solution = solutionBody(page.text);
-  assertBefore(solution, /u:I.*\(0,\s*\+\\infty\)|u.*positive/i, /take.*log|\\ln y/i, 'Problem 001 Solution must state u:I to positive reals before logarithms');
-  assertBefore(solution, /v:I.*\\mathbb\{R\}|v.*differentiable/i, /take.*log|\\ln y/i, 'Problem 001 Solution must independently state differentiable v before logarithms');
+  const logIdentity = /\\ln y\s*=\s*v\\ln u/;
+  assertBefore(solution, /u:I\\to\(0,\s*\+\\infty\)/, logIdentity, 'Problem 001 Solution must state u:I to positive reals before logarithms');
+  assertBefore(solution, /u:I\\to\(0,\s*\+\\infty\)\$?\s+(?:is|be)\s+differentiable/i, logIdentity, 'Problem 001 Solution must independently state differentiable u before logarithms');
+  assertBefore(solution, /v:I\\to\\mathbb\s*R/, logIdentity, 'Problem 001 Solution must state v:I to real values before logarithms');
+  assertBefore(solution, /v:I\\to\\mathbb\s*R\$?\s+(?:is|be)\s+differentiable/i, logIdentity, 'Problem 001 Solution must independently state differentiable v before logarithms');
   assertMath(solution, String.raw`\boxed{\frac{d}{dx}u(x)^{v(x)}=u(x)^{v(x)}\left(v'(x)\ln u(x)+v(x)\frac{u'(x)}{u(x)}\right)}`, 'Problem 001 general result');
   assert.match(page.text, /differentiate.*x\^x|derivative.*x\^x/i);
   assertMath(solution, String.raw`\boxed{\frac{d}{dx}x^x=x^x(\ln x+1)},\qquad x>0`, 'Problem 001 x^x result and domain');
@@ -464,7 +481,7 @@ and, for differentiable $f$ and $g$,
 (f\circ g)'(x)=f'(g(x))g'(x).
 \]
 
-The quotient rule needs a nonzero denominator at the evaluation point. The chain rule needs the outer derivative at the actual inner value $g(x)$.
+The quotient rule needs a denominator that is nonzero at the evaluation point. The chain rule needs the outer derivative at the actual inner value $g(x)$.
 
 ## Fixed and Generalized Powers
 
@@ -587,7 +604,7 @@ Differentiate and restore $y=u^v$:
 so
 
 \[
-\boxed{y'=u^v\left(v'\ln u+v\frac{u'}u\right)}.
+\boxed{y'=u^v\left(v'\ln u+v\frac{u'}{u}\right)}.
 \]
 
 ## Why the Hypotheses Come First
@@ -640,7 +657,7 @@ Therefore
 
 \[
 \boxed{\frac{d}{dx}(\ln x)^{\ln x}
-=\frac{(\ln x)^{\ln x}}x(\ln\ln x+1)},\qquad x>1.
+=\frac{(\ln x)^{\ln x}}{x}(\ln\ln x+1)},\qquad x>1.
 \]
 
 ## Recognition Signals
@@ -794,7 +811,7 @@ The product and chain rules give
 Restoring $y$,
 
 \[
-\boxed{y'=\frac{(\ln x)^{\ln x}}x(\ln\ln x+1)},\qquad x>1.
+\boxed{y'=\frac{(\ln x)^{\ln x}}{x}(\ln\ln x+1)},\qquad x>1.
 \]
 
 ## Why This Matters
@@ -868,10 +885,12 @@ test('qualitative derivative Knowledge separates critical, curvature, and inflec
   assert.match(page.text, /first-derivative sign chart/i);
   assert.match(page.text, /local.*global|global.*local/i);
   assert.match(page.text, /closed interval.*endpoint|endpoint.*closed interval/i);
-  assert.match(page.text, /f'\s*=\s*0.*f''\s*>\s*0.*local minimum|local minimum.*f''\s*>\s*0/is);
-  assert.match(page.text, /f'\s*=\s*0.*f''\s*<\s*0.*local maximum|local maximum.*f''\s*<\s*0/is);
-  assert.match(page.text, /critical point[^\n]*f''\s*=\s*0[^\n]*inconclusive|f''\s*=\s*0[^\n]*inconclusive[^\n]*critical/i);
-  assert.match(page.text, /inflection[^\n]*f''\s*=\s*0[^\n]*(?:not sufficient|inconclusive)|f''\s*=\s*0[^\n]*(?:not sufficient|inconclusive)[^\n]*inflection/i);
+  const localTests = sectionBody(page.text, 'Second-Derivative Local Tests');
+  assert.match(localTests, /f'(?:\(c\))?\s*=\s*0.*f''(?:\(c\))?\s*>\s*0.*local minimum/is);
+  assert.match(localTests, /f'(?:\(c\))?\s*=\s*0.*f''(?:\(c\))?\s*<\s*0.*local maximum/is);
+  assert.match(localTests, /critical point[^\n]*f''(?:\(c\))?\s*=\s*0[^\n]*inconclusive|f''(?:\(c\))?\s*=\s*0[^\n]*inconclusive[^\n]*critical/i);
+  const curvatureTests = sectionBody(page.text, 'Convexity, Concavity, and Inflection');
+  assert.match(curvatureTests, /inflection[^\n]*f''(?:\(c\))?\s*=\s*0[^\n]*(?:not sufficient|inconclusive)|f''(?:\(c\))?\s*=\s*0[^\n]*(?:not sufficient|inconclusive)[^\n]*inflection/i);
   assert.match(page.text, /inflection.*sign change|concavity change/i);
   assert.match(page.text, /midpoint convexity/i);
   assertMath(page.text, String.raw`F'(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)`, 'Normal density example');
@@ -1113,7 +1132,7 @@ Because $x^2>0$, the sign comes entirely from $1-\ln x$:
 - $f'(e)=0$;
 - $f'(x)<0$ on $(e,+\infty)$.
 
-Thus $f$ increases on $(0,e)$ and decreases on $(e,+\infty)$. Since $\pi>e$,
+Thus $f$ increases on $(0,e)$ and decreases on $(e,+\infty)$. Therefore, $f$ has its global maximum at $e$. Since $\pi>e$,
 
 \[
 \frac{\ln\pi}{\pi}=f(\pi)<f(e)=\frac1e.
@@ -1186,7 +1205,7 @@ Use $f(x)=e^x$ and compute its second derivative on all of $\mathbb R$.
 <details>
 <summary>Hint 2</summary>
 
-Strict convexity gives $f((a+b)/2)\le(f(a)+f(b))/2$. Its equality clause is strict unless the two input points coincide.
+Strict convexity gives the midpoint inequality $f((a+b)/2)\le(f(a)+f(b))/2$. Its equality clause is strict unless the two input points coincide.
 
 </details>
 
@@ -1296,8 +1315,10 @@ test('Problem 009 proves the unique Normal-CDF inflection by a sign change', asy
   assertMath(page.text, String.raw`\sigma>0`, 'Normal scale domain');
   assertMath(solution, String.raw`F'(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)`, 'Normal density');
   assertMath(solution, String.raw`F''(x)=-\frac{x-\mu}{\sigma^3\sqrt{2\pi}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)`, 'Normal CDF second derivative');
-  assert.match(solution, /F''\s*>\s*0.*x\s*<\s*\\mu|positive.*left.*\\mu/is);
-  assert.match(solution, /F''\s*<\s*0.*x\s*>\s*\\mu|negative.*right.*\\mu/is);
+  const signChart = solution.match(/\\\[[\s\S]*?F''\(x\)>0[\s\S]*?F''\(x\)<0[\s\S]*?\\\]/)?.[0];
+  assert.ok(signChart, 'Normal CDF Solution missing displayed left/right sign chart');
+  assert.match(signChart, /F''(?:\(x\))?\s*>\s*0.*x\s*<\s*\\mu/is);
+  assert.match(signChart, /F''(?:\(x\))?\s*<\s*0.*x\s*>\s*\\mu/is);
   assertMath(solution, String.raw`\boxed{x=\mu\text{ is the unique inflection point}}`, 'unique inflection');
   assert.match(solution, /not merely.*F''|F''.*zero.*not.*enough|sign change.*not merely/i);
 });
@@ -1565,7 +1586,7 @@ The quotient forms $0/0$ and extended-real infinity-over-infinity are indetermin
 
 ## Simplify Before Differentiating
 
-Factor and cancel only on a punctured neighborhood, rationalize conjugate differences, use trigonometric identities, and substitute when a standard limit is hidden. For example, if $u=x^2$ and $x\to0^+$, then $u\to0^+$; substitution exposes the power-log pattern before any L'Hôpital step.
+Use algebraic simplification before differentiating: factor and cancel only on a punctured neighborhood, rationalize conjugate differences, use trigonometric identities, and substitute when a standard limit is hidden. For example, if $u=x^2$ and $x\to0^+$, then $u\to0^+$; substitution exposes the power-log pattern before any L'Hôpital step.
 
 ## Three Standard Limits
 
@@ -1576,7 +1597,7 @@ The reusable elementary limits are
 \qquad
 \lim_{x\to0}\frac{e^x-1}{x}=1,
 \qquad
-\lim_{x\to0}\frac{\ln(1+x)}x=1.
+\lim_{x\to0}\frac{\ln(1+x)}{x}=1.
 \]
 
 ## The Full L'Hopital Gate
@@ -1584,7 +1605,7 @@ The reusable elementary limits are
 For a one-sided or two-sided limit of $f/g$, check all of the following on an appropriate punctured neighborhood:
 
 1. $f$ and $g$ are differentiable there;
-2. $g'(x)\ne0$ there;
+2. $g'(x)$ is nonzero there, equivalently $g'(x)\ne0$;
 3. $f/g$ has form $0/0$ or extended-real infinity-over-infinity;
 4. the ordinary or extended-real limit of $f'(x)/g'(x)$ exists.
 
@@ -1779,7 +1800,7 @@ The displayed expression is a product, so L'Hôpital's rule does not apply to it
 <details>
 <summary>Hint 1</summary>
 
-Use $x^2\ln x=\ln x/x^{-2}$. Determine the signs and extended-real limits of numerator and denominator as $x\to0^+$.
+Rewrite the product as the quotient $x^2\ln x=\ln x/x^{-2}$. Determine the signs and extended-real limits of numerator and denominator as $x\to0^+$.
 
 </details>
 
@@ -2024,7 +2045,7 @@ Since $\sec^2\theta=1+\tan^2\theta=1+s^2/a^2$,
 
 \[
 \boxed{\frac{ds}{dt}=2\pi a\sec^2\theta
-=\frac{2\pi(a^2+s^2)}a\ \text{miles per minute}}.
+=\frac{2\pi(a^2+s^2)}{a}\ \text{miles per minute}}.
 \]
 
 ## Recognition Signals
@@ -2126,7 +2147,7 @@ so the two exact specialized forms are
 
 \[
 \boxed{\frac{ds}{dt}=2\pi a\sec^2\theta
-=\frac{2\pi(a^2+s^2)}a\ \text{miles per minute}}.
+=\frac{2\pi(a^2+s^2)}{a}\ \text{miles per minute}}.
 \]
 
 The sign is the direction along the chosen shore coordinate. Its magnitude is the linear speed of the illuminated point.
@@ -2248,7 +2269,7 @@ The numerator becomes $(x^2+5x)-x^2=5x$. On the positive tail divide both numera
 
 ## Solution
 
-Directly writing $+\infty-(+\infty)$ is invalid because infinity is not an ordinary number and this is an indeterminate difference. Rationalize instead:
+We cannot subtract $+\infty-(+\infty)$: infinity is not an ordinary number, and this is an indeterminate difference. Rationalize instead:
 
 \[
 \sqrt{x^2+5x}-x
@@ -2409,7 +2430,7 @@ Define $\Delta_h=\cos(x+h)-\cos x$. Rewrite $e^{\cos(x+h)}$ as $e^{\cos x}e^{\De
 <details>
 <summary>Hint 2</summary>
 
-Insert $\Delta_h/\Delta_h$ in the limiting sense. Then use angle addition to show $\Delta_h/h\to-\sin x$ and $(e^{\Delta_h}-1)/\Delta_h\to1$.
+Insert $\Delta_h/\Delta_h$ in the limiting sense. Use angle addition to show $\Delta_h/h\to-\sin x$; then the standard exponential limit gives $(e^{\Delta_h}-1)/\Delta_h\to1$.
 
 </details>
 
@@ -2556,7 +2577,7 @@ test('bounded-monotone Knowledge proves convergence before fixed-point selection
   assertMath(page.text, String.raw`c_0=2`, 'Knowledge continued-fraction start');
   assertMath(page.text, String.raw`c_{n+1}=2+\frac2{c_n}`, 'Knowledge continued-fraction recurrence');
   assertMath(page.text, String.raw`1+\sqrt3`, 'Knowledge continued-fraction limit');
-  assert.match(page.text, /nested radical/i);
+  assert.match(page.text, /nested[ -]radical/i);
   assertMath(page.text, String.raw`x=\sqrt2`, 'Knowledge tower base');
   assertMath(page.text, String.raw`L=2`, 'Knowledge tower limit');
   assert.match(page.text, /fixed point.*4|branch.*4/i);
@@ -2586,11 +2607,11 @@ test('Problem 008 proves alternating-subsequence convergence before selecting on
   assertBefore(solution, /^### A single limit$/m, /^### Fixed point and selection$/m, 'Problem 008 convergence must precede fixed point');
   const invariant = subsectionBody(solution, 'Invariant interval');
   assertMath(invariant, String.raw`c_0=2`, 'Problem 008 start');
-  assertMath(invariant, String.raw`c_1=3`, 'Problem 008 first iterate');
+  assertMath(invariant, String.raw`c_1=F(2)=3`, 'Problem 008 first iterate');
   assertMath(invariant, String.raw`2\le c_n\le3`, 'Problem 008 invariant');
   assert.match(invariant, /2\s*\le.*2\s*\+\s*2\s*\/.*\le\s*3|maps.*\[2,\s*3\].*into/is);
   const subsequences = subsectionBody(solution, 'Alternating subsequences');
-  assertMath(subsequences, String.raw`c_0<c_2`, 'Problem 008 even base inequality');
+  assertMath(subsequences, String.raw`c_0=2<c_2=2+\frac23=\frac83`, 'Problem 008 even base inequality');
   assert.match(subsequences, /c_\{2n\}.*increasing|even subsequence.*increasing/i);
   assert.match(subsequences, /c_\{2n\+1\}.*decreasing|odd subsequence.*decreasing/i);
   assert.match(subsequences, /apply.*decreasing|F.*decreasing/i);
@@ -2604,7 +2625,7 @@ test('Problem 008 proves alternating-subsequence convergence before selecting on
   assertMath(fixed, String.raw`L^2-2L-2=0`, 'Problem 008 fixed-point polynomial');
   assertMath(fixed, String.raw`L=1\pm\sqrt3`, 'Problem 008 candidate roots');
   assertMath(fixed, String.raw`\boxed{L=1+\sqrt3}`, 'Problem 008 selected limit');
-  assert.match(fixed, /positivity.*reject|reject.*1-\\sqrt3/i);
+  assert.match(fixed, /(?:positive|positivity).*1-\\sqrt3.*reject|1-\\sqrt3.*reject/i);
 });
 ```
 
@@ -2640,11 +2661,11 @@ Use this complete body after the tested frontmatter:
 ```markdown
 ## Core Idea
 
-A recursive sequence is not known to converge merely because its formal limit would satisfy a fixed-point equation. First prove convergence, commonly through monotonicity plus a bound or through convergent even and odd subsequences. Only then may continuity identify the limit.
+A recursive sequence is not known to converge merely because its formal limit would satisfy a fixed-point equation. First prove convergence, commonly through monotonicity plus a bound or through convergent even and odd subsequences. Only after convergence is proved may continuity identify the limit.
 
 ## Bounded Monotone Convergence
 
-Every increasing real sequence bounded above converges, and every decreasing real sequence bounded below converges. The proof obligation therefore has two independent parts: an induction establishing monotonicity and an induction establishing the bound.
+Every bounded monotone real sequence converges: every increasing real sequence bounded above converges, and every decreasing real sequence bounded below converges. The proof obligation therefore has two independent parts: an induction establishing monotonicity and an induction establishing the bound.
 
 ## Invariant Intervals and Induction
 
@@ -3324,20 +3345,20 @@ test('Problem 013 proves the harmonic square and logarithmic-harmonic classifica
   assertBefore(solution, /^### Harmonic series: dyadic lower blocks$/m, /^### Reciprocal-square series: telescoping upper bound$/m, 'Problem 013 harmonic proof must come first');
   assertBefore(solution, /^### Reciprocal-square series: telescoping upper bound$/m, /^### Logarithmic-harmonic series: condensation$/m, 'Problem 013 square proof must precede log-harmonic proof');
   const harmonic = subsectionBody(solution, 'Harmonic series: dyadic lower blocks');
-  assertMath(harmonic, String.raw`\sum_{k=2^m+1}^{2^{m+1}}\frac1k\ge\frac12`, 'Problem 013 dyadic harmonic block');
+  assertMath(harmonic, String.raw`\sum_{k=2^m+1}^{2^{m+1}}\frac1k\ge2^m\frac1{2^{m+1}}=\frac12`, 'Problem 013 dyadic harmonic block');
   assert.match(harmonic, /infinitely many.*blocks.*one half|partial sums.*unbounded/is);
   assertMath(harmonic, String.raw`\boxed{\sum_{k=1}^{+\infty}\frac1k\text{ diverges}}`, 'harmonic classification');
   const square = subsectionBody(solution, 'Reciprocal-square series: telescoping upper bound');
   assertMath(square, String.raw`\frac1{k^2}\le\frac1{k(k-1)}=\frac1{k-1}-\frac1k`, 'Problem 013 telescoping comparison');
   assertMath(square, String.raw`k\ge2`, 'Problem 013 square comparison domain');
-  assertMath(square, String.raw`\sum_{k=2}^{N}\frac1{k^2}\le1-\frac1N`, 'Problem 013 bounded square partial sums');
+  assertMath(square, String.raw`\sum_{k=2}^{N}\frac1{k^2}\le\sum_{k=2}^{N}\left(\frac1{k-1}-\frac1k\right)=1-\frac1N`, 'Problem 013 bounded square partial sums');
   assert.match(square, /increasing.*bounded above.*converges|bounded increasing partial sums/is);
   assertMath(square, String.raw`\boxed{\sum_{k=1}^{+\infty}\frac1{k^2}\text{ converges}}`, 'square-series classification');
   const logHarmonic = subsectionBody(solution, 'Logarithmic-harmonic series: condensation');
   assert.match(logHarmonic, /a_k.*positive.*decreasing|positive.*nonincreasing/is);
   assert.match(logHarmonic, /k\s*\ln k.*increasing|product.*increasing/is);
   assert.match(logHarmonic, /Cauchy condensation/i);
-  assertMath(logHarmonic, String.raw`2^na_{2^n}=\frac1{n\ln2}`, 'Problem 013 condensed terms');
+  assertMath(logHarmonic, String.raw`2^na_{2^n}=\frac{2^n}{2^n\ln(2^n)}=\frac1{n\ln2}`, 'Problem 013 condensed terms');
   assertMath(logHarmonic, String.raw`\sum_{n=1}^{+\infty}2^na_{2^n}=\frac1{\ln2}\sum_{n=1}^{+\infty}\frac1n`, 'Problem 013 exact harmonic comparison chain');
   assert.match(logHarmonic, /constant multiple.*harmonic|compare.*harmonic/i);
   assertMath(logHarmonic, String.raw`\boxed{\sum_{k=2}^{+\infty}\frac1{k\ln k}\text{ diverges}}`, 'log-harmonic classification');
@@ -3616,7 +3637,7 @@ Thus the exact comparison chain is
 =\frac1{\ln2}\sum_{n=1}^{+\infty}\frac1n.
 \]
 
-The condensed series is the positive constant $1/\ln2$ times the harmonic series, so it diverges. Cauchy condensation therefore gives
+The condensed series is a positive constant multiple of the harmonic series, namely $1/\ln2$ times it, so it diverges. Cauchy condensation therefore gives
 
 \[
 \boxed{\sum_{k=2}^{+\infty}\frac1{k\ln k}\text{ diverges}}.
@@ -4369,26 +4390,31 @@ async function assertCoverageSource(source, expectedRows) {
 
 test('exactly two Red source mappings change and every other map entry stays frozen', async () => {
   const sourceTopicMap = await readJson(mapPath);
-  const byKey = new Map(sourceTopicMap.entries.map((entry) => [`${entry.source}::${entry.sourceSection}`, entry]));
-  assert.deepEqual(byKey.get('red-book::6.2.2'), {
-    source: 'red-book',
-    sourceSection: '6.2.2',
-    role: 'content',
-    canonicalTopics: ['limits-derivatives', 'integration'],
-  });
-  assert.deepEqual(byKey.get('red-book::6.3.2'), {
-    source: 'red-book',
-    sourceSection: '6.3.2',
-    role: 'content',
-    canonicalTopics: ['limits-derivatives', 'integration'],
-  });
   const repairedKeys = new Set(['red-book::6.2.2', 'red-book::6.3.2']);
-  const protectedEntries = sourceTopicMap.entries.filter((entry) => !repairedKeys.has(`${entry.source}::${entry.sourceSection}`));
+  const repairedIndexes = sourceTopicMap.entries.flatMap((entry, index) =>
+    repairedKeys.has(`${entry.source}::${entry.sourceSection}`) ? [index] : []
+  );
+  assert.equal(sourceTopicMap.version, 1);
   assert.equal(sourceTopicMap.entries.length, 281);
-  assert.equal(protectedEntries.length, 279);
+  assert.deepEqual(repairedIndexes, [241, 244], 'the two repaired entries must retain their exact array positions');
+  assert.deepEqual(repairedIndexes.map((index) => sourceTopicMap.entries[index]), [
+    {
+      source: 'red-book',
+      sourceSection: '6.2.2',
+      role: 'content',
+      canonicalTopics: ['limits-derivatives', 'integration'],
+    },
+    {
+      source: 'red-book',
+      sourceSection: '6.3.2',
+      role: 'content',
+      canonicalTopics: ['limits-derivatives', 'integration'],
+    },
+  ]);
   assert.equal(
-    createHash('sha256').update(JSON.stringify(protectedEntries)).digest('hex'),
-    'bba6c9a65d63e31884acfcc9be1c8038c1e484da6ceb62315a3f5ebb5ad8f3db',
+    createHash('sha256').update(JSON.stringify(sourceTopicMap)).digest('hex'),
+    '0370edc39605e70f7aea12fe7c38cff717aee33bbbc0e3e23594c67519c9ce58',
+    'entire final source-topic-map object, including version and entry order, must stay frozen after the two repairs',
   );
 });
 
