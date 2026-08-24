@@ -609,7 +609,7 @@ test('Problem 008 proves alternating-subsequence convergence before selecting on
     concepts: ['bounded-monotone-convergence-and-fixed-points'],
     techniques: [],
     prerequisites: [],
-    relatedProblems: [],
+    relatedProblems: ['nested-radical-limit', 'infinite-power-tower-limit'],
     family: 'recursive-sequence-limits',
     mathDifficulty: 3,
     insightDifficulty: 3,
@@ -641,4 +641,84 @@ test('Problem 008 proves alternating-subsequence convergence before selecting on
   assertMath(fixed, String.raw`L=1\pm\sqrt3`, 'Problem 008 candidate roots');
   assertMath(fixed, String.raw`\boxed{L=1+\sqrt3}`, 'Problem 008 selected limit');
   assert.match(fixed, /(?:positive|positivity).*1-\\sqrt3.*reject|1-\\sqrt3.*reject/i);
+});
+
+test('Problem 011 proves the nested radical is increasing and bounded before selecting two', async () => {
+  const page = await readPage('src/content/problems/calculus/nested-radical-limit.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-011',
+    title: 'Nested-Radical Limit',
+    description: 'Prove a nested-radical sequence is increasing and bounded before selecting its positive fixed-point limit.',
+    subcategories: ['Limits', 'Sequences', 'Fixed Points'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['bounded-monotone-convergence-and-fixed-points'],
+    techniques: [],
+    prerequisites: [],
+    relatedProblems: ['periodic-continued-fraction-limit', 'infinite-power-tower-limit'],
+    family: 'recursive-sequence-limits',
+    mathDifficulty: 2,
+    insightDifficulty: 3,
+    interviewDifficulty: 3,
+    estimatedMinutes: 12,
+  });
+  const solution = solutionBody(page.text);
+  assertBefore(solution, /^### Monotonicity by induction$/m, /^### Upper bound by induction$/m, 'Problem 011 monotonicity must precede bound');
+  assertBefore(solution, /^### Upper bound by induction$/m, /^### Convergence$/m, 'Problem 011 bound must precede convergence');
+  assertBefore(solution, /^### Convergence$/m, /^### Fixed point$/m, 'Problem 011 convergence must precede fixed point');
+  const monotonicity = subsectionBody(solution, 'Monotonicity by induction');
+  assertMath(monotonicity, String.raw`a_1=\sqrt2`, 'Problem 011 start');
+  assertMath(monotonicity, String.raw`a_{n+1}=\sqrt{2+a_n}`, 'Problem 011 recurrence');
+  assert.match(monotonicity, /a_2.*>.*a_1|base case.*increasing/is);
+  assert.match(monotonicity, /a_n.*>.*a_\{n-1\}.*a_\{n\+1\}.*>.*a_n|inductive hypothesis.*square root.*increasing/is);
+  const bound = subsectionBody(solution, 'Upper bound by induction');
+  assert.match(bound, /a_1.*<.*2|base case.*upper bound/is);
+  assert.match(bound, /a_n.*<.*2.*a_\{n\+1\}.*<.*2|inductive hypothesis.*upper bound/is);
+  const convergence = subsectionBody(solution, 'Convergence');
+  assert.match(convergence, /increasing.*bounded above.*converges|bounded monotone convergence/is);
+  const fixed = subsectionBody(solution, 'Fixed point');
+  assertMath(fixed, String.raw`L=\sqrt{2+L}`, 'Problem 011 fixed point');
+  assert.match(fixed, /positivity.*-1|reject.*-1/i);
+  assertMath(fixed, String.raw`\boxed{L=2}`, 'Problem 011 limit');
+});
+
+test('Problem 012 distinguishes requested base sqrt two from tower limit two and rejects branch four', async () => {
+  const page = await readPage('src/content/problems/calculus/infinite-power-tower-limit.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-012',
+    title: 'Infinite Power-Tower Limit',
+    description: 'Find the positive tower base for value two, then prove its finite towers converge to two rather than the other fixed-point branch.',
+    subcategories: ['Limits', 'Sequences', 'Fixed Points'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['bounded-monotone-convergence-and-fixed-points'],
+    techniques: [],
+    prerequisites: [],
+    relatedProblems: ['periodic-continued-fraction-limit', 'nested-radical-limit'],
+    family: 'recursive-sequence-limits',
+    mathDifficulty: 3,
+    insightDifficulty: 4,
+    interviewDifficulty: 4,
+    estimatedMinutes: 15,
+  });
+  const solution = solutionBody(page.text);
+  assertBefore(solution, /^### Determine the base$/m, /^### Monotonicity by induction$/m, 'Problem 012 base must precede validation');
+  assertBefore(solution, /^### Monotonicity by induction$/m, /^### Upper bound by induction$/m, 'Problem 012 monotonicity must precede bound');
+  assertBefore(solution, /^### Upper bound by induction$/m, /^### Convergence and branch selection$/m, 'Problem 012 bound must precede fixed point');
+  const base = subsectionBody(solution, 'Determine the base');
+  assertMath(base, String.raw`2=x^2`, 'Problem 012 base equation');
+  assertMath(base, String.raw`\boxed{x=\sqrt2}`, 'Problem 012 requested base');
+  const monotonicity = subsectionBody(solution, 'Monotonicity by induction');
+  assertMath(monotonicity, String.raw`t_0=\sqrt2`, 'Problem 012 finite-tower start');
+  assertMath(monotonicity, String.raw`t_{n+1}=(\sqrt2)^{t_n}`, 'Problem 012 finite-tower recurrence');
+  assert.match(monotonicity, /t_1.*>.*t_0|base case.*increasing/is);
+  assert.match(monotonicity, /t_n.*>.*t_\{n-1\}.*t_\{n\+1\}.*>.*t_n|inductive hypothesis.*increasing function/is);
+  const bound = subsectionBody(solution, 'Upper bound by induction');
+  assert.match(bound, /t_0.*<.*2|base case.*upper bound/is);
+  assertMath(bound, String.raw`t_{n+1}=(\sqrt2)^{t_n}<(\sqrt2)^2=2`, 'Problem 012 inductive upper bound');
+  const closure = subsectionBody(solution, 'Convergence and branch selection');
+  assert.match(closure, /increasing.*bounded above.*converges|bounded monotone convergence/is);
+  assertMath(closure, String.raw`L=(\sqrt2)^L`, 'Problem 012 fixed point');
+  assert.match(closure, /both.*2.*4|2 and 4.*fixed/i);
+  assert.match(closure, /L\s*\\le\s*2.*reject.*4|upper bound.*reject.*4/is);
+  assertMath(closure, String.raw`\boxed{L=2}`, 'Problem 012 proved tower limit');
+  assert.match(solution, /base.*not.*limit|must not be conflated|distinguish.*base.*limit/i);
 });

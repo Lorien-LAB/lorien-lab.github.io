@@ -11,7 +11,7 @@ quantInterviewTopics: [calculus-differential-equations, limits-derivatives]
 concepts: [bounded-monotone-convergence-and-fixed-points]
 techniques: []
 prerequisites: []
-relatedProblems: []
+relatedProblems: [nested-radical-limit, infinite-power-tower-limit]
 family: recursive-sequence-limits
 mathDifficulty: 3
 insightDifficulty: 3
