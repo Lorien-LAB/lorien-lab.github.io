@@ -337,6 +337,16 @@ test('deterministic topology validation rejects duplicate declarations and refer
 });
 
 const handoffPath = 'docs/quant-interview/HANDOFF.md';
+const workstream011Path = 'src/data/quant-interview/workstreams/stochastic-processes-random-walks-markov-chains-011.json';
+
+async function workstream011Status() {
+  try {
+    return JSON.parse(await readFile(workstream011Path, 'utf8')).status;
+  } catch (error) {
+    if (error?.code === 'ENOENT') return 'absent';
+    throw error;
+  }
+}
 
 const reservations = [
   {
@@ -370,35 +380,53 @@ function reservationRows(coordination) {
     .map(([queue, ordinal, topic, branch, state]) => ({ queue, ordinal, topic, branch, state }));
 }
 
-test('handoff reserves the first parallel wave without claiming candidate completion', async () => {
+test('handoff preserves exact reservations while 011 advances through its lifecycle', async () => {
   const handoff = await readFile(handoffPath, 'utf8');
   const coordination = handoff.split(/## Parallel workstream coordination/i)[1]?.split(/## /)[0] ?? '';
-
+  const rows = reservationRows(coordination);
   assert.ok(coordination, 'HANDOFF missing parallel workstream coordination');
   assert.match(coordination, /maximum active candidates[^\n]*3/i);
-  assert.match(coordination, /integration queue[^\n]*011[^\n]*012[^\n]*013/i);
-  assert.match(coordination, /candidate[^\n]*active[^\n]*not[^\n]*complete/i);
   assert.deepEqual(
-    reservationRows(coordination),
-    reservations.map((reservation, index) => ({ queue: String(index + 1), ...reservation })),
+    rows.map(({ state, ...identity }) => identity),
+    reservations.map(({ state, ...identity }, index) => ({ queue: String(index + 1), ...identity })),
   );
+  assert.match(rows[0]?.state ?? '', /^(?:design-audit|active|complete)$/);
+  assert.equal(rows[1]?.state, 'design-audit');
+  assert.equal(rows[2]?.state, 'design-audit');
+
+  const status = await workstream011Status();
+  if (status === 'complete') {
+    assert.match(coordination, /completed queue entry[^\n]*011/i);
+    assert.match(coordination, /remaining integration queue[^\n]*012[^\n]*013/i);
+    assert.doesNotMatch(coordination, /remaining integration queue[^\n]*011/i);
+  } else {
+    assert.match(coordination, /integration queue[^\n]*011[^\n]*012[^\n]*013/i);
+    assert.match(coordination, /candidate[^\n]*active[^\n]*not[^\n]*complete/i);
+  }
 });
 
-test('parallel reservations preserve Random Walks as the authoritative current topic', async () => {
+test('authoritative current topic follows the serialized 011 lifecycle', async () => {
   const handoff = await readFile(handoffPath, 'utf8');
   const current = handoff.split(/Current bounded topic:/i)[1]?.split(/## /)[0] ?? '';
-
-  assert.match(current, /Random Walks & Markov Chains/i);
-  assert.doesNotMatch(current, /Limits & Derivatives|Reasoning & Communication/i);
+  const status = await workstream011Status();
+  if (status === 'complete') {
+    assert.match(current, /Limits & Derivatives/i);
+    assert.doesNotMatch(current, /Random Walks & Markov Chains|Reasoning & Communication/i);
+  } else {
+    assert.match(current, /Random Walks & Markov Chains/i);
+    assert.doesNotMatch(current, /Limits & Derivatives|Reasoning & Communication/i);
+  }
 });
 
-test('governance does not create product workstream manifests early', async () => {
+test('governance admits 011 while keeping 012 and 013 manifests premature', async () => {
   const files = await readdir('src/data/quant-interview/workstreams');
-  const reservedOrdinals = new Set(reservations.map(({ ordinal }) => ordinal));
+  assert.ok(files.includes('stochastic-processes-random-walks-markov-chains-011.json'));
+  const workstream011 = JSON.parse(await readFile(workstream011Path, 'utf8'));
+  assert.match(workstream011.status, /^(?:active|complete)$/);
+  const prematureOrdinals = new Set(['012', '013']);
   const prematureManifests = files.filter((file) => {
     const suffix = file.match(/(\d{3})\.json$/)?.[1];
-    return suffix && reservedOrdinals.has(suffix);
+    return suffix && prematureOrdinals.has(suffix);
   });
-
   assert.deepEqual(prematureManifests, []);
 });

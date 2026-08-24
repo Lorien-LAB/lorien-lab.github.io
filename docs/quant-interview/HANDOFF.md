@@ -427,7 +427,7 @@ Maximum active candidates: **3**. Parallel candidates are isolated design and im
 
 | Queue | Reservation | Canonical topic | Candidate branch | State |
 |---:|---:|---|---|---|
-| 1 | 011 | `random-walks-markov-chains` | `chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23` | design-audit |
+| 1 | 011 | `random-walks-markov-chains` | `chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23` | active |
 | 2 | 012 | `limits-derivatives` | `chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23` | design-audit |
 | 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | design-audit |
 

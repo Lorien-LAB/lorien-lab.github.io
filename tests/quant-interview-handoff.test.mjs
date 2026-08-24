@@ -216,3 +216,21 @@ test('root README points agents to durable Quant Interview repository memory', a
   assert.match(readme, /docs\/quant-interview\/README\.md/);
   assert.match(readme, /repository.*memory/i);
 });
+
+test('handoff current topic and remaining queue follow workstream 011 status', async () => {
+  const workstream = JSON.parse(await readFile(
+    'src/data/quant-interview/workstreams/stochastic-processes-random-walks-markov-chains-011.json',
+    'utf8',
+  ));
+  const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
+  const current = handoff.split(/Current bounded topic:/i)[1]?.split(/## /)[0] ?? '';
+  const coordination = handoff.split(/## Parallel workstream coordination/i)[1]?.split(/## /)[0] ?? '';
+  if (workstream.status === 'complete') {
+    assert.match(current, /Limits & Derivatives/i);
+    assert.match(coordination, /remaining integration queue[^\n]*012[^\n]*013/i);
+  } else {
+    assert.equal(workstream.status, 'active');
+    assert.match(current, /Random Walks & Markov Chains/i);
+    assert.match(coordination, /integration queue[^\n]*011[^\n]*012[^\n]*013/i);
+  }
+});

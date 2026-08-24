@@ -16,7 +16,7 @@ test('order statistics extremes workstream closes only with real verification ev
   assert.equal(workstream.verification?.conclusion, 'success');
 });
 
-test('handoff records workstream 010 and advances to random walks and Markov chains', async () => {
+test('handoff records workstream 010 as durable history', async () => {
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
   assert.match(handoff, /probability-statistics-order-statistics-extremes-010/);
   assert.match(handoff, new RegExp(expectedCommit));
@@ -37,10 +37,6 @@ test('handoff records workstream 010 and advances to random walks and Markov cha
   assert.match(handoff, /Random Ants|collision relabeling/i);
   assert.match(handoff, /150[^\n]*(?:no new|no independent|no.*ownership)/i);
 
-  const nextAction = handoff.split(/## Next action/i)[1] ?? '';
-  assert.match(nextAction, /cross-book/i);
-  assert.match(nextAction, /Stochastic Processes & Stochastic Calculus/i);
-  assert.match(nextAction, /Random Walks & Markov Chains/i);
-  assert.doesNotMatch(nextAction, /Order Statistics & Extremes[\s\S]{0,180}(?:execute|next|continue|current bounded topic)/i);
-  assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);
+  assert.match(handoff, /Historical transition marker:[^\n]*Order Statistics & Extremes[^\n]*fully closed/i);
+  assert.match(handoff, /does not authorize reopening|records lineage only/i);
 });

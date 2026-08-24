@@ -1,0 +1,38 @@
+{
+  "id": "stochastic-processes-random-walks-markov-chains-011",
+  "canonicalTopics": [
+    "stochastic-processes-stochastic-calculus",
+    "random-walks-markov-chains"
+  ],
+  "status": "active",
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["5.1"],
+      "evidencePageRanges": [{"startPage": 121, "endPage": 131}],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Audited exactly Green 5.1 theory, 5.1.gamblers-ruin, 5.1.dice-question, 5.1.coin-triplets, and 5.1.color-balls. Ownership is limited to finite-state Markov-chain theory, the existing boundary identity, two pattern/streak families, and ordered-pair recoloring; martingales, continuous-time chains, and unrelated chapter material remain excluded."
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["3.2.1", "3.2.2"],
+      "evidencePageRanges": [
+        {"startPage": 94, "endPage": 96},
+        {"startPage": 115, "endPage": 117},
+        {"startPage": 139, "endPage": 139}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Audited exactly Red items 3.22, 3.23, and 3.40. Item 3.22 owns the cube positive-return Problem; items 3.23 and 3.40 merge into the existing random-walk-boundary identity. No other Red item or broad section is claimed by 011."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["2.6"],
+      "evidencePageRanges": [
+        {"startPage": 41, "endPage": 43},
+        {"startPage": 145, "endPage": 174}
+      ],
+      "reviewOutcome": "reviewed-no-new-ownership",
+      "reviewNote": "Items 10-29 were audited and contain only martingale, Brownian, Itô, SDE, change-of-measure, and stochastic-volatility material outside 011. Terminal items 1-9 remain unchanged, no new 150 coverage rows are added, and aggregate 2.6:: stays pending as a broad mixed-topic container."
+    }
+  ]
+}
