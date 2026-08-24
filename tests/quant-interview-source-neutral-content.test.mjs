@@ -10,6 +10,10 @@ const currentProblemSlugs = [
   'correlation-matrix-parameter-range',
   'conditional-dice-expectation',
   'random-walk-boundary',
+  'twelve-before-consecutive-sevens',
+  'coin-pattern-hitting-times',
+  'random-recoloring-consensus-time',
+  'random-walk-return-time-on-cube',
   'covariance-matrix-positive-semidefinite-proof',
   'covariance-to-correlation-matrix',
   'equicorrelation-matrix-bounds',
@@ -68,6 +72,8 @@ const currentProblemSlugs = [
 const expectedKnowledgeTopics = new Map([
   ['conditioning', ['probability-statistics', 'conditional-probability-bayes']],
   ['first-step-analysis', ['stochastic-processes-stochastic-calculus', 'random-walks-markov-chains']],
+  ['finite-state-markov-chains', ['stochastic-processes-stochastic-calculus', 'random-walks-markov-chains']],
+  ['markov-chain-state-compression', ['stochastic-processes-stochastic-calculus', 'random-walks-markov-chains']],
   ['recursion-problem-solving', ['logic-brainteasers-discrete-reasoning']],
   ['no-arbitrage-principle', ['derivatives-options-no-arbitrage', 'no-arbitrage-option-properties']],
   ['option-price-convexity-in-strike', ['derivatives-options-no-arbitrage', 'no-arbitrage-option-properties']],
@@ -143,14 +149,14 @@ async function classifiedMarkdownSlugs(root) {
   return slugs.sort();
 }
 
-test('source-neutral regression discovers exactly the current 59 Problem and 39 Knowledge contracts', async () => {
+test('source-neutral regression discovers exactly the current 63 Problem and 41 Knowledge contracts', async () => {
   const actualProblemSlugs = await classifiedMarkdownSlugs('src/content/problems');
   const actualKnowledgeSlugs = await classifiedMarkdownSlugs('src/content/knowledge');
   const expectedProblemSlugs = [...currentProblemSlugs].sort();
   const expectedKnowledgeSlugs = [...expectedKnowledgeTopics.keys()].sort();
 
-  assert.equal(actualProblemSlugs.length, 59);
-  assert.equal(actualKnowledgeSlugs.length, 39);
+  assert.equal(actualProblemSlugs.length, 63);
+  assert.equal(actualKnowledgeSlugs.length, 41);
   assert.deepEqual(actualProblemSlugs, expectedProblemSlugs);
   assert.deepEqual(actualKnowledgeSlugs, expectedKnowledgeSlugs);
 });
