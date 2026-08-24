@@ -14,6 +14,33 @@ const terminalStates = new Set(['canonical-problem', 'merged-duplicate', 'varian
 const keyOf = (entry) => `${entry.sourceSection}::${entry.sourceItem ?? ''}`;
 const expectedCoverage = {};
 
+expectedCoverage['green-book'] = {
+  '3.1::': {
+    state: 'knowledge-only',
+    canonicalProblems: [],
+    canonicalKnowledge: ['derivative-definition-and-core-rules', 'logarithmic-differentiation', 'monotonicity-convexity-critical-points-and-inflection', 'indeterminate-limits-and-growth-rates'],
+    resolutionNote: 'Reusable derivative definitions and rules, logarithmic differentiation, qualitative derivative analysis, and elementary limit theory are fused into four public Knowledge nodes with visible Interview Checks.',
+  },
+  '3.1.1::': {
+    state: 'canonical-problem',
+    canonicalProblems: ['differentiate-variable-base-and-exponent'],
+    canonicalKnowledge: ['derivative-definition-and-core-rules', 'logarithmic-differentiation'],
+    resolutionNote: 'The canonical Problem derives the positive variable-base/variable-exponent rule, explicitly differentiates x^x on x>0, and applies the rule to the log-power case on x>1.',
+  },
+  '3.1.2::': {
+    state: 'canonical-problem',
+    canonicalProblems: ['compare-e-pi-power-expressions'],
+    canonicalKnowledge: ['monotonicity-convexity-critical-points-and-inflection', 'derivative-definition-and-core-rules'],
+    resolutionNote: 'The canonical comparison uses the sign of the first derivative on full intervals; a second derivative is only a local check and zero is inconclusive without a sign change.',
+  },
+  '3.1.3::': {
+    state: 'canonical-problem',
+    canonicalProblems: ['exponential-over-polynomial-limit', 'logarithm-power-limit-at-zero'],
+    canonicalKnowledge: ['indeterminate-limits-and-growth-rates', 'derivative-definition-and-core-rules'],
+    resolutionNote: "One source row contains two independent limit identities, so it resolves to two Problems; both enforce the L'Hôpital gate and the origin limit preserves its approach from below.",
+  },
+};
+
 async function exists(file) {
   try { await access(file); return true; } catch { return false; }
 }
@@ -132,4 +159,16 @@ test('012 lifecycle registration is phase-safe and serialized after completed 01
     assert.doesNotMatch(current, /Reasoning & Communication/i);
     assert.equal(await exists(manifest013Path), false);
   }
+});
+
+test('Green has exactly four 012 terminal rows with a 3/0/1 split', async () => {
+  const rows = await assertCoverageSource('green-book', expectedCoverage['green-book']);
+  assert.equal(rows.length, 4);
+  assert.equal(rows.filter((row) => row.state === 'canonical-problem').length, 3);
+  assert.equal(rows.filter((row) => row.state === 'merged-duplicate').length, 0);
+  assert.equal(rows.filter((row) => row.state === 'knowledge-only').length, 1);
+  const multiTarget = rows.find((row) => keyOf(row) === '3.1.3::');
+  assert.deepEqual(multiTarget?.canonicalProblems, ['exponential-over-polynomial-limit', 'logarithm-power-limit-at-zero']);
+  const { ledger } = await coverageRows('green-book');
+  assert.equal(ledger.entries.filter((row) => keyOf(row) === '3.1.3::').length, 1);
 });
