@@ -466,3 +466,54 @@ test('Problem 004 converts the product to a gated quotient and preserves zero fr
   assert.match(solution, /negative.*0\s*<\s*x\s*<\s*1|0\s*<\s*x\s*<\s*1.*negative/is);
   assertMath(solution, String.raw`\boxed{0^-}`, 'Problem 004 signed result');
 });
+
+test('related-rates Knowledge preserves functions of time, signs, units, and the one-revolution specialization', async () => {
+  const page = await readPage('src/content/knowledge/concepts/related-rates-and-implicit-differentiation.md');
+  assertKnowledgePage(page, {
+    slug: 'related-rates-and-implicit-differentiation',
+    title: 'Related Rates and Implicit Differentiation',
+    description: 'Differentiate implicit time-dependent constraints, preserve units and signs, and solve elementary geometric related-rate problems.',
+    category: 'Problem Solving Techniques',
+    tags: ['Calculus', 'Derivatives', 'Related Rates'],
+    related: ['derivative-definition-and-core-rules'],
+  });
+  assert.match(page.text, /functions of time|function.*t/i);
+  assert.match(page.text, /chain rule/i);
+  assert.match(page.text, /units/i);
+  assert.match(page.text, /sign/i);
+  assertMath(page.text, String.raw`a>0`, 'lighthouse distance domain');
+  assertMath(page.text, String.raw`s=a\tan\theta`, 'lighthouse constraint');
+  assertMath(page.text, String.raw`\cos\theta\ne0`, 'tangent domain');
+  assertMath(page.text, String.raw`\frac{d\theta}{dt}=2\pi`, 'one-revolution angular rate');
+  assertMath(page.text, String.raw`\boxed{\frac{ds}{dt}=2\pi a\sec^2\theta=\frac{2\pi(a^2+s^2)}{a}\ \text{miles per minute}}`, 'Knowledge lighthouse specialization');
+});
+
+test('Problem 005 derives the general signed rate and exact one-revolution speed forms', async () => {
+  const page = await readPage('src/content/problems/calculus/rotating-lighthouse-beam-related-rate.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-005',
+    title: 'Rotating Lighthouse Beam Related Rate',
+    description: 'Differentiate a lighthouse beam geometry constraint and specialize the signed shore rate to one full revolution per minute.',
+    subcategories: ['Derivatives', 'Related Rates', 'Geometry'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['derivative-definition-and-core-rules'],
+    techniques: ['related-rates-and-implicit-differentiation'],
+    prerequisites: [],
+    relatedProblems: [],
+    family: 'geometric-related-rates',
+    mathDifficulty: 2,
+    insightDifficulty: 3,
+    interviewDifficulty: 3,
+    estimatedMinutes: 12,
+  });
+  assertMath(page.text, String.raw`a>0`, 'Problem 005 a domain');
+  assertMath(page.text, String.raw`s=a\tan\theta`, 'Problem 005 geometry');
+  assertMath(page.text, String.raw`\cos\theta\ne0`, 'Problem 005 theta domain');
+  assertMath(page.text, String.raw`\boxed{\frac{ds}{dt}=a\sec^2\theta\frac{d\theta}{dt}}`, 'Problem 005 general rate');
+  assert.match(page.text, /one full revolution per minute|one revolution per minute/i);
+  assertMath(page.text, String.raw`\frac{d\theta}{dt}=2\pi\ \text{radians per minute}`, 'Problem 005 angular specialization');
+  assertMath(page.text, String.raw`\sec^2\theta=1+\tan^2\theta=1+\frac{s^2}{a^2}`, 'Problem 005 equivalent-form identity');
+  assertMath(page.text, String.raw`\boxed{\frac{ds}{dt}=2\pi a\sec^2\theta=\frac{2\pi(a^2+s^2)}{a}\ \text{miles per minute}}`, 'Problem 005 exact specialized result');
+  assert.match(page.text, /signed shore coordinate/i);
+  assert.match(page.text, /angular rate.*linear speed|linear speed.*angular rate/is);
+});
