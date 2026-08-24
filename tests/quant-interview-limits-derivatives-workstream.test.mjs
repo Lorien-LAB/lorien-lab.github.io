@@ -41,6 +41,69 @@ expectedCoverage['green-book'] = {
   },
 };
 
+expectedCoverage['red-book'] = {
+  '6.2.1::6.1': {
+    state: 'canonical-problem',
+    canonicalProblems: ['rotating-lighthouse-beam-related-rate'],
+    canonicalKnowledge: ['related-rates-and-implicit-differentiation', 'derivative-definition-and-core-rules'],
+    resolutionNote: 'The canonical lighthouse Problem models s=a tan theta, derives the general related rate, and specializes one revolution per minute to 2 pi a secant-squared theta miles per minute.',
+  },
+  '6.2.1::6.2': {
+    state: 'canonical-problem',
+    canonicalProblems: ['radical-difference-limit-at-infinity'],
+    canonicalKnowledge: ['indeterminate-limits-and-growth-rates'],
+    resolutionNote: 'The canonical Problem rationalizes sqrt(x squared plus 5x) minus x and preserves the finite limit 5/2 instead of subtracting infinities.',
+  },
+  '6.2.1::6.5': {
+    state: 'canonical-problem',
+    canonicalProblems: ['exponential-midpoint-convexity'],
+    canonicalKnowledge: ['monotonicity-convexity-critical-points-and-inflection'],
+    resolutionNote: 'The canonical Problem proves exponential midpoint convexity and records equality exactly at equal endpoints.',
+  },
+  '6.2.1::6.6': {
+    state: 'merged-duplicate',
+    canonicalProblems: ['compare-e-pi-power-expressions'],
+    canonicalKnowledge: ['monotonicity-convexity-critical-points-and-inflection', 'derivative-definition-and-core-rules'],
+    resolutionNote: 'This asks the same transcendental-power comparison as the Green item and is absorbed into one source-neutral monotonicity Problem.',
+  },
+  '6.2.1::6.7': {
+    state: 'canonical-problem',
+    canonicalProblems: ['periodic-continued-fraction-limit'],
+    canonicalKnowledge: ['bounded-monotone-convergence-and-fixed-points'],
+    resolutionNote: 'The canonical recurrence starts at c0=2 with c(n+1)=2+2/cn, proves convergence of finite convergents, and only then selects 1+sqrt(3) from the fixed-point roots.',
+  },
+  '6.2.1::6.8': {
+    state: 'canonical-problem',
+    canonicalProblems: ['normal-cdf-inflection-point'],
+    canonicalKnowledge: ['monotonicity-convexity-critical-points-and-inflection', 'derivative-definition-and-core-rules'],
+    resolutionNote: 'The canonical Problem differentiates the Normal CDF with sigma positive and proves the unique inflection through an actual sign change of the second derivative.',
+  },
+  '6.2.1::6.16': {
+    state: 'merged-duplicate',
+    canonicalProblems: ['classify-basic-positive-series'],
+    canonicalKnowledge: ['positive-series-convergence'],
+    resolutionNote: 'The exact harmonic, square, and logarithmic-harmonic series triple is owned by the canonical Problem and adds no separate public identity.',
+  },
+  '6.2.2::6.18': {
+    state: 'merged-duplicate',
+    canonicalProblems: ['differentiate-variable-base-and-exponent'],
+    canonicalKnowledge: ['derivative-definition-and-core-rules', 'logarithmic-differentiation'],
+    resolutionNote: 'The x^x derivative on x>0 is absorbed into the canonical positive variable-base/variable-exponent Problem.',
+  },
+  '6.2.2::6.20': {
+    state: 'canonical-problem',
+    canonicalProblems: ['derive-exponential-cosine-derivative-from-definition'],
+    canonicalKnowledge: ['derivative-definition-and-core-rules'],
+    resolutionNote: 'The canonical Problem derives the derivative of exp(cos x) from an exact difference-quotient factorization and standard limits, without Taylor series.',
+  },
+  '6.2.2::6.21': {
+    state: 'knowledge-only',
+    canonicalProblems: [],
+    canonicalKnowledge: ['derivative-definition-and-core-rules'],
+    resolutionNote: 'The reusable derivative-rule review is fused into core public Knowledge, including an Interview Check that differentiates x ln x on x>0 as ln x+1.',
+  },
+};
+
 async function exists(file) {
   try { await access(file); return true; } catch { return false; }
 }
@@ -171,4 +234,42 @@ test('Green has exactly four 012 terminal rows with a 3/0/1 split', async () => 
   assert.deepEqual(multiTarget?.canonicalProblems, ['exponential-over-polynomial-limit', 'logarithm-power-limit-at-zero']);
   const { ledger } = await coverageRows('green-book');
   assert.equal(ledger.entries.filter((row) => keyOf(row) === '3.1.3::').length, 1);
+});
+
+test('Red has exactly ten 012 terminal rows with a 6/3/1 split and no repaired-section overrides', async () => {
+  const rows = await assertCoverageSource('red-book', expectedCoverage['red-book']);
+  assert.equal(rows.length, 10);
+  assert.equal(rows.filter((row) => row.state === 'canonical-problem').length, 6);
+  assert.equal(rows.filter((row) => row.state === 'merged-duplicate').length, 3);
+  assert.equal(rows.filter((row) => row.state === 'knowledge-only').length, 1);
+  for (const item of ['6.18', '6.20', '6.21']) {
+    const row = rows.find((entry) => entry.sourceSection === '6.2.2' && entry.sourceItem === item);
+    assert.ok(row, `missing Red ${item}`);
+    assert.equal(Object.hasOwn(row, 'topicOverrideReason'), false, `Red ${item} must not carry an override after the map repair`);
+  }
+});
+
+test('Red Q6.9 and Q6.10 retain their complete pre-012 ownership and are outside the twenty rows', async () => {
+  const { rows } = await coverageRows('red-book');
+  assert.deepEqual(rows.get('6.2.1::6.9'), {
+    sourceSection: '6.2.1',
+    sourceItem: '6.9',
+    canonicalTopics: ['linear-algebra-matrix-methods', 'positive-semidefinite-matrices'],
+    state: 'knowledge-only',
+    canonicalProblems: [],
+    canonicalKnowledge: ['positive-semidefinite-matrix', 'principal-minor-feasibility'],
+    topicOverrideReason: 'Item-level review classifies this specific covariance/correlation/PSD item more precisely than the broader editorial TOC section when necessary.',
+    resolutionNote: 'Definition/properties material enriches canonical PSD/PD Knowledge and interview checks.',
+  });
+  assert.deepEqual(rows.get('6.2.1::6.10'), {
+    sourceSection: '6.2.1',
+    sourceItem: '6.10',
+    canonicalTopics: ['matrix-decompositions'],
+    state: 'canonical-problem',
+    canonicalProblems: ['matrix-square-root-and-cholesky-factor'],
+    canonicalKnowledge: ['eigenbasis-decomposition', 'lu-cholesky-decomposition'],
+    resolutionNote: 'This task is the semantic anchor for the canonical matrix-square-root and Gram-factor Problem. Its entrywise square-root route is retained as an alternative method while the canonical page foregrounds reusable spectral and Cholesky structure.',
+  });
+  assert.equal(Object.hasOwn(expectedCoverage['red-book'], '6.2.1::6.9'), false);
+  assert.equal(Object.hasOwn(expectedCoverage['red-book'], '6.2.1::6.10'), false);
 });

@@ -1224,6 +1224,158 @@
         "first-step-analysis"
       ],
       "resolutionNote": "The fair walk on 0 through 1000 starting at 80 is the lower-boundary complement case of random-walk-boundary and evaluates to 92/100 = 23/25 without a second public identity."
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": "6.1",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "rotating-lighthouse-beam-related-rate"
+      ],
+      "canonicalKnowledge": [
+        "related-rates-and-implicit-differentiation",
+        "derivative-definition-and-core-rules"
+      ],
+      "resolutionNote": "The canonical lighthouse Problem models s=a tan theta, derives the general related rate, and specializes one revolution per minute to 2 pi a secant-squared theta miles per minute."
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": "6.2",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "radical-difference-limit-at-infinity"
+      ],
+      "canonicalKnowledge": [
+        "indeterminate-limits-and-growth-rates"
+      ],
+      "resolutionNote": "The canonical Problem rationalizes sqrt(x squared plus 5x) minus x and preserves the finite limit 5/2 instead of subtracting infinities."
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": "6.5",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "exponential-midpoint-convexity"
+      ],
+      "canonicalKnowledge": [
+        "monotonicity-convexity-critical-points-and-inflection"
+      ],
+      "resolutionNote": "The canonical Problem proves exponential midpoint convexity and records equality exactly at equal endpoints."
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": "6.6",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "compare-e-pi-power-expressions"
+      ],
+      "canonicalKnowledge": [
+        "monotonicity-convexity-critical-points-and-inflection",
+        "derivative-definition-and-core-rules"
+      ],
+      "resolutionNote": "This asks the same transcendental-power comparison as the Green item and is absorbed into one source-neutral monotonicity Problem."
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": "6.7",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "periodic-continued-fraction-limit"
+      ],
+      "canonicalKnowledge": [
+        "bounded-monotone-convergence-and-fixed-points"
+      ],
+      "resolutionNote": "The canonical recurrence starts at c0=2 with c(n+1)=2+2/cn, proves convergence of finite convergents, and only then selects 1+sqrt(3) from the fixed-point roots."
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": "6.8",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "normal-cdf-inflection-point"
+      ],
+      "canonicalKnowledge": [
+        "monotonicity-convexity-critical-points-and-inflection",
+        "derivative-definition-and-core-rules"
+      ],
+      "resolutionNote": "The canonical Problem differentiates the Normal CDF with sigma positive and proves the unique inflection through an actual sign change of the second derivative."
+    },
+    {
+      "sourceSection": "6.2.1",
+      "sourceItem": "6.16",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "classify-basic-positive-series"
+      ],
+      "canonicalKnowledge": [
+        "positive-series-convergence"
+      ],
+      "resolutionNote": "The exact harmonic, square, and logarithmic-harmonic series triple is owned by the canonical Problem and adds no separate public identity."
+    },
+    {
+      "sourceSection": "6.2.2",
+      "sourceItem": "6.18",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "differentiate-variable-base-and-exponent"
+      ],
+      "canonicalKnowledge": [
+        "derivative-definition-and-core-rules",
+        "logarithmic-differentiation"
+      ],
+      "resolutionNote": "The x^x derivative on x>0 is absorbed into the canonical positive variable-base/variable-exponent Problem."
+    },
+    {
+      "sourceSection": "6.2.2",
+      "sourceItem": "6.20",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "derive-exponential-cosine-derivative-from-definition"
+      ],
+      "canonicalKnowledge": [
+        "derivative-definition-and-core-rules"
+      ],
+      "resolutionNote": "The canonical Problem derives the derivative of exp(cos x) from an exact difference-quotient factorization and standard limits, without Taylor series."
+    },
+    {
+      "sourceSection": "6.2.2",
+      "sourceItem": "6.21",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "derivative-definition-and-core-rules"
+      ],
+      "resolutionNote": "The reusable derivative-rule review is fused into core public Knowledge, including an Interview Check that differentiates x ln x on x>0 as ln x+1."
     }
   ]
 }
