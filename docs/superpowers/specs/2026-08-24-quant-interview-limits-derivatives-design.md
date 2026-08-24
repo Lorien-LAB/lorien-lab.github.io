@@ -29,7 +29,7 @@ The public delta is therefore **+13 Problems / +7 Knowledge**. After serialized 
 
 These counts follow semantic identity; they are not quotas. If the latest durable base reveals a genuine collision, the design must be amended rather than preserving the count artificially.
 
-This spec covers one bounded canonical-topic implementation plan after written approval. It contains no implementation plan and makes no completion claim.
+This spec defines one bounded canonical-topic design that may later be implemented under one separately approved plan. It contains no implementation plan and makes no completion claim.
 
 ## 2. Authority, source identity, and public boundary
 
@@ -101,7 +101,7 @@ The surrounding registered sections on PDF pages 11–12, 27–28, and 50–65 w
 - Critical points, monotonicity, convexity/concavity, and inflection analysis.
 - Elementary indeterminate limits and L'Hôpital's rule with its full gate conditions.
 - Bounded monotone convergence of real sequences before fixed-point identification.
-- Elementary positive-series convergence by partial sums, geometric comparison, dyadic grouping, and the term test.
+- Elementary positive-series convergence by partial sums, telescoping comparison, dyadic grouping, Cauchy condensation, geometric comparison, and the term test.
 - Exactly the 13 canonical Problem identities in Section 6.
 
 ### 4.2 Excluded
@@ -158,7 +158,12 @@ Required content:
 - linearity, product, quotient, and chain rules, with denominator conditions;
 - fixed-power and generalized-power rules with real-domain conditions;
 - elementary exponential, logarithmic, sine, cosine, and tangent derivatives;
-- the standard limits used by derivative-from-definition arguments.
+- the standard limits used by derivative-from-definition arguments;
+- a visible Interview Check asking for the derivative of $x\ln x$ on $x>0$, with result
+
+  \[
+  \boxed{\frac{d}{dx}(x\ln x)=\ln x+1}.
+  \]
 
 ```yaml
 related: [logarithmic-differentiation, monotonicity-convexity-critical-points-and-inflection, indeterminate-limits-and-growth-rates, related-rates-and-implicit-differentiation]
@@ -185,14 +190,27 @@ y(x)=u(x)^{v(x)},
 derive
 
 \[
-\log y=v\log u,
+\ln y=v\ln u,
 \qquad
 \boxed{
-y'=u^v\left(v'\log u+v\frac{u'}{u}\right)
+y'=u^v\left(v'\ln u+v\frac{u'}{u}\right)
 }.
 \]
 
-The page must explain why both differentiability assumptions are required, why $u>0$ is required for this real-valued formula, how logarithms linearize products and quotients, how to restore the factor $y$, and why zero or negative bases require separate analysis.
+The page must explain why both differentiability assumptions are required, why $u>0$ is required for this real-valued formula, how logarithms linearize products and quotients, how to restore the factor $y$, and why zero or negative bases require separate analysis. Its Interview Checks must include
+
+\[
+\boxed{\frac{d}{dx}x^x=x^x(\ln x+1)},\qquad x>0,
+\]
+
+and the Green log-power specialization
+
+\[
+\boxed{
+\frac{d}{dx}(\ln x)^{\ln x}
+=\frac{(\ln x)^{\ln x}}{x}(\ln\ln x+1)
+},\qquad x>1.
+\]
 
 ```yaml
 related: [derivative-definition-and-core-rules]
@@ -237,13 +255,13 @@ Required content:
   \qquad
   \lim_{x\to0}\frac{e^x-1}{x}=1,
   \qquad
-  \lim_{x\to0}\frac{\log(1+x)}{x}=1;
+  \lim_{x\to0}\frac{\ln(1+x)}{x}=1;
   \]
 
 - the exact L'Hôpital gate: differentiability on the appropriate punctured neighborhood, $g'\ne0$, a `0/0` or extended-real infinity-over-infinity form, and existence of the required ordinary or extended-real derivative-quotient limit;
 - renewed checks before repeated applications;
 - the logarithm–power–exponential growth hierarchy in its valid positive-tail regime;
-- the signed identity $x^a\log x\to0^-$ as $x\to0^+$ for $a>0$.
+- the signed identity $x^a\ln x\to0^-$ as $x\to0^+$ for $a>0$.
 
 ```yaml
 related: [derivative-definition-and-core-rules, bounded-monotone-convergence-and-fixed-points, positive-series-convergence]
@@ -262,7 +280,17 @@ Required content:
 - retain units and signs;
 - solve for the requested rate only after differentiating;
 - distinguish a geometric coordinate from its speed;
-- model a beam hitting a line at perpendicular distance $a>0$ by $x=a\tan\theta$, with the domain condition $\cos\theta\ne0$.
+- model a beam hitting a line at perpendicular distance $a>0$ by $s=a\tan\theta$, with the domain condition $\cos\theta\ne0$;
+- specialize one revolution per minute to $d\theta/dt=2\pi$ radians per minute and derive
+
+  \[
+  \boxed{
+  \frac{ds}{dt}
+  =2\pi a\sec^2\theta
+  =\frac{2\pi(a^2+s^2)}{a}
+  \ \text{miles per minute}
+  }.
+  \]
 
 ```yaml
 related: [derivative-definition-and-core-rules]
@@ -282,7 +310,9 @@ Required content:
 - only **after convergence is proved** may continuity pass a recurrence to a fixed-point equation;
 - a fixed-point equation gives candidates, not convergence;
 - admissible bounds, signs, or the proved invariant interval select among multiple roots;
-- explicit warnings for the continued fraction, nested radical, and power tower.
+- explicit warnings for the continued fraction, nested radical, and power tower;
+- the exact continued-fraction recurrence $c_0=2$, $c_{n+1}=2+2/c_n$, including convergent even/odd subsequences before selecting $1+\sqrt3$;
+- the power-tower distinction between solving for the positive base $x=\sqrt2$ whose tower value is $2$ and proving that its finite towers actually converge to $2$ rather than the other fixed point $4$.
 
 ```yaml
 related: [indeterminate-limits-and-growth-rates]
@@ -301,7 +331,22 @@ Required content:
 - finite geometric sums and the infinite geometric criterion;
 - direct comparison;
 - harmonic-series divergence by dyadic grouping;
-- the positive (p)-series classification by dyadic blocks or Cauchy condensation;
+- Cauchy condensation only for positive nonincreasing terms, with those hypotheses checked before use;
+- the positive $p$-series classification by dyadic blocks or Cauchy condensation;
+- convergence of $\sum_{k=1}^{\infty}1/k^2$ by the telescoping comparison
+
+  \[
+  \frac1{k^2}\le\frac1{k(k-1)}
+  =\frac1{k-1}-\frac1k,
+  \qquad k\ge2;
+  \]
+
+- divergence of $\sum_{k=2}^{\infty}1/(k\ln k)$ by dyadic grouping or Cauchy condensation, whose condensed terms are
+
+  \[
+  \frac{2^n}{2^n\ln(2^n)}=\frac1{n\ln2};
+  \]
+
 - no proof that silently depends on integration or the integral test.
 
 For $p>1$, dyadic blocks give an upper bound proportional to
@@ -356,25 +401,33 @@ For differentiable $u:I\to(0,\infty)$ and differentiable $v:I\to\mathbb R$, deri
 \boxed{
 \frac{d}{dx}u(x)^{v(x)}
 =u(x)^{v(x)}
-\left(v'(x)\log u(x)+v(x)\frac{u'(x)}{u(x)}\right)
+\left(v'(x)\ln u(x)+v(x)\frac{u'(x)}{u(x)}\right)
 }.
 \]
 
-Then apply it to
+The public prompt must then explicitly ask for $x^x$ on $x>0$ and derive
 
 \[
-y=(\log x)^{\log x},\qquad x>1,
+\boxed{
+\frac{d}{dx}x^x=x^x(\ln x+1)
+},\qquad x>0.
+\]
+
+It must also apply the general rule to the Green log-power expression
+
+\[
+y=(\ln x)^{\ln x},\qquad x>1,
 \]
 
 and obtain
 
 \[
 \boxed{
-y'=\frac{(\log x)^{\log x}}{x}\left(\log\log x+1\right)
+y'=\frac{(\ln x)^{\ln x}}{x}\left(\ln\ln x+1\right)
 }.
 \]
 
-The page must state both differentiability assumptions and the positivity/domain requirements before taking logarithms.
+The page must state both differentiability assumptions and the positivity/domain requirements before taking logarithms. The $x^x$ task is the public representation that absorbs the Red 6.18 and 150 item 5 duplicates; it is not merely an optional extension.
 
 ### 6.2 `compare-e-pi-power-expressions`
 
@@ -396,17 +449,17 @@ estimatedMinutes: 10
 The body asks whether $e^\pi$ or $\pi^e$ is larger. For
 
 \[
-f(x)=\frac{\log x}{x},
+f(x)=\frac{\ln x}{x},
 \qquad
-f'(x)=\frac{1-\log x}{x^2},
+f'(x)=\frac{1-\ln x}{x^2},
 \]
 
 prove that $f$ increases on $(0,e)$, decreases on $(e,\infty)$, and reaches its global maximum at $e$. Since $e<\pi$,
 
 \[
-\frac{\log\pi}{\pi}<\frac1e
+\frac{\ln\pi}{\pi}<\frac1e
 \Longrightarrow
-e\log\pi<\pi
+e\ln\pi<\pi
 \Longrightarrow
 \boxed{e^\pi>\pi^e}.
 \]
@@ -459,10 +512,10 @@ estimatedMinutes: 10
 Rewrite
 
 \[
-\lim_{x\to0^+}x^2\log x
+\lim_{x\to0^+}x^2\ln x
 \]
 
-as $\log x/x^{-2}$, check the one-sided L'Hôpital gate, and derive
+as $\ln x/x^{-2}$, check the one-sided L'Hôpital gate, and derive
 
 \[
 \frac{1/x}{-2x^{-3}}=-\frac{x^2}{2}\to0.
@@ -493,21 +546,38 @@ interviewDifficulty: 3
 estimatedMinutes: 12
 ```
 
-A lighthouse is perpendicular distance $a>0$ from a straight shore. If $\theta$ is the beam angle from the perpendicular and $x$ is the signed shore coordinate, model
+A lighthouse is perpendicular distance $a>0$ miles from a straight shore. If $\theta$ is the beam angle from the perpendicular and $s$ is the signed shore coordinate in miles, model
 
 \[
-x=a\tan\theta.
+s=a\tan\theta.
 \]
 
 For differentiable $\theta(t)$ with $\cos\theta\ne0$, derive
 
 \[
 \boxed{
-\frac{dx}{dt}=a\sec^2\theta\frac{d\theta}{dt}
+\frac{ds}{dt}=a\sec^2\theta\frac{d\theta}{dt}
 }.
 \]
 
-The solution must keep units and sign conventions explicit and distinguish angular rate from the beam spot's linear speed.
+The public prompt must explicitly specialize to one full revolution per minute,
+
+\[
+\frac{d\theta}{dt}=2\pi\ \text{radians per minute},
+\]
+
+and box both equivalent speed forms
+
+\[
+\boxed{
+\frac{ds}{dt}
+=2\pi a\sec^2\theta
+=\frac{2\pi(a^2+s^2)}{a}
+\ \text{miles per minute}
+}.
+\]
+
+The solution must keep units and sign conventions explicit, use $\sec^2\theta=1+\tan^2\theta=1+s^2/a^2$, and distinguish angular rate from the beam spot's linear speed.
 
 ### 6.6 `radical-difference-limit-at-infinity`
 
@@ -529,20 +599,20 @@ estimatedMinutes: 8
 Evaluate by rationalization:
 
 \[
-\sqrt{x^2+x}-x
-=\frac{x}{\sqrt{x^2+x}+x}
-=\frac{1}{\sqrt{1+1/x}+1}.
+\sqrt{x^2+5x}-x
+=\frac{5x}{\sqrt{x^2+5x}+x}
+=\frac{5}{\sqrt{1+5/x}+1}.
 \]
 
 Therefore
 
 \[
 \boxed{
-\lim_{x\to\infty}(\sqrt{x^2+x}-x)=\frac12
+\lim_{x\to\infty}(\sqrt{x^2+5x}-x)=\frac52
 }.
 \]
 
-The page must reject the invalid subtraction of two separate infinite limits.
+The page must reject the invalid subtraction of two separate infinite limits and must retain the coefficient $5$ throughout rationalization.
 
 ### 6.7 `exponential-midpoint-convexity`
 
@@ -591,23 +661,45 @@ estimatedMinutes: 15
 For the finite convergents
 
 \[
-x_1=1,
+c_0=2,
 \qquad
-x_{n+1}=1+\frac1{x_n},
+c_{n+1}=2+\frac2{c_n},
 \]
 
-prove convergence before taking a fixed point. A valid proof may show that odd and even subsequences are monotone, bounded, and have the same limit, or may identify $x_n$ as a ratio of consecutive Fibonacci numbers with a proved ratio limit.
+prove convergence before taking a fixed point. The required proof keeps all terms in $[2,3]$, shows that $(c_{2n})$ is increasing and $(c_{2n+1})$ is decreasing, and obtains limits $a$ and $b$ for the two subsequences. Passing the recurrence between already-convergent subsequences gives
+
+\[
+b=2+\frac2a,
+\qquad
+a=2+\frac2b.
+\]
+
+Subtracting yields
+
+\[
+(b-a)\left(1-\frac2{ab}\right)=0.
+\]
+
+Because $a,b\ge2$, the alternative $ab=2$ is impossible; hence $a=b$ and the full sequence converges.
 
 Only after convergence is established may the solution use
 
 \[
-L=1+\frac1L.
+L=2+\frac2L.
 \]
 
-Positivity rejects the negative root, giving
+Equivalently,
 
 \[
-\boxed{L=\frac{1+\sqrt5}{2}}.
+L^2-2L-2=0,
+\qquad
+L=1\pm\sqrt3.
+\]
+
+Positivity rejects $1-\sqrt3$, giving
+
+\[
+\boxed{L=1+\sqrt3}.
 \]
 
 ### 6.9 `normal-cdf-inflection-point`
@@ -653,7 +745,7 @@ Thus $F''>0$ for $x<\mu$ and $F''<0$ for $x>\mu$. The actual sign change, not me
 
 ```yaml
 problemId: limits-derivatives-010
-title: Derive an Exponential-Cosine Derivative from the Definition
+title: Derive an Exponential-of-Cosine Derivative from the Definition
 subcategories: [Derivatives, First Principles]
 concepts: [derivative-definition-and-core-rules]
 techniques: []
@@ -669,26 +761,43 @@ estimatedMinutes: 15
 Starting from the difference quotient, derive the derivative of
 
 \[
-f(x)=e^x\cos x
+g(x)=e^{\cos x}.
 \]
 
-using only algebra, angle addition, continuity, and the standard limits
+Define
 
 \[
-\lim_{h\to0}\frac{e^h-1}{h}=1,
-\qquad
-\lim_{h\to0}\frac{\sin h}{h}=1,
-\qquad
-\lim_{h\to0}\frac{\cos h-1}{h}=0.
+\Delta_h=\cos(x+h)-\cos x.
 \]
 
-The result is
+The solution must factor the difference quotient exactly as
 
 \[
-\boxed{f'(x)=e^x(\cos x-\sin x)}.
+\frac{g(x+h)-g(x)}h
+=e^{\cos x}
+\left(\frac{e^{\Delta_h}-1}{\Delta_h}\right)
+\left(\frac{\Delta_h}{h}\right),
 \]
 
-The proof must not invoke Taylor series and must not assume the product rule as the derivation of the target expression.
+with the limiting interpretation when $\Delta_h=0$. Angle addition and the standard trigonometric limits give
+
+\[
+\lim_{h\to0}\frac{\Delta_h}{h}=-\sin x,
+\]
+
+while continuity gives $\Delta_h\to0$ and
+
+\[
+\lim_{z\to0}\frac{e^z-1}{z}=1.
+\]
+
+Therefore
+
+\[
+\boxed{g'(x)=-\sin x\,e^{\cos x}}.
+\]
+
+The proof must not invoke Taylor series and must not replace the requested function by the unrelated product $e^x\cos x$.
 
 ### 6.11 `nested-radical-limit`
 
@@ -744,25 +853,45 @@ interviewDifficulty: 4
 estimatedMinutes: 15
 ```
 
-Define finite towers by
+The public prompt first asks for the positive base $x$ such that
 
 \[
-t_1=\sqrt2,
+x^{x^{x^{\cdot^{\cdot^{\cdot}}}}}=2.
+\]
+
+If such a tower converges to $2$, its first-level self-similarity requires
+
+\[
+2=x^2.
+\]
+
+Because the requested base is positive,
+
+\[
+\boxed{x=\sqrt2}.
+\]
+
+The solution must then justify that this base really produces the claimed tower value. Define finite towers by
+
+\[
+t_0=\sqrt2,
 \qquad
 t_{n+1}=(\sqrt2)^{t_n}.
 \]
 
-Prove first that $t_n$ is increasing and bounded above by $2$. Then continuity gives
+Prove first that $t_n$ is increasing and satisfies $t_n<2$ for every finite $n$. Then continuity gives
 
 \[
 L=(\sqrt2)^L.
 \]
 
-Both $2$ and $4$ solve the fixed-point equation, so the equation alone does not identify the tower limit. The proved bound $L\le2$ rejects the larger branch $4$, and the solution concludes
+Both $2$ and $4$ solve the fixed-point equation, so the equation alone does not identify the tower limit. The proved bound $L\le2$ rejects the larger branch $4$, and the convergence proof concludes
 
 \[
 \boxed{L=2}.
 \]
+
+The boxed base $x=\sqrt2$ answers the public question; the boxed sequence limit $L=2$ verifies that the answer is admissible. They must not be conflated.
 
 ### 6.13 `classify-basic-positive-series`
 
@@ -783,23 +912,21 @@ estimatedMinutes: 15
 
 Classify and justify:
 
-1. the nonnegative geometric series $\sum_{n=0}^{\infty}r^n$ for $r\ge0$;
-2. the harmonic series $\sum_{n=1}^{\infty}1/n$;
-3. the positive $p$-series $\sum_{n=1}^{\infty}1/n^p$.
+1. $\sum_{k=1}^{\infty}1/k$;
+2. $\sum_{k=1}^{\infty}1/k^2$;
+3. $\sum_{k=2}^{\infty}1/(k\ln k)$.
 
 The exact conclusions are:
 
 \[
 \boxed{
-\sum_{n=0}^{\infty}r^n
-\text{ converges exactly when }0\le r<1,
-\text{ with sum }\frac1{1-r}
+\sum_{k=1}^{\infty}\frac1k\text{ diverges}
 },
 \]
 
 \[
 \boxed{
-\sum_{n=1}^{\infty}\frac1n\text{ diverges}
+\sum_{k=1}^{\infty}\frac1{k^2}\text{ converges}
 },
 \]
 
@@ -807,12 +934,26 @@ and
 
 \[
 \boxed{
-\sum_{n=1}^{\infty}\frac1{n^p}
-\text{ converges exactly when }p>1
+\sum_{k=2}^{\infty}\frac1{k\ln k}\text{ diverges}
 }.
 \]
 
-Use finite geometric sums, dyadic grouping, and direct comparison. No method may hide integration or the integral test as an undeclared prerequisite.
+The harmonic-series proof uses dyadic grouping. For the square series, use bounded increasing partial sums and the telescoping comparison
+
+\[
+\frac1{k^2}\le\frac1{k(k-1)}
+=\frac1{k-1}-\frac1k,
+\qquad k\ge2.
+\]
+
+For $a_k=1/(k\ln k)$, first verify positivity and monotone decrease for $k\ge2$, then use Cauchy condensation or the equivalent dyadic-block lower bound:
+
+\[
+2^n a_{2^n}
+=\frac{1}{n\ln2},
+\]
+
+so the condensed series is a constant multiple of the harmonic series and diverges. No method may use integration or the integral test. Generic geometric- and $p$-series classifications may remain in Knowledge or Extensions, but they cannot replace this exact canonical triple.
 
 ## 7. Public graph decision
 
@@ -836,30 +977,30 @@ Every one of the following 20 rows has exactly
 "canonicalTopics": ["limits-derivatives"]
 ```
 
-and the exact targets below. The quoted resolution note is the required nonempty semantic decision; wording may receive punctuation-only normalization but must not lose any stated boundary.
+and the exact targets below. Each resolution note is the exact required nonempty string; implementation and strict tests must preserve it without normalization.
 
 | Source/key | State | `canonicalProblems` | `canonicalKnowledge` | Resolution note |
 |---|---|---|---|---|
 | Green `3.1::` | `knowledge-only` | `[]` | `[derivative-definition-and-core-rules, logarithmic-differentiation, monotonicity-convexity-critical-points-and-inflection, indeterminate-limits-and-growth-rates]` | Reusable derivative definitions and rules, logarithmic differentiation, qualitative derivative analysis, and elementary limit theory are fused into four public Knowledge nodes with visible Interview Checks. |
-| Green `3.1.1::` | `canonical-problem` | `[differentiate-variable-base-and-exponent]` | `[derivative-definition-and-core-rules, logarithmic-differentiation]` | The canonical Problem derives the positive variable-base/variable-exponent rule and applies it to the log-power case with its real domain stated explicitly. |
+| Green `3.1.1::` | `canonical-problem` | `[differentiate-variable-base-and-exponent]` | `[derivative-definition-and-core-rules, logarithmic-differentiation]` | The canonical Problem derives the positive variable-base/variable-exponent rule, explicitly differentiates x^x on x>0, and applies the rule to the log-power case on x>1. |
 | Green `3.1.2::` | `canonical-problem` | `[compare-e-pi-power-expressions]` | `[monotonicity-convexity-critical-points-and-inflection, derivative-definition-and-core-rules]` | The canonical comparison uses the sign of the first derivative on full intervals; a second derivative is only a local check and zero is inconclusive without a sign change. |
 | Green `3.1.3::` | `canonical-problem` | `[exponential-over-polynomial-limit, logarithm-power-limit-at-zero]` | `[indeterminate-limits-and-growth-rates, derivative-definition-and-core-rules]` | One source row contains two independent limit identities, so it resolves to two Problems; both enforce the L'Hôpital gate and the origin limit preserves its approach from below. |
-| Red `6.2.1::6.1` | `canonical-problem` | `[rotating-lighthouse-beam-related-rate]` | `[related-rates-and-implicit-differentiation, derivative-definition-and-core-rules]` | This is the canonical geometric related-rate identity linking angular velocity to the signed linear speed of a beam spot on a line. |
-| Red `6.2.1::6.2` | `canonical-problem` | `[radical-difference-limit-at-infinity]` | `[indeterminate-limits-and-growth-rates]` | The canonical Problem rationalizes a difference of divergent radicals and preserves the finite one-half limit instead of subtracting infinities. |
+| Red `6.2.1::6.1` | `canonical-problem` | `[rotating-lighthouse-beam-related-rate]` | `[related-rates-and-implicit-differentiation, derivative-definition-and-core-rules]` | The canonical lighthouse Problem models s=a tan theta, derives the general related rate, and specializes one revolution per minute to 2 pi a secant-squared theta miles per minute. |
+| Red `6.2.1::6.2` | `canonical-problem` | `[radical-difference-limit-at-infinity]` | `[indeterminate-limits-and-growth-rates]` | The canonical Problem rationalizes sqrt(x squared plus 5x) minus x and preserves the finite limit 5/2 instead of subtracting infinities. |
 | Red `6.2.1::6.5` | `canonical-problem` | `[exponential-midpoint-convexity]` | `[monotonicity-convexity-critical-points-and-inflection]` | The canonical Problem proves exponential midpoint convexity and records equality exactly at equal endpoints. |
 | Red `6.2.1::6.6` | `merged-duplicate` | `[compare-e-pi-power-expressions]` | `[monotonicity-convexity-critical-points-and-inflection, derivative-definition-and-core-rules]` | This asks the same transcendental-power comparison as the Green item and is absorbed into one source-neutral monotonicity Problem. |
-| Red `6.2.1::6.7` | `canonical-problem` | `[periodic-continued-fraction-limit]` | `[bounded-monotone-convergence-and-fixed-points]` | The canonical continued-fraction Problem proves convergence of finite convergents before using the positive fixed point. |
+| Red `6.2.1::6.7` | `canonical-problem` | `[periodic-continued-fraction-limit]` | `[bounded-monotone-convergence-and-fixed-points]` | The canonical recurrence starts at c0=2 with c(n+1)=2+2/cn, proves convergence of finite convergents, and only then selects 1+sqrt(3) from the fixed-point roots. |
 | Red `6.2.1::6.8` | `canonical-problem` | `[normal-cdf-inflection-point]` | `[monotonicity-convexity-critical-points-and-inflection, derivative-definition-and-core-rules]` | The canonical Problem differentiates the Normal CDF with sigma positive and proves the unique inflection through an actual sign change of the second derivative. |
-| Red `6.2.1::6.16` | `merged-duplicate` | `[classify-basic-positive-series]` | `[positive-series-convergence]` | The series tests are the same basic positive-series classification owned by the canonical Problem and add no separate public identity. |
-| Red `6.2.2::6.18` | `merged-duplicate` | `[differentiate-variable-base-and-exponent]` | `[derivative-definition-and-core-rules, logarithmic-differentiation]` | This variable-base/variable-exponent derivative is absorbed into the general positive logarithmic-differentiation Problem. |
-| Red `6.2.2::6.20` | `canonical-problem` | `[derive-exponential-cosine-derivative-from-definition]` | `[derivative-definition-and-core-rules]` | The canonical Problem derives the exponential-cosine derivative directly from the difference quotient and standard limits without Taylor series. |
-| Red `6.2.2::6.21` | `knowledge-only` | `[]` | `[derivative-definition-and-core-rules]` | The reusable derivative-rule review is fused into core public Knowledge and preserved through Interview Checks rather than inflated into another Problem. |
+| Red `6.2.1::6.16` | `merged-duplicate` | `[classify-basic-positive-series]` | `[positive-series-convergence]` | The exact harmonic, square, and logarithmic-harmonic series triple is owned by the canonical Problem and adds no separate public identity. |
+| Red `6.2.2::6.18` | `merged-duplicate` | `[differentiate-variable-base-and-exponent]` | `[derivative-definition-and-core-rules, logarithmic-differentiation]` | The x^x derivative on x>0 is absorbed into the canonical positive variable-base/variable-exponent Problem. |
+| Red `6.2.2::6.20` | `canonical-problem` | `[derive-exponential-cosine-derivative-from-definition]` | `[derivative-definition-and-core-rules]` | The canonical Problem derives the derivative of exp(cos x) from an exact difference-quotient factorization and standard limits, without Taylor series. |
+| Red `6.2.2::6.21` | `knowledge-only` | `[]` | `[derivative-definition-and-core-rules]` | The reusable derivative-rule review is fused into core public Knowledge, including an Interview Check that differentiates x ln x on x>0 as ln x+1. |
 | 150 `2.1::2` | `merged-duplicate` | `[compare-e-pi-power-expressions]` | `[monotonicity-convexity-critical-points-and-inflection, derivative-definition-and-core-rules]` | This is the same transcendental-power comparison already represented by the canonical monotonicity Problem. |
 | 150 `2.1::3` | `merged-duplicate` | `[exponential-midpoint-convexity]` | `[monotonicity-convexity-critical-points-and-inflection]` | This is the same exponential midpoint-convexity identity and is absorbed as alternate evidence rather than duplicated publicly. |
-| 150 `2.1::5` | `merged-duplicate` | `[differentiate-variable-base-and-exponent]` | `[derivative-definition-and-core-rules, logarithmic-differentiation]` | This is the same variable-base/variable-exponent differentiation family and is absorbed into the general positive-domain canonical Problem. |
+| 150 `2.1::5` | `merged-duplicate` | `[differentiate-variable-base-and-exponent]` | `[derivative-definition-and-core-rules, logarithmic-differentiation]` | This x^x derivative on x>0 is absorbed into the same canonical positive variable-base/variable-exponent Problem. |
 | 150 `2.1::6` | `canonical-problem` | `[nested-radical-limit]` | `[bounded-monotone-convergence-and-fixed-points]` | The canonical nested-radical Problem proves bounded monotone convergence before selecting the positive fixed point. |
-| 150 `2.1::7` | `canonical-problem` | `[infinite-power-tower-limit]` | `[bounded-monotone-convergence-and-fixed-points]` | The canonical finite-tower sequence is proved increasing and bounded by two before the fixed-point equation is used, so the larger root four is rejected. |
-| 150 `2.1::8` | `canonical-problem` | `[classify-basic-positive-series]` | `[positive-series-convergence]` | The canonical Problem classifies geometric, harmonic, and positive p-series by elementary partial-sum and comparison arguments without an integration prerequisite. |
+| 150 `2.1::7` | `canonical-problem` | `[infinite-power-tower-limit]` | `[bounded-monotone-convergence-and-fixed-points]` | The canonical Problem first finds the positive base sqrt(2) for tower value 2, then proves the finite towers increase below 2 and reject fixed-point branch 4. |
+| 150 `2.1::8` | `canonical-problem` | `[classify-basic-positive-series]` | `[positive-series-convergence]` | The canonical Problem proves divergence of the harmonic and logarithmic-harmonic series and convergence of the square series by elementary non-integral arguments. |
 
 The exact state recount is:
 
@@ -936,7 +1077,7 @@ Its pre-closure contract is:
 }
 ```
 
-The candidate never writes completion or verification placeholders. Only the coordinator adds real verification and changes `status` to `complete` after integration and successful CI.
+The candidate omits all completion and verification fields. Only the coordinator adds the completion-only `preClosureActiveGate` and `verification` records described in Section 12 and changes `status` to `complete` after integration and successful CI.
 
 ## 11. Ownership boundary
 
@@ -984,12 +1125,14 @@ The coordinator alone may create or edit:
 - `tests/quant-interview-source-neutral-content.test.mjs`;
 - `tests/quant-interview-limits-derivatives-workstream.test.mjs`;
 - `tests/quant-interview-limits-derivatives-completion.test.mjs`;
+- `tests/quant-interview-parallel-workstream-governance.test.mjs`;
 - prior 011 completion assertions that advance the current topic;
 - `docs/quant-interview/HANDOFF.md`;
 - `tests/quant-interview-handoff.test.mjs`;
-- CI-owned completion metadata.
+- CI-owned completion metadata;
+- the temporary workflow `.github/workflows/quant-interview-limits-derivatives-012-temporary.yml`, if needed for 012 verification, and its mandatory removal before closure.
 
-There is no taxonomy delta, no pre-existing public-content delta, and no CI-workflow delta.
+There is no taxonomy delta, no pre-existing public-content delta, and no **final** CI-workflow delta. The temporary 012 workflow is coordinator-owned verification scaffolding, not a durable product artifact.
 
 The protected `main` branch is never modified directly. Candidates and the coordinator must not force-update or rewrite candidate, shared, or durable history.
 
@@ -1008,33 +1151,47 @@ The protected `main` branch is never modified directly. Candidates and the coord
 - each Problem meets the S3+ structure and has at least two progressive hints;
 - no public file mentions a source/book identity, source item, source section, PDF page, question page, or solution page;
 - logarithmic differentiation states differentiable $u:I\to(0,\infty)$ and differentiable $v$ before deriving the formula;
+- the variable-base Problem visibly asks for and solves $x^x$ on $x>0$, while separately preserving the log-power specialization on $x>1$;
+- the core derivative Knowledge page visibly asks for and solves the derivative of $x\ln x$ on $x>0$;
+- the monotonicity comparison uses the first-derivative sign on full intervals, and the Knowledge page says that $f''=0$ alone is inconclusive for both critical-point and inflection claims;
+- both L'Hôpital Problems state and check the exact indeterminate form, differentiability, nonzero denominator derivative, and derivative-quotient limit hypotheses, renewing the checks before repeated use;
+- the lighthouse page contains both the general related-rate identity and the one-revolution-per-minute specialization with miles-per-minute units;
+- the radical page preserves coefficient $5$ through the exact rationalization;
 - the Normal CDF uses $\sigma>0$, the exact density factor $1/(\sigma\sqrt{2\pi})$, the exact second derivative factor $1/(\sigma^3\sqrt{2\pi})$, and a sign change around $\mu$;
 - continued-fraction, nested-radical, and power-tower pages prove convergence before taking fixed points;
-- the power-tower page identifies both fixed-point branches and rejects (4) using the proved upper bound;
-- the exponential-cosine page uses the difference quotient and standard limits without Taylor series;
-- the series Knowledge and Problem use no integration or integral-test prerequisite.
+- the continued-fraction page uses exactly $c_0=2$ and $c_{n+1}=2+2/c_n$, derives candidate roots $1\pm\sqrt3$, and selects $1+\sqrt3$ only after convergence;
+- the power-tower page distinguishes the requested base $\sqrt2$ from the proved limit $2$, identifies fixed-point branches $2$ and $4$, and rejects $4$ using the proved upper bound;
+- the exponential-cosine page uses the exact $\Delta_h$ difference-quotient factorization and standard limits, with no Taylor series and no substitution of an unrelated product;
+- the series Knowledge explicitly supports logarithmic-harmonic divergence, and the canonical Problem proves harmonic divergence by dyadic grouping, square-series convergence by telescoping comparison, and logarithmic-harmonic divergence by Cauchy condensation or equivalent dyadic grouping, without integration or an integral-test prerequisite.
 
 The tests must check these semantic boxed results:
 
 | Problem | Required result |
 |---|---|
-| `differentiate-variable-base-and-exponent` | $u^v(v'\log u+vu'/u)$, and the log-power specialization |
+| `differentiate-variable-base-and-exponent` | $u^v(v'\ln u+vu'/u)$; $(x^x)'=x^x(\ln x+1)$ for $x>0$; and $((\ln x)^{\ln x})'=((\ln x)^{\ln x}/x)(\ln\ln x+1)$ for $x>1$ |
 | `compare-e-pi-power-expressions` | $e^\pi>\pi^e$ |
 | `exponential-over-polynomial-limit` | $+\infty$ |
-| `logarithm-power-limit-at-zero` | (0^-) |
-| `rotating-lighthouse-beam-related-rate` | $dx/dt=a\sec^2\theta\,d\theta/dt$ |
-| `radical-difference-limit-at-infinity` | (1/2) |
+| `logarithm-power-limit-at-zero` | $0^-$ |
+| `rotating-lighthouse-beam-related-rate` | $ds/dt=a\sec^2\theta\,d\theta/dt$, and for one revolution per minute $ds/dt=2\pi a\sec^2\theta=2\pi(a^2+s^2)/a$ miles per minute |
+| `radical-difference-limit-at-infinity` | $\sqrt{x^2+5x}-x=5/(\sqrt{1+5/x}+1)\to5/2$ |
 | `exponential-midpoint-convexity` | $(e^a+e^b)/2\ge e^{(a+b)/2}$, equality iff $a=b$ |
-| `periodic-continued-fraction-limit` | $(1+\sqrt5)/2$ |
+| `periodic-continued-fraction-limit` | $c_0=2$, $c_{n+1}=2+2/c_n$, roots $1\pm\sqrt3$, and $L=1+\sqrt3$ after convergence |
 | `normal-cdf-inflection-point` | unique inflection at $x=\mu$ |
-| `derive-exponential-cosine-derivative-from-definition` | $e^x(\cos x-\sin x)$ |
-| `nested-radical-limit` | (2) |
-| `infinite-power-tower-limit` | (2), with branch (4) rejected |
-| `classify-basic-positive-series` | geometric, harmonic, and (p)-series classifications in Section 6.13 |
+| `derive-exponential-cosine-derivative-from-definition` | for $g(x)=e^{\cos x}$, $g'(x)=-\sin x\,e^{\cos x}$ |
+| `nested-radical-limit` | $2$ |
+| `infinite-power-tower-limit` | requested base $x=\sqrt2$ and finite-tower limit $L=2$, with branch $4$ rejected |
+| `classify-basic-positive-series` | $\sum_{k\ge1}1/k$ diverges, $\sum_{k\ge1}1/k^2$ converges, and $\sum_{k\ge2}1/(k\ln k)$ diverges |
 
-Assertions should verify mathematical invariants without requiring brittle verbatim prose.
+The core derivative Knowledge assertion separately requires the visible boxed Interview Check
 
-### 12.2 Coordinator source-map and workstream test
+\[
+\frac{d}{dx}(x\ln x)=\ln x+1,
+\qquad x>0.
+\]
+
+Assertions must normalize harmless whitespace and TeX layout while testing the mathematical operands, domains, signs, units, branches, and conclusions exactly. They must not reduce these contracts to keyword-only checks.
+
+### 12.2 Coordinator source-map, coverage, and phase-safe workstream test
 
 `tests/quant-interview-limits-derivatives-workstream.test.mjs` must assert:
 
@@ -1044,13 +1201,55 @@ Assertions should verify mathematical invariants without requiring brittle verba
 - exactly the 20 coverage keys in Section 8 and no additional 012 terminal row;
 - every row has exactly `[limits-derivatives]` as `canonicalTopics`;
 - exact state split `12/6/2`;
-- exact Problem arrays, Knowledge arrays, and nonempty resolution notes;
+- exact Problem arrays, Knowledge arrays, and exact nonempty resolution-note strings from Section 8;
 - Green `3.1.3::` is one row with exactly two Problem targets;
 - Red `6.2.2` rows need no `topicOverrideReason` after the map repair;
 - Q6.9 and Q6.10 retain their pre-012 ownership and are not counted among the 20 rows;
 - all three coverage ledgers pass `validateCoverageLedger` with real slugs and `allowUnresolvedCanonicalRefs: false`.
 
-### 12.3 Exact global registry regression
+This test is phase-safe under the repository's full test glob. It accepts only `status: active` or `status: complete` and runs all shared audit assertions in both phases. When status is `active`, it must additionally assert that:
+
+- the manifest has neither `preClosureActiveGate` nor `verification`;
+- HANDOFF and the authoritative queue have not advanced from 012 to 013;
+- workstream 011 remains complete;
+- workstream 013 remains protected as premature.
+
+When status is `complete`, the test must not demand `active`; it retains the shared audit assertions and delegates closure-only evidence to the completion test.
+
+### 12.3 Phase-safe completion and parallel-governance tests
+
+`tests/quant-interview-limits-derivatives-completion.test.mjs` is also phase-safe under the full test glob and accepts only `active` or `complete`.
+
+For `active`, it asserts that completion-only evidence is absent, HANDOFF still identifies 012 as the current bounded workstream/reservation, and 013 has not become current or executable. It then ends successfully without demanding completion.
+
+For `complete`, it requires all of the following:
+
+- the test pins the factual active integrated commit and factual CI run ID as exact constants added only during closure, then requires both manifest records and HANDOFF to equal those constants;
+- `preClosureActiveGate.commit` is the exact integrated commit tested while 012 was still active and matches `/^[0-9a-f]{40}$/`;
+- `preClosureActiveGate.environment` is exactly `linux-native-lf-node24` or `wsl-native-lf-node24`;
+- `preClosureActiveGate.commands` is exactly `['npm run test', 'npm run check', 'npm run build']` in that order, and `preClosureActiveGate.conclusion` is exactly `success`;
+- `verification.commit` equals `preClosureActiveGate.commit` and matches `/^[0-9a-f]{40}$/`;
+- `verification.runId` is an integer greater than zero;
+- `verification.commands` is exactly `['npm run test', 'npm run check', 'npm run build']` in that order, and `verification.conclusion` is exactly `success`;
+- the corresponding GitHub Actions run has `head_sha` equal to `verification.commit` and conclusion `success`;
+- HANDOFF contains that same commit, run ID, authoritative environment, and ordered successful gates; records the exact `76 Problems / 48 Knowledge` closure and `20 = 12/6/2` coverage result; and only then advances the current topic/reservation to 013, Reasoning & Communication;
+- `.github/workflows/quant-interview-limits-derivatives-012-temporary.yml` is absent, and no alternate 012 temporary-workflow path remains.
+
+The CI-tested SHA is deliberately the pre-closure **active integrated commit**. The later commit that removes temporary CI scaffolding, writes factual metadata, marks 012 complete, and advances HANDOFF is a distinct closure commit; neither tests nor documentation may call the earlier SHA the final closure tree.
+
+`tests/quant-interview-parallel-workstream-governance.test.mjs` must be updated by the coordinator so that it:
+
+- preserves workstream 011 as complete;
+- permits the 012 manifest in either `active` or `complete` state;
+- preserves all premature-work protection for 013;
+- keeps 012 as the current topic/reservation while 012 is active;
+- permits the current topic/reservation to become 013 only when factual 012 closure, strict completion evidence, and HANDOFF agree.
+
+`tests/quant-interview-handoff.test.mjs` and any prior-011 next-action assertion must follow the same phase branch: while 012 is active they require 012 to remain current and reject a 013 advance; once 012 is complete they require the factual evidence and `76/48` closure before accepting 013 as current.
+
+The governance and completion tests must never encode mutually exclusive unconditional status assertions. Both phases must pass the same full test glob at their appropriate repository state.
+
+### 12.4 Exact global registry regression
 
 At integration, the coordinator updates the complete exact post-011 slug sets by adding the 13 approved Problem slugs and seven approved Knowledge slugs. The regression must assert:
 
@@ -1069,9 +1268,28 @@ The test must not use lower bounds, omit post-011 slugs, preserve an obsolete ea
 
 ## 13. Authoritative verification environments
 
-### 13.1 Candidate-local evidence
+### 13.1 Filesystem and runtime authority
 
-Linux/WSL is the authoritative local environment. Use Ubuntu with Node 24 for:
+Authoritative local evidence comes only from Node 24 in either:
+
+- an LF-normalized native Linux checkout; or
+- a WSL checkout stored on a WSL-native filesystem, such as under `/home`.
+
+Native Windows and WSL operating on a Windows-mounted checkout such as `/mnt/c` are diagnostic only. Neither can provide authoritative baseline, candidate, integration, or closure evidence.
+
+Before candidate evidence is accepted, establish that frozen base `f41880f220991f43d84ddb3795a59b8688e5230c` is green in an authoritative checkout for the exact ordered gates:
+
+```text
+npm run test
+npm run check
+npm run build
+```
+
+This separates inherited failures from candidate changes.
+
+### 13.2 Candidate-local evidence
+
+On the same class of authoritative checkout, the candidate runs:
 
 ```text
 node --test tests/quant-interview-limits-derivatives-content.test.mjs
@@ -1080,13 +1298,13 @@ npm run check
 npm run build
 ```
 
-Because the candidate is forbidden to update coordinator-owned exact global counts and shared coverage, its full `npm run test` may report only the expected integration-pending shared-state failures. The candidate must record the exact failures. Any module-content, relationship, schema, check, build, or unrelated-test failure blocks handoff.
+The module-content test, `npm run check`, and `npm run build` must pass. On frozen base counts `59/39`, adding exactly 13 Problem and seven Knowledge pages makes candidate discovery exactly `72/46` before coordinator state exists. Therefore candidate `npm run test` may fail **only** the exact slug-set and exact-count assertions in `tests/quant-interview-source-neutral-content.test.mjs` that still expect `59/39`. The candidate report must name those exact assertions and show the observed `72/46` values.
 
-Windows runs are diagnostic only and cannot replace authoritative WSL results.
+Any other full-suite failure—including a module-content, relationship, schema, coverage, governance, handoff, or unrelated failure—blocks candidate handoff. “Integration pending” is not a generic waiver.
 
-### 13.2 Integrated evidence and CI
+### 13.3 Integrated active-gate, CI, and closure evidence
 
-After applying the coordinator-owned shared deltas on the latest durable post-011 base, all of the following must pass under Ubuntu/WSL with Node 24:
+After the coordinator applies all shared deltas on the durable post-011 `63/41` base, the active integrated tree must discover exactly `76/48` and pass, in order, in an authoritative checkout:
 
 ```text
 npm run test
@@ -1094,26 +1312,41 @@ npm run check
 npm run build
 ```
 
-Final CI must run on Ubuntu with Node 24 and succeed for the exact integrated commit. A Windows-only result, a stale commit, a local-only run, or a provisional run ID is not completion evidence.
+That successful full-suite active gate and its exact 40-lowercase-hex commit are later recorded as `preClosureActiveGate`.
+
+The coordinator may create only `.github/workflows/quant-interview-limits-derivatives-012-temporary.yml` for temporary 012 CI. It must use Ubuntu and Node 24 and run, in order:
+
+```text
+npm ci
+npm run test
+npm run check
+npm run build
+```
+
+The real successful run ID and its `head_sha` must identify the same active integrated commit recorded in `preClosureActiveGate.commit` and `verification.commit`. The manifest's exact `verification.commands` array remains the three repository gates—`npm run test`, `npm run check`, `npm run build`—while `npm ci` is the workflow's required dependency-installation step.
+
+After capturing that evidence, remove every temporary workflow artifact. The closure tree must contain no temporary 012 workflow, and fresh `npm run test`, `npm run check`, and `npm run build` must all pass on the clean post-removal tree in an authoritative local environment. CI proves the active integrated SHA; the fresh final local run proves the later metadata/HANDOFF closure tree.
 
 ## 14. Serialized integration and closure
 
 Workstream 012 is integrated only after workstream 011 is durably complete. The coordinator:
 
-1. verifies the latest durable base is the exact post-011 `63/41` state;
-2. reviews and ports only the candidate-owned pages and module-local test;
-3. repairs exactly the two Red source-topic-map entries;
-4. applies the 20 coverage decisions semantically across the three current ledgers;
-5. verifies existing Q6.9/Q6.10 ownership remains unchanged;
-6. adds the three-source active manifest;
-7. adds coordinator workstream/completion tests and the exact `76/48` registry regression;
-8. updates HANDOFF, handoff tests, and the prior next-action assertion;
-9. runs authoritative Ubuntu/WSL Node 24 local gates;
-10. reviews the topic-only diff for unrelated map changes, forbidden provenance, and out-of-scope edits;
-11. obtains Ubuntu Node 24 CI success for the exact integrated commit;
-12. records the real 40-character commit, positive run ID, exact commands, and `success` conclusion;
-13. changes workstream 012 to `complete` and advances authoritative HANDOFF state to reservation 013, Reasoning & Communication;
-14. reruns fresh closure verification on the final clean tree.
+1. records green frozen-base `f41880f220991f43d84ddb3795a59b8688e5230c` evidence under the authoritative filesystem rules in Section 13;
+2. verifies the latest durable integration base is the exact post-011 `63/41` state and that workstream 011 is complete;
+3. reviews and ports only the candidate-owned pages and module-local test;
+4. repairs exactly the two Red source-topic-map entries;
+5. applies the exact 20 coverage rows, targets, and resolution notes across the three current ledgers while preserving Q6.9/Q6.10;
+6. creates the three-source manifest as `active`, without `preClosureActiveGate` or `verification`;
+7. adds the coordinator-owned source-neutral regression, workstream test, phase-safe completion test, governance update, and exact `76/48` registry contract;
+8. keeps HANDOFF and the queue on 012 and confirms the full test glob passes in the active phase;
+9. if CI scaffolding is needed, creates only the temporary 012 Ubuntu/Node 24 workflow named in Section 13;
+10. creates a clean active integrated commit without rewriting history, runs the successful authoritative pre-closure active gate against that exact HEAD, records the SHA externally for closure, and reviews the topic-only diff for unrelated map changes, forbidden provenance, and out-of-scope edits;
+11. pushes that exact active integrated commit and obtains a real successful temporary-workflow CI run whose `head_sha` equals it;
+12. verifies the run ID is a positive integer and the run executed `npm ci`, `npm run test`, `npm run check`, and `npm run build` successfully in order;
+13. removes every temporary workflow artifact;
+14. writes `preClosureActiveGate` and `verification` using the factual active SHA and CI run, changes 012 to `complete`, records the same evidence and exact `76/48` closure in HANDOFF, only then advances the current topic/reservation to 013, Reasoning & Communication, and creates the distinct closure commit;
+15. runs the phase-safe full test glob plus fresh `npm run check` and `npm run build` against that clean post-removal closure commit in an authoritative local environment;
+16. confirms the final diff has no CI workflow artifact or unrelated shared delta.
 
 Neither the candidate branch nor an unverified integrated commit may claim completion.
 
@@ -1137,11 +1370,15 @@ If Q6.9, Q6.10, or any other existing row would be re-owned, stop. Preserve prio
 
 ### Logarithmic-differentiation domain failure
 
-Do not use the generalized formula without differentiable $u:I\to(0,\infty)$ and differentiable $v$. The log-power specialization retains $x>1$.
+Do not use the generalized formula without differentiable $u:I\to(0,\infty)$ and differentiable $v$. The $x^x$ task retains $x>0$, and the log-power specialization retains $x>1$.
+
+### Exact-contract drift
+
+Stop if implementation changes any authoritative exercise: the lighthouse specialization is one revolution per minute; the radical coefficient and limit are $5$ and $5/2$; the continued fraction is $c_{n+1}=2+2/c_n$ with limit $1+\sqrt3$; the first-principles function is $e^{\cos x}$; the tower asks for base $\sqrt2$ and separately proves limit $2$; and the series Problem owns the exact harmonic, square, and logarithmic-harmonic triple.
 
 ### Fixed-point misuse
 
-Do not infer convergence from a fixed-point equation. Continued fractions, nested radicals, and the power tower require convergence proofs first. For the tower, the larger solution (4) must be rejected using the proved invariant bound.
+Do not infer convergence from a fixed-point equation. Continued fractions, nested radicals, and the power tower require convergence proofs first. For the continued fraction, convergence precedes selection of $1+\sqrt3$. For the tower, the requested base $\sqrt2$ is not the sequence limit, and the larger fixed point $4$ must be rejected using the proved invariant bound.
 
 ### Curvature misuse
 
@@ -1153,15 +1390,23 @@ Do not apply L'Hôpital to a product form, a non-indeterminate quotient, or a qu
 
 ### Method-boundary failure
 
-Do not use Taylor series for the derivative-from-definition Problem. Do not make integration an undeclared prerequisite for the positive-series classification.
+Do not use Taylor series for the derivative-from-definition Problem. Do not replace $e^{\cos x}$ by $e^x\cos x$. Do not make integration an undeclared prerequisite for the positive-series classification; the logarithmic-harmonic divergence must use condensation or dyadic grouping.
 
 ### Sign loss
 
-For $x^2\log x$ as $x\to0^+$, preserve zero approached from below: $0^-$.
+For $x^2\ln x$ as $x\to0^+$, preserve zero approached from below: $0^-$.
 
 ### Verification failure
 
-Keep the workstream `active`. Do not write success metadata, advance HANDOFF, or claim completion until authoritative local gates and Ubuntu Node 24 CI pass for the exact integrated commit.
+Keep the workstream `active` if the frozen-base evidence is not green, an authoritative active-gate command fails, CI is missing or unsuccessful, the run ID is not a positive integer, or CI `head_sha` differs from the recorded active commit. Native Windows and WSL-over-`/mnt/c` results cannot cure those failures.
+
+At candidate stage, tolerate only the exact `59/39` versus `72/46` slug/count assertions in `tests/quant-interview-source-neutral-content.test.mjs`; any other failure blocks handoff. At integration and closure, no test, check, or build failure is expected or permitted.
+
+### Lifecycle or CI-scaffolding failure
+
+While 012 is active, do not write completion-only evidence or advance HANDOFF/the queue to 013. While it is complete, do not leave the temporary workflow or omit factual evidence. A completion test that unconditionally demands `complete`, or a workstream test that unconditionally demands `active`, is invalid because it breaks the full test glob in one phase.
+
+The CI-tested active SHA and the later metadata/HANDOFF closure commit are distinct. Do not rewrite the active commit to make metadata self-referential, reuse a stale CI run, leave temporary CI artifacts in the final tree, or describe the temporary workflow as a final workflow delta.
 
 ### History safety
 
@@ -1181,7 +1426,11 @@ This design is satisfied when:
 - adjacent reviewed material creates no synthetic ownership and Q6.9/Q6.10 remain intact;
 - candidate and coordinator ownership boundaries are respected;
 - serialized integration produces the exact `76/48` registry contract;
-- authoritative Ubuntu/WSL Node 24 gates and Ubuntu Node 24 CI succeed for the exact integrated commit;
-- the completed manifest and HANDOFF contain only real verification evidence.
+- the module test enforces every boxed result and domain in Section 12, including the derivative-rule Interview Check and exact three-series classification;
+- the workstream, completion, handoff, and parallel-governance tests are phase-safe under the full test glob;
+- frozen-base, candidate, active-integration, and final-closure evidence comes only from an LF-normalized native Linux checkout or a WSL-native-filesystem checkout with Node 24;
+- the successful Ubuntu/Node 24 CI run's `head_sha` equals the recorded pre-closure active integrated commit;
+- the completed manifest and HANDOFF contain the same real 40-lowercase-hex commit, positive run ID, ordered commands, `success` conclusion, and `76/48` closure;
+- every temporary 012 workflow artifact is absent from the final tree, and fresh final test/check/build gates pass after removal.
 
 The bounded result completes workstream 012 only. It does not claim that calculus, any source section beyond the registered scopes, or any source book is complete.
