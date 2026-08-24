@@ -11,7 +11,7 @@ quantInterviewTopics: [probability-statistics, expectation-variance-covariance]
 concepts: [expectation-linearity-indicators]
 techniques: []
 prerequisites: []
-relatedProblems: [coupon-collector-expectations, expected-position-of-first-special-card]
+relatedProblems: [coupon-collector-expectations, expected-position-of-first-special-card, coin-pattern-hitting-times]
 family: indicator-pattern-counts
 mathDifficulty: 2
 insightDifficulty: 3

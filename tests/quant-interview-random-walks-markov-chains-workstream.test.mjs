@@ -75,3 +75,70 @@ test('existing validator accepts workstream 011 registration', async () => {
   const { validateTopicWorkstream } = await import('../src/lib/quantInterviewWorkstreams.mjs');
   assert.doesNotThrow(() => validateTopicWorkstream(workstream, ctx));
 });
+
+const readText = (file) => readFile(file, 'utf8');
+
+function parseInlineArray(text, field) {
+  const match = text.match(new RegExp(`^${field}:\\s*\\[([^\\]]*)\\]$`, 'm'));
+  assert.ok(match, `missing inline ${field}`);
+  return match[1].split(',').map((item) => item.trim()).filter(Boolean);
+}
+
+test('existing boundary identity is enriched in place with the general absorbing formula', async () => {
+  const text = await readText('src/content/problems/stochastic-processes/random-walk-boundary.md');
+  assert.match(text, /^problemId: lorien-stochastic-001$/m);
+  assert.deepEqual(parseInlineArray(text, 'quantInterviewTopics'), [
+    'stochastic-processes-stochastic-calculus',
+    'random-walks-markov-chains',
+  ]);
+  assert.deepEqual(parseInlineArray(text, 'concepts'), ['finite-state-markov-chains']);
+  assert.deepEqual(parseInlineArray(text, 'techniques'), ['first-step-analysis', 'recursion-problem-solving']);
+  assert.deepEqual(parseInlineArray(text, 'relatedProblems'), ['random-walk-return-time-on-cube']);
+  assert.ok(text.includes('u_i = i/N'));
+  assert.ok(text.includes('u_i = [1-(q/p)^i] / [1-(q/p)^N]'));
+  assert.match(text, /p\s*=\s*0.*deterministic|deterministic.*p\s*=\s*0/i);
+  assert.match(text, /p\s*=\s*1.*deterministic|deterministic.*p\s*=\s*1/i);
+  for (const result of ['N=4, i=2, p=1/2', '1/2', 'N=3, i=1, p=2/3', '4/7', 'N=1000, i=80, p=1/2', '92/100', '23/25']) {
+    assert.ok(text.replaceAll(' ', '').includes(result.replaceAll(' ', '')), `boundary page missing ${result}`);
+  }
+  assert.match(text, /u_i.*p.*u_\{?i\+1\}?.*q.*u_\{?i-1\}?/i);
+  assert.doesNotMatch(text, /optional stopping/i);
+  for (const heading of ['## Problem', '## Think Before Revealing', '## Solution', '## Why This Matters', '## Common Mistakes', '## Extensions']) {
+    assert.ok(text.includes(heading), `boundary page missing ${heading}`);
+  }
+  assert.ok((text.match(/<details>/g) ?? []).length >= 3);
+  assert.match(text, /<summary>Show Solution<\/summary>/);
+});
+
+test('coordinator adds exact reciprocal links without re-owning existing pages', async () => {
+  const firstStep = await readText('src/content/knowledge/concepts/first-step-analysis.md');
+  assert.deepEqual(parseInlineArray(firstStep, 'quantInterviewTopics'), [
+    'stochastic-processes-stochastic-calculus',
+    'random-walks-markov-chains',
+  ]);
+  assert.deepEqual(parseInlineArray(firstStep, 'related'), [
+    'conditional-expectation-tower-property',
+    'finite-state-markov-chains',
+    'markov-chain-state-compression',
+  ]);
+
+  const expectedProblems = new Map([
+    ['src/content/problems/probability/recursive-dice-game-expected-payoff.md', {
+      topics: ['probability-statistics', 'expectation-variance-covariance'],
+      related: ['conditional-dice-expectation', 'expected-loops-from-random-pairings', 'twelve-before-consecutive-sevens'],
+    }],
+    ['src/content/problems/probability/expected-pattern-count-by-indicators.md', {
+      topics: ['probability-statistics', 'expectation-variance-covariance'],
+      related: ['coupon-collector-expectations', 'expected-position-of-first-special-card', 'coin-pattern-hitting-times'],
+    }],
+    ['src/content/problems/probability/no-consecutive-heads-in-n-tosses.md', {
+      topics: ['probability-statistics', 'combinatorial-probability'],
+      related: ['coin-pattern-hitting-times'],
+    }],
+  ]);
+  for (const [file, expected] of expectedProblems) {
+    const text = await readText(file);
+    assert.deepEqual(parseInlineArray(text, 'quantInterviewTopics'), expected.topics, `${file} changed ownership`);
+    assert.deepEqual(parseInlineArray(text, 'relatedProblems'), expected.related, `${file} has incorrect reciprocal links`);
+  }
+});
