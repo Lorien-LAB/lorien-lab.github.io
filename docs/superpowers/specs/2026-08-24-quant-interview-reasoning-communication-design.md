@@ -126,16 +126,33 @@ The coordinator creates `src/data/quant-interview/workstreams/interview-strategy
 ```json
 {
   "id": "interview-strategy-communication-reasoning-communication-013",
+  "status": "active",
   "canonicalTopics": [
     "interview-strategy-communication",
     "reasoning-communication"
+  ],
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["1.3", "1.4", "1.5"],
+      "evidencePageRanges": [{"startPage": 18, "endPage": 18}],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Three reusable reasoning-and-communication sections resolve as knowledge-only public checks."
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["1.12"],
+      "evidencePageRanges": [{"startPage": 25, "endPage": 26}],
+      "reviewOutcome": "reclassified-to-interview-preparation-coverage-only",
+      "reviewNote": "The section is rerouted to interview-preparation as coverage-only interview guidance with no public target."
+    }
   ]
 }
 ```
 
-The Green source scope lists `1.3`, `1.4`, and `1.5` with the private evidence range 18–18. The Red source scope lists `1.12` with the private evidence range 25–26 and records the reclassification as coverage-only guidance. The manifest has no 150 source scope.
+The coordinator creates this pre-closure manifest with `status: "active"`. The Green source scope lists `1.3`, `1.4`, and `1.5` with the private evidence range 18–18. The Red source scope lists `1.12` with the private evidence range 25–26 and records the reclassification as coverage-only guidance. The manifest has no 150 source scope.
 
-The candidate remains `active` after local verification. The coordinator alone may set the integrated manifest to `complete`, and only after reconciling against the latest durable base, applying shared-state deltas, updating exact corpus regression, passing the required local commands on the integrated commit, obtaining real successful CI for that commit, and recording factual HANDOFF closure.
+The candidate remains `active` after local verification. Only the coordinator may change the integrated manifest from `active` to `complete`, and only after reconciling against the latest durable base, applying shared-state deltas, updating exact corpus regression, passing the required local commands on the integrated commit, obtaining real successful CI for that exact commit, and recording factual HANDOFF closure.
 
 ## 6. Ownership boundaries
 
