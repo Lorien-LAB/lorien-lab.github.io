@@ -517,3 +517,27 @@ test('Problem 005 derives the general signed rate and exact one-revolution speed
   assert.match(page.text, /signed shore coordinate/i);
   assert.match(page.text, /angular rate.*linear speed|linear speed.*angular rate/is);
 });
+
+test('Problem 006 preserves coefficient five through exact rationalization to five halves', async () => {
+  const page = await readPage('src/content/problems/calculus/radical-difference-limit-at-infinity.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-006',
+    title: 'Radical Difference at Infinity',
+    description: 'Evaluate a difference of two unbounded radical terms by exact conjugate rationalization instead of subtracting infinite limits.',
+    subcategories: ['Limits', 'Rationalization'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['indeterminate-limits-and-growth-rates'],
+    techniques: [],
+    prerequisites: [],
+    relatedProblems: [],
+    family: 'algebraic-limit-transformations',
+    mathDifficulty: 2,
+    insightDifficulty: 2,
+    interviewDifficulty: 2,
+    estimatedMinutes: 8,
+  });
+  assertMath(page.text, String.raw`\sqrt{x^2+5x}-x=\frac{5x}{\sqrt{x^2+5x}+x}=\frac{5}{\sqrt{1+5/x}+1}`, 'Problem 006 rationalization');
+  assertMath(page.text, String.raw`\boxed{\lim_{x\to+\infty}(\sqrt{x^2+5x}-x)=\frac52}`, 'Problem 006 limit');
+  assert.match(page.text, /cannot subtract|invalid.*subtract|infinity minus infinity/i);
+  assert.ok((normalizedMath(page.text).match(/5/g) ?? []).length >= 4, 'coefficient 5 disappeared during rationalization');
+});
