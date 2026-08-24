@@ -572,3 +572,73 @@ test('Problem 006 preserves coefficient five through exact rationalization to fi
   assert.match(page.text, /cannot subtract|invalid.*subtract|infinity minus infinity/i);
   assert.ok((normalizedMath(page.text).match(/5/g) ?? []).length >= 4, 'coefficient 5 disappeared during rationalization');
 });
+
+test('bounded-monotone Knowledge proves convergence before fixed-point selection', async () => {
+  const page = await readPage('src/content/knowledge/concepts/bounded-monotone-convergence-and-fixed-points.md');
+  assertKnowledgePage(page, {
+    slug: 'bounded-monotone-convergence-and-fixed-points',
+    title: 'Bounded Monotone Convergence and Fixed Points',
+    description: 'Prove real recursive sequences converge through invariant bounds and monotonicity before using continuity to identify admissible fixed points.',
+    category: 'Calculus',
+    tags: ['Calculus', 'Limits', 'Sequences'],
+    related: ['indeterminate-limits-and-growth-rates'],
+  });
+  assert.match(page.text, /bounded monotone.*converges|monotone.*bounded.*converges/i);
+  assert.match(page.text, /invariant interval/i);
+  assert.match(page.text, /induction/i);
+  assert.match(page.text, /even and odd subsequences|even.*odd.*subsequence/i);
+  assert.match(page.text, /only after convergence|after.*prove.*converg/i);
+  assert.match(page.text, /fixed-point equation.*candidate|candidates.*not.*convergence/i);
+  assertMath(page.text, String.raw`c_0=2`, 'Knowledge continued-fraction start');
+  assertMath(page.text, String.raw`c_{n+1}=2+\frac2{c_n}`, 'Knowledge continued-fraction recurrence');
+  assertMath(page.text, String.raw`1+\sqrt3`, 'Knowledge continued-fraction limit');
+  assert.match(page.text, /nested[ -]radical/i);
+  assertMath(page.text, String.raw`x=\sqrt2`, 'Knowledge tower base');
+  assertMath(page.text, String.raw`L=2`, 'Knowledge tower limit');
+  assert.match(page.text, /fixed point.*4|branch.*4/i);
+});
+
+test('Problem 008 proves alternating-subsequence convergence before selecting one plus sqrt three', async () => {
+  const page = await readPage('src/content/problems/calculus/periodic-continued-fraction-limit.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-008',
+    title: 'Periodic Continued-Fraction Limit',
+    description: 'Prove finite continued-fraction convergents converge through alternating monotone subsequences before selecting the admissible fixed point.',
+    subcategories: ['Limits', 'Sequences', 'Fixed Points'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['bounded-monotone-convergence-and-fixed-points'],
+    techniques: [],
+    prerequisites: [],
+    relatedProblems: [],
+    family: 'recursive-sequence-limits',
+    mathDifficulty: 3,
+    insightDifficulty: 3,
+    interviewDifficulty: 4,
+    estimatedMinutes: 15,
+  });
+  const solution = solutionBody(page.text);
+  assertBefore(solution, /^### Invariant interval$/m, /^### Alternating subsequences$/m, 'Problem 008 invariant proof must precede subsequences');
+  assertBefore(solution, /^### Alternating subsequences$/m, /^### A single limit$/m, 'Problem 008 subsequences must precede common-limit proof');
+  assertBefore(solution, /^### A single limit$/m, /^### Fixed point and selection$/m, 'Problem 008 convergence must precede fixed point');
+  const invariant = subsectionBody(solution, 'Invariant interval');
+  assertMath(invariant, String.raw`c_0=2`, 'Problem 008 start');
+  assertMath(invariant, String.raw`c_1=F(2)=3`, 'Problem 008 first iterate');
+  assertMath(invariant, String.raw`2\le c_n\le3`, 'Problem 008 invariant');
+  assert.match(invariant, /2\s*\le.*2\s*\+\s*2\s*\/.*\le\s*3|maps.*\[2,\s*3\].*into/is);
+  const subsequences = subsectionBody(solution, 'Alternating subsequences');
+  assertMath(subsequences, String.raw`c_0=2<c_2=2+\frac23=\frac83`, 'Problem 008 even base inequality');
+  assert.match(subsequences, /c_\{2n\}.*increasing|even subsequence.*increasing/i);
+  assert.match(subsequences, /c_\{2n\+1\}.*decreasing|odd subsequence.*decreasing/i);
+  assert.match(subsequences, /apply.*decreasing|F.*decreasing/i);
+  const common = subsectionBody(solution, 'A single limit');
+  assertMath(common, String.raw`b=2+\frac2a`, 'Problem 008 odd-subsequence limit');
+  assertMath(common, String.raw`a=2+\frac2b`, 'Problem 008 even-subsequence limit');
+  assertMath(common, String.raw`(b-a)\left(1-\frac2{ab}\right)=0`, 'Problem 008 equal-limits argument');
+  assert.match(common, /a,?b.*(?:greater than or equal|\\ge).*2.*ab.*(?:greater than or equal|\\ge).*4|ab\s*=\s*2.*impossible/is);
+  assert.match(common, /full sequence converges|a\s*=\s*b/i);
+  const fixed = subsectionBody(solution, 'Fixed point and selection');
+  assertMath(fixed, String.raw`L^2-2L-2=0`, 'Problem 008 fixed-point polynomial');
+  assertMath(fixed, String.raw`L=1\pm\sqrt3`, 'Problem 008 candidate roots');
+  assertMath(fixed, String.raw`\boxed{L=1+\sqrt3}`, 'Problem 008 selected limit');
+  assert.match(fixed, /(?:positive|positivity).*1-\\sqrt3.*reject|1-\\sqrt3.*reject/i);
+});
