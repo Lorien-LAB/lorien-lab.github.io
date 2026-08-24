@@ -493,6 +493,7 @@
       "sourceSection": "6.2.2",
       "sourceItem": null,
       "canonicalTopics": [
+        "limits-derivatives",
         "integration"
       ],
       "state": "pending",
@@ -522,6 +523,7 @@
       "sourceSection": "6.3.2",
       "sourceItem": null,
       "canonicalTopics": [
+        "limits-derivatives",
         "integration"
       ],
       "state": "pending",

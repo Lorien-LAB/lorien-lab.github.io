@@ -1957,6 +1957,7 @@
       "sourceSection": "6.2.2",
       "role": "content",
       "canonicalTopics": [
+        "limits-derivatives",
         "integration"
       ]
     },
@@ -1980,6 +1981,7 @@
       "sourceSection": "6.3.2",
       "role": "content",
       "canonicalTopics": [
+        "limits-derivatives",
         "integration"
       ]
     },

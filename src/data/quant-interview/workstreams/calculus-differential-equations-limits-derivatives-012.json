@@ -1,0 +1,37 @@
+{
+  "id": "calculus-differential-equations-limits-derivatives-012",
+  "canonicalTopics": ["calculus-differential-equations", "limits-derivatives"],
+  "status": "active",
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": ["3.1", "3.1.1", "3.1.2", "3.1.3"],
+      "evidencePageRanges": [
+        {"startPage": 49, "endPage": 52}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Four Green rows resolve to three canonical-problem decisions and one knowledge-only decision; 3.1.3 owns two independent canonical Problems."
+    },
+    {
+      "source": "red-book",
+      "sourceSections": ["6.1", "6.2.1", "6.2.2", "6.3.1", "6.3.2", "10", "10.2"],
+      "evidencePageRanges": [
+        {"startPage": 201, "endPage": 229},
+        {"startPage": 317, "endPage": 318}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Ten Red rows resolve to six canonical Problems, three merged duplicates, and one knowledge-only decision. Adjacent items are reviewed-no-new-ownership or out of scope, and existing Q6.9/Q6.10 ownership remains unchanged."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": ["1", "2.1", "3.1"],
+      "evidencePageRanges": [
+        {"startPage": 11, "endPage": 12},
+        {"startPage": 27, "endPage": 28},
+        {"startPage": 50, "endPage": 65}
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Six item-level rows resolve to three canonical Problems and three merged duplicates. Other reviewed material has no new bounded Limits & Derivatives ownership."
+    }
+  ]
+}
