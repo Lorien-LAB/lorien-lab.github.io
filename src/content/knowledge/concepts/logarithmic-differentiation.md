@@ -47,7 +47,13 @@ Zero or negative bases require a separate real-domain analysis. A negative base 
 
 ## Products and Quotients of Many Factors
 
-For a positive product $y=\prod_{j=1}^m u_j(x)$,
+Let $u_j:I\to(0,+\infty)$ be differentiable for every $j=1,\dots,m$. Thus every individual factor satisfies $u_j(x)>0$ on $I$. For the product
+
+\[
+y=\prod_{j=1}^m u_j(x),
+\]
+
+the logarithm is justified factor by factor:
 
 \[
 \ln y=\sum_{j=1}^m\ln u_j,
@@ -55,7 +61,21 @@ For a positive product $y=\prod_{j=1}^m u_j(x)$,
 \frac{y'}y=\sum_{j=1}^m\frac{u_j'}{u_j}.
 \]
 
-Positive quotient factors enter with a minus sign. Always multiply the logarithmic derivative by the original $y$ at the end.
+For the quotient
+
+\[
+q(x)=\frac{\prod_{j=1}^m a_j(x)}{\prod_{k=1}^n b_k(x)},
+\]
+
+assume every numerator factor $a_j:I\to(0,+\infty)$ is differentiable and every denominator factor $b_k:I\to(0,+\infty)$ is differentiable. Consequently each $a_j(x)>0$ and each $b_k(x)>0$ on $I$. Only then do logarithms give
+
+\[
+\ln q=\sum_{j=1}^m\ln a_j-\sum_{k=1}^n\ln b_k,
+\qquad
+\frac{q'}q=\sum_{j=1}^m\frac{a_j'}{a_j}-\sum_{k=1}^n\frac{b_k'}{b_k}.
+\]
+
+Only denominator-factor terms enter with a minus sign. Always multiply the logarithmic derivative by the original function at the end.
 
 ## Variable Base and Variable Exponent
 

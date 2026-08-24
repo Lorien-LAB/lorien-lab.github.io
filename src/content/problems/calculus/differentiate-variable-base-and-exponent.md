@@ -125,6 +125,6 @@ The derivation separates a reusable rule from its domain. In an interview, stati
 
 ## Extensions
 
-Derive the logarithmic derivative of a positive product $y=\prod_j u_j(x)^{v_j(x)}$. Each factor contributes $v_j'\ln u_j+v_j u_j'/u_j$, after which the result is multiplied by $y$.
+Let every base $u_j:I\to(0,+\infty)$ be differentiable and every exponent $v_j:I\to\mathbb R$ be differentiable. Then each base value $u_j(x)$ is strictly positive, so every factor $u_j(x)^{v_j(x)}$ is positive before logarithms are taken. Derive the logarithmic derivative of $y=\prod_j u_j(x)^{v_j(x)}$: each factor contributes $v_j'\ln u_j+v_j u_j'/u_j$, after which the result is multiplied by $y$.
 
 </details>

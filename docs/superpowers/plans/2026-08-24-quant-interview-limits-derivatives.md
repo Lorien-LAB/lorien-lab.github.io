@@ -364,6 +364,42 @@ test('logarithmic differentiation Knowledge freezes the positive-base domain and
   assertBefore(page.text, /u:I\\to\(0,\s*\+\\infty\)\$?\s+(?:is|be)\s+differentiable/i, logIdentity, 'u differentiability must independently precede logarithms');
   assertBefore(page.text, /v:I\\to\\mathbb\s*R/, logIdentity, 'v:I to real values must precede logarithms');
   assertBefore(page.text, /v:I\\to\\mathbb\s*R\$?\s+(?:is|be)\s+differentiable/i, logIdentity, 'v differentiability must independently precede logarithms');
+  const factors = sectionBody(page.text, 'Products and Quotients of Many Factors');
+  const productLogIdentity = /\\ln y\s*=\s*\\sum_\{j=1\}\^m\\ln u_j/;
+  assertBefore(
+    factors,
+    /u_j:I\\to\(0,\s*\+\\infty\)\$?\s+be\s+differentiable\s+for\s+every/i,
+    productLogIdentity,
+    'each differentiable product factor must be positive before logarithms',
+  );
+  assertBefore(
+    factors,
+    /every individual factor satisfies \$u_j\(x\)>0\$/i,
+    productLogIdentity,
+    'each product-factor value must be strictly positive before logarithms',
+  );
+  const quotientLogIdentity =
+    /\\ln q\s*=\s*\\sum_\{j=1\}\^m\\ln a_j\s*-\s*\\sum_\{k=1\}\^n\\ln b_k/;
+  assertBefore(
+    factors,
+    /every numerator factor \$a_j:I\\to\(0,\s*\+\\infty\)\$ is differentiable/i,
+    quotientLogIdentity,
+    'every numerator factor must be differentiable and positive before quotient logarithms',
+  );
+  assertBefore(
+    factors,
+    /every denominator factor \$b_k:I\\to\(0,\s*\+\\infty\)\$ is differentiable/i,
+    quotientLogIdentity,
+    'every denominator factor must be differentiable and positive before quotient logarithms',
+  );
+  assertBefore(factors, /each \$a_j\(x\)>0\$/i, quotientLogIdentity, 'numerator values must be strictly positive');
+  assertBefore(factors, /each \$b_k\(x\)>0\$/i, quotientLogIdentity, 'denominator values must be strictly positive');
+  assertMath(
+    factors,
+    String.raw`\frac{q'}q=\sum_{j=1}^m\frac{a_j'}{a_j}-\sum_{k=1}^n\frac{b_k'}{b_k}`,
+    'quotient logarithmic derivative signs',
+  );
+  assert.match(factors, /only denominator-factor terms enter with a minus sign/i);
   assertMath(page.text, String.raw`\boxed{y'=u^v\left(v'\ln u+v\frac{u'}{u}\right)}`, 'general logarithmic derivative');
   assertMath(page.text, String.raw`\boxed{\frac{d}{dx}x^x=x^x(\ln x+1)},\qquad x>0`, 'x^x derivative and domain');
   assertMath(page.text, String.raw`\boxed{\frac{d}{dx}(\ln x)^{\ln x}=\frac{(\ln x)^{\ln x}}{x}(\ln\ln x+1)},\qquad x>1`, 'log-power derivative and domain');
@@ -381,7 +417,7 @@ test('Problem 001 derives u^v, visibly asks x^x, and preserves the log-power spe
     concepts: ['derivative-definition-and-core-rules'],
     techniques: ['logarithmic-differentiation'],
     prerequisites: [],
-    relatedProblems: ['derive-exponential-cosine-derivative-from-definition'],
+    relatedProblems: [],
     family: 'variable-base-variable-exponent',
     mathDifficulty: 2,
     insightDifficulty: 3,
@@ -615,7 +651,13 @@ Zero or negative bases require a separate real-domain analysis. A negative base 
 
 ## Products and Quotients of Many Factors
 
-For a positive product $y=\prod_{j=1}^m u_j(x)$,
+Let $u_j:I\to(0,+\infty)$ be differentiable for every $j=1,\dots,m$. Thus every individual factor satisfies $u_j(x)>0$ on $I$. For the product
+
+\[
+y=\prod_{j=1}^m u_j(x),
+\]
+
+the logarithm is justified factor by factor:
 
 \[
 \ln y=\sum_{j=1}^m\ln u_j,
@@ -623,7 +665,21 @@ For a positive product $y=\prod_{j=1}^m u_j(x)$,
 \frac{y'}y=\sum_{j=1}^m\frac{u_j'}{u_j}.
 \]
 
-Positive quotient factors enter with a minus sign. Always multiply the logarithmic derivative by the original $y$ at the end.
+For the quotient
+
+\[
+q(x)=\frac{\prod_{j=1}^m a_j(x)}{\prod_{k=1}^n b_k(x)},
+\]
+
+assume every numerator factor $a_j:I\to(0,+\infty)$ is differentiable and every denominator factor $b_k:I\to(0,+\infty)$ is differentiable. Consequently each $a_j(x)>0$ and each $b_k(x)>0$ on $I$. Only then do logarithms give
+
+\[
+\ln q=\sum_{j=1}^m\ln a_j-\sum_{k=1}^n\ln b_k,
+\qquad
+\frac{q'}q=\sum_{j=1}^m\frac{a_j'}{a_j}-\sum_{k=1}^n\frac{b_k'}{b_k}.
+\]
+
+Only denominator-factor terms enter with a minus sign. Always multiply the logarithmic derivative by the original function at the end.
 
 ## Variable Base and Variable Exponent
 
@@ -710,7 +766,7 @@ quantInterviewTopics: [calculus-differential-equations, limits-derivatives]
 concepts: [derivative-definition-and-core-rules]
 techniques: [logarithmic-differentiation]
 prerequisites: []
-relatedProblems: [derive-exponential-cosine-derivative-from-definition]
+relatedProblems: []
 family: variable-base-variable-exponent
 mathDifficulty: 2
 insightDifficulty: 3
@@ -828,7 +884,7 @@ The derivation separates a reusable rule from its domain. In an interview, stati
 
 ## Extensions
 
-Derive the logarithmic derivative of a positive product $y=\prod_j u_j(x)^{v_j(x)}$. Each factor contributes $v_j'\ln u_j+v_j u_j'/u_j$, after which the result is multiplied by $y$.
+Let every base $u_j:I\to(0,+\infty)$ be differentiable and every exponent $v_j:I\to\mathbb R$ be differentiable. Then each base value $u_j(x)$ is strictly positive, so every factor $u_j(x)^{v_j(x)}$ is positive before logarithms are taken. Derive the logarithmic derivative of $y=\prod_j u_j(x)^{v_j(x)}$: each factor contributes $v_j'\ln u_j+v_j u_j'/u_j$, after which the result is multiplied by $y$.
 
 </details>
 ```
@@ -2352,13 +2408,23 @@ Expected: PASS.
 
 **Files:**
 - Modify: `tests/quant-interview-limits-derivatives-content.test.mjs`
+- Modify: `src/content/problems/calculus/differentiate-variable-base-and-exponent.md`
 - Create: `src/content/problems/calculus/derive-exponential-cosine-derivative-from-definition.md`
 
 **Interfaces:**
 - Consumes: the derivative-definition standard limits from `derivative-definition-and-core-rules`.
 - Produces: Problem 010, reciprocal with Problem 001, using `Delta_h := cos(x+h)-cos x` as the exact intermediate variable.
 
-- [ ] **Step 1: Append the first-principles RED contract**
+- [ ] **Step 1: Update the existing graph contract, then append the first-principles RED contract**
+
+First, in the existing `Problem 001 derives u^v, visibly asks x^x, and preserves the log-power specialization` test, replace its phase-safe relationship expectation with:
+
+```diff
+-    relatedProblems: [],
++    relatedProblems: ['derive-exponential-cosine-derivative-from-definition'],
+```
+
+Only after that existing contract has been changed from `[]`, append this Problem 010 contract:
 
 ```js
 test('Problem 010 derives exp(cos x) from the exact Delta_h factorization without Taylor series', async () => {
@@ -2397,11 +2463,17 @@ test('Problem 010 derives exp(cos x) from the exact Delta_h factorization withou
 
 Run `node --test tests/quant-interview-limits-derivatives-content.test.mjs`.
 
-Expected: only Problem 010 fails with `ENOENT`.
+Expected: Problem 001 fails with a `relatedProblems` graph mismatch because its frontmatter still has `[]`, and Problem 010 fails with `ENOENT`. No other subtest fails.
 
-- [ ] **Step 3: Write minimal GREEN Problem 010**
+- [ ] **Step 3: Restore the reciprocal Problem 001 edge and write minimal GREEN Problem 010**
 
-Use the exact metadata asserted above. Start from the difference quotient, define `Delta_h`, factor exactly as tested, and explain the limiting interpretation at isolated `h` values for which `Delta_h=0`. Use angle addition plus `sin h/h -> 1` and `(cos h-1)/h -> 0` to obtain `Delta_h/h -> -sin x`; use continuity to show `Delta_h -> 0`, then the standard exponential limit. Do not use a Taylor/Maclaurin expansion and do not substitute the unrelated product `e^x cos x`. In Common Mistakes, describe those prohibited shortcuts in words without presenting them as derivation steps.
+In the same GREEN edit, change Problem 001's existing frontmatter field to:
+
+```yaml
+relatedProblems: [derive-exponential-cosine-derivative-from-definition]
+```
+
+Then create Problem 010 with `relatedProblems: [differentiate-variable-base-and-exponent]` as asserted above. This makes both directions resolvable before any schema/build gate runs. Start from the difference quotient, define `Delta_h`, factor exactly as tested, and explain the limiting interpretation at isolated `h` values for which `Delta_h=0`. Use angle addition plus `sin h/h -> 1` and `(cos h-1)/h -> 0` to obtain `Delta_h/h -> -sin x`; use continuity to show `Delta_h -> 0`, then the standard exponential limit. Do not use a Taylor/Maclaurin expansion and do not substitute the unrelated product `e^x cos x`. In Common Mistakes, describe those prohibited shortcuts in words without presenting them as derivation steps.
 
 Use this complete body after the tested frontmatter:
 
@@ -2536,7 +2608,7 @@ Repeat the same factorization for $e^{u(x)}$ whenever the first-principles deriv
 node --test tests/quant-interview-limits-derivatives-content.test.mjs
 npm run check
 npm run build
-git add tests/quant-interview-limits-derivatives-content.test.mjs src/content/problems/calculus/derive-exponential-cosine-derivative-from-definition.md
+git add tests/quant-interview-limits-derivatives-content.test.mjs src/content/problems/calculus/differentiate-variable-base-and-exponent.md src/content/problems/calculus/derive-exponential-cosine-derivative-from-definition.md
 git commit -m "feat: add first principles exponential cosine derivative"
 ```
 
@@ -2594,7 +2666,7 @@ test('Problem 008 proves alternating-subsequence convergence before selecting on
     concepts: ['bounded-monotone-convergence-and-fixed-points'],
     techniques: [],
     prerequisites: [],
-    relatedProblems: ['nested-radical-limit', 'infinite-power-tower-limit'],
+    relatedProblems: [],
     family: 'recursive-sequence-limits',
     mathDifficulty: 3,
     insightDifficulty: 3,
@@ -2747,7 +2819,13 @@ For each of the three safeguards above, state the induction base, induction step
 
 - [ ] **Step 4: Write Problem 008 with the complete subsequence proof**
 
-Use the tested metadata. Prove `[2,3]` is invariant, show even terms increase and odd terms decrease, name their limits `a,b`, pass the recurrence only after those subsequences converge, and use the exact subtraction identity to prove `a=b`. Only then solve the fixed-point quadratic; positivity rejects `1-sqrt(3)`. Do not shorten the proof to “the continued fraction clearly converges.”
+Use the tested metadata. Its complete Task 8 frontmatter must temporarily contain:
+
+```yaml
+relatedProblems: []
+```
+
+This phase-safe empty array is intentional because both final related targets belong to Task 9 and do not exist yet. Prove `[2,3]` is invariant, show even terms increase and odd terms decrease, name their limits `a,b`, pass the recurrence only after those subsequences converge, and use the exact subtraction identity to prove `a=b`. Only then solve the fixed-point quadratic; positivity rejects `1-sqrt(3)`. Do not shorten the proof to “the continued fraction clearly converges.” Task 9 restores the final three-node reciprocal graph before its own GREEN gates.
 
 Use this complete body after the tested frontmatter:
 
@@ -2919,6 +2997,7 @@ Expected: PASS.
 
 **Files:**
 - Modify: `tests/quant-interview-limits-derivatives-content.test.mjs`
+- Modify: `src/content/problems/calculus/periodic-continued-fraction-limit.md`
 - Create: `src/content/problems/calculus/nested-radical-limit.md`
 - Create: `src/content/problems/calculus/infinite-power-tower-limit.md`
 
@@ -2926,7 +3005,16 @@ Expected: PASS.
 - Consumes: `bounded-monotone-convergence-and-fixed-points` and the reciprocal Problem 008 graph.
 - Produces: Problems 011/012, completing the exact three-Problem recursive-sequence family.
 
-- [ ] **Step 1: Append RED contracts for both convergence proofs**
+- [ ] **Step 1: Update the existing Problem 008 graph contract, then append both convergence RED contracts**
+
+First, in the existing `Problem 008 proves alternating-subsequence convergence before selecting one plus sqrt three` test, replace its phase-safe relationship expectation with:
+
+```diff
+-    relatedProblems: [],
++    relatedProblems: ['nested-radical-limit', 'infinite-power-tower-limit'],
+```
+
+Only after that existing contract has been changed from `[]`, append both new tests:
 
 ```js
 test('Problem 011 proves the nested radical is increasing and bounded before selecting two', async () => {
@@ -3014,11 +3102,17 @@ test('Problem 012 distinguishes requested base sqrt two from tower limit two and
 
 Run `node --test tests/quant-interview-limits-derivatives-content.test.mjs`.
 
-Expected: only Problems 011 and 012 fail with `ENOENT`.
+Expected: Problem 008 fails with a `relatedProblems` graph mismatch because its frontmatter still has `[]`, while Problems 011 and 012 each fail with `ENOENT`. No other subtest fails.
 
-- [ ] **Step 3: Write Problem 011**
+- [ ] **Step 3: Restore the Problem 008 edges and write Problem 011**
 
-Use the exact tested metadata. Prove the lower start and monotonic step by induction, prove `a_n<2` by induction, invoke bounded-monotone convergence, then solve `L=sqrt(2+L)` and reject `-1` by positivity. Keep the proof order visible in section headings.
+Begin one GREEN edit by changing the existing Problem 008 frontmatter field to:
+
+```yaml
+relatedProblems: [nested-radical-limit, infinite-power-tower-limit]
+```
+
+Then write Problem 011 with the exact tested metadata. Prove the lower start and monotonic step by induction, prove `a_n<2` by induction, invoke bounded-monotone convergence, then solve `L=sqrt(2+L)` and reject `-1` by positivity. Keep the proof order visible in section headings. Do not run check or build until Problem 012 has also been created in Step 4, so every new relationship target exists together.
 
 Use this complete body after the tested frontmatter:
 
@@ -3271,7 +3365,7 @@ For a general positive base $b$, study finite towers $t_{n+1}=b^{t_n}$ and ask w
 node --test tests/quant-interview-limits-derivatives-content.test.mjs
 npm run check
 npm run build
-git add tests/quant-interview-limits-derivatives-content.test.mjs src/content/problems/calculus/nested-radical-limit.md src/content/problems/calculus/infinite-power-tower-limit.md
+git add tests/quant-interview-limits-derivatives-content.test.mjs src/content/problems/calculus/periodic-continued-fraction-limit.md src/content/problems/calculus/nested-radical-limit.md src/content/problems/calculus/infinite-power-tower-limit.md
 git commit -m "feat: add recursive radical and tower limits"
 ```
 

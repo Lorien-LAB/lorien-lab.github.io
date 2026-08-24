@@ -188,6 +188,42 @@ test('logarithmic differentiation Knowledge freezes the positive-base domain and
   assertBefore(page.text, /u:I\\to\(0,\s*\+\\infty\)\$?\s+(?:is|be)\s+differentiable/i, logIdentity, 'u differentiability must independently precede logarithms');
   assertBefore(page.text, /v:I\\to\\mathbb\s*R/, logIdentity, 'v:I to real values must precede logarithms');
   assertBefore(page.text, /v:I\\to\\mathbb\s*R\$?\s+(?:is|be)\s+differentiable/i, logIdentity, 'v differentiability must independently precede logarithms');
+  const factors = sectionBody(page.text, 'Products and Quotients of Many Factors');
+  const productLogIdentity = /\\ln y\s*=\s*\\sum_\{j=1\}\^m\\ln u_j/;
+  assertBefore(
+    factors,
+    /u_j:I\\to\(0,\s*\+\\infty\)\$?\s+be\s+differentiable\s+for\s+every/i,
+    productLogIdentity,
+    'each differentiable product factor must be positive before logarithms',
+  );
+  assertBefore(
+    factors,
+    /every individual factor satisfies \$u_j\(x\)>0\$/i,
+    productLogIdentity,
+    'each product-factor value must be strictly positive before logarithms',
+  );
+  const quotientLogIdentity =
+    /\\ln q\s*=\s*\\sum_\{j=1\}\^m\\ln a_j\s*-\s*\\sum_\{k=1\}\^n\\ln b_k/;
+  assertBefore(
+    factors,
+    /every numerator factor \$a_j:I\\to\(0,\s*\+\\infty\)\$ is differentiable/i,
+    quotientLogIdentity,
+    'every numerator factor must be differentiable and positive before quotient logarithms',
+  );
+  assertBefore(
+    factors,
+    /every denominator factor \$b_k:I\\to\(0,\s*\+\\infty\)\$ is differentiable/i,
+    quotientLogIdentity,
+    'every denominator factor must be differentiable and positive before quotient logarithms',
+  );
+  assertBefore(factors, /each \$a_j\(x\)>0\$/i, quotientLogIdentity, 'numerator values must be strictly positive');
+  assertBefore(factors, /each \$b_k\(x\)>0\$/i, quotientLogIdentity, 'denominator values must be strictly positive');
+  assertMath(
+    factors,
+    String.raw`\frac{q'}q=\sum_{j=1}^m\frac{a_j'}{a_j}-\sum_{k=1}^n\frac{b_k'}{b_k}`,
+    'quotient logarithmic derivative signs',
+  );
+  assert.match(factors, /only denominator-factor terms enter with a minus sign/i);
   assertMath(page.text, String.raw`\boxed{y'=u^v\left(v'\ln u+v\frac{u'}{u}\right)}`, 'general logarithmic derivative');
   assertMath(page.text, String.raw`\boxed{\frac{d}{dx}x^x=x^x(\ln x+1)},\qquad x>0`, 'x^x derivative and domain');
   assertMath(page.text, String.raw`\boxed{\frac{d}{dx}(\ln x)^{\ln x}=\frac{(\ln x)^{\ln x}}{x}(\ln\ln x+1)},\qquad x>1`, 'log-power derivative and domain');
