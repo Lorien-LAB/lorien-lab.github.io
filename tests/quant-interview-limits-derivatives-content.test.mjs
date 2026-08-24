@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import { tmpdir } from 'node:os';
 import path from 'node:path';
 
 const topicArray = ['calculus-differential-equations', 'limits-derivatives'];
@@ -801,12 +802,45 @@ async function topicLocalSlugs(root) {
   for (const file of files.filter((entry) => String(entry).endsWith('.md'))) {
     const fullPath = path.join(root, String(file));
     const page = await readPage(fullPath);
-    const topics = scalar(page.frontmatter, 'quantInterviewTopics');
-    if (topics && JSON.stringify(inlineArray(page.frontmatter, 'quantInterviewTopics')) === JSON.stringify(topicArray)) {
+    if (
+      /^quantInterviewTopics:/m.test(page.frontmatter)
+      && JSON.stringify(inlineArray(page.frontmatter, 'quantInterviewTopics')) === JSON.stringify(topicArray)
+    ) {
       slugs.push(path.basename(String(file), '.md'));
     }
   }
   return slugs.sort();
+}
+
+async function topicFixture(t, frontmatterLines, eol = '\n') {
+  const root = await mkdtemp(path.join(tmpdir(), 'limits-derivatives-topics-'));
+  t.after(() => rm(root, { recursive: true, force: true }));
+  await writeFile(path.join(root, 'fixture.md'), ['---', ...frontmatterLines, '---', ''].join(eol));
+  return root;
+}
+
+async function assertTopicFieldContracts(t) {
+  const root = await topicFixture(t, ['title: Missing topics']);
+  assert.deepEqual(await topicLocalSlugs(root), [], 'missing topic field must be skipped');
+
+  const emptyRoot = await topicFixture(t, ['title: Empty topics', 'quantInterviewTopics:'], '\r\n');
+  await assert.rejects(
+    topicLocalSlugs(emptyRoot),
+    /quantInterviewTopics must use an inline YAML array/,
+    'present but empty topic field must be rejected',
+  );
+
+  const blockListRoot = await topicFixture(t, [
+    'title: Block-list topics',
+    'quantInterviewTopics:',
+    '  - calculus-differential-equations',
+    '  - limits-derivatives',
+  ]);
+  await assert.rejects(
+    topicLocalSlugs(blockListRoot),
+    /quantInterviewTopics must use an inline YAML array/,
+    'topic YAML block list must be rejected',
+  );
 }
 
 const exactKnowledgeSlugs = [
@@ -890,7 +924,8 @@ const progressiveHintContracts = new Map([
   }],
 ]);
 
-test('module contains exactly seven Knowledge and thirteen Problem slugs', async () => {
+test('module contains exactly seven Knowledge and thirteen Problem slugs', async (t) => {
+  await assertTopicFieldContracts(t);
   assert.deepEqual(await topicLocalSlugs('src/content/knowledge'), exactKnowledgeSlugs);
   assert.deepEqual(await topicLocalSlugs('src/content/problems'), exactProblemSlugs);
 });
