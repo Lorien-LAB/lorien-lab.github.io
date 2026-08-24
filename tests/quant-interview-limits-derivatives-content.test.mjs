@@ -260,3 +260,82 @@ test('Problem 001 derives u^v, visibly asks x^x, and preserves the log-power spe
   assertMath(page.text, String.raw`y=(\ln x)^{\ln x}`, 'Problem 001 log-power prompt');
   assertMath(solution, String.raw`\boxed{y'=\frac{(\ln x)^{\ln x}}{x}(\ln\ln x+1)},\qquad x>1`, 'Problem 001 log-power result and domain');
 });
+
+test('qualitative derivative Knowledge separates critical, curvature, and inflection tests', async () => {
+  const page = await readPage('src/content/knowledge/concepts/monotonicity-convexity-critical-points-and-inflection.md');
+  assertKnowledgePage(page, {
+    slug: 'monotonicity-convexity-critical-points-and-inflection',
+    title: 'Monotonicity, Convexity, Critical Points, and Inflection',
+    description: 'Use derivative sign charts and second-derivative sign changes to analyze critical points, monotonicity, convexity, extrema, and inflection.',
+    category: 'Calculus',
+    tags: ['Calculus', 'Derivatives', 'Convexity'],
+    related: ['derivative-definition-and-core-rules'],
+  });
+  assert.match(page.text, /f'.*=\s*0|f'.*undefined/i);
+  assert.match(page.text, /first-derivative sign chart/i);
+  assert.match(page.text, /local.*global|global.*local/i);
+  assert.match(page.text, /closed interval.*endpoint|endpoint.*closed interval/i);
+  const localTests = sectionBody(page.text, 'Second-Derivative Local Tests');
+  assert.match(localTests, /f'(?:\(c\))?\s*=\s*0.*f''(?:\(c\))?\s*>\s*0.*local minimum/is);
+  assert.match(localTests, /f'(?:\(c\))?\s*=\s*0.*f''(?:\(c\))?\s*<\s*0.*local maximum/is);
+  assert.match(localTests, /critical point[^\n]*f''(?:\(c\))?\s*=\s*0[^\n]*inconclusive|f''(?:\(c\))?\s*=\s*0[^\n]*inconclusive[^\n]*critical/i);
+  const curvatureTests = sectionBody(page.text, 'Convexity, Concavity, and Inflection');
+  assert.match(curvatureTests, /inflection[^\n]*f''(?:\(c\))?\s*=\s*0[^\n]*(?:not sufficient|inconclusive)|f''(?:\(c\))?\s*=\s*0[^\n]*(?:not sufficient|inconclusive)[^\n]*inflection/i);
+  assert.match(page.text, /inflection.*sign change|concavity change/i);
+  assert.match(page.text, /midpoint convexity/i);
+  assertMath(page.text, String.raw`F'(x)=\frac{1}{\sigma\sqrt{2\pi}}\exp\left(-\frac{(x-\mu)^2}{2\sigma^2}\right)`, 'Normal density example');
+  assert.match(page.text, /F''>0.*x<.*mu|positive.*left.*mu/i);
+  assert.match(page.text, /F''<0.*x>.*mu|negative.*right.*mu/i);
+});
+
+test('Problem 002 proves the transcendental-power comparison by a full-interval sign chart', async () => {
+  const page = await readPage('src/content/problems/calculus/compare-e-pi-power-expressions.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-002',
+    title: 'Compare Two Transcendental Powers',
+    description: 'Compare two transcendental powers by maximizing the logarithm-over-input function with a first-derivative sign chart.',
+    subcategories: ['Derivatives', 'Monotonicity', 'Inequalities'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['monotonicity-convexity-critical-points-and-inflection'],
+    techniques: [],
+    prerequisites: ['derivative-definition-and-core-rules'],
+    relatedProblems: ['exponential-midpoint-convexity'],
+    family: 'exponential-inequalities',
+    mathDifficulty: 2,
+    insightDifficulty: 3,
+    interviewDifficulty: 3,
+    estimatedMinutes: 10,
+  });
+  assert.equal(scalar(page.frontmatter, 'title'), 'Compare Two Transcendental Powers');
+  assert.doesNotMatch(scalar(page.frontmatter, 'title'), /e\^pi|pi\^e|\\pi|\$/i);
+  assertMath(page.text, String.raw`f(x)=\frac{\ln x}{x}`, 'comparison function');
+  assertMath(page.text, String.raw`f'(x)=\frac{1-\ln x}{x^2}`, 'comparison derivative');
+  assert.match(page.text, /increases.*\(0,\s*e\)/i);
+  assert.match(page.text, /decreases.*\(e,\s*\+\\infty\)/i);
+  assert.match(page.text, /global maximum.*e/i);
+  assertMath(page.text, String.raw`\boxed{e^\pi>\pi^e}`, 'transcendental comparison');
+  assert.match(page.text, /f''\s*=\s*0.*inconclusive|inconclusive.*f''\s*=\s*0/i);
+});
+
+test('Problem 007 proves exponential midpoint convexity with the exact equality case', async () => {
+  const page = await readPage('src/content/problems/calculus/exponential-midpoint-convexity.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-007',
+    title: 'Exponential Midpoint Convexity',
+    description: 'Prove the exponential midpoint inequality by strict convexity and identify the equality case exactly.',
+    subcategories: ['Derivatives', 'Convexity', 'Inequalities'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['monotonicity-convexity-critical-points-and-inflection'],
+    techniques: [],
+    prerequisites: ['derivative-definition-and-core-rules'],
+    relatedProblems: ['compare-e-pi-power-expressions'],
+    family: 'exponential-inequalities',
+    mathDifficulty: 2,
+    insightDifficulty: 2,
+    interviewDifficulty: 3,
+    estimatedMinutes: 10,
+  });
+  assertMath(page.text, String.raw`\boxed{\frac{e^a+e^b}{2}\ge e^{(a+b)/2}}`, 'midpoint inequality');
+  assertMath(page.text, String.raw`f''(x)=e^x>0`, 'strict convexity');
+  assert.match(page.text, /equality.*(?:if and only if|iff|exactly when).*a\s*=\s*b/i);
+});
