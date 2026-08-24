@@ -164,7 +164,7 @@ The candidate may create only:
 - `src/content/knowledge/concepts/structured-think-aloud-reasoning.md`; and
 - `tests/quant-interview-reasoning-communication-content.test.mjs`.
 
-The candidate test is public-content-only. It verifies both pages exist; their exact canonical topic arrays; reciprocal new-node links; aligned `relatedNotes`; visible Interview Checks; source-neutral public text; and the absence of a classified Problem assigned to `reasoning-communication`.
+The candidate test is public-content-only. For both slugs it asserts the frozen frontmatter fields `type: concept`, `domain: Interview Strategy & Communication`, `category: Problem Solving Techniques`, `status: growing`, and `featured: false`; it also verifies both pages exist, their exact canonical topic arrays, reciprocal new-node links, aligned `relatedNotes`, visible Interview Checks, source-neutral public text, and the absence of a classified Problem assigned to `reasoning-communication`.
 
 ### 6.2 Coordinator-owned integration surface
 
@@ -174,7 +174,10 @@ The coordinator alone reconciles or creates:
 - `src/data/quant-interview/coverage/red-book.json`;
 - `src/data/quant-interview/topics/source-topic-map.json`;
 - `src/data/quant-interview/workstreams/interview-strategy-communication-reasoning-communication-013.json`;
+- `tests/quant-interview-reasoning-communication-workstream.test.mjs`;
+- `tests/quant-interview-reasoning-communication-completion.test.mjs`;
 - `tests/quant-interview-source-neutral-content.test.mjs`;
+- `tests/quant-interview-handoff.test.mjs`;
 - coverage and workstream integration assertions;
 - `docs/quant-interview/HANDOFF.md`; and
 - completion metadata and real-CI evidence.
@@ -183,7 +186,7 @@ No existing public page is modified by the candidate, including reciprocal links
 
 ## 7. Test and regression contract
 
-The candidate-owned content test must be narrow enough to pass before coordinator-owned shared files exist. It does not assert coverage, source-map, manifest, HANDOFF, or global-count state.
+The candidate-owned content test must be narrow enough to pass before coordinator-owned shared files exist. It does not assert coverage, source-map, manifest, HANDOFF, completion, CI, or global-count state.
 
 At integration, coordinator-owned checks must assert all of the following:
 
@@ -195,6 +198,22 @@ At integration, coordinator-owned checks must assert all of the following:
 6. the source-neutral global regression enumerates every slug and asserts exactly 76 Problems and 50 Knowledge nodes, including both new Knowledge slugs.
 
 The global count check remains exact enumeration; it must not be weakened to a lower-bound assertion.
+
+### 7.1 Coordinator-owned workstream and completion gates
+
+`tests/quant-interview-reasoning-communication-workstream.test.mjs` is added by the coordinator with the shared-state integration patch. Before closure, it asserts `manifest.status === 'active'`, the fixed ID and source scopes in Section 5, and successful `validateTopicWorkstream` validation; it also asserts the coverage, map, target, and no-150 conditions in the numbered integration contract above. A manifest that is already `complete` before the completion evidence exists is a test failure. This active-state test must pass before the coordinator changes the manifest status.
+
+`tests/quant-interview-reasoning-communication-completion.test.mjs` is added by the coordinator before changing the manifest to `complete`. Its final-state assertions require all of the following concrete facts:
+
+1. the manifest status is exactly `complete`; the separately passing pre-closure workstream test is the automated active-state gate before this transition;
+2. `verification.commit` is a real 40-character lowercase hexadecimal commit identifier;
+3. `verification.runId` is a positive integer identifying the real successful CI run for that exact commit;
+4. `verification.commands` is exactly `npm run test`, `npm run check`, and `npm run build`, in that order, and `verification.conclusion` is `success`;
+5. the factual HANDOFF closure names the same 40-character commit and positive CI run ID, records the module as closed, and does not claim a later workstream complete by implication;
+6. if temporary CI scaffolding was used, the completion test lists every temporary artifact path used by 013 and asserts that each is absent from the final tree; and
+7. the final clean tree has fresh, post-removal passing `npm run test`, `npm run check`, and `npm run build` evidence before completion is recorded.
+
+The completion test must make these assertions against the manifest, HANDOFF, repository paths, and recorded verification metadata; prose alone is not sufficient evidence. The candidate may not create, relax, or satisfy these coordinator-owned closure tests. `tests/quant-interview-handoff.test.mjs` and the global source-neutral regression are updated by the coordinator in the same closure path to enforce the HANDOFF and exact 76/50 corpus contracts.
 
 ## 8. Editorial and safety constraints
 
@@ -209,6 +228,7 @@ Integration is serialized as 011, then 012, then 013. The coordinator applies th
 - If source identity or evidence is found to be invalid, keep the workstream active and do not freeze coverage or author source-derived public content.
 - If a semantic collision with an existing canonical node is found, preserve canonical ownership and revise the design or merge the material instead of creating a duplicate node.
 - If a shared-state or validation check fails, keep the workstream active; do not advance HANDOFF, completion metadata, or CI success claims.
+- Do not change the manifest to `complete` or advance the serialized queue until the coordinator-owned workstream and completion tests pass with every fact in Section 7.1, including post-temporary-removal final-tree verification when temporary CI scaffolding was used.
 - If integration requires correction after a durable commit, use a corrective commit rather than rewriting shared history.
 
 ## 10. Review gate
