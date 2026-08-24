@@ -384,17 +384,22 @@ test('handoff preserves exact reservations while 011 advances through its lifecy
   const handoff = await readFile(handoffPath, 'utf8');
   const coordination = handoff.split(/## Parallel workstream coordination/i)[1]?.split(/## /)[0] ?? '';
   const rows = reservationRows(coordination);
+  const status = await workstream011Status();
+  const expected011State = {
+    absent: 'design-audit',
+    active: 'active',
+    complete: 'complete',
+  }[status];
   assert.ok(coordination, 'HANDOFF missing parallel workstream coordination');
   assert.match(coordination, /maximum active candidates[^\n]*3/i);
   assert.deepEqual(
     rows.map(({ state, ...identity }) => identity),
     reservations.map(({ state, ...identity }, index) => ({ queue: String(index + 1), ...identity })),
   );
-  assert.match(rows[0]?.state ?? '', /^(?:design-audit|active|complete)$/);
+  assert.equal(rows[0]?.state, expected011State);
   assert.equal(rows[1]?.state, 'design-audit');
   assert.equal(rows[2]?.state, 'design-audit');
 
-  const status = await workstream011Status();
   if (status === 'complete') {
     assert.match(coordination, /completed queue entry[^\n]*011/i);
     assert.match(coordination, /remaining integration queue[^\n]*012[^\n]*013/i);
@@ -402,6 +407,7 @@ test('handoff preserves exact reservations while 011 advances through its lifecy
   } else {
     assert.match(coordination, /integration queue[^\n]*011[^\n]*012[^\n]*013/i);
     assert.match(coordination, /candidate[^\n]*active[^\n]*not[^\n]*complete/i);
+    assert.doesNotMatch(coordination, /completed queue entry[^\n]*011/i);
   }
 });
 

@@ -4,6 +4,8 @@ import { readFile } from 'node:fs/promises';
 
 const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
 const workstreamPath = 'src/data/quant-interview/workstreams/stochastic-processes-random-walks-markov-chains-011.json';
+const expectedGreenReviewNote = 'Audited exactly Green 5.1 theory, 5.1.gamblers-ruin, 5.1.dice-question, 5.1.coin-triplets, and 5.1.color-balls. Ownership is limited to finite-state Markov-chain theory, the existing boundary identity, two pattern/streak families, and ordered-pair recoloring; martingales, continuous-time chains, and unrelated chapter material remain excluded.';
+const expectedRedReviewNote = 'Audited exactly Red items 3.22, 3.23, and 3.40. Item 3.22 owns the cube positive-return Problem; items 3.23 and 3.40 merge into the existing random-walk-boundary identity. No other Red item or broad section is claimed by 011.';
 
 async function context() {
   const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
@@ -46,14 +48,16 @@ test('workstream 011 records exact bounded evidence and 150 no-ownership review'
   const q150 = workstream.sourceScopes.find((scope) => scope.source === '150-most-frequently-asked');
   assert.deepEqual(green?.sourceSections, ['5.1']);
   assert.deepEqual(green?.evidencePageRanges, [{ startPage: 121, endPage: 131 }]);
-  for (const key of ['5.1', 'gamblers-ruin', 'dice-question', 'coin-triplets', 'color-balls']) assert.match(green?.reviewNote ?? '', new RegExp(key.replace('.', '\\.')));
+  assert.equal(green?.reviewOutcome, 'bounded-item-level-review');
+  assert.equal(green?.reviewNote, expectedGreenReviewNote);
   assert.deepEqual(red?.sourceSections, ['3.2.1', '3.2.2']);
   assert.deepEqual(red?.evidencePageRanges, [
     { startPage: 94, endPage: 96 },
     { startPage: 115, endPage: 117 },
     { startPage: 139, endPage: 139 },
   ]);
-  for (const item of ['3.22', '3.23', '3.40']) assert.match(red?.reviewNote ?? '', new RegExp(item.replace('.', '\\.')));
+  assert.equal(red?.reviewOutcome, 'bounded-item-level-review');
+  assert.equal(red?.reviewNote, expectedRedReviewNote);
   assert.deepEqual(q150?.sourceSections, ['2.6']);
   assert.deepEqual(q150?.evidencePageRanges, [
     { startPage: 41, endPage: 43 },

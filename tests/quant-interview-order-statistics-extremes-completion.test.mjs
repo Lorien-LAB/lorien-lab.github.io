@@ -37,6 +37,12 @@ test('handoff records workstream 010 as durable history', async () => {
   assert.match(handoff, /Random Ants|collision relabeling/i);
   assert.match(handoff, /150[^\n]*(?:no new|no independent|no.*ownership)/i);
 
-  assert.match(handoff, /Historical transition marker:[^\n]*Order Statistics & Extremes[^\n]*fully closed/i);
-  assert.match(handoff, /does not authorize reopening|records lineage only/i);
+  const orderStatisticsMarkers = handoff
+    .split(/\r?\n/)
+    .filter((line) => /Historical transition marker:.*Order Statistics & Extremes/i.test(line));
+  assert.equal(orderStatisticsMarkers.length, 1);
+  const [orderStatisticsMarker] = orderStatisticsMarkers;
+  assert.match(orderStatisticsMarker, /fully closed/i);
+  assert.match(orderStatisticsMarker, /records lineage only/i);
+  assert.match(orderStatisticsMarker, /does not authorize reopening/i);
 });
