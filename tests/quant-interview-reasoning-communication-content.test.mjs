@@ -92,3 +92,66 @@ test('problem framing page teaches clarification and revisable assumptions', asy
   assert.match(checks, /assumption.*consequence/is);
   assert.match(checks, /feedback.*revise/is);
 });
+
+test('structured think-aloud page exposes decisive and revisable reasoning', async () => {
+  const text = await readFile(structuredPath, 'utf8');
+  assertFixedMetadata(text, {
+    title: 'Structured Think-Aloud Reasoning',
+    description:
+      'Communicate conclusions and decisive reasoning steps clearly, distinguish facts from inferences, and revise the explanation when feedback changes the model.',
+    tags: ['Interview', 'Reasoning', 'Communication', 'Feedback'],
+    related: ['problem-framing-clarification-assumption-management'],
+  });
+  assertSourceNeutral(text);
+
+  for (const heading of [
+    '## Core Idea',
+    '## Concise Explanation Protocol',
+    '## Recognition Signals',
+    '## What to Expose',
+    '## Common Mistakes',
+    '## Interview Checks',
+  ]) assert.match(text, new RegExp('^' + heading + '$', 'm'), 'missing ' + heading);
+
+  assert.match(text, /conclusion or intended route first/i);
+  assert.match(text, /observations.*assumptions.*inferences.*uncertainty/is);
+  assert.match(text, /steps that change the decision/i);
+  assert.match(text, /trivial arithmetic or syntax/i);
+  assert.match(text, /meaningful checkpoint/i);
+  assert.match(text, /result, limitation, or next discriminating test/i);
+  assert.match(text, /correct(?:ing|ive) feedback/i);
+  assert.match(text, /revise/i);
+
+  const checks = text.split(/^## Interview Checks$/m)[1] ?? '';
+  assert.match(checks, /decisive step/i);
+  assert.match(checks, /fact.*inference/is);
+  assert.match(checks, /compress.*routine narration/is);
+  assert.match(checks, /challenge.*update/is);
+});
+
+test('new Knowledge nodes form one aligned reciprocal pair', async () => {
+  const framing = await readFile(framingPath, 'utf8');
+  const structured = await readFile(structuredPath, 'utf8');
+  assert.deepEqual(parseInlineArray(framing, 'related'), [
+    'structured-think-aloud-reasoning',
+  ]);
+  assert.deepEqual(parseInlineArray(structured, 'related'), [
+    'problem-framing-clarification-assumption-management',
+  ]);
+  assert.deepEqual(parseInlineArray(framing, 'relatedNotes'), [relationNote]);
+  assert.deepEqual(parseInlineArray(structured, 'relatedNotes'), [relationNote]);
+});
+
+test('reasoning communication creates no classified Problem', async () => {
+  const root = 'src/content/problems';
+  const files = (await readdir(root, { recursive: true }))
+    .filter((file) => String(file).endsWith('.md'));
+  const offenders = [];
+  for (const file of files) {
+    const text = await readFile(path.join(root, String(file)), 'utf8');
+    if (parseInlineArray(text, 'quantInterviewTopics').includes('reasoning-communication')) {
+      offenders.push(String(file).replaceAll('\\', '/'));
+    }
+  }
+  assert.deepEqual(offenders.sort(), []);
+});
