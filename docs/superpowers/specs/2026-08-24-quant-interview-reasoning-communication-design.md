@@ -201,19 +201,25 @@ The global count check remains exact enumeration; it must not be weakened to a l
 
 ### 7.1 Coordinator-owned workstream and completion gates
 
-`tests/quant-interview-reasoning-communication-workstream.test.mjs` is added by the coordinator with the shared-state integration patch. Before closure, it asserts `manifest.status === 'active'`, the fixed ID and source scopes in Section 5, and successful `validateTopicWorkstream` validation; it also asserts the coverage, map, target, and no-150 conditions in the numbered integration contract above. A manifest that is already `complete` before the completion evidence exists is a test failure. This active-state test must pass before the coordinator changes the manifest status.
+`tests/quant-interview-reasoning-communication-workstream.test.mjs` is added by the coordinator with the shared-state integration patch. In every phase it asserts the fixed ID and source scopes in Section 5, successful `validateTopicWorkstream` validation, and the coverage, map, target, and no-150 conditions in the numbered integration contract above. It accepts only `manifest.status` values `active` and `complete`.
 
-`tests/quant-interview-reasoning-communication-completion.test.mjs` is added by the coordinator before changing the manifest to `complete`. Its final-state assertions require all of the following concrete facts:
+- When the manifest is `active`, the test requires all completion-only verification fields to be absent or unset, asserts that the HANDOFF does not close 013 or advance the queue on 013's behalf, and establishes the automated active-state gate.
+- When the manifest is `complete`, the test never demands `active`; it requires the strict closure-evidence contract below directly or through a shared completion assertion helper.
 
-1. the manifest status is exactly `complete`; the separately passing pre-closure workstream test is the automated active-state gate before this transition;
-2. `verification.commit` is a real 40-character lowercase hexadecimal commit identifier;
-3. `verification.runId` is a positive integer identifying the real successful CI run for that exact commit;
-4. `verification.commands` is exactly `npm run test`, `npm run check`, and `npm run build`, in that order, and `verification.conclusion` is `success`;
-5. the factual HANDOFF closure names the same 40-character commit and positive CI run ID, records the module as closed, and does not claim a later workstream complete by implication;
-6. if temporary CI scaffolding was used, the completion test lists every temporary artifact path used by 013 and asserts that each is absent from the final tree; and
-7. the final clean tree has fresh, post-removal passing `npm run test`, `npm run check`, and `npm run build` evidence before completion is recorded.
+`tests/quant-interview-reasoning-communication-completion.test.mjs` is also added by the coordinator before closure and is phase-safe:
 
-The completion test must make these assertions against the manifest, HANDOFF, repository paths, and recorded verification metadata; prose alone is not sufficient evidence. The candidate may not create, relax, or satisfy these coordinator-owned closure tests. `tests/quant-interview-handoff.test.mjs` and the global source-neutral regression are updated by the coordinator in the same closure path to enforce the HANDOFF and exact 76/50 corpus contracts.
+- In the `active` phase, it proves that no premature completion is recorded: completion-only verification fields are absent or unset, the HANDOFF does not claim closure, and no later queue advance is attributed to 013.
+- In the `complete` phase, it asserts all of the following concrete facts:
+
+  1. `verification.commit` is a real 40-character lowercase hexadecimal commit identifier;
+  2. `verification.runId` is a positive integer identifying the real successful CI run for that exact commit;
+  3. `verification.commands` is exactly `npm run test`, `npm run check`, and `npm run build`, in that order, and `verification.conclusion` is `success`;
+  4. closure evidence records the successful pre-closure active-state test run and its 40-character commit, with status `active` at that recorded commit;
+  5. the factual HANDOFF closure names the same final 40-character commit and positive CI run ID, records the module as closed, and does not claim a later workstream complete by implication;
+  6. if temporary CI scaffolding was used, the completion test lists every temporary artifact path used by 013 and asserts that each is absent from the final tree; and
+  7. the final clean tree has fresh, post-removal passing `npm run test`, `npm run check`, and `npm run build` evidence before completion is recorded.
+
+The workstream and completion tests make these assertions against the manifest, HANDOFF, repository paths, and recorded verification metadata; prose alone is not sufficient evidence. The candidate may not create, relax, or satisfy these coordinator-owned closure tests. `tests/quant-interview-handoff.test.mjs` and the global source-neutral regression are updated by the coordinator in the same closure path to enforce the HANDOFF and exact 76/50 corpus contracts. This phase-safe arrangement allows fresh final `npm run test`, `npm run check`, and `npm run build` to pass after the manifest reaches `complete`.
 
 ## 8. Editorial and safety constraints
 
