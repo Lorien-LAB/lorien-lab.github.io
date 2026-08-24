@@ -121,12 +121,16 @@ const knowledgeMeta = {
 Run from an LF-normalized native-Linux or WSL-native-filesystem checkout, never `/mnt/c`:
 
 ```bash
-test "$(node --version | cut -d. -f1)" = "v24"
 case "$PWD" in /mnt/*) exit 1 ;; esac
+test "$(node --version | cut -d. -f1)" = "v24"
+test -z "$(git grep -Il $'\r')"
 test -z "$(git status --short)"
 git worktree add ../quant-interview-013-frozen-baseline f41880f220991f43d84ddb3795a59b8688e5230c
 (
   cd ../quant-interview-013-frozen-baseline
+  case "$PWD" in /mnt/*) exit 1 ;; esac
+  test "$(node --version | cut -d. -f1)" = "v24"
+  test -z "$(git grep -Il $'\r')"
   npm ci
   npm run test
   npm run check
@@ -136,32 +140,24 @@ git worktree remove ../quant-interview-013-frozen-baseline
 npm ci
 candidate_baseline_sha="$(git rev-parse HEAD)"
 printf '%s' "$candidate_baseline_sha" | grep -Eq '^[0-9a-f]{40}$'
-if grep -qi microsoft /proc/version; then
-  candidate_environment=wsl-native-lf-node24
-else
-  candidate_environment=linux-native-lf-node24
-fi
 git_common_dir="$(cd "$(git rev-parse --git-common-dir)" && pwd -P)"
 candidate_context="$git_common_dir/quant-interview-013-candidate-context.json"
 CANDIDATE_BASELINE_SHA="$candidate_baseline_sha" \
-CANDIDATE_ENVIRONMENT="$candidate_environment" \
 CANDIDATE_CONTEXT="$candidate_context" \
 node --input-type=module <<'NODE'
 import assert from 'node:assert/strict';
 import { writeFileSync } from 'node:fs';
 
 const baselineSha = process.env.CANDIDATE_BASELINE_SHA;
-const environment = process.env.CANDIDATE_ENVIRONMENT;
 assert.match(baselineSha, /^[0-9a-f]{40}$/);
-assert.match(environment, /^(?:linux-native-lf-node24|wsl-native-lf-node24)$/);
 writeFileSync(
   process.env.CANDIDATE_CONTEXT,
-  `${JSON.stringify({ baselineSha, environment }, null, 2)}\n`,
+  `${JSON.stringify({ baselineSha }, null, 2)}\n`,
 );
 NODE
 ```
 
-Expected: Node reports major version 24; the checkout path is not Windows-mounted; all three ordered gates pass on the frozen `59/39` base; the disposable baseline worktree is removed; the candidate's exact implementation-base SHA and qualified environment are persisted outside the tracked tree in the Git common directory.
+Expected: both the candidate checkout and disposable frozen-base checkout are outside `/mnt`, run Node 24, and have no CR bytes in tracked text; all three ordered gates pass on the frozen `59/39` base; the disposable baseline worktree is removed; and only the candidate's exact implementation-base SHA is persisted outside the tracked tree in the Git common directory. Task 2 must derive the reported environment from its own fresh authoritative verification run.
 
 - [ ] **Step 2: Write the failing framing-page test**
 
@@ -578,15 +574,27 @@ Expected: the committed Task 1 delta is exactly the framing page and module test
 Run in the same qualified Node 24 checkout:
 
 ```bash
+case "$PWD" in /mnt/*) exit 1 ;; esac
+test "$(node --version | cut -d. -f1)" = "v24"
+test -z "$(git grep -Il $'\r')"
+if grep -qi microsoft /proc/version; then
+  candidate_environment=wsl-native-lf-node24
+else
+  candidate_environment=linux-native-lf-node24
+fi
+printf '%s' "$candidate_environment" | \
+  grep -Eq '^(linux-native-lf-node24|wsl-native-lf-node24)$'
 git_common_dir="$(cd "$(git rev-parse --git-common-dir)" && pwd -P)"
 candidate_context="$git_common_dir/quant-interview-013-candidate-context.json"
 verification_log="$git_common_dir/quant-interview-013-candidate-verification.log"
+candidate_verification="$git_common_dir/quant-interview-013-candidate-verification.json"
 test -s "$candidate_context"
 candidate_baseline_sha="$(node -p \
   "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8')).baselineSha" \
   "$candidate_context")"
 printf '%s' "$candidate_baseline_sha" | grep -Eq '^[0-9a-f]{40}$'
 : > "$verification_log"
+printf '{}\n' > "$candidate_verification"
 node --test tests/quant-interview-reasoning-communication-content.test.mjs \
   2>&1 | tee -a "$verification_log"
 test "${PIPESTATUS[0]}" -eq 0
@@ -617,6 +625,22 @@ test "${PIPESTATUS[0]}" -eq 0
 npm run build 2>&1 | tee -a "$verification_log"
 test "${PIPESTATUS[0]}" -eq 0
 git diff --check "$candidate_baseline_sha" HEAD
+CANDIDATE_BASELINE_SHA="$candidate_baseline_sha" \
+CANDIDATE_ENVIRONMENT="$candidate_environment" \
+CANDIDATE_VERIFICATION="$candidate_verification" \
+node --input-type=module <<'NODE'
+import assert from 'node:assert/strict';
+import { writeFileSync } from 'node:fs';
+
+const baselineSha = process.env.CANDIDATE_BASELINE_SHA;
+const environment = process.env.CANDIDATE_ENVIRONMENT;
+assert.match(baselineSha, /^[0-9a-f]{40}$/);
+assert.match(environment, /^(?:linux-native-lf-node24|wsl-native-lf-node24)$/);
+writeFileSync(
+  process.env.CANDIDATE_VERIFICATION,
+  `${JSON.stringify({ baselineSha, environment }, null, 2)}\n`,
+);
+NODE
 ```
 
 Expected:
@@ -626,7 +650,8 @@ Expected:
 - `npm run test` and the isolated exact-registry test exit nonzero because the coordinator-owned exact Knowledge count still expects 39 while candidate discovery is 41; the Problem count remains exactly 59;
 - one invocation containing every other `*.test.mjs` file passes, and a negative name filter proves that every other test in the source-neutral file also passes;
 - `npm run check` and `npm run build` pass, and the committed Task 1 diff has no whitespace errors;
-- the complete raw output is preserved outside the worktree in `quant-interview-013-candidate-verification.log`.
+- the complete raw output is preserved outside the worktree in `quant-interview-013-candidate-verification.log`; and
+- only after every authoritative assertion passes, the run's validated implementation-base SHA and live Linux/WSL, LF, Node 24 environment are persisted in `quant-interview-013-candidate-verification.json` outside the tracked tree.
 
 Any other failure blocks the candidate report. Do not edit the global regression to make the isolated candidate suite green.
 
@@ -658,18 +683,25 @@ Generate the report from committed facts, push that exact commit without force, 
 git_common_dir="$(cd "$(git rev-parse --git-common-dir)" && pwd -P)"
 candidate_context="$git_common_dir/quant-interview-013-candidate-context.json"
 verification_log="$git_common_dir/quant-interview-013-candidate-verification.log"
+candidate_verification="$git_common_dir/quant-interview-013-candidate-verification.json"
 candidate_report="$git_common_dir/quant-interview-013-candidate-report.txt"
 test -s "$candidate_context"
 test -s "$verification_log"
+test -s "$candidate_verification"
 candidate_sha="$(git rev-parse HEAD)"
 candidate_baseline_sha="$(node -p \
   "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8')).baselineSha" \
   "$candidate_context")"
+verified_baseline_sha="$(node -p \
+  "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8')).baselineSha" \
+  "$candidate_verification")"
 candidate_environment="$(node -p \
   "JSON.parse(require('fs').readFileSync(process.argv[1], 'utf8')).environment" \
-  "$candidate_context")"
+  "$candidate_verification")"
 printf '%s' "$candidate_sha" | grep -Eq '^[0-9a-f]{40}$'
 printf '%s' "$candidate_baseline_sha" | grep -Eq '^[0-9a-f]{40}$'
+printf '%s' "$verified_baseline_sha" | grep -Eq '^[0-9a-f]{40}$'
+test "$verified_baseline_sha" = "$candidate_baseline_sha"
 printf '%s' "$candidate_environment" | \
   grep -Eq '^(linux-native-lf-node24|wsl-native-lf-node24)$'
 expected_paths="$(printf '%s\n' \
@@ -744,8 +776,9 @@ Expected: the pushed object is the exact 40-hex `Candidate commit` recorded in t
 The execution controller first saves the reviewed candidate report attachment verbatim as `quant-interview-013-reviewed-candidate-report.txt` in the Git common directory. From the coordinator's latest durable checkout, run:
 
 ```bash
-test "$(node --version | cut -d. -f1)" = "v24"
 case "$PWD" in /mnt/*) exit 1 ;; esac
+test "$(node --version | cut -d. -f1)" = "v24"
+test -z "$(git grep -Il $'\r')"
 test -z "$(git status --porcelain=v1 --untracked-files=all)"
 git_common_dir="$(cd "$(git rev-parse --git-common-dir)" && pwd -P)"
 reviewed_report="$git_common_dir/quant-interview-013-reviewed-candidate-report.txt"
@@ -810,10 +843,14 @@ test ! -e src/content/knowledge/concepts/structured-think-aloud-reasoning.md
 git worktree add -b chatgpt/quant-interview-integration-reasoning-communication-2026-08-24 \
   ../quant-interview-013-integration "$(git rev-parse HEAD)"
 cd ../quant-interview-013-integration
+case "$PWD" in /mnt/*) exit 1 ;; esac
+test "$(node --version | cut -d. -f1)" = "v24"
+test -z "$(git grep -Il $'\r')"
+test -z "$(git status --porcelain=v1 --untracked-files=all)"
 npm ci
 ```
 
-Expected: the reviewed report has exactly one candidate SHA and one implementation-base SHA; the fetched `FETCH_HEAD` equals the reported candidate SHA; that exact object has an exact three-file implementation delta. Both prior manifests are complete; the authoritative post-012 suite passes with exact `76/48` discovery; neither approved slug collides with an existing page; the new integration branch starts at that exact durable HEAD. If a slug exists or the registry is not exactly `76/48`, stop and reconcile the design rather than overwriting or preserving `+2` as a quota.
+Expected: the reviewed report has exactly one candidate SHA and one implementation-base SHA; the fetched `FETCH_HEAD` equals the reported candidate SHA; that exact object has an exact three-file implementation delta. Before and after coordinator worktree creation, the live checkout is outside `/mnt`, uses Node 24, has no CR bytes in tracked text, and is clean. Both prior manifests are complete; the authoritative post-012 suite passes with exact `76/48` discovery; neither approved slug collides with an existing page; the new integration branch starts at that exact durable HEAD. If a slug exists or the registry is not exactly `76/48`, stop and reconcile the design rather than overwriting or preserving `+2` as a quota.
 
 - [ ] **Step 2: Raise the exact registry expectation before porting the pages**
 
@@ -1497,19 +1534,21 @@ Create `src/data/quant-interview/workstreams/interview-strategy-communication-re
 
 The active object contains no `preClosureActiveGate`, `verification`, `finalTreeGate`, commit, run id, CI conclusion, or 150 source scope.
 
-- [ ] **Step 6: Run the shared-state target and validator tests to prove GREEN**
+- [ ] **Step 6: Run the five non-lifecycle shared-state audits to prove bounded GREEN**
 
 Run:
 
 ```bash
 node --test tests/quant-interview-reasoning-communication-content.test.mjs
-node --test tests/quant-interview-reasoning-communication-workstream.test.mjs
+node --test \
+  --test-name-pattern='^(?:013 manifest has exact identity and two-source scope|Green 1\.3 through 1\.5 have exact knowledge-only resolutions|Red 1\.12 is interview-preparation guidance with no public target|150 source has no reasoning communication map, coverage, or scope|workstream and affected ledgers validate with real public targets)$' \
+  tests/quant-interview-reasoning-communication-workstream.test.mjs
 node --test --test-name-pattern="source-neutral regression discovers exactly" tests/quant-interview-source-neutral-content.test.mjs
 npm run check
 git diff --check
 ```
 
-Expected: all targeted tests pass; both ledgers validate with `allowUnresolvedCanonicalRefs: false`; exact registry remains `76/50`; Astro and whitespace checks pass.
+Expected: the content test passes; exactly five named non-lifecycle workstream audits pass and `workstream lifecycle is phase-safe` is skipped because HANDOFF is intentionally still `design-audit`; both ledgers validate with `allowUnresolvedCanonicalRefs: false`; exact registry remains `76/50`; Astro and whitespace checks pass. This is a bounded audit checkpoint, not the full-suite GREEN gate. Step 8 proves the lifecycle RED, Step 10 makes HANDOFF active, and Step 11 is the first full workstream/full-suite GREEN run before any Task 4 commit.
 
 - [ ] **Step 7: Create the strict phase-safe completion contract**
 
@@ -2049,20 +2088,66 @@ printf '%s' "$active_sha" | grep -Eq '^[0-9a-f]{40}$'
 test "$(git rev-parse HEAD)" = "$active_sha"
 git push origin \
   "${active_sha}:refs/heads/chatgpt/quant-interview-integration-reasoning-communication-2026-08-24"
-run_id="$(gh run list \
-  --workflow quant-interview-reasoning-communication-013-temporary.yml \
-  --branch chatgpt/quant-interview-integration-reasoning-communication-2026-08-24 \
-  --commit "$active_sha" \
-  --event push \
-  --limit 1 \
-  --json databaseId \
-  --jq '.[0].databaseId')"
+workflow_file='quant-interview-reasoning-communication-013-temporary.yml'
+workflow_name='Quant Interview Reasoning Communication 013 Temporary CI'
+integration_ref='chatgpt/quant-interview-integration-reasoning-communication-2026-08-24'
+run_id=''
+for attempt in $(seq 1 36); do
+  runs_json="$(gh run list \
+    --workflow "$workflow_file" \
+    --branch "$integration_ref" \
+    --commit "$active_sha" \
+    --event push \
+    --limit 20 \
+    --json databaseId,headSha,headBranch,workflowName)"
+  run_id="$(RUNS_JSON="$runs_json" \
+    ACTIVE_SHA="$active_sha" \
+    INTEGRATION_REF="$integration_ref" \
+    WORKFLOW_NAME="$workflow_name" \
+    node --input-type=module <<'NODE'
+const runs = JSON.parse(process.env.RUNS_JSON);
+const match = runs.find((run) =>
+  run.headSha === process.env.ACTIVE_SHA &&
+  run.headBranch === process.env.INTEGRATION_REF &&
+  run.workflowName === process.env.WORKFLOW_NAME &&
+  Number.isInteger(run.databaseId) &&
+  run.databaseId > 0
+);
+if (match) process.stdout.write(String(match.databaseId));
+NODE
+)"
+  if printf '%s' "$run_id" | grep -Eq '^[1-9][0-9]*$'; then
+    break
+  fi
+  sleep 10
+done
 printf '%s' "$run_id" | grep -Eq '^[1-9][0-9]*$'
+run_identity_json="$(gh run view "$run_id" \
+  --json databaseId,headSha,headBranch,workflowName)"
+RUN_ID="$run_id" \
+ACTIVE_SHA="$active_sha" \
+INTEGRATION_REF="$integration_ref" \
+WORKFLOW_NAME="$workflow_name" \
+RUN_IDENTITY_JSON="$run_identity_json" \
+node --input-type=module <<'NODE'
+import assert from 'node:assert/strict';
+
+const run = JSON.parse(process.env.RUN_IDENTITY_JSON);
+const runId = Number(process.env.RUN_ID);
+assert.equal(Number.isInteger(runId) && runId > 0, true);
+assert.equal(run.databaseId, runId);
+assert.equal(run.headSha, process.env.ACTIVE_SHA);
+assert.equal(run.headBranch, process.env.INTEGRATION_REF);
+assert.equal(run.workflowName, process.env.WORKFLOW_NAME);
+NODE
 gh run watch "$run_id" --exit-status
-run_json="$(gh run view "$run_id" --json databaseId,headSha,conclusion,jobs)"
+run_json="$(gh run view "$run_id" \
+  --json databaseId,headSha,headBranch,conclusion,jobs,workflowName)"
 RUN_JSON="$run_json" \
 ACTIVE_SHA="$active_sha" \
 RUN_ID="$run_id" \
+INTEGRATION_REF="$integration_ref" \
+WORKFLOW_NAME="$workflow_name" \
 EVIDENCE_FILE="$evidence_file" \
 node --input-type=module <<'NODE'
 import assert from 'node:assert/strict';
@@ -2077,6 +2162,8 @@ assert.equal(Number.isInteger(runId) && runId > 0, true);
 assert.equal(evidence.activeSha, activeSha);
 assert.equal(run.databaseId, runId);
 assert.equal(run.headSha, activeSha);
+assert.equal(run.headBranch, process.env.INTEGRATION_REF);
+assert.equal(run.workflowName, process.env.WORKFLOW_NAME);
 assert.equal(run.conclusion, 'success');
 const required = [
   'Set up Node 24',
@@ -2108,7 +2195,7 @@ test -z "$(git status --porcelain=v1 --untracked-files=all)"
 cat "$evidence_file"
 ```
 
-Expected: `runId` is a positive real GitHub Actions database id; the successful run's `headSha` equals the validated active SHA; the Ubuntu workflow's Node 24 setup, `npm ci`, test, check, and build steps appear in exact order and all succeed. The manifest remains `active` and field-free, the repository remains clean, and the external evidence file now holds the complete factual tuple.
+Expected: the bounded six-minute poll discovers a positive real GitHub Actions database id only for the exact workflow name, integration branch, and validated active SHA; a pre-watch identity query reasserts that tuple before `gh run watch`. The successful run's `headSha` still equals the validated active SHA; the Ubuntu workflow's Node 24 setup, `npm ci`, test, check, and build steps appear in exact order and all succeed. A timeout or any workflow, branch, SHA, conclusion, or step mismatch blocks progress. The manifest remains `active` and field-free, the repository remains clean, and the external evidence file now holds the complete factual tuple.
 
 ---
 
@@ -2426,9 +2513,11 @@ handoff = handoff.replace(
   '\n' + closure + '\n\n## Verified source state\n',
 );
 
+const currentHeadingPattern = /^Current bounded topic:\r?$/gm;
+assert.equal([...handoff.matchAll(currentHeadingPattern)].length, 1);
 const currentPattern =
-  /Current bounded topic:\r?\n[\s\S]*?(?=\r?\n## Parallel workstream coordination)/;
-assert.equal((handoff.match(currentPattern) ?? []).length, 1);
+  /^Current bounded topic:\r?\n[\s\S]*?(?=^## Parallel workstream coordination\r?$)/gm;
+assert.equal([...handoff.matchAll(currentPattern)].length, 1);
 const closedCurrent = [
   'Current bounded topic:',
   '',
@@ -2436,7 +2525,11 @@ const closedCurrent = [
   '',
   'A later workstream requires its own approved design and evidence audit; no later workstream is complete or authorized by this closure.',
 ].join('\n');
-handoff = handoff.replace(currentPattern, closedCurrent + '\n');
+handoff = handoff.replace(currentPattern, closedCurrent + '\n\n');
+const exactClosedCurrentPattern =
+  /^Current bounded topic:\n\n\*\*No bounded topic is active\. The serialized 011 → 012 → 013 queue is closed\.\*\*\n\nA later workstream requires its own approved design and evidence audit; no later workstream is complete or authorized by this closure\.\n\n(?=^## Parallel workstream coordination$)/gm;
+assert.equal([...handoff.matchAll(currentHeadingPattern)].length, 1);
+assert.equal([...handoff.matchAll(exactClosedCurrentPattern)].length, 1);
 
 const activeRow =
   '| 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | active |';
