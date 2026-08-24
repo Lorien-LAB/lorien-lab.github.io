@@ -723,3 +723,227 @@ test('Problem 012 distinguishes requested base sqrt two from tower limit two and
   assertMath(closure, String.raw`\boxed{L=2}`, 'Problem 012 proved tower limit');
   assert.match(solution, /base.*not.*limit|must not be conflated|distinguish.*base.*limit/i);
 });
+
+test('positive-series Knowledge supplies elementary proofs for the exact three-series family', async () => {
+  const page = await readPage('src/content/knowledge/concepts/positive-series-convergence.md');
+  assertKnowledgePage(page, {
+    slug: 'positive-series-convergence',
+    title: 'Positive-Series Convergence',
+    description: 'Classify elementary nonnegative series through partial sums, comparison, telescoping, dyadic grouping, condensation, geometric bounds, and the term test.',
+    category: 'Calculus',
+    tags: ['Calculus', 'Series', 'Convergence'],
+    related: ['indeterminate-limits-and-growth-rates'],
+  });
+  assert.match(page.text, /bounded increasing partial sums|partial sums.*bounded.*increasing/i);
+  assertMath(page.text, String.raw`a_n\to0`, 'series term test');
+  assert.match(page.text, /necessary.*not sufficient|not sufficient.*term/i);
+  assertMath(page.text, String.raw`\sum_{k=0}^{N}r^k=\frac{1-r^{N+1}}{1-r}`, 'finite geometric sum');
+  assertMath(page.text, String.raw`|r|<1`, 'infinite geometric criterion');
+  assertMath(page.text, String.raw`\sum_{k=0}^{+\infty}r^k=\frac1{1-r}`, 'infinite geometric sum');
+  assert.match(page.text, /direct comparison/i);
+  assert.match(page.text, /harmonic.*dyadic|dyadic.*harmonic/is);
+  assert.match(page.text, /Cauchy condensation/i);
+  assert.match(page.text, /positive.*nonincreasing|nonincreasing.*positive/i);
+  assertMath(page.text, String.raw`\frac1{k^2}\le\frac1{k(k-1)}=\frac1{k-1}-\frac1k`, 'square-series telescoping comparison');
+  assertMath(page.text, String.raw`k\ge2`, 'square-series comparison domain');
+  assertMath(page.text, String.raw`\frac{2^n}{2^n\ln(2^n)}=\frac1{n\ln2}`, 'log-harmonic condensation');
+  assertMath(page.text, String.raw`2^{k(1-p)}`, 'p-series dyadic upper bound');
+  assert.match(page.text, /p\s*>\s*1.*converges|converges.*p\s*>\s*1/is);
+  assert.match(page.text, /0\s*<\s*p\s*\\le\s*1.*diverges|diverges.*0\s*<\s*p/is);
+  assert.match(page.text, /p\s*\\le\s*0.*terms.*not.*zero|term test.*p\s*\\le\s*0/is);
+});
+
+test('Problem 013 proves the harmonic square and logarithmic-harmonic classifications without integration', async () => {
+  const page = await readPage('src/content/problems/calculus/classify-basic-positive-series.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-013',
+    title: 'Classify Basic Positive Series',
+    description: 'Classify the harmonic, reciprocal-square, and logarithmic-harmonic series with elementary non-integral convergence arguments.',
+    subcategories: ['Limits', 'Series', 'Convergence'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['positive-series-convergence'],
+    techniques: [],
+    prerequisites: [],
+    relatedProblems: [],
+    family: 'positive-series-convergence',
+    mathDifficulty: 3,
+    insightDifficulty: 3,
+    interviewDifficulty: 3,
+    estimatedMinutes: 15,
+  });
+  const solution = solutionBody(page.text);
+  assertBefore(solution, /^### Harmonic series: dyadic lower blocks$/m, /^### Reciprocal-square series: telescoping upper bound$/m, 'Problem 013 harmonic proof must come first');
+  assertBefore(solution, /^### Reciprocal-square series: telescoping upper bound$/m, /^### Logarithmic-harmonic series: condensation$/m, 'Problem 013 square proof must precede log-harmonic proof');
+  const harmonic = subsectionBody(solution, 'Harmonic series: dyadic lower blocks');
+  assertMath(harmonic, String.raw`\sum_{k=2^m+1}^{2^{m+1}}\frac1k\ge2^m\frac1{2^{m+1}}=\frac12`, 'Problem 013 dyadic harmonic block');
+  assert.match(harmonic, /infinitely many.*blocks.*one half|partial sums.*unbounded/is);
+  assertMath(harmonic, String.raw`\boxed{\sum_{k=1}^{+\infty}\frac1k\text{ diverges}}`, 'harmonic classification');
+  const square = subsectionBody(solution, 'Reciprocal-square series: telescoping upper bound');
+  assertMath(square, String.raw`\frac1{k^2}\le\frac1{k(k-1)}=\frac1{k-1}-\frac1k`, 'Problem 013 telescoping comparison');
+  assertMath(square, String.raw`k\ge2`, 'Problem 013 square comparison domain');
+  assertMath(square, String.raw`\sum_{k=2}^{N}\frac1{k^2}\le\sum_{k=2}^{N}\left(\frac1{k-1}-\frac1k\right)=1-\frac1N`, 'Problem 013 bounded square partial sums');
+  assert.match(square, /increasing.*bounded above.*converges|bounded increasing partial sums/is);
+  assertMath(square, String.raw`\boxed{\sum_{k=1}^{+\infty}\frac1{k^2}\text{ converges}}`, 'square-series classification');
+  const logHarmonic = subsectionBody(solution, 'Logarithmic-harmonic series: condensation');
+  assert.match(logHarmonic, /a_k.*positive.*decreasing|positive.*nonincreasing/is);
+  assert.match(logHarmonic, /k\s*\ln k.*increasing|product.*increasing/is);
+  assert.match(logHarmonic, /Cauchy condensation/i);
+  assertMath(logHarmonic, String.raw`2^na_{2^n}=\frac{2^n}{2^n\ln(2^n)}=\frac1{n\ln2}`, 'Problem 013 condensed terms');
+  assertMath(logHarmonic, String.raw`\sum_{n=1}^{+\infty}2^na_{2^n}=\frac1{\ln2}\sum_{n=1}^{+\infty}\frac1n`, 'Problem 013 exact harmonic comparison chain');
+  assert.match(logHarmonic, /constant multiple.*harmonic|compare.*harmonic/i);
+  assertMath(logHarmonic, String.raw`\boxed{\sum_{k=2}^{+\infty}\frac1{k\ln k}\text{ diverges}}`, 'log-harmonic classification');
+  assert.doesNotMatch(solution, /integral test|\\int/);
+});
+
+async function topicLocalSlugs(root) {
+  const files = await readdir(root, { recursive: true });
+  const slugs = [];
+  for (const file of files.filter((entry) => String(entry).endsWith('.md'))) {
+    const fullPath = path.join(root, String(file));
+    const page = await readPage(fullPath);
+    const topics = scalar(page.frontmatter, 'quantInterviewTopics');
+    if (topics && JSON.stringify(inlineArray(page.frontmatter, 'quantInterviewTopics')) === JSON.stringify(topicArray)) {
+      slugs.push(path.basename(String(file), '.md'));
+    }
+  }
+  return slugs.sort();
+}
+
+const exactKnowledgeSlugs = [
+  'bounded-monotone-convergence-and-fixed-points',
+  'derivative-definition-and-core-rules',
+  'indeterminate-limits-and-growth-rates',
+  'logarithmic-differentiation',
+  'monotonicity-convexity-critical-points-and-inflection',
+  'positive-series-convergence',
+  'related-rates-and-implicit-differentiation',
+].sort();
+
+const exactProblemSlugs = [
+  'classify-basic-positive-series',
+  'compare-e-pi-power-expressions',
+  'derive-exponential-cosine-derivative-from-definition',
+  'differentiate-variable-base-and-exponent',
+  'exponential-midpoint-convexity',
+  'exponential-over-polynomial-limit',
+  'infinite-power-tower-limit',
+  'logarithm-power-limit-at-zero',
+  'nested-radical-limit',
+  'normal-cdf-inflection-point',
+  'periodic-continued-fraction-limit',
+  'radical-difference-limit-at-infinity',
+  'rotating-lighthouse-beam-related-rate',
+].sort();
+
+const progressiveHintContracts = new Map([
+  ['differentiate-variable-base-and-exponent', {
+    hint1: /positivity.*logarithm.*hypotheses.*u.*v/is,
+    hint2: /y'\s*\/\s*y.*multiply.*original.*u\^v/is,
+  }],
+  ['compare-e-pi-power-expressions', {
+    hint1: /f\(x\)=\$?\\ln x\/?x.*derivative.*sign.*constant/is,
+    hint2: /f'.*1-\\ln x.*decreasing interval.*compare/is,
+  }],
+  ['exponential-midpoint-convexity', {
+    hint1: /f\(x\)=e\^x.*second derivative/is,
+    hint2: /strict convexity.*midpoint.*equality/is,
+  }],
+  ['normal-cdf-inflection-point', {
+    hint1: /fundamental theorem.*density.*differentiate/is,
+    hint2: /every factor.*except.*x-\\mu.*positive.*sign table/is,
+  }],
+  ['exponential-over-polynomial-limit', {
+    hint1: /positive tail.*differentiability.*2x.*never vanishes/is,
+    hint2: /first application.*e\^x.*2x.*renew.*constant.*2/is,
+  }],
+  ['logarithm-power-limit-at-zero', {
+    hint1: /quotient.*x\^\{-2\}.*0\^\+/is,
+    hint2: /differentiate numerator and denominator.*-x\^2\/?2/is,
+  }],
+  ['rotating-lighthouse-beam-related-rate', {
+    hint1: /s=a\\tan\\theta.*depend on time/is,
+    hint2: /differentiate.*sec\^2.*2\\pi.*1\+s\^2\/?a\^2/is,
+  }],
+  ['radical-difference-limit-at-infinity', {
+    hint1: /conjugate.*sqrt\{x\^2\+5x\}\+x/is,
+    hint2: /numerator.*5x.*divide.*positive.*x/is,
+  }],
+  ['derive-exponential-cosine-derivative-from-definition', {
+    hint1: /Delta_h.*cos\(x\+h\)-\\cos x.*rewrite/is,
+    hint2: /angle addition.*Delta_h\/?h.*-\\sin x.*exponential/is,
+  }],
+  ['periodic-continued-fraction-limit', {
+    hint1: /maps.*\[2,3\].*c_0<c_2.*two applications/is,
+    hint2: /subsequence limits.*a.*b.*subtract.*before solving/is,
+  }],
+  ['nested-radical-limit', {
+    hint1: /monotonicity.*a_2>a_1.*strictly increasing/is,
+    hint2: /a_n<2.*induction.*sqrt\{2\+a_n\}<\\sqrt4/is,
+  }],
+  ['infinite-power-tower-limit', {
+    hint1: /2=x\^2.*positive root.*t_0=\\sqrt2/is,
+    hint2: /t_n.*increasing.*separately.*t_n<2/is,
+  }],
+  ['classify-basic-positive-series', {
+    hint1: /powers of two.*reciprocal square.*1\/\[k\(k-1\)\]/is,
+    hint2: /positivity and decrease.*condensation.*1\/\(n\\ln2\)/is,
+  }],
+]);
+
+test('module contains exactly seven Knowledge and thirteen Problem slugs', async () => {
+  assert.deepEqual(await topicLocalSlugs('src/content/knowledge'), exactKnowledgeSlugs);
+  assert.deepEqual(await topicLocalSlugs('src/content/problems'), exactProblemSlugs);
+});
+
+test('Problem IDs are exactly limits-derivatives-001 through limits-derivatives-013', async () => {
+  const ids = [];
+  for (const slug of exactProblemSlugs) {
+    const page = await readPage(`src/content/problems/calculus/${slug}.md`);
+    ids.push(scalar(page.frontmatter, 'problemId'));
+    assert.doesNotMatch(scalar(page.frontmatter, 'title'), /[$\\{}^]/, `${slug} title must be plain text`);
+  }
+  assert.deepEqual(ids.sort(), Array.from({ length: 13 }, (_, index) => `limits-derivatives-${String(index + 1).padStart(3, '0')}`));
+});
+
+test('module graph and Technique categories are exact', async () => {
+  const reciprocalProblems = new Map([
+    ['compare-e-pi-power-expressions', ['exponential-midpoint-convexity']],
+    ['exponential-midpoint-convexity', ['compare-e-pi-power-expressions']],
+    ['exponential-over-polynomial-limit', ['logarithm-power-limit-at-zero']],
+    ['logarithm-power-limit-at-zero', ['exponential-over-polynomial-limit']],
+    ['periodic-continued-fraction-limit', ['nested-radical-limit', 'infinite-power-tower-limit']],
+    ['nested-radical-limit', ['periodic-continued-fraction-limit', 'infinite-power-tower-limit']],
+    ['infinite-power-tower-limit', ['periodic-continued-fraction-limit', 'nested-radical-limit']],
+    ['differentiate-variable-base-and-exponent', ['derive-exponential-cosine-derivative-from-definition']],
+    ['derive-exponential-cosine-derivative-from-definition', ['differentiate-variable-base-and-exponent']],
+  ]);
+  for (const [slug, expected] of reciprocalProblems) {
+    const page = await readPage(`src/content/problems/calculus/${slug}.md`);
+    assert.deepEqual(inlineArray(page.frontmatter, 'relatedProblems'), expected, `${slug} graph`);
+  }
+  for (const slug of ['logarithmic-differentiation', 'related-rates-and-implicit-differentiation']) {
+    const page = await readPage(`src/content/knowledge/concepts/${slug}.md`);
+    assert.equal(scalar(page.frontmatter, 'category'), 'Problem Solving Techniques');
+  }
+});
+
+test('every module page remains source-neutral and every Problem remains S3+', async () => {
+  for (const slug of exactKnowledgeSlugs) {
+    const page = await readPage(`src/content/knowledge/concepts/${slug}.md`);
+    assertPublicBoundary(page.text, page.frontmatter, slug);
+    assert.match(page.text, /^## Common Mistakes$/m);
+    assert.match(page.text, /^## Interview Checks$/m);
+  }
+  for (const slug of exactProblemSlugs) {
+    const page = await readPage(`src/content/problems/calculus/${slug}.md`);
+    assertPublicBoundary(page.text, page.frontmatter, slug);
+    const hint1 = disclosureBody(page.text, 'Hint 1');
+    const hint2 = disclosureBody(page.text, 'Hint 2');
+    const contract = progressiveHintContracts.get(slug);
+    assert.ok(contract, `${slug} missing problem-specific progressive-hint contract`);
+    assert.match(hint1, contract.hint1, `${slug} Hint 1 must identify its problem-specific opening move`);
+    assert.match(hint2, contract.hint2, `${slug} Hint 2 must expose a later intermediate step`);
+    assert.notEqual(normalizedMath(hint1), normalizedMath(hint2), `${slug} hints must remain distinct`);
+    assert.match(page.text, /<summary>Show Solution<\/summary>/);
+  }
+});
