@@ -4,7 +4,7 @@
     "stochastic-processes-stochastic-calculus",
     "random-walks-markov-chains"
   ],
-  "status": "active",
+  "status": "complete",
   "sourceScopes": [
     {
       "source": "green-book",
@@ -34,5 +34,15 @@
       "reviewOutcome": "reviewed-no-new-ownership",
       "reviewNote": "Items 10-29 were audited and contain only martingale, Brownian, Itô, SDE, change-of-measure, and stochastic-volatility material outside 011. Terminal items 1-9 remain unchanged, no new 150 coverage rows are added, and aggregate 2.6:: stays pending as a broad mixed-topic container."
     }
-  ]
+  ],
+  "verification": {
+    "commit": "78a9cd4a0a4d6b24d3683641ade5dbbe6f583b58",
+    "runId": 32761496211,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  }
 }

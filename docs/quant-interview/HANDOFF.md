@@ -385,9 +385,49 @@ Exactly **5 terminal claimed source rows** are closed for this workstream: 3 Gre
 - Existing distribution, symmetry, transformation, expectation, and covariance Knowledge links into the new nodes while retaining its prior canonical ownership.
 - The 150-question source received a bounded review with **no new independent ownership**; no synthetic Order Statistics row was invented.
 
-## Public corpus state after ten workstreams
+## Completed cross-book workstream 11
 
-The current source-neutral regression contract discovers exactly **59 canonical Problems** and **39 explicitly topic-classified Knowledge / Technique nodes**.
+`stochastic-processes-random-walks-markov-chains-011`
+
+Scope: **Stochastic Processes & Stochastic Calculus → Random Walks & Markov Chains**.
+
+Content-complete verification:
+
+- commit `78a9cd4a0a4d6b24d3683641ade5dbbe6f583b58`
+- GitHub Actions run `32761496211`
+- commands: `npm run test`, `npm run check`, `npm run build`
+- conclusion: success
+
+The machine-readable workstream is `status: complete` and stores exactly this real verification evidence.
+
+### Canonical Knowledge
+
+- `finite-state-markov-chains` — transition matrices, communicating and closed classes, stationarity, periodicity, hitting equations, and positive return.
+- `markov-chain-state-compression` — sufficient streak/suffix states, strong lumpability, Hamming symmetry, target preservation, and backward lineages.
+
+### Canonical Problems and enriched identity
+
+- `twelve-before-consecutive-sevens`
+- `coin-pattern-hitting-times`
+- `random-recoloring-consensus-time`
+- `random-walk-return-time-on-cube`
+- `random-walk-boundary` — enriched in place as the existing absorbing-boundary identity.
+
+All four new Problems are independently authored, source-neutral, solved, and S3+. The existing boundary page retains its slug, problem id, and canonical topics.
+
+### Cross-book semantic decisions and graph boundaries
+
+Exactly **8 terminal claimed source rows** are closed: **5 Green plus 3 Red**. The exact state split is **5 `canonical-problem` / 2 `merged-duplicate` / 1 `knowledge-only`**. Green gambler's ruin owns the existing `random-walk-boundary` identity; both Red boundary rows are merged duplicates of that same identity.
+
+The 150-question review of items 10-29 is `reviewed-no-new-ownership`: terminal items 1-9 remain unchanged, no 150 coverage row was added, and aggregate `2.6::` remains `pending`.
+
+The finite-chain and state-compression Knowledge nodes link reciprocally through first-step analysis. Dice and coin pages link to their older expectation/combinatorial neighbors, and cube return links reciprocally with the boundary walk. Every older page retains its prior canonical topic ownership.
+
+Martingales and optional stopping, Brownian motion, Itô calculus, SDEs, continuous-time chains, general dynamic programming, and optimal stopping remain outside workstream 011.
+
+## Public corpus state after eleven workstreams
+
+The current source-neutral regression contract discovers exactly **63 canonical Problems** and **41 explicitly topic-classified Knowledge / Technique nodes**.
 
 These are repository-record counts only. They are not whole-book completeness percentages and do not imply that Probability & Statistics as a whole is complete.
 
@@ -411,13 +451,15 @@ Historical transition marker: **Random Variables & Distributions** is fully clos
 
 Historical transition marker: **Expectation, Variance & Covariance** is fully closed. Its four canonical Knowledge nodes, thirteen new S3+ Problems, upgraded conditional-dice linkage, eighteen terminal hidden source rows, indicator/tower/scalar-covariance boundaries, and verified 55/37 source-neutral corpus contract are durable repository state. This paragraph records lineage only and does not authorize reopening that bounded topic.
 
-Historical transition marker: **Order Statistics & Extremes** is fully closed. Its two canonical Knowledge nodes, four S3+ Problems, five terminal hidden source rows, four-canonical-plus-one-merged state split, cross-source uniform-extrema merge, Random Ants collision-relabeling boundary, reciprocal public graph links, exact 59/39 source-neutral corpus contract, and real verification evidence are durable repository state. This paragraph records lineage only and does not authorize reopening that bounded topic.
+Historical transition marker: **Order Statistics & Extremes** is fully closed. Its two canonical Knowledge nodes, four S3+ Problems, five terminal hidden source rows, four-canonical-plus-one-merged state split, cross-source uniform-extrema merge, Random Ants collision-relabeling boundary, reciprocal public graph links, exact 59 canonical Problems / 39 explicitly topic-classified Knowledge / Technique nodes source-neutral corpus contract, and real verification evidence are durable repository state. This paragraph records lineage only and does not authorize reopening that bounded topic.
+
+Historical transition marker: **Random Walks & Markov Chains** is fully closed. Its two canonical Knowledge nodes, four new S3+ Problems, enriched absorbing-boundary identity, eight terminal hidden source rows, exact 5/2/1 state split, reciprocal public graph links, 63/41 source-neutral corpus contract, and real verification evidence are durable repository state. This paragraph records lineage only and does not authorize reopening that bounded topic.
 
 Current bounded topic:
 
-**Stochastic Processes & Stochastic Calculus → Random Walks & Markov Chains.**
+**Calculus & Differential Equations → Limits & Derivatives.**
 
-Proceed by resolving random-walk and Markov-chain material across all three verified sources before authoring. Reuse existing conditioning and first-step-analysis Knowledge where appropriate; distinguish genuine state-transition machinery from one-step expectation recursions, martingales, and continuous-time process wrappers; preserve prior semantic ownership instead of reopening closed workstreams.
+Coordinator integration proceeds in serialized order: workstream 012 before workstream 013. Preserve completed prior-workstream ownership, exact corpus counts, and shared-state history while reviewing the bounded Limits & Derivatives evidence pool.
 
 Do not process one book to completion before the others. Do not organize the public corpus by source numbering. Do not use a generic deferred state to avoid semantic decisions.
 
@@ -427,11 +469,11 @@ Maximum active candidates: **3**. Parallel candidates are isolated design and im
 
 | Queue | Reservation | Canonical topic | Candidate branch | State |
 |---:|---:|---|---|---|
-| 1 | 011 | `random-walks-markov-chains` | `chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23` | active |
+| 1 | 011 | `random-walks-markov-chains` | `chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23` | complete |
 | 2 | 012 | `limits-derivatives` | `chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23` | design-audit |
 | 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | design-audit |
 
-Integration queue: **011 → 012 → 013**. A candidate stays `active` during implementation and is not `complete` until the coordinator integrates it on the latest durable base, reconciles shared state, obtains fresh local and real CI verification for the exact commit, and records factual closure here.
+Completed queue entry: **011**. Remaining integration queue: **012 → 013**. A candidate stays `active` during implementation and is not `complete` until the coordinator integrates it on the latest durable base, reconciles shared state, obtains fresh local and real CI verification for the exact commit, and records factual closure here.
 
 ## Non-negotiable invariants
 
