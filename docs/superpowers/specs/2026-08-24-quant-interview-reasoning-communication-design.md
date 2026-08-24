@@ -18,7 +18,7 @@ The approved module delta is:
 | Problems | +0 |
 | Knowledge | +2 |
 
-After the corrected 011 and 012 integrations, their exact contract is 67 Problems and 45 Knowledge nodes. Workstream 013 raises only the Knowledge total, yielding the exact integrated contract of **67 Problems and 47 Knowledge nodes**.
+After the corrected 011 and 012 integrations, their exact contract is 76 Problems and 48 Knowledge nodes. Workstream 013 raises only the Knowledge total, yielding the exact integrated contract of **76 Problems and 50 Knowledge nodes**.
 
 ## 2. Scope
 
@@ -192,7 +192,7 @@ At integration, coordinator-owned checks must assert all of the following:
 3. no 150 map or coverage row claims `reasoning-communication` ownership;
 4. the 013 manifest has the exact ID, parent-first topic array, Green and Red scopes, and no invented 150 scope;
 5. the workstream and all affected coverage ledgers validate against the current taxonomy, source-topic map, and real public slugs; and
-6. the source-neutral global regression enumerates every slug and asserts exactly 67 Problems and 47 Knowledge nodes, including both new Knowledge slugs.
+6. the source-neutral global regression enumerates every slug and asserts exactly 76 Problems and 50 Knowledge nodes, including both new Knowledge slugs.
 
 The global count check remains exact enumeration; it must not be weakened to a lower-bound assertion.
 
