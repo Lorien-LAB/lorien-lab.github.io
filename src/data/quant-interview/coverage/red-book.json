@@ -1171,6 +1171,57 @@
         "order-statistics-basics"
       ],
       "resolutionNote": "The general kth-order-statistic distribution and density form a distinct canonical identity that was intentionally left outside workstream 009."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.22",
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "random-walk-return-time-on-cube"
+      ],
+      "canonicalKnowledge": [
+        "finite-state-markov-chains",
+        "markov-chain-state-compression",
+        "first-step-analysis"
+      ],
+      "topicOverrideReason": "Item-level review identifies this cube first-positive-return question as finite-state stochastic-process material despite the broader editorial probability-statistics section.",
+      "resolutionNote": "The cube return family is a distinct canonical Problem solved both by the finite-chain mean-return identity and by Hamming-distance compression, with expected positive return 8."
+    },
+    {
+      "sourceSection": "3.2.1",
+      "sourceItem": "3.23",
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "random-walk-boundary"
+      ],
+      "canonicalKnowledge": [
+        "finite-state-markov-chains",
+        "first-step-analysis"
+      ],
+      "topicOverrideReason": "Item-level review identifies this finite absorbing-boundary walk as stochastic-process material despite the broader editorial probability-statistics section.",
+      "resolutionNote": "The fair finite-plank walk has the same state space, absorbing boundaries, recurrence, and fair solution as random-walk-boundary, so it enriches that identity instead of creating a wrapper duplicate."
+    },
+    {
+      "sourceSection": "3.2.2",
+      "sourceItem": "3.40",
+      "canonicalTopics": [
+        "random-walks-markov-chains"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "random-walk-boundary"
+      ],
+      "canonicalKnowledge": [
+        "finite-state-markov-chains",
+        "first-step-analysis"
+      ],
+      "resolutionNote": "The fair walk on 0 through 1000 starting at 80 is the lower-boundary complement case of random-walk-boundary and evaluates to 92/100 = 23/25 without a second public identity."
     }
   ]
 }

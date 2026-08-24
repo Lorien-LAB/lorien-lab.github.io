@@ -1,8 +1,15 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
+import path from 'node:path';
 
 const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
+
+async function markdownSlugs(root) {
+  const files = await readdir(root, { recursive: true });
+  return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
+}
+
 const workstreamPath = 'src/data/quant-interview/workstreams/stochastic-processes-random-walks-markov-chains-011.json';
 const expectedGreenReviewNote = 'Audited exactly Green 5.1 theory, 5.1.gamblers-ruin, 5.1.dice-question, 5.1.coin-triplets, and 5.1.color-balls. Ownership is limited to finite-state Markov-chain theory, the existing boundary identity, two pattern/streak families, and ordered-pair recoloring; martingales, continuous-time chains, and unrelated chapter material remain excluded.';
 const expectedRedReviewNote = 'Audited exactly Red items 3.22, 3.23, and 3.40. Item 3.22 owns the cube positive-return Problem; items 3.23 and 3.40 merge into the existing random-walk-boundary identity. No other Red item or broad section is claimed by 011.';
@@ -145,4 +152,126 @@ test('coordinator adds exact reciprocal links without re-owning existing pages',
     assert.deepEqual(parseInlineArray(text, 'quantInterviewTopics'), expected.topics, `${file} changed ownership`);
     assert.deepEqual(parseInlineArray(text, 'relatedProblems'), expected.related, `${file} has incorrect reciprocal links`);
   }
+});
+
+const keyOf = (entry) => `${entry.sourceSection}::${entry.sourceItem ?? ''}`;
+const terminalStates = new Set(['canonical-problem', 'merged-duplicate', 'variant', 'knowledge-only']);
+const expectedCoverage = {
+  'green-book': {
+    '5.1::': {
+      state: 'knowledge-only',
+      canonicalProblems: [],
+      canonicalKnowledge: ['finite-state-markov-chains'],
+    },
+    '5.1.gamblers-ruin::': {
+      state: 'canonical-problem',
+      canonicalProblems: ['random-walk-boundary'],
+      canonicalKnowledge: ['finite-state-markov-chains', 'first-step-analysis'],
+    },
+    '5.1.dice-question::': {
+      state: 'canonical-problem',
+      canonicalProblems: ['twelve-before-consecutive-sevens'],
+      canonicalKnowledge: ['finite-state-markov-chains', 'markov-chain-state-compression', 'first-step-analysis'],
+    },
+    '5.1.coin-triplets::': {
+      state: 'canonical-problem',
+      canonicalProblems: ['coin-pattern-hitting-times'],
+      canonicalKnowledge: ['finite-state-markov-chains', 'markov-chain-state-compression', 'first-step-analysis'],
+    },
+    '5.1.color-balls::': {
+      state: 'canonical-problem',
+      canonicalProblems: ['random-recoloring-consensus-time'],
+      canonicalKnowledge: ['finite-state-markov-chains', 'markov-chain-state-compression', 'first-step-analysis'],
+    },
+  },
+  'red-book': {
+    '3.2.1::3.22': {
+      state: 'canonical-problem',
+      canonicalProblems: ['random-walk-return-time-on-cube'],
+      canonicalKnowledge: ['finite-state-markov-chains', 'markov-chain-state-compression', 'first-step-analysis'],
+    },
+    '3.2.1::3.23': {
+      state: 'merged-duplicate',
+      canonicalProblems: ['random-walk-boundary'],
+      canonicalKnowledge: ['finite-state-markov-chains', 'first-step-analysis'],
+    },
+    '3.2.2::3.40': {
+      state: 'merged-duplicate',
+      canonicalProblems: ['random-walk-boundary'],
+      canonicalKnowledge: ['finite-state-markov-chains', 'first-step-analysis'],
+    },
+  },
+};
+
+test('011 owns exactly eight terminal rows with exact targets and 5/2/1 split', async () => {
+  const ledgers = {
+    'green-book': await readJson('src/data/quant-interview/coverage/green-book.json'),
+    'red-book': await readJson('src/data/quant-interview/coverage/red-book.json'),
+  };
+  const claimed = [];
+  for (const [source, fixtures] of Object.entries(expectedCoverage)) {
+    const rows = new Map(ledgers[source].entries.map((entry) => [keyOf(entry), entry]));
+    for (const [key, expected] of Object.entries(fixtures)) {
+      const row = rows.get(key);
+      assert.ok(row, `${source} missing ${key}`);
+      assert.equal(row.state, expected.state, `${source} ${key} state`);
+      assert.deepEqual(row.canonicalProblems, expected.canonicalProblems, `${source} ${key} Problem targets`);
+      assert.deepEqual(row.canonicalKnowledge, expected.canonicalKnowledge, `${source} ${key} Knowledge targets`);
+      assert.deepEqual(row.canonicalTopics, ['random-walks-markov-chains']);
+      assert.ok((row.resolutionNote ?? '').trim(), `${source} ${key} missing resolution note`);
+      claimed.push(row);
+    }
+    const ownedKeys = ledgers[source].entries
+      .filter((entry) => entry.canonicalTopics?.includes('random-walks-markov-chains') && terminalStates.has(entry.state))
+      .map(keyOf)
+      .sort();
+    assert.deepEqual(ownedKeys, Object.keys(fixtures).sort(), `${source} has extra 011 terminal ownership`);
+  }
+  assert.equal(claimed.length, 8);
+  assert.equal(claimed.filter((row) => row.state === 'canonical-problem').length, 5);
+  assert.equal(claimed.filter((row) => row.state === 'merged-duplicate').length, 2);
+  assert.equal(claimed.filter((row) => row.state === 'knowledge-only').length, 1);
+});
+
+test('Red editorial overrides are exact and only required on 3.22 and 3.23', async () => {
+  const red = await readJson('src/data/quant-interview/coverage/red-book.json');
+  const rows = new Map(red.entries.map((entry) => [keyOf(entry), entry]));
+  for (const key of ['3.2.1::3.22', '3.2.1::3.23']) {
+    assert.ok((rows.get(key)?.topicOverrideReason ?? '').trim(), `${key} missing topicOverrideReason`);
+    assert.match(rows.get(key).topicOverrideReason, /item-level.*stochastic-process/i);
+  }
+  assert.equal(rows.get('3.2.2::3.40')?.topicOverrideReason, undefined);
+});
+
+test('all three ledgers validate against real targets and 150 receives no 011 row', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const problemSlugs = await markdownSlugs('src/content/problems');
+  const knowledgeSlugs = await markdownSlugs('src/content/knowledge');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+  for (const source of ['green-book', 'red-book', '150-most-frequently-asked']) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+      sourceTopicMap,
+      taxonomy,
+      problemSlugs,
+      knowledgeSlugs,
+      allowUnresolvedCanonicalRefs: false,
+    }));
+  }
+  const q150 = await readJson('src/data/quant-interview/coverage/150-most-frequently-asked.json');
+  assert.equal(q150.entries.filter((entry) => entry.canonicalTopics?.includes('random-walks-markov-chains')).length, 0);
+  const aggregate = q150.entries.find((entry) => keyOf(entry) === '2.6::');
+  assert.equal(aggregate?.state, 'pending');
+  assert.deepEqual(aggregate?.canonicalProblems, []);
+  assert.deepEqual(aggregate?.canonicalKnowledge, []);
+});
+
+test('011 uses existing section routing and creates no item-level source-map entries', async () => {
+  const sourceTopicMap = await readJson('src/data/quant-interview/topics/source-topic-map.json');
+  const byKey = new Map(sourceTopicMap.entries.map((entry) => [`${entry.source}::${entry.sourceSection}`, entry]));
+  assert.deepEqual(byKey.get('green-book::5.1')?.canonicalTopics, ['random-walks-markov-chains']);
+  assert.deepEqual(byKey.get('red-book::3.2.1')?.canonicalTopics, ['probability-statistics']);
+  assert.deepEqual(byKey.get('red-book::3.2.2')?.canonicalTopics, ['stochastic-processes-stochastic-calculus']);
+  assert.equal(sourceTopicMap.entries.some((entry) => /3\.(?:22|23|40)$/.test(entry.sourceSection)), false);
 });

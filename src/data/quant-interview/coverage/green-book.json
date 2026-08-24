@@ -1333,9 +1333,12 @@
       "canonicalTopics": [
         "random-walks-markov-chains"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "finite-state-markov-chains"
+      ],
+      "resolutionNote": "Finite homogeneous Markov-chain theory is represented by reusable Knowledge with visible Interview Checks for matrix orientation, state structure, stationarity, hitting equations, periodicity, and positive return."
     },
     {
       "sourceSection": "5.1.gamblers-ruin",
@@ -1343,9 +1346,15 @@
       "canonicalTopics": [
         "random-walks-markov-chains"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "random-walk-boundary"
+      ],
+      "canonicalKnowledge": [
+        "finite-state-markov-chains",
+        "first-step-analysis"
+      ],
+      "resolutionNote": "This row establishes canonical source ownership for the existing random-walk-boundary identity, enriched once with fair, biased, deterministic, and three numeric boundary cases."
     },
     {
       "sourceSection": "5.1.dice-question",
@@ -1353,9 +1362,16 @@
       "canonicalTopics": [
         "random-walks-markov-chains"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "twelve-before-consecutive-sevens"
+      ],
+      "canonicalKnowledge": [
+        "finite-state-markov-chains",
+        "markov-chain-state-compression",
+        "first-step-analysis"
+      ],
+      "resolutionNote": "The competing total-of-12 and consecutive-seven hazards form a distinct two-state streak-compression Problem with success probability 7/13."
     },
     {
       "sourceSection": "5.1.coin-triplets",
@@ -1363,9 +1379,16 @@
       "canonicalTopics": [
         "random-walks-markov-chains"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "coin-pattern-hitting-times"
+      ],
+      "canonicalKnowledge": [
+        "finite-state-markov-chains",
+        "markov-chain-state-compression",
+        "first-step-analysis"
+      ],
+      "resolutionNote": "One multipart canonical Problem owns the HHH and THH waiting times, their first-hitting race, and the exact length-three second-chooser response guarantee."
     },
     {
       "sourceSection": "5.1.color-balls",
@@ -1373,9 +1396,16 @@
       "canonicalTopics": [
         "random-walks-markov-chains"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "random-recoloring-consensus-time"
+      ],
+      "canonicalKnowledge": [
+        "finite-state-markov-chains",
+        "markov-chain-state-compression",
+        "first-step-analysis"
+      ],
+      "resolutionNote": "Ordered-pair recoloring from distinct initial colors is represented by backward active-lineage coalescence and the exact mean consensus time (n-1)^2."
     },
     {
       "sourceSection": "5.2",
