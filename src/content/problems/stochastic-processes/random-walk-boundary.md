@@ -24,7 +24,7 @@ featured: true
 
 ## Problem
 
-On states \(0,1,\ldots,N\), start at \(i\). Each step moves up with probability \(p\) and down with probability \(q=1-p\); states 0 and \(N\) are absorbing. Find \(u_i=P_i(\text{hit }N\text{ before }0)\), including fair, biased, and deterministic cases. Then evaluate the three cases listed in the solution.
+On states `0, 1, ..., N`, start at `i`. Each step moves up with probability `p` and down with probability `q = 1-p`; states 0 and `N` are absorbing. Find `u_i = P_i(hit N before 0)`, including fair, biased, and deterministic cases. Then evaluate the three cases listed in the solution.
 
 ## Think Before Revealing
 
@@ -33,14 +33,14 @@ Write a boundary-value recurrence before guessing from symmetry.
 <details>
 <summary>Hint 1</summary>
 
-Use \(u_0=0\), \(u_N=1\), and condition on the first step from an interior state.
+Use `u_0 = 0`, `u_N = 1`, and condition on the first step from an interior state.
 
 </details>
 
 <details>
 <summary>Hint 2</summary>
 
-For \(p\ne q\), the characteristic roots are 1 and \(q/p\). The fair case is the repeated-root limit and is linear in \(i\).
+For `p != q`, the characteristic roots are 1 and `q/p`. The fair case is the repeated-root limit and is linear in `i`.
 
 </details>
 
@@ -49,11 +49,11 @@ For \(p\ne q\), the characteristic roots are 1 and \(q/p\). The fair case is the
 
 ## Solution
 
-For \(0<i<N\), first-step analysis gives
+For `0 < i < N`, first-step analysis gives
 
-\[
-u_i=p\,u_{i+1}+q\,u_{i-1},\qquad u_0=0,\quad u_N=1.
-\]
+```text
+u_i = p u_{i+1} + q u_{i-1},    u_0 = 0,    u_N = 1
+```
 
 The boundary conditions give
 
@@ -62,7 +62,7 @@ u_i = i/N                                      when p=q=1/2
 u_i = [1-(q/p)^i] / [1-(q/p)^N]              when 0<p<1 and p!=q
 ```
 
-At the deterministic endpoints, \(p=0\) gives \(u_i=0\) for every \(i<N\), while \(p=1\) gives \(u_i=1\) for every \(i>0\). These are stated separately because the biased formula assumes \(0<p<1\).
+At the deterministic endpoints, `p = 0` gives `u_i = 0` for every `i < N`, while `p = 1` gives `u_i = 1` for every `i > 0`. These are stated separately because the biased formula assumes `0 < p < 1`.
 
 The requested evaluations are:
 

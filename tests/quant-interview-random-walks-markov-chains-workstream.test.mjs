@@ -86,6 +86,8 @@ function parseInlineArray(text, field) {
 
 test('existing boundary identity is enriched in place with the general absorbing formula', async () => {
   const text = await readText('src/content/problems/stochastic-processes/random-walk-boundary.md');
+  const body = text.replace(/^---\r?\n[\s\S]*?\r?\n---\r?\n/, '').replaceAll('\r\n', '\n');
+  const recurrence = 'u_i = p u_{i+1} + q u_{i-1},    u_0 = 0,    u_N = 1';
   assert.match(text, /^problemId: lorien-stochastic-001$/m);
   assert.deepEqual(parseInlineArray(text, 'quantInterviewTopics'), [
     'stochastic-processes-stochastic-calculus',
@@ -102,6 +104,8 @@ test('existing boundary identity is enriched in place with the general absorbing
     assert.ok(text.replaceAll(' ', '').includes(result.replaceAll(' ', '')), `boundary page missing ${result}`);
   }
   assert.match(text, /u_i.*p.*u_\{?i\+1\}?.*q.*u_\{?i-1\}?/i);
+  assert.ok(body.includes(`\`\`\`text\n${recurrence}\n\`\`\``), 'boundary recurrence must use renderer-safe fenced text');
+  assert.doesNotMatch(body, /\\(?:,|[A-Za-z]+)/, 'boundary body must not leak raw TeX commands');
   assert.doesNotMatch(text, /optional stopping/i);
   for (const heading of ['## Problem', '## Think Before Revealing', '## Solution', '## Why This Matters', '## Common Mistakes', '## Extensions']) {
     assert.ok(text.includes(heading), `boundary page missing ${heading}`);
