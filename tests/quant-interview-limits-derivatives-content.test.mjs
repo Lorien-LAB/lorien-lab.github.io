@@ -241,7 +241,7 @@ test('Problem 001 derives u^v, visibly asks x^x, and preserves the log-power spe
     concepts: ['derivative-definition-and-core-rules'],
     techniques: ['logarithmic-differentiation'],
     prerequisites: [],
-    relatedProblems: [],
+    relatedProblems: ['derive-exponential-cosine-derivative-from-definition'],
     family: 'variable-base-variable-exponent',
     mathDifficulty: 2,
     insightDifficulty: 3,
@@ -259,6 +259,37 @@ test('Problem 001 derives u^v, visibly asks x^x, and preserves the log-power spe
   assertMath(solution, String.raw`\boxed{\frac{d}{dx}x^x=x^x(\ln x+1)},\qquad x>0`, 'Problem 001 x^x result and domain');
   assertMath(page.text, String.raw`y=(\ln x)^{\ln x}`, 'Problem 001 log-power prompt');
   assertMath(solution, String.raw`\boxed{y'=\frac{(\ln x)^{\ln x}}{x}(\ln\ln x+1)},\qquad x>1`, 'Problem 001 log-power result and domain');
+});
+
+test('Problem 010 derives exp(cos x) from the exact Delta_h factorization without Taylor series', async () => {
+  const page = await readPage('src/content/problems/calculus/derive-exponential-cosine-derivative-from-definition.md');
+  assertProblemPage(page, {
+    problemId: 'limits-derivatives-010',
+    title: 'Derive an Exponential-of-Cosine Derivative from the Definition',
+    description: 'Derive the derivative of an exponential of cosine directly from its difference quotient and standard elementary limits.',
+    subcategories: ['Derivatives', 'First Principles'],
+    tags: ['Calculus', 'Interview'],
+    concepts: ['derivative-definition-and-core-rules'],
+    techniques: [],
+    prerequisites: [],
+    relatedProblems: ['differentiate-variable-base-and-exponent'],
+    family: 'derivative-from-definition',
+    mathDifficulty: 3,
+    insightDifficulty: 3,
+    interviewDifficulty: 3,
+    estimatedMinutes: 15,
+  });
+  const derivation = solutionBody(page.text);
+  assertMath(page.text, String.raw`g(x)=e^{\cos x}`, 'Problem 010 function');
+  assertMath(derivation, String.raw`\Delta_h=\cos(x+h)-\cos x`, 'Problem 010 Delta definition');
+  assertMath(derivation, String.raw`\frac{g(x+h)-g(x)}h=e^{\cos x}\left(\frac{e^{\Delta_h}-1}{\Delta_h}\right)\left(\frac{\Delta_h}{h}\right)`, 'Problem 010 exact factorization');
+  assert.match(derivation, /limiting interpretation.*Delta|when.*Delta_h.*zero|Delta_h.*zero.*limit/is);
+  assertMath(derivation, String.raw`\frac{\Delta_h}{h}=\cos x\frac{\cos h-1}{h}-\sin x\frac{\sin h}{h}`, 'Problem 010 angle-addition quotient');
+  assertMath(derivation, String.raw`\lim_{h\to0}\frac{\Delta_h}{h}=-\sin x`, 'Problem 010 inner limit');
+  assertMath(derivation, String.raw`\lim_{z\to0}\frac{e^z-1}{z}=1`, 'Problem 010 exponential limit');
+  assertMath(derivation, String.raw`\boxed{g'(x)=-\sin x\,e^{\cos x}}`, 'Problem 010 derivative');
+  assert.doesNotMatch(derivation, /Taylor|Maclaurin|big-O|O\(h/i);
+  assert.doesNotMatch(page.text, /e\^x\s*\\cos x|e\^x\s*cos x/);
 });
 
 test('qualitative derivative Knowledge separates critical, curvature, and inflection tests', async () => {

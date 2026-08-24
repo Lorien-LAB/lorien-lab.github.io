@@ -11,7 +11,7 @@ quantInterviewTopics: [calculus-differential-equations, limits-derivatives]
 concepts: [derivative-definition-and-core-rules]
 techniques: [logarithmic-differentiation]
 prerequisites: []
-relatedProblems: []
+relatedProblems: [derive-exponential-cosine-derivative-from-definition]
 family: variable-base-variable-exponent
 mathDifficulty: 2
 insightDifficulty: 3
