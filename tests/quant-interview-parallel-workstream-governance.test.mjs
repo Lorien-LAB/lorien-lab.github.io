@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 import { extname, join } from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
 
@@ -338,14 +338,30 @@ test('deterministic topology validation rejects duplicate declarations and refer
 
 const handoffPath = 'docs/quant-interview/HANDOFF.md';
 const workstream011Path = 'src/data/quant-interview/workstreams/stochastic-processes-random-walks-markov-chains-011.json';
+const workstream012Path = 'src/data/quant-interview/workstreams/calculus-differential-equations-limits-derivatives-012.json';
+const workstream013Path = 'src/data/quant-interview/workstreams/interview-strategy-communication-reasoning-communication-013.json';
+const orderedGates = ['npm run test', 'npm run check', 'npm run build'];
 
-async function workstream011Status() {
-  try {
-    return JSON.parse(await readFile(workstream011Path, 'utf8')).status;
-  } catch (error) {
-    if (error?.code === 'ENOENT') return 'absent';
-    throw error;
-  }
+function section(handoff, heading) {
+  return handoff.split(new RegExp(`## ${heading}`, 'i'))[1]?.split(/\n## /)[0] ?? '';
+}
+
+function assertFactual012Closure(workstream, handoff) {
+  const gate = workstream.preClosureActiveGate;
+  const verification = workstream.verification;
+  assert.match(gate?.commit ?? '', /^[0-9a-f]{40}$/);
+  assert.match(gate?.environment ?? '', /^(?:linux-native-lf-node24|wsl-native-lf-node24)$/);
+  assert.deepEqual(gate?.commands, orderedGates);
+  assert.equal(gate?.conclusion, 'success');
+  assert.equal(verification?.commit, gate.commit);
+  assert.ok(Number.isInteger(verification?.runId) && verification.runId > 0);
+  assert.deepEqual(verification?.commands, orderedGates);
+  assert.equal(verification?.conclusion, 'success');
+  assert.match(handoff, new RegExp(gate.commit));
+  assert.match(handoff, new RegExp(String(verification.runId)));
+  assert.match(handoff, new RegExp(gate.environment));
+  assert.match(handoff, /76[^\n]*Problems[^\n]*48[^\n]*Knowledge/i);
+  assert.match(handoff, /20[^\n]*12[^\n]*canonical-problem[^\n]*6[^\n]*merged-duplicate[^\n]*2[^\n]*knowledge-only/i);
 }
 
 const reservations = [
@@ -380,59 +396,72 @@ function reservationRows(coordination) {
     .map(([queue, ordinal, topic, branch, state]) => ({ queue, ordinal, topic, branch, state }));
 }
 
-test('handoff preserves exact reservations while 011 advances through its lifecycle', async () => {
+test('handoff preserves exact reservations while 012 advances through its lifecycle', async () => {
   const handoff = await readFile(handoffPath, 'utf8');
-  const coordination = handoff.split(/## Parallel workstream coordination/i)[1]?.split(/## /)[0] ?? '';
+  const coordination = section(handoff, 'Parallel workstream coordination');
   const rows = reservationRows(coordination);
-  const status = await workstream011Status();
-  const expected011State = {
-    absent: 'design-audit',
-    active: 'active',
-    complete: 'complete',
-  }[status];
+  const workstream011 = JSON.parse(await readFile(workstream011Path, 'utf8'));
+  const workstream012 = JSON.parse(await readFile(workstream012Path, 'utf8'));
+
   assert.ok(coordination, 'HANDOFF missing parallel workstream coordination');
   assert.match(coordination, /maximum active candidates[^\n]*3/i);
+  assert.equal(workstream011.status, 'complete');
+  assert.match(workstream012.status, /^(?:active|complete)$/);
   assert.deepEqual(
     rows.map(({ state, ...identity }) => identity),
     reservations.map(({ state, ...identity }, index) => ({ queue: String(index + 1), ...identity })),
   );
-  assert.equal(rows[0]?.state, expected011State);
-  assert.equal(rows[1]?.state, 'design-audit');
+  assert.equal(rows[0]?.state, 'complete');
+  assert.equal(rows[1]?.state, workstream012.status);
   assert.equal(rows[2]?.state, 'design-audit');
-
-  if (status === 'complete') {
-    assert.match(coordination, /completed queue entry[^\n]*011/i);
+  assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011/i);
+  if (workstream012.status === 'active') {
     assert.match(coordination, /remaining integration queue[^\n]*012[^\n]*013/i);
-    assert.doesNotMatch(coordination, /remaining integration queue[^\n]*011/i);
+    assert.doesNotMatch(coordination, /completed queue entr(?:y|ies)[^.\n]*012/i);
   } else {
-    assert.match(coordination, /integration queue[^\n]*011[^\n]*012[^\n]*013/i);
-    assert.match(coordination, /candidate[^\n]*active[^\n]*not[^\n]*complete/i);
-    assert.doesNotMatch(coordination, /completed queue entry[^\n]*011/i);
+    assertFactual012Closure(workstream012, handoff);
+    assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012/i);
+    assert.match(coordination, /remaining integration queue[^\n]*013/i);
+    assert.doesNotMatch(coordination, /remaining integration queue[^\n]*012/i);
   }
 });
 
-test('authoritative current topic follows the serialized 011 lifecycle', async () => {
+test('authoritative current topic follows factual 012 lifecycle', async () => {
   const handoff = await readFile(handoffPath, 'utf8');
-  const current = handoff.split(/Current bounded topic:/i)[1]?.split(/## /)[0] ?? '';
-  const status = await workstream011Status();
-  if (status === 'complete') {
+  const current = handoff.split(/Current bounded topic:/i)[1]?.split(/\n## /)[0] ?? '';
+  const currentTitle = current.split(/\r?\n/).find((line) => /\*\*/.test(line)) ?? '';
+  const workstream012 = JSON.parse(await readFile(workstream012Path, 'utf8'));
+  if (workstream012.status === 'active') {
+    assert.match(current, /Calculus & Differential Equations/i);
     assert.match(current, /Limits & Derivatives/i);
-    assert.doesNotMatch(current, /Random Walks & Markov Chains|Reasoning & Communication/i);
+    assert.doesNotMatch(current, /Reasoning & Communication/i);
   } else {
-    assert.match(current, /Random Walks & Markov Chains/i);
-    assert.doesNotMatch(current, /Limits & Derivatives|Reasoning & Communication/i);
+    assert.equal(workstream012.status, 'complete');
+    assertFactual012Closure(workstream012, handoff);
+    assert.match(current, /Interview Strategy & Communication/i);
+    assert.match(current, /Reasoning & Communication/i);
+    assert.doesNotMatch(currentTitle, /Limits & Derivatives/i);
   }
 });
 
-test('governance admits 011 while keeping 012 and 013 manifests premature', async () => {
+test('governance admits 012 and protects 013 until factual 012 closure', async () => {
   const files = await readdir('src/data/quant-interview/workstreams');
   assert.ok(files.includes('stochastic-processes-random-walks-markov-chains-011.json'));
+  assert.ok(files.includes('calculus-differential-equations-limits-derivatives-012.json'));
   const workstream011 = JSON.parse(await readFile(workstream011Path, 'utf8'));
-  assert.match(workstream011.status, /^(?:active|complete)$/);
-  const prematureOrdinals = new Set(['012', '013']);
-  const prematureManifests = files.filter((file) => {
-    const suffix = file.match(/(\d{3})\.json$/)?.[1];
-    return suffix && prematureOrdinals.has(suffix);
-  });
-  assert.deepEqual(prematureManifests, []);
+  const workstream012 = JSON.parse(await readFile(workstream012Path, 'utf8'));
+  assert.equal(workstream011.status, 'complete');
+  assert.match(workstream012.status, /^(?:active|complete)$/);
+  const has013 = files.includes('interview-strategy-communication-reasoning-communication-013.json');
+  if (workstream012.status === 'active') {
+    assert.equal(has013, false);
+    await assert.rejects(access(workstream013Path));
+  } else {
+    const handoff = await readFile(handoffPath, 'utf8');
+    assertFactual012Closure(workstream012, handoff);
+    if (has013) {
+      const workstream013 = JSON.parse(await readFile(workstream013Path, 'utf8'));
+      assert.match(workstream013.status, /^(?:active|complete)$/);
+    }
+  }
 });
