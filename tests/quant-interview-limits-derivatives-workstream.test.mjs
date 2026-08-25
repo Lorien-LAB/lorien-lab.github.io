@@ -326,3 +326,36 @@ test('150 source has exactly six 012 item rows with a 3/3/0 split and no synthet
   assert.deepEqual(container?.canonicalProblems, []);
   assert.deepEqual(container?.canonicalKnowledge, []);
 });
+
+test('the complete 012 terminal audit is exactly twenty rows split 12/6/2', async () => {
+  const rowsBySource = await Promise.all(
+    Object.entries(expectedCoverage).map(([source, expected]) => assertCoverageSource(source, expected)),
+  );
+  const rows = rowsBySource.flat();
+  assert.equal(rows.length, 20);
+  assert.equal(rows.filter((row) => row.state === 'canonical-problem').length, 12);
+  assert.equal(rows.filter((row) => row.state === 'merged-duplicate').length, 6);
+  assert.equal(rows.filter((row) => row.state === 'knowledge-only').length, 2);
+  for (const row of rows) {
+    assert.deepEqual(row.canonicalTopics, ['limits-derivatives']);
+    assert.ok(row.resolutionNote.length > 0);
+  }
+});
+
+test('all three current ledgers validate with real 012 Problem and Knowledge slugs', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const sourceTopicMap = await readJson(mapPath);
+  const problemSlugs = await markdownSlugs('src/content/problems');
+  const knowledgeSlugs = await markdownSlugs('src/content/knowledge');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+  for (const source of ['green-book', 'red-book', '150-most-frequently-asked']) {
+    const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);
+    assert.doesNotThrow(() => validateCoverageLedger(ledger, {
+      sourceTopicMap,
+      taxonomy,
+      problemSlugs,
+      knowledgeSlugs,
+      allowUnresolvedCanonicalRefs: false,
+    }), `${source} fails strict real-target coverage validation`);
+  }
+});

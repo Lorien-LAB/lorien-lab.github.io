@@ -67,6 +67,19 @@ const currentProblemSlugs = [
   'joint-min-max-correlation-of-uniforms',
   'random-ants-last-fall-time',
   'kth-order-statistic-distribution',
+  'differentiate-variable-base-and-exponent',
+  'compare-e-pi-power-expressions',
+  'exponential-over-polynomial-limit',
+  'logarithm-power-limit-at-zero',
+  'rotating-lighthouse-beam-related-rate',
+  'radical-difference-limit-at-infinity',
+  'exponential-midpoint-convexity',
+  'periodic-continued-fraction-limit',
+  'normal-cdf-inflection-point',
+  'derive-exponential-cosine-derivative-from-definition',
+  'nested-radical-limit',
+  'infinite-power-tower-limit',
+  'classify-basic-positive-series',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -111,6 +124,13 @@ const expectedKnowledgeTopics = new Map([
   ['moments-moment-generating-functions', ['probability-statistics', 'expectation-variance-covariance']],
   ['order-statistics-basics', ['probability-statistics', 'order-statistics-extremes']],
   ['joint-extremes-and-range', ['probability-statistics', 'order-statistics-extremes']],
+  ['derivative-definition-and-core-rules', ['calculus-differential-equations', 'limits-derivatives']],
+  ['logarithmic-differentiation', ['calculus-differential-equations', 'limits-derivatives']],
+  ['monotonicity-convexity-critical-points-and-inflection', ['calculus-differential-equations', 'limits-derivatives']],
+  ['indeterminate-limits-and-growth-rates', ['calculus-differential-equations', 'limits-derivatives']],
+  ['related-rates-and-implicit-differentiation', ['calculus-differential-equations', 'limits-derivatives']],
+  ['bounded-monotone-convergence-and-fixed-points', ['calculus-differential-equations', 'limits-derivatives']],
+  ['positive-series-convergence', ['calculus-differential-equations', 'limits-derivatives']],
 ]);
 
 async function findProblem(slug) {
@@ -149,14 +169,14 @@ async function classifiedMarkdownSlugs(root) {
   return slugs.sort();
 }
 
-test('source-neutral regression discovers exactly the current 63 Problem and 41 Knowledge contracts', async () => {
+test('source-neutral regression discovers exactly the current 76 Problem and 48 Knowledge contracts', async () => {
   const actualProblemSlugs = await classifiedMarkdownSlugs('src/content/problems');
   const actualKnowledgeSlugs = await classifiedMarkdownSlugs('src/content/knowledge');
   const expectedProblemSlugs = [...currentProblemSlugs].sort();
   const expectedKnowledgeSlugs = [...expectedKnowledgeTopics.keys()].sort();
 
-  assert.equal(actualProblemSlugs.length, 63);
-  assert.equal(actualKnowledgeSlugs.length, 41);
+  assert.equal(actualProblemSlugs.length, 76);
+  assert.equal(actualKnowledgeSlugs.length, 48);
   assert.deepEqual(actualProblemSlugs, expectedProblemSlugs);
   assert.deepEqual(actualKnowledgeSlugs, expectedKnowledgeSlugs);
 });
