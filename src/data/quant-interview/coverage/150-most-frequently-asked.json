@@ -637,6 +637,98 @@
         "gaussian-lognormal-structure"
       ],
       "resolutionNote": "The general Normal E[Phi(X)] identity owns the canonical Problem; the standard-normal special case from another source is retained as a variant and alternative method."
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": "2",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "compare-e-pi-power-expressions"
+      ],
+      "canonicalKnowledge": [
+        "monotonicity-convexity-critical-points-and-inflection",
+        "derivative-definition-and-core-rules"
+      ],
+      "resolutionNote": "This is the same transcendental-power comparison already represented by the canonical monotonicity Problem."
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": "3",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "exponential-midpoint-convexity"
+      ],
+      "canonicalKnowledge": [
+        "monotonicity-convexity-critical-points-and-inflection"
+      ],
+      "resolutionNote": "This is the same exponential midpoint-convexity identity and is absorbed as alternate evidence rather than duplicated publicly."
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": "5",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "differentiate-variable-base-and-exponent"
+      ],
+      "canonicalKnowledge": [
+        "derivative-definition-and-core-rules",
+        "logarithmic-differentiation"
+      ],
+      "resolutionNote": "This x^x derivative on x>0 is absorbed into the same canonical positive variable-base/variable-exponent Problem."
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": "6",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "nested-radical-limit"
+      ],
+      "canonicalKnowledge": [
+        "bounded-monotone-convergence-and-fixed-points"
+      ],
+      "resolutionNote": "The canonical nested-radical Problem proves bounded monotone convergence before selecting the positive fixed point."
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": "7",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "infinite-power-tower-limit"
+      ],
+      "canonicalKnowledge": [
+        "bounded-monotone-convergence-and-fixed-points"
+      ],
+      "resolutionNote": "The canonical Problem first finds the positive base sqrt(2) for tower value 2, then proves the finite towers increase below 2 and reject fixed-point branch 4."
+    },
+    {
+      "sourceSection": "2.1",
+      "sourceItem": "8",
+      "canonicalTopics": [
+        "limits-derivatives"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "classify-basic-positive-series"
+      ],
+      "canonicalKnowledge": [
+        "positive-series-convergence"
+      ],
+      "resolutionNote": "The canonical Problem proves divergence of the harmonic and logarithmic-harmonic series and convergence of the square series by elementary non-integral arguments."
     }
   ]
 }

@@ -104,6 +104,45 @@ expectedCoverage['red-book'] = {
   },
 };
 
+expectedCoverage['150-most-frequently-asked'] = {
+  '2.1::2': {
+    state: 'merged-duplicate',
+    canonicalProblems: ['compare-e-pi-power-expressions'],
+    canonicalKnowledge: ['monotonicity-convexity-critical-points-and-inflection', 'derivative-definition-and-core-rules'],
+    resolutionNote: 'This is the same transcendental-power comparison already represented by the canonical monotonicity Problem.',
+  },
+  '2.1::3': {
+    state: 'merged-duplicate',
+    canonicalProblems: ['exponential-midpoint-convexity'],
+    canonicalKnowledge: ['monotonicity-convexity-critical-points-and-inflection'],
+    resolutionNote: 'This is the same exponential midpoint-convexity identity and is absorbed as alternate evidence rather than duplicated publicly.',
+  },
+  '2.1::5': {
+    state: 'merged-duplicate',
+    canonicalProblems: ['differentiate-variable-base-and-exponent'],
+    canonicalKnowledge: ['derivative-definition-and-core-rules', 'logarithmic-differentiation'],
+    resolutionNote: 'This x^x derivative on x>0 is absorbed into the same canonical positive variable-base/variable-exponent Problem.',
+  },
+  '2.1::6': {
+    state: 'canonical-problem',
+    canonicalProblems: ['nested-radical-limit'],
+    canonicalKnowledge: ['bounded-monotone-convergence-and-fixed-points'],
+    resolutionNote: 'The canonical nested-radical Problem proves bounded monotone convergence before selecting the positive fixed point.',
+  },
+  '2.1::7': {
+    state: 'canonical-problem',
+    canonicalProblems: ['infinite-power-tower-limit'],
+    canonicalKnowledge: ['bounded-monotone-convergence-and-fixed-points'],
+    resolutionNote: 'The canonical Problem first finds the positive base sqrt(2) for tower value 2, then proves the finite towers increase below 2 and reject fixed-point branch 4.',
+  },
+  '2.1::8': {
+    state: 'canonical-problem',
+    canonicalProblems: ['classify-basic-positive-series'],
+    canonicalKnowledge: ['positive-series-convergence'],
+    resolutionNote: 'The canonical Problem proves divergence of the harmonic and logarithmic-harmonic series and convergence of the square series by elementary non-integral arguments.',
+  },
+};
+
 async function exists(file) {
   try { await access(file); return true; } catch { return false; }
 }
@@ -272,4 +311,18 @@ test('Red Q6.9 and Q6.10 retain their complete pre-012 ownership and are outside
   });
   assert.equal(Object.hasOwn(expectedCoverage['red-book'], '6.2.1::6.9'), false);
   assert.equal(Object.hasOwn(expectedCoverage['red-book'], '6.2.1::6.10'), false);
+});
+
+test('150 source has exactly six 012 item rows with a 3/3/0 split and no synthetic container ownership', async () => {
+  const rows = await assertCoverageSource('150-most-frequently-asked', expectedCoverage['150-most-frequently-asked']);
+  assert.equal(rows.length, 6);
+  assert.equal(rows.filter((row) => row.state === 'canonical-problem').length, 3);
+  assert.equal(rows.filter((row) => row.state === 'merged-duplicate').length, 3);
+  assert.equal(rows.filter((row) => row.state === 'knowledge-only').length, 0);
+  for (const row of rows) assert.equal(Object.hasOwn(row, 'topicOverrideReason'), false);
+  const { rows: allRows } = await coverageRows('150-most-frequently-asked');
+  const container = allRows.get('2.1::');
+  assert.equal(container?.state, 'pending');
+  assert.deepEqual(container?.canonicalProblems, []);
+  assert.deepEqual(container?.canonicalKnowledge, []);
 });
