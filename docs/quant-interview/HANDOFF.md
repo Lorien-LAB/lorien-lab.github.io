@@ -439,6 +439,66 @@ All three source files remain edition-pinned and source-file-verified. Source-fi
 - Red Book: Version 1.01 (2008), ISBN-13 `9781438217031`, overall coverage incomplete.
 - 150 Questions: First edition (2013), ISBN-13 `9780979757648`, overall cross-book reconciliation incomplete.
 
+## Completed cross-book workstream 12
+
+`calculus-differential-equations-limits-derivatives-012`
+
+Scope: **Calculus & Differential Equations → Limits & Derivatives**.
+
+Active integrated verification:
+
+- CI-tested pre-closure active commit: `666cacb1b4832b5aab43c8f146696a4681425f76`
+- GitHub Actions run: `32807218682`; its `head_sha` is `666cacb1b4832b5aab43c8f146696a4681425f76`
+- authoritative local environment: `wsl-native-lf-node24`
+- CI environment: Ubuntu with Node 24; CI ran `npm ci` first
+- ordered gates: `npm run test`, `npm run check`, `npm run build`
+- conclusion: success
+
+This evidence belongs to the active integrated commit above, not to the later workflow-free closure commit. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`.
+
+### Canonical Knowledge
+
+- `derivative-definition-and-core-rules`
+- `logarithmic-differentiation`
+- `monotonicity-convexity-critical-points-and-inflection`
+- `indeterminate-limits-and-growth-rates`
+- `related-rates-and-implicit-differentiation`
+- `bounded-monotone-convergence-and-fixed-points`
+- `positive-series-convergence`
+
+### Canonical Problems
+
+- `differentiate-variable-base-and-exponent`
+- `compare-e-pi-power-expressions`
+- `exponential-over-polynomial-limit`
+- `logarithm-power-limit-at-zero`
+- `rotating-lighthouse-beam-related-rate`
+- `radical-difference-limit-at-infinity`
+- `exponential-midpoint-convexity`
+- `periodic-continued-fraction-limit`
+- `normal-cdf-inflection-point`
+- `derive-exponential-cosine-derivative-from-definition`
+- `nested-radical-limit`
+- `infinite-power-tower-limit`
+- `classify-basic-positive-series`
+
+### Exact registry, coverage, and mapping decisions
+
+- Source-neutral corpus checkpoint: **76 canonical Problems / 48 explicitly topic-classified Knowledge / Technique nodes**.
+- Terminal coverage: **20 rows = 12 canonical-problem / 6 merged-duplicate / 2 knowledge-only**.
+- Source distribution: **Green 4 / Red 10 / 150 6**.
+- Green `3.1.3::` is one terminal row with two canonical Problem targets; Red Q6.9 and Q6.10 retain their complete pre-012 ownership.
+- Exact source-map repairs: `red-book::6.2.2 -> [limits-derivatives, integration]` and `red-book::6.3.2 -> [limits-derivatives, integration]`.
+- There is no other source-map delta and no taxonomy delta.
+
+### Bounded source scope and closure boundary
+
+- Green Book sections `3.1`, `3.1.1`, `3.1.2`, and `3.1.3`, evidence pages 49–52.
+- Red Book sections `6.1`, `6.2.1`, `6.2.2`, `6.3.1`, `6.3.2`, `10`, and `10.2`, evidence pages 201–229 and 317–318.
+- 150 Most Frequently Asked sections `1`, `2.1`, and `3.1`, evidence pages 11–12, 27–28, and 50–65.
+
+This closes only registered workstream 012. It does not claim completeness for calculus, for any of Green/Red/150 as a whole, for any broad source section, or for material outside the registered page and section scopes.
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -455,13 +515,15 @@ Historical transition marker: **Order Statistics & Extremes** is fully closed. I
 
 Historical transition marker: **Random Walks & Markov Chains** is fully closed. Its two canonical Knowledge nodes, four new S3+ Problems, enriched absorbing-boundary identity, eight terminal hidden source rows, exact 5/2/1 state split, reciprocal public graph links, 63/41 source-neutral corpus contract, and real verification evidence are durable repository state. This paragraph records lineage only and does not authorize reopening that bounded topic.
 
+Historical transition marker: **Limits & Derivatives** is fully closed. Its seven Knowledge nodes, thirteen S3+ Problems, exact 76/48 registry, twenty terminal rows, two bounded Red map repairs, and factual active-commit CI evidence are durable repository state. This paragraph records lineage only and does not authorize reopening the bounded topic during workstream 013.
+
 Current bounded topic:
 
-**Calculus & Differential Equations → Limits & Derivatives.**
+**Interview Strategy & Communication → Reasoning & Communication.**
 
-Coordinator integration proceeds in serialized order: workstream 012 before workstream 013. Preserve completed prior-workstream ownership, exact corpus counts, and shared-state history while reviewing the bounded Limits & Derivatives evidence pool.
+Workstream 012 is factually closed. Workstream 013 is now the sole remaining serialized reservation; it remains in design-audit until its own coordinator integration and must not inherit a completion claim or manifest from 012.
 
-Do not process one book to completion before the others. Do not organize the public corpus by source numbering. Do not use a generic deferred state to avoid semantic decisions.
+Do not reopen closed workstream 012 during 013. Preserve source-neutral public identity, item-level hidden coverage, protected-main safety, and the exact serialized order.
 
 ## Parallel workstream coordination
 
@@ -470,10 +532,10 @@ Maximum active candidates: **3**. Parallel candidates are isolated design and im
 | Queue | Reservation | Canonical topic | Candidate branch | State |
 |---:|---:|---|---|---|
 | 1 | 011 | `random-walks-markov-chains` | `chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23` | complete |
-| 2 | 012 | `limits-derivatives` | `chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23` | active |
+| 2 | 012 | `limits-derivatives` | `chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23` | complete |
 | 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | design-audit |
 
-Completed queue entry: **011**. Remaining integration queue: **012 → 013**. A candidate stays `active` during implementation and is not `complete` until the coordinator integrates it on the latest durable base, reconciles shared state, obtains fresh local and real CI verification for the exact commit, and records factual closure here.
+Completed queue entries: **011, 012**. Remaining integration queue: **013**. A candidate stays `active` during implementation and is not `complete` until the coordinator integrates it on the latest durable base, reconciles shared state, obtains fresh local and real CI verification for the exact commit, and records factual closure here.
 
 ## Non-negotiable invariants
 
