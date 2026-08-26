@@ -1,5 +1,3 @@
-[ERROR] - (starship::print): Under a 'dumb' terminal (TERM=dumb).
-
 # Quant Interview Knowledge Directory Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
@@ -811,7 +809,7 @@ Expected: tests PASS; Astro reports 0 errors; build succeeds; both PowerShell as
 - [ ] **Step 9: Commit Task 3**
 
 ```powershell
-git add src/pages/knowledge/quant-interview/directory.astro src/components/QuantInterviewTopicCard.astro src/pages/knowledge/quant-interview/index.astro tests/quant-interview-knowledge-directory.test.mjs
+git add src/pages/knowledge/quant-interview/directory.astro src/components/QuantInterviewTopicCard.astro src/pages/knowledge/quant-interview/index.astro tests/quant-interview-knowledge-directory.test.mjs tests/quant-interview-topic-public-shell.test.mjs
 git commit -m "feat: add quant interview knowledge directory"
 ```
 

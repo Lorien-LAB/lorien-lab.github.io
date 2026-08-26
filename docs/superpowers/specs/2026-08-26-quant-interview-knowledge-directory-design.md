@@ -1,5 +1,3 @@
-[ERROR] - (starship::print): Under a 'dumb' terminal (TERM=dumb).
-
 # Quant Interview Knowledge Directory — Design Spec
 
 **Date:** 2026-08-26

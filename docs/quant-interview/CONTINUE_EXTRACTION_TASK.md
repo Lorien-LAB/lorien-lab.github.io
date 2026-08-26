@@ -1,5 +1,3 @@
-[ERROR] - (starship::print): Under a 'dumb' terminal (TERM=dumb).
-
 # Continue Quant Interview Extraction — Agent Task
 
 ## Objective
