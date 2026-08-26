@@ -28,6 +28,7 @@
 
 - Create `src/data/leetcodeProblems.ts` — typed canonical records and derived track/category/week values.
 - Create `src/components/LeetCodeGateway.astro` — compact Knowledge landing-page entry point.
+- Create `src/lib/leetcodeFilter.ts` — small pure predicate shared by the page interaction and focused unit tests.
 - Create `src/pages/knowledge/leetcode/index.astro` — static syllabus, filters, list, inline interaction, and scoped styling.
 - Modify `src/pages/knowledge/index.astro` — import and render the gateway beside the existing learning gateways.
 - Create `tests/leetcode-practice-list.test.mjs` — data invariants, public-route contract, filter/control contract, and scope exclusions.
@@ -52,7 +53,6 @@ Create `tests/leetcode-practice-list.test.mjs` with imports and assertions that 
 ```js
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
 import { leetcodeProblems } from '../src/data/leetcodeProblems.ts';
 
 const minimum25 = [1, 3, 15, 20, 33, 49, 53, 56, 121, 128, 139, 198, 200, 207, 209, 215, 238, 239, 283, 322, 347, 560, 704, 739, 973];
@@ -215,7 +215,6 @@ git commit -m "feat: add quant LeetCode syllabus data"
 ### Task 2: Knowledge Landing Gateway
 
 **Files:**
-- Modify: `tests/leetcode-practice-list.test.mjs`
 - Create: `src/components/LeetCodeGateway.astro`
 - Modify: `src/pages/knowledge/index.astro:5-6,53-54`
 
@@ -223,31 +222,7 @@ git commit -m "feat: add quant LeetCode syllabus data"
 - Consumes: `href: string` and the derived counts from `leetcodeProblems`.
 - Produces: a semantic gateway linking to `/knowledge/leetcode/` with no decorative media.
 
-- [ ] **Step 1: Add failing gateway contract tests**
-
-Append:
-
-```js
-test('Knowledge exposes a compact LeetCode gateway at the canonical route', async () => {
-  const gateway = await readFile('src/components/LeetCodeGateway.astro', 'utf8');
-  const knowledge = await readFile('src/pages/knowledge/index.astro', 'utf8');
-
-  assert.match(gateway, /LeetCode for Quant Internships/);
-  assert.match(gateway, /leetcodeProblems/);
-  assert.doesNotMatch(gateway, /<img|<svg|background-image|localStorage/i);
-  assert.match(knowledge, /import LeetCodeGateway/);
-  assert.match(knowledge, /knowledge\/leetcode\//);
-  assert.match(knowledge, /<LeetCodeGateway/);
-});
-```
-
-- [ ] **Step 2: Run the focused test and verify the missing-component failure**
-
-Run: `node --test tests/leetcode-practice-list.test.mjs`
-
-Expected: FAIL with `ENOENT` for `src/components/LeetCodeGateway.astro`.
-
-- [ ] **Step 3: Create the compact gateway**
+- [ ] **Step 1: Create the compact gateway**
 
 Implement `LeetCodeGateway.astro` with this structure:
 
@@ -279,7 +254,7 @@ const minimumCount = leetcodeProblems.filter(({ minimum25 }) => minimum25).lengt
 
 Use a low-height grid, one-pixel borders, restrained accent color, and no illustration, large empty panel, shadow-heavy card, or process diagram.
 
-- [ ] **Step 4: Integrate the gateway into Knowledge**
+- [ ] **Step 2: Integrate the gateway into Knowledge**
 
 Import `LeetCodeGateway` after `QuantInterviewGateway` and render it after the Quant Interview gateway and before the longer Financial Engineering resources gateway:
 
@@ -291,14 +266,14 @@ Import `LeetCodeGateway` after `QuantInterviewGateway` and render it after the Q
 </section>
 ```
 
-- [ ] **Step 5: Run focused tests and commit**
+- [ ] **Step 3: Run type checking and commit**
 
-Run: `node --test tests/leetcode-practice-list.test.mjs`
+Run: `npm run check`
 
-Expected: all focused tests PASS.
+Expected: Astro reports 0 errors.
 
 ```bash
-git add src/components/LeetCodeGateway.astro src/pages/knowledge/index.astro tests/leetcode-practice-list.test.mjs
+git add src/components/LeetCodeGateway.astro src/pages/knowledge/index.astro
 git commit -m "feat: add LeetCode Knowledge gateway"
 ```
 
@@ -308,39 +283,29 @@ git commit -m "feat: add LeetCode Knowledge gateway"
 
 **Files:**
 - Modify: `tests/leetcode-practice-list.test.mjs`
+- Create: `src/lib/leetcodeFilter.ts`
 - Create: `src/pages/knowledge/leetcode/index.astro`
 
 **Interfaces:**
 - Consumes: `leetcodeProblems`, `leetcodeCategories`, and `leetcodeWeeks`.
 - Produces: static route `/knowledge/leetcode/`, 55 server-rendered rows, derived counts, track buttons, labelled select filters, search field, result count, reset control, and no-results state.
 
-- [ ] **Step 1: Add failing page-structure and scope tests**
+- [ ] **Step 1: Add failing filter-behavior tests**
 
 Append:
 
 ```js
-test('LeetCode page renders a dense, progressively enhanced problem index', async () => {
-  const page = await readFile('src/pages/knowledge/leetcode/index.astro', 'utf8');
+import { matchesLeetCodeProblem } from '../src/lib/leetcodeFilter.ts';
 
-  assert.match(page, /leetcodeProblems\.map/);
-  assert.match(page, /data-leetcode-row/);
-  assert.match(page, /data-track-filter/);
-  assert.match(page, /data-category-filter/);
-  assert.match(page, /data-difficulty-filter/);
-  assert.match(page, /data-week-filter/);
-  assert.match(page, /data-leetcode-search/);
-  assert.match(page, /data-result-count/);
-  assert.match(page, /data-filter-reset/);
-  assert.match(page, /data-no-results/);
-});
+test('LeetCode filters combine track, text, category, difficulty, and week', () => {
+  const medianStream = leetcodeProblems.find(({ number }) => number === 295);
+  const medianWindow = leetcodeProblems.find(({ number }) => number === 480);
+  assert.ok(medianStream && medianWindow);
 
-test('LeetCode phase 1 remains a read-only external syllabus', async () => {
-  const page = await readFile('src/pages/knowledge/leetcode/index.astro', 'utf8');
-
-  assert.doesNotMatch(page, /type=["']checkbox["']|localStorage|sessionStorage|completed|solved/i);
-  assert.doesNotMatch(page, /<img|<svg|<canvas|background-image/i);
-  assert.match(page, /target="_blank"/);
-  assert.match(page, /rel="noreferrer"/);
+  assert.equal(matchesLeetCodeProblem(medianStream, { track: 'all', query: 'median', category: '', difficulty: '', week: '' }), true);
+  assert.equal(matchesLeetCodeProblem(medianWindow, { track: 'quant', query: 'median', category: '', difficulty: 'Hard', week: '5' }), true);
+  assert.equal(matchesLeetCodeProblem(medianStream, { track: 'quant', query: 'median', category: '', difficulty: '', week: '' }), false);
+  assert.equal(matchesLeetCodeProblem(medianWindow, { track: 'minimum', query: '', category: '', difficulty: '', week: '' }), false);
 });
 ```
 
@@ -348,9 +313,41 @@ test('LeetCode phase 1 remains a read-only external syllabus', async () => {
 
 Run: `node --test tests/leetcode-practice-list.test.mjs`
 
-Expected: FAIL with `ENOENT` for `src/pages/knowledge/leetcode/index.astro`.
+Expected: FAIL with `ERR_MODULE_NOT_FOUND` for `src/lib/leetcodeFilter.ts`.
 
-- [ ] **Step 3: Build the server-rendered page shell**
+- [ ] **Step 3: Implement the pure filter predicate**
+
+Create `src/lib/leetcodeFilter.ts`:
+
+```ts
+import type { LeetCodeProblem } from '../data/leetcodeProblems';
+
+export interface LeetCodeFilters {
+  track: 'all' | 'minimum' | 'core' | 'quant';
+  query: string;
+  category: string;
+  difficulty: string;
+  week: string;
+}
+
+export const matchesLeetCodeProblem = (problem: LeetCodeProblem, filters: LeetCodeFilters): boolean => {
+  const haystack = [problem.number, problem.title, problem.pattern, problem.quantApplication].join(' ').toLowerCase();
+  const trackMatches = filters.track === 'all'
+    || (filters.track === 'minimum' && problem.minimum25)
+    || problem.track === filters.track;
+  return trackMatches
+    && (!filters.query.trim() || haystack.includes(filters.query.trim().toLowerCase()))
+    && (!filters.category || problem.category === filters.category)
+    && (!filters.difficulty || problem.difficulty === filters.difficulty)
+    && (!filters.week || String(problem.week) === filters.week);
+};
+```
+
+Run: `node --test tests/leetcode-practice-list.test.mjs`
+
+Expected: all focused data and filter tests PASS.
+
+- [ ] **Step 4: Build the server-rendered page shell**
 
 Create the page with `BaseLayout`, a shallow Knowledge-style hero, and derived values:
 
@@ -393,7 +390,7 @@ const minimumCount = leetcodeProblems.filter(({ minimum25 }) => minimum25).lengt
 
 The abbreviated article in this shell is replaced by the complete row markup in Step 4. The hero statistics render `{leetcodeProblems.length}`, `{minimumCount}`, `{coreCount}`, and `{quantCount}`. Controls use visible labels, native inputs/selects, and `type="button"` track/reset buttons.
 
-- [ ] **Step 4: Render the complete compact index**
+- [ ] **Step 5: Render the complete compact index**
 
 Render every problem with searchable data attributes:
 
@@ -409,6 +406,7 @@ Render every problem with searchable data attributes:
     data-difficulty={problem.difficulty}
     data-week={String(problem.week)}
     data-search={searchText}
+    data-problem={JSON.stringify(problem)}
   >
     <span class="problem-number">{String(problem.number).padStart(3, '0')}</span>
     <div class="problem-title"><strong>{problem.title}</strong><small>{problem.category}</small></div>
@@ -423,11 +421,13 @@ Render every problem with searchable data attributes:
 
 Include a small six-week legend: weeks 1–5 name their focus and week 6 states `Timed practice & review`. The legend must not duplicate problem rows.
 
-- [ ] **Step 5: Add progressive filter behavior**
+- [ ] **Step 6: Add progressive filter behavior**
 
-Add one inline script scoped by LeetCode-specific data attributes. It must:
+Add one bundled script scoped by LeetCode-specific data attributes. Import `matchesLeetCodeProblem` and construct the same record shape from each row's data attributes so the tested predicate owns the matching semantics:
 
 ```js
+import { matchesLeetCodeProblem } from '../../../lib/leetcodeFilter';
+
 (() => {
   const search = document.querySelector('[data-leetcode-search]');
   const category = document.querySelector('[data-category-filter]');
@@ -444,14 +444,8 @@ Add one inline script scoped by LeetCode-specific data attributes. It must:
     const query = (search?.value || '').trim().toLowerCase();
     let visible = 0;
     rows.forEach((row) => {
-      const trackMatches = activeTrack === 'all'
-        || (activeTrack === 'minimum' && row.dataset.minimum === 'true')
-        || row.dataset.track === activeTrack;
-      const matches = trackMatches
-        && (!query || row.dataset.search.includes(query))
-        && (!category?.value || row.dataset.category === category.value)
-        && (!difficulty?.value || row.dataset.difficulty === difficulty.value)
-        && (!week?.value || row.dataset.week === week.value);
+      const problem = JSON.parse(row.dataset.problem);
+      const matches = matchesLeetCodeProblem(problem, { track: activeTrack, query, category: category?.value || '', difficulty: difficulty?.value || '', week: week?.value || '' });
       row.hidden = !matches;
       if (matches) visible += 1;
     });
@@ -479,7 +473,7 @@ Add one inline script scoped by LeetCode-specific data attributes. It must:
 
 Do not persist or synchronize state.
 
-- [ ] **Step 6: Add dense desktop-first styling**
+- [ ] **Step 7: Add dense desktop-first styling**
 
 Use scoped CSS with:
 
@@ -493,7 +487,7 @@ Use scoped CSS with:
 
 Do not add `<img>`, `<svg>`, `<canvas>`, background images, decorative diagrams, or oversized empty surfaces.
 
-- [ ] **Step 7: Run focused tests, check, build, and commit**
+- [ ] **Step 8: Run focused tests, check, build, and commit**
 
 Run: `node --test tests/leetcode-practice-list.test.mjs`
 
@@ -508,7 +502,7 @@ Run: `npm run build`
 Expected: build completes and emits `dist/knowledge/leetcode/index.html`.
 
 ```bash
-git add src/pages/knowledge/leetcode/index.astro tests/leetcode-practice-list.test.mjs
+git add src/lib/leetcodeFilter.ts src/pages/knowledge/leetcode/index.astro tests/leetcode-practice-list.test.mjs
 git commit -m "feat: build LeetCode practice list"
 ```
 
@@ -604,5 +598,5 @@ If no correction was required, do not create an empty commit.
 ## Self-Review Record
 
 - Spec coverage: gateway, canonical route, exact counts, three tracks, search, category/difficulty/week filters, week legend, progressive enhancement, accessibility, scope exclusions, and desktop visual QA are each assigned to a task.
-- Placeholder scan: implementation steps contain exact interfaces, required records, observable behavior, tests, and commands; no `TBD`, `TODO`, or deferred implementation requirement remains.
+- Test quality: automated tests exercise imported data and filter behavior; route integration and presentation are verified by Astro check/build and browser QA instead of source-text assertions.
 - Type consistency: `track` is exactly `'core' | 'quant'`; fast-track membership is `minimum25`; week is exactly `1 | 2 | 3 | 4 | 5`; all page data attributes use these same values.
