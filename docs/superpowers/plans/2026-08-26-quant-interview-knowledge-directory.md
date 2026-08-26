@@ -577,6 +577,7 @@ git commit -m "data: add quant interview curriculum catalog"
 - Modify: `src/components/QuantInterviewTopicCard.astro`
 - Modify: `src/pages/knowledge/quant-interview/index.astro`
 - Modify: `tests/quant-interview-knowledge-directory.test.mjs`
+- Modify: `tests/quant-interview-topic-public-shell.test.mjs`
 
 **Interfaces:**
 - Consumes: Task 1 `buildPublicKnowledgeDirectory`; Task 2 catalog; Astro `knowledge` and `problems` collections; existing `QuantInterviewTopicCard`.
