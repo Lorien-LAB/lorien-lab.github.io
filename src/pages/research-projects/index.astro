@@ -24,18 +24,10 @@ const otherProjects = projects.filter((entry) => !systemIds.has(entry.id) && !st
   description="Quantitative research, strategy research, research systems, and empirical reproductions by Lorien Lab."
 >
   <header class="page-hero portfolio-hero">
-    <div class="container hero-grid">
-      <div>
-        <div class="mono-label"><span class="lang-en">Research &amp; Projects</span><span class="lang-zh" lang="zh-CN">研究与项目</span></div>
-        <h1><span class="lang-en">Research questions.<br/>Systems that compound.</span><span class="lang-zh" lang="zh-CN">从研究问题出发，<br/>让系统持续积累。</span></h1>
-        <p><span class="lang-en">One portfolio for quantitative research, systematic strategy development, research infrastructure, and empirical reproduction. The emphasis is not on separating “research” from “projects”, but on showing how ideas become validated and reusable research objects.</span><span class="lang-zh" lang="zh-CN">这里统一呈现量化研究、系统化策略开发、研究基础设施与实证复现。重点不再是人为区分“研究”和“项目”，而是展示一个想法如何被验证，并最终沉淀为可复用的研究对象。</span></p>
-      </div>
-      <div class="portfolio-index" aria-label="Portfolio categories / 研究与项目分类">
-        <a href="#research-tracks"><span>01</span><strong><span class="lang-en">Research Tracks</span><span class="lang-zh" lang="zh-CN">研究方向</span></strong></a>
-        <a href="#reproductions"><span>02</span><strong><span class="lang-en">Reproductions</span><span class="lang-zh" lang="zh-CN">论文与研报复现</span></strong></a>
-        <a href="#research-systems"><span>03</span><strong><span class="lang-en">Research Systems</span><span class="lang-zh" lang="zh-CN">研究系统</span></strong></a>
-        <a href="#strategy-frameworks"><span>04</span><strong><span class="lang-en">Strategy Frameworks</span><span class="lang-zh" lang="zh-CN">策略框架</span></strong></a>
-      </div>
+    <div class="container portfolio-hero-copy">
+      <div class="mono-label"><span class="lang-en">Research &amp; Projects</span><span class="lang-zh" lang="zh-CN">研究与项目</span></div>
+      <h1><span class="lang-en">Research questions.<br/>Systems that compound.</span><span class="lang-zh" lang="zh-CN">从研究问题出发，<br/>让系统持续积累。</span></h1>
+      <p><span class="lang-en">One portfolio for quantitative research, systematic strategy development, research infrastructure, and empirical reproduction. The emphasis is on showing how ideas become validated and reusable research objects.</span><span class="lang-zh" lang="zh-CN">这里统一呈现量化研究、系统化策略开发、研究基础设施与实证复现，重点展示一个想法如何被验证，并最终沉淀为可复用的研究对象。</span></p>
     </div>
   </header>
 
@@ -108,14 +100,9 @@ const otherProjects = projects.filter((entry) => !systemIds.has(entry.id) && !st
 </BaseLayout>
 
 <style>
-  .portfolio-hero { padding-bottom: 70px; }
-  .hero-grid { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(280px, .65fr); gap: 70px; align-items: end; }
-  .portfolio-hero h1>.lang-en,.portfolio-hero h1>.lang-zh,.portfolio-hero p>.lang-en,.portfolio-hero p>.lang-zh,.portfolio-group h2>.lang-en,.portfolio-group h2>.lang-zh,.portfolio-group p>.lang-en,.portfolio-group p>.lang-zh,.portfolio-index strong>.lang-en,.portfolio-index strong>.lang-zh{display:block}
-  .portfolio-index { border-top: 1px solid rgba(255,255,255,.18); }
-  .portfolio-index a { display: grid; grid-template-columns: 42px 1fr; gap: 12px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(255,255,255,.12); color: #d9e3ea; }
-  .portfolio-index a:hover { color: var(--accent); }
-  .portfolio-index a>span { color: var(--accent); font: 700 .7rem var(--font-mono); }
-  .portfolio-index strong { font-size: .88rem; }
+  .portfolio-hero { padding-bottom: 42px; }
+  .portfolio-hero-copy { max-width: 1040px; }
+  .portfolio-hero h1>.lang-en,.portfolio-hero h1>.lang-zh,.portfolio-hero p>.lang-en,.portfolio-hero p>.lang-zh,.portfolio-group h2>.lang-en,.portfolio-group h2>.lang-zh,.portfolio-group p>.lang-en,.portfolio-group p>.lang-zh{display:block}
   .portfolio-group { border-top: 1px solid var(--border); scroll-margin-top: 88px; }
   .portfolio-group:first-of-type { border-top: 0; }
   .portfolio-group .section-heading { max-width: 850px; }
@@ -123,5 +110,5 @@ const otherProjects = projects.filter((entry) => !systemIds.has(entry.id) && !st
   .compact-heading { margin-bottom: 28px; }
   .reproduction-section { background: color-mix(in srgb, var(--surface) 58%, transparent); }
   .portfolio-group :global(.project-card), .portfolio-group :global(.research-card) { min-height: 100%; }
-  @media(max-width:900px){.hero-grid{grid-template-columns:1fr;gap:38px}.portfolio-hero{padding-bottom:54px}}
+  @media(max-width:900px){.portfolio-hero{padding-bottom:40px}}
 </style>

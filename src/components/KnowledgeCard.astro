@@ -15,7 +15,7 @@ const typeLabel = entry.data.type === 'topic' ? 'Research Topic' : entry.data.ty
   <h3>{entry.data.title}</h3>
   <p>{entry.data.description}</p>
   <div class="knowledge-domain"><strong>{entry.data.domain}</strong><span>/</span><span>{entry.data.category}</span></div>
-  {!compact && <TagList tags={entry.data.tags.slice(0, 4)} />}
+  {!compact && <TagList tags={entry.data.tags.slice(0, 3)} />}
   <span class="knowledge-arrow" aria-hidden="true">→</span>
 </a>
 

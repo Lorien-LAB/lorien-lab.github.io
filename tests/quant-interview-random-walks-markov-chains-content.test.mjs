@@ -2,7 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 
-const read = (file) => readFile(file, 'utf8');
+const read = async (file) => (await readFile(file, 'utf8')).replace(/\r\n?/g, '\n');
 const topics = ['stochastic-processes-stochastic-calculus', 'random-walks-markov-chains'];
 const sourceLeak = /Green Book|Red Book|150 (?:Most|Questions)|(?:source|PDF)\s+(?:page|section|item)|\b(?:5\.1(?:\.[a-z-]+)?|3\.2\.[12]|3\.(?:22|23|40))\b/i;
 

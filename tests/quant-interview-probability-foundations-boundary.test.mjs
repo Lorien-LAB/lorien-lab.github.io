@@ -18,7 +18,7 @@ const newProblems = [
 
 async function findMarkdown(root, slug) {
   const files = await readdir(root, { recursive: true });
-  const match = files.find((file) => String(file).endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
+  const match = files.find((file) => String(file).replaceAll('\\', '/').endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
   assert.ok(match, `missing ${slug}`);
   return `${root}/${match}`;
 }

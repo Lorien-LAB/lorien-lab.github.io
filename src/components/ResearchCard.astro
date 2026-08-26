@@ -15,7 +15,7 @@ const zh = publicContentZh.research[entry.id];
     </div>
     <h3><span class="lang-en">{entry.data.title}</span>{zh?.title && <span class="lang-zh" lang="zh-CN">{zh.title}</span>}</h3>
     <p><span class="lang-en">{entry.data.description}</span>{zh?.description && <span class="lang-zh" lang="zh-CN">{zh.description}</span>}</p>
-    <TagList tags={entry.data.tags} />
+    <TagList tags={entry.data.tags.slice(0, 3)} />
   </div>
 </a>
 <style>.research-card{display:block;box-shadow:none;transition:transform .2s ease,border-color .2s ease,box-shadow .2s ease}.research-card:hover{transform:translateY(-4px);border-color:color-mix(in srgb,var(--accent) 45%,var(--border));box-shadow:var(--shadow);color:var(--ink)}.research-card h3>.lang-en,.research-card h3>.lang-zh,.research-card p>.lang-en,.research-card p>.lang-zh{display:block}</style>

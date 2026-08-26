@@ -6,7 +6,7 @@ const manifestPath = 'src/data/quant-interview/150-most-frequently-asked.json';
 
 async function findProblem(slug) {
   const files = await readdir('src/content/problems', { recursive: true });
-  const match = files.find((path) => String(path).endsWith(`/${slug}.md`) || String(path) === `${slug}.md`);
+  const match = files.find((path) => String(path).replaceAll('\\', '/').endsWith(`/${slug}.md`) || String(path) === `${slug}.md`);
   assert.ok(match, `missing problem ${slug}`);
   return `src/content/problems/${match}`;
 }

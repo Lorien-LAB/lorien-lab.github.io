@@ -13,6 +13,7 @@ const policyId = 'quant-interview.parallel-workstream-governance';
 const policyVersion = '1.0.0';
 const policyReferenceStart = '<!-- parallel-workstream-policy-reference:start -->';
 const policyReferenceEnd = '<!-- parallel-workstream-policy-reference:end -->';
+const normalizeNewlines = (text) => text.replace(/\r\n?/g, '\n');
 const policyReferenceBlock = `<!-- parallel-workstream-policy-reference:start -->
 > Canonical parallel-workstream policy: \`${policyId}\` at \`${policyPath}\`.
 >
@@ -216,7 +217,7 @@ async function repositoryTextArtifacts(directory = '.') {
         : repositoryTextArtifacts(path);
     }
     return ['.json', '.md'].includes(extname(entry.name).toLowerCase())
-      ? [{ path: path.replaceAll('\\', '/').replace(/^\.\//, ''), text: await readFile(path, 'utf8') }]
+      ? [{ path: path.replaceAll('\\', '/').replace(/^\.\//, ''), text: normalizeNewlines(await readFile(path, 'utf8')) }]
       : [];
   }));
   return nested.flat();
@@ -267,7 +268,7 @@ test('canonical parallel-workstream policy exactly matches the complete typed co
 
 for (const [name, path] of Object.entries(governanceEntrypoints)) {
   test(`${name} contains exactly one canonical policy reference block`, async () => {
-    const entrypoint = await readFile(path, 'utf8');
+    const entrypoint = normalizeNewlines(await readFile(path, 'utf8'));
 
     assert.equal(hasExactlyOneCanonicalReference(entrypoint), true);
   });
