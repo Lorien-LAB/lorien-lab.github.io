@@ -40,7 +40,7 @@ const topTopics = [...taxonomy.topics]
         <h1>Quant Interview<br/>Knowledge System.</h1>
         <p>Learn the concept, recognize the technique, solve the problem, and connect related ideas across one canonical quantitative-interview knowledge graph.</p>
         <div class="hero-actions">
-          <a class="button primary" href="#topics">Learn by Topic →</a>
+          <a class="button primary" href={`${base}knowledge/quant-interview/directory/`}>Open Knowledge Directory</a>
           <a class="button" href={`${base}problems/`}>Practice Problems</a>
           <a class="button" href="#techniques">Problem-Solving Techniques</a>
         </div>
@@ -83,7 +83,7 @@ const topTopics = [...taxonomy.topics]
       </div>
       <div class="topic-grid">
         {topTopics.map(({ topic, knowledgeCount, problemCount }) => (
-          <QuantInterviewTopicCard topic={topic} knowledgeCount={knowledgeCount} problemCount={problemCount} />
+          <QuantInterviewTopicCard topic={topic} knowledgeCount={knowledgeCount} problemCount={problemCount} learnHref={`${base}knowledge/quant-interview/directory/#topic-${topic.id}`} />
         ))}
       </div>
     </div>

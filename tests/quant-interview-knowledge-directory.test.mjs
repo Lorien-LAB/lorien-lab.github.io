@@ -23,6 +23,27 @@ async function readRepositoryKnowledgeRecords() {
   return records.sort((a, b) => a.slug.localeCompare(b.slug));
 }
 
+async function readRepositoryProblemRecords() {
+  const files = await readdir('src/content/problems', { recursive: true });
+  const records = [];
+  for (const file of files.filter((name) => String(name).endsWith('.md'))) {
+    const fullPath = `src/content/problems/${String(file).replaceAll('\\', '/')}`;
+    const text = await readFile(fullPath, 'utf8');
+    const readArray = (field) => {
+      const value = text.match(new RegExp(`^${field}:\\s*\\[([^\\]]*)\\]$`, 'm'))?.[1] ?? '';
+      return value.split(',').map((item) => item.trim()).filter(Boolean);
+    };
+    records.push({
+      slug: path.basename(String(file), '.md'),
+      canonicalTopics: readArray('quantInterviewTopics'),
+      concepts: readArray('concepts'),
+      techniques: readArray('techniques'),
+      prerequisites: readArray('prerequisites'),
+    });
+  }
+  return records;
+}
+
 const exactOrder = {
   'reasoning-communication': [
     'problem-framing-clarification-assumption-management',
@@ -113,6 +134,40 @@ test('repository catalog contains the exact published corpus and planned 013 mod
       .map((module) => module.slug);
     assert.deepEqual(actual, slugs, topic);
   }
+});
+
+test('repository public projection exposes the complete source-neutral curriculum', async () => {
+  const [catalogText, taxonomyText, knowledgeRecords, problemRecords] = await Promise.all([
+    readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
+    readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'),
+    readRepositoryKnowledgeRecords(),
+    readRepositoryProblemRecords(),
+  ]);
+  const result = buildPublicKnowledgeDirectory({
+    catalog: JSON.parse(catalogText),
+    taxonomy: JSON.parse(taxonomyText),
+    knowledgeRecords,
+    problemRecords,
+    base: '/',
+  });
+  assert.deepEqual(result.totals, { published: 48, planned: 2 });
+  assert.equal(result.topics.length, 10);
+  const interview = result.topics.find((topic) => topic.id === 'interview-strategy-communication');
+  const reasoning = interview.children.find((topic) => topic.id === 'reasoning-communication');
+  assert.deepEqual(reasoning.modules.map((module) => [module.slug, module.status, module.href]), [
+    ['problem-framing-clarification-assumption-management', 'planned', null],
+    ['structured-think-aloud-reasoning', 'planned', null],
+  ]);
+  const logic = result.topics.find((topic) => topic.id === 'logic-brainteasers-discrete-reasoning');
+  assert.equal(logic.modules.some((module) => module.slug === 'recursion-problem-solving'), true);
+  assert.equal(result.topics.some((topic) => topic.id === 'fixed-income-rates-general-finance'), true);
+  assert.equal(JSON.stringify(result).match(/green-book|red-book|150-most|coverage|sourceSection|pageRange|workstream/gi), null);
+});
+
+test('directory route imports no hidden curriculum state', async () => {
+  const route = await readFile('src/pages/knowledge/quant-interview/directory.astro', 'utf8');
+  assert.match(route, /buildPublicKnowledgeDirectory/);
+  assert.doesNotMatch(route, /quant-interview\/coverage|quantInterviewCoverage|source-topic-map|workstreams/);
 });
 
 const taxonomy = {
