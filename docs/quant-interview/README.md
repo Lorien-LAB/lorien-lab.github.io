@@ -32,11 +32,12 @@ For every new Chat or Agent:
 
 1. Read this file.
 2. Read [`HANDOFF.md`](./HANDOFF.md).
-3. Read [`AGENT_PROTOCOL.md`](./AGENT_PROTOCOL.md) before changing repository state.
-4. Read [`CONTENT_STANDARD.md`](./CONTENT_STANDARD.md) before authoring or reviewing public content.
-5. Use [`SOURCE_CATALOG.md`](./SOURCE_CATALOG.md) for source identity and verification state.
-6. Select exactly one bounded **canonical topic workstream**, not one book chapter sequence.
-7. Resolve that topic through the hidden source-topic map and coverage ledger before reading or writing source-derived content.
+3. Read [`CONTINUE_EXTRACTION_TASK.md`](./CONTINUE_EXTRACTION_TASK.md), the single reusable execution brief for a new bounded extraction Agent.
+4. Read [`AGENT_PROTOCOL.md`](./AGENT_PROTOCOL.md) before changing repository state.
+5. Read [`CONTENT_STANDARD.md`](./CONTENT_STANDARD.md) before authoring or reviewing public content.
+6. Use [`SOURCE_CATALOG.md`](./SOURCE_CATALOG.md) for source identity and verification state.
+7. Select exactly one bounded **canonical topic workstream**, not one book chapter sequence.
+8. Resolve that topic through the hidden source-topic map and coverage ledger before reading or writing source-derived content.
 
 ## Working rule
 
@@ -60,6 +61,15 @@ Source page numbers are internal evidence only. Public Knowledge and Problems sh
 - source records: `src/content/problem-sources/*.md`
 - canonical Problems: `src/content/problems/`
 - canonical Knowledge / Techniques: `src/content/knowledge/`
+
+## Knowledge Directory
+
+- `src/data/quant-interview/topics/knowledge-catalog.json` is the public-safe canonical curriculum order.
+- `/knowledge/quant-interview/directory/` is the source-neutral public learning directory.
+- `docs/quant-interview/KNOWLEDGE_DIRECTORY.md` is generated internal extraction state; never edit it manually.
+- Run `npm run knowledge:directory` after catalog, taxonomy, public Knowledge/Problems, source routing, coverage, or workstream changes.
+- Run `npm run knowledge:directory:check` before integration.
+- Planned modules reserve learning destinations but are not published pages or completion claims.
 
 ## Verification gates
 

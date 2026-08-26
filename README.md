@@ -59,11 +59,21 @@ The Quant Interview system is now **Topic-first**. Green Book, Red Book, and 150
 ```text
 src/content/knowledge/                         canonical concepts and Problem Solving Techniques
 src/content/problems/                          canonical Problem records
-src/data/quant-interview/topics/               canonical taxonomy + hidden source-topic routing
+src/data/quant-interview/topics/               canonical taxonomy, public curriculum catalog + hidden source-topic routing
 src/data/quant-interview/coverage/             hidden source coverage / dedup audit
 src/data/quant-interview/toc/                  verified source TOCs
 src/data/quant-interview/*.json                source-file verification + ingestion manifests
+docs/quant-interview/KNOWLEDGE_DIRECTORY.md    generated internal extraction directory
 docs/quant-interview/                          durable repository memory and Agent Protocol
+```
+
+`src/data/quant-interview/topics/knowledge-catalog.json` is the public-safe canonical curriculum order. The source-neutral public learning directory is published at `/knowledge/quant-interview/directory/`; it cannot import hidden source state. `docs/quant-interview/KNOWLEDGE_DIRECTORY.md` is generated internal extraction state and cannot be used to claim whole-book completeness.
+
+After catalog, taxonomy, public Knowledge/Problems, source routing, coverage, or workstream changes, run:
+
+```bash
+npm run knowledge:directory
+npm run knowledge:directory:check
 ```
 
 Canonical public Problem routes remain `/problems/<slug>/`. Problems never become a fifth Knowledge type. Problem-solving methods such as Conditioning, First-Step Analysis, Symmetry, and Recursion remain ordinary Knowledge entries with `type: concept` and `category: Problem Solving Techniques`.
