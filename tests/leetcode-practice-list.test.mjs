@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { leetcodeProblems } from '../src/data/leetcodeProblems.ts';
+import { matchesLeetCodeProblem } from '../src/lib/leetcodeFilter.ts';
 
 const minimum25 = [1, 3, 15, 20, 33, 49, 53, 56, 121, 128, 139, 198, 200, 207, 209, 215, 238, 239, 283, 322, 347, 560, 704, 739, 973];
 const quant15 = [76, 152, 309, 380, 384, 416, 480, 528, 643, 714, 721, 901, 912, 981, 986];
@@ -27,4 +28,15 @@ test('every syllabus item has complete original metadata and an official URL', (
 
 test('problem 167 uses its official full English title', () => {
   assert.equal(leetcodeProblems.find(({ number }) => number === 167)?.title, 'Two Sum II - Input Array Is Sorted');
+});
+
+test('LeetCode filters combine track, text, category, difficulty, and week', () => {
+  const medianStream = leetcodeProblems.find(({ number }) => number === 295);
+  const medianWindow = leetcodeProblems.find(({ number }) => number === 480);
+  assert.ok(medianStream && medianWindow);
+
+  assert.equal(matchesLeetCodeProblem(medianStream, { track: 'all', query: 'median', category: '', difficulty: '', week: '' }), true);
+  assert.equal(matchesLeetCodeProblem(medianWindow, { track: 'quant', query: 'median', category: '', difficulty: 'Hard', week: '5' }), true);
+  assert.equal(matchesLeetCodeProblem(medianStream, { track: 'quant', query: 'median', category: '', difficulty: '', week: '' }), false);
+  assert.equal(matchesLeetCodeProblem(medianWindow, { track: 'minimum', query: '', category: '', difficulty: '', week: '' }), false);
 });

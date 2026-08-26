@@ -1,0 +1,166 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { leetcodeCategories, leetcodeProblems, leetcodeWeeks } from '../../../data/leetcodeProblems';
+
+const coreCount = leetcodeProblems.filter(({ track }) => track === 'core').length;
+const quantCount = leetcodeProblems.filter(({ track }) => track === 'quant').length;
+const minimumCount = leetcodeProblems.filter(({ minimum25 }) => minimum25).length;
+const weekFocus = [
+  'Arrays, hashing & prefix sums',
+  'Pointers, windows & stacks',
+  'Search, intervals & heaps',
+  'Trees, graphs & dynamic programming',
+  'Quant extensions',
+  'Timed practice & review',
+];
+---
+
+<BaseLayout title="LeetCode for Quant Internships · Lorien Lab" description="A focused 55-problem algorithm syllabus connecting interview patterns with quantitative applications.">
+  <header class="leetcode-hero">
+    <div class="container hero-grid">
+      <div>
+        <div class="mono-label">Knowledge · Programming Practice</div>
+        <h1>LeetCode for<br />Quant Internships.</h1>
+        <p>A focused algorithm syllabus connecting interview patterns with quantitative applications.</p>
+      </div>
+      <div class="hero-stats" aria-label="Practice list statistics">
+        <span><strong>{leetcodeProblems.length}</strong>Total</span>
+        <span><strong>{minimumCount}</strong>Minimum Set</span>
+        <span><strong>{coreCount}</strong>Core</span>
+        <span><strong>{quantCount}</strong>Quant</span>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-intro">
+        <div>
+          <div class="mono-label">Practice Index</div>
+          <h2>Choose a track, then narrow the list.</h2>
+        </div>
+        <p>All 55 problems are listed below. Filters refine the static index in your browser without saving any progress or preferences.</p>
+      </div>
+
+      <div class="track-switcher" aria-label="Problem tracks">
+        <button type="button" data-track-filter="all" aria-pressed="true">All {leetcodeProblems.length}</button>
+        <button type="button" data-track-filter="minimum" aria-pressed="false">Minimum {minimumCount}</button>
+        <button type="button" data-track-filter="core" aria-pressed="false">Core {coreCount}</button>
+        <button type="button" data-track-filter="quant" aria-pressed="false">Quant {quantCount}</button>
+      </div>
+
+      <div class="filter-bar">
+        <label class="search-field"><span>Search</span><input type="search" data-leetcode-search placeholder="Problem, pattern, application…" /></label>
+        <label><span>Category</span><select data-category-filter><option value="">All categories</option>{leetcodeCategories.map((value) => <option value={value}>{value}</option>)}</select></label>
+        <label><span>Difficulty</span><select data-difficulty-filter><option value="">All levels</option><option>Easy</option><option>Medium</option><option>Hard</option></select></label>
+        <label><span>Week</span><select data-week-filter><option value="">All weeks</option>{leetcodeWeeks.map((value) => <option value={value}>Week {value}</option>)}</select></label>
+        <button class="reset-button" type="button" data-filter-reset>Reset</button>
+      </div>
+
+      <p class="result-summary"><strong data-result-count>{leetcodeProblems.length}</strong> problems shown</p>
+      <div class="problem-list" data-problem-list>
+        <div class="problem-head" aria-hidden="true">
+          <span>No.</span><span>Problem</span><span>Difficulty</span><span>Pattern</span><span>Quant application</span><span>Track / Week</span><span>Link</span>
+        </div>
+        {leetcodeProblems.map((problem) => {
+          const searchText = [problem.number, problem.title, problem.pattern, problem.quantApplication].join(' ').toLowerCase();
+          return <article
+            class="problem-row"
+            data-leetcode-row
+            data-track={problem.track}
+            data-minimum={String(problem.minimum25)}
+            data-category={problem.category}
+            data-difficulty={problem.difficulty}
+            data-week={String(problem.week)}
+            data-search={searchText}
+            data-problem={JSON.stringify(problem)}
+          >
+            <span class="problem-number">{String(problem.number).padStart(3, '0')}</span>
+            <div class="problem-title"><strong>{problem.title}</strong><small>{problem.category}</small></div>
+            <span class:list={['difficulty', `difficulty-${problem.difficulty.toLowerCase()}`]}>{problem.difficulty}</span>
+            <span class="problem-pattern">{problem.pattern}</span>
+            <span class="quant-application">{problem.quantApplication}</span>
+            <span class="problem-track">{problem.track === 'core' ? 'Core' : 'Quant'} · W{problem.week}</span>
+            <a href={problem.url} target="_blank" rel="noreferrer" aria-label={`Open ${problem.number}. ${problem.title} on LeetCode`}>Open ↗</a>
+          </article>;
+        })}
+      </div>
+      <p class="no-results" data-no-results hidden>No problems match the current filters.</p>
+
+      <aside class="week-legend" aria-label="Six-week practice outline">
+        {weekFocus.map((focus, index) => <div><strong>Week {index + 1}</strong><span>{focus}</span></div>)}
+      </aside>
+    </div>
+  </section>
+</BaseLayout>
+
+<script>
+  import { matchesLeetCodeProblem } from '../../../lib/leetcodeFilter';
+
+  (() => {
+    const search = document.querySelector<HTMLInputElement>('[data-leetcode-search]');
+    const category = document.querySelector<HTMLSelectElement>('[data-category-filter]');
+    const difficulty = document.querySelector<HTMLSelectElement>('[data-difficulty-filter]');
+    const week = document.querySelector<HTMLSelectElement>('[data-week-filter]');
+    const trackButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-track-filter]')];
+    const rows = [...document.querySelectorAll<HTMLElement>('[data-leetcode-row]')];
+    const resultCount = document.querySelector<HTMLElement>('[data-result-count]');
+    const noResults = document.querySelector<HTMLElement>('[data-no-results]');
+    const reset = document.querySelector<HTMLButtonElement>('[data-filter-reset]');
+    let activeTrack: 'all' | 'minimum' | 'core' | 'quant' = 'all';
+
+    const apply = () => {
+      const query = (search?.value || '').trim().toLowerCase();
+      let visible = 0;
+
+      rows.forEach((row) => {
+        const problem = JSON.parse(row.dataset.problem || '{}');
+        const matches = matchesLeetCodeProblem(problem, {
+          track: activeTrack,
+          query,
+          category: category?.value || '',
+          difficulty: difficulty?.value || '',
+          week: week?.value || '',
+        });
+        row.hidden = !matches;
+        if (matches) visible += 1;
+      });
+
+      if (resultCount) resultCount.textContent = String(visible);
+      if (noResults) noResults.hidden = visible !== 0;
+    };
+
+    search?.addEventListener('input', apply);
+    [category, difficulty, week].forEach((control) => control?.addEventListener('change', apply));
+    trackButtons.forEach((button) => button.addEventListener('click', () => {
+      activeTrack = (button.dataset.trackFilter || 'all') as typeof activeTrack;
+      trackButtons.forEach((candidate) => candidate.setAttribute('aria-pressed', String(candidate === button)));
+      apply();
+    }));
+    reset?.addEventListener('click', () => {
+      if (search) search.value = '';
+      [category, difficulty, week].forEach((control) => { if (control) control.value = ''; });
+      activeTrack = 'all';
+      trackButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.trackFilter === 'all')));
+      apply();
+      search?.focus();
+    });
+  })();
+</script>
+
+<style>
+  .leetcode-hero { background: var(--hero); color: var(--hero-ink); border-bottom: 1px solid rgba(255,255,255,.08); }
+  .hero-grid { display: grid; grid-template-columns: minmax(0,1fr) minmax(380px,.8fr); gap: 64px; align-items: end; padding-top: 48px; padding-bottom: 42px; }
+  .leetcode-hero h1 { margin: 10px 0 0; font: 700 clamp(2.6rem,5vw,4rem)/.96 var(--font-mono); letter-spacing: -.065em; }
+  .leetcode-hero p { max-width: 690px; margin: 16px 0 0; color: var(--hero-muted); font: 400 .98rem/1.65 var(--font-mono); }
+  .hero-stats { display: grid; grid-template-columns: repeat(4,1fr); border-top: 1px solid rgba(255,255,255,.15); border-bottom: 1px solid rgba(255,255,255,.15); }
+  .hero-stats span { min-height: 68px; padding: 12px 10px; border-right: 1px solid rgba(255,255,255,.1); color: #98acb8; font: 600 .62rem/1.3 var(--font-mono); text-transform: uppercase; letter-spacing: .04em; }
+  .hero-stats span:last-child { border-right: 0; }.hero-stats strong { display: block; margin-bottom: 5px; color: var(--accent); font: 800 1.25rem/1 var(--font-mono); }
+  .page-intro { display: grid; grid-template-columns: 1fr minmax(280px,500px); gap: 42px; align-items: end; margin-bottom: 22px; }.page-intro h2 { margin: 6px 0 0; font-size: clamp(1.65rem,3vw,2.35rem); line-height: 1.1; letter-spacing: -.045em; }.page-intro p { margin: 0; color: var(--muted); font-size: .92rem; line-height: 1.6; }
+  .track-switcher { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 12px; }.track-switcher button { min-height: 35px; padding: 0 12px; border: 1px solid var(--border); border-radius: 7px; background: var(--surface); color: var(--muted); font: 700 .74rem var(--font-mono); cursor: pointer; }.track-switcher button[aria-pressed='true'] { border-color: var(--accent); background: var(--accent-soft); color: var(--accent-strong); }.track-switcher button:hover { border-color: var(--accent); color: var(--ink); }
+  .filter-bar { display: grid; grid-template-columns: minmax(220px,1.25fr) minmax(190px,1fr) 126px 108px auto; gap: 10px; align-items: end; padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); }.filter-bar label { display: grid; gap: 5px; }.filter-bar label > span { color: var(--muted); font: 700 .63rem var(--font-mono); text-transform: uppercase; letter-spacing: .05em; }.filter-bar input,.filter-bar select { width: 100%; height: 37px; padding: 0 10px; border: 1px solid var(--border); border-radius: 6px; background: var(--bg); color: var(--ink); font-size: .79rem; }.filter-bar input:focus,.filter-bar select:focus { outline: 2px solid color-mix(in srgb,var(--accent) 55%,transparent); outline-offset: 2px; }.reset-button { height: 37px; padding: 0 12px; border: 1px solid var(--border); border-radius: 6px; background: transparent; color: var(--muted); font-weight: 700; font-size: .78rem; cursor: pointer; }.reset-button:hover { border-color: var(--accent); color: var(--ink); }
+  .result-summary { margin: 15px 0 7px; color: var(--muted); font-size: .79rem; }.result-summary strong { color: var(--ink); font-family: var(--font-mono); }.problem-list { border-top: 1px solid var(--border); }.problem-head,.problem-row { display: grid; grid-template-columns: 48px minmax(190px,1.05fr) 78px minmax(130px,.8fr) minmax(190px,1.15fr) 74px 45px; gap: 14px; align-items: center; }.problem-head { min-height: 30px; color: var(--muted); font: 700 .61rem var(--font-mono); text-transform: uppercase; letter-spacing: .04em; }.problem-row { min-height: 58px; padding: 12px 3px; border-bottom: 1px solid var(--border); color: var(--ink); font-size: .77rem; line-height: 1.38; }.problem-row:hover { background: color-mix(in srgb,var(--surface) 68%,transparent); }.problem-number { color: var(--accent-strong); font: 700 .7rem var(--font-mono); }.problem-title strong,.problem-title small { display: block; }.problem-title strong { font-size: .84rem; line-height: 1.35; }.problem-title small { margin-top: 3px; color: var(--muted); font-size: .66rem; line-height: 1.3; }.difficulty { justify-self: start; padding: 3px 6px; border: 1px solid var(--border); border-radius: 999px; font: 700 .62rem var(--font-mono); }.difficulty-easy { border-color: color-mix(in srgb,var(--accent) 65%,var(--border)); color: var(--accent-strong); }.difficulty-medium { border-color: #d9b66f; color: #9a6700; }.difficulty-hard { border-color: #d88e8e; color: var(--danger); }.problem-pattern,.quant-application { color: var(--muted); }.problem-track { color: var(--muted); font: 700 .65rem var(--font-mono); }.problem-row a { color: var(--accent-strong); font: 700 .7rem var(--font-mono); white-space: nowrap; }.problem-row a:hover { text-decoration: underline; text-underline-offset: 3px; }.no-results { margin: 0; padding: 22px; border-bottom: 1px solid var(--border); text-align: center; color: var(--muted); font-size: .9rem; }.week-legend { display: grid; grid-template-columns: repeat(6,1fr); margin-top: 24px; border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }.week-legend div { min-height: 56px; padding: 10px; border-right: 1px solid var(--border); }.week-legend div:last-child { border-right: 0; }.week-legend strong,.week-legend span { display: block; }.week-legend strong { color: var(--accent-strong); font: 700 .64rem var(--font-mono); text-transform: uppercase; }.week-legend span { margin-top: 4px; color: var(--muted); font-size: .67rem; line-height: 1.35; }
+  @media (max-width: 1160px) { .filter-bar { grid-template-columns: 1fr 1fr 126px 108px auto; }.search-field { grid-column: 1 / -1; }.problem-head,.problem-row { grid-template-columns: 48px minmax(180px,1fr) 78px minmax(130px,.8fr) minmax(150px,1fr) 74px 45px; gap: 10px; } }
+  @media (max-width: 960px) { .hero-grid,.page-intro { grid-template-columns: 1fr; gap: 26px; }.problem-head,.problem-row { grid-template-columns: 48px minmax(180px,1fr) 78px minmax(115px,.8fr) 70px 45px; }.quant-application { display: none; }.week-legend { grid-template-columns: repeat(3,1fr); }.week-legend div:nth-child(3) { border-right: 0; }.week-legend div:nth-child(-n+3) { border-bottom: 1px solid var(--border); } }
+  @media (max-width: 640px) { .hero-grid { padding-top: 42px; padding-bottom: 38px; }.hero-stats { max-width: 480px; }.filter-bar { grid-template-columns: 1fr 1fr; }.search-field { grid-column: 1 / -1; }.reset-button { grid-column: 2; }.problem-head { display: none; }.problem-row { grid-template-columns: 43px minmax(0,1fr) 70px 42px; gap: 10px; min-height: 62px; }.problem-pattern,.problem-track { display: none; }.difficulty { grid-column: 3; }.problem-row a { grid-column: 4; }.week-legend { grid-template-columns: repeat(2,1fr); }.week-legend div:nth-child(3) { border-right: 1px solid var(--border); }.week-legend div:nth-child(even) { border-right: 0; }.week-legend div:nth-child(-n+4) { border-bottom: 1px solid var(--border); } }
+</style>
