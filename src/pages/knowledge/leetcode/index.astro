@@ -5,6 +5,7 @@ import { leetcodeCategories, leetcodeProblems, leetcodeWeeks } from '../../../da
 const coreCount = leetcodeProblems.filter(({ track }) => track === 'core').length;
 const quantCount = leetcodeProblems.filter(({ track }) => track === 'quant').length;
 const minimumCount = leetcodeProblems.filter(({ minimum25 }) => minimum25).length;
+const totalCount = leetcodeProblems.length;
 const weekFocus = [
   'Arrays, hashing & prefix sums',
   'Pointers, windows & stacks',
@@ -15,7 +16,7 @@ const weekFocus = [
 ];
 ---
 
-<BaseLayout title="LeetCode for Quant Internships · Lorien Lab" description="A focused 55-problem algorithm syllabus connecting interview patterns with quantitative applications.">
+<BaseLayout title="LeetCode for Quant Internships · Lorien Lab" description={`A focused ${totalCount}-problem algorithm syllabus connecting interview patterns with quantitative applications.`}>
   <header class="leetcode-hero">
     <div class="container hero-grid">
       <div>
@@ -43,7 +44,7 @@ const weekFocus = [
       </div>
 
       <div class="track-switcher" aria-label="Problem tracks">
-        <button type="button" data-track-filter="all" aria-pressed="true">All {leetcodeProblems.length}</button>
+        <button type="button" data-track-filter="all" aria-pressed="true">All {totalCount}</button>
         <button type="button" data-track-filter="minimum" aria-pressed="false">Minimum {minimumCount}</button>
         <button type="button" data-track-filter="core" aria-pressed="false">Core {coreCount}</button>
         <button type="button" data-track-filter="quant" aria-pressed="false">Quant {quantCount}</button>
