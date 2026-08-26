@@ -54,12 +54,16 @@ export function validateKnowledgeCatalog(catalog, taxonomy, knowledgeRecords) {
     }
     const primary = topicById.get(module.primaryTopic);
     if (!primary) throw new Error(`unknown taxonomy topic: ${module.primaryTopic}`);
-    const followsPrimaryPath = primary.path.slice(0, topics.length).every((id, index) => topics[index] === id);
-    if (followsPrimaryPath && topics.includes(module.primaryTopic) && topics.at(-1) !== module.primaryTopic) {
-      throw new Error(`primaryTopic must be the deepest canonical topic: ${module.slug}`);
+    const seenTopics = new Set();
+    for (const topicId of topics) {
+      const topic = topicById.get(topicId);
+      if (!topic.path.slice(0, -1).every((ancestor) => seenTopics.has(ancestor))) {
+        throw new Error(`canonicalTopics must list ancestors before descendants: ${module.slug}`);
+      }
+      seenTopics.add(topicId);
     }
-    if (JSON.stringify(topics) !== JSON.stringify(primary.path)) {
-      throw new Error(`canonicalTopics must equal taxonomy path: ${module.slug}`);
+    if (topics.at(-1) !== module.primaryTopic) {
+      throw new Error(`primaryTopic must be the deepest canonical topic: ${module.slug}`);
     }
     if (!ordersByTopic.has(module.primaryTopic)) ordersByTopic.set(module.primaryTopic, new Map());
     const orders = ordersByTopic.get(module.primaryTopic);

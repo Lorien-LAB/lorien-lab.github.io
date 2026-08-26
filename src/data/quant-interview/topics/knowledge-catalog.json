@@ -1,0 +1,677 @@
+{
+  "version": 1,
+  "modules": [
+    {
+      "slug": "problem-framing-clarification-assumption-management",
+      "title": "Problem Framing, Clarification & Assumption Management",
+      "canonicalTopics": [
+        "interview-strategy-communication",
+        "reasoning-communication"
+      ],
+      "primaryTopic": "reasoning-communication",
+      "learningOrder": 10,
+      "status": "planned",
+      "prerequisites": []
+    },
+    {
+      "slug": "structured-think-aloud-reasoning",
+      "title": "Structured Think-Aloud Reasoning",
+      "canonicalTopics": [
+        "interview-strategy-communication",
+        "reasoning-communication"
+      ],
+      "primaryTopic": "reasoning-communication",
+      "learningOrder": 20,
+      "status": "planned",
+      "prerequisites": [
+        "problem-framing-clarification-assumption-management"
+      ]
+    },
+    {
+      "slug": "recursion-problem-solving",
+      "title": "Recursion for Problem Solving",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning"
+      ],
+      "primaryTopic": "logic-brainteasers-discrete-reasoning",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "modular-arithmetic",
+      "title": "Modular Arithmetic",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "modular-arithmetic"
+      ],
+      "primaryTopic": "modular-arithmetic",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "identity-swapping-invariance",
+      "title": "Identity-Swapping Invariance",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "invariants-state-transformations"
+      ],
+      "primaryTopic": "invariants-state-transformations",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "modular-invariants",
+      "title": "Modular Invariants",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "modular-arithmetic",
+        "invariants-state-transformations"
+      ],
+      "primaryTopic": "invariants-state-transformations",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "modular-arithmetic"
+      ]
+    },
+    {
+      "slug": "derivative-definition-and-core-rules",
+      "title": "Derivative Definition and Core Rules",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "primaryTopic": "limits-derivatives",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "logarithmic-differentiation",
+      "title": "Logarithmic Differentiation",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "primaryTopic": "limits-derivatives",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "derivative-definition-and-core-rules"
+      ]
+    },
+    {
+      "slug": "monotonicity-convexity-critical-points-and-inflection",
+      "title": "Monotonicity, Convexity, Critical Points, and Inflection",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "primaryTopic": "limits-derivatives",
+      "learningOrder": 30,
+      "status": "published",
+      "prerequisites": [
+        "derivative-definition-and-core-rules"
+      ]
+    },
+    {
+      "slug": "indeterminate-limits-and-growth-rates",
+      "title": "Indeterminate Limits and Growth Rates",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "primaryTopic": "limits-derivatives",
+      "learningOrder": 40,
+      "status": "published",
+      "prerequisites": [
+        "derivative-definition-and-core-rules"
+      ]
+    },
+    {
+      "slug": "related-rates-and-implicit-differentiation",
+      "title": "Related Rates and Implicit Differentiation",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "primaryTopic": "limits-derivatives",
+      "learningOrder": 50,
+      "status": "published",
+      "prerequisites": [
+        "derivative-definition-and-core-rules"
+      ]
+    },
+    {
+      "slug": "bounded-monotone-convergence-and-fixed-points",
+      "title": "Bounded Monotone Convergence and Fixed Points",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "primaryTopic": "limits-derivatives",
+      "learningOrder": 60,
+      "status": "published",
+      "prerequisites": [
+        "monotonicity-convexity-critical-points-and-inflection"
+      ]
+    },
+    {
+      "slug": "positive-series-convergence",
+      "title": "Positive-Series Convergence",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "primaryTopic": "limits-derivatives",
+      "learningOrder": 70,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "vector-geometry-inner-products",
+      "title": "Vector Geometry & Inner Products",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "vectors-linear-systems"
+      ],
+      "primaryTopic": "vectors-linear-systems",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "linear-independence-span-basis-rank",
+      "title": "Linear Independence, Span, Basis & Rank",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "vectors-linear-systems"
+      ],
+      "primaryTopic": "vectors-linear-systems",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "vector-geometry-inner-products"
+      ]
+    },
+    {
+      "slug": "linear-systems-consistency",
+      "title": "Linear Systems & Consistency",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "vectors-linear-systems"
+      ],
+      "primaryTopic": "vectors-linear-systems",
+      "learningOrder": 30,
+      "status": "published",
+      "prerequisites": [
+        "linear-independence-span-basis-rank"
+      ]
+    },
+    {
+      "slug": "eigenvalues-eigenvectors",
+      "title": "Eigenvalues & Eigenvectors",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "primaryTopic": "determinants-eigenvalues",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "matrix-spectral-invariants",
+      "title": "Trace, Determinant & Spectral Invariants",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "primaryTopic": "determinants-eigenvalues",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "eigenvalues-eigenvectors"
+      ]
+    },
+    {
+      "slug": "eigenbasis-decomposition",
+      "title": "Eigenbasis Decomposition",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues",
+        "matrix-decompositions"
+      ],
+      "primaryTopic": "matrix-decompositions",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": [
+        "eigenvalues-eigenvectors"
+      ]
+    },
+    {
+      "slug": "lu-cholesky-decomposition",
+      "title": "LU & Cholesky Decomposition",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "matrix-decompositions"
+      ],
+      "primaryTopic": "matrix-decompositions",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "linear-independence-span-basis-rank"
+      ]
+    },
+    {
+      "slug": "qr-decomposition",
+      "title": "QR Decomposition",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "matrix-decompositions"
+      ],
+      "primaryTopic": "matrix-decompositions",
+      "learningOrder": 30,
+      "status": "published",
+      "prerequisites": [
+        "vector-geometry-inner-products",
+        "linear-independence-span-basis-rank"
+      ]
+    },
+    {
+      "slug": "singular-value-decomposition",
+      "title": "Singular Value Decomposition",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "matrix-decompositions"
+      ],
+      "primaryTopic": "matrix-decompositions",
+      "learningOrder": 40,
+      "status": "published",
+      "prerequisites": [
+        "eigenvalues-eigenvectors",
+        "vector-geometry-inner-products"
+      ]
+    },
+    {
+      "slug": "correlation-matrix",
+      "title": "Correlation Matrix",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices"
+      ],
+      "primaryTopic": "covariance-correlation-matrices",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "positive-semidefinite-matrix",
+      "title": "Positive Semidefinite Matrix",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "positive-semidefinite-matrices"
+      ],
+      "primaryTopic": "positive-semidefinite-matrices",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "principal-minor-feasibility",
+      "title": "Principal-Minor Feasibility",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "positive-semidefinite-matrices"
+      ],
+      "primaryTopic": "positive-semidefinite-matrices",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "positive-semidefinite-matrix"
+      ]
+    },
+    {
+      "slug": "probability-spaces-events",
+      "title": "Probability Spaces & Events",
+      "canonicalTopics": [
+        "probability-statistics",
+        "probability-foundations"
+      ],
+      "primaryTopic": "probability-foundations",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "probability-axioms-derived-rules",
+      "title": "Probability Axioms & Derived Rules",
+      "canonicalTopics": [
+        "probability-statistics",
+        "probability-foundations"
+      ],
+      "primaryTopic": "probability-foundations",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "probability-spaces-events"
+      ]
+    },
+    {
+      "slug": "symmetry-equiprobability-geometric-probability",
+      "title": "Symmetry, Equiprobability & Geometric Probability",
+      "canonicalTopics": [
+        "probability-statistics",
+        "probability-foundations"
+      ],
+      "primaryTopic": "probability-foundations",
+      "learningOrder": 30,
+      "status": "published",
+      "prerequisites": [
+        "probability-axioms-derived-rules"
+      ]
+    },
+    {
+      "slug": "counting-permutations-combinations",
+      "title": "Counting, Permutations & Combinations",
+      "canonicalTopics": [
+        "probability-statistics",
+        "combinatorial-probability"
+      ],
+      "primaryTopic": "combinatorial-probability",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "finite-combinatorial-probability-modeling",
+      "title": "Finite Combinatorial Probability Modeling",
+      "canonicalTopics": [
+        "probability-statistics",
+        "combinatorial-probability"
+      ],
+      "primaryTopic": "combinatorial-probability",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "counting-permutations-combinations"
+      ]
+    },
+    {
+      "slug": "inclusion-exclusion-derangements",
+      "title": "Inclusion–Exclusion & Derangements",
+      "canonicalTopics": [
+        "probability-statistics",
+        "combinatorial-probability"
+      ],
+      "primaryTopic": "combinatorial-probability",
+      "learningOrder": 30,
+      "status": "published",
+      "prerequisites": [
+        "counting-permutations-combinations"
+      ]
+    },
+    {
+      "slug": "conditioning",
+      "title": "Conditioning",
+      "canonicalTopics": [
+        "probability-statistics",
+        "conditional-probability-bayes"
+      ],
+      "primaryTopic": "conditional-probability-bayes",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "bayes-rule-base-rates",
+      "title": "Bayes Rule and Base Rates",
+      "canonicalTopics": [
+        "probability-statistics",
+        "conditional-probability-bayes"
+      ],
+      "primaryTopic": "conditional-probability-bayes",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "conditioning"
+      ]
+    },
+    {
+      "slug": "random-variables-cdf-pmf-pdf",
+      "title": "Random Variables, CDF, PMF, and PDF",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "common-probability-distributions",
+      "title": "Common Probability Distributions",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "random-variables-cdf-pmf-pdf"
+      ]
+    },
+    {
+      "slug": "random-variable-transformations-convolution",
+      "title": "Random Variable Transformations and Convolution",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "learningOrder": 30,
+      "status": "published",
+      "prerequisites": [
+        "random-variables-cdf-pmf-pdf",
+        "common-probability-distributions"
+      ]
+    },
+    {
+      "slug": "gaussian-lognormal-structure",
+      "title": "Gaussian and Lognormal Structure",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "learningOrder": 40,
+      "status": "published",
+      "prerequisites": [
+        "common-probability-distributions"
+      ]
+    },
+    {
+      "slug": "limit-theorems-lln-clt",
+      "title": "Law of Large Numbers and Central Limit Theorem",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "learningOrder": 50,
+      "status": "published",
+      "prerequisites": [
+        "moments-moment-generating-functions"
+      ]
+    },
+    {
+      "slug": "expectation-linearity-indicators",
+      "title": "Expectation, Linearity, and Indicator Variables",
+      "canonicalTopics": [
+        "probability-statistics",
+        "expectation-variance-covariance"
+      ],
+      "primaryTopic": "expectation-variance-covariance",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "conditional-expectation-tower-property",
+      "title": "Conditional Expectation and the Tower Property",
+      "canonicalTopics": [
+        "probability-statistics",
+        "expectation-variance-covariance"
+      ],
+      "primaryTopic": "expectation-variance-covariance",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "conditioning",
+        "expectation-linearity-indicators"
+      ]
+    },
+    {
+      "slug": "expectation-variance-covariance-algebra",
+      "title": "Expectation, Variance, and Covariance Algebra",
+      "canonicalTopics": [
+        "probability-statistics",
+        "expectation-variance-covariance"
+      ],
+      "primaryTopic": "expectation-variance-covariance",
+      "learningOrder": 30,
+      "status": "published",
+      "prerequisites": [
+        "expectation-linearity-indicators"
+      ]
+    },
+    {
+      "slug": "moments-moment-generating-functions",
+      "title": "Moments and Moment Generating Functions",
+      "canonicalTopics": [
+        "probability-statistics",
+        "expectation-variance-covariance"
+      ],
+      "primaryTopic": "expectation-variance-covariance",
+      "learningOrder": 40,
+      "status": "published",
+      "prerequisites": [
+        "expectation-linearity-indicators",
+        "expectation-variance-covariance-algebra"
+      ]
+    },
+    {
+      "slug": "order-statistics-basics",
+      "title": "Order Statistics",
+      "canonicalTopics": [
+        "probability-statistics",
+        "order-statistics-extremes"
+      ],
+      "primaryTopic": "order-statistics-extremes",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "joint-extremes-and-range",
+      "title": "Joint Extremes and Sample Range",
+      "canonicalTopics": [
+        "probability-statistics",
+        "order-statistics-extremes"
+      ],
+      "primaryTopic": "order-statistics-extremes",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "order-statistics-basics"
+      ]
+    },
+    {
+      "slug": "finite-state-markov-chains",
+      "title": "Finite-State Markov Chains",
+      "canonicalTopics": [
+        "stochastic-processes-stochastic-calculus",
+        "random-walks-markov-chains"
+      ],
+      "primaryTopic": "random-walks-markov-chains",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "markov-chain-state-compression",
+      "title": "State Compression for Markov Chains",
+      "canonicalTopics": [
+        "stochastic-processes-stochastic-calculus",
+        "random-walks-markov-chains"
+      ],
+      "primaryTopic": "random-walks-markov-chains",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "finite-state-markov-chains"
+      ]
+    },
+    {
+      "slug": "first-step-analysis",
+      "title": "First-Step Analysis",
+      "canonicalTopics": [
+        "stochastic-processes-stochastic-calculus",
+        "random-walks-markov-chains"
+      ],
+      "primaryTopic": "random-walks-markov-chains",
+      "learningOrder": 30,
+      "status": "published",
+      "prerequisites": [
+        "finite-state-markov-chains",
+        "conditioning"
+      ]
+    },
+    {
+      "slug": "no-arbitrage-principle",
+      "title": "No-Arbitrage Principle",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties"
+      ],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "static-arbitrage-construction",
+      "title": "Static Arbitrage Construction",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties"
+      ],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "no-arbitrage-principle"
+      ]
+    },
+    {
+      "slug": "option-price-convexity-in-strike",
+      "title": "Option Price Convexity in Strike",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties"
+      ],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "learningOrder": 30,
+      "status": "published",
+      "prerequisites": [
+        "no-arbitrage-principle",
+        "static-arbitrage-construction"
+      ]
+    }
+  ]
+}
