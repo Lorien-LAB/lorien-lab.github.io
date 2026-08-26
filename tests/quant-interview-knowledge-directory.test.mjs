@@ -118,6 +118,59 @@ const exactOrder = {
   ],
 };
 
+const exactPrerequisites = {
+  'bayes-rule-base-rates': ['conditioning'],
+  'bounded-monotone-convergence-and-fixed-points': ['monotonicity-convexity-critical-points-and-inflection'],
+  'common-probability-distributions': ['random-variables-cdf-pmf-pdf'],
+  'conditional-expectation-tower-property': ['conditioning', 'expectation-linearity-indicators'],
+  conditioning: [],
+  'correlation-matrix': [],
+  'counting-permutations-combinations': [],
+  'derivative-definition-and-core-rules': [],
+  'eigenbasis-decomposition': ['eigenvalues-eigenvectors'],
+  'eigenvalues-eigenvectors': [],
+  'expectation-linearity-indicators': [],
+  'expectation-variance-covariance-algebra': ['expectation-linearity-indicators'],
+  'finite-combinatorial-probability-modeling': ['counting-permutations-combinations'],
+  'finite-state-markov-chains': [],
+  'first-step-analysis': ['finite-state-markov-chains', 'conditioning'],
+  'gaussian-lognormal-structure': ['common-probability-distributions'],
+  'identity-swapping-invariance': [],
+  'inclusion-exclusion-derangements': ['counting-permutations-combinations'],
+  'indeterminate-limits-and-growth-rates': ['derivative-definition-and-core-rules'],
+  'joint-extremes-and-range': ['order-statistics-basics'],
+  'limit-theorems-lln-clt': ['moments-moment-generating-functions'],
+  'linear-independence-span-basis-rank': ['vector-geometry-inner-products'],
+  'linear-systems-consistency': ['linear-independence-span-basis-rank'],
+  'logarithmic-differentiation': ['derivative-definition-and-core-rules'],
+  'lu-cholesky-decomposition': ['linear-independence-span-basis-rank'],
+  'markov-chain-state-compression': ['finite-state-markov-chains'],
+  'matrix-spectral-invariants': ['eigenvalues-eigenvectors'],
+  'modular-arithmetic': [],
+  'modular-invariants': ['modular-arithmetic'],
+  'moments-moment-generating-functions': ['expectation-linearity-indicators', 'expectation-variance-covariance-algebra'],
+  'monotonicity-convexity-critical-points-and-inflection': ['derivative-definition-and-core-rules'],
+  'no-arbitrage-principle': [],
+  'option-price-convexity-in-strike': ['no-arbitrage-principle', 'static-arbitrage-construction'],
+  'order-statistics-basics': [],
+  'positive-semidefinite-matrix': [],
+  'positive-series-convergence': [],
+  'principal-minor-feasibility': ['positive-semidefinite-matrix'],
+  'probability-axioms-derived-rules': ['probability-spaces-events'],
+  'probability-spaces-events': [],
+  'problem-framing-clarification-assumption-management': [],
+  'qr-decomposition': ['vector-geometry-inner-products', 'linear-independence-span-basis-rank'],
+  'random-variable-transformations-convolution': ['random-variables-cdf-pmf-pdf', 'common-probability-distributions'],
+  'random-variables-cdf-pmf-pdf': [],
+  'recursion-problem-solving': [],
+  'related-rates-and-implicit-differentiation': ['derivative-definition-and-core-rules'],
+  'singular-value-decomposition': ['eigenvalues-eigenvectors', 'vector-geometry-inner-products'],
+  'static-arbitrage-construction': ['no-arbitrage-principle'],
+  'structured-think-aloud-reasoning': ['problem-framing-clarification-assumption-management'],
+  'symmetry-equiprobability-geometric-probability': ['probability-axioms-derived-rules'],
+  'vector-geometry-inner-products': [],
+};
+
 test('repository catalog contains the exact published corpus and planned 013 modules', async () => {
   const [catalogText, taxonomyText, knowledgeRecords] = await Promise.all([
     readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
@@ -132,6 +185,10 @@ test('repository catalog contains the exact published corpus and planned 013 mod
   assert.deepEqual(
     repositoryCatalog.modules.filter((module) => module.status === 'planned').map((module) => module.slug).sort(),
     ['problem-framing-clarification-assumption-management', 'structured-think-aloud-reasoning'],
+  );
+  assert.deepEqual(
+    Object.fromEntries(repositoryCatalog.modules.map((module) => [module.slug, module.prerequisites])),
+    exactPrerequisites,
   );
   for (const [topic, slugs] of Object.entries(exactOrder)) {
     const actual = repositoryCatalog.modules
@@ -255,6 +312,22 @@ test('internal directory joins exact source coverage and workstream state', () =
     '150-most-frequently-asked': {},
   });
   assert.deepEqual(child.workstreams, [{ id: 'child-topic-001', status: 'active' }]);
+});
+
+test('internal directory rejects unknown coverage taxonomy topics before projection', () => {
+  const invalidFixture = {
+    ...internalFixture,
+    coverageLedgers: {
+      ...internalFixture.coverageLedgers,
+      'green-book': {
+        entries: [{ ...internalFixture.coverageLedgers['green-book'].entries[0], canonicalTopics: ['missing-topic'] }],
+      },
+    },
+  };
+  assert.throws(
+    () => buildInternalDirectoryModel(invalidFixture),
+    /unknown coverage taxonomy topic: missing-topic/,
+  );
 });
 
 test('internal Markdown is deterministic and contains no completion percentage', () => {

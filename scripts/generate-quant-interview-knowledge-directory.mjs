@@ -20,7 +20,17 @@ function topicSets(taxonomy, publicTopics) {
   for (const topic of flat) {
     for (const ancestor of topic.path) descendants.get(ancestor).add(topic.id);
   }
-  return descendants;
+  return { descendants, topicIds: new Set(flat.map((topic) => topic.id)) };
+}
+
+function validateCoverageTopics(coverageLedgers, topicIds) {
+  for (const ledger of Object.values(coverageLedgers ?? {})) {
+    for (const entry of ledger.entries ?? []) {
+      for (const topicId of entry.canonicalTopics ?? []) {
+        if (!topicIds.has(topicId)) throw new Error(`unknown coverage taxonomy topic: ${topicId}`);
+      }
+    }
+  }
 }
 
 function intersectsTopicSet(topicIds, descendantIds) {
@@ -67,7 +77,8 @@ function internalFields(id, inputs, descendants) {
  * @param {object} inputs
  */
 export function buildInternalDirectoryModel(inputs) {
-  const descendants = topicSets(inputs.taxonomy, inputs.publicDirectory.topics);
+  const { descendants, topicIds } = topicSets(inputs.taxonomy, inputs.publicDirectory.topics);
+  validateCoverageTopics(inputs.coverageLedgers, topicIds);
   const project = (node) => ({
     ...node,
     ...internalFields(node.id, inputs, descendants),
