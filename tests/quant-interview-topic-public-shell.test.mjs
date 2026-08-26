@@ -1,15 +1,60 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { access, readFile, readdir } from 'node:fs/promises';
+import { access, mkdtemp, readFile, readdir, rm, writeFile } from 'node:fs/promises';
+import path from 'node:path';
 
 const hub = 'src/pages/knowledge/quant-interview/index.astro';
 const bank = 'src/pages/problems/index.astro';
 const detail = 'src/layouts/ProblemLayout.astro';
+const repositoryRoot = path.resolve();
+const hiddenPublicState = /src[\\/]data[\\/]quant-interview[\\/](?:coverage[\\/]|topics[\\/]source-topic-map\.json$)|workstreams/;
+const importPattern = /(?:import|export)\s+(?:[^'"\n]*?\s+from\s+)?['"]([^'"]+)['"]/g;
 
 const legacySourcePages = [
   'src/pages/knowledge/quant-interview/sources/index.astro',
   'src/pages/knowledge/quant-interview/sources/[...slug].astro',
 ];
+
+const isRepositoryPath = (candidate) => {
+  const relative = path.relative(repositoryRoot, candidate);
+  return relative && !relative.startsWith(`..${path.sep}`) && !path.isAbsolute(relative);
+};
+
+async function resolveLocalImport(from, specifier) {
+  if (!specifier.startsWith('.')) return null;
+  const base = path.resolve(path.dirname(from), specifier);
+  const candidates = path.extname(base)
+    ? [base]
+    : [base, ...['.astro', '.ts', '.js', '.mjs', '.json'].map((extension) => `${base}${extension}`)];
+  for (const candidate of candidates) {
+    if (!isRepositoryPath(candidate)) continue;
+    try {
+      await access(candidate);
+      return candidate;
+    } catch {
+      // An unresolvable local import is not part of the traversal.
+    }
+  }
+  return null;
+}
+
+async function assertNoHiddenCoverageImports(root) {
+  const pending = [path.resolve(root)];
+  const visited = new Set();
+  while (pending.length > 0) {
+    const current = pending.pop();
+    if (!current || visited.has(current)) continue;
+    visited.add(current);
+    if (hiddenPublicState.test(path.relative(repositoryRoot, current))) {
+      throw new Error(`hidden coverage import: ${path.relative(repositoryRoot, current)}`);
+    }
+    const source = await readFile(current, 'utf8');
+    for (const match of source.matchAll(importPattern)) {
+      const dependency = await resolveLocalImport(current, match[1]);
+      if (dependency) pending.push(dependency);
+    }
+  }
+}
 
 test('public topic primitives depend only on the canonical taxonomy', async () => {
   const loader = await readFile('src/lib/quantInterviewPublicTopics.ts', 'utf8');
@@ -76,10 +121,25 @@ test('Problem detail renders no public source provenance', async () => {
 });
 
 test('public topic shell cannot import hidden coverage data', async () => {
-  for (const path of [hub, bank, detail, 'src/pages/problems/[...slug].astro', 'src/components/ProblemCard.astro']) {
-    const text = await readFile(path, 'utf8');
-    assert.doesNotMatch(text, /quant-interview\/coverage|quantInterviewCoverage/);
+  for (const root of [hub, bank, detail, 'src/pages/problems/[...slug].astro', 'src/components/ProblemCard.astro', 'src/pages/knowledge/quant-interview/directory.astro']) {
+    await assert.doesNotReject(assertNoHiddenCoverageImports(root));
   }
+});
+
+test('public shell guard follows local directory dependencies', async (t) => {
+  const fixtureDirectory = await mkdtemp(path.resolve('tests', '.public-shell-'));
+  t.after(() => rm(fixtureDirectory, { recursive: true, force: true }));
+  const root = path.join(fixtureDirectory, 'directory.astro');
+  await writeFile(root, "import './public-helper.mjs';\n", 'utf8');
+  await writeFile(
+    path.join(fixtureDirectory, 'public-helper.mjs'),
+    "import '../../src/data/quant-interview/coverage/green-book.json';\n",
+    'utf8',
+  );
+  await assert.rejects(
+    assertNoHiddenCoverageImports(root),
+    /hidden coverage import/,
+  );
 });
 
 test('legacy source routes are retired and redirected to the Topic-first hub', async () => {
