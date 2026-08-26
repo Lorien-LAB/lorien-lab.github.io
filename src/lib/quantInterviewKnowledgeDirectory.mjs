@@ -26,6 +26,15 @@ export function validateKnowledgeCatalog(catalog, taxonomy, knowledgeRecords) {
   const topicById = new Map();
   for (const topic of flat) topicById.set(topic.id, topic);
 
+  for (const module of catalog.modules) {
+    if (!module || typeof module !== 'object') throw new Error('catalog module must be an object');
+    if (typeof module.slug !== 'string' || !module.slug) throw new Error('module slug must be a non-empty string');
+    if (typeof module.title !== 'string' || !module.title.trim()) throw new Error(`module title must be a non-empty string: ${module.slug}`);
+    if (!Array.isArray(module.canonicalTopics)) throw new Error(`canonicalTopics must be an array: ${module.slug}`);
+    if (typeof module.primaryTopic !== 'string' || !module.primaryTopic) throw new Error(`primaryTopic must be a non-empty string: ${module.slug}`);
+    if (!Array.isArray(module.prerequisites)) throw new Error(`prerequisites must be an array: ${module.slug}`);
+  }
+
   const modulesBySlug = new Map();
   for (const module of catalog.modules) {
     if (modulesBySlug.has(module.slug)) throw new Error(`duplicate catalog slug: ${module.slug}`);

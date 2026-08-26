@@ -138,3 +138,20 @@ test('catalog rejects published metadata drift and missing classified Knowledge'
     /planned module already has a public page: planned-module/,
   );
 });
+
+test('catalog rejects malformed module fields before semantic validation', () => {
+  assert.throws(
+    () => validateKnowledgeCatalog({
+      ...catalog,
+      modules: [{ ...catalog.modules[1], title: undefined }, catalog.modules[0]],
+    }, taxonomy, knowledgeRecords),
+    /module title must be a non-empty string: planned-module/,
+  );
+  assert.throws(
+    () => validateKnowledgeCatalog({
+      ...catalog,
+      modules: [{ ...catalog.modules[1], prerequisites: '' }, catalog.modules[0]],
+    }, taxonomy, knowledgeRecords),
+    /prerequisites must be an array: planned-module/,
+  );
+});
