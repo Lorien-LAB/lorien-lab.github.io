@@ -156,7 +156,7 @@ test('all claimed probability foundations rows are terminal and resolve to real 
 test('knowledge-only foundations source material remains visible through Interview Checks', async () => {
   for (const slug of ['probability-spaces-events', 'symmetry-equiprobability-geometric-probability']) {
     const files = await readdir('src/content/knowledge', { recursive: true });
-    const match = files.find((file) => String(file).endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
+    const match = files.find((file) => String(file).replaceAll('\\', '/').endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
     assert.ok(match, `missing knowledge ${slug}`);
     const text = await readFile(`src/content/knowledge/${match}`, 'utf8');
     assert.match(text, /^## Interview Checks$/m);

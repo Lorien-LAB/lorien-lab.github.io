@@ -4,14 +4,14 @@ import { readFile, readdir } from 'node:fs/promises';
 
 async function findKnowledge(slug) {
   const files = await readdir('src/content/knowledge', { recursive: true });
-  const match = files.find((file) => String(file).endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
+  const match = files.find((file) => String(file).replaceAll('\\', '/').endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
   assert.ok(match, `missing knowledge ${slug}`);
   return `src/content/knowledge/${match}`;
 }
 
 async function findProblem(slug) {
   const files = await readdir('src/content/problems', { recursive: true });
-  const match = files.find((file) => String(file).endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
+  const match = files.find((file) => String(file).replaceAll('\\', '/').endsWith(`/${slug}.md`) || String(file) === `${slug}.md`);
   assert.ok(match, `missing problem ${slug}`);
   return `src/content/problems/${match}`;
 }

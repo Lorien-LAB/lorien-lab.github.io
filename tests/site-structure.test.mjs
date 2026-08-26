@@ -56,6 +56,32 @@ test('homepage positions the site around quantitative research without fabricate
   assert.match(source, /Turning Data Into/);
   assert.match(source, /Alpha\./);
   assert.doesNotMatch(source, /Sharpe Ratio|Annual Return|Max Drawdown|1\.87|24\.31/);
+  assert.match(source, /research-projects\//);
+  assert.match(source, /cv\//);
+  assert.doesNotMatch(source, /hero-visual|signal-chart|research-panel|class="bars"|hero-grid-bg|hero-meta/);
+});
+
+test('homepage keeps the research portfolio compact and removes redundant closing promos', async () => {
+  const source = await readFile('src/pages/index.astro', 'utf8');
+  assert.doesNotMatch(source, /focus-section|contact-strip|Current Focus/);
+});
+
+test('portfolio cards prioritize research content over decorative filler', async () => {
+  const projectCard = await readFile('src/components/ProjectCard.astro', 'utf8');
+  const researchCard = await readFile('src/components/ResearchCard.astro', 'utf8');
+  const knowledgeCard = await readFile('src/components/KnowledgeCard.astro', 'utf8');
+
+  assert.doesNotMatch(projectCard, /project-visual/);
+  for (const source of [projectCard, researchCard, knowledgeCard]) assert.match(source, /tags\.slice\(0, 3\)/);
+});
+
+test('global density adjustments are scoped to desktop viewports', async () => {
+  const source = await readFile('src/styles/global.css', 'utf8');
+  const desktopRules = source.match(/@media \(min-width: 901px\) \{([\s\S]*?)\n\}/)?.[1] ?? '';
+
+  assert.match(desktopRules, /\.section \{ padding: 48px 0; \}/);
+  assert.match(desktopRules, /\.page-hero h1/);
+  assert.match(source, /^\.section \{ padding: 58px 0; \}$/m);
 });
 
 test('deployment workflow targets GitHub Pages', async () => {
@@ -87,11 +113,10 @@ test('knowledge base navigation and homepage integration are present', async () 
   assert.match(home, /Explore Knowledge/);
 });
 
-test('Obsidian knowledge graph is explicitly coming soon and is not a dead link', async () => {
+test('knowledge landing presents real library content without decorative graph placeholders', async () => {
   const source = await readFile('src/pages/knowledge/index.astro', 'utf8');
-  assert.match(source, /Obsidian Knowledge Graph/);
-  assert.match(source, /Coming Soon/);
-  assert.doesNotMatch(source, /<a[^>]+href=[^>]*obsidian/i);
+  assert.doesNotMatch(source, /Obsidian Knowledge Graph|Coming Soon|network-grid|obsidian-preview|obsidian-section/);
+  assert.match(source, /count > 0|filter\(\(\[, count\]\) => count > 0\)/);
 });
 
 test('knowledge page derives counts instead of hard-coding invented corpus statistics', async () => {
@@ -133,6 +158,7 @@ test('research and projects landing is the first-class reproduction gateway', as
   assert.match(page, /<ReproductionGateway/);
   assert.match(page, /ProjectCard/);
   assert.match(page, /ResearchCard/);
+  assert.doesNotMatch(page, /portfolio-index/);
 });
 
 test('reproduction workbench canonical route files live under projects only', async () => {

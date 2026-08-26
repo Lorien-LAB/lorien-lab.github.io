@@ -7,34 +7,66 @@ import ResearchCard from '../components/ResearchCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import KnowledgeCard from '../components/KnowledgeCard.astro';
 import NoteCard from '../components/NoteCard.astro';
-const base=import.meta.env.BASE_URL;
-const research=(await getCollection('research',({data})=>data.featured)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf()).slice(0,3);
-const projects=(await getCollection('projects',({data})=>data.featured)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf()).slice(0,3);
-const knowledge=(await getCollection('knowledge',({data})=>data.featured)).sort((a,b)=>(b.data.updated??b.data.date).valueOf()-(a.data.updated??a.data.date).valueOf()).slice(0,3);
-const notes=(await getCollection('notes',({data})=>!data.draft)).sort((a,b)=>b.data.date.valueOf()-a.data.date.valueOf()).slice(0,3);
-const focus=['Alpha Discovery','Futures & Term Structure','Market Microstructure','CTA & Systematic Trading','Machine Learning','Research Engineering'];
-const focusZh=['Alpha 发现','期货与期限结构','市场微观结构','CTA 与系统化交易','机器学习','研究工程'];
-const knowledgeDomains=['Quantitative Finance','Mathematics & Statistics','Machine Learning','AI & Research Agents','Research Infrastructure'];
-const knowledgeDomainsZh=['量化金融','数学与统计','机器学习','AI 与研究 Agent','研究基础设施'];
+
+const base = import.meta.env.BASE_URL;
+const research = (await getCollection('research', ({ data }) => data.featured)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0,3);
+const projects = (await getCollection('projects', ({ data }) => data.featured)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0,3);
+const knowledge = (await getCollection('knowledge', ({ data }) => data.featured)).sort((a,b) => (b.data.updated ?? b.data.date).valueOf() - (a.data.updated ?? a.data.date).valueOf()).slice(0,3);
+const notes = (await getCollection('notes', ({ data }) => !data.draft)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0,3);
+const knowledgeDomains = ['Quantitative Finance','Mathematics & Statistics','Machine Learning','AI & Research Agents','Research Infrastructure'];
+const knowledgeDomainsZh = ['量化金融','数学与统计','机器学习','AI 与研究 Agent','研究基础设施'];
 ---
 <BaseLayout title="Lorien Lab · Quantitative Research" description="Quantitative research portfolio covering alpha discovery, futures, market microstructure, systematic trading, and research infrastructure.">
   <Hero />
+
   <section class="section home-portfolio">
     <div class="container">
       <SectionHeading label="01 / Research & Projects" labelZh="01 / 研究与项目" title="Research & Projects" titleZh="研究与项目" description="Research questions, strategy frameworks, and research systems presented as one connected portfolio." descriptionZh="将研究问题、策略框架与研究系统放在同一个研究组合中呈现。" href={`${base}research-projects/`} linkLabel="Explore research & projects →" linkLabelZh="查看研究与项目 →"/>
       <div class="home-portfolio-block">
         <div class="portfolio-subhead"><div class="mono-label"><span class="lang-en">Research Tracks</span><span class="lang-zh" lang="zh-CN">研究方向</span></div><p><span class="lang-en">Mechanisms, data-generating processes, and falsifiable questions.</span><span class="lang-zh" lang="zh-CN">围绕机制、数据生成过程与可证伪问题展开研究。</span></p></div>
-        <div class="card-grid">{research.map(entry=><ResearchCard entry={entry}/>)}</div>
+        <div class="card-grid">{research.map(entry => <ResearchCard entry={entry}/>)}</div>
       </div>
       <div class="home-portfolio-block projects-block">
         <div class="portfolio-subhead"><div class="mono-label"><span class="lang-en">Research Systems & Strategy Frameworks</span><span class="lang-zh" lang="zh-CN">研究系统与策略框架</span></div><p><span class="lang-en">Infrastructure and reusable structures that turn research ideas into durable workflows.</span><span class="lang-zh" lang="zh-CN">用基础设施与可复用结构把研究想法转化为可持续的工作流。</span></p></div>
-        <div class="card-grid">{projects.map(entry=><ProjectCard entry={entry}/>)}</div>
+        <div class="card-grid">{projects.map(entry => <ProjectCard entry={entry}/>)}</div>
       </div>
     </div>
   </section>
-  <section class="section home-knowledge"><div class="container"><SectionHeading label="02 / Knowledge" labelZh="02 / 知识" title="Personal Knowledge Base" titleZh="个人知识库" description="A structured research library connecting concepts, tools, papers, and research topics across quantitative finance and research engineering." descriptionZh="连接量化金融、研究工程中的概念、工具、论文与研究主题的结构化研究资料库。" href={`${base}knowledge/`} linkLabel="Explore Knowledge →" linkLabelZh="探索知识库 →"/><div class="knowledge-home-grid"><div class="knowledge-domain-list">{knowledgeDomains.map((domain,i)=><a href={`${base}knowledge/#knowledge-index`}><span>{String(i+1).padStart(2,'0')}</span><strong><span class="lang-en">{domain}</span><span class="lang-zh" lang="zh-CN">{knowledgeDomainsZh[i]}</span></strong><i aria-hidden="true">→</i></a>)}</div><div class="knowledge-home-cards">{knowledge.map(entry=><KnowledgeCard entry={entry} compact />)}</div></div></div></section>
-  <section class="section"><div class="container"><SectionHeading label="03 / Notes" labelZh="03 / 笔记" title="Latest Research Notes" titleZh="最新研究笔记" description="Methodology, architecture decisions, paper reading, and experiment write-ups." descriptionZh="记录研究方法、架构决策、论文阅读与实验过程。" href={`${base}notes/`} linkLabel="Read all notes →" linkLabelZh="阅读全部笔记 →"/><div>{notes.map(entry=><NoteCard entry={entry}/>)}</div></div></section>
-  <section class="section focus-section"><div class="container focus-grid"><div><div class="mono-label"><span class="lang-en">Current Focus</span><span class="lang-zh" lang="zh-CN">当前关注</span></div><h2><span class="lang-en">Building a research process that scales ideas without scaling noise.</span><span class="lang-zh" lang="zh-CN">构建一种能扩展研究想法、却不会同步放大噪声的研究流程。</span></h2></div><div class="focus-list">{focus.map((item,i)=><div><span>{String(i+1).padStart(2,'0')}</span><strong><span class="lang-en">{item}</span><span class="lang-zh" lang="zh-CN">{focusZh[i]}</span></strong></div>)}</div></div></section>
-  <section class="contact-strip"><div class="container contact-inner"><div><div class="mono-label"><span class="lang-en">Contact</span><span class="lang-zh" lang="zh-CN">联系</span></div><h2><span class="lang-en">Interested in quantitative research, systematic trading, or research systems?</span><span class="lang-zh" lang="zh-CN">对量化研究、系统化交易或研究系统感兴趣？</span></h2></div><a class="button primary" href="https://github.com/Lorien-LAB" target="_blank" rel="noreferrer"><span class="lang-en">View GitHub →</span><span class="lang-zh" lang="zh-CN">查看 GitHub →</span></a></div></section>
+
+  <section class="section home-knowledge">
+    <div class="container">
+      <SectionHeading label="02 / Knowledge" labelZh="02 / 知识" title="Personal Knowledge Base" titleZh="个人知识库" description="A structured research library connecting concepts, tools, papers, and research topics across quantitative finance and research engineering." descriptionZh="连接量化金融、研究工程中的概念、工具、论文与研究主题的结构化研究资料库。" href={`${base}knowledge/`} linkLabel="Explore Knowledge →" linkLabelZh="探索知识库 →"/>
+      <div class="knowledge-home-grid">
+        <div class="knowledge-domain-list">{knowledgeDomains.map((domain,i) => <a href={`${base}knowledge/#knowledge-index`}><span>{String(i+1).padStart(2,'0')}</span><strong><span class="lang-en">{domain}</span><span class="lang-zh" lang="zh-CN">{knowledgeDomainsZh[i]}</span></strong><i aria-hidden="true">→</i></a>)}</div>
+        <div class="knowledge-home-cards">{knowledge.map(entry => <KnowledgeCard entry={entry} compact />)}</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section home-notes">
+    <div class="container">
+      <SectionHeading label="03 / Notes" labelZh="03 / 笔记" title="Latest Research Notes" titleZh="最新研究笔记" description="Methodology, architecture decisions, paper reading, and experiment write-ups." descriptionZh="记录研究方法、架构决策、论文阅读与实验过程。" href={`${base}notes/`} linkLabel="Read all notes →" linkLabelZh="阅读全部笔记 →"/>
+      <div>{notes.map(entry => <NoteCard entry={entry}/>)}</div>
+    </div>
+  </section>
 </BaseLayout>
-<style>.home-portfolio{border-bottom:1px solid var(--border)}.home-portfolio-block{margin-top:34px}.projects-block{margin-top:52px;padding-top:34px;border-top:1px solid var(--border)}.portfolio-subhead{display:flex;align-items:end;justify-content:space-between;gap:24px;margin-bottom:18px}.portfolio-subhead p{max-width:560px;margin:0;color:var(--muted);font-size:.9rem}.portfolio-subhead p>.lang-en,.portfolio-subhead p>.lang-zh{display:block}.home-knowledge{background:color-mix(in srgb,var(--surface) 62%,transparent);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.knowledge-home-grid{display:grid;grid-template-columns:.85fr 1.15fr;gap:34px;align-items:start}.knowledge-domain-list{border-top:1px solid var(--border)}.knowledge-domain-list a{display:grid;grid-template-columns:48px 1fr 22px;gap:12px;align-items:center;padding:15px 0;border-bottom:1px solid var(--border);color:var(--ink)}.knowledge-domain-list a:hover{color:var(--accent-strong)}.knowledge-domain-list span{font:700 .68rem var(--font-mono);color:var(--accent-strong)}.knowledge-domain-list strong{font-size:.9rem}.knowledge-domain-list strong>.lang-en,.knowledge-domain-list strong>.lang-zh,.focus-list strong>.lang-en,.focus-list strong>.lang-zh,.focus-grid h2>.lang-en,.focus-grid h2>.lang-zh,.contact-strip h2>.lang-en,.contact-strip h2>.lang-zh{display:block}.knowledge-domain-list i{font-style:normal;font-weight:800}.focus-section{padding-top:78px}.focus-grid{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:start}.focus-grid h2{margin:12px 0 0;font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;letter-spacing:-.05em}.focus-list{border-top:1px solid var(--border)}.focus-list div{display:grid;grid-template-columns:52px 1fr;gap:12px;padding:16px 0;border-bottom:1px solid var(--border)}.focus-list span{color:var(--accent-strong);font:700 .75rem var(--font-mono)}.focus-list strong{font-size:.94rem}.contact-strip{margin-top:56px;padding:52px 0;background:var(--hero);color:var(--hero-ink)}.contact-inner{display:flex;align-items:center;justify-content:space-between;gap:30px}.contact-strip h2{max-width:720px;margin:8px 0 0;font-size:clamp(1.55rem,3vw,2.5rem);line-height:1.1;letter-spacing:-.035em}@media(max-width:900px){.portfolio-subhead{align-items:flex-start;flex-direction:column}.knowledge-home-grid{grid-template-columns:1fr}.focus-grid{grid-template-columns:1fr;gap:35px}.contact-inner{align-items:flex-start;flex-direction:column}}</style>
+
+<style>
+  .home-portfolio { border-bottom: 1px solid var(--border); }
+  .home-portfolio-block { margin-top: 28px; }
+  .projects-block { margin-top: 40px; padding-top: 28px; border-top: 1px solid var(--border); }
+  .portfolio-subhead { display: flex; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 16px; }
+  .portfolio-subhead p { max-width: 560px; margin: 0; color: var(--muted); font-size: .88rem; }
+  .portfolio-subhead p>.lang-en,.portfolio-subhead p>.lang-zh { display: block; }
+  .home-knowledge { background: color-mix(in srgb,var(--surface) 62%,transparent); border-bottom: 1px solid var(--border); }
+  .knowledge-home-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 30px; align-items: start; }
+  .knowledge-domain-list { border-top: 1px solid var(--border); }
+  .knowledge-domain-list a { display: grid; grid-template-columns: 42px 1fr 22px; gap: 10px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--border); color: var(--ink); }
+  .knowledge-domain-list a:hover { color: var(--accent-strong); }
+  .knowledge-domain-list span { font: 700 .68rem var(--font-mono); color: var(--accent-strong); }
+  .knowledge-domain-list strong { font-size: .88rem; }
+  .knowledge-domain-list strong>.lang-en,.knowledge-domain-list strong>.lang-zh { display: block; }
+  .knowledge-domain-list i { font-style: normal; font-weight: 800; }
+  .home-notes { padding-bottom: 42px; }
+  @media(max-width:900px){.portfolio-subhead{align-items:flex-start;flex-direction:column}.knowledge-home-grid{grid-template-columns:1fr}}
+</style>
