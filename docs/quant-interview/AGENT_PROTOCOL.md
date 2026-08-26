@@ -1,5 +1,11 @@
 # Quant Interview Agent Protocol
 
+<!-- parallel-workstream-policy-reference:start -->
+> Canonical parallel-workstream policy: `quant-interview.parallel-workstream-governance` at `docs/quant-interview/parallel-workstream-policy.json`.
+>
+> The JSON policy is normative and the sole source of truth for parallel-workstream governance. Surrounding prose is explanatory and cannot override it.
+<!-- parallel-workstream-policy-reference:end -->
+
 ## 1. Authority
 
 **Do not trust conversational memory** as the source of truth. Current repository files and verified source evidence are authoritative.
@@ -20,7 +26,19 @@ The public system is **Topic-first**. Books are internal evidence sources, not p
 
 Use a **task-specific branch** unless the user explicitly authorizes direct integration. Never force-update `main`.
 
-One branch should implement one bounded infrastructure stage or one bounded canonical topic workstream.
+One branch must still implement one bounded infrastructure stage or one bounded canonical topic workstream.
+
+A single coordinator may authorize up to three isolated canonical topic workstreams to be active at once. Each candidate uses its own branch and worktree from the same frozen durable base. Candidate branches never share a checkout, never edit another candidate branch, and never force-update shared history.
+
+Module implementation may not begin until its written module spec is approved. Design and source audit may precede approval.
+
+### Parallel workstream governance
+
+Parallelism applies to isolated design and implementation only. A single coordinator owns ordinal reservation, cross-module source-row ownership, semantic reconciliation of coverage and source-topic mappings, exact global counts, the authoritative HANDOFF, integration order, and completion evidence.
+
+Candidate agents must not edit shared coverage, source-topic map, global-count regression, HANDOFF, completion metadata, or CI workflow paths. Candidates may only submit local module content and test changes allowed by their approved spec, plus a report with precise proposed shared-file deltas for the coordinator.
+
+Candidate workstreams remain `active` after module-local verification. Only the coordinator may mark an integrated workstream `complete`. Integration, completion metadata, real CI evidence, exact corpus regression, and HANDOFF closure are serialized one workstream at a time.
 
 ## 4. Canonical topic workstream discipline
 
@@ -146,7 +164,9 @@ Before completing a topic workstream:
 5. run `npm run test`;
 6. run `npm run check`;
 7. run `npm run build`;
-8. review the diff against `main`;
-9. update `docs/quant-interview/HANDOFF.md` with factual current state only.
+8. when parallel candidates exist, reconcile shared-file deltas against the latest durable base instead of accepting whole-file conflict resolution;
+9. keep the candidate `active` until the coordinator verifies the integrated commit and records its completion evidence;
+10. review the diff against `main`;
+11. update `docs/quant-interview/HANDOFF.md` with factual current state only.
 
 Do not claim completion when any verification gate fails.

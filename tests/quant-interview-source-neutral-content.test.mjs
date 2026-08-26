@@ -10,6 +10,10 @@ const currentProblemSlugs = [
   'correlation-matrix-parameter-range',
   'conditional-dice-expectation',
   'random-walk-boundary',
+  'twelve-before-consecutive-sevens',
+  'coin-pattern-hitting-times',
+  'random-recoloring-consensus-time',
+  'random-walk-return-time-on-cube',
   'covariance-matrix-positive-semidefinite-proof',
   'covariance-to-correlation-matrix',
   'equicorrelation-matrix-bounds',
@@ -59,11 +63,30 @@ const currentProblemSlugs = [
   'expected-radius-of-uniform-disk-point',
   'fair-box-opening-price-by-expectation',
   'multiplicative-wealth-expected-growth',
+  'uniform-sample-extremes-and-range',
+  'joint-min-max-correlation-of-uniforms',
+  'random-ants-last-fall-time',
+  'kth-order-statistic-distribution',
+  'differentiate-variable-base-and-exponent',
+  'compare-e-pi-power-expressions',
+  'exponential-over-polynomial-limit',
+  'logarithm-power-limit-at-zero',
+  'rotating-lighthouse-beam-related-rate',
+  'radical-difference-limit-at-infinity',
+  'exponential-midpoint-convexity',
+  'periodic-continued-fraction-limit',
+  'normal-cdf-inflection-point',
+  'derive-exponential-cosine-derivative-from-definition',
+  'nested-radical-limit',
+  'infinite-power-tower-limit',
+  'classify-basic-positive-series',
 ];
 
 const expectedKnowledgeTopics = new Map([
   ['conditioning', ['probability-statistics', 'conditional-probability-bayes']],
   ['first-step-analysis', ['stochastic-processes-stochastic-calculus', 'random-walks-markov-chains']],
+  ['finite-state-markov-chains', ['stochastic-processes-stochastic-calculus', 'random-walks-markov-chains']],
+  ['markov-chain-state-compression', ['stochastic-processes-stochastic-calculus', 'random-walks-markov-chains']],
   ['recursion-problem-solving', ['logic-brainteasers-discrete-reasoning']],
   ['no-arbitrage-principle', ['derivatives-options-no-arbitrage', 'no-arbitrage-option-properties']],
   ['option-price-convexity-in-strike', ['derivatives-options-no-arbitrage', 'no-arbitrage-option-properties']],
@@ -99,6 +122,15 @@ const expectedKnowledgeTopics = new Map([
   ['conditional-expectation-tower-property', ['probability-statistics', 'expectation-variance-covariance']],
   ['expectation-variance-covariance-algebra', ['probability-statistics', 'expectation-variance-covariance']],
   ['moments-moment-generating-functions', ['probability-statistics', 'expectation-variance-covariance']],
+  ['order-statistics-basics', ['probability-statistics', 'order-statistics-extremes']],
+  ['joint-extremes-and-range', ['probability-statistics', 'order-statistics-extremes']],
+  ['derivative-definition-and-core-rules', ['calculus-differential-equations', 'limits-derivatives']],
+  ['logarithmic-differentiation', ['calculus-differential-equations', 'limits-derivatives']],
+  ['monotonicity-convexity-critical-points-and-inflection', ['calculus-differential-equations', 'limits-derivatives']],
+  ['indeterminate-limits-and-growth-rates', ['calculus-differential-equations', 'limits-derivatives']],
+  ['related-rates-and-implicit-differentiation', ['calculus-differential-equations', 'limits-derivatives']],
+  ['bounded-monotone-convergence-and-fixed-points', ['calculus-differential-equations', 'limits-derivatives']],
+  ['positive-series-convergence', ['calculus-differential-equations', 'limits-derivatives']],
 ]);
 
 async function findProblem(slug) {
@@ -126,9 +158,27 @@ async function markdownSlugs(root) {
   return new Set(files.filter((file) => String(file).endsWith('.md')).map((file) => path.basename(String(file), '.md')));
 }
 
-test('source-neutral regression enumerates the current 55 Problem and 37 Knowledge contracts', () => {
-  assert.equal(currentProblemSlugs.length, 55);
-  assert.equal(expectedKnowledgeTopics.size, 37);
+async function classifiedMarkdownSlugs(root) {
+  const files = await readdir(root, { recursive: true });
+  const slugs = [];
+  for (const file of files.filter((entry) => String(entry).endsWith('.md'))) {
+    const text = await readFile(path.join(root, String(file)), 'utf8');
+    if (parseInlineArray(text, 'quantInterviewTopics').length > 0) slugs.push(path.basename(String(file), '.md'));
+  }
+  assert.equal(new Set(slugs).size, slugs.length, `${root} has duplicate classified Markdown slugs`);
+  return slugs.sort();
+}
+
+test('source-neutral regression discovers exactly the current 76 Problem and 48 Knowledge contracts', async () => {
+  const actualProblemSlugs = await classifiedMarkdownSlugs('src/content/problems');
+  const actualKnowledgeSlugs = await classifiedMarkdownSlugs('src/content/knowledge');
+  const expectedProblemSlugs = [...currentProblemSlugs].sort();
+  const expectedKnowledgeSlugs = [...expectedKnowledgeTopics.keys()].sort();
+
+  assert.equal(actualProblemSlugs.length, 76);
+  assert.equal(actualKnowledgeSlugs.length, 48);
+  assert.deepEqual(actualProblemSlugs, expectedProblemSlugs);
+  assert.deepEqual(actualKnowledgeSlugs, expectedKnowledgeSlugs);
 });
 
 test('public Problem schema is source-neutral', async () => {

@@ -46,7 +46,7 @@ test('handoff records the sixth completed workstream and advances to Conditional
 
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
   assert.match(nextAction, /cross-book/i);
-  assert.match(nextAction, /Probability & Statistics/i);
+  assert.match(nextAction, /Historical transition marker/i);
   assert.match(nextAction, /Conditional Probability & Bayes/i);
   assert.doesNotMatch(nextAction, /Combinatorial Probability[\s\S]{0,180}(?:execute|next|continue)/i);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);

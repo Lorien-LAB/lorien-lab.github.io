@@ -9,8 +9,8 @@ date: 2026-08-19
 tags: [Probability, Expectation, Variance, Covariance]
 quantInterviewTopics: [probability-statistics, expectation-variance-covariance]
 featured: false
-related: []
-relatedNotes: []
+related: [order-statistics-basics]
+relatedNotes: [Uniform extrema show how a derived order-statistic distribution and linearity combine to compute an expected sample range.]
 ---
 
 ## Core Idea

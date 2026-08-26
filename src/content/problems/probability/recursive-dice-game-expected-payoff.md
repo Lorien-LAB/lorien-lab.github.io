@@ -11,7 +11,7 @@ quantInterviewTopics: [probability-statistics, expectation-variance-covariance]
 concepts: [conditional-expectation-tower-property]
 techniques: [conditioning]
 prerequisites: []
-relatedProblems: [conditional-dice-expectation, expected-loops-from-random-pairings]
+relatedProblems: [conditional-dice-expectation, expected-loops-from-random-pairings, twelve-before-consecutive-sevens]
 family: recursive-expectation-fixed-point
 mathDifficulty: 2
 insightDifficulty: 3

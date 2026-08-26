@@ -38,7 +38,8 @@ test('handoff records the seventh completed workstream and advances to Random Va
   assert.match(handoff, /protocol|observation/i);
 
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
-  assert.match(nextAction, /Probability & Statistics/i);
+  assert.match(nextAction, /cross-book/i);
+  assert.match(nextAction, /Historical transition marker/i);
   assert.match(nextAction, /Random Variables & Distributions/i);
   assert.doesNotMatch(nextAction, /Conditional Probability & Bayes[\s\S]{0,180}(?:execute|next|continue|target workstream)/i);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);

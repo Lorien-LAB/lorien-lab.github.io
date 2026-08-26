@@ -11,7 +11,7 @@ quantInterviewTopics: [probability-statistics, combinatorial-probability]
 concepts: [counting-permutations-combinations, finite-combinatorial-probability-modeling]
 techniques: []
 prerequisites: [counting-permutations-combinations]
-relatedProblems: []
+relatedProblems: [coin-pattern-hitting-times]
 family: forbidden-adjacency-counting
 mathDifficulty: 2
 insightDifficulty: 4
