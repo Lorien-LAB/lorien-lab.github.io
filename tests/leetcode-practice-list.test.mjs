@@ -16,6 +16,9 @@ test('LeetCode syllabus contains the exact 55-problem track split', () => {
 });
 
 test('every syllabus item has complete original metadata and an official URL', () => {
+  assert.equal(new Set(leetcodeProblems.map(({ slug }) => slug)).size, 55);
+  assert.equal(new Set(leetcodeProblems.map(({ url }) => url)).size, 55);
+
   for (const problem of leetcodeProblems) {
     assert.match(problem.slug, /^[a-z0-9-]+$/);
     assert.match(problem.url, new RegExp(`^https://leetcode\\.com/problems/${problem.slug}/$`));

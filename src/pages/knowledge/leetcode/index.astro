@@ -58,30 +58,24 @@ const weekFocus = [
         <button class="reset-button" type="button" data-filter-reset>Reset</button>
       </div>
 
-      <p class="result-summary"><strong data-result-count>{leetcodeProblems.length}</strong> problems shown</p>
+      <p class="result-summary" role="status" aria-live="polite" aria-atomic="true"><strong data-result-count>{leetcodeProblems.length}</strong> problems shown</p>
       <div class="problem-list" data-problem-list>
         <div class="problem-head" aria-hidden="true">
           <span>No.</span><span>Problem</span><span>Difficulty</span><span>Pattern</span><span>Quant application</span><span>Track / Week</span><span>Link</span>
         </div>
         {leetcodeProblems.map((problem) => {
-          const searchText = [problem.number, problem.title, problem.pattern, problem.quantApplication].join(' ').toLowerCase();
           return <article
             class="problem-row"
             data-leetcode-row
-            data-track={problem.track}
-            data-minimum={String(problem.minimum25)}
-            data-category={problem.category}
-            data-difficulty={problem.difficulty}
-            data-week={String(problem.week)}
-            data-search={searchText}
             data-problem={JSON.stringify(problem)}
+            aria-labelledby={`leetcode-problem-${problem.number}`}
           >
-            <span class="problem-number">{String(problem.number).padStart(3, '0')}</span>
-            <div class="problem-title"><strong>{problem.title}</strong><small>{problem.category}</small></div>
-            <span class:list={['difficulty', `difficulty-${problem.difficulty.toLowerCase()}`]}>{problem.difficulty}</span>
-            <span class="problem-pattern">{problem.pattern}</span>
-            <span class="quant-application">{problem.quantApplication}</span>
-            <span class="problem-track">{problem.track === 'core' ? 'Core' : 'Quant'} · W{problem.week}</span>
+            <span class="problem-number" aria-label={`Problem number ${problem.number}`}>{String(problem.number).padStart(3, '0')}</span>
+            <div class="problem-title"><strong id={`leetcode-problem-${problem.number}`}>{problem.title}</strong><small>{problem.category}</small></div>
+            <span class:list={['difficulty', `difficulty-${problem.difficulty.toLowerCase()}`]} aria-label={`Difficulty: ${problem.difficulty}`}>{problem.difficulty}</span>
+            <span class="problem-pattern" aria-label={`Pattern: ${problem.pattern}`}>{problem.pattern}</span>
+            <span class="quant-application" aria-label={`Quant application: ${problem.quantApplication}`}>{problem.quantApplication}</span>
+            <span class="problem-track" aria-label={`Track: ${problem.track === 'core' ? 'Core' : 'Quant'}; Week ${problem.week}`}>{problem.track === 'core' ? 'Core' : 'Quant'} · W{problem.week}</span>
             <a href={problem.url} target="_blank" rel="noreferrer" aria-label={`Open ${problem.number}. ${problem.title} on LeetCode`}>Open ↗</a>
           </article>;
         })}
@@ -104,7 +98,10 @@ const weekFocus = [
     const difficulty = document.querySelector<HTMLSelectElement>('[data-difficulty-filter]');
     const week = document.querySelector<HTMLSelectElement>('[data-week-filter]');
     const trackButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-track-filter]')];
-    const rows = [...document.querySelectorAll<HTMLElement>('[data-leetcode-row]')];
+    const entries = [...document.querySelectorAll<HTMLElement>('[data-leetcode-row]')].map((row) => ({
+      row,
+      problem: JSON.parse(row.dataset.problem || '{}'),
+    }));
     const resultCount = document.querySelector<HTMLElement>('[data-result-count]');
     const noResults = document.querySelector<HTMLElement>('[data-no-results]');
     const reset = document.querySelector<HTMLButtonElement>('[data-filter-reset]');
@@ -114,8 +111,7 @@ const weekFocus = [
       const query = (search?.value || '').trim().toLowerCase();
       let visible = 0;
 
-      rows.forEach((row) => {
-        const problem = JSON.parse(row.dataset.problem || '{}');
+      entries.forEach(({ row, problem }) => {
         const matches = matchesLeetCodeProblem(problem, {
           track: activeTrack,
           query,
@@ -138,14 +134,17 @@ const weekFocus = [
       trackButtons.forEach((candidate) => candidate.setAttribute('aria-pressed', String(candidate === button)));
       apply();
     }));
-    reset?.addEventListener('click', () => {
+    const resetFilters = (focusSearch: boolean) => {
       if (search) search.value = '';
       [category, difficulty, week].forEach((control) => { if (control) control.value = ''; });
       activeTrack = 'all';
-      trackButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.trackFilter === 'all')));
+      trackButtons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.trackFilter === activeTrack)));
       apply();
-      search?.focus();
-    });
+      if (focusSearch) search?.focus();
+    };
+
+    reset?.addEventListener('click', () => resetFilters(true));
+    window.addEventListener('pageshow', () => resetFilters(false));
   })();
 </script>
 
