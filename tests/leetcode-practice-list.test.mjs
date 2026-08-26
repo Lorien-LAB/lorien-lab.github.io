@@ -24,3 +24,7 @@ test('every syllabus item has complete original metadata and an official URL', (
     assert.ok(Number.isInteger(problem.week) && problem.week >= 1 && problem.week <= 5);
   }
 });
+
+test('problem 167 uses its official full English title', () => {
+  assert.equal(leetcodeProblems.find(({ number }) => number === 167)?.title, 'Two Sum II - Input Array Is Sorted');
+});
