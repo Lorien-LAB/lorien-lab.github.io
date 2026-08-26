@@ -119,8 +119,8 @@ Each module uses:
 
 - `slug` is globally unique and URL-safe.
 - `title` is a source-neutral public curriculum label.
-- `canonicalTopics` is parent-first and must match the published Knowledge frontmatter when `status` is `published`.
-- `primaryTopic` is the deepest owning taxonomy id and must appear in `canonicalTopics`.
+- `canonicalTopics` is an ordered multi-classification and must match the published Knowledge frontmatter when `status` is `published`. For every listed Topic, all of its taxonomy ancestors must appear earlier in the array; sibling Topics may coexist after their shared ancestor.
+- `primaryTopic` is exactly the final id in `canonicalTopics`. It determines the module's single directory placement and learning order; other listed Topics remain cross-classifications for search, counts, and relationships.
 - `learningOrder` is a positive integer unique within one `primaryTopic`.
 - `status` is exactly `planned` or `published`.
 - `prerequisites` contains catalog slugs only, forms no cycles, and never points to the module itself.
@@ -332,8 +332,8 @@ The directory validator rejects:
 
 - duplicate catalog slugs;
 - unknown taxonomy ids;
-- `primaryTopic` values absent from `canonicalTopics`;
-- non-parent-first topic arrays;
+- `primaryTopic` values that are not the final `canonicalTopics` id;
+- topic arrays where a listed Topic appears before one of its taxonomy ancestors;
 - duplicate or non-positive `learningOrder` values inside one primary Topic;
 - unknown prerequisite slugs;
 - self-dependencies or prerequisite cycles;

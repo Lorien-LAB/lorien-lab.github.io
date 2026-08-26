@@ -185,8 +185,8 @@ const invalidCases = [
   ['invalid slug', { ...catalog, modules: [{ ...catalog.modules[0], slug: 'Not Valid' }, catalog.modules[1]] }, /invalid catalog slug: Not Valid/],
   ['invalid status', { ...catalog, modules: [{ ...catalog.modules[0], status: 'draft' }, catalog.modules[1]] }, /invalid module status: draft/],
   ['unknown topic', { ...catalog, modules: [{ ...catalog.modules[0], canonicalTopics: ['missing'], primaryTopic: 'missing' }] }, /unknown taxonomy topic: missing/],
-  ['non-parent-first topics', { ...catalog, modules: [{ ...catalog.modules[0], canonicalTopics: ['child-topic', 'root-topic'] }, catalog.modules[1]] }, /canonicalTopics must equal taxonomy path: published-module/],
-  ['primary topic absent', { ...catalog, modules: [{ ...catalog.modules[0], primaryTopic: 'root-topic' }] }, /primaryTopic must be the deepest canonical topic/],
+  ['non-parent-first topics', { ...catalog, modules: [{ ...catalog.modules[0], canonicalTopics: ['child-topic', 'root-topic'] }, catalog.modules[1]] }, /taxonomy ancestor root-topic must precede child-topic: published-module/],
+  ['primary topic not final', { ...catalog, modules: [{ ...catalog.modules[0], primaryTopic: 'root-topic' }] }, /primaryTopic must equal final canonical topic: published-module/],
   ['non-positive order', { ...catalog, modules: [{ ...catalog.modules[0], learningOrder: 0 }, catalog.modules[1]] }, /learningOrder must be a positive integer: published-module/],
   ['duplicate order', { ...catalog, modules: [catalog.modules[0], { ...catalog.modules[1], learningOrder: 10 }] }, /duplicate learningOrder 10 in child-topic/],
   ['unknown prerequisite', { ...catalog, modules: [{ ...catalog.modules[0], prerequisites: ['missing'] }, catalog.modules[1]] }, /unknown prerequisite: missing/],
@@ -215,6 +215,35 @@ test('catalog rejects prerequisite cycles', () => {
   assert.throws(
     () => validateKnowledgeCatalog(cyclic, taxonomy, knowledgeRecords),
     /prerequisite cycle: planned-module -> published-module -> planned-module|prerequisite cycle: published-module -> planned-module -> published-module/,
+  );
+});
+
+test('catalog accepts ordered sibling topic classifications with one primary placement', () => {
+  const branchingTaxonomy = {
+    version: 1,
+    topics: [{
+      id: 'root-topic', title: 'Root Topic', order: 1,
+      children: [
+        { id: 'child-topic', title: 'Child Topic', order: 1 },
+        { id: 'sibling-topic', title: 'Sibling Topic', order: 2 },
+      ],
+    }],
+  };
+  const branchingCatalog = {
+    version: 1,
+    modules: [{
+      ...catalog.modules[0],
+      canonicalTopics: ['root-topic', 'child-topic', 'sibling-topic'],
+      primaryTopic: 'sibling-topic',
+    }],
+  };
+  const branchingKnowledge = [{
+    ...knowledgeRecords[0],
+    canonicalTopics: ['root-topic', 'child-topic', 'sibling-topic'],
+  }];
+  assert.equal(
+    validateKnowledgeCatalog(branchingCatalog, branchingTaxonomy, branchingKnowledge),
+    true,
   );
 });
 ```
@@ -281,7 +310,7 @@ Implement `validateKnowledgeCatalog` in this exact order so failures remain acti
 1. require `catalog.version === 1` and arrays for `modules` and taxonomy topics;
 2. flatten taxonomy and create `topicById` with each node's `path`;
 3. reject duplicate slugs;
-4. require `status` in `planned|published`, URL-safe slug, positive integer order, known topic ids, `canonicalTopics` equal to the taxonomy `path` for `primaryTopic`, and unique order within `primaryTopic`;
+4. require `status` in `planned|published`, URL-safe slug, positive integer order, and known topic ids; for every listed Topic require each taxonomy ancestor to occur earlier in `canonicalTopics`; allow sibling classifications after their shared ancestor; require `primaryTopic === canonicalTopics.at(-1)` and unique order within `primaryTopic`;
 5. require every prerequisite slug to exist, reject self-links, then perform depth-first cycle detection using `visiting` and `visited` sets;
 6. create `knowledgeBySlug`; for each `published` module require a real record and exact title/topics; for each `planned` module reject a real record;
 7. require every `knowledgeRecords` entry to have exactly one catalog module;
