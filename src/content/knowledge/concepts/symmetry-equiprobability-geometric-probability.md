@@ -9,8 +9,8 @@ date: 2026-08-17
 tags: [Probability, Symmetry, Equiprobability, Geometric Probability]
 quantInterviewTopics: [probability-statistics, probability-foundations]
 featured: false
-related: [probability-spaces-events, probability-axioms-derived-rules]
-relatedNotes: []
+related: [probability-spaces-events, probability-axioms-derived-rules, order-statistics-basics]
+relatedNotes: [Event language makes symmetry claims precise., Probability rules control complements and unions before geometric simplification., Uniform sample geometry leads naturally to extrema and order-statistic models.]
 ---
 
 ## Core idea

@@ -15,6 +15,8 @@ const tocPaths = {
   red: 'src/data/quant-interview/toc/red-book.json',
   q150: 'src/data/quant-interview/toc/150-most-frequently-asked.json',
 };
+const workstream011Path = 'src/data/quant-interview/workstreams/stochastic-processes-random-walks-markov-chains-011.json';
+const workstream012Path = 'src/data/quant-interview/workstreams/calculus-differential-equations-limits-derivatives-012.json';
 
 test('repository memory defines the Topic-first cross-book protocol', async () => {
   for (const file of docs) await access(file);
@@ -155,7 +157,7 @@ test('handoff records five completed cross-book workstreams and advances to comb
 
   const nextAction = handoff.split(/## Next action/i)[1] ?? '';
   assert.match(nextAction, /cross-book/i);
-  assert.match(nextAction, /Probability & Statistics/i);
+  assert.match(nextAction, /Historical transition marker/i);
   assert.match(nextAction, /Combinatorial Probability/i);
   assert.doesNotMatch(nextAction, /Probability Foundations[\s\S]{0,180}(?:execute|next|continue)/i);
   assert.doesNotMatch(nextAction, /Question\s+\d+|Q\d+/i);
@@ -215,4 +217,32 @@ test('root README points agents to durable Quant Interview repository memory', a
   const readme = await readFile('README.md', 'utf8');
   assert.match(readme, /docs\/quant-interview\/README\.md/);
   assert.match(readme, /repository.*memory/i);
+});
+
+test('handoff current topic and remaining queue follow workstream 012 status', async () => {
+  const workstream011 = JSON.parse(await readFile(workstream011Path, 'utf8'));
+  const workstream012 = JSON.parse(await readFile(workstream012Path, 'utf8'));
+  const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
+  const current = handoff.split(/Current bounded topic:/i)[1]?.split(/\n## /)[0] ?? '';
+  const currentTitle = current.split(/\r?\n/).find((line) => /\*\*/.test(line)) ?? '';
+  const coordination = handoff.split(/## Parallel workstream coordination/i)[1]?.split(/\n## /)[0] ?? '';
+  assert.equal(workstream011.status, 'complete');
+  if (workstream012.status === 'active') {
+    assert.match(current, /Limits & Derivatives/i);
+    assert.doesNotMatch(current, /Reasoning & Communication/i);
+    assert.match(coordination, /remaining integration queue[^\n]*012[^\n]*013/i);
+    assert.doesNotMatch(coordination, /completed queue entr(?:y|ies)[^.\n]*012/i);
+  } else {
+    assert.equal(workstream012.status, 'complete');
+    assert.match(workstream012.preClosureActiveGate?.commit ?? '', /^[0-9a-f]{40}$/);
+    assert.equal(workstream012.verification?.commit, workstream012.preClosureActiveGate.commit);
+    assert.ok(Number.isInteger(workstream012.verification?.runId) && workstream012.verification.runId > 0);
+    assert.match(handoff, new RegExp(workstream012.verification.commit));
+    assert.match(handoff, new RegExp(String(workstream012.verification.runId)));
+    assert.match(handoff, /76[^\n]*Problems[^\n]*48[^\n]*Knowledge/i);
+    assert.match(current, /Reasoning & Communication/i);
+    assert.doesNotMatch(currentTitle, /Limits & Derivatives/i);
+    assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012/i);
+    assert.match(coordination, /remaining integration queue[^\n]*013/i);
+  }
 });

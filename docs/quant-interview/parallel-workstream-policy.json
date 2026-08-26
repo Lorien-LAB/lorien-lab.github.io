@@ -1,0 +1,158 @@
+{
+  "policyId": "quant-interview.parallel-workstream-governance",
+  "version": "1.0.0",
+  "authority": {
+    "status": "normative",
+    "sourceOfTruth": "sole",
+    "scope": "parallel-workstream-governance"
+  },
+  "repository": {
+    "main": {
+      "protected": true,
+      "mayBeModified": false
+    },
+    "historySafety": {
+      "candidateForceUpdateSharedOrDurableHistoryAllowed": false,
+      "candidateRewriteSharedOrDurableHistoryAllowed": false,
+      "integrationOwner": "coordinator",
+      "coordinatorIntegrationForceUpdateAllowed": false,
+      "coordinatorRewriteSharedOrDurableHistoryAllowed": false
+    }
+  },
+  "candidates": {
+    "maxActive": 3,
+    "isolationRequired": true,
+    "approvedModulesPerBranch": 1,
+    "approvedModulesPerWorktree": 1,
+    "implementationRequiresApprovedWrittenDesignSpec": true,
+    "preApprovalActivities": [
+      "design",
+      "source-audit"
+    ],
+    "allowedResponsibilities": [
+      "module-scoped-public-knowledge-content",
+      "module-scoped-public-problem-content",
+      "module-specific-tests",
+      "report-proposed-shared-file-deltas"
+    ],
+    "responsibilityConstraints": {
+      "moduleScopedPublicContent": {
+        "creationOrigin": "candidate-created",
+        "moduleScope": "approved-module-only"
+      },
+      "moduleSpecificTests": {
+        "moduleScope": "approved-module-only",
+        "excludedCoordinatorSurfaceIds": [
+          "exact-global-registry-count-regression-tests",
+          "handoff-and-handoff-tests",
+          "prior-workstream-completion-tests"
+        ]
+      },
+      "sharedSurfaceDeltas": {
+        "mode": "report-proposal-only",
+        "candidateEditAllowed": false
+      }
+    },
+    "forbiddenSharedResponsibilities": [
+      "coverage-ledgers",
+      "source-topic-map",
+      "exact-global-registry-count-regressions",
+      "handoff",
+      "workstream-completion-metadata-manifests",
+      "ci-workflows"
+    ],
+    "postVerificationState": "active",
+    "activeStateIsCompletion": false,
+    "mayDeclareCompletion": false
+  },
+  "coordinator": {
+    "ownsAllSharedState": true,
+    "reconciliationBase": "latest-durable-base",
+    "integrationMode": "serialized-one-at-a-time",
+    "closureMode": "serialized-one-at-a-time",
+    "sharedState": {
+      "ownership": "coordinator-only",
+      "candidateEditAllowed": false,
+      "candidateProposalMode": "report-only",
+      "surfaces": [
+        {
+          "id": "coverage-ledgers",
+          "pathPatterns": [
+            "src/data/quant-interview/coverage/*.json"
+          ]
+        },
+        {
+          "id": "source-topic-map",
+          "pathPatterns": [
+            "src/data/quant-interview/topics/source-topic-map.json"
+          ]
+        },
+        {
+          "id": "exact-global-registry-count-regression-tests",
+          "pathPatterns": [
+            "tests/quant-interview-source-neutral-content.test.mjs"
+          ]
+        },
+        {
+          "id": "handoff-and-handoff-tests",
+          "pathPatterns": [
+            "docs/quant-interview/HANDOFF.md",
+            "tests/quant-interview-handoff.test.mjs"
+          ]
+        },
+        {
+          "id": "workstream-completion-metadata-manifests",
+          "pathPatterns": [
+            "src/data/quant-interview/workstreams/*.json"
+          ]
+        },
+        {
+          "id": "prior-workstream-completion-tests",
+          "pathPatterns": [
+            "tests/quant-interview-*-completion.test.mjs"
+          ]
+        },
+        {
+          "id": "ci-workflows",
+          "pathPatterns": [
+            ".github/workflows/*.yml",
+            ".github/workflows/*.yaml"
+          ]
+        },
+        {
+          "id": "base-existing-knowledge-problem-reciprocal-links",
+          "pathPatterns": [
+            "src/content/knowledge/**/*.md",
+            "src/content/problems/**/*.md"
+          ],
+          "selection": {
+            "existenceAtCandidateBase": true,
+            "editKind": "reciprocal-link"
+          }
+        }
+      ]
+    },
+    "queue": [
+      "011",
+      "012",
+      "013"
+    ]
+  },
+  "reservations": [
+    {
+      "ordinal": "011",
+      "topic": "random-walks-markov-chains",
+      "branch": "chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23"
+    },
+    {
+      "ordinal": "012",
+      "topic": "limits-derivatives",
+      "branch": "chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23"
+    },
+    {
+      "ordinal": "013",
+      "topic": "reasoning-communication",
+      "branch": "chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23"
+    }
+  ]
+}
