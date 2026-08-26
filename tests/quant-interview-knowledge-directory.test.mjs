@@ -314,6 +314,22 @@ test('internal directory joins exact source coverage and workstream state', () =
   assert.deepEqual(child.workstreams, [{ id: 'child-topic-001', status: 'active' }]);
 });
 
+test('internal directory renders only active and complete workstreams', () => {
+  const model = buildInternalDirectoryModel({
+    ...internalFixture,
+    workstreams: [
+      ...internalFixture.workstreams,
+      { id: 'child-topic-000', status: 'complete', canonicalTopics: ['root-topic', 'child-topic'], sourceScopes: [] },
+      { id: 'child-topic-999', status: 'planned', canonicalTopics: ['root-topic', 'child-topic'], sourceScopes: [] },
+    ],
+  });
+
+  assert.deepEqual(model.topics[0].children[0].workstreams, [
+    { id: 'child-topic-000', status: 'complete' },
+    { id: 'child-topic-001', status: 'active' },
+  ]);
+});
+
 test('internal directory rejects unknown coverage taxonomy topics before projection', () => {
   const invalidFixture = {
     ...internalFixture,
@@ -359,6 +375,20 @@ test('directory CLI detects and repairs a stale generated file', async () => {
   assert.equal(fresh.status, 0, fresh.stderr);
 });
 
+test('directory CLI preserves non-missing output read errors in check mode', async () => {
+  const outputDirectory = await mkdtemp(path.join(os.tmpdir(), 'knowledge-directory-invalid-output-'));
+  const script = 'scripts/generate-quant-interview-knowledge-directory.mjs';
+  const result = spawnSync(
+    process.execPath,
+    [script, '--check', '--repo-root', process.cwd(), '--output', outputDirectory],
+    { encoding: 'utf8' },
+  );
+
+  assert.notEqual(result.status, 0);
+  assert.doesNotMatch(result.stderr, /Knowledge directory is stale/);
+  assert.match(result.stderr, /EISDIR|illegal operation on a directory|is a directory/i);
+});
+
 test('public directory projects published and planned modules without private state', () => {
   const result = buildPublicKnowledgeDirectory({
     catalog, taxonomy, knowledgeRecords, problemRecords, base: '/',
@@ -384,7 +414,50 @@ test('public directory projects published and planned modules without private st
   assert.equal(JSON.stringify(result).match(/source|coverage|workstream|pageRange/gi), null);
 });
 
-test('catalog accepts ordered sibling classifications with the final topic as primary', () => {
+test('topic Problem counts aggregate descendants without leaking across siblings', () => {
+  const siblingCountTaxonomy = {
+    version: 1,
+    topics: [{
+      id: 'root', title: 'Root', order: 1,
+      children: [
+        { id: 'a', title: 'A', order: 1 },
+        { id: 'b', title: 'B', order: 2 },
+      ],
+    }],
+  };
+  const siblingCountCatalog = {
+    version: 1,
+    modules: [{
+      slug: 'module-a',
+      title: 'Module A',
+      canonicalTopics: ['root', 'a'],
+      primaryTopic: 'a',
+      learningOrder: 10,
+      status: 'published',
+      prerequisites: [],
+    }],
+  };
+  const result = buildPublicKnowledgeDirectory({
+    catalog: siblingCountCatalog,
+    taxonomy: siblingCountTaxonomy,
+    knowledgeRecords: [{ slug: 'module-a', title: 'Module A', canonicalTopics: ['root', 'a'] }],
+    problemRecords: [{
+      slug: 'problem-a',
+      canonicalTopics: ['root', 'a'],
+      concepts: [],
+      techniques: [],
+      prerequisites: [],
+    }],
+  });
+
+  assert.deepEqual({
+    root: result.topics[0].problemCount,
+    a: result.topics[0].children[0].problemCount,
+    b: result.topics[0].children[1].problemCount,
+  }, { root: 1, a: 1, b: 0 });
+});
+
+test('catalog projects ordered sibling classifications with the final topic as primary', () => {
   const siblingTaxonomy = {
     version: 1,
     topics: [{
@@ -405,24 +478,62 @@ test('catalog accepts ordered sibling classifications with the final topic as pr
       primaryTopic: 'sibling-topic',
     }],
   };
-  assert.equal(validateKnowledgeCatalog(siblingCatalog, siblingTaxonomy, [{
+  const siblingKnowledgeRecords = [{
     slug: 'sibling-module',
     title: 'Sibling Module',
     canonicalTopics: ['root-topic', 'child-topic', 'sibling-topic'],
-  }]), true);
+  }];
+  assert.equal(validateKnowledgeCatalog(siblingCatalog, siblingTaxonomy, siblingKnowledgeRecords), true);
+  const result = buildPublicKnowledgeDirectory({
+    catalog: siblingCatalog,
+    taxonomy: siblingTaxonomy,
+    knowledgeRecords: siblingKnowledgeRecords,
+    problemRecords: [],
+  });
+  assert.deepEqual(result.topics[0].children[1].modules[0].canonicalTopics, [
+    { id: 'root-topic', title: 'Root Topic' },
+    { id: 'child-topic', title: 'Child Topic' },
+    { id: 'sibling-topic', title: 'Sibling Topic' },
+  ]);
+});
+
+test('public directory sorts taxonomy siblings recursively by order', () => {
+  const shuffledTaxonomy = {
+    version: 1,
+    topics: [
+      { id: 'second-root', title: 'Second Root', order: 2 },
+      {
+        id: 'first-root', title: 'First Root', order: 1,
+        children: [
+          { id: 'second-child', title: 'Second Child', order: 2 },
+          { id: 'first-child', title: 'First Child', order: 1 },
+        ],
+      },
+    ],
+  };
+  const result = buildPublicKnowledgeDirectory({
+    catalog: { version: 1, modules: [] },
+    taxonomy: shuffledTaxonomy,
+    knowledgeRecords: [],
+    problemRecords: [],
+  });
+
+  assert.deepEqual(result.topics.map((topic) => topic.id), ['first-root', 'second-root']);
+  assert.deepEqual(result.topics[0].children.map((topic) => topic.id), ['first-child', 'second-child']);
 });
 
 const invalidCases = [
   ['duplicate slug', { ...catalog, modules: [catalog.modules[0], catalog.modules[0]] }, /duplicate catalog slug: published-module/],
   ['invalid slug', { ...catalog, modules: [{ ...catalog.modules[0], slug: 'Not Valid' }, catalog.modules[1]] }, /invalid catalog slug: Not Valid/],
-  ['invalid status', { ...catalog, modules: [{ ...catalog.modules[0], status: 'draft' }, catalog.modules[1]] }, /invalid module status: draft/],
-  ['unknown topic', { ...catalog, modules: [{ ...catalog.modules[0], canonicalTopics: ['missing'], primaryTopic: 'missing' }] }, /unknown taxonomy topic: missing/],
+  ['invalid status', { ...catalog, modules: [{ ...catalog.modules[0], status: 'draft' }, catalog.modules[1]] }, { message: 'module published-module field status must be planned or published; received draft' }],
+  ['unknown topic', { ...catalog, modules: [{ ...catalog.modules[0], canonicalTopics: ['missing'], primaryTopic: 'missing' }] }, { message: 'module published-module field canonicalTopics must contain only known taxonomy topics; unknown missing' }],
+  ['unknown primary topic', { ...catalog, modules: [{ ...catalog.modules[0], primaryTopic: 'missing' }, catalog.modules[1]] }, { message: 'module published-module field primaryTopic must reference a known taxonomy topic; unknown missing' }],
   ['non-parent-first topics', { ...catalog, modules: [{ ...catalog.modules[0], canonicalTopics: ['child-topic', 'root-topic'] }, catalog.modules[1]] }, /canonicalTopics must list ancestors before descendants: published-module/],
   ['primary topic absent', { ...catalog, modules: [{ ...catalog.modules[0], primaryTopic: 'root-topic' }] }, /primaryTopic must be the deepest canonical topic/],
   ['non-positive order', { ...catalog, modules: [{ ...catalog.modules[0], learningOrder: 0 }, catalog.modules[1]] }, /learningOrder must be a positive integer: published-module/],
-  ['duplicate order', { ...catalog, modules: [catalog.modules[0], { ...catalog.modules[1], learningOrder: 10 }] }, /duplicate learningOrder 10 in child-topic/],
-  ['unknown prerequisite', { ...catalog, modules: [{ ...catalog.modules[0], prerequisites: ['missing'] }, catalog.modules[1]] }, /unknown prerequisite: missing/],
-  ['self prerequisite', { ...catalog, modules: [{ ...catalog.modules[0], prerequisites: ['published-module'] }, catalog.modules[1]] }, /self prerequisite: published-module/],
+  ['duplicate order', { ...catalog, modules: [catalog.modules[0], { ...catalog.modules[1], learningOrder: 10 }] }, { message: 'module planned-module field learningOrder must be unique within primaryTopic child-topic; duplicate 10' }],
+  ['unknown prerequisite', { ...catalog, modules: [{ ...catalog.modules[0], prerequisites: ['missing'] }, catalog.modules[1]] }, { message: 'module published-module field prerequisites must reference catalog modules; unknown missing' }],
+  ['self prerequisite', { ...catalog, modules: [{ ...catalog.modules[0], prerequisites: ['published-module'] }, catalog.modules[1]] }, { message: 'module published-module field prerequisites must not reference the module itself' }],
 ];
 
 for (const [name, candidate, expected] of invalidCases) {

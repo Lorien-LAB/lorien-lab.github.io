@@ -1,10 +1,11 @@
 const URL_SAFE_SLUG = /^[a-z0-9]+(?:-[a-z0-9]+)*$/;
+const orderedTopics = (topics = []) => [...topics].sort((left, right) => left.order - right.order || left.id.localeCompare(right.id));
 
 /** @param {object} taxonomy */
 export function flattenTaxonomy(taxonomy) {
   const flat = [];
   const visit = (nodes, parentPath = []) => {
-    for (const node of nodes) {
+    for (const node of orderedTopics(nodes)) {
       const path = [...parentPath, node.id];
       flat.push({ id: node.id, title: node.title, order: node.order, path, node });
       visit(node.children ?? [], path);
@@ -44,16 +45,22 @@ export function validateKnowledgeCatalog(catalog, taxonomy, knowledgeRecords) {
   const ordersByTopic = new Map();
   for (const module of catalog.modules) {
     if (!URL_SAFE_SLUG.test(module.slug)) throw new Error(`invalid catalog slug: ${module.slug}`);
-    if (!['planned', 'published'].includes(module.status)) throw new Error(`invalid module status: ${module.status}`);
+    if (!['planned', 'published'].includes(module.status)) {
+      throw new Error(`module ${module.slug} field status must be planned or published; received ${module.status}`);
+    }
     if (!Number.isInteger(module.learningOrder) || module.learningOrder <= 0) {
       throw new Error(`learningOrder must be a positive integer: ${module.slug}`);
     }
     const topics = Array.isArray(module.canonicalTopics) ? module.canonicalTopics : [];
     for (const topicId of topics) {
-      if (!topicById.has(topicId)) throw new Error(`unknown taxonomy topic: ${topicId}`);
+      if (!topicById.has(topicId)) {
+        throw new Error(`module ${module.slug} field canonicalTopics must contain only known taxonomy topics; unknown ${topicId}`);
+      }
     }
     const primary = topicById.get(module.primaryTopic);
-    if (!primary) throw new Error(`unknown taxonomy topic: ${module.primaryTopic}`);
+    if (!primary) {
+      throw new Error(`module ${module.slug} field primaryTopic must reference a known taxonomy topic; unknown ${module.primaryTopic}`);
+    }
     const seenTopics = new Set();
     for (const topicId of topics) {
       const topic = topicById.get(topicId);
@@ -67,14 +74,20 @@ export function validateKnowledgeCatalog(catalog, taxonomy, knowledgeRecords) {
     }
     if (!ordersByTopic.has(module.primaryTopic)) ordersByTopic.set(module.primaryTopic, new Map());
     const orders = ordersByTopic.get(module.primaryTopic);
-    if (orders.has(module.learningOrder)) throw new Error(`duplicate learningOrder ${module.learningOrder} in ${module.primaryTopic}`);
+    if (orders.has(module.learningOrder)) {
+      throw new Error(`module ${module.slug} field learningOrder must be unique within primaryTopic ${module.primaryTopic}; duplicate ${module.learningOrder}`);
+    }
     orders.set(module.learningOrder, module.slug);
   }
 
   for (const module of catalog.modules) {
     for (const prerequisite of module.prerequisites ?? []) {
-      if (!modulesBySlug.has(prerequisite)) throw new Error(`unknown prerequisite: ${prerequisite}`);
-      if (prerequisite === module.slug) throw new Error(`self prerequisite: ${module.slug}`);
+      if (!modulesBySlug.has(prerequisite)) {
+        throw new Error(`module ${module.slug} field prerequisites must reference catalog modules; unknown ${prerequisite}`);
+      }
+      if (prerequisite === module.slug) {
+        throw new Error(`module ${module.slug} field prerequisites must not reference the module itself`);
+      }
     }
   }
   const visiting = new Set();
@@ -134,7 +147,9 @@ export function buildPublicKnowledgeDirectory({ catalog, taxonomy, knowledgeReco
     for (const topic of flat) {
       const includesTopicOrDescendant = ids.some((id) => {
         const recordTopic = topicById.get(id);
-        return id === topic.id || (recordTopic && recordTopic.path.slice(0, topic.path.length).every((part, index) => part === topic.path[index]));
+        return id === topic.id || (recordTopic
+          && recordTopic.path.length >= topic.path.length
+          && recordTopic.path.slice(0, topic.path.length).every((part, index) => part === topic.path[index]));
       });
       if (includesTopicOrDescendant) topicProblems.set(topic.id, topicProblems.get(topic.id) + 1);
     }
@@ -155,6 +170,10 @@ export function buildPublicKnowledgeDirectory({ catalog, taxonomy, knowledgeReco
         learningOrder: module.learningOrder,
         href: hrefFor(module),
         problemCount: module.status === 'published' ? problemCountByModule.get(module.slug) : null,
+        canonicalTopics: module.canonicalTopics.map((topicId) => {
+          const topic = topicById.get(topicId);
+          return { id: topic.id, title: topic.title };
+        }),
         prerequisites: publicPrerequisites(module),
       }));
     return {
@@ -164,11 +183,11 @@ export function buildPublicKnowledgeDirectory({ catalog, taxonomy, knowledgeReco
       anchor: `topic-${node.id}`,
       problemCount: topicProblems.get(node.id),
       modules,
-      children: (node.children ?? []).map(project),
+      children: orderedTopics(node.children).map(project),
     };
   };
   return {
     totals: { published: publishedModules.length, planned: catalog.modules.length - publishedModules.length },
-    topics: taxonomy.topics.map(project),
+    topics: orderedTopics(taxonomy.topics).map(project),
   };
 }

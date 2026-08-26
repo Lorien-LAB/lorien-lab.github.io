@@ -143,7 +143,7 @@
 ### 02.01. Problem Simplification
 
 - Curriculum: 0 published / 0 planned
-- Problems: 2
+- Problems: 0
 - Green Book sections: `2.1`, `2.1.screwy-pirates`, `2.1.tiger-and-sheep`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -164,7 +164,7 @@
 ### 02.02. Logical Deduction
 
 - Curriculum: 0 published / 0 planned
-- Problems: 2
+- Problems: 0
 - Green Book sections: `2.2`, `2.2.birthday-problem`, `2.2.burning-ropes`, `2.2.card-game`, `2.2.defective-ball`, `2.2.horse-race`, `2.2.infinite-sequence`, `2.2.river-crossing`, `2.2.trailing-zeros`, `2.3`, `2.3.box-packing`, `2.3.calendar-cubes`, `2.3.door-to-offer`, `2.3.last-ball`, `2.3.light-switches`, `2.3.message-delivery`, `2.3.quant-salary`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -185,7 +185,7 @@
 ### 02.03. Invariants & State Transformations
 
 - Curriculum: 2 published / 0 planned
-- Problems: 2
+- Problems: 1
 - Green Book sections: None
 - Red Book sections: None
 - 150 Questions sections: None
@@ -208,7 +208,7 @@
 ### 02.04. Symmetry
 
 - Curriculum: 0 published / 0 planned
-- Problems: 2
+- Problems: 0
 - Green Book sections: `2.4`, `2.4.coin-piles`, `2.4.mislabeled-bags`, `2.4.wise-men`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -229,7 +229,7 @@
 ### 02.05. Pigeonhole Principle
 
 - Curriculum: 0 published / 0 planned
-- Problems: 2
+- Problems: 0
 - Green Book sections: `2.6`, `2.6.ants-on-a-square`, `2.6.counterfeit-coins-ii`, `2.6.handshakes`, `2.6.have-we-met-before`, `2.6.matching-socks`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -250,7 +250,7 @@
 ### 02.06. Modular Arithmetic
 
 - Curriculum: 1 published / 0 planned
-- Problems: 2
+- Problems: 1
 - Green Book sections: `2.7`, `2.7.chameleon-colors`, `2.7.division-by-9`, `2.7.prisoner-problem`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -272,7 +272,7 @@
 ### 02.07. Mathematical Induction
 
 - Curriculum: 0 published / 0 planned
-- Problems: 2
+- Problems: 0
 - Green Book sections: `2.8`, `2.8.chocolate-bar-problem`, `2.8.coin-split-problem`, `2.8.race-track`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -293,7 +293,7 @@
 ### 02.08. Proof by Contradiction
 
 - Curriculum: 0 published / 0 planned
-- Problems: 2
+- Problems: 0
 - Green Book sections: `2.9`, `2.9.irrational-number`, `2.9.rainbow-hats`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -314,7 +314,7 @@
 ### 02.09. Summation & Combinatorial Puzzles
 
 - Curriculum: 0 published / 0 planned
-- Problems: 2
+- Problems: 0
 - Green Book sections: `2.5`, `2.5.clock-pieces`, `2.5.counterfeit-coins-i`, `2.5.missing-integers`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -384,7 +384,7 @@
 ### 03.02. Integration
 
 - Curriculum: 0 published / 0 planned
-- Problems: 13
+- Problems: 0
 - Green Book sections: `3.2`, `3.2.1`, `3.2.2`, `3.2.3`
 - Red Book sections: `6.2.2`, `6.3.2`
 - 150 Questions sections: None
@@ -405,7 +405,7 @@
 ### 03.03. Multivariable Calculus
 
 - Curriculum: 0 published / 0 planned
-- Problems: 13
+- Problems: 0
 - Green Book sections: `3.3`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -426,7 +426,7 @@
 ### 03.04. Taylor, Newton & Optimization
 
 - Curriculum: 0 published / 0 planned
-- Problems: 13
+- Problems: 0
 - Green Book sections: `3.4`, `3.4.1`, `3.4.2`, `3.4.3`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -447,7 +447,7 @@
 ### 03.05. Ordinary Differential Equations
 
 - Curriculum: 0 published / 0 planned
-- Problems: 13
+- Problems: 0
 - Green Book sections: `3.5`, `3.5.1`, `3.5.2`, `3.5.3`, `3.5.4`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -489,7 +489,7 @@
 ### 04.01. Vectors & Linear Systems
 
 - Curriculum: 3 published / 0 planned
-- Problems: 13
+- Problems: 2
 - Green Book sections: `3.6.1`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -513,7 +513,7 @@
 ### 04.02. Determinants & Eigenvalues
 
 - Curriculum: 2 published / 0 planned
-- Problems: 13
+- Problems: 4
 - Green Book sections: `3.6.3`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -536,7 +536,7 @@
 ### 04.03. Positive Semidefinite Matrices
 
 - Curriculum: 2 published / 0 planned
-- Problems: 13
+- Problems: 3
 - Green Book sections: `3.6.4`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -559,7 +559,7 @@
 ### 04.04. Covariance & Correlation Matrices
 
 - Curriculum: 1 published / 0 planned
-- Problems: 13
+- Problems: 4
 - Green Book sections: None
 - Red Book sections: None
 - 150 Questions sections: None
@@ -581,7 +581,7 @@
 ### 04.05. Matrix Decompositions
 
 - Curriculum: 4 published / 0 planned
-- Problems: 13
+- Problems: 3
 - Green Book sections: `3.6.2`, `3.6.5`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -627,7 +627,7 @@
 ### 05.01. Probability Foundations
 
 - Curriculum: 3 published / 0 planned
-- Problems: 42
+- Problems: 6
 - Green Book sections: `4.1`, `4.1.card-game`, `4.1.coin-toss-game`, `4.1.drunk-passenger`, `4.1.n-points-on-a-circle`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -651,7 +651,7 @@
 ### 05.02. Combinatorial Probability
 
 - Curriculum: 3 published / 0 planned
-- Problems: 42
+- Problems: 6
 - Green Book sections: `4.2`, `4.2.100th-digit`, `4.2.application-letters`, `4.2.birthday-problem`, `4.2.chess-tournament`, `4.2.cubic-of-integer`, `4.2.hopping-rabbit`, `4.2.poker-hands`, `4.2.screwy-pirates-2`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -675,7 +675,7 @@
 ### 05.03. Conditional Probability & Bayes
 
 - Curriculum: 2 published / 0 planned
-- Problems: 42
+- Problems: 7
 - Green Book sections: `4.3`, `4.3.aces`, `4.3.all-girl-world`, `4.3.amoeba-population`, `4.3.basketball-scores`, `4.3.birthday-line`, `4.3.boys-and-girls`, `4.3.candies-in-a-jar`, `4.3.cars-on-road`, `4.3.coin-toss-game`, `4.3.dart-game`, `4.3.dice-order`, `4.3.fair-probability-from-unfair-coin`, `4.3.gamblers-ruin`, `4.3.monty-hall`, `4.3.russian-roulette-series`, `4.3.unfair-coin`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -698,7 +698,7 @@
 ### 05.04. Random Variables & Distributions
 
 - Curriculum: 5 published / 0 planned
-- Problems: 42
+- Problems: 6
 - Green Book sections: `4.4`, `4.4.meeting-probability`, `4.4.poisson-process-property`, `4.4.probability-of-triangle`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -724,7 +724,7 @@
 ### 05.05. Expectation, Variance & Covariance
 
 - Curriculum: 4 published / 0 planned
-- Problems: 42
+- Problems: 14
 - Green Book sections: `4.4.normal-moments`, `4.5`, `4.5.card-game`, `4.5.connecting-noodles`, `4.5.coupon-collection`, `4.5.dice-game`, `4.5.joint-default-probability`, `4.5.optimal-hedge-ratio`, `4.5.sum-of-random-variables`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -749,7 +749,7 @@
 ### 05.06. Order Statistics & Extremes
 
 - Curriculum: 2 published / 0 planned
-- Problems: 42
+- Problems: 4
 - Green Book sections: `4.6`, `4.6.correlation-max-min`, `4.6.expected-max-min`, `4.6.random-ants`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -817,7 +817,7 @@
 ### 06.02. Martingales & Stopping Times
 
 - Curriculum: 0 published / 0 planned
-- Problems: 5
+- Problems: 0
 - Green Book sections: `5.2`, `5.2.coin-sequence`, `5.2.dice-game`, `5.2.drunk-man`, `5.2.ticket-line`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -838,7 +838,7 @@
 ### 06.03. Brownian Motion
 
 - Curriculum: 0 published / 0 planned
-- Problems: 5
+- Problems: 0
 - Green Book sections: `5.4`, `5.4.brownian-motion`, `5.4.itos-lemma`, `5.4.stopping-time`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -859,7 +859,7 @@
 ### 06.04. Ito & Stochastic Calculus
 
 - Curriculum: 0 published / 0 planned
-- Problems: 5
+- Problems: 0
 - Green Book sections: `5.4`, `5.4.brownian-motion`, `5.4.itos-lemma`, `5.4.stopping-time`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -880,7 +880,7 @@
 ### 06.05. Stochastic Differential Equations
 
 - Curriculum: 0 published / 0 planned
-- Problems: 5
+- Problems: 0
 - Green Book sections: `5.4`, `5.4.brownian-motion`, `5.4.itos-lemma`, `5.4.stopping-time`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -946,7 +946,7 @@
 ### 07.02. Replication & Hedging
 
 - Curriculum: 0 published / 0 planned
-- Problems: 1
+- Problems: 0
 - Green Book sections: None
 - Red Book sections: `2.2.3`, `2.3.3`
 - 150 Questions sections: None
@@ -967,7 +967,7 @@
 ### 07.03. Black-Scholes
 
 - Curriculum: 0 published / 0 planned
-- Problems: 1
+- Problems: 0
 - Green Book sections: `6.1`, `6.1.american-european`, `6.1.black-scholes-formula`, `6.1.bsm-pde`, `6.1.price-direction`, `6.1.put-call-parity`
 - Red Book sections: `2.2.1`, `2.3.1`
 - 150 Questions sections: None
@@ -988,7 +988,7 @@
 ### 07.04. Option Greeks
 
 - Curriculum: 0 published / 0 planned
-- Problems: 1
+- Problems: 0
 - Green Book sections: `6.2`, `6.2.delta`, `6.2.gamma`, `6.2.theta`, `6.2.vega`
 - Red Book sections: `2.2.4`, `2.3.4`
 - 150 Questions sections: None
@@ -1009,7 +1009,7 @@
 ### 07.05. Trees & Monte Carlo for Options
 
 - Curriculum: 0 published / 0 planned
-- Problems: 1
+- Problems: 0
 - Green Book sections: None
 - Red Book sections: `2.2.6`, `2.3.6`
 - 150 Questions sections: None
@@ -1030,7 +1030,7 @@
 ### 07.06. Option Portfolios & Exotics
 
 - Curriculum: 0 published / 0 planned
-- Problems: 1
+- Problems: 0
 - Green Book sections: `6.3`, `6.3.binary-options`, `6.3.bull-spread`, `6.3.exchange-options`, `6.3.straddle`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -1051,7 +1051,7 @@
 ### 07.07. Incomplete Markets
 
 - Curriculum: 0 published / 0 planned
-- Problems: 1
+- Problems: 0
 - Green Book sections: None
 - Red Book sections: `2.2.7`, `2.3.7`
 - 150 Questions sections: None

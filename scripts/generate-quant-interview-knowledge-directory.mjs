@@ -66,6 +66,7 @@ function internalFields(id, inputs, descendants) {
     coverageCounts(inputs.coverageLedgers[source]?.entries, descendantIds),
   ]));
   const workstreams = (inputs.workstreams ?? [])
+    .filter((workstream) => ['active', 'complete'].includes(workstream.status))
     .filter((workstream) => intersectsTopicSet(workstream.canonicalTopics, descendantIds))
     .map(({ id: workstreamId, status }) => ({ id: workstreamId, status }))
     .sort((left, right) => left.id.localeCompare(right.id));
@@ -266,8 +267,11 @@ async function main(argv = process.argv.slice(2)) {
   let existing;
   try {
     existing = await readFile(options.output, 'utf8');
-  } catch {
-    throw new Error('Knowledge directory is stale; run npm run knowledge:directory');
+  } catch (error) {
+    if (error?.code === 'ENOENT') {
+      throw new Error('Knowledge directory is stale; run npm run knowledge:directory');
+    }
+    throw error;
   }
   if (existing !== markdown) throw new Error('Knowledge directory is stale; run npm run knowledge:directory');
 }

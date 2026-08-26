@@ -13,6 +13,7 @@ type DirectoryModule = {
   learningOrder: number;
   href: string | null;
   problemCount: number | null;
+  canonicalTopics: Array<{ id: string; title: string }>;
   prerequisites: Array<{ slug: string; title: string; status: 'published' | 'planned'; href: string | null }>;
 };
 type DirectoryTopic = {
@@ -24,111 +25,126 @@ type DirectoryTopic = {
   modules: DirectoryModule[];
   children: DirectoryTopic[];
 };
-
-const base = import.meta.env.BASE_URL;
-const knowledge = await getCollection('knowledge');
-const problems = await getCollection('problems');
-const knowledgeRecords = knowledge
-  .filter((entry) => entry.data.quantInterviewTopics.length > 0)
-  .map((entry) => ({
-    slug: slugOf(entry.id),
-    title: entry.data.title,
-    canonicalTopics: entry.data.quantInterviewTopics,
-  }));
-const problemRecords = problems.map((entry) => ({
-  slug: slugOf(entry.id),
-  canonicalTopics: entry.data.quantInterviewTopics,
-  concepts: entry.data.concepts,
-  techniques: entry.data.techniques,
-  prerequisites: entry.data.prerequisites,
-}));
-const directory = buildPublicKnowledgeDirectory({
-  catalog,
-  taxonomy: getQuantInterviewTaxonomy(),
-  knowledgeRecords,
-  problemRecords,
-  base,
-}) as { totals: { published: number; planned: number }; topics: DirectoryTopic[] };
-
-const topicSections: Array<DirectoryTopic & { depth: number; searchTitles: string }> = [];
-const collectTopics = (topics: DirectoryTopic[], parents: string[] = [], depth = 0) => {
-  for (const topic of topics) {
-    topicSections.push({ ...topic, depth, searchTitles: [...parents, topic.title].join(' ') });
-    collectTopics(topic.children, [...parents, topic.title], depth + 1);
-  }
+type DirectoryData = {
+  totals: { published: number; planned: number };
+  topics: DirectoryTopic[];
 };
-collectTopics(directory.topics);
+type RecursiveTopicProps = {
+  topic?: DirectoryTopic;
+  depth?: number;
+  base?: string;
+};
+
+const { topic, depth = 0, base: suppliedBase } = Astro.props as RecursiveTopicProps;
+const base = suppliedBase ?? import.meta.env.BASE_URL;
+const subtreeModuleCount = (node: DirectoryTopic): number => node.modules.length
+  + node.children.reduce((count, child) => count + subtreeModuleCount(child), 0);
+const topicModuleCount = topic ? subtreeModuleCount(topic) : 0;
+const TopicHeading = `h${Math.min(depth + 2, 6)}` as 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+
+let directory: DirectoryData | null = null;
+if (!topic) {
+  const knowledge = await getCollection('knowledge');
+  const problems = await getCollection('problems');
+  const knowledgeRecords = knowledge
+    .filter((entry) => entry.data.quantInterviewTopics.length > 0)
+    .map((entry) => ({
+      slug: slugOf(entry.id),
+      title: entry.data.title,
+      canonicalTopics: entry.data.quantInterviewTopics,
+    }));
+  const problemRecords = problems.map((entry) => ({
+    slug: slugOf(entry.id),
+    canonicalTopics: entry.data.quantInterviewTopics,
+    concepts: entry.data.concepts,
+    techniques: entry.data.techniques,
+    prerequisites: entry.data.prerequisites,
+  }));
+  directory = buildPublicKnowledgeDirectory({
+    catalog,
+    taxonomy: getQuantInterviewTaxonomy(),
+    knowledgeRecords,
+    problemRecords,
+    base,
+  }) as DirectoryData;
+}
 ---
 
-<BaseLayout title="Quant Interview Knowledge Directory · Lorien Lab" description="A Topic-first curriculum connecting quantitative interview knowledge with canonical practice problems.">
-  <header class="directory-hero">
-    <div class="container hero-grid">
+{topic ? (
+  <section id={topic.anchor} class="directory-topic" data-directory-topic data-has-rows={topicModuleCount > 0 ? 'true' : 'false'}>
+    <header class="topic-heading">
       <div>
-        <div class="mono-label">Knowledge · Quant Interview</div>
-        <h1>Knowledge Directory.</h1>
-        <p>Learn concepts in a deliberate order, then practice the canonical problems connected to each topic.</p>
+        <div class="mono-label">{`${depth === 0 ? 'Topic' : 'Subtopic'} ${String(topic.order).padStart(2, '0')}`}</div>
+        <TopicHeading>{topic.title}</TopicHeading>
       </div>
-      <div class="directory-stats" aria-label="Curriculum module counts">
-        <span><strong>{directory.totals.published}</strong>Published</span>
-        <span><strong>{directory.totals.planned}</strong>Planned</span>
+      <div class="topic-summary">
+        <span>{topic.problemCount} Problems</span>
+        <a href={`${base}problems/?topic=${encodeURIComponent(topic.id)}`}>Practice →</a>
       </div>
-    </div>
-  </header>
-
-  <section class="section">
-    <div class="container">
-      <nav class="topic-jump" aria-label="Knowledge directory topics">
-        {directory.topics.map((topic) => <a href={`#${topic.anchor}`}>{topic.title}</a>)}
-      </nav>
-
-      <div class="directory-controls" data-directory-controls>
-        <label>
-          <span>Search modules</span>
-          <input type="search" data-directory-search placeholder="Concept, technique, or topic…" />
-        </label>
-        <div class="status-filter" role="group" aria-label="Module status">
-          <button type="button" data-status-filter="all" aria-pressed="true">All</button>
-          <button type="button" data-status-filter="published" aria-pressed="false">Published</button>
-          <button type="button" data-status-filter="planned" aria-pressed="false">Planned</button>
-        </div>
-        <p role="status" aria-live="polite"><strong data-directory-count>{directory.totals.published + directory.totals.planned}</strong> modules shown</p>
-      </div>
-
-      <div class="directory-topics">
-        {topicSections.map((topic) => (
-          <section id={topic.anchor} class="directory-topic" data-directory-topic data-has-rows={topic.modules.length > 0 ? 'true' : 'false'} style={`--topic-depth:${topic.depth}`}>
-            <header class="topic-heading">
-              <div>
-                <div class="mono-label">Topic {String(topic.order).padStart(2, '0')}</div>
-                <h2>{topic.title}</h2>
-              </div>
-              <div class="topic-summary">
-                <span>{topic.problemCount} Problems</span>
-                <a href={`${base}problems/?topic=${encodeURIComponent(topic.id)}`}>Practice →</a>
-              </div>
-            </header>
-            {topic.modules.length > 0 ? <div class="module-list">
-              {topic.modules.map((module) => (
-                <article class="module-row" data-directory-row data-status={module.status} data-search={`${module.title} ${topic.searchTitles}`.toLowerCase()}>
-                  <span class="module-order">{String(module.learningOrder).padStart(2, '0')}</span>
-                  <div class="module-title">
-                    {module.href ? <a href={module.href}>{module.title}</a> : <strong>{module.title}</strong>}
-                    {module.status === 'planned' && <span class="planned-badge">Planned</span>}
-                  </div>
-                  <span class={`status ${module.status}`}>{module.status}</span>
-                  {module.prerequisites.length > 0 && <div class="module-prerequisites"><span>Prerequisites</span>{module.prerequisites.map((prerequisite) => prerequisite.href ? <a href={prerequisite.href}>{prerequisite.title}</a> : <span>{prerequisite.title}</span>)}</div>}
-                  {module.problemCount !== null && <span class="module-problems">{module.problemCount} Problems</span>}
-                  {module.href && <a class="module-action" href={module.href}>Learn →</a>}
-                </article>
-              ))}
-            </div> : <p class="empty-topic">No curriculum modules published or planned yet.</p>}
-          </section>
-        ))}
-      </div>
-      <p class="directory-empty" data-directory-empty hidden>No curriculum modules match the current filters.</p>
-    </div>
+    </header>
+    {topic.modules.length > 0 && <div class="module-list">
+      {topic.modules.map((module) => (
+        <article class="module-row" data-directory-row data-status={module.status} data-search={`${module.title} ${module.canonicalTopics.map((canonicalTopic) => `${canonicalTopic.id} ${canonicalTopic.title}`).join(' ')}`.toLowerCase()}>
+          <span class="module-order">{String(module.learningOrder).padStart(2, '0')}</span>
+          <div class="module-title">
+            {module.href ? <a href={module.href}>{module.title}</a> : <strong>{module.title}</strong>}
+            {module.status === 'planned' && <span class="planned-badge">Planned</span>}
+          </div>
+          <span class={`status ${module.status}`}>{module.status}</span>
+          {module.prerequisites.length > 0 && <div class="module-prerequisites"><span>Prerequisites</span>{module.prerequisites.map((prerequisite) => prerequisite.href ? <a href={prerequisite.href}>{prerequisite.title}</a> : <span>{prerequisite.title}</span>)}</div>}
+          {module.problemCount !== null && <span class="module-problems">{module.problemCount} Problems</span>}
+          {module.href && <a class="module-action" href={module.href}>Learn →</a>}
+        </article>
+      ))}
+    </div>}
+    {topic.modules.length === 0 && topic.children.length === 0 && <p class="empty-topic">No curriculum modules published or planned yet.</p>}
+    {topic.children.length > 0 && <div class="directory-children">
+      {topic.children.map((child) => <Astro.self topic={child} depth={depth + 1} base={base} />)}
+    </div>}
   </section>
-</BaseLayout>
+) : directory ? (
+  <BaseLayout title="Quant Interview Knowledge Directory · Lorien Lab" description="A Topic-first curriculum connecting quantitative interview knowledge with canonical practice problems.">
+    <header class="directory-hero">
+      <div class="container hero-grid">
+        <div>
+          <div class="mono-label">Knowledge · Quant Interview</div>
+          <h1>Knowledge Directory.</h1>
+          <p>Learn concepts in a deliberate order, then practice the canonical problems connected to each topic.</p>
+        </div>
+        <div class="directory-stats" aria-label="Curriculum module counts">
+          <span><strong>{directory.totals.published}</strong>Published</span>
+          <span><strong>{directory.totals.planned}</strong>Planned</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="section">
+      <div class="container">
+        <nav class="topic-jump" aria-label="Knowledge directory topics">
+          {directory.topics.map((directoryTopic) => <a href={`#${directoryTopic.anchor}`}>{directoryTopic.title}</a>)}
+        </nav>
+
+        <div class="directory-controls" data-directory-controls>
+          <label>
+            <span>Search modules</span>
+            <input type="search" data-directory-search placeholder="Concept, technique, or topic…" />
+          </label>
+          <div class="status-filter" role="group" aria-label="Module status">
+            <button type="button" data-status-filter="all" aria-pressed="true">All</button>
+            <button type="button" data-status-filter="published" aria-pressed="false">Published</button>
+            <button type="button" data-status-filter="planned" aria-pressed="false">Planned</button>
+          </div>
+          <p role="status" aria-live="polite"><strong data-directory-count>{directory.totals.published + directory.totals.planned}</strong> modules shown</p>
+        </div>
+
+        <div class="directory-topics">
+          {directory.topics.map((directoryTopic) => <Astro.self topic={directoryTopic} depth={0} base={base} />)}
+        </div>
+        <p class="directory-empty" data-directory-empty hidden>No curriculum modules match the current filters.</p>
+      </div>
+    </section>
+  </BaseLayout>
+) : null}
 
 <script>
   const rows = [...document.querySelectorAll<HTMLElement>('[data-directory-row]')];
@@ -173,5 +189,5 @@ collectTopics(directory.topics);
 </script>
 
 <style>
-  .directory-hero{padding:74px 0 62px;background:radial-gradient(circle at 78% 22%,#0d3140 0,#071a25 34%,var(--hero) 72%);color:var(--hero-ink);border-bottom:1px solid rgba(255,255,255,.08)}.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:70px;align-items:end}.directory-hero h1{margin:13px 0 20px;font-size:clamp(3rem,6vw,5.8rem);line-height:.94;letter-spacing:-.065em}.directory-hero p{max-width:720px;margin:0;color:#b9cbd5;font:400 1rem/1.7 var(--font-mono)}.directory-stats{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);background:rgba(4,16,25,.55)}.directory-stats span{padding:20px;color:#9db0bc;font:600 .65rem var(--font-mono);text-transform:uppercase}.directory-stats span+span{border-left:1px solid rgba(255,255,255,.1)}.directory-stats strong{display:block;color:var(--accent);font:800 1.8rem var(--font-mono)}.topic-jump{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}.topic-jump a{padding:7px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font:600 .66rem var(--font-mono)}.directory-controls{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:14px;align-items:end;padding:16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}.directory-controls label{display:grid;gap:6px;color:var(--muted);font:600 .65rem var(--font-mono)}.directory-controls input{min-width:0;padding:10px 11px;border:1px solid var(--border);border-radius:7px;background:var(--paper);color:var(--ink);font:inherit}.status-filter{display:flex;gap:6px}.status-filter button{padding:10px;border:1px solid var(--border);border-radius:7px;background:var(--paper);color:var(--muted);font:700 .64rem var(--font-mono);cursor:pointer}.status-filter button[aria-pressed=true]{border-color:var(--accent);color:var(--accent-strong)}.directory-controls p{margin:0;color:var(--muted);font:600 .68rem var(--font-mono);white-space:nowrap}.directory-controls p strong{color:var(--ink)}.directory-topics{margin-top:22px}.directory-topic{margin-left:calc(var(--topic-depth) * 20px);padding:28px 0;border-bottom:1px solid var(--border)}.topic-heading{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:15px}.topic-heading h2{margin:8px 0 0;font-size:clamp(1.35rem,2vw,2rem);letter-spacing:-.035em}.topic-summary{display:flex;gap:14px;align-items:center;color:var(--muted);font:600 .67rem var(--font-mono);white-space:nowrap}.topic-summary a,.module-action,.module-title a,.module-prerequisites a{color:var(--accent-strong)}.module-list{border-top:1px solid var(--border)}.module-row{display:grid;grid-template-columns:36px minmax(220px,1.8fr) 76px minmax(150px,1fr) 84px 64px;gap:12px;align-items:center;padding:14px 4px;border-bottom:1px solid var(--border)}.module-order,.status,.module-problems,.module-action{font:700 .64rem var(--font-mono)}.module-order{color:var(--accent-strong)}.module-title{display:flex;gap:8px;align-items:center;min-width:0}.module-title a,.module-title strong{font-size:.92rem;line-height:1.3}.planned-badge{padding:3px 5px;border:1px solid color-mix(in srgb,var(--accent) 48%,var(--border));border-radius:999px;color:var(--accent-strong);font:700 .58rem var(--font-mono);text-transform:uppercase}.status{color:var(--muted);text-transform:capitalize}.status.planned{color:var(--accent-strong)}.module-prerequisites{display:flex;flex-wrap:wrap;gap:4px 7px;color:var(--muted);font:600 .63rem/1.35 var(--font-mono)}.module-prerequisites>span:first-child{width:100%;color:var(--muted);text-transform:uppercase}.module-problems{color:var(--muted);white-space:nowrap}.empty-topic,.directory-empty{margin:0;color:var(--muted);font:italic .88rem/1.6 var(--font-mono)}.directory-empty{margin-top:24px;padding:16px;border:1px dashed var(--border);border-radius:var(--radius)}@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.directory-stats{max-width:360px}.directory-controls{grid-template-columns:1fr auto}.directory-controls p{grid-column:1/-1}.module-row{grid-template-columns:36px minmax(0,1fr) auto;gap:9px}.module-prerequisites,.module-problems,.module-action{grid-column:2}.status{grid-column:3;grid-row:1}.module-action{grid-row:auto}.module-prerequisites{margin-top:2px}}@media(max-width:640px){.directory-hero{padding-top:56px}.directory-controls{grid-template-columns:1fr}.status-filter{flex-wrap:wrap}.directory-controls p{grid-column:auto}.directory-topic{margin-left:0}.topic-heading{align-items:flex-start;flex-direction:column}.module-row{grid-template-columns:30px minmax(0,1fr);min-width:320px}.module-list{overflow-x:auto}.status{grid-column:2;grid-row:auto}.module-prerequisites,.module-problems,.module-action{grid-column:2}}
+  .directory-hero{padding:74px 0 62px;background:radial-gradient(circle at 78% 22%,#0d3140 0,#071a25 34%,var(--hero) 72%);color:var(--hero-ink);border-bottom:1px solid rgba(255,255,255,.08)}.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:70px;align-items:end}.directory-hero h1{margin:13px 0 20px;font-size:clamp(3rem,6vw,5.8rem);line-height:.94;letter-spacing:-.065em}.directory-hero p{max-width:720px;margin:0;color:#b9cbd5;font:400 1rem/1.7 var(--font-mono)}.directory-stats{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);background:rgba(4,16,25,.55)}.directory-stats span{padding:20px;color:#9db0bc;font:600 .65rem var(--font-mono);text-transform:uppercase}.directory-stats span+span{border-left:1px solid rgba(255,255,255,.1)}.directory-stats strong{display:block;color:var(--accent);font:800 1.8rem var(--font-mono)}.topic-jump{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}.topic-jump a{padding:7px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font:600 .66rem var(--font-mono)}.directory-controls{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:14px;align-items:end;padding:16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}.directory-controls label{display:grid;gap:6px;color:var(--muted);font:600 .65rem var(--font-mono)}.directory-controls input{min-width:0;padding:10px 11px;border:1px solid var(--border);border-radius:7px;background:var(--paper);color:var(--ink);font:inherit}.status-filter{display:flex;gap:6px}.status-filter button{padding:10px;border:1px solid var(--border);border-radius:7px;background:var(--paper);color:var(--muted);font:700 .64rem var(--font-mono);cursor:pointer}.status-filter button[aria-pressed=true]{border-color:var(--accent);color:var(--accent-strong)}.directory-controls p{margin:0;color:var(--muted);font:600 .68rem var(--font-mono);white-space:nowrap}.directory-controls p strong{color:var(--ink)}.directory-topics{margin-top:22px}.directory-topic{padding:28px 0;border-bottom:1px solid var(--border)}.directory-children{margin-left:20px;padding-left:20px;border-left:1px solid var(--border)}.topic-heading{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:15px}.topic-heading :is(h2,h3,h4,h5,h6){margin:8px 0 0;letter-spacing:-.035em}.topic-heading h2{font-size:clamp(1.35rem,2vw,2rem)}.topic-heading h3{font-size:clamp(1.15rem,1.7vw,1.6rem)}.topic-heading :is(h4,h5,h6){font-size:clamp(1rem,1.5vw,1.35rem)}.topic-summary{display:flex;gap:14px;align-items:center;color:var(--muted);font:600 .67rem var(--font-mono);white-space:nowrap}.topic-summary a,.module-action,.module-title a,.module-prerequisites a{color:var(--accent-strong)}.module-list{border-top:1px solid var(--border)}.module-row{display:grid;grid-template-columns:36px minmax(220px,1.8fr) 76px minmax(150px,1fr) 84px 64px;gap:12px;align-items:center;padding:14px 4px;border-bottom:1px solid var(--border)}.module-order,.status,.module-problems,.module-action{font:700 .64rem var(--font-mono)}.module-order{color:var(--accent-strong)}.module-title{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-width:0}.module-title a,.module-title strong{font-size:.92rem;line-height:1.3;overflow-wrap:anywhere}.planned-badge{padding:3px 5px;border:1px solid color-mix(in srgb,var(--accent) 48%,var(--border));border-radius:999px;color:var(--accent-strong);font:700 .58rem var(--font-mono);text-transform:uppercase}.status{color:var(--muted);text-transform:capitalize}.status.planned{color:var(--accent-strong)}.module-prerequisites{display:flex;flex-wrap:wrap;min-width:0;gap:4px 7px;color:var(--muted);font:600 .63rem/1.35 var(--font-mono);overflow-wrap:anywhere}.module-prerequisites>span:first-child{width:100%;color:var(--muted);text-transform:uppercase}.module-problems{color:var(--muted);white-space:nowrap}.empty-topic,.directory-empty{margin:0;color:var(--muted);font:italic .88rem/1.6 var(--font-mono)}.directory-empty{margin-top:24px;padding:16px;border:1px dashed var(--border);border-radius:var(--radius)}@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.directory-stats{max-width:360px}.directory-controls{grid-template-columns:1fr auto}.directory-controls p{grid-column:1/-1}.module-row{grid-template-columns:36px minmax(0,1fr) auto;gap:9px}.module-prerequisites,.module-problems,.module-action{grid-column:2}.status{grid-column:3;grid-row:1}.module-action{grid-row:auto}.module-prerequisites{margin-top:2px}}@media(max-width:640px){.directory-hero{padding-top:56px}.directory-controls{grid-template-columns:1fr}.status-filter{flex-wrap:wrap}.directory-controls p{grid-column:auto}.directory-children{margin-left:0;padding-left:12px}.topic-heading{align-items:flex-start;flex-direction:column}.module-row{grid-template-columns:30px minmax(0,1fr)}.status{grid-column:2;grid-row:auto}.module-prerequisites,.module-problems,.module-action{grid-column:2}}@media(max-width:360px){:global(body){min-width:0}:global(.site-header .brand>span:not(.brand-mark)){display:none}}
 </style>
