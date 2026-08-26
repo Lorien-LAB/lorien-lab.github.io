@@ -1,11 +1,17 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile, readdir } from 'node:fs/promises';
+import { mkdtemp, readFile, readdir, writeFile } from 'node:fs/promises';
+import { spawnSync } from 'node:child_process';
+import os from 'node:os';
 import path from 'node:path';
 import {
   buildPublicKnowledgeDirectory,
   validateKnowledgeCatalog,
 } from '../src/lib/quantInterviewKnowledgeDirectory.mjs';
+import {
+  buildInternalDirectoryModel,
+  renderInternalDirectoryMarkdown,
+} from '../scripts/generate-quant-interview-knowledge-directory.mjs';
 
 async function readRepositoryKnowledgeRecords() {
   const files = await readdir('src/content/knowledge', { recursive: true });
@@ -215,6 +221,70 @@ const problemRecords = [{
   techniques: [],
   prerequisites: [],
 }];
+
+const internalFixture = {
+  publicDirectory: buildPublicKnowledgeDirectory({
+    catalog, taxonomy, knowledgeRecords, problemRecords, base: '/',
+  }),
+  problemRecords,
+  sourceTopicMap: {
+    entries: [
+      { source: 'green-book', sourceSection: '1.1', role: 'content', canonicalTopics: ['child-topic'] },
+      { source: 'red-book', sourceSection: '2.1', role: 'content', canonicalTopics: ['child-topic'] },
+    ],
+  },
+  coverageLedgers: {
+    'green-book': { entries: [{ sourceSection: '1.1', sourceItem: null, canonicalTopics: ['child-topic'], state: 'knowledge-only', canonicalProblems: [], canonicalKnowledge: ['published-module'], resolutionNote: 'Resolved.' }] },
+    'red-book': { entries: [{ sourceSection: '2.1', sourceItem: null, canonicalTopics: ['child-topic'], state: 'pending', canonicalProblems: [], canonicalKnowledge: [] }] },
+    '150-most-frequently-asked': { entries: [] },
+  },
+  workstreams: [{ id: 'child-topic-001', status: 'active', canonicalTopics: ['root-topic', 'child-topic'], sourceScopes: [] }],
+};
+
+test('internal directory joins exact source coverage and workstream state', () => {
+  const model = buildInternalDirectoryModel(internalFixture);
+  const child = model.topics[0].children[0];
+  assert.deepEqual(child.sources, {
+    'green-book': ['1.1'],
+    'red-book': ['2.1'],
+    '150-most-frequently-asked': [],
+  });
+  assert.deepEqual(child.coverage, {
+    'green-book': { 'knowledge-only': 1 },
+    'red-book': { pending: 1 },
+    '150-most-frequently-asked': {},
+  });
+  assert.deepEqual(child.workstreams, [{ id: 'child-topic-001', status: 'active' }]);
+});
+
+test('internal Markdown is deterministic and contains no completion percentage', () => {
+  const model = buildInternalDirectoryModel(internalFixture);
+  const first = renderInternalDirectoryMarkdown(model);
+  const second = renderInternalDirectoryMarkdown(model);
+  assert.equal(first, second);
+  assert.match(first, /^# Quant Interview Knowledge Directory$/m);
+  assert.match(first, /Green Book sections: `1\.1`/);
+  assert.match(first, /Red Book sections: `2\.1`/);
+  assert.match(first, /`knowledge-only`: 1/);
+  assert.match(first, /`pending`: 1/);
+  assert.match(first, /`child-topic-001` \(active\)/);
+  assert.doesNotMatch(first, /\d+(?:\.\d+)?%|percent complete|completion rate/i);
+  assert.equal(first.endsWith('\n'), true);
+});
+
+test('directory CLI detects and repairs a stale generated file', async () => {
+  const tempRoot = await mkdtemp(path.join(os.tmpdir(), 'knowledge-directory-'));
+  const output = path.join(tempRoot, 'KNOWLEDGE_DIRECTORY.md');
+  await writeFile(output, 'stale\n', 'utf8');
+  const script = 'scripts/generate-quant-interview-knowledge-directory.mjs';
+  const stale = spawnSync(process.execPath, [script, '--check', '--repo-root', process.cwd(), '--output', output], { encoding: 'utf8' });
+  assert.notEqual(stale.status, 0);
+  assert.match(stale.stderr, /Knowledge directory is stale/);
+  const write = spawnSync(process.execPath, [script, '--write', '--repo-root', process.cwd(), '--output', output], { encoding: 'utf8' });
+  assert.equal(write.status, 0, write.stderr);
+  const fresh = spawnSync(process.execPath, [script, '--check', '--repo-root', process.cwd(), '--output', output], { encoding: 'utf8' });
+  assert.equal(fresh.status, 0, fresh.stderr);
+});
 
 test('public directory projects published and planned modules without private state', () => {
   const result = buildPublicKnowledgeDirectory({

@@ -8,7 +8,9 @@
     "build": "astro build",
     "preview": "astro preview",
     "check": "astro check",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "knowledge:directory": "node scripts/generate-quant-interview-knowledge-directory.mjs --write",
+    "knowledge:directory:check": "node scripts/generate-quant-interview-knowledge-directory.mjs --check"
   },
   "dependencies": {
     "astro": "^5.0.0"
