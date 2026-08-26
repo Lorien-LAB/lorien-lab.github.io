@@ -4,6 +4,7 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import KnowledgeCard from '../../components/KnowledgeCard.astro';
 import LearningResourcesGateway from '../../components/LearningResourcesGateway.astro';
 import QuantInterviewGateway from '../../components/QuantInterviewGateway.astro';
+import LeetCodeGateway from '../../components/LeetCodeGateway.astro';
 
 const base = import.meta.env.BASE_URL;
 const entries = (await getCollection('knowledge')).sort((a,b) => (b.data.updated ?? b.data.date).valueOf() - (a.data.updated ?? a.data.date).valueOf());
@@ -51,6 +52,7 @@ const visibleTypeCounts = Object.entries(typeCounts).filter(([, count]) => count
   </section>
 
   <section class="section gateway-section"><div class="container"><QuantInterviewGateway href={`${base}knowledge/quant-interview/`} /></div></section>
+  <section class="section gateway-section"><div class="container"><LeetCodeGateway href={`${base}knowledge/leetcode/`} /></div></section>
   <section class="section gateway-section"><div class="container"><LearningResourcesGateway href={`${base}knowledge/financial-engineering-learning-resources/`} /></div></section>
 
   {featured.length > 0 && <section class="section featured-section">

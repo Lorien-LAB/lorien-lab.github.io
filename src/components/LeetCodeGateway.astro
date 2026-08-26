@@ -1,0 +1,26 @@
+---
+import { leetcodeProblems } from '../data/leetcodeProblems';
+
+interface Props { href: string; }
+const { href } = Astro.props;
+const coreCount = leetcodeProblems.filter(({ track }) => track === 'core').length;
+const quantCount = leetcodeProblems.filter(({ track }) => track === 'quant').length;
+const minimumCount = leetcodeProblems.filter(({ minimum25 }) => minimum25).length;
+---
+<section class="leetcode-gateway" aria-labelledby="leetcode-gateway-title">
+  <div>
+    <div class="mono-label">Programming Practice</div>
+    <h2 id="leetcode-gateway-title">LeetCode for Quant Internships</h2>
+    <p>A focused algorithm syllabus connecting interview patterns with quantitative applications.</p>
+  </div>
+  <div class="gateway-meta" aria-label="Practice list coverage">
+    <span><strong>{leetcodeProblems.length}</strong> problems</span>
+    <span><strong>{minimumCount}</strong> minimum</span>
+    <span><strong>{coreCount}</strong> core</span>
+    <span><strong>{quantCount}</strong> quant</span>
+  </div>
+  <a href={href}>Open practice list →</a>
+</section>
+<style>
+.leetcode-gateway{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(280px,.75fr) auto;gap:28px;align-items:center;padding:20px 24px;border:1px solid color-mix(in srgb,var(--accent) 28%,var(--border));background:var(--surface)}.leetcode-gateway h2{margin:7px 0 7px;font-size:clamp(1.45rem,3vw,2.15rem);line-height:1.05;letter-spacing:-.04em}.leetcode-gateway p{margin:0;color:var(--muted);font-size:.85rem;line-height:1.5}.gateway-meta{display:grid;grid-template-columns:repeat(2,minmax(80px,1fr));border-top:1px solid var(--border);border-left:1px solid var(--border)}.gateway-meta span{padding:8px 10px;border-right:1px solid var(--border);border-bottom:1px solid var(--border);color:var(--muted);font:600 .66rem var(--font-mono);text-transform:uppercase}.gateway-meta strong{margin-right:4px;color:var(--ink);font-size:.95rem}.leetcode-gateway>a{color:var(--accent-strong);font-weight:800;white-space:nowrap}@media(max-width:860px){.leetcode-gateway{grid-template-columns:minmax(0,1fr) auto}.leetcode-gateway>a{grid-column:1/-1}}@media(max-width:560px){.leetcode-gateway{grid-template-columns:1fr;padding:18px}.gateway-meta{max-width:280px}.leetcode-gateway>a{grid-column:auto}}
+</style>
