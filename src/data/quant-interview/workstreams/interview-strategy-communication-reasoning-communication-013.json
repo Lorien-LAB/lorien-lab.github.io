@@ -4,7 +4,7 @@
     "interview-strategy-communication",
     "reasoning-communication"
   ],
-  "status": "active",
+  "status": "complete",
   "sourceScopes": [
     {
       "source": "green-book",
@@ -16,11 +16,11 @@
       "evidencePageRanges": [
         {
           "startPage": 18,
-          "endPage": 20
+          "endPage": 18
         }
       ],
       "reviewOutcome": "bounded-item-level-review",
-      "reviewNote": "Green Book 1.3 (Listen carefully), 1.4 (Speak your mind), and 1.5 (Make reasonable assumptions) are interview-guidance evidence only. 1.3 and 1.5 resolve to Problem Framing, Clarification & Assumption Management (knowledge-only); 1.4 resolves to Structured Think-Aloud Reasoning (knowledge-only). No canonical Problem is created."
+      "reviewNote": "Three Green rows (1.3 Listen carefully, 1.4 Speak your mind, 1.5 Make reasonable assumptions) resolve to two canonical Knowledge nodes (Problem Framing, Clarification & Assumption Management and Structured Think-Aloud Reasoning); no new Problem is created. The framing and structured-reasoning pair is stated in the public body, not in relatedNotes."
     },
     {
       "source": "red-book",
@@ -34,7 +34,28 @@
         }
       ],
       "reviewOutcome": "bounded-item-level-review",
-      "reviewNote": "Red Book 1.12 is broad, date-sensitive job-search preparation and self-assessment material. It is rerouted from reasoning-communication to interview-preparation and produces no canonical Problem or Knowledge."
+      "reviewNote": "Red Book 1.12 is broad, date-sensitive job-search preparation and self-assessment material; it is rerouted from reasoning-communication to interview-preparation and resolves to no public Problem or Knowledge (final state interview-guidance)."
     }
-  ]
+  ],
+  "preClosureActiveGate": {
+    "commit": "b4a282a682428bbde7d7dec43223f014947108ed",
+    "runId": 33085791614,
+    "environment": "windows-native-lf-node24",
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "b4a282a682428bbde7d7dec43223f014947108ed",
+    "runId": 33085791614,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  }
 }
