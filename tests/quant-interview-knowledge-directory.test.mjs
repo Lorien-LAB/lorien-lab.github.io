@@ -224,13 +224,19 @@ test('repository public projection exposes the complete source-neutral curriculu
   const logic = result.topics.find((topic) => topic.id === 'logic-brainteasers-discrete-reasoning');
   assert.equal(logic.modules.some((module) => module.slug === 'recursion-problem-solving'), true);
   assert.equal(result.topics.some((topic) => topic.id === 'fixed-income-rates-general-finance'), true);
-  assert.equal(JSON.stringify(result).match(/green-book|red-book|150-most|coverage|sourceSection|pageRange|workstream/gi), null);
+  assert.equal(
+    JSON.stringify(result).match(/green-book|red-book|150-most|coverage|sourceSection|pageRange|workstream|masterDirectory|masterItems|questionPages|solutionPages|firstPendingKey/gi),
+    null,
+  );
 });
 
 test('directory route imports no hidden curriculum state', async () => {
   const route = await readFile('src/pages/knowledge/quant-interview/directory.astro', 'utf8');
   assert.match(route, /buildPublicKnowledgeDirectory/);
-  assert.doesNotMatch(route, /quant-interview\/coverage|quantInterviewCoverage|source-topic-map|workstreams/);
+  assert.doesNotMatch(
+    route,
+    /quant-interview\/coverage|quantInterviewCoverage|source-topic-map|workstreams|master-directory|quantInterviewMasterDirectory/,
+  );
 });
 
 const taxonomy = {
@@ -296,10 +302,51 @@ const internalFixture = {
     '150-most-frequently-asked': { entries: [] },
   },
   workstreams: [{ id: 'child-topic-001', status: 'active', canonicalTopics: ['root-topic', 'child-topic'], sourceScopes: [] }],
+  masterDirectory: {
+    version: 1,
+    sourceOrder: ['green-book', 'red-book', '150-most-frequently-asked'],
+    nodes: [],
+    items: [
+      {
+        key: 'green-book::1.1::guidance',
+        source: 'green-book',
+        sourceSection: '1.1',
+        sourceItem: null,
+        questionPages: [{ startPage: 17, endPage: 17 }],
+        solutionPages: [],
+        primaryTopic: 'child-topic',
+        state: 'pending',
+        canonicalProblems: [],
+        canonicalKnowledge: [],
+        workstream: null,
+        sortKey: '01.01|01|0001|green-book::1.1::guidance',
+      },
+      {
+        key: 'red-book::2.1::theory',
+        source: 'red-book',
+        sourceSection: '2.1',
+        sourceItem: null,
+        questionPages: [{ startPage: 27, endPage: 28 }],
+        solutionPages: [],
+        primaryTopic: 'child-topic',
+        state: 'knowledge-only',
+        canonicalProblems: [],
+        canonicalKnowledge: ['published-module'],
+        workstream: 'child-topic-001',
+        sortKey: '01.01|02|0002|red-book::2.1::theory',
+      },
+    ],
+  },
 };
 
 test('internal directory joins exact source coverage and workstream state', () => {
   const model = buildInternalDirectoryModel(internalFixture);
+  assert.deepEqual(model.masterSummary, {
+    total: 2,
+    pending: 1,
+    terminal: 1,
+    firstPendingKey: 'green-book::1.1::guidance',
+  });
   const child = model.topics[0].children[0];
   assert.deepEqual(child.sources, {
     'green-book': ['1.1'],
@@ -312,6 +359,10 @@ test('internal directory joins exact source coverage and workstream state', () =
     '150-most-frequently-asked': {},
   });
   assert.deepEqual(child.workstreams, [{ id: 'child-topic-001', status: 'active' }]);
+  assert.deepEqual(child.masterItems.map(({ key, state }) => ({ key, state })), [
+    { key: 'green-book::1.1::guidance', state: 'pending' },
+    { key: 'red-book::2.1::theory', state: 'knowledge-only' },
+  ]);
 });
 
 test('internal directory renders only active and complete workstreams', () => {
@@ -357,6 +408,9 @@ test('internal Markdown is deterministic and contains no completion percentage',
   assert.match(first, /`knowledge-only`: 1/);
   assert.match(first, /`pending`: 1/);
   assert.match(first, /`child-topic-001` \(active\)/);
+  assert.match(first, /Master records: 2/);
+  assert.match(first, /First pending: `green-book::1\.1::guidance`/);
+  assert.match(first, /`green-book::1\.1::guidance`.*`pending`/);
   assert.doesNotMatch(first, /\d+(?:\.\d+)?%|percent complete|completion rate/i);
   assert.equal(first.endsWith('\n'), true);
 });
@@ -411,7 +465,10 @@ test('public directory projects published and planned modules without private st
     status: 'published',
     href: '/knowledge/published-module/',
   }]);
-  assert.equal(JSON.stringify(result).match(/source|coverage|workstream|pageRange/gi), null);
+  assert.equal(
+    JSON.stringify(result).match(/source|coverage|workstream|pageRange|masterDirectory|masterItems|questionPages|solutionPages|firstPendingKey/gi),
+    null,
+  );
 });
 
 test('topic Problem counts aggregate descendants without leaking across siblings', () => {

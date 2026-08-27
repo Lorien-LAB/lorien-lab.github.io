@@ -5,6 +5,7 @@ import {
   buildPublicKnowledgeDirectory,
   flattenTaxonomy,
 } from '../src/lib/quantInterviewKnowledgeDirectory.mjs';
+import { getNextPendingItem } from '../src/lib/quantInterviewMasterDirectory.mjs';
 
 const SOURCE_ORDER = ['green-book', 'red-book', '150-most-frequently-asked'];
 const SOURCE_LABELS = {
@@ -70,7 +71,32 @@ function internalFields(id, inputs, descendants) {
     .filter((workstream) => intersectsTopicSet(workstream.canonicalTopics, descendantIds))
     .map(({ id: workstreamId, status }) => ({ id: workstreamId, status }))
     .sort((left, right) => left.id.localeCompare(right.id));
-  return { sources, coverage, workstreams };
+  const masterItems = (inputs.masterDirectory?.items ?? [])
+    .filter((item) => item.primaryTopic === id)
+    .map(({
+      key,
+      source,
+      sourceSection,
+      sourceItem,
+      questionPages,
+      solutionPages,
+      state,
+      canonicalProblems,
+      canonicalKnowledge,
+      workstream,
+    }) => ({
+      key,
+      source,
+      sourceSection,
+      sourceItem,
+      questionPages,
+      solutionPages,
+      state,
+      canonicalProblems,
+      canonicalKnowledge,
+      workstream,
+    }));
+  return { sources, coverage, workstreams, masterItems };
 }
 
 /**
@@ -85,9 +111,18 @@ export function buildInternalDirectoryModel(inputs) {
     ...internalFields(node.id, inputs, descendants),
     children: (node.children ?? []).map(project),
   });
+  const masterItems = inputs.masterDirectory?.items ?? [];
+  const next = getNextPendingItem(inputs.masterDirectory);
+  const terminal = masterItems.filter((item) => item.state !== 'pending').length;
   return {
     totals: { ...inputs.publicDirectory.totals },
     problemTotal: new Set((inputs.problemRecords ?? []).map((record) => record.slug)).size,
+    masterSummary: {
+      total: masterItems.length,
+      pending: masterItems.length - terminal,
+      terminal,
+      firstPendingKey: next?.key ?? null,
+    },
     topics: inputs.publicDirectory.topics.map(project),
   };
 }
@@ -102,6 +137,19 @@ function moduleRows(modules) {
       ? module.prerequisites.map((prerequisite) => `\`${prerequisite.slug}\``).join(', ')
       : 'None';
     return `| ${module.learningOrder} | ${module.status} | \`${module.slug}\` | ${prerequisites} |`;
+  });
+}
+
+function pageRanges(ranges) {
+  return ranges.length
+    ? ranges.map(({ startPage, endPage }) => startPage === endPage ? `${startPage}` : `${startPage}–${endPage}`).join(', ')
+    : 'None';
+}
+
+function masterRows(items) {
+  return items.map((item) => {
+    const targets = [...item.canonicalProblems, ...item.canonicalKnowledge];
+    return `| \`${item.key}\` | \`${item.state}\` | ${pageRanges(item.questionPages)} | ${pageRanges(item.solutionPages)} | ${markdownList(targets)} |`;
   });
 }
 
@@ -132,6 +180,16 @@ function renderNode(node, depth, parentNumber = []) {
       return `- ${SOURCE_LABELS[source]}: ${counts.length ? counts.map(([state, count]) => `\`${state}\`: ${count}`).join(', ') : 'None'}`;
     }),
   ];
+  if (node.masterItems.length > 0) {
+    lines.push(
+      '',
+      `${'#'.repeat(depth + 3)} Master queue records`,
+      '',
+      '| Key | State | Question pages | Solution pages | Targets |',
+      '|---|---|---:|---:|---|',
+      ...masterRows(node.masterItems),
+    );
+  }
   for (const child of node.children ?? []) {
     lines.push('', '', renderNode(child, depth + 1, sectionParts));
   }
@@ -152,6 +210,10 @@ export function renderInternalDirectoryMarkdown(model) {
     `- Published Knowledge: ${model.totals.published}`,
     `- Planned Knowledge: ${model.totals.planned}`,
     `- Canonical Problems: ${model.problemTotal}`,
+    `- Master records: ${model.masterSummary.total}`,
+    `- Terminal master records: ${model.masterSummary.terminal}`,
+    `- Pending master records: ${model.masterSummary.pending}`,
+    `- First pending: ${model.masterSummary.firstPendingKey ? `\`${model.masterSummary.firstPendingKey}\`` : 'None'}`,
   ];
   for (const topic of model.topics) lines.push('', '', renderNode(topic, 0));
   return `${lines.join('\n')}\n`;
@@ -184,10 +246,11 @@ async function readJson(file) {
 export async function loadRepositoryDirectoryInputs(repoRoot = process.cwd()) {
   const dataRoot = path.join(repoRoot, 'src', 'data', 'quant-interview');
   const workstreamDirectory = path.join(dataRoot, 'workstreams');
-  const [catalog, taxonomy, sourceTopicMap, greenCoverage, redCoverage, questionsCoverage, knowledgeRecords, problemRecords, workstreamFiles] = await Promise.all([
+  const [catalog, taxonomy, sourceTopicMap, masterDirectory, greenCoverage, redCoverage, questionsCoverage, knowledgeRecords, problemRecords, workstreamFiles] = await Promise.all([
     readJson(path.join(dataRoot, 'topics', 'knowledge-catalog.json')),
     readJson(path.join(dataRoot, 'topics', 'taxonomy.json')),
     readJson(path.join(dataRoot, 'topics', 'source-topic-map.json')),
+    readJson(path.join(dataRoot, 'master-directory.json')),
     readJson(path.join(dataRoot, 'coverage', 'green-book.json')),
     readJson(path.join(dataRoot, 'coverage', 'red-book.json')),
     readJson(path.join(dataRoot, 'coverage', '150-most-frequently-asked.json')),
@@ -212,6 +275,7 @@ export async function loadRepositoryDirectoryInputs(repoRoot = process.cwd()) {
     taxonomy,
     problemRecords,
     sourceTopicMap,
+    masterDirectory,
     coverageLedgers: {
       'green-book': greenCoverage,
       'red-book': redCoverage,

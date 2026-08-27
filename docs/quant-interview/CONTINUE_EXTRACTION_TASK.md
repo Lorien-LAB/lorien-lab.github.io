@@ -2,27 +2,28 @@
 
 ## Objective
 
-Continue building Lorien Lab's Topic-first Quant Interview Knowledge System from the three verified interview books. Process exactly one bounded canonical topic at a time, reconcile overlapping source material across all three books, publish independent source-neutral Knowledge and Problems, and preserve private evidence in the hidden repository layer.
+Continue building Lorien Lab's Topic-first Quant Interview Knowledge System from the three verified interview books. Start at the first `pending` record in the three-book master directory, process only consecutive records inside one approved bounded workstream, publish independent source-neutral Knowledge and Problems, and preserve private evidence in the hidden repository layer.
 
-Do not process one book from front to back. Do not copy source questions or answers. Do not infer whole-book completeness from a verified file, TOC, chapter map, or bounded workstream.
+Do not select an arbitrary topic while an earlier master record remains `pending`. Do not copy source questions or answers. Do not infer whole-book completeness from a verified file, TOC, chapter map, master-directory enumeration, or bounded workstream.
 
 ## Authoritative State
 
 Repository state is authoritative; conversation history is not.
 
-Before selecting or changing anything, read the current state from:
+Before selecting or changing anything, run `npm run master:directory:check`, then read the current state from:
 
-1. `docs/quant-interview/HANDOFF.md` — current bounded topic, completed workstreams, reservations, and factual verification evidence;
-2. `docs/quant-interview/KNOWLEDGE_DIRECTORY.md` — generated public curriculum and internal extraction state;
-3. `src/data/quant-interview/workstreams/*.json` — active and completed bounded workstreams;
-4. `src/data/quant-interview/coverage/*.json` — item-level hidden coverage and semantic-dedup decisions;
-5. `src/data/quant-interview/topics/source-topic-map.json` — source-section routing;
-6. `src/data/quant-interview/topics/taxonomy.json` — canonical public Topic hierarchy;
-7. `src/data/quant-interview/topics/knowledge-catalog.json` — canonical public-safe curriculum order.
+1. `src/data/quant-interview/master-directory.json` — complete ordered three-book record set and the authoritative first `pending` item;
+2. `docs/quant-interview/HANDOFF.md` — current bounded topic, completed workstreams, reservations, and factual verification evidence;
+3. `docs/quant-interview/KNOWLEDGE_DIRECTORY.md` — generated curriculum, master queue summary, and internal extraction state;
+4. `src/data/quant-interview/workstreams/*.json` — active and completed bounded workstreams;
+5. `src/data/quant-interview/coverage/*.json` — legacy item-level coverage kept in lockstep with master records;
+6. `src/data/quant-interview/topics/source-topic-map.json` — source-section routing;
+7. `src/data/quant-interview/topics/taxonomy.json` — canonical public Topic hierarchy;
+8. `src/data/quant-interview/topics/knowledge-catalog.json` — canonical public-safe curriculum order.
 
 If these disagree, stop and reconcile the repository rather than choosing the most convenient file.
 
-If `KNOWLEDGE_DIRECTORY.md` or `knowledge-catalog.json` is absent, the Knowledge Directory feature has not been integrated on the current base. Do not invent a replacement list; finish or integrate `docs/superpowers/plans/2026-08-26-quant-interview-knowledge-directory.md` first.
+If `master-directory.json`, `KNOWLEDGE_DIRECTORY.md`, or `knowledge-catalog.json` is absent or stale, do not invent a replacement list. Complete the approved three-book master-directory migration before authoring new public content.
 
 ## Verified Local Sources
 
@@ -49,8 +50,9 @@ Read these files in order:
 5. `docs/quant-interview/CONTENT_STANDARD.md`;
 6. `docs/quant-interview/SOURCE_CATALOG.md`;
 7. `docs/quant-interview/KNOWLEDGE_DIRECTORY.md`;
-8. `docs/quant-interview/parallel-workstream-policy.json`;
-9. the current or proposed workstream design and implementation plan.
+8. `src/data/quant-interview/master-directory.json`;
+9. `docs/quant-interview/parallel-workstream-policy.json`;
+10. the current or proposed workstream design and implementation plan.
 
 Then:
 
@@ -63,8 +65,11 @@ Then:
 
 ## Select One Bounded Workstream
 
-Select exactly one canonical Subtopic or another explicitly approved bounded Topic. The selection must satisfy all of these conditions:
+Read `First pending` from the generated internal directory and select exactly one consecutive bounded scope beginning at that key. The selection must satisfy all of these conditions:
 
+- its first item is identical to the master directory's first `pending` key;
+- every additional item is consecutive in master `sortKey` order;
+- it stops at ten actual questions, a leaf-topic boundary, or a source boundary, whichever comes first;
 - it is the current serialized reservation in `HANDOFF.md`, or a newly approved reservation after the previous queue closes;
 - its source sections are resolved through the source-topic map;
 - existing coverage rows and public canonical identities have been inspected;
@@ -76,9 +81,9 @@ Do not reopen a completed workstream because adjacent source pages contain simil
 
 ## Source Audit
 
-For the selected canonical topic:
+For the selected consecutive master records:
 
-1. collect every mapped section from Green, Red, and 150 Questions;
+1. read the exact source, section, item, question pages, solution pages, and canonical topic from each master record;
 2. inspect the actual verified PDF pages, including surrounding context needed to identify the semantic task;
 3. inventory concepts, techniques, distinct Problems, variants, hints, and guidance;
 4. compare state, target, constraints, mathematical structure, and decisive insight across sources;
@@ -86,6 +91,8 @@ For the selected canonical topic:
 6. identify existing Knowledge or Problems that already own the semantic identity;
 7. define explicit exclusions for adjacent topics;
 8. propose an item-level coverage disposition for every inspected item.
+
+Update each master record and its legacy coverage row together. A workstream may not advance to a later record while its current record remains `pending`.
 
 Allowed terminal dispositions include repository-supported states such as `canonical-problem`, `merged-duplicate`, `variant`, `knowledge-only`, and `interview-guidance`. A terminal row needs a nonempty private resolution note and real canonical targets when the state requires them.
 
@@ -185,6 +192,7 @@ Every approved workstream must reconcile the curriculum catalog:
 Run:
 
 ```text
+npm run master:directory:check
 npm run knowledge:directory
 npm run knowledge:directory:check
 ```
@@ -198,6 +206,7 @@ At each RED/GREEN task boundary, run the focused test named in the approved impl
 Before candidate handoff and again before coordinator integration, run:
 
 ```text
+npm run master:directory:check
 npm run knowledge:directory:check
 npm run test
 npm run check

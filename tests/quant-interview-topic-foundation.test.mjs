@@ -146,7 +146,10 @@ test('hidden coverage infrastructure is not imported by public pages or layouts'
       const path = `${root}/${name}`;
       if (!/\.(?:astro|ts|js|mjs)$/.test(path)) continue;
       const text = await readFile(path, 'utf8');
-      assert.doesNotMatch(text, /quant-interview\/coverage|quantInterviewCoverage/);
+      assert.doesNotMatch(
+        text,
+        /quant-interview\/coverage|quantInterviewCoverage|master-directory\.json|quantInterviewMasterDirectory/,
+      );
     }
   }
 });
