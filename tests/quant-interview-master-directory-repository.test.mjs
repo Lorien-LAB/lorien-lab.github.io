@@ -1,7 +1,11 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { spawnSync } from 'node:child_process';
-import { access } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
+import {
+  getNextPendingItem,
+  validateSequentialScope,
+} from '../src/lib/quantInterviewMasterDirectory.mjs';
 import {
   loadMasterDirectoryRepository,
   validateMasterDirectoryRepository,
@@ -249,4 +253,19 @@ test('repository validator rejects coverage and master lifecycle drift', async (
     () => validateMasterDirectoryRepository(inputs),
     /coverage\/master migration mismatch: green-book::1\.3::/i,
   );
+});
+
+test('migration closes with one exact first pending key and no active 014', async () => {
+  const { directory, workstreams } = await loadMasterDirectoryRepository(process.cwd());
+  const first = getNextPendingItem(directory);
+  assert.ok(first);
+  assert.equal(first.key, 'green-book::1.1::guidance');
+  assert.equal(validateSequentialScope(directory, [first.key]), true);
+  assert.equal(
+    workstreams.some(({ id, status }) => /-014$/.test(id) && status === 'active'),
+    false,
+  );
+  const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
+  assert.equal(handoff.includes(`First pending master record: \`${first.key}\``), true);
+  assert.match(handoff, /No bounded ingestion workstream is active/i);
 });

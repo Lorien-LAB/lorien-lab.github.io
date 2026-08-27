@@ -560,6 +560,14 @@ Current bounded topic:
 
 A later workstream requires its own approved design and evidence audit; no later workstream is complete or authorized by this closure.
 
+## Master directory ingestion state
+
+**No bounded ingestion workstream is active. The three-book master directory migration is complete.**
+
+First pending master record: `green-book::1.1::guidance`
+
+The next workstream must start at that key and may include only consecutive master records within the approved batch boundary. Workstream 014 is not active until its separate design and plan are approved.
+
 ## Parallel workstream coordination
 
 Maximum active candidates: **3**. Parallel candidates are isolated design and implementation branches; they are not authoritative completion state. The coordinator alone owns ordinal reservation, integration order, shared-file reconciliation, exact corpus counts, completion metadata, real CI evidence, and HANDOFF closure.
