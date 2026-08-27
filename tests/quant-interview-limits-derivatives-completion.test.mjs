@@ -74,8 +74,6 @@ test('012 completion contract is phase-safe and pins factual active-gate evidenc
   assert.match(closure, /Green[^\n]*4[^\n]*Red[^\n]*10[^\n]*150[^\n]*6/i);
   assert.match(closure, /red-book::6\.2\.2[^\n]*limits-derivatives[^\n]*integration/i);
   assert.match(closure, /red-book::6\.3\.2[^\n]*limits-derivatives[^\n]*integration/i);
-  assert.match(current, /Interview Strategy & Communication/i);
-  assert.match(current, /Reasoning & Communication/i);
   assert.doesNotMatch(currentTitle, /Limits & Derivatives/i);
   assert.match(reservation012, /\|\s*complete\s*\|/i);
   assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012/i);
@@ -83,10 +81,14 @@ test('012 completion contract is phase-safe and pins factual active-gate evidenc
   const workstream013 = await readJson(workstream013Path);
   assert.match(workstream013.status, /^(?:active|complete)$/);
   if (workstream013.status === 'active') {
+    assert.match(current, /Interview Strategy & Communication/i);
+    assert.match(current, /Reasoning & Communication/i);
     assert.match(coordination, /remaining integration queue[^\n]*013/i);
     assert.doesNotMatch(coordination, /completed queue entr(?:y|ies)[^\n]*013/i);
   } else {
     assert.equal(workstream013.status, 'complete');
+    assert.match(current, /No bounded topic is active.*011.*012.*013.*queue is closed/is);
+    assert.match(current, /A later workstream requires its own approved design and evidence audit/i);
     assert.doesNotMatch(coordination, /remaining integration queue[^\n]*013/i);
     assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012[^\n]*013/i);
   }

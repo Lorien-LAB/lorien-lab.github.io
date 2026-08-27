@@ -447,9 +447,16 @@ test('authoritative current topic follows factual 012 lifecycle', async () => {
   } else {
     assert.equal(workstream012.status, 'complete');
     assertFactual012Closure(workstream012, handoff);
-    assert.match(current, /Interview Strategy & Communication/i);
-    assert.match(current, /Reasoning & Communication/i);
     assert.doesNotMatch(currentTitle, /Limits & Derivatives/i);
+    const workstream013 = JSON.parse(await readFile(workstream013Path, 'utf8'));
+    if (workstream013.status === 'active') {
+      assert.match(current, /Interview Strategy & Communication/i);
+      assert.match(current, /Reasoning & Communication/i);
+    } else {
+      assert.equal(workstream013.status, 'complete');
+      assert.match(current, /No bounded topic is active.*011.*012.*013.*queue is closed/is);
+      assert.match(current, /A later workstream requires its own approved design and evidence audit/i);
+    }
   }
 });
 

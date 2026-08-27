@@ -4,7 +4,7 @@
     "interview-strategy-communication",
     "reasoning-communication"
   ],
-  "status": "active",
+  "status": "complete",
   "sourceScopes": [
     {
       "source": "green-book",
@@ -36,5 +36,39 @@
       "reviewOutcome": "reclassified-to-interview-preparation-coverage-only",
       "reviewNote": "The section is rerouted to interview-preparation as coverage-only interview guidance with no public target."
     }
-  ]
+  ],
+  "preClosureActiveGate": {
+    "status": "active",
+    "commit": "bb584ea70e6694b7a15116842ffb9da8a3aca39d",
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "bb584ea70e6694b7a15116842ffb9da8a3aca39d",
+    "runId": 33112491183,
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifacts": [
+      ".github/workflows/quant-interview-reasoning-communication-013-temporary.yml"
+    ]
+  },
+  "finalTreeGate": {
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifactsAbsent": true
+  }
 }

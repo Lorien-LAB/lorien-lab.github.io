@@ -501,6 +501,41 @@ This evidence belongs to the active integrated commit above, not to the later wo
 
 This closes only registered workstream 012. It does not claim completeness for calculus, for any of Green/Red/150 as a whole, for any broad source section, or for material outside the registered page and section scopes.
 
+## Completed cross-book workstream 13
+
+`interview-strategy-communication-reasoning-communication-013`
+
+Scope: **Interview Strategy & Communication → Reasoning & Communication**.
+
+Active integrated verification:
+
+- CI-tested pre-closure active commit: `bb584ea70e6694b7a15116842ffb9da8a3aca39d`
+- GitHub Actions run: `33112491183`; its `head_sha` is `bb584ea70e6694b7a15116842ffb9da8a3aca39d`
+- authoritative local environment: `wsl-native-lf-node24`
+- CI environment: Ubuntu with Node 24; CI ran `npm ci` first
+- ordered gates: `npm run test`, then `npm run check`, then `npm run build`
+- conclusion: success
+- final workflow-free tree gate: the same ordered commands succeeded in `wsl-native-lf-node24`, and the temporary workflow is absent
+
+This evidence belongs to the active integrated commit above, not to the later workflow-free closure commit. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`.
+
+### Canonical Knowledge
+
+- `problem-framing-clarification-assumption-management`
+- `structured-think-aloud-reasoning`
+
+### Canonical Problems
+
+None. Workstream 013 produced exactly +0 Problems and +2 Knowledge. The global source-neutral corpus is exactly 76 canonical Problems and 50 explicitly topic-classified Knowledge nodes.
+
+### Source dispositions
+
+- Green Book sections `1.3`, `1.4`, and `1.5` resolve `knowledge-only` to the two canonical Knowledge nodes above; evidence page 18. No new Problem is created.
+- Red Book section `1.12` is rerouted to `interview-preparation` and closes as `interview-guidance` with no public Problem or Knowledge; evidence pages 25–26.
+- 150 Most Frequently Asked Questions has no scope, map, coverage, or ownership in workstream 013.
+
+This closes only registered workstream 013. It does not claim completeness for Interview Strategy & Communication as a whole, for any source book as a whole, or for material outside the registered section and page scopes.
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -521,11 +556,9 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**Interview Strategy & Communication → Reasoning & Communication.**
+**No bounded topic is active. The serialized 011 → 012 → 013 queue is closed.**
 
-Workstream 012 is factually closed. Workstream 013 is active on the latest durable base. Its two Knowledge nodes and shared-state reconciliation are integrated, but no completion evidence is recorded until WSL-native gates and real CI succeed.
-
-Do not reopen closed workstreams 011 or 012. Preserve source-neutral public identity, item-level hidden coverage, protected-main safety, and the exact serialized order.
+A later workstream requires its own approved design and evidence audit; no later workstream is complete or authorized by this closure.
 
 ## Parallel workstream coordination
 
@@ -535,13 +568,9 @@ Maximum active candidates: **3**. Parallel candidates are isolated design and im
 |---:|---:|---|---|---|
 | 1 | 011 | `random-walks-markov-chains` | `chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23` | complete |
 | 2 | 012 | `limits-derivatives` | `chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23` | complete |
-| 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | active |
+| 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | complete |
 
-Completed queue entries: **011, 012**.
-
-Remaining integration queue entry: **013** (active).
-
-013 remains active and no completion evidence is recorded.
+Completed queue entries: **011, 012, 013**. The serialized queue is closed.
 
 A candidate stays `active` during implementation and is not `complete` until the coordinator integrates it on the latest durable base, reconciles shared state, obtains fresh local and real CI verification for the exact commit, and records factual closure here.
 
