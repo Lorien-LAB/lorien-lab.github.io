@@ -17,6 +17,7 @@ const tocPaths = {
 };
 const workstream011Path = 'src/data/quant-interview/workstreams/stochastic-processes-random-walks-markov-chains-011.json';
 const workstream012Path = 'src/data/quant-interview/workstreams/calculus-differential-equations-limits-derivatives-012.json';
+const workstream013Path = 'src/data/quant-interview/workstreams/interview-strategy-communication-reasoning-communication-013.json';
 
 test('repository memory defines the Topic-first cross-book protocol', async () => {
   for (const file of docs) await access(file);
@@ -239,10 +240,18 @@ test('handoff current topic and remaining queue follow workstream 012 status', a
     assert.ok(Number.isInteger(workstream012.verification?.runId) && workstream012.verification.runId > 0);
     assert.match(handoff, new RegExp(workstream012.verification.commit));
     assert.match(handoff, new RegExp(String(workstream012.verification.runId)));
-    assert.match(handoff, /76[^\n]*Problems[^\n]*48[^\n]*Knowledge/i);
+    assert.match(handoff, /76[^\n]*Problems[^\n]*50[^\n]*Knowledge/i);
     assert.match(current, /Reasoning & Communication/i);
     assert.doesNotMatch(currentTitle, /Limits & Derivatives/i);
-    assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012/i);
-    assert.match(coordination, /remaining integration queue[^\n]*013/i);
+    const workstream013 = JSON.parse(await readFile(workstream013Path, 'utf8'));
+    if (workstream013.status === 'active') {
+      assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012/i);
+      assert.match(coordination, /remaining integration queue[^\n]*013/i);
+      assert.doesNotMatch(coordination, /completed queue entr(?:y|ies)[^\n]*013/i);
+    } else {
+      assert.equal(workstream013.status, 'complete');
+      assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012[^\n]*013/i);
+      assert.doesNotMatch(coordination, /remaining integration queue[^\n]*013/i);
+    }
   }
 });

@@ -124,11 +124,12 @@
       "sourceSection": "1.12",
       "sourceItem": null,
       "canonicalTopics": [
-        "reasoning-communication"
+        "interview-preparation"
       ],
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [],
+      "resolutionNote": "Red Book 1.12 is broad, date-sensitive job-search preparation and self-assessment material; it is rerouted from reasoning-communication to interview-preparation and produces no public Problem or Knowledge."
     },
     {
       "sourceSection": "2",

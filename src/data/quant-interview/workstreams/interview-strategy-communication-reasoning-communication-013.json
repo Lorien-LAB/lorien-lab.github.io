@@ -1,0 +1,40 @@
+{
+  "id": "interview-strategy-communication-reasoning-communication-013",
+  "canonicalTopics": [
+    "interview-strategy-communication",
+    "reasoning-communication"
+  ],
+  "status": "active",
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": [
+        "1.3",
+        "1.4",
+        "1.5"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 18,
+          "endPage": 20
+        }
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Green Book 1.3 (Listen carefully), 1.4 (Speak your mind), and 1.5 (Make reasonable assumptions) are interview-guidance evidence only. 1.3 and 1.5 resolve to Problem Framing, Clarification & Assumption Management (knowledge-only); 1.4 resolves to Structured Think-Aloud Reasoning (knowledge-only). No canonical Problem is created."
+    },
+    {
+      "source": "red-book",
+      "sourceSections": [
+        "1.12"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 25,
+          "endPage": 26
+        }
+      ],
+      "reviewOutcome": "bounded-item-level-review",
+      "reviewNote": "Red Book 1.12 is broad, date-sensitive job-search preparation and self-assessment material. It is rerouted from reasoning-communication to interview-preparation and produces no canonical Problem or Knowledge."
+    }
+  ]
+}

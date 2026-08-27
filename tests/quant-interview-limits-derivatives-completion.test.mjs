@@ -79,9 +79,17 @@ test('012 completion contract is phase-safe and pins factual active-gate evidenc
   assert.doesNotMatch(currentTitle, /Limits & Derivatives/i);
   assert.match(reservation012, /\|\s*complete\s*\|/i);
   assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012/i);
-  assert.match(coordination, /remaining integration queue[^\n]*013/i);
   assert.doesNotMatch(coordination, /remaining integration queue[^\n]*012/i);
-  await assert.rejects(access(workstream013Path));
+  const workstream013 = await readJson(workstream013Path);
+  assert.match(workstream013.status, /^(?:active|complete)$/);
+  if (workstream013.status === 'active') {
+    assert.match(coordination, /remaining integration queue[^\n]*013/i);
+    assert.doesNotMatch(coordination, /completed queue entr(?:y|ies)[^\n]*013/i);
+  } else {
+    assert.equal(workstream013.status, 'complete');
+    assert.doesNotMatch(coordination, /remaining integration queue[^\n]*013/i);
+    assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012[^\n]*013/i);
+  }
 });
 
 test('only the named 012 temporary workflow can exist before closure', async () => {

@@ -63,7 +63,16 @@ test('HANDOFF records exact 011 closure and advances only to 012', async () => {
     assert.match(current, /Interview Strategy & Communication/i);
     assert.match(current, /Reasoning & Communication/i);
     assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012/i);
-    assert.match(coordination, /remaining integration queue[^\n]*013/i);
+    const workstream013 = await readJson(
+      'src/data/quant-interview/workstreams/interview-strategy-communication-reasoning-communication-013.json',
+    );
+    if (workstream013.status === 'active') {
+      assert.match(coordination, /remaining integration queue[^\n]*013/i);
+    } else {
+      assert.equal(workstream013.status, 'complete');
+      assert.doesNotMatch(coordination, /remaining integration queue[^\n]*013/i);
+      assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012[^\n]*013/i);
+    }
   }
 });
 

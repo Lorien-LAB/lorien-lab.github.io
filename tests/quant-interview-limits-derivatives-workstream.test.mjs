@@ -185,7 +185,7 @@ async function assertCoverageSource(source, expectedRows) {
   return Object.keys(expectedRows).map((key) => rows.get(key));
 }
 
-test('exactly two Red source mappings change and every other map entry stays frozen', async () => {
+test('012 Red repairs stay frozen at exact positions and 013 Red 1.12 reroute is present; map hash pinned', async () => {
   const sourceTopicMap = await readJson(mapPath);
   const repairedKeys = new Set(['red-book::6.2.2', 'red-book::6.3.2']);
   const repairedIndexes = sourceTopicMap.entries.flatMap((entry, index) =>
@@ -193,7 +193,7 @@ test('exactly two Red source mappings change and every other map entry stays fro
   );
   assert.equal(sourceTopicMap.version, 1);
   assert.equal(sourceTopicMap.entries.length, 281);
-  assert.deepEqual(repairedIndexes, [241, 244], 'the two repaired entries must retain their exact array positions');
+  assert.deepEqual(repairedIndexes, [241, 244], 'the two 012 repaired entries must retain their exact array positions');
   assert.deepEqual(repairedIndexes.map((index) => sourceTopicMap.entries[index]), [
     {
       source: 'red-book',
@@ -208,10 +208,13 @@ test('exactly two Red source mappings change and every other map entry stays fro
       canonicalTopics: ['limits-derivatives', 'integration'],
     },
   ]);
+  const red112 = sourceTopicMap.entries.find((e) => e.source === 'red-book' && e.sourceSection === '1.12');
+  assert.ok(red112, 'Red 1.12 must remain in the map');
+  assert.deepEqual(red112.canonicalTopics, ['interview-preparation'], '013 reroutes Red 1.12 to interview-preparation');
   assert.equal(
     createHash('sha256').update(JSON.stringify(sourceTopicMap)).digest('hex'),
-    '0370edc39605e70f7aea12fe7c38cff717aee33bbbc0e3e23594c67519c9ce58',
-    'entire final source-topic-map object, including version and entry order, must stay frozen after the two repairs',
+    '5297f52f76c252c587734a8a1504737f428b145332f34ee783bd5cb97fcefa6f',
+    'entire final source-topic-map object, including version and entry order, must stay frozen after the authorized 012 and 013 repairs',
   );
 });
 

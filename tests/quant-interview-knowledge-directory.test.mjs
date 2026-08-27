@@ -181,10 +181,10 @@ test('repository catalog contains the exact published corpus and planned 013 mod
   const repositoryTaxonomy = JSON.parse(taxonomyText);
   assert.equal(validateKnowledgeCatalog(repositoryCatalog, repositoryTaxonomy, knowledgeRecords), true);
   assert.equal(repositoryCatalog.modules.length, 50);
-  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 48);
+  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 50);
   assert.deepEqual(
     repositoryCatalog.modules.filter((module) => module.status === 'planned').map((module) => module.slug).sort(),
-    ['problem-framing-clarification-assumption-management', 'structured-think-aloud-reasoning'],
+    [],
   );
   assert.deepEqual(
     Object.fromEntries(repositoryCatalog.modules.map((module) => [module.slug, module.prerequisites])),
@@ -213,13 +213,13 @@ test('repository public projection exposes the complete source-neutral curriculu
     problemRecords,
     base: '/',
   });
-  assert.deepEqual(result.totals, { published: 48, planned: 2 });
+  assert.deepEqual(result.totals, { published: 50, planned: 0 });
   assert.equal(result.topics.length, 10);
   const interview = result.topics.find((topic) => topic.id === 'interview-strategy-communication');
   const reasoning = interview.children.find((topic) => topic.id === 'reasoning-communication');
   assert.deepEqual(reasoning.modules.map((module) => [module.slug, module.status, module.href]), [
-    ['problem-framing-clarification-assumption-management', 'planned', null],
-    ['structured-think-aloud-reasoning', 'planned', null],
+    ['problem-framing-clarification-assumption-management', 'published', '/knowledge/problem-framing-clarification-assumption-management/'],
+    ['structured-think-aloud-reasoning', 'published', '/knowledge/structured-think-aloud-reasoning/'],
   ]);
   const logic = result.topics.find((topic) => topic.id === 'logic-brainteasers-discrete-reasoning');
   assert.equal(logic.modules.some((module) => module.slug === 'recursion-problem-solving'), true);

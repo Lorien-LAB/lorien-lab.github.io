@@ -403,6 +403,7 @@ test('handoff preserves exact reservations while 012 advances through its lifecy
   const rows = reservationRows(coordination);
   const workstream011 = JSON.parse(await readFile(workstream011Path, 'utf8'));
   const workstream012 = JSON.parse(await readFile(workstream012Path, 'utf8'));
+  const workstream013 = JSON.parse(await readFile(workstream013Path, 'utf8'));
 
   assert.ok(coordination, 'HANDOFF missing parallel workstream coordination');
   assert.match(coordination, /maximum active candidates[^\n]*3/i);
@@ -414,7 +415,7 @@ test('handoff preserves exact reservations while 012 advances through its lifecy
   );
   assert.equal(rows[0]?.state, 'complete');
   assert.equal(rows[1]?.state, workstream012.status);
-  assert.equal(rows[2]?.state, 'design-audit');
+  assert.equal(rows[2]?.state, workstream013.status);
   assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011/i);
   if (workstream012.status === 'active') {
     assert.match(coordination, /remaining integration queue[^\n]*012[^\n]*013/i);
@@ -422,7 +423,14 @@ test('handoff preserves exact reservations while 012 advances through its lifecy
   } else {
     assertFactual012Closure(workstream012, handoff);
     assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012/i);
-    assert.match(coordination, /remaining integration queue[^\n]*013/i);
+    if (workstream013.status === 'active') {
+      assert.match(coordination, /remaining integration queue[^\n]*013/i);
+      assert.doesNotMatch(coordination, /completed queue entr(?:y|ies)[^\n]*013/i);
+    } else {
+      assert.equal(workstream013.status, 'complete');
+      assert.doesNotMatch(coordination, /remaining integration queue[^\n]*013/i);
+      assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012[^\n]*013/i);
+    }
     assert.doesNotMatch(coordination, /remaining integration queue[^\n]*012/i);
   }
 });

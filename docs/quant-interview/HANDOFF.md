@@ -425,11 +425,13 @@ The finite-chain and state-compression Knowledge nodes link reciprocally through
 
 Martingales and optional stopping, Brownian motion, Itô calculus, SDEs, continuous-time chains, general dynamic programming, and optimal stopping remain outside workstream 011.
 
-## Public corpus state after eleven workstreams
+Historical corpus checkpoint after workstream 11: **63 canonical Problems** and **41 explicitly topic-classified Knowledge / Technique nodes**. This checkpoint is retained for repository lineage only.
 
-The current source-neutral regression contract discovers exactly **63 canonical Problems** and **41 explicitly topic-classified Knowledge / Technique nodes**.
+## Public corpus state (current)
 
-These are repository-record counts only. They are not whole-book completeness percentages and do not imply that Probability & Statistics as a whole is complete.
+The current source-neutral regression contract discovers exactly **76 canonical Problems** and **50 explicitly topic-classified Knowledge / Technique nodes**.
+
+These are repository-record counts only. They are not whole-book completeness percentages and do not imply that Interview Strategy & Communication, Reasoning & Communication, or Green/Red/150 as a whole is complete.
 
 ## Verified source state
 
@@ -521,7 +523,7 @@ Current bounded topic:
 
 **Interview Strategy & Communication → Reasoning & Communication.**
 
-Workstream 012 is factually closed. Workstream 013 is now the sole remaining serialized reservation; it remains in design-audit until its own coordinator integration and must not inherit a completion claim or manifest from 012.
+Workstream 012 is factually closed. Workstream 013 is now in coordinator integration (active): its two canonical Knowledge nodes (Problem Framing, Clarification & Assumption Management; Structured Think-Aloud Reasoning) are published and the serialized queue reconciliation is in progress. It must complete its own real CI verification and coordinator closure before any completion claim.
 
 Do not reopen closed workstream 012 during 013. Preserve source-neutral public identity, item-level hidden coverage, protected-main safety, and the exact serialized order.
 
@@ -533,9 +535,11 @@ Maximum active candidates: **3**. Parallel candidates are isolated design and im
 |---:|---:|---|---|---|
 | 1 | 011 | `random-walks-markov-chains` | `chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23` | complete |
 | 2 | 012 | `limits-derivatives` | `chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23` | complete |
-| 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | design-audit |
+| 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | active |
 
-Completed queue entries: **011, 012**. Remaining integration queue: **013**. A candidate stays `active` during implementation and is not `complete` until the coordinator integrates it on the latest durable base, reconciles shared state, obtains fresh local and real CI verification for the exact commit, and records factual closure here.
+Completed queue entries: **011, 012**.
+
+Remaining integration queue: **013**. A candidate stays `active` during implementation and is not `complete` until the coordinator integrates it on the latest durable base, reconciles shared state, obtains fresh local and real CI verification for the exact commit, and records factual closure here.
 
 ## Non-negotiable invariants
 

@@ -44,9 +44,12 @@
       "canonicalTopics": [
         "reasoning-communication"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "problem-framing-clarification-assumption-management"
+      ],
+      "resolutionNote": "Green Book 1.3 (Listen carefully) is interview-guidance evidence for Problem Framing, Clarification & Assumption Management; it resolves to that canonical Knowledge only, with no new Problem."
     },
     {
       "sourceSection": "1.4",
@@ -54,9 +57,12 @@
       "canonicalTopics": [
         "reasoning-communication"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "structured-think-aloud-reasoning"
+      ],
+      "resolutionNote": "Green Book 1.4 (Speak your mind) is interview-guidance evidence for Structured Think-Aloud Reasoning; it resolves to that canonical Knowledge only, with no new Problem."
     },
     {
       "sourceSection": "1.5",
@@ -64,9 +70,12 @@
       "canonicalTopics": [
         "reasoning-communication"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "problem-framing-clarification-assumption-management"
+      ],
+      "resolutionNote": "Green Book 1.5 (Make reasonable assumptions) is interview-guidance evidence for Problem Framing, Clarification & Assumption Management; it resolves to that canonical Knowledge only, with no new Problem."
     },
     {
       "sourceSection": "2",

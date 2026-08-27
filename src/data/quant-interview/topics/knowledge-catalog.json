@@ -10,7 +10,7 @@
       ],
       "primaryTopic": "reasoning-communication",
       "learningOrder": 10,
-      "status": "planned",
+      "status": "published",
       "prerequisites": []
     },
     {
@@ -22,7 +22,7 @@
       ],
       "primaryTopic": "reasoning-communication",
       "learningOrder": 20,
-      "status": "planned",
+      "status": "published",
       "prerequisites": [
         "problem-framing-clarification-assumption-management"
       ]

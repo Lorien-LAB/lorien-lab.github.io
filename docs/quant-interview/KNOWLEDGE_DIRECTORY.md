@@ -6,8 +6,8 @@
 
 ## Summary
 
-- Published Knowledge: 48
-- Planned Knowledge: 2
+- Published Knowledge: 50
+- Planned Knowledge: 0
 - Canonical Problems: 76
 
 
@@ -18,7 +18,7 @@
 - Green Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`
 - Red Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`, `1.6`, `1.7`, `1.8`, `1.9`, `1.10`, `1.11`, `1.12`, `9`, `9.2`, `9.3`
 - 150 Questions sections: None
-- Workstreams: None
+- Workstreams: `interview-strategy-communication-reasoning-communication-013` (active)
 
 ### Modules
 
@@ -27,8 +27,8 @@
 
 ### Coverage records
 
-- Green Book: `pending`: 5
-- Red Book: `pending`: 15
+- Green Book: `knowledge-only`: 3, `pending`: 2
+- Red Book: `interview-guidance`: 1, `pending`: 14
 - 150 Questions: None
 
 
@@ -37,7 +37,7 @@
 - Curriculum: 0 published / 0 planned
 - Problems: 0
 - Green Book sections: `1.1`, `1.2`
-- Red Book sections: `1.10`, `1.11`, `9.3`
+- Red Book sections: `1.10`, `1.11`, `1.12`, `9.3`
 - 150 Questions sections: None
 - Workstreams: None
 
@@ -49,30 +49,30 @@
 #### Coverage records
 
 - Green Book: `pending`: 2
-- Red Book: `pending`: 3
+- Red Book: `interview-guidance`: 1, `pending`: 3
 - 150 Questions: None
 
 
 ### 01.02. Reasoning & Communication
 
-- Curriculum: 0 published / 2 planned
+- Curriculum: 2 published / 0 planned
 - Problems: 0
 - Green Book sections: `1.3`, `1.4`, `1.5`
-- Red Book sections: `1.12`
+- Red Book sections: None
 - 150 Questions sections: None
-- Workstreams: None
+- Workstreams: `interview-strategy-communication-reasoning-communication-013` (active)
 
 #### Modules
 
 | Order | State | Slug | Prerequisites |
 |---:|---|---|---|
-| 10 | planned | `problem-framing-clarification-assumption-management` | None |
-| 20 | planned | `structured-think-aloud-reasoning` | `problem-framing-clarification-assumption-management` |
+| 10 | published | `problem-framing-clarification-assumption-management` | None |
+| 20 | published | `structured-think-aloud-reasoning` | `problem-framing-clarification-assumption-management` |
 
 #### Coverage records
 
-- Green Book: `pending`: 3
-- Red Book: `pending`: 1
+- Green Book: `knowledge-only`: 3
+- Red Book: None
 - 150 Questions: None
 
 
