@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "check": "astro check",
     "test": "node --test tests/*.test.mjs",
+    "master:directory:check": "node scripts/validate-quant-interview-master-directory.mjs --check",
     "knowledge:directory": "node scripts/generate-quant-interview-knowledge-directory.mjs --write",
     "knowledge:directory:check": "node scripts/generate-quant-interview-knowledge-directory.mjs --check"
   },
