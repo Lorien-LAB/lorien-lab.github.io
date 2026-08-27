@@ -132,13 +132,22 @@ export function validateMasterDirectory(directory, context) {
     if (item.kind !== 'non-content' && item.questionPages.length === 0) {
       throw new Error(`Reviewable master item requires questionPages at ${item.key}`);
     }
-    if (!topicById.has(item.primaryTopic)) throw new Error(`Unknown primaryTopic at ${item.key}`);
-    if (!Array.isArray(item.canonicalTopics)
-      || !item.canonicalTopics.includes(item.primaryTopic)) {
-      throw new Error(`primaryTopic must be present in canonicalTopics at ${item.key}`);
-    }
-    for (const topicId of item.canonicalTopics) {
-      if (!topicById.has(topicId)) throw new Error(`Unknown canonical topic ${topicId} at ${item.key}`);
+    const isNonContent = item.kind === 'non-content';
+    if (isNonContent) {
+      if (item.primaryTopic !== null
+        || !Array.isArray(item.canonicalTopics)
+        || item.canonicalTopics.length !== 0) {
+        throw new Error(`Non-content master item must have no canonical topic at ${item.key}`);
+      }
+    } else {
+      if (!topicById.has(item.primaryTopic)) throw new Error(`Unknown primaryTopic at ${item.key}`);
+      if (!Array.isArray(item.canonicalTopics)
+        || !item.canonicalTopics.includes(item.primaryTopic)) {
+        throw new Error(`primaryTopic must be present in canonicalTopics at ${item.key}`);
+      }
+      for (const topicId of item.canonicalTopics) {
+        if (!topicById.has(topicId)) throw new Error(`Unknown canonical topic ${topicId} at ${item.key}`);
+      }
     }
     if (!SORT_KEY.test(item.sortKey) || sortKeys.has(item.sortKey)) {
       throw new Error(`Invalid or duplicate sortKey at ${item.key}`);
@@ -148,8 +157,10 @@ export function validateMasterDirectory(directory, context) {
     const [topicRank, sourceRank] = item.sortKey.split('|');
     const topic = topicById.get(item.primaryTopic);
     let root = topic;
-    while (root.parentId) root = topicById.get(root.parentId);
-    const expectedTopicRank = `${String(root.order).padStart(2, '0')}.${String(topic.order).padStart(2, '0')}`;
+    while (root?.parentId) root = topicById.get(root.parentId);
+    const expectedTopicRank = isNonContent
+      ? '99.99'
+      : `${String(root.order).padStart(2, '0')}.${String(topic.order).padStart(2, '0')}`;
     const expectedSourceRank = String(SOURCE_ORDER.indexOf(item.source) + 1).padStart(2, '0');
     if (topicRank !== expectedTopicRank) {
       throw new Error(`sortKey topic rank mismatch at ${item.key}`);

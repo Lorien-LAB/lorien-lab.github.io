@@ -141,3 +141,32 @@ test('sequential scope starts at the first pending record and stays consecutive'
     /must start at first pending.*green-book::1\.1::guidance/i,
   );
 });
+
+test('non-content source records may remain outside canonical topic order', () => {
+  const directory = structuredClone(baseDirectory);
+  directory.items.push({
+    key: 'green-book::preface::non-content',
+    kind: 'non-content',
+    source: 'green-book',
+    sourceSection: 'preface',
+    sourceItem: null,
+    questionPages: [],
+    solutionPages: [],
+    primaryTopic: null,
+    canonicalTopics: [],
+    sortKey: '99.99|01|0001|green-book::preface::non-content',
+    state: 'non-content-frontmatter',
+    canonicalProblems: [],
+    canonicalKnowledge: [],
+    workstream: null,
+    resolutionNote: 'Verified frontmatter with no public ingestion target.',
+  });
+  const localContext = {
+    ...context,
+    sourceSections: new Map(
+      [...context.sourceSections].map(([source, sections]) => [source, new Set(sections)]),
+    ),
+  };
+  localContext.sourceSections.get('green-book').add('preface');
+  assert.equal(validateMasterDirectory(directory, localContext), true);
+});

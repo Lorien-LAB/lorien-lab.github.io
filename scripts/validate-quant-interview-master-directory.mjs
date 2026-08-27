@@ -106,6 +106,29 @@ export function validateMasterDirectoryRepository(inputs) {
     }
   }
 
+  const byLegacyKey = new Map();
+  for (const item of inputs.directory.items) {
+    const key = `${item.source}::${item.sourceSection}::${item.sourceItem ?? ''}`;
+    if (byLegacyKey.has(key)) throw new Error(`Duplicate master legacy key: ${key}`);
+    byLegacyKey.set(key, item);
+  }
+  for (const [source, ledger] of Object.entries(inputs.coverageLedgers)) {
+    for (const entry of ledger.entries) {
+      const key = `${source}::${entry.sourceSection}::${entry.sourceItem ?? ''}`;
+      const item = byLegacyKey.get(key);
+      if (!item) throw new Error(`Coverage row missing from master directory: ${key}`);
+      if (JSON.stringify([item.state, item.canonicalProblems, item.canonicalKnowledge])
+        !== JSON.stringify([entry.state, entry.canonicalProblems, entry.canonicalKnowledge])) {
+        throw new Error(`Coverage/master migration mismatch: ${key}`);
+      }
+    }
+  }
+  if (inputs.problemSlugs.size !== 76 || inputs.knowledgeSlugs.size !== 50) {
+    throw new Error(
+      `Master migration must preserve 76 Problems / 50 Knowledge; received ${inputs.problemSlugs.size}/${inputs.knowledgeSlugs.size}`,
+    );
+  }
+
   return true;
 }
 

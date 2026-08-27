@@ -63,9 +63,12 @@ test('Green Book is completely represented in physical and canonical order', asy
   const greenContentSections = sourceTopicMap.entries
     .filter(({ source, role }) => source === 'green-book' && role === 'content')
     .map(({ sourceSection }) => sourceSection);
-  assert.equal(greenItems.length, 181);
+  const greenEnumerated = greenItems.filter((item) =>
+    item.sourceItem === null && greenContentSections.includes(item.sourceSection));
+  assert.equal(greenEnumerated.length, 181);
+  assert.equal(greenItems.length, 227);
   assert.deepEqual(
-    new Set(greenItems.map(({ sourceSection }) => sourceSection)),
+    new Set(greenEnumerated.map(({ sourceSection }) => sourceSection)),
     new Set(greenContentSections),
   );
 
@@ -83,7 +86,7 @@ test('Green Book is completely represented in physical and canonical order', asy
       `missing Green TOC section ${id}`,
     );
   }
-  for (const item of greenItems) {
+  for (const item of greenEnumerated) {
     assert.ok(item.questionPages.length > 0, item.key);
     assert.equal(item.solutionPages.length, 0, item.key);
   }
@@ -97,7 +100,9 @@ test('Red Book questions and solutions are completely paired', async () => {
   assert.ok(redItems.length > 0);
   assert.equal(new Set(redItems.map(({ key }) => key)).size, redItems.length);
   const questionItems = redItems.filter((item) => item.kind === 'question');
-  assert.equal(redItems.length, 318);
+  const redEnumerated = redItems.filter((item) => Number(item.sortKey.split('|')[2]) < 8000);
+  assert.equal(redEnumerated.length, 318);
+  assert.equal(redItems.length, 344);
   assert.equal(questionItems.length, 272);
   for (const item of questionItems) {
     assert.ok(item.questionPages.length > 0, `${item.key} question pages`);
@@ -152,7 +157,9 @@ test('150 Questions has complete numbered question and solution pairs', async ()
   assert.equal(new Set(items.map(({ key }) => key)).size, items.length);
 
   const questions = items.filter((item) => item.kind === 'question');
-  assert.equal(items.length, 175);
+  const enumeratedItems = items.filter((item) => Number(item.sortKey.split('|')[2]) < 8000);
+  assert.equal(enumeratedItems.length, 175);
+  assert.equal(items.length, 179);
   assert.equal(questions.length, 160);
   for (const item of questions) {
     assert.match(item.sourceItem ?? '', /^\d+(?:\.\d+)*$/);
@@ -180,4 +187,66 @@ test('150 Questions has complete numbered question and solution pairs', async ()
     '2.7': 32,
   });
   assert.equal(questions.filter(({ sourceSection }) => sourceSection !== '1').length, 150);
+});
+
+const legacyKey = (source, sourceSection, sourceItem) =>
+  `${source}::${sourceSection}::${sourceItem ?? ''}`;
+
+test('every legacy coverage row maps exactly once into the master directory', async () => {
+  const { directory, coverageLedgers } = await loadMasterDirectoryRepository(process.cwd());
+  const masterByLegacyKey = new Map();
+  for (const item of directory.items) {
+    const key = legacyKey(item.source, item.sourceSection, item.sourceItem);
+    assert.equal(masterByLegacyKey.has(key), false, `duplicate master legacy key ${key}`);
+    masterByLegacyKey.set(key, item);
+  }
+  for (const [source, ledger] of Object.entries(coverageLedgers)) {
+    for (const entry of ledger.entries) {
+      const key = legacyKey(source, entry.sourceSection, entry.sourceItem);
+      const item = masterByLegacyKey.get(key);
+      assert.ok(item, `missing master migration row ${key}`);
+      assert.equal(item.state, entry.state, key);
+      assert.deepEqual(item.canonicalProblems, entry.canonicalProblems, key);
+      assert.deepEqual(item.canonicalKnowledge, entry.canonicalKnowledge, key);
+    }
+  }
+});
+
+test('master migration preserves the exact pre-ingestion public corpus', async () => {
+  const inputs = await loadMasterDirectoryRepository(process.cwd());
+  assert.equal(inputs.problemSlugs.size, 76);
+  assert.equal(inputs.knowledgeSlugs.size, 50);
+  assert.equal(inputs.workstreams.filter(({ status }) => status !== 'complete').length, 0);
+  assert.deepEqual(inputs.workstreams.map(({ id }) => id).sort(), [
+    'calculus-differential-equations-limits-derivatives-012',
+    'interview-strategy-communication-reasoning-communication-013',
+    'linear-algebra-covariance-correlation-psd-001',
+    'linear-algebra-determinants-eigenvalues-002',
+    'linear-algebra-matrix-decompositions-003',
+    'linear-algebra-vectors-linear-systems-004',
+    'probability-statistics-combinatorial-probability-006',
+    'probability-statistics-conditional-probability-bayes-007',
+    'probability-statistics-expectation-variance-covariance-009',
+    'probability-statistics-order-statistics-extremes-010',
+    'probability-statistics-probability-foundations-005',
+    'probability-statistics-random-variables-distributions-008',
+    'stochastic-processes-random-walks-markov-chains-011',
+  ]);
+});
+
+test('repository validator rejects coverage and master lifecycle drift', async () => {
+  const inputs = await loadMasterDirectoryRepository(process.cwd());
+  const item = inputs.directory.items.find((record) =>
+    record.source === 'green-book'
+      && record.sourceSection === '1.3'
+      && record.sourceItem === null);
+  item.state = 'pending';
+  item.canonicalProblems = [];
+  item.canonicalKnowledge = [];
+  item.workstream = null;
+  item.resolutionNote = null;
+  assert.throws(
+    () => validateMasterDirectoryRepository(inputs),
+    /coverage\/master migration mismatch: green-book::1\.3::/i,
+  );
 });
