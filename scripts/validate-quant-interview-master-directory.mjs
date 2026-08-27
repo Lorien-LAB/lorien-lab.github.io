@@ -32,9 +32,10 @@ function flattenTocSections(sections, output = new Set()) {
 
 export async function loadMasterDirectoryRepository(repoRoot = process.cwd()) {
   const dataRoot = path.join(repoRoot, 'src', 'data', 'quant-interview');
-  const [directory, taxonomy, ...sourceInputs] = await Promise.all([
+  const [directory, taxonomy, sourceTopicMap, ...sourceInputs] = await Promise.all([
     readJson(path.join(dataRoot, 'master-directory.json')),
     readJson(path.join(dataRoot, 'topics', 'taxonomy.json')),
+    readJson(path.join(dataRoot, 'topics', 'source-topic-map.json')),
     ...SOURCES.flatMap((source) => [
       readJson(path.join(dataRoot, `${source}.json`)),
       readJson(path.join(dataRoot, 'toc', `${source}.json`)),
@@ -62,6 +63,7 @@ export async function loadMasterDirectoryRepository(repoRoot = process.cwd()) {
   return {
     directory,
     taxonomy,
+    sourceTopicMap,
     sourceManifests,
     tocs,
     coverageLedgers,
