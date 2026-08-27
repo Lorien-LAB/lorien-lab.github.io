@@ -2891,6 +2891,177 @@
       "order": 12,
       "source": "red-book",
       "sourceSection": "index"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::preface",
+      "kind": "source-section",
+      "title": "Preface",
+      "parentId": null,
+      "order": 1,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "preface"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::1",
+      "kind": "source-section",
+      "title": "First Look: Ten Questions",
+      "parentId": null,
+      "order": 2,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::2",
+      "kind": "source-section",
+      "title": "Questions",
+      "parentId": null,
+      "order": 3,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::2.1",
+      "kind": "source-subsection",
+      "title": "Mathematics, calculus, differential equations",
+      "parentId": "source-section::150-most-frequently-asked::2",
+      "order": 1,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::2.2",
+      "kind": "source-subsection",
+      "title": "Covariance and correlation matrices, linear algebra",
+      "parentId": "source-section::150-most-frequently-asked::2",
+      "order": 2,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::2.3",
+      "kind": "source-subsection",
+      "title": "Financial instruments: options, bonds, swaps, forwards, futures",
+      "parentId": "source-section::150-most-frequently-asked::2",
+      "order": 3,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::2.4",
+      "kind": "source-subsection",
+      "title": "C++ data structures",
+      "parentId": "source-section::150-most-frequently-asked::2",
+      "order": 4,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::2.5",
+      "kind": "source-subsection",
+      "title": "Monte Carlo simulation, numerical methods",
+      "parentId": "source-section::150-most-frequently-asked::2",
+      "order": 5,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::2.6",
+      "kind": "source-subsection",
+      "title": "Probability, stochastic calculus",
+      "parentId": "source-section::150-most-frequently-asked::2",
+      "order": 6,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::2.7",
+      "kind": "source-subsection",
+      "title": "Brainteasers",
+      "parentId": "source-section::150-most-frequently-asked::2",
+      "order": 7,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::3",
+      "kind": "source-section",
+      "title": "Solutions",
+      "parentId": null,
+      "order": 4,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::3.1",
+      "kind": "source-subsection",
+      "title": "Mathematics, calculus, differential equations",
+      "parentId": "source-section::150-most-frequently-asked::3",
+      "order": 1,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.1"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::3.2",
+      "kind": "source-subsection",
+      "title": "Covariance and correlation matrices, linear algebra",
+      "parentId": "source-section::150-most-frequently-asked::3",
+      "order": 2,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.2"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::3.3",
+      "kind": "source-subsection",
+      "title": "Financial instruments: options, bonds, swaps, forwards, futures",
+      "parentId": "source-section::150-most-frequently-asked::3",
+      "order": 3,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.3"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::3.4",
+      "kind": "source-subsection",
+      "title": "C++ data structures",
+      "parentId": "source-section::150-most-frequently-asked::3",
+      "order": 4,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.4"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::3.5",
+      "kind": "source-subsection",
+      "title": "Monte Carlo simulation, numerical methods",
+      "parentId": "source-section::150-most-frequently-asked::3",
+      "order": 5,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.5"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::3.6",
+      "kind": "source-subsection",
+      "title": "Probability, stochastic calculus",
+      "parentId": "source-section::150-most-frequently-asked::3",
+      "order": 6,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.6"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::3.7",
+      "kind": "source-subsection",
+      "title": "Brainteasers",
+      "parentId": "source-section::150-most-frequently-asked::3",
+      "order": 7,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.7"
+    },
+    {
+      "id": "source-section::150-most-frequently-asked::bibliography",
+      "kind": "source-section",
+      "title": "Bibliography",
+      "parentId": null,
+      "order": 5,
+      "source": "150-most-frequently-asked",
+      "sourceSection": "bibliography"
     }
   ],
   "items": [
@@ -4563,6 +4734,126 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.7::8",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "8",
+      "questionPages": [
+        {
+          "startPage": 45,
+          "endPage": 45
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 182,
+          "endPage": 185
+        }
+      ],
+      "primaryTopic": "problem-simplification",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "problem-simplification"
+      ],
+      "sortKey": "02.01|03|1135|150-most-frequently-asked::2.7::8",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::16",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "16",
+      "questionPages": [
+        {
+          "startPage": 46,
+          "endPage": 46
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 192,
+          "endPage": 194
+        }
+      ],
+      "primaryTopic": "problem-simplification",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "problem-simplification"
+      ],
+      "sortKey": "02.01|03|1143|150-most-frequently-asked::2.7::16",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::23",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "23",
+      "questionPages": [
+        {
+          "startPage": 48,
+          "endPage": 48
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 199,
+          "endPage": 201
+        }
+      ],
+      "primaryTopic": "problem-simplification",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "problem-simplification"
+      ],
+      "sortKey": "02.01|03|1150|150-most-frequently-asked::2.7::23",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::30",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "30",
+      "questionPages": [
+        {
+          "startPage": 49,
+          "endPage": 49
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 215,
+          "endPage": 216
+        }
+      ],
+      "primaryTopic": "problem-simplification",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "problem-simplification"
+      ],
+      "sortKey": "02.01|03|1157|150-most-frequently-asked::2.7::30",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::2.2::theory",
       "kind": "theory",
       "source": "green-book",
@@ -5365,6 +5656,304 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.7::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 44,
+          "endPage": 50
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "logical-deduction",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "sortKey": "02.02|03|0008|150-most-frequently-asked::2.7::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::3.7::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.7",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 175,
+          "endPage": 218
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "logical-deduction",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "sortKey": "02.02|03|0015|150-most-frequently-asked::3.7::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::1::8",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": "8",
+      "questionPages": [
+        {
+          "startPage": 12,
+          "endPage": 12
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 22,
+          "endPage": 22
+        }
+      ],
+      "primaryTopic": "logical-deduction",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ],
+      "sortKey": "02.02|03|1007|150-most-frequently-asked::1::8",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::4",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "4",
+      "questionPages": [
+        {
+          "startPage": 44,
+          "endPage": 44
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 178,
+          "endPage": 179
+        }
+      ],
+      "primaryTopic": "logical-deduction",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "sortKey": "02.02|03|1131|150-most-frequently-asked::2.7::4",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::9",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "9",
+      "questionPages": [
+        {
+          "startPage": 45,
+          "endPage": 45
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 185,
+          "endPage": 185
+        }
+      ],
+      "primaryTopic": "logical-deduction",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "sortKey": "02.02|03|1136|150-most-frequently-asked::2.7::9",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::11",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "11",
+      "questionPages": [
+        {
+          "startPage": 45,
+          "endPage": 45
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 185,
+          "endPage": 187
+        }
+      ],
+      "primaryTopic": "logical-deduction",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "sortKey": "02.02|03|1138|150-most-frequently-asked::2.7::11",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::22",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "22",
+      "questionPages": [
+        {
+          "startPage": 48,
+          "endPage": 48
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 198,
+          "endPage": 199
+        }
+      ],
+      "primaryTopic": "logical-deduction",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "sortKey": "02.02|03|1149|150-most-frequently-asked::2.7::22",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::26",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "26",
+      "questionPages": [
+        {
+          "startPage": 48,
+          "endPage": 49
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 206,
+          "endPage": 208
+        }
+      ],
+      "primaryTopic": "logical-deduction",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "sortKey": "02.02|03|1153|150-most-frequently-asked::2.7::26",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::31",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "31",
+      "questionPages": [
+        {
+          "startPage": 49,
+          "endPage": 49
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 216,
+          "endPage": 216
+        }
+      ],
+      "primaryTopic": "logical-deduction",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "sortKey": "02.02|03|1158|150-most-frequently-asked::2.7::31",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::32",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "32",
+      "questionPages": [
+        {
+          "startPage": 49,
+          "endPage": 49
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 216,
+          "endPage": 216
+        }
+      ],
+      "primaryTopic": "logical-deduction",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "sortKey": "02.02|03|1159|150-most-frequently-asked::2.7::32",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "red-book::8::8.7",
       "kind": "question",
       "source": "red-book",
@@ -5448,6 +6037,66 @@
         "invariants-state-transformations"
       ],
       "sortKey": "02.03|02|1224|red-book::8::8.23",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::1::4",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": "4",
+      "questionPages": [
+        {
+          "startPage": 11,
+          "endPage": 12
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 17,
+          "endPage": 18
+        }
+      ],
+      "primaryTopic": "invariants-state-transformations",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "invariants-state-transformations"
+      ],
+      "sortKey": "02.03|03|1003|150-most-frequently-asked::1::4",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::18",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "18",
+      "questionPages": [
+        {
+          "startPage": 47,
+          "endPage": 47
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 194,
+          "endPage": 195
+        }
+      ],
+      "primaryTopic": "invariants-state-transformations",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "invariants-state-transformations"
+      ],
+      "sortKey": "02.03|03|1145|150-most-frequently-asked::2.7::18",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -5578,6 +6227,36 @@
         "symmetry"
       ],
       "sortKey": "02.04|02|1225|red-book::8::8.24",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::15",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "15",
+      "questionPages": [
+        {
+          "startPage": 46,
+          "endPage": 46
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 191,
+          "endPage": 192
+        }
+      ],
+      "primaryTopic": "symmetry",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "symmetry"
+      ],
+      "sortKey": "02.04|03|1142|150-most-frequently-asked::2.7::15",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -5735,6 +6414,36 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.7::19",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "19",
+      "questionPages": [
+        {
+          "startPage": 47,
+          "endPage": 47
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 195,
+          "endPage": 196
+        }
+      ],
+      "primaryTopic": "pigeonhole-principle",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "pigeonhole-principle"
+      ],
+      "sortKey": "02.05|03|1146|150-most-frequently-asked::2.7::19",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::2.7::theory",
       "kind": "theory",
       "source": "green-book",
@@ -5858,6 +6567,36 @@
         "modular-arithmetic"
       ],
       "sortKey": "02.06|02|1222|red-book::8::8.21",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::1::2",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": "2",
+      "questionPages": [
+        {
+          "startPage": 11,
+          "endPage": 11
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 14,
+          "endPage": 16
+        }
+      ],
+      "primaryTopic": "modular-arithmetic",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "modular-arithmetic"
+      ],
+      "sortKey": "02.06|03|1001|150-most-frequently-asked::1::2",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -6412,6 +7151,66 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.7::10",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "10",
+      "questionPages": [
+        {
+          "startPage": 45,
+          "endPage": 45
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 185,
+          "endPage": 185
+        }
+      ],
+      "primaryTopic": "summation-combinatorial-puzzles",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "summation-combinatorial-puzzles"
+      ],
+      "sortKey": "02.09|03|1137|150-most-frequently-asked::2.7::10",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::17",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "17",
+      "questionPages": [
+        {
+          "startPage": 46,
+          "endPage": 47
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 194,
+          "endPage": 194
+        }
+      ],
+      "primaryTopic": "summation-combinatorial-puzzles",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "summation-combinatorial-puzzles"
+      ],
+      "sortKey": "02.09|03|1144|150-most-frequently-asked::2.7::17",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::3.1::theory",
       "kind": "theory",
       "source": "green-book",
@@ -6943,6 +7742,296 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.1::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 27,
+          "endPage": 29
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "limits-derivatives",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "sortKey": "03.01|03|0002|150-most-frequently-asked::2.1::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::3.1::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.1",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 50,
+          "endPage": 65
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "limits-derivatives",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "sortKey": "03.01|03|0009|150-most-frequently-asked::3.1::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::1",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "1",
+      "questionPages": [
+        {
+          "startPage": 27,
+          "endPage": 27
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 50,
+          "endPage": 50
+        }
+      ],
+      "primaryTopic": "limits-derivatives",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "sortKey": "03.01|03|1010|150-most-frequently-asked::2.1::1",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::2",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "2",
+      "questionPages": [
+        {
+          "startPage": 27,
+          "endPage": 27
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 50,
+          "endPage": 51
+        }
+      ],
+      "primaryTopic": "limits-derivatives",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "sortKey": "03.01|03|1011|150-most-frequently-asked::2.1::2",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::3",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "3",
+      "questionPages": [
+        {
+          "startPage": 27,
+          "endPage": 27
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 51,
+          "endPage": 52
+        }
+      ],
+      "primaryTopic": "limits-derivatives",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "sortKey": "03.01|03|1012|150-most-frequently-asked::2.1::3",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::4",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "4",
+      "questionPages": [
+        {
+          "startPage": 27,
+          "endPage": 27
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 52,
+          "endPage": 52
+        }
+      ],
+      "primaryTopic": "limits-derivatives",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "sortKey": "03.01|03|1013|150-most-frequently-asked::2.1::4",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::5",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "5",
+      "questionPages": [
+        {
+          "startPage": 27,
+          "endPage": 27
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 52,
+          "endPage": 52
+        }
+      ],
+      "primaryTopic": "limits-derivatives",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "sortKey": "03.01|03|1014|150-most-frequently-asked::2.1::5",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::6",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "6",
+      "questionPages": [
+        {
+          "startPage": 27,
+          "endPage": 27
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 52,
+          "endPage": 53
+        }
+      ],
+      "primaryTopic": "limits-derivatives",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "sortKey": "03.01|03|1015|150-most-frequently-asked::2.1::6",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::7",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "7",
+      "questionPages": [
+        {
+          "startPage": 27,
+          "endPage": 27
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 53,
+          "endPage": 55
+        }
+      ],
+      "primaryTopic": "limits-derivatives",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "sortKey": "03.01|03|1016|150-most-frequently-asked::2.1::7",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::8",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "8",
+      "questionPages": [
+        {
+          "startPage": 27,
+          "endPage": 28
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 55,
+          "endPage": 57
+        }
+      ],
+      "primaryTopic": "limits-derivatives",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "limits-derivatives"
+      ],
+      "sortKey": "03.01|03|1017|150-most-frequently-asked::2.1::8",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::3.2::theory",
       "kind": "theory",
       "source": "green-book",
@@ -7253,6 +8342,126 @@
         "integration"
       ],
       "sortKey": "03.02|02|1166|red-book::6.2.2::6.26",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::9",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "9",
+      "questionPages": [
+        {
+          "startPage": 28,
+          "endPage": 28
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 57,
+          "endPage": 58
+        }
+      ],
+      "primaryTopic": "integration",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "integration"
+      ],
+      "sortKey": "03.02|03|1018|150-most-frequently-asked::2.1::9",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::10",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "10",
+      "questionPages": [
+        {
+          "startPage": 28,
+          "endPage": 28
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 58,
+          "endPage": 59
+        }
+      ],
+      "primaryTopic": "integration",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "integration"
+      ],
+      "sortKey": "03.02|03|1019|150-most-frequently-asked::2.1::10",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::11",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "11",
+      "questionPages": [
+        {
+          "startPage": 28,
+          "endPage": 28
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 59,
+          "endPage": 59
+        }
+      ],
+      "primaryTopic": "integration",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "integration"
+      ],
+      "sortKey": "03.02|03|1020|150-most-frequently-asked::2.1::11",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::12",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "12",
+      "questionPages": [
+        {
+          "startPage": 28,
+          "endPage": 28
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 59,
+          "endPage": 60
+        }
+      ],
+      "primaryTopic": "integration",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "integration"
+      ],
+      "sortKey": "03.02|03|1021|150-most-frequently-asked::2.1::12",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -7603,6 +8812,66 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.1::13",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "13",
+      "questionPages": [
+        {
+          "startPage": 28,
+          "endPage": 28
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 60,
+          "endPage": 61
+        }
+      ],
+      "primaryTopic": "ordinary-differential-equations",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "ordinary-differential-equations"
+      ],
+      "sortKey": "03.05|03|1022|150-most-frequently-asked::2.1::13",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.1::14",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "14",
+      "questionPages": [
+        {
+          "startPage": 28,
+          "endPage": 28
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 61,
+          "endPage": 62
+        }
+      ],
+      "primaryTopic": "ordinary-differential-equations",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "ordinary-differential-equations"
+      ],
+      "sortKey": "03.05|03|1023|150-most-frequently-asked::2.1::14",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::3.6.1::theory",
       "kind": "theory",
       "source": "green-book",
@@ -7628,6 +8897,86 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.2::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 29,
+          "endPage": 31
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "vectors-linear-systems",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "vectors-linear-systems"
+      ],
+      "sortKey": "04.01|03|0003|150-most-frequently-asked::2.2::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::3.2::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.2",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 65,
+          "endPage": 85
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "vectors-linear-systems",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "vectors-linear-systems"
+      ],
+      "sortKey": "04.01|03|0010|150-most-frequently-asked::3.2::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.2::9",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": "9",
+      "questionPages": [
+        {
+          "startPage": 30,
+          "endPage": 30
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 79,
+          "endPage": 80
+        }
+      ],
+      "primaryTopic": "vectors-linear-systems",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "vectors-linear-systems"
+      ],
+      "sortKey": "04.01|03|1033|150-most-frequently-asked::2.2::9",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::3.6.3::theory",
       "kind": "theory",
       "source": "green-book",
@@ -7646,6 +8995,126 @@
         "determinants-eigenvalues"
       ],
       "sortKey": "04.02|01|0071|green-book::3.6.3::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.2::4",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": "4",
+      "questionPages": [
+        {
+          "startPage": 29,
+          "endPage": 29
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 71,
+          "endPage": 72
+        }
+      ],
+      "primaryTopic": "determinants-eigenvalues",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "sortKey": "04.02|03|1028|150-most-frequently-asked::2.2::4",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.2::6",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": "6",
+      "questionPages": [
+        {
+          "startPage": 30,
+          "endPage": 30
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 76,
+          "endPage": 77
+        }
+      ],
+      "primaryTopic": "determinants-eigenvalues",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "sortKey": "04.02|03|1030|150-most-frequently-asked::2.2::6",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.2::7",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": "7",
+      "questionPages": [
+        {
+          "startPage": 30,
+          "endPage": 30
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 77,
+          "endPage": 78
+        }
+      ],
+      "primaryTopic": "determinants-eigenvalues",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "sortKey": "04.02|03|1031|150-most-frequently-asked::2.2::7",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.2::8",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": "8",
+      "questionPages": [
+        {
+          "startPage": 30,
+          "endPage": 30
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 78,
+          "endPage": 79
+        }
+      ],
+      "primaryTopic": "determinants-eigenvalues",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "determinants-eigenvalues"
+      ],
+      "sortKey": "04.02|03|1032|150-most-frequently-asked::2.2::8",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -7770,6 +9239,160 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::1::5",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": "5",
+      "questionPages": [
+        {
+          "startPage": 12,
+          "endPage": 12
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 18,
+          "endPage": 19
+        }
+      ],
+      "primaryTopic": "positive-semidefinite-matrices",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "positive-semidefinite-matrices",
+        "covariance-correlation-matrices"
+      ],
+      "sortKey": "04.03|03|1004|150-most-frequently-asked::1::5",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.2::1",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": "1",
+      "questionPages": [
+        {
+          "startPage": 29,
+          "endPage": 29
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 65,
+          "endPage": 67
+        }
+      ],
+      "primaryTopic": "positive-semidefinite-matrices",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "positive-semidefinite-matrices",
+        "covariance-correlation-matrices"
+      ],
+      "sortKey": "04.03|03|1025|150-most-frequently-asked::2.2::1",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.2::3",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": "3",
+      "questionPages": [
+        {
+          "startPage": 29,
+          "endPage": 29
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 68,
+          "endPage": 71
+        }
+      ],
+      "primaryTopic": "positive-semidefinite-matrices",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "positive-semidefinite-matrices",
+        "covariance-correlation-matrices"
+      ],
+      "sortKey": "04.03|03|1027|150-most-frequently-asked::2.2::3",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.2::10",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": "10",
+      "questionPages": [
+        {
+          "startPage": 30,
+          "endPage": 30
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 80,
+          "endPage": 80
+        }
+      ],
+      "primaryTopic": "positive-semidefinite-matrices",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "positive-semidefinite-matrices",
+        "covariance-correlation-matrices"
+      ],
+      "sortKey": "04.03|03|1034|150-most-frequently-asked::2.2::10",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.2::2",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": "2",
+      "questionPages": [
+        {
+          "startPage": 29,
+          "endPage": 29
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 67,
+          "endPage": 68
+        }
+      ],
+      "primaryTopic": "covariance-correlation-matrices",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "covariance-correlation-matrices"
+      ],
+      "sortKey": "04.04|03|1026|150-most-frequently-asked::2.2::2",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::3.6.2::theory",
       "kind": "theory",
       "source": "green-book",
@@ -7843,6 +9466,36 @@
         "matrix-decompositions"
       ],
       "sortKey": "04.05|02|1150|red-book::6.2.1::6.10",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.2::5",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.2",
+      "sourceItem": "5",
+      "questionPages": [
+        {
+          "startPage": 29,
+          "endPage": 30
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 72,
+          "endPage": 76
+        }
+      ],
+      "primaryTopic": "matrix-decompositions",
+      "canonicalTopics": [
+        "linear-algebra-matrix-methods",
+        "matrix-decompositions"
+      ],
+      "sortKey": "04.05|03|1029|150-most-frequently-asked::2.2::5",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -8200,6 +9853,180 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.6::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 40,
+          "endPage": 44
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "probability-foundations",
+      "canonicalTopics": [
+        "probability-statistics",
+        "probability-foundations",
+        "stochastic-processes-stochastic-calculus"
+      ],
+      "sortKey": "05.01|03|0007|150-most-frequently-asked::2.6::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::3.6::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.6",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 134,
+          "endPage": 175
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "probability-foundations",
+      "canonicalTopics": [
+        "probability-statistics",
+        "probability-foundations",
+        "stochastic-processes-stochastic-calculus"
+      ],
+      "sortKey": "05.01|03|0014|150-most-frequently-asked::3.6::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::1::6",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": "6",
+      "questionPages": [
+        {
+          "startPage": 12,
+          "endPage": 12
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 19,
+          "endPage": 20
+        }
+      ],
+      "primaryTopic": "probability-foundations",
+      "canonicalTopics": [
+        "probability-statistics",
+        "probability-foundations"
+      ],
+      "sortKey": "05.01|03|1005|150-most-frequently-asked::1::6",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::3",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "3",
+      "questionPages": [
+        {
+          "startPage": 44,
+          "endPage": 44
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 177,
+          "endPage": 178
+        }
+      ],
+      "primaryTopic": "probability-foundations",
+      "canonicalTopics": [
+        "probability-statistics",
+        "probability-foundations"
+      ],
+      "sortKey": "05.01|03|1130|150-most-frequently-asked::2.7::3",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::28",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "28",
+      "questionPages": [
+        {
+          "startPage": 49,
+          "endPage": 49
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 211,
+          "endPage": 212
+        }
+      ],
+      "primaryTopic": "probability-foundations",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "probability-statistics",
+        "probability-foundations"
+      ],
+      "sortKey": "05.01|03|1155|150-most-frequently-asked::2.7::28",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::29",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "29",
+      "questionPages": [
+        {
+          "startPage": 49,
+          "endPage": 49
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 212,
+          "endPage": 215
+        }
+      ],
+      "primaryTopic": "probability-foundations",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "probability-statistics",
+        "probability-foundations"
+      ],
+      "sortKey": "05.01|03|1156|150-most-frequently-asked::2.7::29",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::4.2::theory",
       "kind": "theory",
       "source": "green-book",
@@ -8508,6 +10335,97 @@
         "combinatorial-probability"
       ],
       "sortKey": "05.02|02|1080|red-book::3.2.1::3.21",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::7",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "7",
+      "questionPages": [
+        {
+          "startPage": 45,
+          "endPage": 45
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 180,
+          "endPage": 182
+        }
+      ],
+      "primaryTopic": "combinatorial-probability",
+      "canonicalTopics": [
+        "probability-statistics",
+        "combinatorial-probability"
+      ],
+      "sortKey": "05.02|03|1134|150-most-frequently-asked::2.7::7",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::14",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "14",
+      "questionPages": [
+        {
+          "startPage": 46,
+          "endPage": 46
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 190,
+          "endPage": 191
+        }
+      ],
+      "primaryTopic": "combinatorial-probability",
+      "canonicalTopics": [
+        "probability-statistics",
+        "combinatorial-probability"
+      ],
+      "sortKey": "05.02|03|1141|150-most-frequently-asked::2.7::14",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::20",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "20",
+      "questionPages": [
+        {
+          "startPage": 47,
+          "endPage": 47
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 196,
+          "endPage": 198
+        }
+      ],
+      "primaryTopic": "combinatorial-probability",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "probability-statistics",
+        "combinatorial-probability"
+      ],
+      "sortKey": "05.02|03|1147|150-most-frequently-asked::2.7::20",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -9090,6 +11008,67 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.7::2",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "2",
+      "questionPages": [
+        {
+          "startPage": 44,
+          "endPage": 44
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 176,
+          "endPage": 177
+        }
+      ],
+      "primaryTopic": "conditional-probability-bayes",
+      "canonicalTopics": [
+        "probability-statistics",
+        "conditional-probability-bayes"
+      ],
+      "sortKey": "05.03|03|1129|150-most-frequently-asked::2.7::2",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::12",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "12",
+      "questionPages": [
+        {
+          "startPage": 45,
+          "endPage": 46
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 187,
+          "endPage": 188
+        }
+      ],
+      "primaryTopic": "conditional-probability-bayes",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "probability-statistics",
+        "conditional-probability-bayes"
+      ],
+      "sortKey": "05.03|03|1139|150-most-frequently-asked::2.7::12",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::4.4::theory",
       "kind": "theory",
       "source": "green-book",
@@ -9333,6 +11312,286 @@
         "random-variables-distributions"
       ],
       "sortKey": "05.04|02|1093|red-book::3.2.1::3.34",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::1::7",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": "7",
+      "questionPages": [
+        {
+          "startPage": 12,
+          "endPage": 12
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 20,
+          "endPage": 22
+        }
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "random-variables-distributions",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ],
+      "sortKey": "05.04|03|1006|150-most-frequently-asked::1::7",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::15",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "15",
+      "questionPages": [
+        {
+          "startPage": 32,
+          "endPage": 33
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 101,
+          "endPage": 101
+        }
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "05.04|03|1049|150-most-frequently-asked::2.3::15",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::1",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "1",
+      "questionPages": [
+        {
+          "startPage": 40,
+          "endPage": 40
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 134,
+          "endPage": 135
+        }
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "sortKey": "05.04|03|1099|150-most-frequently-asked::2.6::1",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::2",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "2",
+      "questionPages": [
+        {
+          "startPage": 40,
+          "endPage": 40
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 135,
+          "endPage": 136
+        }
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "sortKey": "05.04|03|1100|150-most-frequently-asked::2.6::2",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::3",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "3",
+      "questionPages": [
+        {
+          "startPage": 40,
+          "endPage": 40
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 136,
+          "endPage": 138
+        }
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "sortKey": "05.04|03|1101|150-most-frequently-asked::2.6::3",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::5",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "5",
+      "questionPages": [
+        {
+          "startPage": 40,
+          "endPage": 40
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 138,
+          "endPage": 142
+        }
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "sortKey": "05.04|03|1103|150-most-frequently-asked::2.6::5",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::6",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "6",
+      "questionPages": [
+        {
+          "startPage": 40,
+          "endPage": 40
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 142,
+          "endPage": 142
+        }
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "sortKey": "05.04|03|1104|150-most-frequently-asked::2.6::6",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::8",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "8",
+      "questionPages": [
+        {
+          "startPage": 41,
+          "endPage": 41
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 144,
+          "endPage": 145
+        }
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "sortKey": "05.04|03|1106|150-most-frequently-asked::2.6::8",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::9",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "9",
+      "questionPages": [
+        {
+          "startPage": 41,
+          "endPage": 41
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 145,
+          "endPage": 145
+        }
+      ],
+      "primaryTopic": "random-variables-distributions",
+      "canonicalTopics": [
+        "probability-statistics",
+        "random-variables-distributions"
+      ],
+      "sortKey": "05.04|03|1107|150-most-frequently-asked::2.6::9",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -9985,6 +12244,190 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.6::4",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "4",
+      "questionPages": [
+        {
+          "startPage": 40,
+          "endPage": 40
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 138,
+          "endPage": 138
+        }
+      ],
+      "primaryTopic": "expectation-variance-covariance",
+      "canonicalTopics": [
+        "probability-statistics",
+        "expectation-variance-covariance"
+      ],
+      "sortKey": "05.05|03|1102|150-most-frequently-asked::2.6::4",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::7",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "7",
+      "questionPages": [
+        {
+          "startPage": 40,
+          "endPage": 41
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 142,
+          "endPage": 144
+        }
+      ],
+      "primaryTopic": "expectation-variance-covariance",
+      "canonicalTopics": [
+        "probability-statistics",
+        "expectation-variance-covariance"
+      ],
+      "sortKey": "05.05|03|1105|150-most-frequently-asked::2.6::7",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::5",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "5",
+      "questionPages": [
+        {
+          "startPage": 44,
+          "endPage": 44
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 179,
+          "endPage": 180
+        }
+      ],
+      "primaryTopic": "expectation-variance-covariance",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "probability-statistics",
+        "expectation-variance-covariance"
+      ],
+      "sortKey": "05.05|03|1132|150-most-frequently-asked::2.7::5",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::6",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "6",
+      "questionPages": [
+        {
+          "startPage": 44,
+          "endPage": 45
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 180,
+          "endPage": 180
+        }
+      ],
+      "primaryTopic": "expectation-variance-covariance",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "probability-statistics",
+        "expectation-variance-covariance"
+      ],
+      "sortKey": "05.05|03|1133|150-most-frequently-asked::2.7::6",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::13",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "13",
+      "questionPages": [
+        {
+          "startPage": 46,
+          "endPage": 46
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 188,
+          "endPage": 190
+        }
+      ],
+      "primaryTopic": "expectation-variance-covariance",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "probability-statistics",
+        "expectation-variance-covariance"
+      ],
+      "sortKey": "05.05|03|1140|150-most-frequently-asked::2.7::13",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::25",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "25",
+      "questionPages": [
+        {
+          "startPage": 48,
+          "endPage": 48
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 202,
+          "endPage": 206
+        }
+      ],
+      "primaryTopic": "expectation-variance-covariance",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "probability-statistics",
+        "expectation-variance-covariance"
+      ],
+      "sortKey": "05.05|03|1152|150-most-frequently-asked::2.7::25",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::4.6::theory",
       "kind": "theory",
       "source": "green-book",
@@ -10410,6 +12853,130 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.7::1",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "1",
+      "questionPages": [
+        {
+          "startPage": 44,
+          "endPage": 44
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 175,
+          "endPage": 176
+        }
+      ],
+      "primaryTopic": "random-walks-markov-chains",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "stochastic-processes-stochastic-calculus",
+        "random-walks-markov-chains"
+      ],
+      "sortKey": "06.01|03|1128|150-most-frequently-asked::2.7::1",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::21",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "21",
+      "questionPages": [
+        {
+          "startPage": 47,
+          "endPage": 48
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 198,
+          "endPage": 198
+        }
+      ],
+      "primaryTopic": "random-walks-markov-chains",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "stochastic-processes-stochastic-calculus",
+        "random-walks-markov-chains"
+      ],
+      "sortKey": "06.01|03|1148|150-most-frequently-asked::2.7::21",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::24",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "24",
+      "questionPages": [
+        {
+          "startPage": 48,
+          "endPage": 48
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 201,
+          "endPage": 202
+        }
+      ],
+      "primaryTopic": "random-walks-markov-chains",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "stochastic-processes-stochastic-calculus",
+        "random-walks-markov-chains"
+      ],
+      "sortKey": "06.01|03|1151|150-most-frequently-asked::2.7::24",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.7::27",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.7",
+      "sourceItem": "27",
+      "questionPages": [
+        {
+          "startPage": 49,
+          "endPage": 49
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 208,
+          "endPage": 211
+        }
+      ],
+      "primaryTopic": "random-walks-markov-chains",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "stochastic-processes-stochastic-calculus",
+        "random-walks-markov-chains"
+      ],
+      "sortKey": "06.01|03|1154|150-most-frequently-asked::2.7::27",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::5.2::theory",
       "kind": "theory",
       "source": "green-book",
@@ -10619,6 +13186,161 @@
         "martingales-stopping-times"
       ],
       "sortKey": "06.02|02|1105|red-book::3.2.2::3.46",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::10",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "10",
+      "questionPages": [
+        {
+          "startPage": 41,
+          "endPage": 41
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 145,
+          "endPage": 146
+        }
+      ],
+      "primaryTopic": "martingales-stopping-times",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "martingales-stopping-times"
+      ],
+      "sortKey": "06.02|03|1108|150-most-frequently-asked::2.6::10",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::23",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "23",
+      "questionPages": [
+        {
+          "startPage": 42,
+          "endPage": 43
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 161,
+          "endPage": 163
+        }
+      ],
+      "primaryTopic": "martingales-stopping-times",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "martingales-stopping-times"
+      ],
+      "sortKey": "06.02|03|1121|150-most-frequently-asked::2.6::23",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::24",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "24",
+      "questionPages": [
+        {
+          "startPage": 43,
+          "endPage": 43
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 163,
+          "endPage": 165
+        }
+      ],
+      "primaryTopic": "martingales-stopping-times",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "martingales-stopping-times"
+      ],
+      "sortKey": "06.02|03|1122|150-most-frequently-asked::2.6::24",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::25",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "25",
+      "questionPages": [
+        {
+          "startPage": 43,
+          "endPage": 43
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 165,
+          "endPage": 167
+        }
+      ],
+      "primaryTopic": "martingales-stopping-times",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "martingales-stopping-times"
+      ],
+      "sortKey": "06.02|03|1123|150-most-frequently-asked::2.6::25",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::26",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "26",
+      "questionPages": [
+        {
+          "startPage": 43,
+          "endPage": 43
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 167,
+          "endPage": 168
+        }
+      ],
+      "primaryTopic": "martingales-stopping-times",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "martingales-stopping-times"
+      ],
+      "sortKey": "06.02|03|1124|150-most-frequently-asked::2.6::26",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -10854,6 +13576,168 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::1::3",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": "3",
+      "questionPages": [
+        {
+          "startPage": 11,
+          "endPage": 11
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 16,
+          "endPage": 17
+        }
+      ],
+      "primaryTopic": "brownian-motion",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "brownian-motion",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ],
+      "sortKey": "06.03|03|1002|150-most-frequently-asked::1::3",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::12",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "12",
+      "questionPages": [
+        {
+          "startPage": 41,
+          "endPage": 41
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 147,
+          "endPage": 148
+        }
+      ],
+      "primaryTopic": "brownian-motion",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "brownian-motion"
+      ],
+      "sortKey": "06.03|03|1110|150-most-frequently-asked::2.6::12",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::13",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "13",
+      "questionPages": [
+        {
+          "startPage": 41,
+          "endPage": 41
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 148,
+          "endPage": 149
+        }
+      ],
+      "primaryTopic": "brownian-motion",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "brownian-motion"
+      ],
+      "sortKey": "06.03|03|1111|150-most-frequently-asked::2.6::13",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::18",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "18",
+      "questionPages": [
+        {
+          "startPage": 42,
+          "endPage": 42
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 156,
+          "endPage": 157
+        }
+      ],
+      "primaryTopic": "brownian-motion",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "brownian-motion"
+      ],
+      "sortKey": "06.03|03|1116|150-most-frequently-asked::2.6::18",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::19",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "19",
+      "questionPages": [
+        {
+          "startPage": 42,
+          "endPage": 42
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 157,
+          "endPage": 158
+        }
+      ],
+      "primaryTopic": "brownian-motion",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "brownian-motion"
+      ],
+      "sortKey": "06.03|03|1117|150-most-frequently-asked::2.6::19",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "red-book::3.2.2::3.42",
       "kind": "question",
       "source": "red-book",
@@ -11034,6 +13918,254 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.6::11",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "11",
+      "questionPages": [
+        {
+          "startPage": 41,
+          "endPage": 41
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 146,
+          "endPage": 147
+        }
+      ],
+      "primaryTopic": "ito-stochastic-calculus",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "ito-stochastic-calculus"
+      ],
+      "sortKey": "06.04|03|1109|150-most-frequently-asked::2.6::11",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::14",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "14",
+      "questionPages": [
+        {
+          "startPage": 41,
+          "endPage": 41
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 149,
+          "endPage": 150
+        }
+      ],
+      "primaryTopic": "ito-stochastic-calculus",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "ito-stochastic-calculus"
+      ],
+      "sortKey": "06.04|03|1112|150-most-frequently-asked::2.6::14",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::15",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "15",
+      "questionPages": [
+        {
+          "startPage": 41,
+          "endPage": 41
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 150,
+          "endPage": 152
+        }
+      ],
+      "primaryTopic": "ito-stochastic-calculus",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "ito-stochastic-calculus"
+      ],
+      "sortKey": "06.04|03|1113|150-most-frequently-asked::2.6::15",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::16",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "16",
+      "questionPages": [
+        {
+          "startPage": 41,
+          "endPage": 42
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 152,
+          "endPage": 154
+        }
+      ],
+      "primaryTopic": "ito-stochastic-calculus",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "ito-stochastic-calculus"
+      ],
+      "sortKey": "06.04|03|1114|150-most-frequently-asked::2.6::16",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::17",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "17",
+      "questionPages": [
+        {
+          "startPage": 42,
+          "endPage": 42
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 154,
+          "endPage": 156
+        }
+      ],
+      "primaryTopic": "ito-stochastic-calculus",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "ito-stochastic-calculus"
+      ],
+      "sortKey": "06.04|03|1115|150-most-frequently-asked::2.6::17",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::20",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "20",
+      "questionPages": [
+        {
+          "startPage": 42,
+          "endPage": 42
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 158,
+          "endPage": 160
+        }
+      ],
+      "primaryTopic": "ito-stochastic-calculus",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "ito-stochastic-calculus"
+      ],
+      "sortKey": "06.04|03|1118|150-most-frequently-asked::2.6::20",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::21",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "21",
+      "questionPages": [
+        {
+          "startPage": 42,
+          "endPage": 42
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 160,
+          "endPage": 160
+        }
+      ],
+      "primaryTopic": "ito-stochastic-calculus",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "ito-stochastic-calculus"
+      ],
+      "sortKey": "06.04|03|1119|150-most-frequently-asked::2.6::21",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::22",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "22",
+      "questionPages": [
+        {
+          "startPage": 42,
+          "endPage": 42
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 160,
+          "endPage": 161
+        }
+      ],
+      "primaryTopic": "ito-stochastic-calculus",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "ito-stochastic-calculus"
+      ],
+      "sortKey": "06.04|03|1120|150-most-frequently-asked::2.6::22",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "red-book::3.2.2::3.41",
       "kind": "question",
       "source": "red-book",
@@ -11117,6 +14249,137 @@
         "stochastic-differential-equations"
       ],
       "sortKey": "06.05|02|1108|red-book::3.2.2::3.49",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::1::9",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": "9",
+      "questionPages": [
+        {
+          "startPage": 12,
+          "endPage": 12
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 22,
+          "endPage": 24
+        }
+      ],
+      "primaryTopic": "stochastic-differential-equations",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "stochastic-differential-equations",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ],
+      "sortKey": "06.05|03|1008|150-most-frequently-asked::1::9",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::27",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "27",
+      "questionPages": [
+        {
+          "startPage": 43,
+          "endPage": 43
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 168,
+          "endPage": 170
+        }
+      ],
+      "primaryTopic": "stochastic-differential-equations",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "sortKey": "06.05|03|1125|150-most-frequently-asked::2.6::27",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::28",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "28",
+      "questionPages": [
+        {
+          "startPage": 43,
+          "endPage": 43
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 170,
+          "endPage": 173
+        }
+      ],
+      "primaryTopic": "stochastic-differential-equations",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "sortKey": "06.05|03|1126|150-most-frequently-asked::2.6::28",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.6::29",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.6",
+      "sourceItem": "29",
+      "questionPages": [
+        {
+          "startPage": 43,
+          "endPage": 43
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 173,
+          "endPage": 173
+        }
+      ],
+      "primaryTopic": "stochastic-differential-equations",
+      "canonicalTopics": [
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "stochastic-differential-equations"
+      ],
+      "sortKey": "06.05|03|1127|150-most-frequently-asked::2.6::29",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -12245,6 +15508,276 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::1::guidance",
+      "kind": "guidance",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 11,
+          "endPage": 27
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp"
+      ],
+      "sortKey": "07.01|03|0001|150-most-frequently-asked::1::guidance",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 31,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.01|03|0004|150-most-frequently-asked::2.3::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::3.3::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.3",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 85,
+          "endPage": 108
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.01|03|0011|150-most-frequently-asked::3.3::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::1::1",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": "1",
+      "questionPages": [
+        {
+          "startPage": 11,
+          "endPage": 11
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 13,
+          "endPage": 14
+        }
+      ],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties"
+      ],
+      "sortKey": "07.01|03|1000|150-most-frequently-asked::1::1",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::1",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "1",
+      "questionPages": [
+        {
+          "startPage": 31,
+          "endPage": 31
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 85,
+          "endPage": 86
+        }
+      ],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.01|03|1035|150-most-frequently-asked::2.3::1",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::6",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "6",
+      "questionPages": [
+        {
+          "startPage": 31,
+          "endPage": 32
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 90,
+          "endPage": 90
+        }
+      ],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.01|03|1040|150-most-frequently-asked::2.3::6",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::10",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "10",
+      "questionPages": [
+        {
+          "startPage": 32,
+          "endPage": 32
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 94,
+          "endPage": 96
+        }
+      ],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.01|03|1044|150-most-frequently-asked::2.3::10",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::11",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "11",
+      "questionPages": [
+        {
+          "startPage": 32,
+          "endPage": 32
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 96,
+          "endPage": 98
+        }
+      ],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.01|03|1045|150-most-frequently-asked::2.3::11",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::14",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "14",
+      "questionPages": [
+        {
+          "startPage": 32,
+          "endPage": 32
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 100,
+          "endPage": 101
+        }
+      ],
+      "primaryTopic": "no-arbitrage-option-properties",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "no-arbitrage-option-properties",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.01|03|1048|150-most-frequently-asked::2.3::14",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "red-book::2.2.3::theory",
       "kind": "theory",
       "source": "red-book",
@@ -12685,6 +16218,68 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.3::3",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "3",
+      "questionPages": [
+        {
+          "startPage": 31,
+          "endPage": 31
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 88,
+          "endPage": 88
+        }
+      ],
+      "primaryTopic": "replication-hedging",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "replication-hedging",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.02|03|1037|150-most-frequently-asked::2.3::3",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::4",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "4",
+      "questionPages": [
+        {
+          "startPage": 31,
+          "endPage": 31
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 88,
+          "endPage": 89
+        }
+      ],
+      "primaryTopic": "replication-hedging",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "replication-hedging",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.02|03|1038|150-most-frequently-asked::2.3::4",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "red-book::2.2.1::theory",
       "kind": "theory",
       "source": "red-book",
@@ -13037,6 +16632,68 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.1::15",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.1",
+      "sourceItem": "15",
+      "questionPages": [
+        {
+          "startPage": 28,
+          "endPage": 28
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 62,
+          "endPage": 62
+        }
+      ],
+      "primaryTopic": "black-scholes",
+      "canonicalTopics": [
+        "calculus-differential-equations",
+        "derivatives-options-no-arbitrage",
+        "black-scholes"
+      ],
+      "sortKey": "07.03|03|1024|150-most-frequently-asked::2.1::15",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::5",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "5",
+      "questionPages": [
+        {
+          "startPage": 31,
+          "endPage": 31
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 89,
+          "endPage": 90
+        }
+      ],
+      "primaryTopic": "black-scholes",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "black-scholes",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.03|03|1039|150-most-frequently-asked::2.3::5",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::6.2::theory",
       "kind": "theory",
       "source": "green-book",
@@ -13355,6 +17012,130 @@
         "option-greeks"
       ],
       "sortKey": "07.04|02|1046|red-book::2.2.4::2.47",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::7",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "7",
+      "questionPages": [
+        {
+          "startPage": 32,
+          "endPage": 32
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 90,
+          "endPage": 92
+        }
+      ],
+      "primaryTopic": "option-greeks",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "option-greeks",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.04|03|1041|150-most-frequently-asked::2.3::7",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::8",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "8",
+      "questionPages": [
+        {
+          "startPage": 32,
+          "endPage": 32
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 92,
+          "endPage": 93
+        }
+      ],
+      "primaryTopic": "option-greeks",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "option-greeks",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.04|03|1042|150-most-frequently-asked::2.3::8",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::9",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "9",
+      "questionPages": [
+        {
+          "startPage": 32,
+          "endPage": 32
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 93,
+          "endPage": 94
+        }
+      ],
+      "primaryTopic": "option-greeks",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "option-greeks",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.04|03|1043|150-most-frequently-asked::2.3::9",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::13",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "13",
+      "questionPages": [
+        {
+          "startPage": 32,
+          "endPage": 32
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 99,
+          "endPage": 100
+        }
+      ],
+      "primaryTopic": "option-greeks",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "option-greeks",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.04|03|1047|150-most-frequently-asked::2.3::13",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -13682,6 +17463,37 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.3::2",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "2",
+      "questionPages": [
+        {
+          "startPage": 31,
+          "endPage": 31
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 86,
+          "endPage": 88
+        }
+      ],
+      "primaryTopic": "trees-monte-carlo-options",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "trees-monte-carlo-options",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.05|03|1036|150-most-frequently-asked::2.3::2",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "green-book::6.3::theory",
       "kind": "theory",
       "source": "green-book",
@@ -13940,6 +17752,37 @@
         "incomplete-markets"
       ],
       "sortKey": "07.07|02|1059|red-book::2.2.7::2.60",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::12",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "12",
+      "questionPages": [
+        {
+          "startPage": 32,
+          "endPage": 32
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 98,
+          "endPage": 99
+        }
+      ],
+      "primaryTopic": "incomplete-markets",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "incomplete-markets",
+        "fixed-income-rates-general-finance"
+      ],
+      "sortKey": "07.07|03|1046|150-most-frequently-asked::2.3::12",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -14215,6 +18058,68 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.3::17",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "17",
+      "questionPages": [
+        {
+          "startPage": 33,
+          "endPage": 33
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 103,
+          "endPage": 104
+        }
+      ],
+      "primaryTopic": "bonds-yields-discounting",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "bonds-yields-discounting"
+      ],
+      "sortKey": "08.01|03|1051|150-most-frequently-asked::2.3::17",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::18",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "18",
+      "questionPages": [
+        {
+          "startPage": 33,
+          "endPage": 33
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 104,
+          "endPage": 104
+        }
+      ],
+      "primaryTopic": "duration-convexity",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "duration-convexity"
+      ],
+      "sortKey": "08.02|03|1052|150-most-frequently-asked::2.3::18",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "red-book::4::4.1",
       "kind": "question",
       "source": "red-book",
@@ -14274,6 +18179,161 @@
         "interest-rate-models"
       ],
       "sortKey": "08.03|02|1116|red-book::4::4.3",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::16",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "16",
+      "questionPages": [
+        {
+          "startPage": 33,
+          "endPage": 33
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 101,
+          "endPage": 103
+        }
+      ],
+      "primaryTopic": "forwards-futures-swaps",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "forwards-futures-swaps"
+      ],
+      "sortKey": "08.03|03|1050|150-most-frequently-asked::2.3::16",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::19",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "19",
+      "questionPages": [
+        {
+          "startPage": 33,
+          "endPage": 33
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 104,
+          "endPage": 105
+        }
+      ],
+      "primaryTopic": "forwards-futures-swaps",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "forwards-futures-swaps"
+      ],
+      "sortKey": "08.03|03|1053|150-most-frequently-asked::2.3::19",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::20",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "20",
+      "questionPages": [
+        {
+          "startPage": 33,
+          "endPage": 33
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 105,
+          "endPage": 105
+        }
+      ],
+      "primaryTopic": "forwards-futures-swaps",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "forwards-futures-swaps"
+      ],
+      "sortKey": "08.03|03|1054|150-most-frequently-asked::2.3::20",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::21",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "21",
+      "questionPages": [
+        {
+          "startPage": 33,
+          "endPage": 33
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 105,
+          "endPage": 106
+        }
+      ],
+      "primaryTopic": "forwards-futures-swaps",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "forwards-futures-swaps"
+      ],
+      "sortKey": "08.03|03|1055|150-most-frequently-asked::2.3::21",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::22",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "22",
+      "questionPages": [
+        {
+          "startPage": 33,
+          "endPage": 33
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 106,
+          "endPage": 107
+        }
+      ],
+      "primaryTopic": "forwards-futures-swaps",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "forwards-futures-swaps"
+      ],
+      "sortKey": "08.03|03|1056|150-most-frequently-asked::2.3::22",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -14373,6 +18433,37 @@
         "interest-rate-models"
       ],
       "sortKey": "08.04|02|1120|red-book::4::4.7",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.3::23",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.3",
+      "sourceItem": "23",
+      "questionPages": [
+        {
+          "startPage": 33,
+          "endPage": 33
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 107,
+          "endPage": 107
+        }
+      ],
+      "primaryTopic": "portfolio-risk",
+      "canonicalTopics": [
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "portfolio-risk"
+      ],
+      "sortKey": "08.05|03|1057|150-most-frequently-asked::2.3::23",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -14658,6 +18749,206 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.5::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 38,
+          "endPage": 40
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "monte-carlo-simulation",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "monte-carlo-simulation"
+      ],
+      "sortKey": "09.01|03|0006|150-most-frequently-asked::2.5::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::3.5::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.5",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 124,
+          "endPage": 134
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "monte-carlo-simulation",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "monte-carlo-simulation"
+      ],
+      "sortKey": "09.01|03|0013|150-most-frequently-asked::3.5::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.5::1",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "sourceItem": "1",
+      "questionPages": [
+        {
+          "startPage": 38,
+          "endPage": 38
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 124,
+          "endPage": 126
+        }
+      ],
+      "primaryTopic": "monte-carlo-simulation",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "monte-carlo-simulation"
+      ],
+      "sortKey": "09.01|03|1090|150-most-frequently-asked::2.5::1",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.5::2",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "sourceItem": "2",
+      "questionPages": [
+        {
+          "startPage": 38,
+          "endPage": 38
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 126,
+          "endPage": 126
+        }
+      ],
+      "primaryTopic": "monte-carlo-simulation",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "monte-carlo-simulation"
+      ],
+      "sortKey": "09.01|03|1091|150-most-frequently-asked::2.5::2",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.5::3",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "sourceItem": "3",
+      "questionPages": [
+        {
+          "startPage": 38,
+          "endPage": 38
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 126,
+          "endPage": 128
+        }
+      ],
+      "primaryTopic": "monte-carlo-simulation",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "monte-carlo-simulation"
+      ],
+      "sortKey": "09.01|03|1092|150-most-frequently-asked::2.5::3",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.5::4",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "sourceItem": "4",
+      "questionPages": [
+        {
+          "startPage": 38,
+          "endPage": 38
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 128,
+          "endPage": 130
+        }
+      ],
+      "primaryTopic": "monte-carlo-simulation",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "monte-carlo-simulation"
+      ],
+      "sortKey": "09.01|03|1093|150-most-frequently-asked::2.5::4",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.5::5",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "sourceItem": "5",
+      "questionPages": [
+        {
+          "startPage": 38,
+          "endPage": 38
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 130,
+          "endPage": 130
+        }
+      ],
+      "primaryTopic": "monte-carlo-simulation",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "monte-carlo-simulation"
+      ],
+      "sortKey": "09.01|03|1094|150-most-frequently-asked::2.5::5",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "red-book::5::5.1",
       "kind": "question",
       "source": "red-book",
@@ -14821,6 +19112,126 @@
         "algorithmic-complexity"
       ],
       "sortKey": "09.02|02|1270|red-book::10.2::5.1",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.5::8",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "sourceItem": "8",
+      "questionPages": [
+        {
+          "startPage": 38,
+          "endPage": 39
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 131,
+          "endPage": 133
+        }
+      ],
+      "primaryTopic": "root-finding-numerical-integration",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "root-finding-numerical-integration"
+      ],
+      "sortKey": "09.02|03|1097|150-most-frequently-asked::2.5::8",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.5::9",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "sourceItem": "9",
+      "questionPages": [
+        {
+          "startPage": 39,
+          "endPage": 39
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 133,
+          "endPage": 133
+        }
+      ],
+      "primaryTopic": "finite-difference-methods",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "finite-difference-methods"
+      ],
+      "sortKey": "09.03|03|1098|150-most-frequently-asked::2.5::9",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.5::6",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "sourceItem": "6",
+      "questionPages": [
+        {
+          "startPage": 38,
+          "endPage": 38
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 130,
+          "endPage": 131
+        }
+      ],
+      "primaryTopic": "variance-reduction-simulation-techniques",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "variance-reduction-simulation-techniques"
+      ],
+      "sortKey": "09.04|03|1095|150-most-frequently-asked::2.5::6",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.5::7",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.5",
+      "sourceItem": "7",
+      "questionPages": [
+        {
+          "startPage": 38,
+          "endPage": 38
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 131,
+          "endPage": 131
+        }
+      ],
+      "primaryTopic": "variance-reduction-simulation-techniques",
+      "canonicalTopics": [
+        "monte-carlo-numerical-methods",
+        "variance-reduction-simulation-techniques"
+      ],
+      "sortKey": "09.04|03|1096|150-most-frequently-asked::2.5::7",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -15393,6 +19804,86 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.4::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 38
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "algorithmic-complexity",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "algorithmic-complexity"
+      ],
+      "sortKey": "10.01|03|0005|150-most-frequently-asked::2.4::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::3.4::theory",
+      "kind": "theory",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "3.4",
+      "sourceItem": null,
+      "questionPages": [
+        {
+          "startPage": 108,
+          "endPage": 124
+        }
+      ],
+      "solutionPages": [],
+      "primaryTopic": "algorithmic-complexity",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "algorithmic-complexity"
+      ],
+      "sortKey": "10.01|03|0012|150-most-frequently-asked::3.4::theory",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::28",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "28",
+      "questionPages": [
+        {
+          "startPage": 37,
+          "endPage": 37
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 120,
+          "endPage": 120
+        }
+      ],
+      "primaryTopic": "algorithmic-complexity",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "algorithmic-complexity"
+      ],
+      "sortKey": "10.01|03|1085|150-most-frequently-asked::2.4::28",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "red-book::5::5.4",
       "kind": "question",
       "source": "red-book",
@@ -15592,6 +20083,66 @@
         "object-oriented-cpp"
       ],
       "sortKey": "10.02|02|1183|red-book::7::7.17",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::27",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "27",
+      "questionPages": [
+        {
+          "startPage": 37,
+          "endPage": 37
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 119,
+          "endPage": 120
+        }
+      ],
+      "primaryTopic": "sorting-searching",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "sorting-searching"
+      ],
+      "sortKey": "10.02|03|1084|150-most-frequently-asked::2.4::27",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::31",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "31",
+      "questionPages": [
+        {
+          "startPage": 37,
+          "endPage": 37
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 122,
+          "endPage": 122
+        }
+      ],
+      "primaryTopic": "sorting-searching",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "sorting-searching"
+      ],
+      "sortKey": "10.02|03|1088|150-most-frequently-asked::2.4::31",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -15851,6 +20402,74 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::1::10",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "1",
+      "sourceItem": "10",
+      "questionPages": [
+        {
+          "startPage": 12,
+          "endPage": 12
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 24,
+          "endPage": 24
+        }
+      ],
+      "primaryTopic": "dynamic-programming-algorithms",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "calculus-differential-equations",
+        "linear-algebra-matrix-methods",
+        "probability-statistics",
+        "stochastic-processes-stochastic-calculus",
+        "derivatives-options-no-arbitrage",
+        "fixed-income-rates-general-finance",
+        "monte-carlo-numerical-methods",
+        "algorithms-data-structures-cpp",
+        "dynamic-programming-algorithms"
+      ],
+      "sortKey": "10.03|03|1009|150-most-frequently-asked::1::10",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::26",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "26",
+      "questionPages": [
+        {
+          "startPage": 37,
+          "endPage": 37
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 118,
+          "endPage": 119
+        }
+      ],
+      "primaryTopic": "dynamic-programming-algorithms",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "dynamic-programming-algorithms"
+      ],
+      "sortKey": "10.03|03|1083|150-most-frequently-asked::2.4::26",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "red-book::7::theory",
       "kind": "theory",
       "source": "red-book",
@@ -16008,6 +20627,66 @@
         "object-oriented-cpp"
       ],
       "sortKey": "10.04|02|1196|red-book::7::7.30",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::30",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "30",
+      "questionPages": [
+        {
+          "startPage": 37,
+          "endPage": 37
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 120,
+          "endPage": 122
+        }
+      ],
+      "primaryTopic": "data-structures",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "data-structures"
+      ],
+      "sortKey": "10.04|03|1087|150-most-frequently-asked::2.4::30",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::32",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "32",
+      "questionPages": [
+        {
+          "startPage": 37,
+          "endPage": 37
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 122,
+          "endPage": 122
+        }
+      ],
+      "primaryTopic": "data-structures",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "data-structures"
+      ],
+      "sortKey": "10.04|03|1089|150-most-frequently-asked::2.4::32",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
@@ -16687,6 +21366,456 @@
       "resolutionNote": null
     },
     {
+      "key": "150-most-frequently-asked::2.4::1",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "1",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 108,
+          "endPage": 108
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1058|150-most-frequently-asked::2.4::1",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::2",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "2",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 108,
+          "endPage": 108
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1059|150-most-frequently-asked::2.4::2",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::3",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "3",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 108,
+          "endPage": 109
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1060|150-most-frequently-asked::2.4::3",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::4",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "4",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 109,
+          "endPage": 110
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1061|150-most-frequently-asked::2.4::4",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::5",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "5",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 110,
+          "endPage": 110
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1062|150-most-frequently-asked::2.4::5",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::6",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "6",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 110,
+          "endPage": 111
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1063|150-most-frequently-asked::2.4::6",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::7",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "7",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 111,
+          "endPage": 111
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1064|150-most-frequently-asked::2.4::7",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::8",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "8",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 111,
+          "endPage": 111
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1065|150-most-frequently-asked::2.4::8",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::9",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "9",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 111,
+          "endPage": 111
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1066|150-most-frequently-asked::2.4::9",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::10",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "10",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 34
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 111,
+          "endPage": 112
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1067|150-most-frequently-asked::2.4::10",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::11",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "11",
+      "questionPages": [
+        {
+          "startPage": 34,
+          "endPage": 35
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 112,
+          "endPage": 113
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1068|150-most-frequently-asked::2.4::11",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::12",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "12",
+      "questionPages": [
+        {
+          "startPage": 35,
+          "endPage": 35
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 113,
+          "endPage": 113
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1069|150-most-frequently-asked::2.4::12",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::14",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "14",
+      "questionPages": [
+        {
+          "startPage": 35,
+          "endPage": 35
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 113,
+          "endPage": 114
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1071|150-most-frequently-asked::2.4::14",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::20",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "20",
+      "questionPages": [
+        {
+          "startPage": 36,
+          "endPage": 36
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 116,
+          "endPage": 117
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1077|150-most-frequently-asked::2.4::20",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::29",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "29",
+      "questionPages": [
+        {
+          "startPage": 37,
+          "endPage": 37
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 120,
+          "endPage": 120
+        }
+      ],
+      "primaryTopic": "cpp-language-memory",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "cpp-language-memory"
+      ],
+      "sortKey": "10.05|03|1086|150-most-frequently-asked::2.4::29",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
       "key": "red-book::7::7.2",
       "kind": "question",
       "source": "red-book",
@@ -17000,6 +22129,336 @@
         "object-oriented-cpp"
       ],
       "sortKey": "10.06|02|1271|red-book::10.2::7.10",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::13",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "13",
+      "questionPages": [
+        {
+          "startPage": 35,
+          "endPage": 35
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 113,
+          "endPage": 113
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1070|150-most-frequently-asked::2.4::13",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::15",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "15",
+      "questionPages": [
+        {
+          "startPage": 35,
+          "endPage": 35
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 114,
+          "endPage": 114
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1072|150-most-frequently-asked::2.4::15",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::16",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "16",
+      "questionPages": [
+        {
+          "startPage": 35,
+          "endPage": 35
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 114,
+          "endPage": 114
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1073|150-most-frequently-asked::2.4::16",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::17",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "17",
+      "questionPages": [
+        {
+          "startPage": 35,
+          "endPage": 35
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 114,
+          "endPage": 115
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1074|150-most-frequently-asked::2.4::17",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::18",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "18",
+      "questionPages": [
+        {
+          "startPage": 35,
+          "endPage": 36
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 115,
+          "endPage": 116
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1075|150-most-frequently-asked::2.4::18",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::19",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "19",
+      "questionPages": [
+        {
+          "startPage": 36,
+          "endPage": 36
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 116,
+          "endPage": 116
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1076|150-most-frequently-asked::2.4::19",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::21",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "21",
+      "questionPages": [
+        {
+          "startPage": 36,
+          "endPage": 36
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 117,
+          "endPage": 117
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1078|150-most-frequently-asked::2.4::21",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::22",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "22",
+      "questionPages": [
+        {
+          "startPage": 36,
+          "endPage": 36
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 117,
+          "endPage": 117
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1079|150-most-frequently-asked::2.4::22",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::23",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "23",
+      "questionPages": [
+        {
+          "startPage": 36,
+          "endPage": 36
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 117,
+          "endPage": 118
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1080|150-most-frequently-asked::2.4::23",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::24",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "24",
+      "questionPages": [
+        {
+          "startPage": 36,
+          "endPage": 36
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 118,
+          "endPage": 118
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1081|150-most-frequently-asked::2.4::24",
+      "state": "pending",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "workstream": null,
+      "resolutionNote": null
+    },
+    {
+      "key": "150-most-frequently-asked::2.4::25",
+      "kind": "question",
+      "source": "150-most-frequently-asked",
+      "sourceSection": "2.4",
+      "sourceItem": "25",
+      "questionPages": [
+        {
+          "startPage": 36,
+          "endPage": 37
+        }
+      ],
+      "solutionPages": [
+        {
+          "startPage": 118,
+          "endPage": 118
+        }
+      ],
+      "primaryTopic": "object-oriented-cpp",
+      "canonicalTopics": [
+        "algorithms-data-structures-cpp",
+        "object-oriented-cpp"
+      ],
+      "sortKey": "10.06|03|1082|150-most-frequently-asked::2.4::25",
       "state": "pending",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
