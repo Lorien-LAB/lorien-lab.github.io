@@ -4,7 +4,7 @@
     "interview-strategy-communication",
     "reasoning-communication"
   ],
-  "status": "complete",
+  "status": "active",
   "sourceScopes": [
     {
       "source": "green-book",
@@ -20,7 +20,7 @@
         }
       ],
       "reviewOutcome": "bounded-item-level-review",
-      "reviewNote": "Three Green rows (1.3 Listen carefully, 1.4 Speak your mind, 1.5 Make reasonable assumptions) resolve to two canonical Knowledge nodes (Problem Framing, Clarification & Assumption Management and Structured Think-Aloud Reasoning); no new Problem is created. The framing and structured-reasoning pair is stated in the public body, not in relatedNotes."
+      "reviewNote": "Three reusable reasoning-and-communication sections resolve as knowledge-only public checks."
     },
     {
       "source": "red-book",
@@ -33,29 +33,8 @@
           "endPage": 26
         }
       ],
-      "reviewOutcome": "bounded-item-level-review",
-      "reviewNote": "Red Book 1.12 is broad, date-sensitive job-search preparation and self-assessment material; it is rerouted from reasoning-communication to interview-preparation and resolves to no public Problem or Knowledge (final state interview-guidance)."
+      "reviewOutcome": "reclassified-to-interview-preparation-coverage-only",
+      "reviewNote": "The section is rerouted to interview-preparation as coverage-only interview guidance with no public target."
     }
-  ],
-  "preClosureActiveGate": {
-    "commit": "b4a282a682428bbde7d7dec43223f014947108ed",
-    "runId": 33085791614,
-    "environment": "windows-native-lf-node24",
-    "commands": [
-      "npm run test",
-      "npm run check",
-      "npm run build"
-    ],
-    "conclusion": "success"
-  },
-  "verification": {
-    "commit": "b4a282a682428bbde7d7dec43223f014947108ed",
-    "runId": 33085791614,
-    "commands": [
-      "npm run test",
-      "npm run check",
-      "npm run build"
-    ],
-    "conclusion": "success"
-  }
+  ]
 }

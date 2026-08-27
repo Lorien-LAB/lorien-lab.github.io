@@ -18,7 +18,7 @@
 - Green Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`
 - Red Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`, `1.6`, `1.7`, `1.8`, `1.9`, `1.10`, `1.11`, `1.12`, `9`, `9.2`, `9.3`
 - 150 Questions sections: None
-- Workstreams: `interview-strategy-communication-reasoning-communication-013` (complete)
+- Workstreams: `interview-strategy-communication-reasoning-communication-013` (active)
 
 ### Modules
 
@@ -60,7 +60,7 @@
 - Green Book sections: `1.3`, `1.4`, `1.5`
 - Red Book sections: None
 - 150 Questions sections: None
-- Workstreams: `interview-strategy-communication-reasoning-communication-013` (complete)
+- Workstreams: `interview-strategy-communication-reasoning-communication-013` (active)
 
 #### Modules
 

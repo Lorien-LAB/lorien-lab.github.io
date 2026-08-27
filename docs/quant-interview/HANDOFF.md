@@ -501,40 +501,6 @@ This evidence belongs to the active integrated commit above, not to the later wo
 
 This closes only registered workstream 012. It does not claim completeness for calculus, for any of Green/Red/150 as a whole, for any broad source section, or for material outside the registered page and section scopes.
 
-## Completed cross-book workstream 13
-
-`interview-strategy-communication-reasoning-communication-013`
-
-Scope: **Interview Strategy & Communication → Reasoning & Communication**.
-
-Active integrated verification:
-
-- CI-tested pre-closure active commit: `b4a282a682428bbde7d7dec43223f014947108ed`
-- GitHub Actions run: `33085791614`; its `head_sha` is `b4a282a682428bbde7d7dec43223f014947108ed`
-- authoritative local environment: `windows-native-lf-node24`
-- CI environment: Ubuntu with Node 24; CI ran `npm ci` first
-- ordered gates: `npm run test`, `npm run check`, `npm run build`
-- conclusion: success
-
-This evidence belongs to the active integrated commit above, not to the later workflow-free closure commit. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`.
-
-### Canonical Knowledge
-
-- `problem-framing-clarification-assumption-management`
-- `structured-think-aloud-reasoning`
-
-### Canonical Problems
-
-None. Workstream 013 produced exactly +0 Problems (no 150-questions increment) and +2 Knowledge; the global corpus moves from 76/48 to 76/50.
-
-### Source dispositions
-
-- Green Book sections 1.3, 1.4, 1.5 → `knowledge-only`: they resolve to the two canonical Knowledge nodes above; evidence pages 18. No new Problem.
-- Red Book section 1.12 → rerouted from `reasoning-communication` to `interview-preparation`; final coverage state `interview-guidance` with no public Problem or Knowledge; evidence pages 25–26.
-- 150 Most Frequently Asked Questions → no increment.
-
-This closes only registered workstream 013. It does not claim completeness for Interview Strategy & Communication as a whole, for any of Green/Red/150 as a whole, or for material outside the registered section and page scopes.
-
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -553,15 +519,13 @@ Historical transition marker: **Random Walks & Markov Chains** is fully closed. 
 
 Historical transition marker: **Limits & Derivatives** is fully closed. Its seven Knowledge nodes, thirteen S3+ Problems, exact 76/48 registry, twenty terminal rows, two bounded Red map repairs, and factual active-commit CI evidence are durable repository state. This paragraph records lineage only and does not authorize reopening the bounded topic.
 
-Historical transition marker: **Interview Strategy & Communication → Reasoning & Communication** is fully closed. Its two canonical Knowledge nodes (Problem Framing, Clarification & Assumption Management; Structured Think-Aloud Reasoning), bounded Green 1.3/1.4/1.5 knowledge-only resolution, Red 1.12 reroute to interview-preparation with no public Problem or Knowledge, exact 76/50 registry, and real active-commit CI evidence (commit `b4a282a682428bbde7d7dec43223f014947108ed`, GitHub Actions run `33085791614`, Node 24, success) are durable repository state. This paragraph records lineage only and does not authorize reopening the bounded topic.
-
 Current bounded topic:
 
 **Interview Strategy & Communication → Reasoning & Communication.**
 
-Workstream 012 is factually closed. Workstream 013 is now factually closed: its two canonical Knowledge nodes (Problem Framing, Clarification & Assumption Management; Structured Think-Aloud Reasoning) are published, reconciled into the source-neutral corpus, and verified by real CI on the exact active commit `b4a282a682428bbde7d7dec43223f014947108ed` (GitHub Actions run `33085791614`, Node 24, success). The serialized cross-book integration queue is fully drained through 013.
+Workstream 012 is factually closed. Workstream 013 is active on the latest durable base. Its two Knowledge nodes and shared-state reconciliation are integrated, but no completion evidence is recorded until WSL-native gates and real CI succeed.
 
-Do not reopen closed workstreams 011, 012, or 013. Preserve source-neutral public identity, item-level hidden coverage, protected-main safety, and the exact serialized order.
+Do not reopen closed workstreams 011 or 012. Preserve source-neutral public identity, item-level hidden coverage, protected-main safety, and the exact serialized order.
 
 ## Parallel workstream coordination
 
@@ -571,9 +535,13 @@ Maximum active candidates: **3**. Parallel candidates are isolated design and im
 |---:|---:|---|---|---|
 | 1 | 011 | `random-walks-markov-chains` | `chatgpt/quant-interview-workstream-random-walks-markov-chains-2026-08-23` | complete |
 | 2 | 012 | `limits-derivatives` | `chatgpt/quant-interview-workstream-limits-derivatives-2026-08-23` | complete |
-| 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | complete |
+| 3 | 013 | `reasoning-communication` | `chatgpt/quant-interview-workstream-reasoning-communication-2026-08-23` | active |
 
-Completed queue entries: **011, 012, 013**.
+Completed queue entries: **011, 012**.
+
+Remaining integration queue entry: **013** (active).
+
+013 remains active and no completion evidence is recorded.
 
 A candidate stays `active` during implementation and is not `complete` until the coordinator integrates it on the latest durable base, reconciles shared state, obtains fresh local and real CI verification for the exact commit, and records factual closure here.
 

@@ -1,0 +1,30 @@
+name: Quant Interview Reasoning Communication 013 Temporary CI
+
+on:
+  push:
+    branches:
+      - chatgpt/quant-interview-integration-reasoning-communication-2026-08-24
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+      - name: Set up Node 24
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
+      - name: Test
+        run: npm run test
+      - name: Check
+        run: npm run check
+      - name: Build
+        run: npm run build
