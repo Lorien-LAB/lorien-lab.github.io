@@ -88,3 +88,58 @@ test('Green Book is completely represented in physical and canonical order', asy
     assert.equal(item.solutionPages.length, 0, item.key);
   }
 });
+
+test('Red Book questions and solutions are completely paired', async () => {
+  const { directory, tocs } = await loadMasterDirectoryRepository(process.cwd());
+  const redNodes = directory.nodes.filter((node) => node.source === 'red-book');
+  const redItems = directory.items.filter((item) => item.source === 'red-book');
+  assert.ok(redNodes.length > 0);
+  assert.ok(redItems.length > 0);
+  assert.equal(new Set(redItems.map(({ key }) => key)).size, redItems.length);
+  const questionItems = redItems.filter((item) => item.kind === 'question');
+  assert.equal(redItems.length, 318);
+  assert.equal(questionItems.length, 272);
+  for (const item of questionItems) {
+    assert.ok(item.questionPages.length > 0, `${item.key} question pages`);
+    assert.ok(
+      item.questionPages[0].endPage - item.questionPages[0].startPage <= 3,
+      `${item.key} question evidence must not cross into another chapter`,
+    );
+    if (item.sourceSection === '9.3') {
+      assert.equal(item.solutionPages.length, 0, `${item.key} intentionally has no source solution`);
+    } else {
+      assert.ok(item.solutionPages.length > 0, `${item.key} solution pages`);
+    }
+  }
+  assert.equal(questionItems.filter(({ sourceSection }) => sourceSection === '10.2').length, 10);
+  const chapterCounts = {};
+  for (const item of questionItems.filter(({ sourceSection }) => sourceSection !== '10.2')) {
+    const chapter = item.sourceItem.split('.')[0];
+    chapterCounts[chapter] = (chapterCounts[chapter] ?? 0) + 1;
+  }
+  assert.deepEqual(chapterCounts, {
+    2: 60,
+    3: 54,
+    4: 7,
+    5: 20,
+    6: 26,
+    7: 35,
+    8: 26,
+    9: 34,
+  });
+
+  const tocIds = new Set();
+  const visit = (sections = []) => sections.forEach((section) => {
+    tocIds.add(section.id);
+    visit(section.children);
+  });
+  visit(tocs['red-book'].sections);
+  for (const id of tocIds) {
+    assert.equal(
+      redNodes.some((node) => node.sourceSection === id)
+        || redItems.some((item) => item.sourceSection === id),
+      true,
+      `missing Red TOC section ${id}`,
+    );
+  }
+});
