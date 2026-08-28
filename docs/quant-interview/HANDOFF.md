@@ -556,17 +556,17 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**No bounded topic is active. The serialized 011 → 012 → 013 queue is closed.**
+**Interview Strategy & Communication → Interview Preparation.**
 
-A later workstream requires its own approved design and evidence audit; no later workstream is complete or authorized by this closure.
+Workstream 014 is active at the first two consecutive master records: `green-book::1.1::guidance` and `green-book::1.2::guidance`. Its public delta is +0 Problems / +1 Knowledge. No completion evidence is recorded until exact active-commit local gates and GitHub CI succeed.
 
 ## Master directory ingestion state
 
-**No bounded ingestion workstream is active. The three-book master directory migration is complete.**
+**Workstream 014 is active. The three-book master directory migration remains complete.**
 
-First pending master record: `green-book::1.1::guidance`
+First pending master record after the active 014 scope: `red-book::1.10::guidance`
 
-The next workstream must start at that key and may include only consecutive master records within the approved batch boundary. Workstream 014 is not active until its separate design and plan are approved.
+The observed next key does not authorize workstream 015. Workstream 014 remains active until exact local and CI evidence is recorded and its workflow-free closure passes.
 
 ## Parallel workstream coordination
 

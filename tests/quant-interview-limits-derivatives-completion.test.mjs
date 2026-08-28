@@ -87,8 +87,15 @@ test('012 completion contract is phase-safe and pins factual active-gate evidenc
     assert.doesNotMatch(coordination, /completed queue entr(?:y|ies)[^\n]*013/i);
   } else {
     assert.equal(workstream013.status, 'complete');
-    assert.match(current, /No bounded topic is active.*011.*012.*013.*queue is closed/is);
-    assert.match(current, /A later workstream requires its own approved design and evidence audit/i);
+    const workstream014 = await readJson(
+      'src/data/quant-interview/workstreams/interview-strategy-communication-interview-preparation-014.json',
+    );
+    if (workstream014.status === 'active') {
+      assert.match(current, /Interview Strategy & Communication.*Interview Preparation/is);
+    } else {
+      assert.equal(workstream014.status, 'complete');
+      assert.match(current, /No bounded topic is active.*Workstream 014 is complete/is);
+    }
     assert.doesNotMatch(coordination, /remaining integration queue[^\n]*013/i);
     assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012[^\n]*013/i);
   }

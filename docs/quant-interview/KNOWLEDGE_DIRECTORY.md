@@ -6,13 +6,13 @@
 
 ## Summary
 
-- Published Knowledge: 50
+- Published Knowledge: 51
 - Planned Knowledge: 0
 - Canonical Problems: 76
 - Master records: 750
-- Terminal master records: 178
-- Pending master records: 572
-- First pending: `green-book::1.1::guidance`
+- Terminal master records: 180
+- Pending master records: 570
+- First pending: `red-book::1.10::guidance`
 
 
 ## 01. Interview Strategy & Communication
@@ -22,7 +22,7 @@
 - Green Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`
 - Red Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`, `1.6`, `1.7`, `1.8`, `1.9`, `1.10`, `1.11`, `1.12`, `9`, `9.2`, `9.3`
 - 150 Questions sections: None
-- Workstreams: `interview-strategy-communication-reasoning-communication-013` (complete)
+- Workstreams: `interview-strategy-communication-interview-preparation-014` (active), `interview-strategy-communication-reasoning-communication-013` (complete)
 
 ### Modules
 
@@ -31,28 +31,29 @@
 
 ### Coverage records
 
-- Green Book: `knowledge-only`: 3, `pending`: 2
+- Green Book: `knowledge-only`: 5
 - Red Book: `interview-guidance`: 1, `pending`: 14
 - 150 Questions: None
 
 
 ### 01.01. Interview Preparation
 
-- Curriculum: 0 published / 0 planned
+- Curriculum: 1 published / 0 planned
 - Problems: 0
 - Green Book sections: `1.1`, `1.2`
 - Red Book sections: `1.10`, `1.11`, `1.12`, `9.3`
 - 150 Questions sections: None
-- Workstreams: None
+- Workstreams: `interview-strategy-communication-interview-preparation-014` (active)
 
 #### Modules
 
 | Order | State | Slug | Prerequisites |
 |---:|---|---|---|
+| 10 | published | `quant-interview-preparation-breadth-and-practice` | None |
 
 #### Coverage records
 
-- Green Book: `pending`: 2
+- Green Book: `knowledge-only`: 2
 - Red Book: `interview-guidance`: 1, `pending`: 3
 - 150 Questions: None
 
@@ -60,8 +61,8 @@
 
 | Key | State | Question pages | Solution pages | Targets |
 |---|---|---:|---:|---|
-| `green-book::1.1::guidance` | `pending` | 17 | None | None |
-| `green-book::1.2::guidance` | `pending` | 17–18 | None | None |
+| `green-book::1.1::guidance` | `knowledge-only` | 17 | None | `quant-interview-preparation-breadth-and-practice` |
+| `green-book::1.2::guidance` | `knowledge-only` | 17–18 | None | `quant-interview-preparation-breadth-and-practice` |
 | `red-book::1.10::guidance` | `pending` | 22–24 | None | None |
 | `red-book::1.11::guidance` | `pending` | 24–25 | None | None |
 | `red-book::1.12::guidance` | `interview-guidance` | 25–27 | None | None |

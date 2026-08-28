@@ -15,6 +15,8 @@ const commands = [
 ];
 const environments = new Set(['wsl-native-lf-node24', 'linux-native-lf-node24']);
 const shaPattern = /^[0-9a-f]{40}$/;
+const currentTopicBlock = (handoff) =>
+  handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0] ?? '';
 
 test('014 lifecycle is field-safe while active and factually strict when complete', async () => {
   const [manifest, handoff] = await Promise.all([
@@ -27,6 +29,12 @@ test('014 lifecycle is field-safe while active and factually strict when complet
     assert.equal('preClosureActiveGate' in manifest, false);
     assert.equal('verification' in manifest, false);
     assert.equal('finalTreeGate' in manifest, false);
+    assert.match(
+      currentTopicBlock(handoff),
+      /Interview Strategy & Communication.*Interview Preparation/is,
+    );
+    assert.match(handoff, /Workstream 014 is active/i);
+    assert.doesNotMatch(handoff, /^## Completed cross-book workstream 14$/m);
     return;
   }
 

@@ -93,13 +93,19 @@ test('013 completion contract is phase-safe and factually strict', async () => {
   assert.match(closure, /Red.*1\.12.*interview-preparation.*interview-guidance/is);
   assert.match(closure, /150.*no (?:scope|map|coverage|ownership)/is);
   assert.equal(reservationState(handoff, '013'), 'complete');
-  assert.match(
-    currentTopicBlock(handoff),
-    /No bounded topic is active.*011.*012.*013.*queue is closed/is,
+  const workstream014 = await readJson(
+    'src/data/quant-interview/workstreams/interview-strategy-communication-interview-preparation-014.json',
   );
-  assert.match(
-    currentTopicBlock(handoff),
-    /A later workstream requires its own approved design and evidence audit; no later workstream is complete or authorized by this closure\./i,
-  );
-  assert.doesNotMatch(currentTopicBlock(handoff), /workstream 014/i);
+  if (workstream014.status === 'active') {
+    assert.match(
+      currentTopicBlock(handoff),
+      /Interview Strategy & Communication.*Interview Preparation/is,
+    );
+  } else {
+    assert.equal(workstream014.status, 'complete');
+    assert.match(
+      currentTopicBlock(handoff),
+      /No bounded topic is active.*Workstream 014 is complete/is,
+    );
+  }
 });
