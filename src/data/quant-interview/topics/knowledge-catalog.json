@@ -2,6 +2,18 @@
   "version": 1,
   "modules": [
     {
+      "slug": "quant-interview-preparation-breadth-and-practice",
+      "title": "Quant Interview Preparation: Breadth, Basics & Deliberate Practice",
+      "canonicalTopics": [
+        "interview-strategy-communication",
+        "interview-preparation"
+      ],
+      "primaryTopic": "interview-preparation",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
       "slug": "problem-framing-clarification-assumption-management",
       "title": "Problem Framing, Clarification & Assumption Management",
       "canonicalTopics": [

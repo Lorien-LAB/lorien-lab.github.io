@@ -77,3 +77,38 @@ test('preparation scope creates no public Problem', async () => {
     access('src/content/problems/quant-interview-preparation-breadth-and-practice.md'),
   );
 });
+
+test('preparation Knowledge is published and reciprocally connected', async () => {
+  const [catalogText, framing, thinkAloud] = await Promise.all([
+    readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
+    readFile(
+      'src/content/knowledge/concepts/problem-framing-clarification-assumption-management.md',
+      'utf8',
+    ),
+    readFile(
+      'src/content/knowledge/concepts/structured-think-aloud-reasoning.md',
+      'utf8',
+    ),
+  ]);
+  const catalog = JSON.parse(catalogText);
+  const module = catalog.modules.find(
+    ({ slug }) => slug === 'quant-interview-preparation-breadth-and-practice',
+  );
+  assert.deepEqual(module, {
+    slug: 'quant-interview-preparation-breadth-and-practice',
+    title: 'Quant Interview Preparation: Breadth, Basics & Deliberate Practice',
+    canonicalTopics: ['interview-strategy-communication', 'interview-preparation'],
+    primaryTopic: 'interview-preparation',
+    learningOrder: 10,
+    status: 'published',
+    prerequisites: [],
+  });
+  assert.match(
+    framing,
+    /^related: \[[^\]]*quant-interview-preparation-breadth-and-practice[^\]]*\]$/m,
+  );
+  assert.match(
+    thinkAloud,
+    /^related: \[[^\]]*quant-interview-preparation-breadth-and-practice[^\]]*\]$/m,
+  );
+});

@@ -9,7 +9,7 @@ status: growing
 tags: [Interview, Problem Solving, Communication, Assumptions]
 quantInterviewTopics: [interview-strategy-communication, reasoning-communication]
 featured: false
-related: [structured-think-aloud-reasoning]
+related: [structured-think-aloud-reasoning, quant-interview-preparation-breadth-and-practice]
 relatedNotes: []
 ---
 

@@ -51,6 +51,9 @@ async function readRepositoryProblemRecords() {
 }
 
 const exactOrder = {
+  'interview-preparation': [
+    'quant-interview-preparation-breadth-and-practice',
+  ],
   'reasoning-communication': [
     'problem-framing-clarification-assumption-management',
     'structured-think-aloud-reasoning',
@@ -155,6 +158,7 @@ const exactPrerequisites = {
   'order-statistics-basics': [],
   'positive-semidefinite-matrix': [],
   'positive-series-convergence': [],
+  'quant-interview-preparation-breadth-and-practice': [],
   'principal-minor-feasibility': ['positive-semidefinite-matrix'],
   'probability-axioms-derived-rules': ['probability-spaces-events'],
   'probability-spaces-events': [],
@@ -171,7 +175,7 @@ const exactPrerequisites = {
   'vector-geometry-inner-products': [],
 };
 
-test('repository catalog contains the exact published corpus and planned 013 modules', async () => {
+test('repository catalog contains the exact published 76/51 corpus', async () => {
   const [catalogText, taxonomyText, knowledgeRecords] = await Promise.all([
     readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
     readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'),
@@ -180,8 +184,8 @@ test('repository catalog contains the exact published corpus and planned 013 mod
   const repositoryCatalog = JSON.parse(catalogText);
   const repositoryTaxonomy = JSON.parse(taxonomyText);
   assert.equal(validateKnowledgeCatalog(repositoryCatalog, repositoryTaxonomy, knowledgeRecords), true);
-  assert.equal(repositoryCatalog.modules.length, 50);
-  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 50);
+  assert.equal(repositoryCatalog.modules.length, 51);
+  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 51);
   assert.deepEqual(
     repositoryCatalog.modules.filter((module) => module.status === 'planned').map((module) => module.slug).sort(),
     [],
@@ -213,7 +217,7 @@ test('repository public projection exposes the complete source-neutral curriculu
     problemRecords,
     base: '/',
   });
-  assert.deepEqual(result.totals, { published: 50, planned: 0 });
+  assert.deepEqual(result.totals, { published: 51, planned: 0 });
   assert.equal(result.topics.length, 10);
   const interview = result.topics.find((topic) => topic.id === 'interview-strategy-communication');
   const reasoning = interview.children.find((topic) => topic.id === 'reasoning-communication');
