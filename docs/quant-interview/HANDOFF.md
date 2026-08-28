@@ -1,6 +1,6 @@
 # Quant Interview — Current Handoff
 
-Updated: 2026-08-23
+Updated: 2026-08-28
 
 ## Current architecture state
 
@@ -429,7 +429,7 @@ Historical corpus checkpoint after workstream 11: **63 canonical Problems** and 
 
 ## Public corpus state (current)
 
-The current source-neutral regression contract discovers exactly **76 canonical Problems** and **50 explicitly topic-classified Knowledge / Technique nodes**.
+The current source-neutral regression contract discovers exactly **76 canonical Problems** and **51 explicitly topic-classified Knowledge / Technique nodes**.
 
 These are repository-record counts only. They are not whole-book completeness percentages and do not imply that Interview Strategy & Communication, Reasoning & Communication, or Green/Red/150 as a whole is complete.
 
@@ -536,6 +536,38 @@ None. Workstream 013 produced exactly +0 Problems and +2 Knowledge. The global s
 
 This closes only registered workstream 013. It does not claim completeness for Interview Strategy & Communication as a whole, for any source book as a whole, or for material outside the registered section and page scopes.
 
+## Completed cross-book workstream 14
+
+`interview-strategy-communication-interview-preparation-014`
+
+Scope: **Interview Strategy & Communication → Interview Preparation**.
+
+Active integrated verification:
+
+- CI-tested pre-closure active commit: `ec271c334b4e5ca278e0f2fedad3c90c09fa2a5d`
+- GitHub Actions run: `33151972903`; its `head_sha` is `ec271c334b4e5ca278e0f2fedad3c90c09fa2a5d`
+- authoritative local environment: `wsl-native-lf-node24`
+- CI environment: Ubuntu with Node 24; CI ran `npm ci` first
+- ordered gates: `npm run master:directory:check`, `npm run knowledge:directory:check`, `npm run test`, `npm run check`, then `npm run build`
+- conclusion: success
+- final workflow-free tree gate: the same ordered commands succeeded in `wsl-native-lf-node24`, and the temporary workflow is absent
+
+This evidence belongs to the active integrated commit above, not to the later workflow-free closure commit. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`.
+
+### Canonical Knowledge
+
+- `quant-interview-preparation-breadth-and-practice` — turns broad fundamentals, representative drills, error diagnosis, and repeated mock interviews into one deliberate-practice loop.
+
+### Canonical Problems
+
+None. Workstream 014 produced exactly **+0 Problems / +1 Knowledge**. The global source-neutral corpus is exactly **76 canonical Problems / 51 explicitly topic-classified Knowledge nodes**.
+
+### Source dispositions and closure boundary
+
+- `green-book::1.1::guidance` and `green-book::1.2::guidance` are consecutive `knowledge-only` records resolving to the one canonical Knowledge node above; evidence pages 17–18.
+- Both interview checks remain visible on the public Knowledge page. No source-specific Problem was created.
+- This closes only registered workstream 014. It does not claim completeness for Interview Strategy & Communication, interview preparation as a whole, or any source book as a whole.
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -556,17 +588,17 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**Interview Strategy & Communication → Interview Preparation.**
+**No bounded topic is active. Workstream 014 is complete.**
 
-Workstream 014 is active at the first two consecutive master records: `green-book::1.1::guidance` and `green-book::1.2::guidance`. Its public delta is +0 Problems / +1 Knowledge. No completion evidence is recorded until exact active-commit local gates and GitHub CI succeed.
+A later workstream requires its own approved design and evidence audit; workstream 015 is not active or authorized by this closure.
 
 ## Master directory ingestion state
 
-**Workstream 014 is active. The three-book master directory migration remains complete.**
+**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
 
-First pending master record after the active 014 scope: `red-book::1.10::guidance`
+First pending master record: `red-book::1.10::guidance`
 
-The observed next key does not authorize workstream 015. Workstream 014 remains active until exact local and CI evidence is recorded and its workflow-free closure passes.
+The observed next key does not authorize workstream 015. Workstream 014 is closed with exact local, workflow-free, and CI evidence.
 
 ## Parallel workstream coordination
 

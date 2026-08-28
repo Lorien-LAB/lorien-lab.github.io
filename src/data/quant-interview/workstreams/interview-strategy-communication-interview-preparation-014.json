@@ -4,7 +4,7 @@
     "interview-strategy-communication",
     "interview-preparation"
   ],
-  "status": "active",
+  "status": "complete",
   "masterItemKeys": [
     "green-book::1.1::guidance",
     "green-book::1.2::guidance"
@@ -32,5 +32,45 @@
   },
   "knowledgeSlugs": [
     "quant-interview-preparation-breadth-and-practice"
-  ]
+  ],
+  "preClosureActiveGate": {
+    "status": "active",
+    "commit": "ec271c334b4e5ca278e0f2fedad3c90c09fa2a5d",
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "ec271c334b4e5ca278e0f2fedad3c90c09fa2a5d",
+    "runId": 33151972903,
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifacts": [
+      ".github/workflows/quant-interview-preparation-014-temporary.yml"
+    ]
+  },
+  "finalTreeGate": {
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifactsAbsent": true
+  }
 }
