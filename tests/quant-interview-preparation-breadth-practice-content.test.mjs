@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile, readdir } from 'node:fs/promises';
+import { load as parseYaml } from 'js-yaml';
 
 const knowledgePath =
   'src/content/knowledge/concepts/quant-interview-preparation-breadth-and-practice.md';
@@ -11,11 +12,17 @@ const readArray = (text, field) =>
     .map((value) => value.trim())
     .filter(Boolean);
 
+test('preparation Knowledge frontmatter is valid YAML', async () => {
+  const text = await readFile(knowledgePath, 'utf8');
+  const frontmatter = text.split(/^---$/m)[1] ?? '';
+  assert.doesNotThrow(() => parseYaml(frontmatter));
+});
+
 test('preparation Knowledge owns breadth and deliberate practice as one loop', async () => {
   const text = await readFile(knowledgePath, 'utf8');
   assert.match(
     text,
-    /^title: Quant Interview Preparation: Breadth, Basics & Deliberate Practice$/m,
+    /^title: "Quant Interview Preparation: Breadth, Basics & Deliberate Practice"$/m,
   );
   assert.match(text, /^date: 2026-08-28$/m);
   assert.match(text, /^type: concept$/m);

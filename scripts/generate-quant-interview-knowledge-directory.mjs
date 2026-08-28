@@ -224,6 +224,14 @@ function frontmatterArray(text, field) {
   return value.split(',').map((item) => item.trim()).filter(Boolean);
 }
 
+function frontmatterScalar(text, field) {
+  const raw = text.match(new RegExp(`^${field}:\\s*(.+)$`, 'm'))?.[1]?.trim() ?? '';
+  const quote = raw[0];
+  return quote && ['"', "'"].includes(quote) && raw.at(-1) === quote
+    ? raw.slice(1, -1)
+    : raw;
+}
+
 async function readContentRecords(repoRoot, relativeDirectory, project, filterClassified = false) {
   const directory = path.join(repoRoot, relativeDirectory);
   const files = await readdir(directory, { recursive: true });
@@ -256,7 +264,7 @@ export async function loadRepositoryDirectoryInputs(repoRoot = process.cwd()) {
     readJson(path.join(dataRoot, 'coverage', '150-most-frequently-asked.json')),
     readContentRecords(repoRoot, path.join('src', 'content', 'knowledge'), ({ slug, text }) => ({
       slug,
-      title: text.match(/^title:\s*(.+)$/m)?.[1]?.trim() ?? '',
+      title: frontmatterScalar(text, 'title'),
       canonicalTopics: frontmatterArray(text, 'quantInterviewTopics'),
     }), true),
     readContentRecords(repoRoot, path.join('src', 'content', 'problems'), ({ slug, text }) => ({

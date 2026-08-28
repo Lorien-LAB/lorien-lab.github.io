@@ -1,5 +1,5 @@
 ---
-title: Quant Interview Preparation: Breadth, Basics & Deliberate Practice
+title: "Quant Interview Preparation: Breadth, Basics & Deliberate Practice"
 description: Build broad working fluency across core quant domains, then convert it into interview performance through representative practice, diagnosis, and repeated simulation.
 date: 2026-08-28
 type: concept

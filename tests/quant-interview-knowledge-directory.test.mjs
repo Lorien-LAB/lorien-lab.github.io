@@ -19,7 +19,11 @@ async function readRepositoryKnowledgeRecords() {
   for (const file of files.filter((name) => String(name).endsWith('.md'))) {
     const fullPath = `src/content/knowledge/${String(file).replaceAll('\\', '/')}`;
     const text = await readFile(fullPath, 'utf8');
-    const title = text.match(/^title:\s*(.+)$/m)?.[1]?.trim() ?? '';
+    const rawTitle = text.match(/^title:\s*(.+)$/m)?.[1]?.trim() ?? '';
+    const quote = rawTitle[0];
+    const title = quote && ['"', "'"].includes(quote) && rawTitle.at(-1) === quote
+      ? rawTitle.slice(1, -1)
+      : rawTitle;
     const topicText = text.match(/^quantInterviewTopics:\s*\[([^\]]*)\]$/m)?.[1] ?? '';
     const canonicalTopics = topicText.split(',').map((item) => item.trim()).filter(Boolean);
     if (canonicalTopics.length > 0) {

@@ -17,11 +17,11 @@ function firstMissingSource(directory) {
       || !directory.items.some((item) => item.source === source));
 }
 
-test('repository loader preserves 76/50 and reports the next enumeration gap', async () => {
+test('repository loader preserves explicit 76/51 state and reports the next enumeration gap', async () => {
   await access('src/data/quant-interview/master-directory.json');
   const inputs = await loadMasterDirectoryRepository(process.cwd());
   assert.equal(inputs.problemSlugs.size, 76);
-  assert.equal(inputs.knowledgeSlugs.size, 50);
+  assert.equal(inputs.knowledgeSlugs.size, 51);
   const missingSource = firstMissingSource(inputs.directory);
   if (missingSource) {
     assert.throws(
@@ -264,17 +264,23 @@ test('repository validator rejects coverage and master lifecycle drift', async (
   );
 });
 
-test('migration closes with one exact first pending key and no active 014', async () => {
+test('post-migration queue follows the factual 014 lifecycle', async () => {
   const { directory, workstreams } = await loadMasterDirectoryRepository(process.cwd());
   const first = getNextPendingItem(directory);
   assert.ok(first);
-  assert.equal(first.key, 'green-book::1.1::guidance');
+  assert.equal(first.key, 'red-book::1.10::guidance');
   assert.equal(validateSequentialScope(directory, [first.key]), true);
-  assert.equal(
-    workstreams.some(({ id, status }) => /-014$/.test(id) && status === 'active'),
-    false,
-  );
+  const workstream014 = workstreams.find(({ id }) => /-014$/.test(id));
+  assert.match(workstream014.status, /^(?:active|complete)$/);
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
-  assert.equal(handoff.includes(`First pending master record: \`${first.key}\``), true);
-  assert.match(handoff, /No bounded ingestion workstream is active/i);
+  if (workstream014.status === 'active') {
+    assert.match(handoff, /Workstream 014 is active/i);
+    assert.equal(
+      handoff.includes(`First pending master record after the active 014 scope: \`${first.key}\``),
+      true,
+    );
+  } else {
+    assert.equal(handoff.includes(`First pending master record: \`${first.key}\``), true);
+    assert.match(handoff, /No bounded ingestion workstream is active/i);
+  }
 });

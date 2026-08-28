@@ -64,7 +64,10 @@ test('problem framing page teaches clarification and revisable assumptions', asy
     description:
       'Frame underspecified interview problems by separating facts, constraints, unknowns, and success conditions before asking high-value questions or stating provisional assumptions.',
     tags: ['Interview', 'Problem Solving', 'Communication', 'Assumptions'],
-    related: ['structured-think-aloud-reasoning'],
+    related: [
+      'structured-think-aloud-reasoning',
+      'quant-interview-preparation-breadth-and-practice',
+    ],
   });
   assertSourceNeutral(text);
 
@@ -100,7 +103,10 @@ test('structured think-aloud page exposes decisive and revisable reasoning', asy
     description:
       'Communicate conclusions and decisive reasoning steps clearly, distinguish facts from inferences, and revise the explanation when feedback changes the model.',
     tags: ['Interview', 'Reasoning', 'Communication', 'Feedback'],
-    related: ['problem-framing-clarification-assumption-management'],
+    related: [
+      'problem-framing-clarification-assumption-management',
+      'quant-interview-preparation-breadth-and-practice',
+    ],
   });
   assertSourceNeutral(text);
 
@@ -129,14 +135,16 @@ test('structured think-aloud page exposes decisive and revisable reasoning', asy
   assert.match(checks, /challenge.*update/is);
 });
 
-test('new Knowledge nodes form one aligned reciprocal pair', async () => {
+test('reasoning Knowledge nodes keep their preparation links aligned', async () => {
   const framing = await readFile(framingPath, 'utf8');
   const structured = await readFile(structuredPath, 'utf8');
   assert.deepEqual(parseInlineArray(framing, 'related'), [
     'structured-think-aloud-reasoning',
+    'quant-interview-preparation-breadth-and-practice',
   ]);
   assert.deepEqual(parseInlineArray(structured, 'related'), [
     'problem-framing-clarification-assumption-management',
+    'quant-interview-preparation-breadth-and-practice',
   ]);
   assert.deepEqual(parseInlineArray(framing, 'relatedNotes'), []);
   assert.deepEqual(parseInlineArray(structured, 'relatedNotes'), []);
