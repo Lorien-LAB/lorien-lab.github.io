@@ -24,9 +24,12 @@
       "canonicalTopics": [
         "interview-preparation"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "quant-interview-preparation-breadth-and-practice"
+      ],
+      "resolutionNote": "Broad foundational readiness and the boundary between working basics and specialization resolve to the canonical preparation Knowledge page."
     },
     {
       "sourceSection": "1.2",
@@ -34,9 +37,12 @@
       "canonicalTopics": [
         "interview-preparation"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "quant-interview-preparation-breadth-and-practice"
+      ],
+      "resolutionNote": "Deliberate practice, advance preparation, and repeated performance feedback resolve to the canonical preparation Knowledge page."
     },
     {
       "sourceSection": "1.3",

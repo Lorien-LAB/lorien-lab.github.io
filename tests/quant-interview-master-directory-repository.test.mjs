@@ -216,13 +216,22 @@ test('every legacy coverage row maps exactly once into the master directory', as
   }
 });
 
-test('master migration preserves the exact pre-ingestion public corpus', async () => {
+test('master corpus preserves the 76/50 baseline plus explicit 014 delta', async () => {
   const inputs = await loadMasterDirectoryRepository(process.cwd());
   assert.equal(inputs.problemSlugs.size, 76);
-  assert.equal(inputs.knowledgeSlugs.size, 50);
-  assert.equal(inputs.workstreams.filter(({ status }) => status !== 'complete').length, 0);
+  assert.equal(inputs.knowledgeSlugs.size, 51);
+  const workstream014 = inputs.workstreams.find(({ id }) => id.endsWith('-014'));
+  assert.match(workstream014.status, /^(?:active|complete)$/);
+  assert.deepEqual(workstream014.publicDelta, { problems: 0, knowledge: 1 });
+  assert.equal(
+    inputs.workstreams
+      .filter(({ id }) => !id.endsWith('-014'))
+      .every(({ status }) => status === 'complete'),
+    true,
+  );
   assert.deepEqual(inputs.workstreams.map(({ id }) => id).sort(), [
     'calculus-differential-equations-limits-derivatives-012',
+    'interview-strategy-communication-interview-preparation-014',
     'interview-strategy-communication-reasoning-communication-013',
     'linear-algebra-covariance-correlation-psd-001',
     'linear-algebra-determinants-eigenvalues-002',

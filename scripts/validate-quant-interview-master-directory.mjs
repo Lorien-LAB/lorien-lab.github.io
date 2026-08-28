@@ -123,9 +123,24 @@ export function validateMasterDirectoryRepository(inputs) {
       }
     }
   }
-  if (inputs.problemSlugs.size !== 76 || inputs.knowledgeSlugs.size !== 50) {
+  const postMigrationWorkstreams = inputs.workstreams.filter(({ id, status }) => {
+    const ordinal = Number(id.match(/-(\d+)$/)?.[1]);
+    return Number.isInteger(ordinal)
+      && ordinal >= 14
+      && ['active', 'complete'].includes(status);
+  });
+  const expectedProblems = 76 + postMigrationWorkstreams.reduce(
+    (total, workstream) => total + (workstream.publicDelta?.problems ?? 0),
+    0,
+  );
+  const expectedKnowledge = 50 + postMigrationWorkstreams.reduce(
+    (total, workstream) => total + (workstream.publicDelta?.knowledge ?? 0),
+    0,
+  );
+  if (inputs.problemSlugs.size !== expectedProblems
+    || inputs.knowledgeSlugs.size !== expectedKnowledge) {
     throw new Error(
-      `Master migration must preserve 76 Problems / 50 Knowledge; received ${inputs.problemSlugs.size}/${inputs.knowledgeSlugs.size}`,
+      `Master corpus must match explicit workstream deltas ${expectedProblems} Problems / ${expectedKnowledge} Knowledge; received ${inputs.problemSlugs.size}/${inputs.knowledgeSlugs.size}`,
     );
   }
 

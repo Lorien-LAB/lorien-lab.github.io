@@ -1,0 +1,36 @@
+{
+  "id": "interview-strategy-communication-interview-preparation-014",
+  "canonicalTopics": [
+    "interview-strategy-communication",
+    "interview-preparation"
+  ],
+  "status": "active",
+  "masterItemKeys": [
+    "green-book::1.1::guidance",
+    "green-book::1.2::guidance"
+  ],
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": [
+        "1.1",
+        "1.2"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 17,
+          "endPage": 18
+        }
+      ],
+      "reviewOutcome": "knowledge-only-consolidation",
+      "reviewNote": "Two consecutive preparation-guidance records resolve to one canonical breadth-and-practice Knowledge page with no Problem delta."
+    }
+  ],
+  "publicDelta": {
+    "problems": 0,
+    "knowledge": 1
+  },
+  "knowledgeSlugs": [
+    "quant-interview-preparation-breadth-and-practice"
+  ]
+}

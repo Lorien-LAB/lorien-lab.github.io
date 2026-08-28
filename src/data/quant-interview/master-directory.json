@@ -3084,11 +3084,13 @@
         "interview-preparation"
       ],
       "sortKey": "01.01|01|0001|green-book::1.1::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-interview-preparation-breadth-and-practice"
+      ],
+      "workstream": "interview-strategy-communication-interview-preparation-014",
+      "resolutionNote": "Broad foundational readiness and the boundary between working basics and specialization resolve to the canonical preparation Knowledge page."
     },
     {
       "key": "green-book::1.2::guidance",
@@ -3109,11 +3111,13 @@
         "interview-preparation"
       ],
       "sortKey": "01.01|01|0002|green-book::1.2::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-interview-preparation-breadth-and-practice"
+      ],
+      "workstream": "interview-strategy-communication-interview-preparation-014",
+      "resolutionNote": "Deliberate practice, advance preparation, and repeated performance feedback resolve to the canonical preparation Knowledge page."
     },
     {
       "key": "red-book::1.10::guidance",
