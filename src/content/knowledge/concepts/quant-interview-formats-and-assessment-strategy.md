@@ -21,14 +21,14 @@ Treat the format as part of the problem specification. The same probability mode
 
 ## Assessment Map
 
-Compare the four common formats along six dimensions before choosing a working rhythm:
+Compare the four common formats along seven dimensions before choosing a working rhythm:
 
-| Format | Interaction level | Time horizon | Allowed tools | Expected artifact | Feedback channel |
-| --- | --- | --- | --- | --- | --- |
-| Live technical | Continuous dialogue with an interviewer | Usually a bounded session | Confirm in advance; often a shared editor, whiteboard, or calculator | Spoken reasoning, sketch, derivation, or small implementation | Immediate questions, corrections, and hints |
-| Remote screen | Dialogue mediated by video, audio, and screen sharing | A bounded session with setup overhead | Confirm editor, terminal, libraries, and screen-sharing rules | Shared-screen work plus verbal explanation | Immediate dialogue, with communication risks from latency |
-| Take-home | Mostly asynchronous | A deadline with self-managed work blocks | Only tools and references explicitly permitted | Reproducible code, analysis, tests, notes, or a report | Delayed review, often focused on the submitted artifact |
-| Supervised written exam | Limited or no interaction during solving | Fixed paper or online-exam window | Follow the stated materials and calculator policy | Derivations, answers, diagrams, and legible working | Usually delayed; partial credit comes from visible reasoning |
+| Format | Interaction level | Time horizon | Allowed tools | Expected artifact | Feedback availability | Communication channel |
+| --- | --- | --- | --- | --- | --- | --- |
+| Live technical | Continuous dialogue with an interviewer | Usually a bounded session | Confirm in advance; often a shared editor, whiteboard, or calculator | Spoken reasoning, sketch, derivation, or small implementation | Immediate questions, corrections, and hints | Synchronous spoken dialogue, often alongside a shared workspace |
+| Remote screen | Dialogue mediated by video, audio, and screen sharing | A bounded session with setup overhead | Confirm editor, terminal, libraries, and screen-sharing rules | Shared-screen work plus verbal explanation | Immediate, subject to latency or visibility constraints | Video or audio with screen sharing and an agreed fallback channel |
+| Take-home | Mostly asynchronous | A deadline with self-managed work blocks | Only tools and references explicitly permitted | Reproducible code, analysis, tests, notes, or a report | Usually delayed; clarification access depends on the stated rules | Asynchronous written questions and submitted documentation |
+| Supervised written exam | Limited or no interaction during solving | Fixed paper or online-exam window | Follow the stated materials and calculator policy | Derivations, answers, diagrams, and legible working | Usually delayed; visible reasoning may support partial credit | A supervised written response, with questions only when rules permit |
 
 The comparison prevents a format mismatch. For example, a take-home artifact needs reproducible instructions and checks, while a live session needs a communication loop that lets the interviewer follow and redirect the work.
 
@@ -88,9 +88,9 @@ Record the prompt, chosen approach, point of failure, evidence that exposed it, 
 
 ## Interview Checks
 
-1. Given a prompt and four possible formats, which interaction level, time horizon, allowed tools, expected artifact, and feedback channel must you confirm before choosing an execution plan?
-2. What clarification questions and assumptions should you state before solving, and how would an ambiguity in tool or resource rules change your plan?
-3. How will you communicate decisive reasoning, respond to a hint, and preserve shared understanding in a live or remote session?
-4. What integrity, resource attribution, independence, and reproducibility checks belong in a take-home submission?
-5. How will you allocate time and show enough derivation for partial credit in a supervised written exam?
-6. After the assessment, how will you classify the failure and turn the evidence into a focused deliberate-practice exercise?
+1. Before starting a take-home, what will you clarify about the deadline, allowed tools and resources, collaboration rules, expected artifact, and access to questions or feedback?
+2. How should your communication differ between a live assessment's immediate dialogue and a take-home's asynchronous, documented reasoning?
+3. When should you ask whether an optimized solution is required rather than a correct sketch or baseline implementation?
+4. During a live interview, how will you respond to a hint, restate what it changes, and incorporate it into the updated model without hiding the correction?
+5. How will you allocate written exam time across scanning, first-pass solving, partial-credit derivations, and final consistency checks?
+6. After an assessment, how will you diagnose format mismatch versus missing knowledge before choosing the next practice exercise?

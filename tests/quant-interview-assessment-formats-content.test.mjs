@@ -6,6 +6,9 @@ import { JSON_SCHEMA, load as parseYaml } from 'js-yaml';
 const knowledgePath =
   'src/content/knowledge/concepts/quant-interview-formats-and-assessment-strategy.md';
 
+const levelTwoSection = (text, heading) =>
+  text.split(new RegExp(`^## ${heading}$`, 'm'))[1]?.split(/^## /m)[0] ?? '';
+
 const metadata = {
   title: 'Quant Interview Formats & Assessment Strategy',
   description:
@@ -28,6 +31,7 @@ const metadata = {
 
 test('assessment-formats Knowledge has the exact public metadata contract', async () => {
   const text = await readFile(knowledgePath, 'utf8');
+  assert.equal(text.startsWith('---\n'), true, 'YAML delimiter must start at byte 0');
   const frontmatter = text.split(/^---$/m)[1] ?? '';
   assert.deepEqual(parseYaml(frontmatter, { schema: JSON_SCHEMA }), metadata);
 });
@@ -51,9 +55,59 @@ test('assessment-formats Knowledge covers the four formats and execution loop', 
     'think aloud', 'hint', 'integrity', 'resource attribution',
     'reproducible', 'time allocation', 'partial credit', 'consistency checks',
   ]) assert.match(text, new RegExp(phrase, 'i'));
-  const checks = text.split(/^## Interview Checks$/m)[1] ?? '';
-  assert.equal((checks.match(/^\d+\./gm) ?? []).length, 6);
   assert.match(text, /copied solutions|copying|external work/i);
+});
+
+test('Assessment Map has the exact seven-column and four-format contract', async () => {
+  const text = await readFile(knowledgePath, 'utf8');
+  const assessmentMap = levelTwoSection(text, 'Assessment Map');
+  const tableRows = assessmentMap
+    .split(/\r?\n/)
+    .filter((line) => /^\|.+\|$/.test(line))
+    .map((line) => line.split('|').slice(1, -1).map((cell) => cell.trim()));
+  const [headers, separator, ...formats] = tableRows;
+
+  assert.deepEqual(headers, [
+    'Format',
+    'Interaction level',
+    'Time horizon',
+    'Allowed tools',
+    'Expected artifact',
+    'Feedback availability',
+    'Communication channel',
+  ]);
+  assert.equal(separator.every((cell) => /^---+$/.test(cell)), true);
+  assert.deepEqual(formats.map(([label]) => label), [
+    'Live technical',
+    'Remote screen',
+    'Take-home',
+    'Supervised written exam',
+  ]);
+  assert.equal(formats.every((row) => row.length === headers.length), true);
+});
+
+test('Interview Checks cover the six required decisions one-for-one', async () => {
+  const text = await readFile(knowledgePath, 'utf8');
+  const checks = levelTwoSection(text, 'Interview Checks')
+    .split(/\r?\n/)
+    .filter((line) => /^\d+\.\s/.test(line));
+
+  assert.equal(checks.length, 6);
+  assert.match(checks[0], /take-home/i);
+  assert.match(checks[0], /clarif|confirm/i);
+  assert.match(checks[1], /live/i);
+  assert.match(checks[1], /take-home/i);
+  assert.match(checks[1], /communicat/i);
+  assert.match(checks[2], /optimized solution/i);
+  assert.match(checks[2], /required|expected/i);
+  assert.match(checks[3], /live/i);
+  assert.match(checks[3], /hint/i);
+  assert.match(checks[3], /respond|incorporat|restate/i);
+  assert.match(checks[4], /written exam/i);
+  assert.match(checks[4], /allocat.*time|time.*allocat/i);
+  assert.match(checks[5], /format mismatch/i);
+  assert.match(checks[5], /missing knowledge/i);
+  assert.match(checks[5], /diagnos|distinguish|separate/i);
 });
 
 test('assessment-formats page is source-neutral and creates no Problem', async () => {
