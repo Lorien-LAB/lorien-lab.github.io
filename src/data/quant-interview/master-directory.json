@@ -3217,11 +3217,11 @@
         "interview-preparation"
       ],
       "sortKey": "01.01|02|0042|red-book::9::guidance",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "Red Book chapter 9 is a mixed soft-interview and current-finance container; it is excluded from the durable public technical question bank and has no independent public target."
     },
     {
       "key": "red-book::9.3::guidance",
@@ -3232,7 +3232,7 @@
       "questionPages": [
         {
           "startPage": 315,
-          "endPage": 317
+          "endPage": 316
         }
       ],
       "solutionPages": [],
@@ -3243,11 +3243,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|0044|red-book::9.3::guidance",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "Red Book 9.3 is a collection of time-sensitive market-awareness prompts; it is excluded from the durable public technical question bank by explicit user direction."
     },
     {
       "key": "red-book::9.3::9.23",
@@ -3269,11 +3269,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1250|red-book::9.3::9.23",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The current equity-benchmark level is time-sensitive market data and is excluded from the durable public technical question bank."
     },
     {
       "key": "red-book::9.3::9.24",
@@ -3295,11 +3295,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1251|red-book::9.3::9.24",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The current commodity price is time-sensitive market data and is excluded from the durable public technical question bank."
     },
     {
       "key": "red-book::9.3::9.25",
@@ -3321,11 +3321,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1252|red-book::9.3::9.25",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The current yield-curve snapshot is time-sensitive market data and is excluded from the durable public technical question bank."
     },
     {
       "key": "red-book::9.3::9.26",
@@ -3347,11 +3347,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1253|red-book::9.3::9.26",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The current US policy-rate prompt is time-sensitive market data and is excluded from the durable public technical question bank."
     },
     {
       "key": "red-book::9.3::9.27",
@@ -3373,11 +3373,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1254|red-book::9.3::9.27",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The current UK policy-rate prompt is time-sensitive market data and is excluded from the durable public technical question bank."
     },
     {
       "key": "red-book::9.3::9.28",
@@ -3399,11 +3399,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1255|red-book::9.3::9.28",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The current euro-area policy-rate prompt is time-sensitive market data and is excluded from the durable public technical question bank."
     },
     {
       "key": "red-book::9.3::9.29",
@@ -3425,11 +3425,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1256|red-book::9.3::9.29",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The source-era crisis current-affairs prompt is excluded from the durable public technical question bank by explicit user direction."
     },
     {
       "key": "red-book::9.3::9.30",
@@ -3451,11 +3451,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1257|red-book::9.3::9.30",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The current foreign-exchange rate is time-sensitive market data and is excluded from the durable public technical question bank."
     },
     {
       "key": "red-book::9.3::9.31",
@@ -3477,11 +3477,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1258|red-book::9.3::9.31",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The current labor-market comparison is time-sensitive market data and is excluded from the durable public technical question bank."
     },
     {
       "key": "red-book::9.3::9.32",
@@ -3503,11 +3503,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1259|red-book::9.3::9.32",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The current US central-bank office-holder prompt is time-sensitive and is excluded from the durable public technical question bank."
     },
     {
       "key": "red-book::9.3::9.33",
@@ -3529,11 +3529,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1260|red-book::9.3::9.33",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The current UK central-bank office-holder prompt is time-sensitive and is excluded from the durable public technical question bank."
     },
     {
       "key": "red-book::9.3::9.34",
@@ -3555,11 +3555,11 @@
         "fixed-income-rates-general-finance"
       ],
       "sortKey": "01.01|02|1261|red-book::9.3::9.34",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
       "workstream": null,
-      "resolutionNote": null
+      "resolutionNote": "The source-era UK regulatory-architecture prompt is obsolete current-affairs material and is excluded from the durable public technical question bank."
     },
     {
       "key": "green-book::1.3::guidance",

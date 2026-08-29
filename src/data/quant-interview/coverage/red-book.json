@@ -614,9 +614,10 @@
       "canonicalTopics": [
         "interview-strategy-communication"
       ],
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [],
+      "resolutionNote": "Red Book chapter 9 is a mixed soft-interview and current-finance container; it is excluded from the durable public technical question bank and has no independent public target."
     },
     {
       "sourceSection": "9.1",
@@ -643,9 +644,154 @@
         "interview-preparation",
         "fixed-income-rates-general-finance"
       ],
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [],
+      "resolutionNote": "Red Book 9.3 is a collection of time-sensitive market-awareness prompts; it is excluded from the durable public technical question bank by explicit user direction."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.23",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The current equity-benchmark level is time-sensitive market data and is excluded from the durable public technical question bank."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.24",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The current commodity price is time-sensitive market data and is excluded from the durable public technical question bank."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.25",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The current yield-curve snapshot is time-sensitive market data and is excluded from the durable public technical question bank."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.26",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The current US policy-rate prompt is time-sensitive market data and is excluded from the durable public technical question bank."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.27",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The current UK policy-rate prompt is time-sensitive market data and is excluded from the durable public technical question bank."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.28",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The current euro-area policy-rate prompt is time-sensitive market data and is excluded from the durable public technical question bank."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.29",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The source-era crisis current-affairs prompt is excluded from the durable public technical question bank by explicit user direction."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.30",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The current foreign-exchange rate is time-sensitive market data and is excluded from the durable public technical question bank."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.31",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The current labor-market comparison is time-sensitive market data and is excluded from the durable public technical question bank."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.32",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The current US central-bank office-holder prompt is time-sensitive and is excluded from the durable public technical question bank."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.33",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The current UK central-bank office-holder prompt is time-sensitive and is excluded from the durable public technical question bank."
+    },
+    {
+      "sourceSection": "9.3",
+      "sourceItem": "9.34",
+      "canonicalTopics": [
+        "interview-preparation",
+        "fixed-income-rates-general-finance"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "The source-era UK regulatory-architecture prompt is obsolete current-affairs material and is excluded from the durable public technical question bank."
     },
     {
       "sourceSection": "10",
