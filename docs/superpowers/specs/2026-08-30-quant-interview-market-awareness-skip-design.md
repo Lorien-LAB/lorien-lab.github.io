@@ -1,7 +1,7 @@
 # Red Book Market-Awareness Skip Audit Design
 
-**Date:** 2026-08-30  
-**Status:** Approved by explicit user instruction: skip this content  
+**Date:** 2026-08-30
+**Status:** Approved by explicit user instruction: skip this content
 **Ordinal:** None; workstream 016 remains unused
 
 ## Context
