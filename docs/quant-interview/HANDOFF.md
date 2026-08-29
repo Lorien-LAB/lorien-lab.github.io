@@ -1,6 +1,6 @@
 # Quant Interview — Current Handoff
 
-Updated: 2026-08-28
+Updated: 2026-08-29
 
 ## Current architecture state
 
@@ -568,6 +568,39 @@ None. Workstream 014 produced exactly **+0 Problems / +1 Knowledge**. The global
 - Both interview checks remain visible on the public Knowledge page. No source-specific Problem was created.
 - This closes only registered workstream 014. It does not claim completeness for Interview Strategy & Communication, interview preparation as a whole, or any source book as a whole.
 
+## Completed cross-book workstream 15
+
+`interview-strategy-communication-interview-preparation-role-employer-fit-015`
+
+Scope: **Interview Strategy & Communication → Interview Preparation**. The bounded subject is **Quant Role & Employer Fit**.
+
+Active integrated verification:
+
+- CI-tested pre-closure active commit: `a6024974396c8609342273f655967f05593de74d`
+- GitHub Actions run: `33260285231`; its `head_sha` is `a6024974396c8609342273f655967f05593de74d`
+- authoritative local environment: WSL native-LF with Node 24 (`wsl-native-lf-node24`)
+- CI environment: Ubuntu with Node 24; CI ran `npm ci` first
+- ordered gates: `npm run master:directory:check`, `npm run knowledge:directory:check`, `npm run test`, `npm run check`, then `npm run build`
+- conclusion: success
+- final workflow-free tree gate: the same ordered commands succeeded at removal commit `b9765b49e02c48a5e0e4f4a031bfcc4e1566b15e` in `wsl-native-lf-node24`, and the temporary workflow is absent
+
+This evidence belongs to the active integrated commit above, not to the later workflow-free closure commits. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`.
+
+### Canonical Knowledge
+
+- `quant-role-and-employer-fit` — consolidates role constraints, employer evidence, fit scoring, falsification questions, and reversible next actions into one source-neutral framework.
+
+### Canonical Problems
+
+None. Workstream 015 produced exactly **+0 Problems / +1 Knowledge**. The global source-neutral corpus is exactly **76 canonical Problems / 52 explicitly topic-classified Knowledge nodes**.
+
+### Source dispositions and closure boundary
+
+- `red-book::1.10::guidance` is `knowledge-only` with the exact page boundary 22–23 and resolves to `quant-role-and-employer-fit`.
+- `red-book::1.11::guidance` is `knowledge-only` with the exact page boundary 24–25 and resolves to the same canonical Knowledge node.
+- Both source records remain internal evidence. The public Knowledge page and its interview checks are source-neutral, and no source-specific Problem was created.
+- This closes only registered workstream 015. It does not claim completeness for Interview Strategy & Communication, interview preparation, role and employer fit as a whole, the Red Book, or any source book as a whole.
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -588,17 +621,15 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**Interview Strategy & Communication → Interview Preparation.**
+**No bounded topic is active. Workstream 015 is complete.**
 
-Workstream 015 is active at the two consecutive master records `red-book::1.10::guidance` and `red-book::1.11::guidance`. Its public delta is +0 Problems / +1 Knowledge. Completion evidence remains absent until the exact active commit passes local, WSL, and GitHub CI verification.
+A later workstream requires its own approved design and evidence audit; workstream 016 is not active or authorized by this closure.
 
 ## Master directory ingestion state
 
-**Workstream 015 is active. The three-book master directory migration remains complete.**
+**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
 
-First pending master record after the active 015 scope: `red-book::9::guidance`
-
-The observed next key does not authorize workstream 016.
+First pending master record: `red-book::9::guidance`
 
 ## Parallel workstream coordination
 

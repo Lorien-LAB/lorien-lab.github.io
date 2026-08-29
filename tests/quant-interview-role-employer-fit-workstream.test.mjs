@@ -17,7 +17,7 @@ const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
 test('015 owns exactly two consecutive Red preparation records', async () => {
   const manifest = await readJson(manifestPath);
   assert.equal(manifest.id, 'interview-strategy-communication-interview-preparation-role-employer-fit-015');
-  assert.equal(manifest.status, 'active');
+  assert.match(manifest.status, /^(?:active|complete)$/);
   assert.deepEqual(manifest.canonicalTopics, [
     'interview-strategy-communication',
     'interview-preparation',
@@ -25,9 +25,11 @@ test('015 owns exactly two consecutive Red preparation records', async () => {
   assert.deepEqual(manifest.masterItemKeys, keys);
   assert.deepEqual(manifest.publicDelta, { problems: 0, knowledge: 1 });
   assert.deepEqual(manifest.knowledgeSlugs, [knowledgeSlug]);
-  assert.equal('preClosureActiveGate' in manifest, false);
-  assert.equal('verification' in manifest, false);
-  assert.equal('finalTreeGate' in manifest, false);
+  if (manifest.status === 'active') {
+    assert.equal('preClosureActiveGate' in manifest, false);
+    assert.equal('verification' in manifest, false);
+    assert.equal('finalTreeGate' in manifest, false);
+  }
 });
 
 test('master and Red coverage close both rows with exact page evidence', async () => {

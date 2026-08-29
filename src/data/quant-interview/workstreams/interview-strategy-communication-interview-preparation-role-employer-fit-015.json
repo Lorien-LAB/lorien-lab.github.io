@@ -4,7 +4,7 @@
     "interview-strategy-communication",
     "interview-preparation"
   ],
-  "status": "active",
+  "status": "complete",
   "masterItemKeys": [
     "red-book::1.10::guidance",
     "red-book::1.11::guidance"
@@ -19,5 +19,45 @@
     }
   ],
   "publicDelta": { "problems": 0, "knowledge": 1 },
-  "knowledgeSlugs": ["quant-role-and-employer-fit"]
+  "knowledgeSlugs": ["quant-role-and-employer-fit"],
+  "preClosureActiveGate": {
+    "status": "active",
+    "commit": "a6024974396c8609342273f655967f05593de74d",
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "a6024974396c8609342273f655967f05593de74d",
+    "runId": 33260285231,
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifacts": [
+      ".github/workflows/quant-interview-role-employer-fit-015-temporary.yml"
+    ]
+  },
+  "finalTreeGate": {
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifactsAbsent": true
+  }
 }
