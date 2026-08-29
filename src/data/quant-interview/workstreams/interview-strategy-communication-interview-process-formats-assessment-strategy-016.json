@@ -4,7 +4,7 @@
     "interview-strategy-communication",
     "interview-process-formats"
   ],
-  "status": "active",
+  "status": "complete",
   "masterItemKeys": [
     "red-book::1.1::guidance",
     "red-book::1.2::guidance",
@@ -26,5 +26,45 @@
     }
   ],
   "publicDelta": { "problems": 0, "knowledge": 1 },
-  "knowledgeSlugs": ["quant-interview-formats-and-assessment-strategy"]
+  "knowledgeSlugs": ["quant-interview-formats-and-assessment-strategy"],
+  "preClosureActiveGate": {
+    "status": "active",
+    "commit": "4bd5731ffed1f7c91d17ed91b5c6384f6f36560b",
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "4bd5731ffed1f7c91d17ed91b5c6384f6f36560b",
+    "runId": 33274838789,
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifacts": [
+      ".github/workflows/quant-interview-assessment-formats-016-temporary.yml"
+    ]
+  },
+  "finalTreeGate": {
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifactsAbsent": true
+  }
 }

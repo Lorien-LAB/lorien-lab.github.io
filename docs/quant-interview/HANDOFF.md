@@ -1,6 +1,6 @@
 # Quant Interview — Current Handoff
 
-Updated: 2026-08-29
+Updated: 2026-08-30
 
 ## Current architecture state
 
@@ -609,6 +609,50 @@ These 14 records contain time-sensitive market snapshots, source-era office hold
 
 No workstream ordinal was consumed. Workstream 016 is not active and remains available for the next substantive scope.
 
+## Completed cross-book workstream 16
+
+`interview-strategy-communication-interview-process-formats-assessment-strategy-016`
+
+Scope: **Interview Strategy & Communication → Interview Process & Formats**. The bounded subject is **assessment formats and execution strategy**.
+
+Active integrated verification:
+
+- CI-tested pre-closure active commit: `4bd5731ffed1f7c91d17ed91b5c6384f6f36560b`
+- GitHub Actions run: `33274838789`; its `head_sha` is `4bd5731ffed1f7c91d17ed91b5c6384f6f36560b`
+- authoritative local environment: WSL native-LF with Node 24 (`wsl-native-lf-node24`)
+- CI environment: Ubuntu with Node 24; CI ran `npm ci` first
+- ordered gates: `npm run master:directory:check`, `npm run knowledge:directory:check`, `npm run test`, `npm run check`, then `npm run build`
+- conclusion: success
+- final workflow-free tree gate: the same ordered commands succeeded at the workflow-removal and closure heads in `wsl-native-lf-node24`, and the temporary workflow is absent
+
+This evidence belongs to the active integrated commit above, not to the later workflow-free closure commits. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`.
+
+### Canonical Knowledge
+
+- `quant-interview-formats-and-assessment-strategy` — consolidates live technical interviews, remote screens, take-homes, supervised written exams, format-specific execution, integrity, deliverable quality, and post-assessment review into one source-neutral framework.
+
+### Canonical Problems
+
+None. Workstream 016 produced exactly **+0 Problems / +1 Knowledge**. The global source-neutral corpus is exactly **76 canonical Problems / 53 explicitly topic-classified Knowledge nodes**.
+
+### Exact nine-row dispositions
+
+- `red-book::1.1::guidance` is `knowledge-only` and resolves to `quant-interview-formats-and-assessment-strategy`; evidence page 13.
+- `red-book::1.2::guidance` is target-free `interview-guidance`; evidence pages 13–15.
+- `red-book::1.3::guidance` is `knowledge-only` and resolves to `quant-interview-formats-and-assessment-strategy`, `problem-framing-clarification-assumption-management`, and `structured-think-aloud-reasoning`; evidence pages 15–17.
+- `red-book::1.4::guidance` is `knowledge-only` and resolves to `quant-interview-formats-and-assessment-strategy`; evidence pages 17–18.
+- `red-book::1.5::guidance` is `knowledge-only` and resolves to `quant-interview-formats-and-assessment-strategy`; evidence page 18.
+- `red-book::1.6::guidance` is `knowledge-only` and resolves to `quant-interview-formats-and-assessment-strategy`; evidence pages 18–19.
+- `red-book::1.7::guidance` is target-free `interview-guidance`; its literal source identity was preserved while its question-page evidence alone was repaired to page 19.
+- `red-book::1.8::guidance` is `knowledge-only` and resolves to `quant-interview-formats-and-assessment-strategy`; evidence pages 20–21.
+- `red-book::1.9::guidance` is `knowledge-only` and resolves to `quant-interview-preparation-breadth-and-practice`; evidence pages 21–22.
+
+All nine rows are terminal, yielding exactly **205 terminal / 545 pending** master-directory records. The next pending record is `red-book::9.2::guidance`.
+
+### Closure boundary
+
+The nine source records remain internal evidence. The one new public Knowledge page, its catalog entry, links, and interview checks are source-neutral; no source-specific Problem was created. This closes only registered workstream 016. It does not claim completeness for Interview Strategy & Communication, interview process and formats as a whole, the Red Book, any source book, or material outside Red Book sections 1.1–1.9 and evidence pages 13–22.
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -629,17 +673,15 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**Interview Strategy & Communication → Interview Process & Formats.**
+**No bounded topic is active. Workstream 016 is complete.**
 
-Workstream 016 is active at the nine consecutive master records `red-book::1.1::guidance` through `red-book::1.9::guidance`. Its public delta is +0 Problems / +1 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI verification.
+A later workstream requires its own approved design and evidence audit; workstream 017 is not active or authorized by this closure.
 
 ## Master directory ingestion state
 
-**Workstream 016 is active. The three-book master directory migration remains complete.**
+**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
 
-First pending master record after the active 016 scope: `red-book::9.2::guidance`
-
-The observed next key does not authorize workstream 017.
+First pending master record: `red-book::9.2::guidance`
 
 ## Parallel workstream coordination
 
