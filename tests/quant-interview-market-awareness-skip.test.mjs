@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile, readdir } from 'node:fs/promises';
-import { getNextPendingItem, TERMINAL_STATES } from '../src/lib/quantInterviewMasterDirectory.mjs';
+import { TERMINAL_STATES } from '../src/lib/quantInterviewMasterDirectory.mjs';
 import {
   loadMasterDirectoryRepository,
   validateMasterDirectoryRepository,
@@ -161,7 +161,7 @@ test('all fourteen rows preserve identity and exact target-free guidance decisio
   assert.equal(validateMasterDirectoryRepository(inputs), true);
 });
 
-test('skip audit repairs pages, preserves public counts, and advances to Red 1.1', async () => {
+test('skip audit repairs pages and remains intact in the current corpus', async () => {
   const inputs = await loadMasterDirectoryRepository(process.cwd());
   const section = inputs.directory.items.find(
     (item) => item.key === 'red-book::9.3::guidance',
@@ -174,12 +174,10 @@ test('skip audit repairs pages, preserves public counts, and advances to Red 1.1
   }
   const terminal = inputs.directory.items.filter((item) => TERMINAL_STATES.has(item.state));
   const pending = inputs.directory.items.filter((item) => item.state === 'pending');
-  assert.equal(terminal.length, 196);
-  assert.equal(pending.length, 554);
+  assert.equal(terminal.length, 205);
+  assert.equal(pending.length, 545);
   assert.equal(inputs.problemSlugs.size, 76);
-  assert.equal(inputs.knowledgeSlugs.size, 52);
-  assert.equal(getNextPendingItem(inputs.directory)?.key, 'red-book::1.1::guidance');
-  assert.equal(inputs.workstreams.some(({ id }) => /-016$/.test(id)), false);
+  assert.equal(inputs.knowledgeSlugs.size, 53);
 });
 
 test('skip audit creates no public market-awareness artifact', async () => {
@@ -271,10 +269,8 @@ These 14 records contain time-sensitive market snapshots, source-era office hold
 
 No workstream ordinal was consumed. Workstream 016 is not active and remains available for the next substantive scope.`,
   );
-  assert.match(handoff, /First pending master record: `red-book::1\.1::guidance`/i);
-  assert.match(directory, /Terminal master records: 196/);
-  assert.match(directory, /Pending master records: 554/);
-  assert.match(directory, /First pending: `red-book::1\.1::guidance`/);
+  assert.match(directory, /Terminal master records: 205/);
+  assert.match(directory, /Pending master records: 545/);
   for (const key of keys) {
     const rows = directory
       .split(/\r?\n/)

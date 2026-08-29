@@ -473,6 +473,18 @@ test('authoritative current topic follows factual 012 lifecycle', async () => {
         } else {
           assert.match(handoff, /^## Completed cross-book workstream 15$/m);
           assert.doesNotMatch(current, /Workstream 015 is active/i);
+          const workstream016 = JSON.parse(await readFile(
+            'src/data/quant-interview/workstreams/interview-strategy-communication-interview-process-formats-assessment-strategy-016.json',
+            'utf8',
+          ));
+          assert.match(workstream016.status, /^(?:active|complete)$/);
+          if (workstream016.status === 'active') {
+            assert.match(current, /Interview Strategy & Communication.*Interview Process & Formats/is);
+            assert.match(current, /Workstream 016 is active/i);
+          } else {
+            assert.match(handoff, /^## Completed cross-book workstream 16$/m);
+            assert.doesNotMatch(current, /Workstream 016 is active/i);
+          }
         }
       }
     }

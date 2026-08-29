@@ -6,13 +6,13 @@
 
 ## Summary
 
-- Published Knowledge: 52
+- Published Knowledge: 53
 - Planned Knowledge: 0
 - Canonical Problems: 76
 - Master records: 750
-- Terminal master records: 196
-- Pending master records: 554
-- First pending: `red-book::1.1::guidance`
+- Terminal master records: 205
+- Pending master records: 545
+- First pending: `red-book::9.2::guidance`
 
 
 ## 01. Interview Strategy & Communication
@@ -22,7 +22,7 @@
 - Green Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`
 - Red Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`, `1.6`, `1.7`, `1.8`, `1.9`, `1.10`, `1.11`, `1.12`, `9`, `9.2`, `9.3`
 - 150 Questions sections: None
-- Workstreams: `interview-strategy-communication-interview-preparation-014` (complete), `interview-strategy-communication-interview-preparation-role-employer-fit-015` (complete), `interview-strategy-communication-reasoning-communication-013` (complete)
+- Workstreams: `interview-strategy-communication-interview-preparation-014` (complete), `interview-strategy-communication-interview-preparation-role-employer-fit-015` (complete), `interview-strategy-communication-interview-process-formats-assessment-strategy-016` (active), `interview-strategy-communication-reasoning-communication-013` (complete)
 
 ### Modules
 
@@ -32,7 +32,7 @@
 ### Coverage records
 
 - Green Book: `knowledge-only`: 5
-- Red Book: `interview-guidance`: 15, `knowledge-only`: 2, `pending`: 10
+- Red Book: `interview-guidance`: 17, `knowledge-only`: 9, `pending`: 1
 - 150 Questions: None
 
 
@@ -116,37 +116,38 @@
 
 ### 01.03. Interview Process & Formats
 
-- Curriculum: 0 published / 0 planned
+- Curriculum: 1 published / 0 planned
 - Problems: 0
 - Green Book sections: None
 - Red Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`, `1.6`, `1.7`, `1.8`, `1.9`
 - 150 Questions sections: None
-- Workstreams: None
+- Workstreams: `interview-strategy-communication-interview-process-formats-assessment-strategy-016` (active)
 
 #### Modules
 
 | Order | State | Slug | Prerequisites |
 |---:|---|---|---|
+| 12 | published | `quant-interview-formats-and-assessment-strategy` | None |
 
 #### Coverage records
 
 - Green Book: None
-- Red Book: `pending`: 9
+- Red Book: `interview-guidance`: 2, `knowledge-only`: 7
 - 150 Questions: None
 
 #### Master queue records
 
 | Key | State | Question pages | Solution pages | Targets |
 |---|---|---:|---:|---|
-| `red-book::1.1::guidance` | `pending` | 13 | None | None |
-| `red-book::1.2::guidance` | `pending` | 13–15 | None | None |
-| `red-book::1.3::guidance` | `pending` | 15–17 | None | None |
-| `red-book::1.4::guidance` | `pending` | 17–18 | None | None |
-| `red-book::1.5::guidance` | `pending` | 18 | None | None |
-| `red-book::1.6::guidance` | `pending` | 18–19 | None | None |
-| `red-book::1.7::guidance` | `pending` | 19–20 | None | None |
-| `red-book::1.8::guidance` | `pending` | 20–21 | None | None |
-| `red-book::1.9::guidance` | `pending` | 21–22 | None | None |
+| `red-book::1.1::guidance` | `knowledge-only` | 13 | None | `quant-interview-formats-and-assessment-strategy` |
+| `red-book::1.2::guidance` | `interview-guidance` | 13–15 | None | None |
+| `red-book::1.3::guidance` | `knowledge-only` | 15–17 | None | `quant-interview-formats-and-assessment-strategy`, `problem-framing-clarification-assumption-management`, `structured-think-aloud-reasoning` |
+| `red-book::1.4::guidance` | `knowledge-only` | 17–18 | None | `quant-interview-formats-and-assessment-strategy` |
+| `red-book::1.5::guidance` | `knowledge-only` | 18 | None | `quant-interview-formats-and-assessment-strategy` |
+| `red-book::1.6::guidance` | `knowledge-only` | 18–19 | None | `quant-interview-formats-and-assessment-strategy` |
+| `red-book::1.7::guidance` | `interview-guidance` | 19 | None | None |
+| `red-book::1.8::guidance` | `knowledge-only` | 20–21 | None | `quant-interview-formats-and-assessment-strategy` |
+| `red-book::1.9::guidance` | `knowledge-only` | 21–22 | None | `quant-interview-preparation-breadth-and-practice` |
 
 
 ### 01.04. Soft Interview

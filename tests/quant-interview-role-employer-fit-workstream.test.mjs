@@ -66,10 +66,10 @@ test('015 master and Red coverage rows remain terminal after the later skip audi
   }
   assert.notEqual(notes[0], notes[1]);
   assert.equal(validateMasterDirectoryRepository(inputs), true);
-  assert.equal(getNextPendingItem(inputs.directory)?.key, 'red-book::1.1::guidance');
+  assert.equal(getNextPendingItem(inputs.directory)?.key, 'red-book::9.2::guidance');
 });
 
-test('015 produces exactly 76 Problems and 52 classified Knowledge nodes', async () => {
+test('current corpus preserves 015 and contains exactly 76 Problems and 53 classified Knowledge nodes', async () => {
   const problemFiles = await readdir('src/content/problems', { recursive: true });
   const knowledgeFiles = await readdir('src/content/knowledge', { recursive: true });
   assert.equal(problemFiles.filter((file) => String(file).endsWith('.md')).length, 76);
@@ -81,5 +81,5 @@ test('015 produces exactly 76 Problems and 52 classified Knowledge nodes', async
     }
   }
   assert.equal(classified.includes(knowledgeSlug), true);
-  assert.equal(classified.length, 52);
+  assert.equal(classified.length, 53);
 });
