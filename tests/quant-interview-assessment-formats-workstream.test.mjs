@@ -46,39 +46,58 @@ const notes = [
   'Red Book 1.9 readiness signals resolve to the existing deliberate-practice preparation Knowledge page.',
 ];
 
-test('016 manifest owns exactly nine ordered source rows while active', async () => {
+const immutableManifestScope = {
+  id: workstreamId,
+  canonicalTopics: [
+    'interview-strategy-communication',
+    'interview-process-formats',
+  ],
+  masterItemKeys: keys,
+  sourceScopes: [
+    {
+      source: 'red-book',
+      sourceSections: [
+        '1.1',
+        '1.2',
+        '1.3',
+        '1.4',
+        '1.5',
+        '1.6',
+        '1.7',
+        '1.8',
+        '1.9',
+      ],
+      evidencePageRanges: [{ startPage: 13, endPage: 22 }],
+      reviewOutcome: 'selective-knowledge-and-guidance',
+      reviewNote:
+        'Nine consecutive interview-process records resolve selectively to one new assessment framework, three existing reusable Knowledge nodes, and two target-free guidance rows.',
+    },
+  ],
+  publicDelta: { problems: 0, knowledge: 1 },
+  knowledgeSlugs: [newSlug],
+};
+
+test('016 manifest preserves its exact nine-row scope across the lifecycle', async () => {
   const manifest = await readJson(manifestPath);
-  assert.deepEqual(manifest, {
-    id: workstreamId,
-    canonicalTopics: [
-      'interview-strategy-communication',
-      'interview-process-formats',
-    ],
-    status: 'active',
-    masterItemKeys: keys,
-    sourceScopes: [
-      {
-        source: 'red-book',
-        sourceSections: [
-          '1.1',
-          '1.2',
-          '1.3',
-          '1.4',
-          '1.5',
-          '1.6',
-          '1.7',
-          '1.8',
-          '1.9',
-        ],
-        evidencePageRanges: [{ startPage: 13, endPage: 22 }],
-        reviewOutcome: 'selective-knowledge-and-guidance',
-        reviewNote:
-          'Nine consecutive interview-process records resolve selectively to one new assessment framework, three existing reusable Knowledge nodes, and two target-free guidance rows.',
-      },
-    ],
-    publicDelta: { problems: 0, knowledge: 1 },
-    knowledgeSlugs: [newSlug],
-  });
+  assert.match(manifest.status, /^(?:active|complete)$/);
+  if (manifest.status === 'active') {
+    assert.deepEqual(manifest, {
+      ...immutableManifestScope,
+      status: 'active',
+    });
+    assert.equal('preClosureActiveGate' in manifest, false);
+    assert.equal('verification' in manifest, false);
+    assert.equal('finalTreeGate' in manifest, false);
+    return;
+  }
+
+  const scope = structuredClone(manifest);
+  delete scope.status;
+  delete scope.preClosureActiveGate;
+  delete scope.verification;
+  delete scope.finalTreeGate;
+  assert.equal(manifest.status, 'complete');
+  assert.deepEqual(scope, immutableManifestScope);
 });
 
 test('master and Red coverage mirror the exact selective dispositions', async () => {

@@ -17,6 +17,10 @@ const environments = new Set(['wsl-native-lf-node24', 'linux-native-lf-node24'])
 const shaPattern = /^[0-9a-f]{40}$/;
 const currentTopicBlock = (handoff) =>
   handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0] ?? '';
+const completedWorkstream16Block = (handoff) =>
+  handoff.split(/^## Completed cross-book workstream 16$/m)[1]?.split(/^## /m)[0] ?? '';
+const masterIngestionBlock = (handoff) =>
+  handoff.split(/^## Master directory ingestion state$/m)[1]?.split(/^## /m)[0] ?? '';
 
 test('016 lifecycle is field-safe while active and factually strict when complete', async () => {
   const [manifest, handoff] = await Promise.all([
@@ -24,20 +28,23 @@ test('016 lifecycle is field-safe while active and factually strict when complet
     readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
   ]);
   assert.match(manifest.status, /^(?:active|complete)$/);
+  const current = currentTopicBlock(handoff);
 
   if (manifest.status === 'active') {
     assert.equal('preClosureActiveGate' in manifest, false);
     assert.equal('verification' in manifest, false);
     assert.equal('finalTreeGate' in manifest, false);
     assert.match(
-      currentTopicBlock(handoff),
+      current,
       /Interview Strategy & Communication.*Interview Process & Formats/is,
     );
-    assert.match(handoff, /Workstream 016 is active/i);
+    assert.match(current, /Workstream 016 is active/i);
     assert.doesNotMatch(handoff, /^## Completed cross-book workstream 16$/m);
     return;
   }
 
+  const closure = completedWorkstream16Block(handoff);
+  const masterIngestion = masterIngestionBlock(handoff);
   const gate = manifest.preClosureActiveGate;
   const verification = manifest.verification;
   const finalTree = manifest.finalTreeGate;
@@ -57,8 +64,9 @@ test('016 lifecycle is field-safe while active and factually strict when complet
   assert.equal(finalTree.temporaryArtifactsAbsent, true);
   await assert.rejects(access(temporaryArtifact), (error) => error?.code === 'ENOENT');
   assert.match(handoff, /^## Completed cross-book workstream 16$/m);
-  assert.match(handoff, new RegExp(gate.commit));
-  assert.match(handoff, new RegExp(String(verification.runId)));
-  assert.match(handoff, /76 (?:canonical )?Problems.*53 .*Knowledge/is);
-  assert.match(handoff, /First pending master record: `red-book::9\.2::guidance`/i);
+  assert.match(closure, new RegExp(gate.commit));
+  assert.match(closure, new RegExp(String(verification.runId)));
+  assert.match(closure, /76 (?:canonical )?Problems.*53 .*Knowledge/is);
+  assert.match(masterIngestion, /First pending master record: `red-book::9\.2::guidance`/i);
+  assert.doesNotMatch(current, /Workstream 016 is active/i);
 });
