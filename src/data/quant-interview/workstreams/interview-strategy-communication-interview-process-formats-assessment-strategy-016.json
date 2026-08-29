@@ -1,0 +1,30 @@
+{
+  "id": "interview-strategy-communication-interview-process-formats-assessment-strategy-016",
+  "canonicalTopics": [
+    "interview-strategy-communication",
+    "interview-process-formats"
+  ],
+  "status": "active",
+  "masterItemKeys": [
+    "red-book::1.1::guidance",
+    "red-book::1.2::guidance",
+    "red-book::1.3::guidance",
+    "red-book::1.4::guidance",
+    "red-book::1.5::guidance",
+    "red-book::1.6::guidance",
+    "red-book::1.7::guidance",
+    "red-book::1.8::guidance",
+    "red-book::1.9::guidance"
+  ],
+  "sourceScopes": [
+    {
+      "source": "red-book",
+      "sourceSections": ["1.1", "1.2", "1.3", "1.4", "1.5", "1.6", "1.7", "1.8", "1.9"],
+      "evidencePageRanges": [{ "startPage": 13, "endPage": 22 }],
+      "reviewOutcome": "selective-knowledge-and-guidance",
+      "reviewNote": "Nine consecutive interview-process records resolve selectively to one new assessment framework, three existing reusable Knowledge nodes, and two target-free guidance rows."
+    }
+  ],
+  "publicDelta": { "problems": 0, "knowledge": 1 },
+  "knowledgeSlugs": ["quant-interview-formats-and-assessment-strategy"]
+}

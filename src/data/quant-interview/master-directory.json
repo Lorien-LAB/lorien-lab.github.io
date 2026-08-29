@@ -3661,11 +3661,13 @@
         "interview-process-formats"
       ],
       "sortKey": "01.03|02|0001|red-book::1.1::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-interview-formats-and-assessment-strategy"
+      ],
+      "workstream": "interview-strategy-communication-interview-process-formats-assessment-strategy-016",
+      "resolutionNote": "Red Book 1.1 assessment goals resolve to the canonical assessment-formats Knowledge page with no public Problem."
     },
     {
       "key": "red-book::1.2::guidance",
@@ -3686,11 +3688,11 @@
         "interview-process-formats"
       ],
       "sortKey": "01.03|02|0002|red-book::1.2::guidance",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "workstream": "interview-strategy-communication-interview-process-formats-assessment-strategy-016",
+      "resolutionNote": "Red Book 1.2 is dated networking, recruiter, and headhunter logistics; it remains target-free interview guidance."
     },
     {
       "key": "red-book::1.3::guidance",
@@ -3711,11 +3713,15 @@
         "interview-process-formats"
       ],
       "sortKey": "01.03|02|0003|red-book::1.3::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-interview-formats-and-assessment-strategy",
+        "problem-framing-clarification-assumption-management",
+        "structured-think-aloud-reasoning"
+      ],
+      "workstream": "interview-strategy-communication-interview-process-formats-assessment-strategy-016",
+      "resolutionNote": "Red Book 1.3 live technical format, clarification, reasoning communication, and adaptive hints resolve to the assessment, framing, and think-aloud Knowledge pages."
     },
     {
       "key": "red-book::1.4::guidance",
@@ -3736,11 +3742,13 @@
         "interview-process-formats"
       ],
       "sortKey": "01.03|02|0004|red-book::1.4::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-interview-formats-and-assessment-strategy"
+      ],
+      "workstream": "interview-strategy-communication-interview-process-formats-assessment-strategy-016",
+      "resolutionNote": "Red Book 1.4 durable remote-screen communication resolves to the assessment-formats Knowledge page after excluding source-era technology prescriptions."
     },
     {
       "key": "red-book::1.5::guidance",
@@ -3761,11 +3769,13 @@
         "interview-process-formats"
       ],
       "sortKey": "01.03|02|0005|red-book::1.5::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-interview-formats-and-assessment-strategy"
+      ],
+      "workstream": "interview-strategy-communication-interview-process-formats-assessment-strategy-016",
+      "resolutionNote": "Red Book 1.5 take-home constraints, integrity, presentation, and deliverable quality resolve to the assessment-formats Knowledge page."
     },
     {
       "key": "red-book::1.6::guidance",
@@ -3786,11 +3796,13 @@
         "interview-process-formats"
       ],
       "sortKey": "01.03|02|0006|red-book::1.6::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-interview-formats-and-assessment-strategy"
+      ],
+      "workstream": "interview-strategy-communication-interview-process-formats-assessment-strategy-016",
+      "resolutionNote": "Red Book 1.6 supervised written-exam rules, tools, time allocation, and clarity resolve to the assessment-formats Knowledge page."
     },
     {
       "key": "red-book::1.7::guidance",
@@ -3801,7 +3813,7 @@
       "questionPages": [
         {
           "startPage": 19,
-          "endPage": 20
+          "endPage": 19
         }
       ],
       "solutionPages": [],
@@ -3811,11 +3823,11 @@
         "interview-process-formats"
       ],
       "sortKey": "01.03|02|0007|red-book::1.7::guidance",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "workstream": "interview-strategy-communication-interview-process-formats-assessment-strategy-016",
+      "resolutionNote": "Red Book 1.7 post-application follow-up and relationship logistics remain target-free interview guidance."
     },
     {
       "key": "red-book::1.8::guidance",
@@ -3836,11 +3848,13 @@
         "interview-process-formats"
       ],
       "sortKey": "01.03|02|0008|red-book::1.8::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-interview-formats-and-assessment-strategy"
+      ],
+      "workstream": "interview-strategy-communication-interview-process-formats-assessment-strategy-016",
+      "resolutionNote": "Red Book 1.8 reusable execution and integrity principles resolve to the assessment-formats Knowledge page after excluding dated prescriptions."
     },
     {
       "key": "red-book::1.9::guidance",
@@ -3861,11 +3875,13 @@
         "interview-process-formats"
       ],
       "sortKey": "01.03|02|0009|red-book::1.9::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-interview-preparation-breadth-and-practice"
+      ],
+      "workstream": "interview-strategy-communication-interview-process-formats-assessment-strategy-016",
+      "resolutionNote": "Red Book 1.9 readiness signals resolve to the existing deliberate-practice preparation Knowledge page."
     },
     {
       "key": "red-book::9.2::guidance",
