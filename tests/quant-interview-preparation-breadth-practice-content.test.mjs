@@ -37,6 +37,7 @@ test('preparation Knowledge owns breadth and deliberate practice as one loop', a
   assert.deepEqual(readArray(text, 'related'), [
     'problem-framing-clarification-assumption-management',
     'structured-think-aloud-reasoning',
+    'quant-role-and-employer-fit',
   ]);
   assert.deepEqual(readArray(text, 'relatedNotes'), []);
 

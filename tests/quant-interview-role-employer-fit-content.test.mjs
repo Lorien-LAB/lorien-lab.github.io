@@ -68,3 +68,30 @@ test('role and employer fit creates no public Problem', async () => {
     (error) => error?.code === 'ENOENT',
   );
 });
+
+test('role and employer fit is published and reciprocally connected', async () => {
+  const [catalogText, preparation] = await Promise.all([
+    readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
+    readFile(
+      'src/content/knowledge/concepts/quant-interview-preparation-breadth-and-practice.md',
+      'utf8',
+    ),
+  ]);
+  const catalog = JSON.parse(catalogText);
+  assert.deepEqual(
+    catalog.modules.find(({ slug }) => slug === 'quant-role-and-employer-fit'),
+    {
+      slug: 'quant-role-and-employer-fit',
+      title: 'Quant Role & Employer Fit',
+      canonicalTopics: ['interview-strategy-communication', 'interview-preparation'],
+      primaryTopic: 'interview-preparation',
+      learningOrder: 11,
+      status: 'published',
+      prerequisites: [],
+    },
+  );
+  assert.match(
+    preparation,
+    /^related: \[[^\]]*quant-role-and-employer-fit[^\]]*\]$/m,
+  );
+});

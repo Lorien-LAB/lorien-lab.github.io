@@ -14,6 +14,18 @@
       "prerequisites": []
     },
     {
+      "slug": "quant-role-and-employer-fit",
+      "title": "Quant Role & Employer Fit",
+      "canonicalTopics": [
+        "interview-strategy-communication",
+        "interview-preparation"
+      ],
+      "primaryTopic": "interview-preparation",
+      "learningOrder": 11,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
       "slug": "problem-framing-clarification-assumption-management",
       "title": "Problem Framing, Clarification & Assumption Management",
       "canonicalTopics": [

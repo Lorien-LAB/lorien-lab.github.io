@@ -9,7 +9,7 @@ status: growing
 tags: [Interview, Preparation, Practice, Learning]
 quantInterviewTopics: [interview-strategy-communication, interview-preparation]
 featured: false
-related: [problem-framing-clarification-assumption-management, structured-think-aloud-reasoning]
+related: [problem-framing-clarification-assumption-management, structured-think-aloud-reasoning, quant-role-and-employer-fit]
 relatedNotes: []
 ---
 
