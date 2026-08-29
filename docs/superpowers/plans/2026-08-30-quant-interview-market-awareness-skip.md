@@ -16,7 +16,7 @@
 - Repair only the Red 9.3 guidance evidence range from PDF pages 315–317 to 315–316; numbered prompts remain page 316 with no solution pages.
 - Public corpus remains exactly 76 Problems / 52 topic-classified Knowledge nodes.
 - Master counts become exactly 196 terminal / 554 pending, and first pending becomes `red-book::1.1::guidance`.
-- Do not create, activate, complete, or reference any workstream id ending in 016; ordinal 016 remains unused.
+- Do not create, activate, complete, or assign any record to a workstream id ending in 016; a negative HANDOFF statement that 016 is inactive is allowed, and the ordinal remains unused.
 - Do not add or modify public content, catalog entries, graph edges, taxonomy, source-topic map, dependencies, or current-market answers.
 - Do not process Red 9.2 or Red 1.1–1.9 in this audit.
 - Preserve all completed workstream 015 SHA, CI, command, and closure evidence.
