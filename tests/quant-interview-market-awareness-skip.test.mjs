@@ -221,11 +221,16 @@ test('skip audit creates no public market-awareness artifact', async () => {
     publicMarkdownFiles.map(async (file) => [file, await readFile(file, 'utf8')]),
   );
   const redBookProvenance = [
-    /\bRed Book\b[^\r\n]{0,160}\bSection\s+9\.3\b/i,
+    /\bRed Book\b[^\r\n]{0,160}\b(?:Section\s+)?9\.3\b/i,
     /\bSection\s+9\.3\b[^\r\n]{0,160}\bRed Book\b/i,
     /\bRed Book\b[^\r\n]{0,160}\bQuestions?\s+9\.(?:2[3-9]|3[0-4])\b/i,
     /\bQuestions?\s+9\.(?:2[3-9]|3[0-4])\b[^\r\n]{0,160}\bRed Book\b/i,
   ];
+  assert.equal(
+    redBookProvenance.some((provenance) => provenance.test('Red Book 9.3')),
+    true,
+    'bare Red Book 9.3 provenance must be rejected',
+  );
   for (const [file, markdown] of publicMarkdown) {
     for (const key of keys) {
       assert.equal(markdown.includes(key), false, `${file}: ${key}`);
