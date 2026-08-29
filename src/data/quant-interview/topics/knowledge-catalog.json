@@ -26,6 +26,18 @@
       "prerequisites": []
     },
     {
+      "slug": "quant-interview-formats-and-assessment-strategy",
+      "title": "Quant Interview Formats & Assessment Strategy",
+      "canonicalTopics": [
+        "interview-strategy-communication",
+        "interview-process-formats"
+      ],
+      "primaryTopic": "interview-process-formats",
+      "learningOrder": 12,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
       "slug": "problem-framing-clarification-assumption-management",
       "title": "Problem Framing, Clarification & Assumption Management",
       "canonicalTopics": [

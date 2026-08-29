@@ -67,3 +67,27 @@ test('assessment-formats page is source-neutral and creates no Problem', async (
     (error) => error?.code === 'ENOENT',
   );
 });
+
+test('assessment-formats Knowledge is published and reciprocally linked', async () => {
+  const [catalogText, preparation, framing, thinkAloud] = await Promise.all([
+    readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
+    readFile('src/content/knowledge/concepts/quant-interview-preparation-breadth-and-practice.md', 'utf8'),
+    readFile('src/content/knowledge/concepts/problem-framing-clarification-assumption-management.md', 'utf8'),
+    readFile('src/content/knowledge/concepts/structured-think-aloud-reasoning.md', 'utf8'),
+  ]);
+  const module = JSON.parse(catalogText).modules.find(
+    ({ slug }) => slug === 'quant-interview-formats-and-assessment-strategy',
+  );
+  assert.deepEqual(module, {
+    slug: 'quant-interview-formats-and-assessment-strategy',
+    title: 'Quant Interview Formats & Assessment Strategy',
+    canonicalTopics: ['interview-strategy-communication', 'interview-process-formats'],
+    primaryTopic: 'interview-process-formats',
+    learningOrder: 12,
+    status: 'published',
+    prerequisites: [],
+  });
+  for (const text of [preparation, framing, thinkAloud]) {
+    assert.match(text, /^related: \[[^\]]*quant-interview-formats-and-assessment-strategy[^\]]*\]$/m);
+  }
+});

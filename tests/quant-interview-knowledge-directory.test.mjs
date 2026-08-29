@@ -59,6 +59,7 @@ const exactOrder = {
     'quant-interview-preparation-breadth-and-practice',
     'quant-role-and-employer-fit',
   ],
+  'interview-process-formats': ['quant-interview-formats-and-assessment-strategy'],
   'reasoning-communication': [
     'problem-framing-clarification-assumption-management',
     'structured-think-aloud-reasoning',
@@ -163,6 +164,7 @@ const exactPrerequisites = {
   'order-statistics-basics': [],
   'positive-semidefinite-matrix': [],
   'positive-series-convergence': [],
+  'quant-interview-formats-and-assessment-strategy': [],
   'quant-interview-preparation-breadth-and-practice': [],
   'quant-role-and-employer-fit': [],
   'principal-minor-feasibility': ['positive-semidefinite-matrix'],
@@ -181,7 +183,7 @@ const exactPrerequisites = {
   'vector-geometry-inner-products': [],
 };
 
-test('repository catalog contains the exact published 76/52 corpus', async () => {
+test('repository catalog contains the exact published 76/53 corpus', async () => {
   const [catalogText, taxonomyText, knowledgeRecords] = await Promise.all([
     readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
     readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'),
@@ -190,8 +192,8 @@ test('repository catalog contains the exact published 76/52 corpus', async () =>
   const repositoryCatalog = JSON.parse(catalogText);
   const repositoryTaxonomy = JSON.parse(taxonomyText);
   assert.equal(validateKnowledgeCatalog(repositoryCatalog, repositoryTaxonomy, knowledgeRecords), true);
-  assert.equal(repositoryCatalog.modules.length, 52);
-  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 52);
+  assert.equal(repositoryCatalog.modules.length, 53);
+  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 53);
   assert.deepEqual(
     repositoryCatalog.modules.filter((module) => module.status === 'planned').map((module) => module.slug).sort(),
     [],
@@ -223,7 +225,7 @@ test('repository public projection exposes the complete source-neutral curriculu
     problemRecords,
     base: '/',
   });
-  assert.deepEqual(result.totals, { published: 52, planned: 0 });
+  assert.deepEqual(result.totals, { published: 53, planned: 0 });
   assert.equal(result.topics.length, 10);
   const interview = result.topics.find((topic) => topic.id === 'interview-strategy-communication');
   const reasoning = interview.children.find((topic) => topic.id === 'reasoning-communication');

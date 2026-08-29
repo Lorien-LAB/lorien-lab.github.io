@@ -9,7 +9,7 @@ status: growing
 tags: [Interview, Reasoning, Communication, Feedback]
 quantInterviewTopics: [interview-strategy-communication, reasoning-communication]
 featured: false
-related: [problem-framing-clarification-assumption-management, quant-interview-preparation-breadth-and-practice]
+related: [problem-framing-clarification-assumption-management, quant-interview-preparation-breadth-and-practice, quant-interview-formats-and-assessment-strategy]
 relatedNotes: []
 ---
 

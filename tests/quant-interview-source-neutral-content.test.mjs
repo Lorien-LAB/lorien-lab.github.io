@@ -131,6 +131,7 @@ const expectedKnowledgeTopics = new Map([
   ['related-rates-and-implicit-differentiation', ['calculus-differential-equations', 'limits-derivatives']],
   ['bounded-monotone-convergence-and-fixed-points', ['calculus-differential-equations', 'limits-derivatives']],
   ['positive-series-convergence', ['calculus-differential-equations', 'limits-derivatives']],
+  ['quant-interview-formats-and-assessment-strategy', ['interview-strategy-communication', 'interview-process-formats']],
   ['problem-framing-clarification-assumption-management', ['interview-strategy-communication', 'reasoning-communication']],
   ['quant-interview-preparation-breadth-and-practice', ['interview-strategy-communication', 'interview-preparation']],
   ['quant-role-and-employer-fit', ['interview-strategy-communication', 'interview-preparation']],
@@ -173,14 +174,14 @@ async function classifiedMarkdownSlugs(root) {
   return slugs.sort();
 }
 
-test('source-neutral regression discovers exactly the current 76 Problem and 52 Knowledge contracts', async () => {
+test('source-neutral regression discovers exactly the current 76 Problem and 53 Knowledge contracts', async () => {
   const actualProblemSlugs = await classifiedMarkdownSlugs('src/content/problems');
   const actualKnowledgeSlugs = await classifiedMarkdownSlugs('src/content/knowledge');
   const expectedProblemSlugs = [...currentProblemSlugs].sort();
   const expectedKnowledgeSlugs = [...expectedKnowledgeTopics.keys()].sort();
 
   assert.equal(actualProblemSlugs.length, 76);
-  assert.equal(actualKnowledgeSlugs.length, 52);
+  assert.equal(actualKnowledgeSlugs.length, 53);
   assert.deepEqual(actualProblemSlugs, expectedProblemSlugs);
   assert.deepEqual(actualKnowledgeSlugs, expectedKnowledgeSlugs);
 });
