@@ -221,8 +221,10 @@ test('skip audit creates no public market-awareness artifact', async () => {
     publicMarkdownFiles.map(async (file) => [file, await readFile(file, 'utf8')]),
   );
   const redBookProvenance = [
-    /\bRed Book\b[^\r\n]{0,160}\b(?:section\s+)?9\.3\b/i,
+    /\bRed Book\b[^\r\n]{0,160}\bSection\s+9\.3\b/i,
+    /\bSection\s+9\.3\b[^\r\n]{0,160}\bRed Book\b/i,
     /\bRed Book\b[^\r\n]{0,160}\bQuestions?\s+9\.(?:2[3-9]|3[0-4])\b/i,
+    /\bQuestions?\s+9\.(?:2[3-9]|3[0-4])\b[^\r\n]{0,160}\bRed Book\b/i,
   ];
   for (const [file, markdown] of publicMarkdown) {
     for (const key of keys) {
@@ -244,30 +246,26 @@ test('HANDOFF and generated directory record the target-free skip audit', async 
     readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
     readFile('docs/quant-interview/KNOWLEDGE_DIRECTORY.md', 'utf8'),
   ]);
+  const normalizedHandoff = handoff.replace(/\r\n/g, '\n');
   const handoffHeading = '## Skipped source audit — Red Book market awareness';
-  const handoffStart = handoff.indexOf(handoffHeading);
+  const handoffStart = normalizedHandoff.indexOf(handoffHeading);
   assert.notEqual(handoffStart, -1);
-  const nextHeading = /^## /gm;
-  nextHeading.lastIndex = handoffStart + handoffHeading.length;
-  const nextHandoffBlock = nextHeading.exec(handoff);
-  const handoffBlock = handoff.slice(handoffStart, nextHandoffBlock?.index ?? handoff.length);
-  assert.match(
+  const handoffContentStart = handoffStart + handoffHeading.length;
+  const nextHandoffHeading = normalizedHandoff.indexOf('\n## ', handoffContentStart);
+  const handoffBlock = normalizedHandoff
+    .slice(
+      handoffContentStart,
+      nextHandoffHeading === -1 ? normalizedHandoff.length : nextHandoffHeading,
+    )
+    .trim();
+  assert.deepEqual(
     handoffBlock,
-    /The exact 14-record block `red-book::9::guidance`, `red-book::9\.3::guidance`, and `red-book::9\.3::9\.23` through `red-book::9\.3::9\.34`/,
+    `The exact 14-record block \`red-book::9::guidance\`, \`red-book::9.3::guidance\`, and \`red-book::9.3::9.23\` through \`red-book::9.3::9.34\` was terminalized as internal \`interview-guidance\` by explicit user direction.
+
+These 14 records contain time-sensitive market snapshots, source-era office holders, current-affairs prompts, and obsolete regulatory details. They produce exactly **+0 Problems / +0 Knowledge**, have no public target, and do not represent public coverage. Section 9.3 evidence was corrected to PDF pages 315–316.
+
+No workstream ordinal was consumed. Workstream 016 is not active and remains available for the next substantive scope.`,
   );
-  assert.match(handoffBlock, /produce exactly \*\*\+0 Problems \/ \+0 Knowledge\*\*/);
-  assert.match(handoffBlock, /have no public target/i);
-  assert.match(handoffBlock, /do not represent public coverage/i);
-  assert.match(handoffBlock, /no workstream ordinal was consumed/i);
-  assert.match(handoffBlock, /workstream 016 is not active/i);
-  const contradictoryTargetAssignments = [
-    /\b(?:canonical|public)\s+(?:Problem|Knowledge)\s+target\s*(?::|=|->)\s*(?!`?none\b)`?[a-z0-9][\w-]*/i,
-    /\b(?:canonical|public)\s+(?:Problem|Knowledge)\s+target\s+(?:is|are)\s+(?!`?none\b)`?[a-z0-9][\w-]*/i,
-    /\b(?:assign(?:s|ed)?|map(?:s|ped)?|link(?:s|ed)?)\b[^\r\n]*\b(?:canonical|public)\s+(?:Problem|Knowledge)\b/i,
-  ];
-  for (const contradiction of contradictoryTargetAssignments) {
-    assert.doesNotMatch(handoffBlock, contradiction);
-  }
   assert.match(handoff, /First pending master record: `red-book::1\.1::guidance`/i);
   assert.match(directory, /Terminal master records: 196/);
   assert.match(directory, /Pending master records: 554/);
