@@ -106,9 +106,12 @@
       "canonicalTopics": [
         "interview-preparation"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "quant-role-and-employer-fit"
+      ],
+      "resolutionNote": "Role archetypes and work-product trade-offs resolve to the canonical role-and-employer-fit framework."
     },
     {
       "sourceSection": "1.11",
@@ -116,9 +119,12 @@
       "canonicalTopics": [
         "interview-preparation"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "quant-role-and-employer-fit"
+      ],
+      "resolutionNote": "Employer operating environments and their interaction with role choice resolve to the canonical role-and-employer-fit framework."
     },
     {
       "sourceSection": "1.12",

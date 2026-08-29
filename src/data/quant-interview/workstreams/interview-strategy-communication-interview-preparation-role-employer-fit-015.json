@@ -1,0 +1,23 @@
+{
+  "id": "interview-strategy-communication-interview-preparation-role-employer-fit-015",
+  "canonicalTopics": [
+    "interview-strategy-communication",
+    "interview-preparation"
+  ],
+  "status": "active",
+  "masterItemKeys": [
+    "red-book::1.10::guidance",
+    "red-book::1.11::guidance"
+  ],
+  "sourceScopes": [
+    {
+      "source": "red-book",
+      "sourceSections": ["1.10", "1.11"],
+      "evidencePageRanges": [{ "startPage": 22, "endPage": 25 }],
+      "reviewOutcome": "knowledge-only-consolidation",
+      "reviewNote": "Two consecutive role-and-employer guidance records resolve to one canonical fit framework with no Problem delta."
+    }
+  ],
+  "publicDelta": { "problems": 0, "knowledge": 1 },
+  "knowledgeSlugs": ["quant-role-and-employer-fit"]
+}

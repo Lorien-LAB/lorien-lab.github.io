@@ -3128,7 +3128,7 @@
       "questionPages": [
         {
           "startPage": 22,
-          "endPage": 24
+          "endPage": 23
         }
       ],
       "solutionPages": [],
@@ -3138,11 +3138,13 @@
         "interview-preparation"
       ],
       "sortKey": "01.01|02|0010|red-book::1.10::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-role-and-employer-fit"
+      ],
+      "workstream": "interview-strategy-communication-interview-preparation-role-employer-fit-015",
+      "resolutionNote": "Role archetypes and work-product trade-offs resolve to the canonical role-and-employer-fit framework."
     },
     {
       "key": "red-book::1.11::guidance",
@@ -3163,11 +3165,13 @@
         "interview-preparation"
       ],
       "sortKey": "01.01|02|0011|red-book::1.11::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "quant-role-and-employer-fit"
+      ],
+      "workstream": "interview-strategy-communication-interview-preparation-role-employer-fit-015",
+      "resolutionNote": "Employer operating environments and their interaction with role choice resolve to the canonical role-and-employer-fit framework."
     },
     {
       "key": "red-book::1.12::guidance",
