@@ -7,50 +7,130 @@ import {
   validateMasterDirectoryRepository,
 } from '../scripts/validate-quant-interview-master-directory.mjs';
 
-const keys = [
-  'red-book::9::guidance',
-  'red-book::9.3::guidance',
-  ...Array.from({ length: 12 }, (_, index) => `red-book::9.3::9.${index + 23}`),
+const auditMarker = 'excluded from the durable public technical question bank';
+const expectedNotes = new Map([
+  ['red-book::9::guidance', 'Red Book chapter 9 is a mixed soft-interview and current-finance container; it is excluded from the durable public technical question bank and has no independent public target.'],
+  ['red-book::9.3::guidance', 'Red Book 9.3 is a collection of time-sensitive market-awareness prompts; it is excluded from the durable public technical question bank by explicit user direction.'],
+  ['red-book::9.3::9.23', 'The current equity-benchmark level is time-sensitive market data and is excluded from the durable public technical question bank.'],
+  ['red-book::9.3::9.24', 'The current commodity price is time-sensitive market data and is excluded from the durable public technical question bank.'],
+  ['red-book::9.3::9.25', 'The current yield-curve snapshot is time-sensitive market data and is excluded from the durable public technical question bank.'],
+  ['red-book::9.3::9.26', 'The current US policy-rate prompt is time-sensitive market data and is excluded from the durable public technical question bank.'],
+  ['red-book::9.3::9.27', 'The current UK policy-rate prompt is time-sensitive market data and is excluded from the durable public technical question bank.'],
+  ['red-book::9.3::9.28', 'The current euro-area policy-rate prompt is time-sensitive market data and is excluded from the durable public technical question bank.'],
+  ['red-book::9.3::9.29', 'The source-era crisis current-affairs prompt is excluded from the durable public technical question bank by explicit user direction.'],
+  ['red-book::9.3::9.30', 'The current foreign-exchange rate is time-sensitive market data and is excluded from the durable public technical question bank.'],
+  ['red-book::9.3::9.31', 'The current labor-market comparison is time-sensitive market data and is excluded from the durable public technical question bank.'],
+  ['red-book::9.3::9.32', 'The current US central-bank office-holder prompt is time-sensitive and is excluded from the durable public technical question bank.'],
+  ['red-book::9.3::9.33', 'The current UK central-bank office-holder prompt is time-sensitive and is excluded from the durable public technical question bank.'],
+  ['red-book::9.3::9.34', 'The source-era UK regulatory-architecture prompt is obsolete current-affairs material and is excluded from the durable public technical question bank.'],
+]);
+const expectedRows = [
+  {
+    key: 'red-book::9::guidance',
+    kind: 'guidance',
+    source: 'red-book',
+    sourceSection: '9',
+    sourceItem: null,
+    canonicalTopics: ['interview-strategy-communication', 'interview-preparation'],
+    coverageCanonicalTopics: ['interview-strategy-communication'],
+    questionPages: [{ startPage: 309, endPage: 309 }],
+    solutionPages: [],
+  },
+  {
+    key: 'red-book::9.3::guidance',
+    kind: 'guidance',
+    source: 'red-book',
+    sourceSection: '9.3',
+    sourceItem: null,
+    canonicalTopics: [
+      'interview-strategy-communication',
+      'interview-preparation',
+      'fixed-income-rates-general-finance',
+    ],
+    coverageCanonicalTopics: ['interview-preparation', 'fixed-income-rates-general-finance'],
+    questionPages: [{ startPage: 315, endPage: 316 }],
+    solutionPages: [],
+  },
+  ...[
+    '9.23', '9.24', '9.25', '9.26', '9.27', '9.28', '9.29', '9.30', '9.31', '9.32', '9.33', '9.34',
+  ].map((sourceItem) => ({
+    key: `red-book::9.3::${sourceItem}`,
+    kind: 'question',
+    source: 'red-book',
+    sourceSection: '9.3',
+    sourceItem,
+    canonicalTopics: [
+      'interview-strategy-communication',
+      'interview-preparation',
+      'fixed-income-rates-general-finance',
+    ],
+    coverageCanonicalTopics: ['interview-preparation', 'fixed-income-rates-general-finance'],
+    questionPages: [{ startPage: 316, endPage: 316 }],
+    solutionPages: [],
+  })),
 ];
+const keys = [...expectedNotes.keys()];
 const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
 
-test('market-awareness skip owns exactly fourteen ordered records', async () => {
+test('market-awareness skip owns exactly fourteen ordered and exclusively marked records', async () => {
   const inputs = await loadMasterDirectoryRepository(process.cwd());
   const selected = inputs.directory.items.filter((item) => keys.includes(item.key));
+  assert.deepEqual(expectedRows.map(({ key }) => key), keys);
   assert.deepEqual(selected.map((item) => item.key), keys);
   assert.equal(selected.length, 14);
-  assert.equal(
-    inputs.directory.items.filter((item) =>
-      item.resolutionNote?.includes('excluded from the durable public technical question bank'),
-    ).length,
-    14,
+  assert.deepEqual(
+    inputs.directory.items
+      .filter((item) => item.resolutionNote?.includes(auditMarker))
+      .map((item) => item.key),
+    keys,
   );
 });
 
-test('all fourteen rows are target-free interview guidance with distinct notes', async () => {
+test('all fourteen rows preserve identity and exact target-free guidance decisions', async () => {
   const [inputs, red] = await Promise.all([
     loadMasterDirectoryRepository(process.cwd()),
     readJson('src/data/quant-interview/coverage/red-book.json'),
   ]);
-  const notes = [];
-  for (const key of keys) {
-    const master = inputs.directory.items.find((item) => item.key === key);
+  for (const expected of expectedRows) {
+    const master = inputs.directory.items.find((item) => item.key === expected.key);
     const coverage = red.entries.find((entry) =>
-      entry.sourceSection === master.sourceSection
-        && entry.sourceItem === master.sourceItem,
+      entry.sourceSection === expected.sourceSection
+        && entry.sourceItem === expected.sourceItem,
     );
-    assert.equal(master.state, 'interview-guidance', key);
-    assert.equal(coverage.state, 'interview-guidance', key);
-    assert.deepEqual(master.canonicalProblems, [], key);
-    assert.deepEqual(master.canonicalKnowledge, [], key);
-    assert.deepEqual(coverage.canonicalProblems, [], key);
-    assert.deepEqual(coverage.canonicalKnowledge, [], key);
-    assert.equal(master.workstream, null, key);
-    assert.ok(master.resolutionNote?.trim(), key);
-    assert.equal(master.resolutionNote, coverage.resolutionNote, key);
-    notes.push(master.resolutionNote);
+    assert.deepEqual(
+      {
+        key: master.key,
+        kind: master.kind,
+        source: master.source,
+        sourceSection: master.sourceSection,
+        sourceItem: master.sourceItem,
+        canonicalTopics: master.canonicalTopics,
+        questionPages: master.questionPages,
+        solutionPages: master.solutionPages,
+      },
+      {
+        key: expected.key,
+        kind: expected.kind,
+        source: expected.source,
+        sourceSection: expected.sourceSection,
+        sourceItem: expected.sourceItem,
+        canonicalTopics: expected.canonicalTopics,
+        questionPages: expected.questionPages,
+        solutionPages: expected.solutionPages,
+      },
+      expected.key,
+    );
+    assert.equal(master.state, 'interview-guidance', expected.key);
+    assert.equal(coverage.state, 'interview-guidance', expected.key);
+    assert.deepEqual(master.canonicalProblems, [], expected.key);
+    assert.deepEqual(master.canonicalKnowledge, [], expected.key);
+    assert.deepEqual(coverage.canonicalProblems, [], expected.key);
+    assert.deepEqual(coverage.canonicalKnowledge, [], expected.key);
+    assert.deepEqual(coverage.canonicalTopics, expected.coverageCanonicalTopics, expected.key);
+    assert.equal(master.workstream, null, expected.key);
+    assert.equal(master.resolutionNote, expectedNotes.get(expected.key), expected.key);
+    assert.equal(coverage.resolutionNote, expectedNotes.get(expected.key), expected.key);
   }
-  assert.equal(new Set(notes).size, 14);
   assert.equal(validateMasterDirectoryRepository(inputs), true);
 });
 
