@@ -3,9 +3,9 @@ import assert from 'node:assert/strict';
 import { access, readFile } from 'node:fs/promises';
 
 const manifestPath =
-  'src/data/quant-interview/workstreams/interview-strategy-communication-interview-preparation-014.json';
+  'src/data/quant-interview/workstreams/interview-strategy-communication-interview-preparation-role-employer-fit-015.json';
 const temporaryArtifact =
-  '.github/workflows/quant-interview-preparation-014-temporary.yml';
+  '.github/workflows/quant-interview-role-employer-fit-015-temporary.yml';
 const commands = [
   'npm run master:directory:check',
   'npm run knowledge:directory:check',
@@ -18,7 +18,7 @@ const shaPattern = /^[0-9a-f]{40}$/;
 const currentTopicBlock = (handoff) =>
   handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0] ?? '';
 
-test('014 lifecycle is field-safe while active and factually strict when complete', async () => {
+test('015 lifecycle is field-safe while active and factually strict when complete', async () => {
   const [manifest, handoff] = await Promise.all([
     readFile(manifestPath, 'utf8').then(JSON.parse),
     readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
@@ -29,12 +29,9 @@ test('014 lifecycle is field-safe while active and factually strict when complet
     assert.equal('preClosureActiveGate' in manifest, false);
     assert.equal('verification' in manifest, false);
     assert.equal('finalTreeGate' in manifest, false);
-    assert.match(
-      currentTopicBlock(handoff),
-      /Interview Strategy & Communication.*Interview Preparation/is,
-    );
-    assert.match(handoff, /Workstream 014 is active/i);
-    assert.doesNotMatch(handoff, /^## Completed cross-book workstream 14$/m);
+    assert.match(currentTopicBlock(handoff), /Interview Strategy & Communication.*Interview Preparation/is);
+    assert.match(handoff, /Workstream 015 is active/i);
+    assert.doesNotMatch(handoff, /^## Completed cross-book workstream 15$/m);
     return;
   }
 
@@ -56,9 +53,11 @@ test('014 lifecycle is field-safe while active and factually strict when complet
   assert.equal(finalTree?.conclusion, 'success');
   assert.equal(finalTree?.temporaryArtifactsAbsent, true);
   await assert.rejects(access(temporaryArtifact), (error) => error?.code === 'ENOENT');
-  assert.match(handoff, /^## Completed cross-book workstream 14$/m);
+  assert.match(handoff, /^## Completed cross-book workstream 15$/m);
   assert.match(handoff, new RegExp(gate.commit));
   assert.match(handoff, new RegExp(String(verification.runId)));
-  assert.match(handoff, /76 (?:canonical )?Problems.*51 .*Knowledge/is);
-  assert.match(handoff, /green-book::1\.1::guidance.*green-book::1\.2::guidance/is);
+  assert.match(handoff, /76 (?:canonical )?Problems.*52 .*Knowledge/is);
+  assert.match(handoff, /red-book::1\.10::guidance.*red-book::1\.11::guidance/is);
+  assert.match(handoff, /First pending master record: `red-book::9::guidance`/i);
+  assert.match(handoff, /workstream 016 is not active or authorized/i);
 });

@@ -429,7 +429,7 @@ Historical corpus checkpoint after workstream 11: **63 canonical Problems** and 
 
 ## Public corpus state (current)
 
-The current source-neutral regression contract discovers exactly **76 canonical Problems** and **51 explicitly topic-classified Knowledge / Technique nodes**.
+The current source-neutral regression contract discovers exactly **76 canonical Problems / 52 explicitly topic-classified Knowledge / Technique nodes**.
 
 These are repository-record counts only. They are not whole-book completeness percentages and do not imply that Interview Strategy & Communication, Reasoning & Communication, or Green/Red/150 as a whole is complete.
 
@@ -588,17 +588,17 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**No bounded topic is active. Workstream 014 is complete.**
+**Interview Strategy & Communication → Interview Preparation.**
 
-A later workstream requires its own approved design and evidence audit; workstream 015 is not active or authorized by this closure.
+Workstream 015 is active at the two consecutive master records `red-book::1.10::guidance` and `red-book::1.11::guidance`. Its public delta is +0 Problems / +1 Knowledge. Completion evidence remains absent until the exact active commit passes local, WSL, and GitHub CI verification.
 
 ## Master directory ingestion state
 
-**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+**Workstream 015 is active. The three-book master directory migration remains complete.**
 
-First pending master record: `red-book::1.10::guidance`
+First pending master record after the active 015 scope: `red-book::9::guidance`
 
-The observed next key does not authorize workstream 015. Workstream 014 is closed with exact local, workflow-free, and CI evidence.
+The observed next key does not authorize workstream 016.
 
 ## Parallel workstream coordination
 
