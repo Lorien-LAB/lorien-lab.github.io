@@ -21,7 +21,7 @@ Treat the format as part of the problem specification. The same probability mode
 
 ## Assessment Map
 
-Compare the four common formats along seven dimensions before choosing a working rhythm:
+Compare the four common formats along six dimensions before choosing a working rhythm:
 
 | Format | Interaction level | Time horizon | Allowed tools | Expected artifact | Feedback availability | Communication channel |
 | --- | --- | --- | --- | --- | --- | --- |

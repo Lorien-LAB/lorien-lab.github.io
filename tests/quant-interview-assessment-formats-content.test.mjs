@@ -61,6 +61,11 @@ test('assessment-formats Knowledge covers the four formats and execution loop', 
 test('Assessment Map has the exact seven-column and four-format contract', async () => {
   const text = await readFile(knowledgePath, 'utf8');
   const assessmentMap = levelTwoSection(text, 'Assessment Map');
+  assert.match(
+    assessmentMap,
+    /^Compare the four common formats along six dimensions before choosing a working rhythm:$/m,
+  );
+  assert.doesNotMatch(assessmentMap, /seven dimensions/i);
   const tableRows = assessmentMap
     .split(/\r?\n/)
     .filter((line) => /^\|.+\|$/.test(line))

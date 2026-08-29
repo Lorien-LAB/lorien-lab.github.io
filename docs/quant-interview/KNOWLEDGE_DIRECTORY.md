@@ -22,7 +22,7 @@
 - Green Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`
 - Red Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`, `1.6`, `1.7`, `1.8`, `1.9`, `1.10`, `1.11`, `1.12`, `9`, `9.2`, `9.3`
 - 150 Questions sections: None
-- Workstreams: `interview-strategy-communication-interview-preparation-014` (complete), `interview-strategy-communication-interview-preparation-role-employer-fit-015` (complete), `interview-strategy-communication-interview-process-formats-assessment-strategy-016` (complete), `interview-strategy-communication-reasoning-communication-013` (complete)
+- Workstreams: `interview-strategy-communication-interview-preparation-014` (complete), `interview-strategy-communication-interview-preparation-role-employer-fit-015` (complete), `interview-strategy-communication-interview-process-formats-assessment-strategy-016` (active), `interview-strategy-communication-reasoning-communication-013` (complete)
 
 ### Modules
 
@@ -121,7 +121,7 @@
 - Green Book sections: None
 - Red Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`, `1.6`, `1.7`, `1.8`, `1.9`
 - 150 Questions sections: None
-- Workstreams: `interview-strategy-communication-interview-process-formats-assessment-strategy-016` (complete)
+- Workstreams: `interview-strategy-communication-interview-process-formats-assessment-strategy-016` (active)
 
 #### Modules
 
