@@ -182,3 +182,25 @@ test('skip audit creates no public market-awareness artifact', async () => {
     (error) => error?.code === 'ENOENT',
   );
 });
+
+test('HANDOFF and generated directory record the target-free skip audit', async () => {
+  const [handoff, directory] = await Promise.all([
+    readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
+    readFile('docs/quant-interview/KNOWLEDGE_DIRECTORY.md', 'utf8'),
+  ]);
+  assert.match(handoff, /^## Skipped source audit — Red Book market awareness$/m);
+  assert.match(handoff, /14 records.*\+0 Problems.*\+0 Knowledge/is);
+  assert.match(handoff, /no workstream ordinal was consumed/i);
+  assert.match(handoff, /workstream 016 is not active/i);
+  assert.match(handoff, /First pending master record: `red-book::1\.1::guidance`/i);
+  assert.match(directory, /Terminal master records: 196/);
+  assert.match(directory, /Pending master records: 554/);
+  assert.match(directory, /First pending: `red-book::1\.1::guidance`/);
+  for (const key of keys) {
+    assert.equal(
+      directory.includes(`| \`${key}\` | \`interview-guidance\` |`),
+      true,
+      key,
+    );
+  }
+});

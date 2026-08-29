@@ -32,7 +32,7 @@ test('015 owns exactly two consecutive Red preparation records', async () => {
   }
 });
 
-test('master and Red coverage close both rows with exact page evidence', async () => {
+test('015 master and Red coverage rows remain terminal after the later skip audit', async () => {
   const [manifest, inputs, red] = await Promise.all([
     readJson(manifestPath),
     loadMasterDirectoryRepository(process.cwd()),
@@ -66,7 +66,7 @@ test('master and Red coverage close both rows with exact page evidence', async (
   }
   assert.notEqual(notes[0], notes[1]);
   assert.equal(validateMasterDirectoryRepository(inputs), true);
-  assert.equal(getNextPendingItem(inputs.directory)?.key, 'red-book::9::guidance');
+  assert.equal(getNextPendingItem(inputs.directory)?.key, 'red-book::1.1::guidance');
 });
 
 test('015 produces exactly 76 Problems and 52 classified Knowledge nodes', async () => {

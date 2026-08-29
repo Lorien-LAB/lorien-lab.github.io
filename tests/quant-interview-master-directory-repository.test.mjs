@@ -264,22 +264,15 @@ test('repository validator rejects coverage and master lifecycle drift', async (
   );
 });
 
-test('post-migration queue follows the factual 015 lifecycle', async () => {
+test('post-015 skip audit advances the queue without creating workstream 016', async () => {
   const { directory, workstreams } = await loadMasterDirectoryRepository(process.cwd());
   const first = getNextPendingItem(directory);
-  assert.equal(first?.key, 'red-book::9::guidance');
+  assert.equal(first?.key, 'red-book::1.1::guidance');
   assert.equal(validateSequentialScope(directory, [first.key]), true);
   const workstream015 = workstreams.find(({ id }) => /-015$/.test(id));
-  assert.match(workstream015.status, /^(?:active|complete)$/);
+  assert.equal(workstream015.status, 'complete');
+  assert.equal(workstreams.some(({ id }) => /-016$/.test(id)), false);
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
-  if (workstream015.status === 'active') {
-    assert.match(handoff, /Workstream 015 is active/i);
-    assert.equal(
-      handoff.includes(`First pending master record after the active 015 scope: \`${first.key}\``),
-      true,
-    );
-  } else {
-    assert.match(handoff, /No bounded ingestion workstream is active/i);
-    assert.equal(handoff.includes(`First pending master record: \`${first.key}\``), true);
-  }
+  assert.match(handoff, /No bounded ingestion workstream is active/i);
+  assert.equal(handoff.includes(`First pending master record: \`${first.key}\``), true);
 });

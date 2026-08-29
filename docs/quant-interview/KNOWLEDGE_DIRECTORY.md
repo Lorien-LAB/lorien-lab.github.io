@@ -10,9 +10,9 @@
 - Planned Knowledge: 0
 - Canonical Problems: 76
 - Master records: 750
-- Terminal master records: 182
-- Pending master records: 568
-- First pending: `red-book::9::guidance`
+- Terminal master records: 196
+- Pending master records: 554
+- First pending: `red-book::1.1::guidance`
 
 
 ## 01. Interview Strategy & Communication
@@ -32,7 +32,7 @@
 ### Coverage records
 
 - Green Book: `knowledge-only`: 5
-- Red Book: `interview-guidance`: 1, `knowledge-only`: 2, `pending`: 12
+- Red Book: `interview-guidance`: 15, `knowledge-only`: 2, `pending`: 10
 - 150 Questions: None
 
 
@@ -55,7 +55,7 @@
 #### Coverage records
 
 - Green Book: `knowledge-only`: 2
-- Red Book: `interview-guidance`: 1, `knowledge-only`: 2, `pending`: 1
+- Red Book: `interview-guidance`: 14, `knowledge-only`: 2
 - 150 Questions: None
 
 #### Master queue records
@@ -67,20 +67,20 @@
 | `red-book::1.10::guidance` | `knowledge-only` | 22–23 | None | `quant-role-and-employer-fit` |
 | `red-book::1.11::guidance` | `knowledge-only` | 24–25 | None | `quant-role-and-employer-fit` |
 | `red-book::1.12::guidance` | `interview-guidance` | 25–27 | None | None |
-| `red-book::9::guidance` | `pending` | 309 | None | None |
-| `red-book::9.3::guidance` | `pending` | 315–317 | None | None |
-| `red-book::9.3::9.23` | `pending` | 316 | None | None |
-| `red-book::9.3::9.24` | `pending` | 316 | None | None |
-| `red-book::9.3::9.25` | `pending` | 316 | None | None |
-| `red-book::9.3::9.26` | `pending` | 316 | None | None |
-| `red-book::9.3::9.27` | `pending` | 316 | None | None |
-| `red-book::9.3::9.28` | `pending` | 316 | None | None |
-| `red-book::9.3::9.29` | `pending` | 316 | None | None |
-| `red-book::9.3::9.30` | `pending` | 316 | None | None |
-| `red-book::9.3::9.31` | `pending` | 316 | None | None |
-| `red-book::9.3::9.32` | `pending` | 316 | None | None |
-| `red-book::9.3::9.33` | `pending` | 316 | None | None |
-| `red-book::9.3::9.34` | `pending` | 316 | None | None |
+| `red-book::9::guidance` | `interview-guidance` | 309 | None | None |
+| `red-book::9.3::guidance` | `interview-guidance` | 315–316 | None | None |
+| `red-book::9.3::9.23` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.24` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.25` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.26` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.27` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.28` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.29` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.30` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.31` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.32` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.33` | `interview-guidance` | 316 | None | None |
+| `red-book::9.3::9.34` | `interview-guidance` | 316 | None | None |
 
 
 ### 01.02. Reasoning & Communication
@@ -1855,7 +1855,7 @@
 ### Coverage records
 
 - Green Book: `pending`: 6
-- Red Book: `pending`: 4
+- Red Book: `interview-guidance`: 13, `pending`: 3
 - 150 Questions: `pending`: 3
 
 

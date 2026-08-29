@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { access, readFile, readdir } from 'node:fs/promises';
 
 const manifestPath =
   'src/data/quant-interview/workstreams/interview-strategy-communication-interview-preparation-role-employer-fit-015.json';
@@ -58,6 +58,6 @@ test('015 lifecycle is field-safe while active and factually strict when complet
   assert.match(handoff, new RegExp(String(verification.runId)));
   assert.match(handoff, /76 (?:canonical )?Problems.*52 .*Knowledge/is);
   assert.match(handoff, /red-book::1\.10::guidance.*red-book::1\.11::guidance/is);
-  assert.match(handoff, /First pending master record: `red-book::9::guidance`/i);
-  assert.match(handoff, /workstream 016 is not active or authorized/i);
+  const workstreamFiles = await readdir('src/data/quant-interview/workstreams');
+  assert.equal(workstreamFiles.some((file) => /-016\.json$/.test(file)), false);
 });

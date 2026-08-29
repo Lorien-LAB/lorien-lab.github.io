@@ -601,6 +601,14 @@ None. Workstream 015 produced exactly **+0 Problems / +1 Knowledge**. The global
 - Both source records remain internal evidence. The public Knowledge page and its interview checks are source-neutral, and no source-specific Problem was created.
 - This closes only registered workstream 015. It does not claim completeness for Interview Strategy & Communication, interview preparation, role and employer fit as a whole, the Red Book, or any source book as a whole.
 
+## Skipped source audit — Red Book market awareness
+
+The exact 14-record block `red-book::9::guidance`, `red-book::9.3::guidance`, and `red-book::9.3::9.23` through `red-book::9.3::9.34` was terminalized as internal `interview-guidance` by explicit user direction.
+
+These 14 records contain time-sensitive market snapshots, source-era office holders, current-affairs prompts, and obsolete regulatory details. They produce exactly **+0 Problems / +0 Knowledge**, have no public target, and do not represent public coverage. Section 9.3 evidence was corrected to PDF pages 315–316.
+
+No workstream ordinal was consumed. Workstream 016 is not active and remains available for the next substantive scope.
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -629,7 +637,7 @@ A later workstream requires its own approved design and evidence audit; workstre
 
 **No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
 
-First pending master record: `red-book::9::guidance`
+First pending master record: `red-book::1.1::guidance`
 
 ## Parallel workstream coordination
 
