@@ -48,14 +48,37 @@ const notes = [
 
 test('016 manifest owns exactly nine ordered source rows while active', async () => {
   const manifest = await readJson(manifestPath);
-  assert.equal(manifest.id, workstreamId);
-  assert.equal(manifest.status, 'active');
-  assert.deepEqual(manifest.masterItemKeys, keys);
-  assert.deepEqual(manifest.publicDelta, { problems: 0, knowledge: 1 });
-  assert.deepEqual(manifest.knowledgeSlugs, [newSlug]);
-  assert.equal('preClosureActiveGate' in manifest, false);
-  assert.equal('verification' in manifest, false);
-  assert.equal('finalTreeGate' in manifest, false);
+  assert.deepEqual(manifest, {
+    id: workstreamId,
+    canonicalTopics: [
+      'interview-strategy-communication',
+      'interview-process-formats',
+    ],
+    status: 'active',
+    masterItemKeys: keys,
+    sourceScopes: [
+      {
+        source: 'red-book',
+        sourceSections: [
+          '1.1',
+          '1.2',
+          '1.3',
+          '1.4',
+          '1.5',
+          '1.6',
+          '1.7',
+          '1.8',
+          '1.9',
+        ],
+        evidencePageRanges: [{ startPage: 13, endPage: 22 }],
+        reviewOutcome: 'selective-knowledge-and-guidance',
+        reviewNote:
+          'Nine consecutive interview-process records resolve selectively to one new assessment framework, three existing reusable Knowledge nodes, and two target-free guidance rows.',
+      },
+    ],
+    publicDelta: { problems: 0, knowledge: 1 },
+    knowledgeSlugs: [newSlug],
+  });
 });
 
 test('master and Red coverage mirror the exact selective dispositions', async () => {
@@ -64,6 +87,24 @@ test('master and Red coverage mirror the exact selective dispositions', async ()
     loadMasterDirectoryRepository(process.cwd()),
     readJson('src/data/quant-interview/coverage/red-book.json'),
   ]);
+  const redIdentities = red.entries.map(({ sourceSection, sourceItem }) =>
+    JSON.stringify([sourceSection, sourceItem]));
+  assert.equal(
+    new Set(redIdentities).size,
+    redIdentities.length,
+    'Red coverage identities must be globally unique',
+  );
+  const ownersByKey = new Map();
+  for (const workstream of inputs.workstreams) {
+    for (const key of workstream.masterItemKeys ?? []) {
+      const owners = ownersByKey.get(key) ?? [];
+      owners.push(workstream.id);
+      ownersByKey.set(key, owners);
+    }
+  }
+  for (const key of keys) {
+    assert.deepEqual(ownersByKey.get(key), [workstreamId], key);
+  }
   assert.deepEqual(
     inputs.directory.items
       .filter((item) => item.workstream === manifest.id)
