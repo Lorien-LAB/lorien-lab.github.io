@@ -260,7 +260,18 @@ test('handoff current topic and remaining queue follow workstream 012 status', a
         assert.match(handoff, /Workstream 014 is active/i);
       } else {
         assert.equal(workstream014.status, 'complete');
-        assert.match(current, /No bounded topic is active.*Workstream 014 is complete/is);
+        const workstream015 = JSON.parse(await readFile(
+          'src/data/quant-interview/workstreams/interview-strategy-communication-interview-preparation-role-employer-fit-015.json',
+          'utf8',
+        ));
+        assert.match(workstream015.status, /^(?:active|complete)$/);
+        if (workstream015.status === 'active') {
+          assert.match(current, /Interview Strategy & Communication.*Interview Preparation/is);
+          assert.match(current, /Workstream 015 is active/i);
+        } else {
+          assert.match(handoff, /^## Completed cross-book workstream 15$/m);
+          assert.doesNotMatch(current, /Workstream 015 is active/i);
+        }
       }
       assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012[^\n]*013/i);
       assert.doesNotMatch(coordination, /remaining integration queue[^\n]*013/i);

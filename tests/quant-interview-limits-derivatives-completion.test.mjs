@@ -94,7 +94,17 @@ test('012 completion contract is phase-safe and pins factual active-gate evidenc
       assert.match(current, /Interview Strategy & Communication.*Interview Preparation/is);
     } else {
       assert.equal(workstream014.status, 'complete');
-      assert.match(current, /No bounded topic is active.*Workstream 014 is complete/is);
+      const workstream015 = await readJson(
+        'src/data/quant-interview/workstreams/interview-strategy-communication-interview-preparation-role-employer-fit-015.json',
+      );
+      assert.match(workstream015.status, /^(?:active|complete)$/);
+      if (workstream015.status === 'active') {
+        assert.match(current, /Interview Strategy & Communication.*Interview Preparation/is);
+        assert.match(current, /Workstream 015 is active/i);
+      } else {
+        assert.match(handoff, /^## Completed cross-book workstream 15$/m);
+        assert.doesNotMatch(current, /Workstream 015 is active/i);
+      }
     }
     assert.doesNotMatch(coordination, /remaining integration queue[^\n]*013/i);
     assert.match(coordination, /completed queue entr(?:y|ies)[^\n]*011[^\n]*012[^\n]*013/i);
