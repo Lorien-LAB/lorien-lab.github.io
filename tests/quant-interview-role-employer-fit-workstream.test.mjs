@@ -42,6 +42,10 @@ test('master and Red coverage close both rows with exact page evidence', async (
     ['red-book::1.10::guidance', [{ startPage: 22, endPage: 23 }]],
     ['red-book::1.11::guidance', [{ startPage: 24, endPage: 25 }]],
   ]);
+  const ownedMasterKeys = inputs.directory.items
+    .filter((item) => item.workstream === manifest.id)
+    .map((item) => item.key);
+  assert.deepEqual(ownedMasterKeys, keys);
   const notes = [];
   for (const key of keys) {
     const master = inputs.directory.items.find((item) => item.key === key);

@@ -1,34 +1,40 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { access, readFile, readdir } from 'node:fs/promises';
-import { load as parseYaml } from 'js-yaml';
+import { JSON_SCHEMA, load as parseYaml } from 'js-yaml';
 
 const knowledgePath =
   'src/content/knowledge/concepts/quant-role-and-employer-fit.md';
 
-const readArray = (text, field) =>
-  (text.match(new RegExp(`^${field}:\\s*\\[([^\\]]*)\\]$`, 'm'))?.[1] ?? '')
-    .split(',')
-    .map((value) => value.trim())
-    .filter(Boolean);
-
 test('role and employer fit Knowledge has valid source-neutral frontmatter', async () => {
   const text = await readFile(knowledgePath, 'utf8');
   const frontmatter = text.split(/^---$/m)[1] ?? '';
-  assert.doesNotThrow(() => parseYaml(frontmatter));
-  assert.match(text, /^title: Quant Role & Employer Fit$/m);
-  assert.match(text, /^date: 2026-08-29$/m);
-  assert.match(text, /^domain: Interview Strategy & Communication$/m);
-  assert.deepEqual(readArray(text, 'quantInterviewTopics'), [
-    'interview-strategy-communication',
-    'interview-preparation',
-  ]);
-  assert.deepEqual(readArray(text, 'related'), [
-    'quant-interview-preparation-breadth-and-practice',
-  ]);
+  assert.deepEqual(parseYaml(frontmatter, { schema: JSON_SCHEMA }), {
+    title: 'Quant Role & Employer Fit',
+    description:
+      'Compare quant roles and employer environments through work product, research-engineering balance, decision proximity, time horizon, risk ownership, and transferable skills.',
+    date: '2026-08-29',
+    type: 'concept',
+    domain: 'Interview Strategy & Communication',
+    category: 'Problem Solving Techniques',
+    status: 'growing',
+    tags: ['Interview', 'Careers', 'Quant Roles', 'Employer Fit'],
+    quantInterviewTopics: ['interview-strategy-communication', 'interview-preparation'],
+    featured: false,
+    related: ['quant-interview-preparation-breadth-and-practice'],
+    relatedNotes: [],
+  });
   assert.doesNotMatch(
     text,
     /Red Book|Mark Joshi|Nicholas Denson|Andrew Downes|sourceSection|PDF page|section 1\.10|section 1\.11|Goldman Sachs|Lehman Brothers|Citadel|Basel II/i,
+  );
+  assert.doesNotMatch(
+    text,
+    /150 Most Frequently Asked Questions on Quant Interviews|A Practical Guide to Quantitative Finance Interviews|Quant Job Interview Questions and Answers/i,
+  );
+  assert.doesNotMatch(
+    text,
+    /paid more|less money|decent pay|astronomical bonus|growth industry|credit crisis|snapped up within|hard to switch|easy to switch|easier to find a job/i,
   );
 });
 
