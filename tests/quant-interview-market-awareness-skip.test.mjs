@@ -85,6 +85,9 @@ const expectedRows = [
 ];
 const keys = [...expectedNotes.keys()];
 const readJson = async (file) => JSON.parse(await readFile(file, 'utf8'));
+const coverageIdentity = ({ sourceSection, sourceItem }) =>
+  `red-book::${sourceSection}::${sourceItem ?? 'guidance'}`;
+const stripMarkdownCode = (value) => value.replace(/^`|`$/g, '');
 
 test('market-awareness skip owns exactly fourteen ordered and exclusively marked records', async () => {
   const inputs = await loadMasterDirectoryRepository(process.cwd());
@@ -105,6 +108,14 @@ test('all fourteen rows preserve identity and exact target-free guidance decisio
     loadMasterDirectoryRepository(process.cwd()),
     readJson('src/data/quant-interview/coverage/red-book.json'),
   ]);
+  const coverageIdentities = red.entries.map(coverageIdentity);
+  assert.equal(new Set(coverageIdentities).size, coverageIdentities.length);
+  assert.deepEqual(
+    red.entries
+      .filter((entry) => entry.resolutionNote?.includes(auditMarker))
+      .map(coverageIdentity),
+    keys,
+  );
   for (const expected of expectedRows) {
     const master = inputs.directory.items.find((item) => item.key === expected.key);
     const coverage = red.entries.find((entry) =>
@@ -172,7 +183,12 @@ test('skip audit repairs pages, preserves public counts, and advances to Red 1.1
 });
 
 test('skip audit creates no public market-awareness artifact', async () => {
-  const files = await readdir('src/content', { recursive: true });
+  const [knowledgeFiles, problemFiles, knowledgeCatalog] = await Promise.all([
+    readdir('src/content/knowledge', { recursive: true }),
+    readdir('src/content/problems', { recursive: true }),
+    readJson('src/data/quant-interview/topics/knowledge-catalog.json'),
+  ]);
+  const files = [...knowledgeFiles, ...problemFiles];
   assert.equal(
     files.some((file) => /market-awareness|current-market-data/i.test(String(file))),
     false,
@@ -181,6 +197,46 @@ test('skip audit creates no public market-awareness artifact', async () => {
     access('src/content/knowledge/concepts/financial-market-awareness-for-quant-interviews.md'),
     (error) => error?.code === 'ENOENT',
   );
+  const forbiddenModuleIdentities = [
+    /\b(?:financial )?market awareness(?: for quant interviews?)?\b/,
+    /\bcurrent market data(?: for quant interviews?)?\b/,
+  ];
+  for (const module of knowledgeCatalog.modules) {
+    for (const identity of [module.slug, module.title]) {
+      const normalizedIdentity = identity.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+      for (const forbidden of forbiddenModuleIdentities) {
+        assert.doesNotMatch(normalizedIdentity, forbidden, `${module.slug}: ${identity}`);
+      }
+    }
+  }
+  const publicMarkdownFiles = [
+    ...knowledgeFiles
+      .filter((file) => /\.md$/i.test(String(file)))
+      .map((file) => `src/content/knowledge/${String(file).replaceAll('\\', '/')}`),
+    ...problemFiles
+      .filter((file) => /\.md$/i.test(String(file)))
+      .map((file) => `src/content/problems/${String(file).replaceAll('\\', '/')}`),
+  ];
+  const publicMarkdown = await Promise.all(
+    publicMarkdownFiles.map(async (file) => [file, await readFile(file, 'utf8')]),
+  );
+  const redBookProvenance = [
+    /\bRed Book\b[^\r\n]{0,160}\b(?:section\s+)?9\.3\b/i,
+    /\bRed Book\b[^\r\n]{0,160}\bQuestions?\s+9\.(?:2[3-9]|3[0-4])\b/i,
+  ];
+  for (const [file, markdown] of publicMarkdown) {
+    for (const key of keys) {
+      assert.equal(markdown.includes(key), false, `${file}: ${key}`);
+    }
+    assert.doesNotMatch(
+      markdown,
+      /financial-market-awareness-for-quant-interviews/i,
+      file,
+    );
+    for (const provenance of redBookProvenance) {
+      assert.doesNotMatch(markdown, provenance, file);
+    }
+  }
 });
 
 test('HANDOFF and generated directory record the target-free skip audit', async () => {
@@ -188,19 +244,45 @@ test('HANDOFF and generated directory record the target-free skip audit', async 
     readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
     readFile('docs/quant-interview/KNOWLEDGE_DIRECTORY.md', 'utf8'),
   ]);
-  assert.match(handoff, /^## Skipped source audit — Red Book market awareness$/m);
-  assert.match(handoff, /14 records.*\+0 Problems.*\+0 Knowledge/is);
-  assert.match(handoff, /no workstream ordinal was consumed/i);
-  assert.match(handoff, /workstream 016 is not active/i);
+  const handoffHeading = '## Skipped source audit — Red Book market awareness';
+  const handoffStart = handoff.indexOf(handoffHeading);
+  assert.notEqual(handoffStart, -1);
+  const nextHeading = /^## /gm;
+  nextHeading.lastIndex = handoffStart + handoffHeading.length;
+  const nextHandoffBlock = nextHeading.exec(handoff);
+  const handoffBlock = handoff.slice(handoffStart, nextHandoffBlock?.index ?? handoff.length);
+  assert.match(
+    handoffBlock,
+    /The exact 14-record block `red-book::9::guidance`, `red-book::9\.3::guidance`, and `red-book::9\.3::9\.23` through `red-book::9\.3::9\.34`/,
+  );
+  assert.match(handoffBlock, /produce exactly \*\*\+0 Problems \/ \+0 Knowledge\*\*/);
+  assert.match(handoffBlock, /have no public target/i);
+  assert.match(handoffBlock, /do not represent public coverage/i);
+  assert.match(handoffBlock, /no workstream ordinal was consumed/i);
+  assert.match(handoffBlock, /workstream 016 is not active/i);
+  const contradictoryTargetAssignments = [
+    /\b(?:canonical|public)\s+(?:Problem|Knowledge)\s+target\s*(?::|=|->)\s*(?!`?none\b)`?[a-z0-9][\w-]*/i,
+    /\b(?:canonical|public)\s+(?:Problem|Knowledge)\s+target\s+(?:is|are)\s+(?!`?none\b)`?[a-z0-9][\w-]*/i,
+    /\b(?:assign(?:s|ed)?|map(?:s|ped)?|link(?:s|ed)?)\b[^\r\n]*\b(?:canonical|public)\s+(?:Problem|Knowledge)\b/i,
+  ];
+  for (const contradiction of contradictoryTargetAssignments) {
+    assert.doesNotMatch(handoffBlock, contradiction);
+  }
   assert.match(handoff, /First pending master record: `red-book::1\.1::guidance`/i);
   assert.match(directory, /Terminal master records: 196/);
   assert.match(directory, /Pending master records: 554/);
   assert.match(directory, /First pending: `red-book::1\.1::guidance`/);
   for (const key of keys) {
-    assert.equal(
-      directory.includes(`| \`${key}\` | \`interview-guidance\` |`),
-      true,
-      key,
-    );
+    const rows = directory
+      .split(/\r?\n/)
+      .filter((line) => line.startsWith(`| \`${key}\` |`));
+    assert.equal(rows.length, 1, key);
+    const cells = rows[0]
+      .split('|')
+      .slice(1, -1)
+      .map((cell) => stripMarkdownCode(cell.trim()));
+    assert.equal(cells.length, 5, key);
+    assert.equal(cells[1], 'interview-guidance', key);
+    assert.equal(cells.at(-1), 'None', key);
   }
 });
