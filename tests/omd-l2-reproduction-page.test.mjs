@@ -11,10 +11,15 @@ const indexOutput = 'dist/projects/reproductions/index.html';
 const existingBrokerOutput = 'dist/projects/reproductions/stock-index-futures-roll-basis-timing/index.html';
 const execFileAsync = promisify(execFile);
 let buildPromise;
+const buildCommand = process.platform === 'win32' ? 'cmd.exe' : 'npm';
+const buildArgs = process.platform === 'win32' ? ['/d', '/s', '/c', 'npm.cmd run build'] : ['run', 'build'];
 const buildSite = () => buildPromise ??= execFileAsync(
-  process.platform === 'win32' ? 'npm.cmd' : 'npm',
-  ['run', 'build'],
-  { cwd: process.cwd(), maxBuffer: 16 * 1024 * 1024 },
+  buildCommand,
+  buildArgs,
+  {
+    cwd: process.cwd(),
+    maxBuffer: 16 * 1024 * 1024,
+  },
 );
 
 const LOCAL_PATH_PATTERN = /^(?:[A-Z]:[\\/]|\\\\[^\\/]+[\\/][^\\/]+|\/\/[^/\\]+[\\/][^/\\]+|file:\/\/|~[\\/]|\/(?:[^/]+\/)+)/i;
@@ -116,4 +121,39 @@ test('recursive L2 privacy gate rejects common local path spellings', () => {
       path,
     );
   }
+});
+
+test('built workbench publishes one featured private-code OMD academic record', async () => {
+  await buildSite();
+  const [indexHtml, detailHtml] = await Promise.all([
+    readFile(indexOutput, 'utf8'), readFile(detailOutput, 'utf8'),
+  ]);
+  assert.match(indexHtml, /Academic Papers<\/span>\s*<strong[^>]*>1<\/strong>/);
+  assert.match(indexHtml, /href="\/projects\/reproductions\/observable-matrix-dynamics-a-share-long-only\/"/);
+  assert.match(indexHtml, /Are Three Matrices All You Need To Beat the Market\? · A股 Long-Only Reproduction/);
+  for (const visible of [
+    'OMD Portfolio Optimization · A股 Long-Only Reproduction',
+    'Academic Paper', 'Portfolio Construction', 'Partial', 'Implementation Private',
+    'Igor Halperin', '2026', 'Point-in-time and causality', 'Cross-window stability',
+  ]) assert.ok(detailHtml.includes(visible), `built detail missing ${visible}`);
+  assert.match(detailHtml, /href="https:\/\/arxiv\.org\/abs\/2607\.27461"/);
+  assert.doesNotMatch(detailHtml, /View Research Code|View Code|Repository ↗|Configuration ↗|Results ↗/);
+});
+
+test('built OMD narrative is bilingual, stitched-first, and public-safe', async () => {
+  await buildSite();
+  const detailHtml = await readFile(detailOutput, 'utf8');
+  for (const heading of [
+    'Research question', 'Paper mechanism', 'A-share long-only adaptation',
+    'Data and point-in-time universe', 'Portfolio construction',
+    'Execution and cost model', 'No-lookahead validation', 'Empirical results',
+    'Benchmark comparison', 'Capacity and robustness', 'Limitations', 'Conclusion',
+  ]) assert.ok(detailHtml.includes(heading), `built narrative missing ${heading}`);
+  for (const visible of ['20.22%', '19.13%', 'CSI 1000', 'OOS1', 'OOS2', '下一开盘成交', '时点成分股', '涨跌停', '停牌']) {
+    assert.ok(detailHtml.includes(visible), `built narrative missing ${visible}`);
+  }
+  assert.match(detailHtml, /not an investment recommendation/i);
+  assert.doesNotMatch(detailHtml, /[A-Z]:\\|[A-Z]:\//);
+  assert.doesNotMatch(detailHtml, /paper_faithful_shadow|a_share_lowvol_mom12|three[- ]lane/i);
+  assert.doesNotMatch(detailHtml, /\bL1\b|\bL3\b/);
 });
