@@ -5,6 +5,9 @@ import { access, readFile, readdir } from 'node:fs/promises';
 const manifestPath = 'src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-problem-simplification-018.json';
 const workflow = '.github/workflows/quant-interview-problem-simplification-018-temporary.yml';
 const commands = ['npm test', 'npm run knowledge:directory:check', 'npm run master:directory:check', 'npm run check', 'npm run build'];
+const activeSha = 'f63bf8529e1833f2e122c59cc29dc44843168edc';
+const runId = 33305049381;
+const ciUrl = 'https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33305049381';
 const activeCurrent = `**Logic, Brainteasers & Discrete Reasoning → Problem Simplification.**
 
 Workstream 018 is active across the exact eleven-record cross-book Problem Simplification scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
@@ -25,19 +28,20 @@ test('018 lifecycle is evidence-free while active and factually strict when comp
     return;
   }
   const { preClosureActiveGate: gate, verification, finalTreeGate } = manifest;
-  assert.equal(gate.status, 'active');
-  assert.match(gate.commit, /^[0-9a-f]{40}$/);
-  assert.equal(gate.environment, 'wsl-native-lf-node24');
-  assert.deepEqual(gate.commands, commands);
-  assert.equal(gate.conclusion, 'success');
-  assert.equal(verification.commit, gate.commit);
-  assert.equal(Number.isSafeInteger(verification.runId) && verification.runId > 0, true);
-  assert.deepEqual(verification.commands, commands);
-  assert.deepEqual(verification.temporaryArtifacts, [workflow]);
+  assert.deepEqual(gate, {
+    status: 'active', commit: activeSha, environment: 'wsl-native-lf-node24',
+    commands, conclusion: 'success',
+  });
+  assert.deepEqual(verification, {
+    commit: activeSha, runId, commands, conclusion: 'success',
+    temporaryArtifacts: [workflow],
+  });
   assert.deepEqual(finalTreeGate, { environment: 'wsl-native-lf-node24', commands, conclusion: 'success', temporaryArtifactsAbsent: true });
   await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
   assert.equal(currentBlock(handoff), completeCurrent);
   assert.match(handoff, /^## Completed cross-book workstream 18$/m);
+  const closure = section(handoff, 'Completed cross-book workstream 18');
+  for (const fact of [activeSha, String(runId), ciUrl]) assert.ok(closure.includes(fact));
   assert.match(handoff, /First pending master record: `green-book::2\.2::theory`/i);
 });
 
