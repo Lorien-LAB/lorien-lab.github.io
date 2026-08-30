@@ -27,24 +27,24 @@ const metadata = {
   relatedNotes: [],
 };
 
-const promptPatterns = [
-  /pursuing quantitative work.*role now/i,
-  /CV item.*contribute.*relevant.*learn/i,
-  /(?:leaving|changing).*previous direction/i,
-  /difficult collaboration.*actions/i,
-  /genuine weakness.*evidence.*progress/i,
-  /deadline.*constraints/i,
-  /next several years.*role fit/i,
-  /research.*non-specialist.*technical expert/i,
-  /qualities.*beyond technical.*demonstrated/i,
-  /collaborators.*working style.*examples/i,
-  /achievement.*(?:initiative|impact)/i,
-  /(?:studied|built).*interest.*(?:finance|quantitative)/i,
-  /recent development.*organization.*role/i,
-  /(?:organization|team).*goals.*alternatives/i,
-  /independently.*collaboration.*result/i,
-  /led others.*measurable outcome/i,
-  /(?:unfamiliar internal language|tool).*transferable skills/i,
+const approvedPrompts = [
+  'Why are you pursuing quantitative work and this role now?',
+  'Choose one CV item: what did you contribute, why is it relevant, and what did you learn?',
+  'Why are you leaving or changing your previous direction?',
+  'Describe a difficult collaboration and the concrete actions you took.',
+  'What genuine weakness are you improving, and what evidence shows progress?',
+  'Give an example of meeting an important deadline under constraints.',
+  'What direction do you want your work to take over the next several years, and why does this role fit?',
+  'Explain your research first to a non-specialist and then to a technical expert.',
+  'What useful qualities do you bring beyond technical ability, and how have you demonstrated them?',
+  'What would close collaborators say about your working style, and what examples support that view?',
+  'What achievement best demonstrates unusual initiative or impact?',
+  'What have you studied or built that demonstrates genuine interest in finance or quantitative work?',
+  'What recent development at this organization is relevant to the role, and why?',
+  'Why does this organization or team fit your goals better than plausible alternatives?',
+  'In what situations do you work best independently, and when does collaboration improve the result?',
+  'Describe a time you led others toward a measurable outcome.',
+  'How would you evaluate and adapt to an unfamiliar internal language or tool while protecting transferable skills?',
 ];
 
 test('behavioral-evidence page has exact byte-zero frontmatter', async () => {
@@ -63,11 +63,34 @@ test('behavioral-evidence page implements the exact answer framework and prompt 
   for (const word of ['Claim', 'Evidence', 'Relevance', 'Reflection']) {
     assert.match(text, new RegExp(`\\b${word}\\b`, 'i'));
   }
-  const promptBlock = text.split(/^## Practice Prompts$/m)[1]?.split(/^## /m)[0] ?? '';
-  assert.equal((promptBlock.match(/^\d+\./gm) ?? []).length, 17);
-  for (const pattern of promptPatterns) assert.match(promptBlock, pattern);
-  const checks = text.split(/^## Interview Checks$/m)[1] ?? '';
-  assert.equal((checks.match(/^\d+\./gm) ?? []).length >= 6, true);
+  const section = (heading) => text.split(new RegExp(`^## ${heading}$`, 'm'))[1]?.split(/^## /m)[0] ?? '';
+  const framework = section('Four-Part Answer Structure');
+  assert.deepEqual(
+    [...framework.matchAll(/^\d+\. \*\*(Claim|Evidence|Relevance|Reflection):\*\*/gm)].map(([, label]) => label),
+    ['Claim', 'Evidence', 'Relevance', 'Reflection'],
+  );
+  const families = section('Prompt Families');
+  assert.deepEqual(
+    [...families.matchAll(/^\d+\. \*\*([^:]+):\*/gm)].map(([, label]) => label),
+    ['Motivation and direction', 'Contribution and achievement', 'Collaboration and leadership', 'Growth and resilience', 'Communication and fit'],
+  );
+  const workflow = section('Answer Preparation Workflow');
+  assert.equal((workflow.match(/^\d+\./gm) ?? []).length, 7);
+  const promptBlock = section('Practice Prompts');
+  const prompts = [...promptBlock.matchAll(/^\d+\. (.+)$/gm)].map(([, prompt]) => prompt);
+  assert.deepEqual(prompts, approvedPrompts);
+  assert.equal(promptBlock.trim(), approvedPrompts.map((prompt, index) => `${index + 1}. ${prompt}`).join('\n'));
+  const checks = section('Interview Checks');
+  const checkLines = [...checks.matchAll(/^\d+\. (.+)$/gm)].map(([, check]) => check);
+  assert.equal(checkLines.length >= 6, true);
+  for (const [index, pattern] of [
+    /trait label.*concrete action.*observable consequence/i,
+    /personal contribution.*vague team credit/i,
+    /adapt one technical story.*non-specialist.*technical expert/i,
+    /real weakness.*evidence.*improvement/i,
+    /organization-specific research.*role.*generic praise/i,
+    /authenticity.*pressured.*preferred answer/i,
+  ].entries()) assert.match(checkLines[index], pattern);
 });
 
 test('behavioral page rejects scripts, stereotypes, source answers, and skipped identities', async () => {
