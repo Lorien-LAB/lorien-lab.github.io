@@ -16,7 +16,7 @@ const smallMetadata = {
   category: 'Problem Solving Techniques', status: 'growing',
   tags: ['Problem Simplification', 'Recurrence', 'Induction', 'Interview'],
   quantInterviewTopics: topics, featured: false,
-  related: ['recursion-problem-solving', 'problem-framing-clarification-assumption-management', 'fermi-estimation-assumption-decomposition'],
+  related: ['recursion-problem-solving', 'problem-framing-clarification-assumption-management', 'fermi-estimation-assumption-decomposition', 'logical-deduction-constraint-propagation-and-case-elimination', 'decision-trees-information-bounds-and-adaptive-testing'],
   relatedNotes: [],
 };
 const fermiMetadata = {

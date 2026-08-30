@@ -85,6 +85,11 @@ const currentProblemSlugs = [
   'two-egg-threshold-search',
   'large-power-digit-count-without-log-tables',
   'minimum-comparisons-for-both-extremes',
+  'bridge-crossing-minimum-time',
+  'public-announcement-candidate-elimination',
+  'twelve-object-balance-scale-diagnosis',
+  'factorial-trailing-zeros-in-arbitrary-base',
+  'top-three-from-batched-races',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -144,6 +149,8 @@ const expectedKnowledgeTopics = new Map([
   ['quant-interview-preparation-breadth-and-practice', ['interview-strategy-communication', 'interview-preparation']],
   ['quant-role-and-employer-fit', ['interview-strategy-communication', 'interview-preparation']],
   ['structured-think-aloud-reasoning', ['interview-strategy-communication', 'reasoning-communication']],
+  ['logical-deduction-constraint-propagation-and-case-elimination', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
+  ['decision-trees-information-bounds-and-adaptive-testing', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
 ]);
 
 async function findProblem(slug) {
@@ -182,14 +189,14 @@ async function classifiedMarkdownSlugs(root) {
   return slugs.sort();
 }
 
-test('source-neutral regression discovers exactly the current 81 Problem and 56 Knowledge contracts', async () => {
+test('source-neutral regression discovers exactly the current 86 Problem and 58 Knowledge contracts', async () => {
   const actualProblemSlugs = await classifiedMarkdownSlugs('src/content/problems');
   const actualKnowledgeSlugs = await classifiedMarkdownSlugs('src/content/knowledge');
   const expectedProblemSlugs = [...currentProblemSlugs].sort();
   const expectedKnowledgeSlugs = [...expectedKnowledgeTopics.keys()].sort();
 
-  assert.equal(actualProblemSlugs.length, 81);
-  assert.equal(actualKnowledgeSlugs.length, 56);
+  assert.equal(actualProblemSlugs.length, 86);
+  assert.equal(actualKnowledgeSlugs.length, 58);
   assert.deepEqual(actualProblemSlugs, expectedProblemSlugs);
   assert.deepEqual(actualKnowledgeSlugs, expectedKnowledgeSlugs);
 });
