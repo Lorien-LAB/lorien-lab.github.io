@@ -17,6 +17,30 @@ const buildSite = () => buildPromise ??= execFileAsync(
   { cwd: process.cwd(), maxBuffer: 16 * 1024 * 1024 },
 );
 
+const LOCAL_PATH_PATTERN = /^(?:[A-Z]:[\\/]|\\\\[^\\/]+[\\/][^\\/]+|\/\/[^/\\]+[\\/][^/\\]+|file:\/\/|~[\\/]|\/(?:[^/]+\/)+)/i;
+const FORBIDDEN_PUBLIC_TERM_PATTERN = /(?:paper[_-]?faithful[_-]?shadow|a[_-]?share[_-]?lowvol[_-]?mom12|three[-_ ]lane|holdings?|orders?|ledger|forecasts?|config(?:uration)?(?:url)?|results?url|hash|\bL[13]\b)/i;
+
+const assertPublicPayloadSafe = (value, location = '$') => {
+  if (typeof value === 'string') {
+    assert.doesNotMatch(value, LOCAL_PATH_PATTERN, `local path at ${location}`);
+    assert.doesNotMatch(value, FORBIDDEN_PUBLIC_TERM_PATTERN, `forbidden public term at ${location}`);
+    return;
+  }
+
+  if (Array.isArray(value)) {
+    value.forEach((item, index) => assertPublicPayloadSafe(item, `${location}[${index}]`));
+    return;
+  }
+
+  if (value && typeof value === 'object') {
+    for (const [key, child] of Object.entries(value)) {
+      assert.doesNotMatch(key, LOCAL_PATH_PATTERN, `local path key at ${location}.${key}`);
+      assert.doesNotMatch(key, FORBIDDEN_PUBLIC_TERM_PATTERN, `forbidden public key at ${location}.${key}`);
+      assertPublicPayloadSafe(child, `${location}.${key}`);
+    }
+  }
+};
+
 test('OMD L2 public evidence freezes the approved stitched headline', async () => {
   const moduleUrl = `${pathToFileURL(dataPath).href}?test=${Date.now()}`;
   const { omdL2Evidence } = await import(moduleUrl);
@@ -38,11 +62,58 @@ test('OMD L2 public evidence freezes the approved stitched headline', async () =
 test('OMD L2 public evidence contains only aggregate L2-safe values', async () => {
   const moduleUrl = `${pathToFileURL(dataPath).href}?privacy=${Date.now()}`;
   const { omdL2Evidence } = await import(moduleUrl);
-  const publicPayload = JSON.stringify(omdL2Evidence);
+  assertPublicPayloadSafe(omdL2Evidence);
+});
+
+const legacyRootOnlyPrivacyGate = (payload) => {
+  const publicPayload = JSON.stringify(payload);
   assert.doesNotMatch(publicPayload, /[A-Z]:\\|[A-Z]:\//);
   assert.doesNotMatch(publicPayload, /paper_faithful_shadow|a_share_lowvol_mom12|three[- ]lane/i);
   assert.doesNotMatch(publicPayload, /\bL1\b|\bL3\b/);
   for (const privateKey of ['holdings', 'orders', 'ledger', 'forecasts', 'configurationUrl', 'resultsUrl']) {
-    assert.equal(Object.hasOwn(omdL2Evidence, privateKey), false, `unexpected public key ${privateKey}`);
+    assert.equal(Object.hasOwn(payload, privateKey), false, `unexpected public key ${privateKey}`);
+  }
+};
+
+test('recursive L2 privacy gate catches nested private mutation missed by the legacy gate', async () => {
+  const moduleUrl = `${pathToFileURL(dataPath).href}?nested=${Date.now()}`;
+  const { omdL2Evidence } = await import(moduleUrl);
+  const nestedMutation = JSON.parse(JSON.stringify(omdL2Evidence));
+  nestedMutation.capacity.audit = {
+    holdings: 'c:\\private\\holdings.parquet',
+    orders: '//server/share/orders.csv',
+    ledger: { forecast: '/home/lorien/forecast.json' },
+    configuration: {
+      hash: 'private-result-hash',
+      path: 'file:///Users/lorien/config.json',
+    },
+  };
+
+  assert.doesNotThrow(() => legacyRootOnlyPrivacyGate(nestedMutation));
+  assert.throws(
+    () => assertPublicPayloadSafe(nestedMutation),
+    (error) => error?.name === 'AssertionError' && /nestedMutation|capacity\.audit/i.test(error.message),
+  );
+});
+
+test('recursive L2 privacy gate rejects common local path spellings', () => {
+  const pathSamples = [
+    'C:\\private\\config.json',
+    'c:/private/config.json',
+    '\\\\server\\share\\config.json',
+    '//server/share/config.json',
+    'FILE:///C:/private/config.json',
+    'file:///Users/lorien/config.json',
+    '/home/lorien/config.json',
+    '/tmp/omd-config.json',
+    '/var/lib/omd/config.json',
+  ];
+
+  for (const path of pathSamples) {
+    assert.throws(
+      () => assertPublicPayloadSafe({ nested: { path } }),
+      (error) => error?.name === 'AssertionError' && /local path/i.test(error.message),
+      path,
+    );
   }
 });
