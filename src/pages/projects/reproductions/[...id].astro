@@ -90,7 +90,7 @@ const artifactLinks = [
 
       {caseStudy ? <div class="container legacy-case">
         <ReproductionVerdictGrid verdicts={caseStudy.verdicts} />
-        {caseStudy.strategyFlow.length > 0 && <ReproductionStrategyFlow steps={caseStudy.strategyFlow} />}
+        {caseStudy.strategyFlow.length > 0 && <ReproductionStrategyFlow steps={caseStudy.strategyFlow} strategyFlowTitle={caseStudy.strategyFlowTitle} strategyFlowDescription={caseStudy.strategyFlowDescription} />}
         {caseStudy.factorEvidence.length > 0 && <ReproductionFactorEvidence factors={caseStudy.factorEvidence} />}
         {caseStudy.limitations.length > 0 && <ReproductionLimitations limitations={caseStudy.limitations} />}
         <main class="prose"><Content /></main>

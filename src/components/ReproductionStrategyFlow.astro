@@ -1,9 +1,13 @@
 ---
-interface Props { steps: string[]; }
-const { steps } = Astro.props;
+interface Props { steps: string[]; strategyFlowTitle?: string; strategyFlowDescription?: string; }
+const {
+  steps,
+  strategyFlowTitle = 'Basis timing, not equity direction.',
+  strategyFlowDescription = 'The signal chooses the maturity to hold. It does not forecast whether the equity index itself rises or falls.',
+} = Astro.props;
 ---
 <section class="flow-section" aria-labelledby="strategy-flow-title">
-  <div class="flow-head"><div class="mono-label">Strategy in 30 Seconds</div><h2 id="strategy-flow-title">Basis timing, not equity direction.</h2><p>The signal chooses the maturity to hold. It does not forecast whether the equity index itself rises or falls.</p></div>
+  <div class="flow-head"><div class="mono-label">Strategy in 30 Seconds</div><h2 id="strategy-flow-title">{strategyFlowTitle}</h2><p>{strategyFlowDescription}</p></div>
   <ol class="flow-list">
     {steps.map((step, index) => <li><span>{String(index + 1).padStart(2,'0')}</span><strong>{step}</strong></li>)}
   </ol>

@@ -1,6 +1,6 @@
 ---
 slug: observable-matrix-dynamics-a-share-long-only
-title: "Are Three Matrices All You Need To Beat the Market? · A股 Long-Only Reproduction"
+title: "Are Three Matrices All You Need To Beat the Market? Observable Matrix Dynamics for Portfolio Optimization"
 description: "A point-in-time, next-open A-share reproduction of the Observable Matrix Dynamics long portfolio across CSI 300, CSI 500, and CSI 1000, with modeled trading costs and capacity constraints."
 researchArea: "Portfolio Construction"
 stage: reproduction
@@ -31,6 +31,8 @@ dataAvailability: "Partial · PIT constituents and production A-share market dat
 caseStudy:
   shortTitle: "OMD Portfolio Optimization · A股 Long-Only Reproduction"
   subtitle: "A tradable A-share adaptation with point-in-time constituents, next-open execution, modeled costs, and capacity constraints"
+  strategyFlowTitle: "From OMD state forecasts to an A-share long-only portfolio."
+  strategyFlowDescription: "Monthly point-in-time selection defines a 30-stock target; the next-open execution layer applies A-share costs and trading constraints."
   verdicts:
     - label: "OMD long-only construction"
       status: reproduced
@@ -110,13 +112,15 @@ The same checks are applied across the PIT membership snapshots and the monthly 
 
 The stitched portfolio produces a 20.22% annual return at CNY 100m per sleeve and 19.13% at CNY 500m per sleeve. “Per sleeve” means three independent sleeves: the corresponding total nominal capital is CNY 300m and CNY 1.5bn. The stitched window runs from 2024-01-02 through 2026-06-30 and combines equal-weighted daily returns across CSI 300, CSI 500, and CSI 1000.
 
+Non-overlapping OOS1 and OOS2 daily paths are concatenated. The stitched path is descriptive and does not replace independent-window robustness evidence.
+
 The window split matters. At CNY 100m per sleeve, the combined annual return is 6.60% in OOS1 and 43.70% in OOS2. At CNY 500m per sleeve, it is 5.56% in OOS1 and 42.53% in OOS2. OOS1's CSI 1000 sleeve is negative (−3.50% at CNY 100m and −4.86% at CNY 500m), while the OOS2 sleeves are all positive. The stitched headline is therefore an aggregate of materially different states, not a claim of uniform performance.
 
 ## Benchmark comparison
 
-Two reference accounts are kept distinct. The official price index is not an executable account; it is a non-executable index reference that does not apply PIT membership, stock-level fills, or the cost and constraint rules above.
+Two reference accounts are kept distinct. The official index is close-to-close and has no modeled stock execution, costs, capacity, or capital scaling. Repeated official values in the 100m/500m rows are intentional. The official price index is not an executable account; it is a non-executable index reference that does not apply PIT membership, stock-level fills, or the cost and constraint rules above.
 
-The PIT equal-weight reference is an executed PIT equal-weight account, not merely a membership-weight series. It uses the exact signal-date PIT membership (时点成分股), then passes through the same next-open A-share execution (下一开盘成交), modeled costs and capacity, and frozen last-close delist convention as the OMD account. This makes it a directly replayed, executable-universe baseline while keeping its equal-weight construction distinct from the OMD target-and-trade process.
+The PIT equal-weight reference remains an executed PIT equal-weight account, not merely a membership-weight series. It uses the exact signal-date PIT membership (时点成分股), then passes through the same execution layer as the OMD account. PIT equal-weight remains the executed exact-signal-date account using the same next-open A-share execution, modeled costs/capacity, and frozen last-close delisting convention. This account therefore uses modeled costs and capacity under that same execution model; the replay uses the frozen last-close delist convention. This makes it a directly replayed, executable-universe baseline while keeping its equal-weight construction distinct from the OMD target-and-trade process.
 
 For the CNY 100m scenario, the combined strategy return is 6.60% versus 7.61% for the official-index reference in OOS1, while the PIT equal-weight account is 9.14%. In OOS2, the corresponding values are 43.70%, 41.00%, and 23.68%. These references answer different questions: an official index shows broad index movement, a PIT equal-weight account shows a tradable-universe baseline, and the reproduction shows the OMD portfolio after its own turnover and constraints.
 

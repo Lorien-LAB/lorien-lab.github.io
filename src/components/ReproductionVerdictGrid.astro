@@ -7,7 +7,7 @@ const statusLabel = { reproduced: 'REPRODUCED', partial: 'PARTIAL', 'not-reprodu
 <section class="verdict-section" aria-labelledby="replication-verdict-title">
   <div class="section-head">
     <div><div class="mono-label">Replication Verdict</div><h2 id="replication-verdict-title">What actually reproduced?</h2></div>
-    <p>A layer-by-layer reading of the documented evidence. Status is interpretive and is not mechanically derived from the numeric score.</p>
+    <p>A layer-by-layer reading of the documented evidence. Status is interpretive and is grounded in the evidence documented on this page.</p>
   </div>
   <div class="verdict-grid">
     {verdicts.map((item, index) => <article class={`verdict verdict-${item.status}`}>

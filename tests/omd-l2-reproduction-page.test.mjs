@@ -163,12 +163,15 @@ test('built workbench publishes one featured private-code OMD academic record', 
   ]);
   assert.match(indexHtml, /Academic Papers<\/span>\s*<strong[^>]*>1<\/strong>/);
   assert.match(indexHtml, /href="\/projects\/reproductions\/observable-matrix-dynamics-a-share-long-only\/"/);
-  assert.match(indexHtml, /Are Three Matrices All You Need To Beat the Market\? · A股 Long-Only Reproduction/);
+  assert.match(indexHtml, /Are Three Matrices All You Need To Beat the Market\? Observable Matrix Dynamics for Portfolio Optimization/);
   for (const visible of [
     'OMD Portfolio Optimization · A股 Long-Only Reproduction',
     'Academic Paper', 'Portfolio Construction', 'Partial', 'Implementation Private',
     'Igor Halperin', '2026', 'Point-in-time and causality', 'Cross-window stability',
+    'Source paper',
   ]) assert.ok(detailHtml.includes(visible), `built detail missing ${visible}`);
+  assert.match(detailHtml, /Source paper[\s\S]*Are Three Matrices All You Need To Beat the Market\? Observable Matrix Dynamics for Portfolio Optimization/);
+  assert.doesNotMatch(detailHtml, /<span>Source report<\/span>[\s\S]*Are Three Matrices All You Need To Beat the Market/);
   assert.match(detailHtml, /href="https:\/\/arxiv\.org\/abs\/2607\.27461"/);
   assert.doesNotMatch(detailHtml, /View Research Code|View Code|Repository ↗|Configuration ↗|Results ↗/);
 });
@@ -189,6 +192,63 @@ test('built OMD narrative is bilingual, stitched-first, and public-safe', async 
   assert.doesNotMatch(detailHtml, /[A-Z]:\\|[A-Z]:\//);
   assert.doesNotMatch(detailHtml, /paper_faithful_shadow|a_share_lowvol_mom12|three[- ]lane/i);
   assert.doesNotMatch(detailHtml, /\bL1\b|\bL3\b/);
+});
+
+test('OMD strategy flow uses its A-share case-study copy while broker copy remains unchanged', async () => {
+  await buildSite();
+  const [omdHtml, brokerHtml] = await Promise.all([
+    readFile(detailOutput, 'utf8'), readFile(existingBrokerOutput, 'utf8'),
+  ]);
+  assert.match(omdHtml, /From OMD state forecasts to an A-share long-only portfolio\./);
+  assert.match(omdHtml, /Monthly point-in-time selection defines a 30-stock target; the next-open execution layer applies A-share costs and trading constraints\./);
+  assert.doesNotMatch(omdHtml, /Basis timing, not equity direction\./);
+  assert.doesNotMatch(omdHtml, /maturity to hold/);
+  assert.match(brokerHtml, /Basis rising/);
+  assert.match(brokerHtml, /hold current-quarter/);
+  assert.match(brokerHtml, /Basis falling/);
+  assert.match(brokerHtml, /hold current-month/);
+});
+
+test('stitched construction and interpretation are explicit beside the headline and in Empirical results', async () => {
+  await buildSite();
+  const detailHtml = await readFile(detailOutput, 'utf8');
+  const constructionSentence = 'Non-overlapping OOS1 and OOS2 daily paths are concatenated.';
+  const interpretationSentence = 'The stitched path is descriptive and does not replace independent-window robustness evidence.';
+  assert.ok((detailHtml.match(new RegExp(constructionSentence, 'g')) ?? []).length >= 2);
+  assert.ok((detailHtml.match(new RegExp(interpretationSentence, 'g')) ?? []).length >= 2);
+});
+
+test('benchmark labels and semantics distinguish official close-to-close values from the executed PIT account', async () => {
+  await buildSite();
+  const detailHtml = await readFile(detailOutput, 'utf8');
+  for (const label of [
+    'Official price index / 官方价格指数',
+    'PIT equal-weight / 时点成分股等权',
+  ]) assert.ok(detailHtml.includes(label), `built benchmark label missing ${label}`);
+  for (const sentence of [
+    'official index is close-to-close',
+    'no modeled stock execution, costs, capacity, or capital scaling',
+    'repeated official values in the 100m/500m rows are intentional',
+    'PIT equal-weight remains the executed exact-signal-date account using the same next-open A-share execution, modeled costs/capacity, and frozen last-close delisting convention',
+  ]) assert.ok((detailHtml.match(new RegExp(sentence, 'gi')) ?? []).length >= 2, `benchmark semantics missing twice: ${sentence}`);
+});
+
+test('OMD publication boundary excludes scores, comparisons, later optimization, private patterns, and broker-only copy', async () => {
+  await buildSite();
+  const detailHtml = await readFile(detailOutput, 'utf8');
+  for (const forbidden of [
+    /Reproduction Score/i,
+    /numeric score/i,
+    /Original vs Reproduced/i,
+    /later optimization/i,
+    /Basis timing, not equity direction\./,
+    /maturity to hold/i,
+    /paper[_-]?faithful[_-]?shadow/i,
+    /a[_-]?share[_-]?lowvol[_-]?mom12/i,
+    /three[-_ ]lane/i,
+    /[A-Z]:\\\\|[A-Z]:\//,
+    /\bL1\b|\bL3\b/,
+  ]) assert.doesNotMatch(detailHtml, forbidden);
 });
 
 test('built OMD benchmark classification names the executed PIT account and non-executable index', async () => {
@@ -238,7 +298,7 @@ test('OMD L2 evidence panel is accessible and progressively enhanced', async () 
       ],
     },
     {
-      caption: 'Official price index and PIT equal-weight comparison',
+      caption: 'Official price index / 官方价格指数 and PIT equal-weight / 时点成分股等权 comparison',
       rows: [
         ['OOS1', '100m', '6.60%', '7.61%', '9.14%'],
         ['OOS1', '500m', '5.56%', '7.61%', '9.11%'],
