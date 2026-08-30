@@ -21,7 +21,7 @@ Prepare several experiences that you can describe precisely, including your own 
 
 ## Four-Part Answer Structure
 
-1. **Claim:** State the capability, motivation, or working preference the example demonstrates.
+1. **Claim:** Answer directly by stating the capability, motivation, or working preference the example demonstrates.
 2. **Evidence:** Give the concrete situation, your actions, the constraints, and the observable result. Separate your contribution from the group’s work.
 3. **Relevance:** Explain why this evidence matters for the role, team, or decision context being discussed.
 4. **Reflection:** Name what you learned, changed, or would do differently, and how that change can be observed.
@@ -38,21 +38,21 @@ Trait labels such as “analytical,” “resilient,” or “collaborative” a
 
 Use five families to build a balanced bank of experiences:
 
-1. **Motivation and direction:** why quantitative work, this role, or a change in direction is timely and credible.
-2. **Contribution and achievement:** what you built, studied, led, or improved, with ownership and impact.
-3. **Collaboration and leadership:** how you handled disagreement, coordinated work, supported others, or led toward an outcome.
-4. **Growth and resilience:** a genuine weakness, a demanding deadline, feedback, and evidence of adaptation.
-5. **Communication and fit:** how you explain technical work, research an organization, choose a working context, and transfer skills to unfamiliar tools.
+1. **Motivation and role/company fit:** why quantitative work, this role, and this company or team fit your direction.
+2. **CV, research, and technical explanation:** what your CV and research show, and how you explain technical work clearly.
+3. **Strengths, weaknesses, self-awareness, and achievements:** what you do well, what you are improving, and which achievements provide evidence.
+4. **Conflict, deadlines, teamwork, leadership, and execution:** how you handle disagreement, constraints, coordination, leadership, and delivery.
+5. **Adaptability, tools, and transferable skills:** how you learn unfamiliar tools while preserving methods that transfer across contexts.
 
 ## Answer Preparation Workflow
 
-1. Inventory real experiences from study, work, projects, volunteering, and independent learning.
-2. Select experiences with a clear decision, constraint, contribution, and result.
-3. Write a one-sentence Claim for each experience before drafting prose.
-4. Record Evidence in a compact timeline, separating your actions from other people’s work.
-5. Add role Relevance using the responsibilities and working context of the target role.
-6. Add Reflection: what changed, what remains unresolved, and what you would test next.
-7. Rehearse from cues and vary the order and depth so the answer stays conversational rather than memorized.
+1. Inventory real examples from study, work, projects, volunteering, and independent learning.
+2. Label the capability, motivation, or working preference each example is meant to demonstrate.
+3. Record the facts, personal contribution, outcome, and reflection before drafting prose.
+4. Adapt the detail and explanation to the interviewer’s audience and follow-up needs.
+5. Connect the example to the target role without pretending that your evidence proves more than it does.
+6. Rehearse retrieval and structure rather than exact wording so the answer stays conversational.
+7. Update each story when new evidence or role understanding changes your interpretation.
 
 Do a follow-up pass for every story: identify the weakest causal link, a plausible alternative explanation, and one detail that would falsify an overconfident claim. Practice a concise version and a deeper version, then adapt based on the interviewer’s question.
 

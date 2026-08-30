@@ -65,17 +65,36 @@ test('behavioral-evidence page implements the exact answer framework and prompt 
   }
   const section = (heading) => text.split(new RegExp(`^## ${heading}$`, 'm'))[1]?.split(/^## /m)[0] ?? '';
   const framework = section('Four-Part Answer Structure');
-  assert.deepEqual(
-    [...framework.matchAll(/^\d+\. \*\*(Claim|Evidence|Relevance|Reflection):\*\*/gm)].map(([, label]) => label),
-    ['Claim', 'Evidence', 'Relevance', 'Reflection'],
-  );
+  const frameworkLines = framework.match(/^\d+\. .+$/gm) ?? [];
+  assert.deepEqual(frameworkLines.map((line) => line.match(/^\d+\. \*\*([^:]+):\*\*/)?.[1]), ['Claim', 'Evidence', 'Relevance', 'Reflection']);
+  for (const [line, pattern] of [
+    [frameworkLines[0], /direct answer|state the capability|motivation|preference/i],
+    [frameworkLines[1], /specific|real|concrete|example|behavior|action|result/i],
+    [frameworkLines[2], /connect|role|team|decision/i],
+    [frameworkLines[3], /changed|learned|different|would do/i],
+  ]) assert.match(line, pattern);
   const families = section('Prompt Families');
-  assert.deepEqual(
-    [...families.matchAll(/^\d+\. \*\*([^:]+):\*/gm)].map(([, label]) => label),
-    ['Motivation and direction', 'Contribution and achievement', 'Collaboration and leadership', 'Growth and resilience', 'Communication and fit'],
-  );
+  const familyLines = families.match(/^\d+\. .+$/gm) ?? [];
+  assert.equal(familyLines.length, 5);
+  for (const [line, pattern] of [
+    [familyLines[0], /motivation.*(?:role|company).*fit|direction.*role/i],
+    [familyLines[1], /CV.*research.*technical explanation|contribution.*research.*communication/i],
+    [familyLines[2], /strengths?.*weaknesses?.*self-awareness.*achievement|growth.*weakness.*achievement/i],
+    [familyLines[3], /conflict.*deadline.*teamwork.*leadership.*execution|collaboration.*leadership.*deadline/i],
+    [familyLines[4], /adaptability.*tools?.*transferable skills|communication.*fit.*transfer/i],
+  ]) assert.match(line, pattern);
   const workflow = section('Answer Preparation Workflow');
-  assert.equal((workflow.match(/^\d+\./gm) ?? []).length, 7);
+  const workflowLines = workflow.match(/^\d+\. .+$/gm) ?? [];
+  assert.equal(workflowLines.length, 7);
+  for (const [line, pattern] of [
+    [workflowLines[0], /inventory.*real (?:experiences|examples)/i],
+    [workflowLines[1], /label.*capability/i],
+    [workflowLines[2], /facts?.*contribution.*outcome.*reflection/i],
+    [workflowLines[3], /adapt.*detail.*audience/i],
+    [workflowLines[4], /connect.*target role.*(?:not|without).*pretend/i],
+    [workflowLines[5], /rehearse.*retrieval.*structure.*(?:not|rather than).*wording/i],
+    [workflowLines[6], /update.*story.*(?:evidence|role understanding).*changes?/i],
+  ]) assert.match(line, pattern);
   const promptBlock = section('Practice Prompts');
   const prompts = [...promptBlock.matchAll(/^\d+\. (.+)$/gm)].map(([, prompt]) => prompt);
   assert.deepEqual(prompts, approvedPrompts);
@@ -98,6 +117,9 @@ test('behavioral page rejects scripts, stereotypes, source answers, and skipped 
   assert.match(text, /invented stories|fabricat/i);
   assert.match(text, /borrowed accomplishments|copied/i);
   assert.match(text, /memorized script|exact wording/i);
+  assert.doesNotMatch(text, /^#{1,6}\s*(?:Sample|Example|Model|Suggested Answer)\b/im);
+  assert.doesNotMatch(text, /\b(?:Sample|Example|Model|Suggested Answer)\s*(?:Answer|Response)?\s*:/i);
+  assert.doesNotMatch(text, /\bI\s+(?:led|built|managed|delivered|did|was|am)\b/i);
   assert.doesNotMatch(text, /Red Book|Quant Job Interview Questions and Answers|Question 9\.(?:[1-9]|1\d|2[0-2])|PDF page/i);
   assert.doesNotMatch(text, /swearing|share price|own shares|French food|first thing.*first day|Goldman Sachs|answer had better be|team player/i);
   const files = await readdir('src/content/problems', { recursive: true });
