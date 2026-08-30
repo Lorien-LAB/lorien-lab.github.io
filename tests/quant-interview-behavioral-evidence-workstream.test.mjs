@@ -211,8 +211,24 @@ const skippedKeys = [
   'red-book::9.2::9.16',
 ];
 
-test('017 active manifest is exact and contains no closure evidence', async () => {
-  assert.deepEqual(await readJson(manifestPath), activeManifest);
+test('017 manifest preserves its immutable scope across the lifecycle', async () => {
+  const manifest = await readJson(manifestPath);
+  if (manifest.status === 'active') {
+    assert.deepEqual(manifest, activeManifest);
+    return;
+  }
+
+  const immutableManifest = structuredClone(manifest);
+  for (const field of [
+    'status',
+    'preClosureActiveGate',
+    'verification',
+    'finalTreeGate',
+  ]) delete immutableManifest[field];
+  const immutableActiveManifest = structuredClone(activeManifest);
+  delete immutableActiveManifest.status;
+  assert.equal(manifest.status, 'complete');
+  assert.deepEqual(immutableManifest, immutableActiveManifest);
 });
 
 test('017 exclusively owns exact mirrored Red 9.2 decisions', async () => {

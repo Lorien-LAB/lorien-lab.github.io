@@ -429,7 +429,7 @@ Historical corpus checkpoint after workstream 11: **63 canonical Problems** and 
 
 ## Public corpus state (current)
 
-The current source-neutral regression contract discovers exactly **76 canonical Problems / 53 explicitly topic-classified Knowledge / Technique nodes**.
+The current source-neutral regression contract discovers exactly **76 canonical Problems / 54 explicitly topic-classified Knowledge / Technique nodes**.
 
 These are repository-record counts only. They are not whole-book completeness percentages and do not imply that Interview Strategy & Communication, Reasoning & Communication, or Green/Red/150 as a whole is complete.
 
@@ -652,6 +652,77 @@ All nine rows are terminal, yielding exactly **205 terminal / 545 pending** mast
 
 The nine source records remain internal evidence. The one new public Knowledge page, its catalog entry, links, and interview checks are source-neutral; no source-specific Problem was created. This closes only registered workstream 016. It does not claim completeness for Interview Strategy & Communication, interview process and formats as a whole, the Red Book, any source book, or material outside Red Book sections 1.1–1.9 and evidence pages 13–22.
 
+## Completed cross-book workstream 17
+
+`interview-strategy-communication-soft-interview-behavioral-evidence-017`
+
+Scope: **Interview Strategy & Communication → Soft Interview**. The bounded subject is **behavioral evidence and authenticity**.
+
+Active integrated verification:
+
+- CI-tested pre-closure active commit: `b1e3ea4d83a8ec6ca6aa29f305cd672d7c252f3b`
+- Windows Node 24 evidence at active commit `b1e3ea4d83a8ec6ca6aa29f305cd672d7c252f3b`: all five ordered gates succeeded.
+- WSL native-LF Node 24 evidence at active commit `b1e3ea4d83a8ec6ca6aa29f305cd672d7c252f3b`: `npm ci`, the LF audit, and all five ordered gates succeeded in `wsl-native-lf-node24`.
+- GitHub Actions CI run `33289163132` at `https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33289163132` used Ubuntu with Node 24, ran `npm ci`, and completed successfully with `head_sha` `b1e3ea4d83a8ec6ca6aa29f305cd672d7c252f3b`.
+- ordered gates: `npm run master:directory:check`, then `npm run knowledge:directory:check`, then `npm run test`, then `npm run check`, then `npm run build`
+- workflow-free removal proof: exact removal commit `de3437ce37040dc0f5cd2835f43c8f65a3838610` passed `npm ci`, the LF audit, and the same five gates in a fresh `wsl-native-lf-node24` worktree; the temporary workflow is absent.
+- conclusion: success
+
+This evidence belongs to the immutable active commit above, not to the later workflow-free closure commits. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`.
+
+### Canonical Knowledge
+
+- `behavioral-interview-evidence-and-authenticity` — provides a source-neutral claim, evidence, relevance, and reflection framework; evidence-quality checks; a preparation workflow; an authenticity boundary; and 17 independently worded Practice Prompts.
+
+### Canonical Problems
+
+None. Workstream 017 produced exactly **+0 Problems / +1 Knowledge**. The global source-neutral corpus is exactly **76 canonical Problems / 54 explicitly topic-classified Knowledge nodes**.
+
+### Exact prompt identities and skipped rows
+
+The exact public prompt bindings are:
+
+- `red-book::9.2::9.1` → pursuing quantitative work and the role now.
+- `red-book::9.2::9.2` → a CV contribution, its relevance, and learning.
+- `red-book::9.2::9.4` → leaving or changing a previous direction.
+- `red-book::9.2::9.5` → concrete actions in a difficult collaboration.
+- `red-book::9.2::9.6` → a genuine weakness and evidence of progress.
+- `red-book::9.2::9.7` → meeting an important deadline under constraints.
+- `red-book::9.2::9.9` → a recent organization development relevant to the role.
+- `red-book::9.2::9.10` → longer-term direction and role fit.
+- `red-book::9.2::9.11` → explaining research to non-specialist and technical audiences.
+- `red-book::9.2::9.13` → demonstrated qualities beyond technical ability.
+- `red-book::9.2::9.14` → collaborator evidence about working style.
+- `red-book::9.2::9.17` → an achievement showing initiative or impact.
+- `red-book::9.2::9.18` → learning or building that demonstrates quantitative or finance interest.
+- `red-book::9.2::9.19` → organization or team fit versus plausible alternatives.
+- `red-book::9.2::9.20` → independent work versus collaboration.
+- `red-book::9.2::9.21` → leading others toward a measurable outcome.
+- `red-book::9.2::9.22` → adapting to an unfamiliar internal language or tool while protecting transferable skills.
+
+Exactly five target-free `interview-guidance` rows have no public prompt binding: `red-book::9.2::9.3`, `red-book::9.2::9.8`, `red-book::9.2::9.12`, `red-book::9.2::9.15`, and `red-book::9.2::9.16`. The `red-book::9.2::guidance` row resolves to the canonical framework but is not a supplied personal-answer prompt.
+
+### Exact evidence-page repairs
+
+Only these ten page fields changed from the literal pre-edit fixture:
+
+- `red-book::9.2::9.2` solution pages: 310–311 → 310.
+- `red-book::9.2::9.3` question pages: 310–311 → 310.
+- `red-book::9.2::9.3` solution pages: 310–311 → 310.
+- `red-book::9.2::9.6` question pages: 311–312 → 311.
+- `red-book::9.2::9.6` solution pages: 311–312 → 311.
+- `red-book::9.2::9.12` solution pages: 312–313 → 313.
+- `red-book::9.2::9.13` solution pages: 313–314 → 313.
+- `red-book::9.2::9.14` question pages: 313–314 → 313.
+- `red-book::9.2::9.14` solution pages: 313–314 → 313.
+- `red-book::9.2::9.22` question pages: 315–316 → 315.
+
+All 23 owned rows are terminal, yielding exactly **228 terminal / 522 pending** master-directory records. The next pending record is `green-book::2.1::theory`.
+
+### Authenticity and closure boundary
+
+The 23 source records remain internal evidence. The public page is source-neutral and provides prompts and an answer-building method, not copied source answers, prescribed personality, or fabricated user experience. It rejects invented stories, borrowed accomplishments, and memorized scripts. This closes only registered workstream 017 and the exact Red Book 9.2 scope on evidence pages 309–315; it does not claim completeness for Soft Interview, Interview Strategy & Communication, the Red Book, any source book, or any material outside that bounded scope.
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -672,17 +743,17 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**Interview Strategy & Communication → Soft Interview.**
+**No bounded topic is active. Workstream 017 is complete.**
 
-Workstream 017 is active at `red-book::9.2::guidance` and `red-book::9.2::9.1` through `red-book::9.2::9.22`. Its public delta is +0 Problems / +1 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.
+A later workstream requires its own approved design and evidence audit; workstream 018 is not active or authorized by this closure.
 
 ## Master directory ingestion state
 
-**Workstream 017 is active. The three-book master directory migration remains complete.**
+**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
 
-First pending master record after the active 017 scope: `green-book::2.1::theory`
+First pending master record: `green-book::2.1::theory`
 
-The observed next key does not authorize workstream 018.
+Workstream 018 is not active or authorized.
 
 ## Parallel workstream coordination
 

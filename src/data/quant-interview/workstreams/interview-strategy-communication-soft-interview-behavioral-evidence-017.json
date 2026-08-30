@@ -4,7 +4,7 @@
     "interview-strategy-communication",
     "soft-interview"
   ],
-  "status": "active",
+  "status": "complete",
   "masterItemKeys": [
     "red-book::9.2::guidance",
     "red-book::9.2::9.1",
@@ -40,5 +40,45 @@
     }
   ],
   "publicDelta": { "problems": 0, "knowledge": 1 },
-  "knowledgeSlugs": ["behavioral-interview-evidence-and-authenticity"]
+  "knowledgeSlugs": ["behavioral-interview-evidence-and-authenticity"],
+  "preClosureActiveGate": {
+    "status": "active",
+    "commit": "b1e3ea4d83a8ec6ca6aa29f305cd672d7c252f3b",
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "b1e3ea4d83a8ec6ca6aa29f305cd672d7c252f3b",
+    "runId": 33289163132,
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifacts": [
+      ".github/workflows/quant-interview-behavioral-evidence-017-temporary.yml"
+    ]
+  },
+  "finalTreeGate": {
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm run master:directory:check",
+      "npm run knowledge:directory:check",
+      "npm run test",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifactsAbsent": true
+  }
 }
