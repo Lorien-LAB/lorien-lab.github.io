@@ -1,0 +1,44 @@
+{
+  "id": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+  "canonicalTopics": [
+    "interview-strategy-communication",
+    "soft-interview"
+  ],
+  "status": "active",
+  "masterItemKeys": [
+    "red-book::9.2::guidance",
+    "red-book::9.2::9.1",
+    "red-book::9.2::9.2",
+    "red-book::9.2::9.3",
+    "red-book::9.2::9.4",
+    "red-book::9.2::9.5",
+    "red-book::9.2::9.6",
+    "red-book::9.2::9.7",
+    "red-book::9.2::9.8",
+    "red-book::9.2::9.9",
+    "red-book::9.2::9.10",
+    "red-book::9.2::9.11",
+    "red-book::9.2::9.12",
+    "red-book::9.2::9.13",
+    "red-book::9.2::9.14",
+    "red-book::9.2::9.15",
+    "red-book::9.2::9.16",
+    "red-book::9.2::9.17",
+    "red-book::9.2::9.18",
+    "red-book::9.2::9.19",
+    "red-book::9.2::9.20",
+    "red-book::9.2::9.21",
+    "red-book::9.2::9.22"
+  ],
+  "sourceScopes": [
+    {
+      "source": "red-book",
+      "sourceSections": ["9.2"],
+      "evidencePageRanges": [{ "startPage": 309, "endPage": 315 }],
+      "reviewOutcome": "selective-behavioral-knowledge-and-guidance",
+      "reviewNote": "Twenty-three consecutive soft-interview records resolve to one source-neutral evidence framework, approved existing Knowledge links, and five target-free guidance rows."
+    }
+  ],
+  "publicDelta": { "problems": 0, "knowledge": 1 },
+  "knowledgeSlugs": ["behavioral-interview-evidence-and-authenticity"]
+}

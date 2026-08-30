@@ -658,9 +658,297 @@
       "canonicalTopics": [
         "soft-interview"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "resolutionNote": "Red Book 9.2 provides reusable behavioral-prompt families that resolve to the canonical evidence-and-authenticity Knowledge page."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.1",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "resolutionNote": "Red Book 9.1 motivation and role-fit evidence resolve to the behavioral-evidence and role-fit Knowledge pages."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.2",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "resolutionNote": "Red Book 9.2 CV evidence, contribution, relevance, and learning resolve to the behavioral-evidence Knowledge page."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.3",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "Red Book 9.3 relies on workplace-culture and swearing stereotypes; it remains target-free interview guidance."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.4",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "resolutionNote": "Red Book 9.4 career-change motivation resolves to the behavioral-evidence and role-fit Knowledge pages."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.5",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "resolutionNote": "Red Book 9.5 difficult-collaboration evidence resolves to the behavioral-evidence Knowledge page without preserving manipulative source tactics."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.6",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "resolutionNote": "Red Book 9.6 honest weakness and improvement evidence resolve to the behavioral-evidence Knowledge page."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.7",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "resolutionNote": "Red Book 9.7 deadline evidence and execution under constraints resolve to the behavioral-evidence Knowledge page."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.8",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "Red Book 9.8 asks for time-sensitive current share-price data and remains target-free interview guidance."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.9",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "resolutionNote": "Red Book 9.9 organization-specific research evidence resolves to the behavioral-evidence and role-fit Knowledge pages without publishing current facts."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.10",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "resolutionNote": "Red Book 9.10 career-direction evidence resolves to the behavioral-evidence and role-fit Knowledge pages."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.11",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "structured-think-aloud-reasoning"
+      ],
+      "resolutionNote": "Red Book 9.11 audience-adapted technical explanation resolves to the behavioral-evidence and think-aloud Knowledge pages."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.12",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "Red Book 9.12 uses share ownership as an outdated interest proxy and remains target-free interview guidance."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.13",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "resolutionNote": "Red Book 9.13 nontechnical strengths supported by examples resolve to the behavioral-evidence Knowledge page."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.14",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "resolutionNote": "Red Book 9.14 collaborator feedback and self-awareness evidence resolve to the behavioral-evidence Knowledge page."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.15",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "Red Book 9.15 is an irrelevant food-preference prompt and remains target-free interview guidance."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.16",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "interview-guidance",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [],
+      "resolutionNote": "Red Book 9.16 depends on a source-specific hidden first-day answer and remains target-free interview guidance."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.17",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "resolutionNote": "Red Book 9.17 initiative and impact evidence resolve to the behavioral-evidence Knowledge page."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.18",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-interview-preparation-breadth-and-practice"
+      ],
+      "resolutionNote": "Red Book 9.18 learning and building evidence resolve to the behavioral-evidence and preparation Knowledge pages."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.19",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "resolutionNote": "Red Book 9.19 organization-fit research resolves to the behavioral-evidence and role-fit Knowledge pages."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.20",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "resolutionNote": "Red Book 9.20 independent-versus-collaborative work preferences resolve to the behavioral-evidence and role-fit Knowledge pages."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.21",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "resolutionNote": "Red Book 9.21 leadership evidence and measurable outcomes resolve to the behavioral-evidence Knowledge page."
+    },
+    {
+      "sourceSection": "9.2",
+      "sourceItem": "9.22",
+      "canonicalTopics": [
+        "soft-interview"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "resolutionNote": "Red Book 9.22 unfamiliar-tool adaptability and transferable-skill trade-offs resolve to the behavioral-evidence and role-fit Knowledge pages."
     },
     {
       "sourceSection": "9.3",

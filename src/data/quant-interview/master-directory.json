@@ -3902,11 +3902,13 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|0043|red-book::9.2::guidance",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.2 provides reusable behavioral-prompt families that resolve to the canonical evidence-and-authenticity Knowledge page."
     },
     {
       "key": "red-book::9.2::9.1",
@@ -3932,11 +3934,14 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1228|red-book::9.2::9.1",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.1 motivation and role-fit evidence resolve to the behavioral-evidence and role-fit Knowledge pages."
     },
     {
       "key": "red-book::9.2::9.2",
@@ -3953,7 +3958,7 @@
       "solutionPages": [
         {
           "startPage": 310,
-          "endPage": 311
+          "endPage": 310
         }
       ],
       "primaryTopic": "soft-interview",
@@ -3962,11 +3967,13 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1229|red-book::9.2::9.2",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.2 CV evidence, contribution, relevance, and learning resolve to the behavioral-evidence Knowledge page."
     },
     {
       "key": "red-book::9.2::9.3",
@@ -3977,13 +3984,13 @@
       "questionPages": [
         {
           "startPage": 310,
-          "endPage": 311
+          "endPage": 310
         }
       ],
       "solutionPages": [
         {
           "startPage": 310,
-          "endPage": 311
+          "endPage": 310
         }
       ],
       "primaryTopic": "soft-interview",
@@ -3992,11 +3999,11 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1230|red-book::9.2::9.3",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.3 relies on workplace-culture and swearing stereotypes; it remains target-free interview guidance."
     },
     {
       "key": "red-book::9.2::9.4",
@@ -4022,11 +4029,14 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1231|red-book::9.2::9.4",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.4 career-change motivation resolves to the behavioral-evidence and role-fit Knowledge pages."
     },
     {
       "key": "red-book::9.2::9.5",
@@ -4052,11 +4062,13 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1232|red-book::9.2::9.5",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.5 difficult-collaboration evidence resolves to the behavioral-evidence Knowledge page without preserving manipulative source tactics."
     },
     {
       "key": "red-book::9.2::9.6",
@@ -4067,13 +4079,13 @@
       "questionPages": [
         {
           "startPage": 311,
-          "endPage": 312
+          "endPage": 311
         }
       ],
       "solutionPages": [
         {
           "startPage": 311,
-          "endPage": 312
+          "endPage": 311
         }
       ],
       "primaryTopic": "soft-interview",
@@ -4082,11 +4094,13 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1233|red-book::9.2::9.6",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.6 honest weakness and improvement evidence resolve to the behavioral-evidence Knowledge page."
     },
     {
       "key": "red-book::9.2::9.7",
@@ -4112,11 +4126,13 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1234|red-book::9.2::9.7",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.7 deadline evidence and execution under constraints resolve to the behavioral-evidence Knowledge page."
     },
     {
       "key": "red-book::9.2::9.8",
@@ -4142,11 +4158,11 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1235|red-book::9.2::9.8",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.8 asks for time-sensitive current share-price data and remains target-free interview guidance."
     },
     {
       "key": "red-book::9.2::9.9",
@@ -4172,11 +4188,14 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1236|red-book::9.2::9.9",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.9 organization-specific research evidence resolves to the behavioral-evidence and role-fit Knowledge pages without publishing current facts."
     },
     {
       "key": "red-book::9.2::9.10",
@@ -4202,11 +4221,14 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1237|red-book::9.2::9.10",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.10 career-direction evidence resolves to the behavioral-evidence and role-fit Knowledge pages."
     },
     {
       "key": "red-book::9.2::9.11",
@@ -4232,11 +4254,14 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1238|red-book::9.2::9.11",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "structured-think-aloud-reasoning"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.11 audience-adapted technical explanation resolves to the behavioral-evidence and think-aloud Knowledge pages."
     },
     {
       "key": "red-book::9.2::9.12",
@@ -4252,7 +4277,7 @@
       ],
       "solutionPages": [
         {
-          "startPage": 312,
+          "startPage": 313,
           "endPage": 313
         }
       ],
@@ -4262,11 +4287,11 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1239|red-book::9.2::9.12",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.12 uses share ownership as an outdated interest proxy and remains target-free interview guidance."
     },
     {
       "key": "red-book::9.2::9.13",
@@ -4283,7 +4308,7 @@
       "solutionPages": [
         {
           "startPage": 313,
-          "endPage": 314
+          "endPage": 313
         }
       ],
       "primaryTopic": "soft-interview",
@@ -4292,11 +4317,13 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1240|red-book::9.2::9.13",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.13 nontechnical strengths supported by examples resolve to the behavioral-evidence Knowledge page."
     },
     {
       "key": "red-book::9.2::9.14",
@@ -4307,13 +4334,13 @@
       "questionPages": [
         {
           "startPage": 313,
-          "endPage": 314
+          "endPage": 313
         }
       ],
       "solutionPages": [
         {
           "startPage": 313,
-          "endPage": 314
+          "endPage": 313
         }
       ],
       "primaryTopic": "soft-interview",
@@ -4322,11 +4349,13 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1241|red-book::9.2::9.14",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.14 collaborator feedback and self-awareness evidence resolve to the behavioral-evidence Knowledge page."
     },
     {
       "key": "red-book::9.2::9.15",
@@ -4352,11 +4381,11 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1242|red-book::9.2::9.15",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.15 is an irrelevant food-preference prompt and remains target-free interview guidance."
     },
     {
       "key": "red-book::9.2::9.16",
@@ -4382,11 +4411,11 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1243|red-book::9.2::9.16",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.16 depends on a source-specific hidden first-day answer and remains target-free interview guidance."
     },
     {
       "key": "red-book::9.2::9.17",
@@ -4412,11 +4441,13 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1244|red-book::9.2::9.17",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.17 initiative and impact evidence resolve to the behavioral-evidence Knowledge page."
     },
     {
       "key": "red-book::9.2::9.18",
@@ -4442,11 +4473,14 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1245|red-book::9.2::9.18",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-interview-preparation-breadth-and-practice"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.18 learning and building evidence resolve to the behavioral-evidence and preparation Knowledge pages."
     },
     {
       "key": "red-book::9.2::9.19",
@@ -4472,11 +4506,14 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1246|red-book::9.2::9.19",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.19 organization-fit research resolves to the behavioral-evidence and role-fit Knowledge pages."
     },
     {
       "key": "red-book::9.2::9.20",
@@ -4502,11 +4539,14 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1247|red-book::9.2::9.20",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.20 independent-versus-collaborative work preferences resolve to the behavioral-evidence and role-fit Knowledge pages."
     },
     {
       "key": "red-book::9.2::9.21",
@@ -4532,11 +4572,13 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1248|red-book::9.2::9.21",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.21 leadership evidence and measurable outcomes resolve to the behavioral-evidence Knowledge page."
     },
     {
       "key": "red-book::9.2::9.22",
@@ -4547,7 +4589,7 @@
       "questionPages": [
         {
           "startPage": 315,
-          "endPage": 316
+          "endPage": 315
         }
       ],
       "solutionPages": [
@@ -4562,11 +4604,14 @@
         "soft-interview"
       ],
       "sortKey": "01.04|02|1249|red-book::9.2::9.22",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "behavioral-interview-evidence-and-authenticity",
+        "quant-role-and-employer-fit"
+      ],
+      "workstream": "interview-strategy-communication-soft-interview-behavioral-evidence-017",
+      "resolutionNote": "Red Book 9.22 unfamiliar-tool adaptability and transferable-skill trade-offs resolve to the behavioral-evidence and role-fit Knowledge pages."
     },
     {
       "key": "green-book::2.1::theory",
