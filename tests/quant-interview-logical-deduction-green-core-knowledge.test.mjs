@@ -18,6 +18,7 @@ async function page(path) {
 }
 const section = (text, heading) => text.split(new RegExp(`^## ${heading}$`, 'm'))[1]?.split(/^## /m)[0] ?? '';
 const headings = (text) => [...text.matchAll(/^## (.+)$/gm)].map(([, heading]) => heading);
+const interviewChecks = (text) => [...section(text, 'Interview Checks').matchAll(/^\d+\. (.+)$/gm)].map(([, value]) => value);
 
 const constraintMetadata = {
   title: 'Logical Deduction, Constraint Propagation & Case Elimination',
@@ -40,15 +41,47 @@ const treeMetadata = {
   relatedNotes: [],
 };
 
+const constraintCheckPatterns = [
+  /2m.*m black.*m red.*black-black.*red-red.*mixed.*prove.*same number/is,
+  /two fuses.*60 minutes.*nonuniform.*either end.*multiple ends.*time zero.*later.*construct.*45 minutes.*justify/is,
+  /four candidate triples.*a.*b.*c.*a sees b and c.*a publicly says.*do not know.*b publicly says.*know.*remaining candidate states?/is,
+  /(?=.*tasks a)(?=.*b)(?=.*c)(?=.*d)(?=.*monday)(?=.*tuesday)(?=.*wednesday)(?=.*thursday)(?=.*a.*before.*b)(?=.*c.*before.*d)(?=.*wednesday unavailable)(?=.*enumerate)(?=.*legal schedules)(?=.*forced)/is,
+  /(?=.*six tokens)(?=.*three black)(?=.*three red)(?=.*positions 1.*6)(?=.*legal move)(?=.*swap)(?=.*adjacent)(?=.*invariant)(?=.*all black)(?=.*reachable)/is,
+  /two observers.*complementary subsets.*five-item set.*legal candidate sets?.*full set/is,
+  /(?=.*finite logic grid)(?=.*three people)(?=.*three roles)(?=.*a is not)(?=.*exactly one)(?=.*b is the builder)(?=.*c is the curator)(?=.*propagate)(?=.*both constraints)(?=.*assignment.*unique)/is,
+  /six labeled states?.*s_1.*s_6.*s_4.*constraints?.*unique.*exhaust.*remaining alternatives?/is,
+];
+
+const treeCheckPatterns = [
+  /(?=.*ternary)(?=.*24)(?=.*three tests?)(?=.*lower bound)(?=.*strategy)/is,
+  /(?=.*compare)(?=.*(?:eight|8).*distinct values)(?=.*maximum)(?=.*comparison certificate)(?=.*maximal)/is,
+  /(?=.*six labeled candidates)(?=.*one heavier)(?=.*balance test)(?=.*left-heavy)(?=.*right-heavy)(?=.*balanced)(?=.*unequal sizes)(?=.*impossible)(?=.*legal operation)(?=.*branching factor)(?=.*capacity)/is,
+  /12 candidates.*three labeled groups.*four each.*test.*one group.*outcomes.*two-round.*adaptive.*survivors/is,
+  /partial order.*a>b.*a>c.*d>e.*top three.*additional comparisons?.*certificate/is,
+  /(?=.*leaf)(?=.*s_1)(?=.*s_2)(?=.*accept)(?=.*reject)(?=.*verification failure)(?=.*legal test)(?=.*outcomes)(?=.*split)/is,
+  /nine possible states.*three outcomes.*balanced.*unbalanced.*worst-case.*deepest branch/is,
+  /binary tree.*root.*left.*right.*ll.*lr.*rl.*rr.*table.*legal states?.*exactly one leaf.*conclusion/is,
+];
+
 test('constraint-propagation Knowledge has exact structure and executable checks', async () => {
   const { text, metadata } = await page(paths.constraint);
   assert.deepEqual(metadata, constraintMetadata);
   assert.deepEqual(headings(text), ['Core Idea', 'Candidate Sets and Constraints', 'Information Partitions', 'Public Announcements and Common Knowledge', 'Invariants and Contradictions', 'Deduction Workflow', 'Recognition Signals', 'Common Mistakes', 'Interview Checks']);
-  for (const pattern of [/candidate states?/i, /necessary conditions?/i, /private information/i, /public statements?/i, /common knowledge/i, /invariant/i, /contradiction/i, /exhaust/i]) assert.match(text, pattern);
-  const checks = [...section(text, 'Interview Checks').matchAll(/^\d+\. (.+)$/gm)].map(([, value]) => value);
+  const candidates = section(text, 'Candidate Sets and Constraints');
+  assert.match(candidates, /finite candidate states?/i);
+  assert.match(candidates, /necessary conditions?/i);
+  const partitions = section(text, 'Information Partitions');
+  assert.match(partitions, /private information/i);
+  const announcements = section(text, 'Public Announcements and Common Knowledge');
+  assert.match(announcements, /public statements?.*shared survivor set.*private-information partitions?/is);
+  assert.match(announcements, /common knowledge/i);
+  const invariants = section(text, 'Invariants and Contradictions');
+  assert.match(invariants, /invariant/i);
+  assert.match(invariants, /contradiction/i);
+  assert.match(section(text, 'Deduction Workflow'), /exhaust.*every alternative|every alternative.*exhaust/i);
+  const checks = interviewChecks(text);
   assert.equal(checks.length, 8);
-  assert.match(checks[0], /2m.*m black.*m red.*black-black.*red-red.*mixed.*prove.*same number/is);
-  assert.match(checks[1], /two.*(?:fuses|cords).*60 minutes.*nonuniform.*45 minutes.*justify/is);
+  constraintCheckPatterns.forEach((pattern, index) => assert.match(checks[index], pattern));
 });
 
 test('decision-tree Knowledge has exact structure and executable checks', async () => {
@@ -59,12 +92,18 @@ test('decision-tree Knowledge has exact structure and executable checks', async 
   assert.match(capacity, /branching factor/i);
   assert.match(capacity, /b\^d|outcomes?.*depth|leaves?/i);
   assert.match(capacity, /balanced.*legal branches|legal.*balanced branches/i);
+  const adaptive = section(text, 'Adaptive Strategy Design');
+  assert.match(adaptive, /each outcome.*next test.*survivors/is);
+  assert.match(adaptive, /different.*branches?/i);
+  const certificates = section(text, 'Ranking and Selection Certificates');
+  assert.match(certificates, /comparison.*certificate/i);
+  assert.match(certificates, /every outsider|every candidate/i);
   const verification = section(text, 'Verification Workflow');
   assert.match(verification, /every legal state.*leaf|leaf.*exactly one/i);
-  const checks = [...section(text, 'Interview Checks').matchAll(/^\d+\. (.+)$/gm)].map(([, value]) => value);
+  assert.match(verification, /each leaf.*certified answer|certified answer.*each leaf/i);
+  const checks = interviewChecks(text);
   assert.equal(checks.length, 8);
-  assert.match(checks.join('\n'), /ternary.*24.*three/i);
-  assert.match(checks.join('\n'), /partial order.*top three|top three.*partial order/i);
+  treeCheckPatterns.forEach((pattern, index) => assert.match(checks[index], pattern));
 });
 
 test('both Logical Deduction Knowledge pages are source-neutral', async () => {

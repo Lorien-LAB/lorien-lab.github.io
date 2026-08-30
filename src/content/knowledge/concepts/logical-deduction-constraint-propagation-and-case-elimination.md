@@ -21,7 +21,7 @@ The method is not a hunt for a clever guess. It is an auditable elimination proc
 
 ## Candidate Sets and Constraints
 
-Define a candidate state with every variable that can change the answer: an assignment, ordering, subset, count, or path. Start with an exhaustive but finite set, then translate each rule into a constraint. A constraint can exclude a state directly, restrict a variable's domain, or create a dependency between variables.
+Define finite candidate states with every variable that can change the answer: an assignment, ordering, subset, count, or path. Start with an exhaustive set, then translate each rule into a constraint. A constraint can exclude a state directly, restrict a variable's domain, or create a dependency between variables.
 
 Separate necessary conditions from sufficient conditions. A necessary condition filters candidates, but satisfying it alone does not prove a state is valid. Keep a small table or list of survivors so that a later observation can be applied consistently to all of them.
 
@@ -33,7 +33,7 @@ When someone says they know, do not merely record the conclusion. Ask which priv
 
 ## Public Announcements and Common Knowledge
 
-A public statement is heard by all participants and becomes part of their future reasoning. After each public statement, update the common candidate set before interpreting the next statement. Everyone can then reason not only from private information but also from what everyone heard and what that implies about the others' possible knowledge.
+A public statement is heard by all participants and becomes part of their future reasoning. Apply each public statement to the shared survivor set, then recompute the private-information partitions before interpreting the next statement. Everyone can then reason not only from private information but also from what everyone heard and what that implies about the others' possible knowledge.
 
 Common knowledge matters because a statement can eliminate states even when it reveals no new private fact. Repeated announcements often alternate between eliminating singleton cells for one observer and creating singleton cells for another.
 
@@ -70,10 +70,10 @@ Use this method when a prompt has a small discrete state space, several interact
 ## Interview Checks
 
 1. A box contains 2m cards: m black and m red. Pair the cards into m pairs, and suppose every pair is either black-black, red-red, or mixed. Prove that the number of black-black pairs is the same number as the red-red pairs.
-2. You have two fuses, each of which takes 60 minutes to burn completely but burns nonuniformly. Describe how to measure 45 minutes and justify why the timing works.
-3. Three people receive distinct positive integers whose sum is known publicly. Specify the candidate states and explain how a sequence of public “I do not know” statements changes their private-information partitions.
-4. Four tasks must be assigned to four days, with two precedence rules and one day unavailable. Enumerate the legal schedules and use the constraints to decide whether a proposed schedule is forced.
-5. A collection has an even number of tokens, each labeled one of two colors. State an invariant that a legal swap preserves and use it to rule out an unreachable final count.
-6. Two observers see complementary subsets of a five-item set. Give a precise condition under which one observer can truthfully announce that they know the full set.
-7. In a finite logic grid, one clue says a person is not in a particular role and another says exactly one of two claims is true. Show how to propagate both constraints without assuming either claim first.
-8. A proposed solution remains after several eliminations. Explain how you would prove it is unique by exhausting all remaining candidate states rather than stopping at consistency.
+2. You have two fuses, each of which takes 60 minutes to burn completely but burns nonuniformly. Either end of either fuse may be lit, and multiple ends may be ignited simultaneously at time zero or later. Construct a procedure to measure 45 minutes and justify every timing step.
+3. A public board lists four candidate triples $(A,B,C)$: $(0,0,0)$, $(1,0,0)$, $(0,1,1)$, and $(1,0,1)$. A sees B and C, B sees A and C, and C sees A and B. A publicly says “I do not know my value”; B publicly says “I know my value.” Update the candidate set after each statement and list the remaining candidate states.
+4. Tasks A, B, C, and D must each be assigned to a distinct working day in a week containing Monday, Tuesday, Wednesday, Thursday, and Friday. A must be before B and C must be before D; Wednesday unavailable. Enumerate the legal schedules and determine whether assigning A to Monday is forced.
+5. Six tokens occupy positions 1 through 6, with three black and three red initially. A legal move swaps the colors on adjacent positions. State the color-count invariant, apply the legal move definition, and determine whether an all black configuration is reachable.
+6. Two observers receive complementary subsets of the five-item set $\{p,q,r,s,t\}$. The legal candidate sets are every two-item subset for the first observer together with its three-item complement for the second; each observer is told only the size of their own subset. Give a precise condition under which the first observer can truthfully announce that they know the full set.
+7. In a finite logic grid, three people A, B, and C receive the three roles Analyst, Builder, and Curator exactly once. The clues are that A is not the Analyst and exactly one of “B is the Builder” and “C is the Curator” is true. Propagate both constraints and determine whether the assignment is unique.
+8. A finite candidate set contains six labeled states $s_1$ through $s_6$, and a proposed solution is $s_4$. Given a written list of every constraint that removes $s_1$, $s_2$, $s_3$, $s_5$, and $s_6$, verify that $s_4$ is unique by exhausting the remaining alternatives rather than stopping at consistency.
