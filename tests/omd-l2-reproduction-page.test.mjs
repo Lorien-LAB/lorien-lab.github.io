@@ -249,6 +249,14 @@ test('OMD L2 evidence panel is accessible and progressively enhanced', async () 
   ]);
 });
 
+test('OMD L2 capital controls expose keyboard activation in the built browser surface', async () => {
+  await buildSite();
+  const detailHtml = await readFile(detailOutput, 'utf8');
+  assert.match(detailHtml, /addEventListener\(['"]keydown['"]/);
+  assert.match(detailHtml, /key\s*===\s*['"]Enter['"]/);
+  assert.match(detailHtml, /key\s*===\s*['"] ['"]/);
+});
+
 test('OMD L2 evidence stylesheet uses responsive two-column charts and theme-safe pressed controls', async () => {
   await buildSite();
   const detailHtml = await readFile(detailOutput, 'utf8');

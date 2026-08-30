@@ -117,7 +117,16 @@ const barPosition = (value: number) => {
       buttons.forEach((button) => button.setAttribute('aria-pressed', String(button.dataset.omdCapital === capital)));
       panels.forEach((panel) => { panel.hidden = panel.dataset.omdCapitalPanel !== capital; });
     };
-    buttons.forEach((button) => button.addEventListener('click', () => select(button.dataset.omdCapital)));
+    buttons.forEach((button) => {
+      const activate = () => select(button.dataset.omdCapital);
+      button.addEventListener('click', activate);
+      button.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          activate();
+        }
+      });
+    });
   });
 </script>
 
