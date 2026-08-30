@@ -429,7 +429,7 @@ Historical corpus checkpoint after workstream 11: **63 canonical Problems** and 
 
 ## Public corpus state (current)
 
-The current source-neutral regression contract discovers exactly **76 canonical Problems / 54 explicitly topic-classified Knowledge / Technique nodes**.
+The current source-neutral regression contract discovers exactly **81 canonical Problems / 56 explicitly topic-classified Knowledge / Technique nodes**.
 
 These are repository-record counts only. They are not whole-book completeness percentages and do not imply that Interview Strategy & Communication, Reasoning & Communication, or Green/Red/150 as a whole is complete.
 
@@ -723,6 +723,43 @@ All 23 owned rows are terminal, yielding exactly **228 terminal / 522 pending** 
 
 The 23 source records remain internal evidence. The public page is source-neutral and provides prompts and an answer-building method, not copied source answers, prescribed personality, or fabricated user experience. It rejects invented stories, borrowed accomplishments, and memorized scripts. This closes only registered workstream 017 and the exact Red Book 9.2 scope on evidence pages 309–315; it does not claim completeness for Soft Interview, Interview Strategy & Communication, the Red Book, any source book, or any material outside that bounded scope.
 
+## Active cross-book workstream 18
+
+`logic-brainteasers-discrete-reasoning-problem-simplification-018`
+
+Status: **active and evidence-free**. The manifest has no `preClosureActiveGate`, `verification`, or `finalTreeGate`; completion evidence must not be added until the exact active commit passes Windows, WSL, and GitHub CI.
+
+Scope: **Logic, Brainteasers & Discrete Reasoning → Problem Simplification**. The exact eleven-record cross-book scope is distributed **3 Green / 4 Red / 4 150 Questions**:
+
+- Green Book (3): `green-book::2.1::theory`, `green-book::2.1.screwy-pirates::question`, and `green-book::2.1.tiger-and-sheep::question`.
+- Red Book (4): `red-book::8::8.2`, `red-book::8::8.5`, `red-book::8::8.25`, and `red-book::8::8.26`.
+- 150 Most Frequently Asked Questions (4): `150-most-frequently-asked::2.7::8`, `150-most-frequently-asked::2.7::16`, `150-most-frequently-asked::2.7::23`, and `150-most-frequently-asked::2.7::30`.
+
+### Canonical Knowledge
+
+- **Small Cases, Recurrence & Structural Simplification** — `small-cases-recurrence-and-structural-simplification`.
+- **Fermi Estimation & Assumption Decomposition** — `fermi-estimation-assumption-decomposition`.
+
+### Canonical Problems
+
+- **Sequential Voting Under Elimination** — `sequential-voting-elimination-backward-induction`.
+- **Predator Replacement Parity** — `predator-replacement-parity`.
+- **Two-Resource Threshold Search** — `two-egg-threshold-search`.
+- **Digit Count of a Large Power Without Log Tables** — `large-power-digit-count-without-log-tables`.
+- **Minimum Comparisons for Both Extremes** — `minimum-comparisons-for-both-extremes`.
+
+### Exact dispositions, refinements, and repairs
+
+- The eleven records resolve to exactly **5 `canonical-problem` / 6 `knowledge-only`**. Workstream 018 adds exactly **+5 Problems / +2 Knowledge**, producing the current **81 Problems / 56 Knowledge** corpus and **239 terminal / 511 pending** master-directory state.
+- Exactly two item-level topic overrides are present: `150-most-frequently-asked::2.7::8` adds `dynamic-programming-algorithms`, and `150-most-frequently-asked::2.7::23` adds `algorithmic-complexity`. The other nine rows remain solely under `problem-simplification`.
+- Exactly two page fields were repaired: `red-book::8::8.25` solution pages changed from 307–308 to 307, and `150-most-frequently-asked::2.7::30` solution pages changed from 215–216 to 215. Every other question and solution page field in the eleven-record fixture is unchanged.
+
+### Active boundary
+
+All public Knowledge and Problems remain source-neutral. The Fermi material teaches assumption decomposition, sensitivity, validation, and uncertainty rather than publishing dated source-era totals. Arithmetic shortcuts, endpoint tricks, and the one-answer geometry prompt remain visible Knowledge checks rather than low-value public Problems.
+
+Workstream 018 alone is bounded to the exact eleven records above. It does not claim completeness for Problem Simplification, Logic, Brainteasers & Discrete Reasoning, any source book, or adjacent topics. Workstream 019 is not active or authorized.
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -743,17 +780,17 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**No bounded topic is active. Workstream 017 is complete.**
+**Logic, Brainteasers & Discrete Reasoning → Problem Simplification.**
 
-A later workstream requires its own approved design and evidence audit; workstream 018 is not active or authorized by this closure.
+Workstream 018 is active across the exact eleven-record cross-book Problem Simplification scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.
 
 ## Master directory ingestion state
 
-**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+**Workstream 018 owns the exact eleven-record Problem Simplification scope. The three-book master directory migration remains complete.**
 
-First pending master record: `green-book::2.1::theory`
+First pending master record after the active 018 scope: `green-book::2.2::theory`
 
-Workstream 018 is not active or authorized.
+Workstream 019 is not active or authorized.
 
 ## Parallel workstream coordination
 

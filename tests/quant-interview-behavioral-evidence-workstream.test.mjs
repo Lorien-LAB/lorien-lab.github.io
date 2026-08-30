@@ -3,7 +3,6 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
   getNextPendingItem,
-  TERMINAL_STATES,
 } from '../src/lib/quantInterviewMasterDirectory.mjs';
 import {
   loadMasterDirectoryRepository,
@@ -366,19 +365,14 @@ test('017 binds exactly 17 relevant source items to exact public prompt semantic
   }
 });
 
-test('017 yields exact 76/54, 228/522, and Green 2.1 next without 018', async () => {
+test('017 remains durable after 018 advances the corpus', async () => {
   const inputs = await loadMasterDirectoryRepository(process.cwd());
-  assert.equal(inputs.problemSlugs.size, 76);
-  assert.equal(inputs.knowledgeSlugs.size, 54);
-  assert.equal(
-    inputs.directory.items.filter((item) => TERMINAL_STATES.has(item.state))
-      .length,
-    228,
-  );
-  assert.equal(
-    inputs.directory.items.filter((item) => item.state === 'pending').length,
-    522,
-  );
-  assert.equal(getNextPendingItem(inputs.directory)?.key, 'green-book::2.1::theory');
-  assert.equal(inputs.workstreams.some(({ id }) => /-018$/.test(id)), false);
+  const manifest017 = inputs.workstreams.find(({ id }) => /-017$/.test(id));
+  const manifest018 = inputs.workstreams.find(({ id }) => /-018$/.test(id));
+  assert.equal(manifest017.status, 'complete');
+  assert.deepEqual(manifest017.publicDelta, { problems: 0, knowledge: 1 });
+  assert.match(manifest018.status, /^(?:active|complete)$/);
+  assert.equal(inputs.problemSlugs.size, 81);
+  assert.equal(inputs.knowledgeSlugs.size, 56);
+  assert.equal(getNextPendingItem(inputs.directory)?.key, 'green-book::2.2::theory');
 });

@@ -6,13 +6,13 @@
 
 ## Summary
 
-- Published Knowledge: 54
+- Published Knowledge: 56
 - Planned Knowledge: 0
-- Canonical Problems: 76
+- Canonical Problems: 81
 - Master records: 750
-- Terminal master records: 228
-- Pending master records: 522
-- First pending: `green-book::2.1::theory`
+- Terminal master records: 239
+- Pending master records: 511
+- First pending: `green-book::2.2::theory`
 
 
 ## 01. Interview Strategy & Communication
@@ -203,11 +203,11 @@
 ## 02. Logic, Brainteasers & Discrete Reasoning
 
 - Curriculum: 1 published / 0 planned
-- Problems: 2
+- Problems: 7
 - Green Book sections: `2.1`, `2.1.screwy-pirates`, `2.1.tiger-and-sheep`, `2.2`, `2.2.birthday-problem`, `2.2.burning-ropes`, `2.2.card-game`, `2.2.defective-ball`, `2.2.horse-race`, `2.2.infinite-sequence`, `2.2.river-crossing`, `2.2.trailing-zeros`, `2.3`, `2.3.box-packing`, `2.3.calendar-cubes`, `2.3.door-to-offer`, `2.3.last-ball`, `2.3.light-switches`, `2.3.message-delivery`, `2.3.quant-salary`, `2.4`, `2.4.coin-piles`, `2.4.mislabeled-bags`, `2.4.wise-men`, `2.5`, `2.5.clock-pieces`, `2.5.counterfeit-coins-i`, `2.5.missing-integers`, `2.6`, `2.6.ants-on-a-square`, `2.6.counterfeit-coins-ii`, `2.6.handshakes`, `2.6.have-we-met-before`, `2.6.matching-socks`, `2.7`, `2.7.chameleon-colors`, `2.7.division-by-9`, `2.7.prisoner-problem`, `2.8`, `2.8.chocolate-bar-problem`, `2.8.coin-split-problem`, `2.8.race-track`, `2.9`, `2.9.irrational-number`, `2.9.rainbow-hats`
 - Red Book sections: `8`, `10`, `10.2`
 - 150 Questions sections: `1`, `2.7`, `3.7`
-- Workstreams: None
+- Workstreams: `logic-brainteasers-discrete-reasoning-problem-simplification-018` (active)
 
 ### Modules
 
@@ -217,46 +217,48 @@
 
 ### Coverage records
 
-- Green Book: `pending`: 45
-- Red Book: `pending`: 3
-- 150 Questions: `canonical-problem`: 2, `pending`: 3
+- Green Book: `canonical-problem`: 2, `knowledge-only`: 1, `pending`: 42
+- Red Book: `knowledge-only`: 4, `pending`: 3
+- 150 Questions: `canonical-problem`: 5, `knowledge-only`: 1, `pending`: 3
 
 
 ### 02.01. Problem Simplification
 
-- Curriculum: 0 published / 0 planned
-- Problems: 0
+- Curriculum: 2 published / 0 planned
+- Problems: 5
 - Green Book sections: `2.1`, `2.1.screwy-pirates`, `2.1.tiger-and-sheep`
 - Red Book sections: None
 - 150 Questions sections: None
-- Workstreams: None
+- Workstreams: `logic-brainteasers-discrete-reasoning-problem-simplification-018` (active)
 
 #### Modules
 
 | Order | State | Slug | Prerequisites |
 |---:|---|---|---|
+| 10 | published | `small-cases-recurrence-and-structural-simplification` | None |
+| 20 | published | `fermi-estimation-assumption-decomposition` | `small-cases-recurrence-and-structural-simplification` |
 
 #### Coverage records
 
-- Green Book: `pending`: 3
-- Red Book: None
-- 150 Questions: None
+- Green Book: `canonical-problem`: 2, `knowledge-only`: 1
+- Red Book: `knowledge-only`: 4
+- 150 Questions: `canonical-problem`: 3, `knowledge-only`: 1
 
 #### Master queue records
 
 | Key | State | Question pages | Solution pages | Targets |
 |---|---|---:|---:|---|
-| `green-book::2.1::theory` | `pending` | 19 | None | None |
-| `green-book::2.1.screwy-pirates::question` | `pending` | 19–20 | None | None |
-| `green-book::2.1.tiger-and-sheep::question` | `pending` | 20–21 | None | None |
-| `red-book::8::8.2` | `pending` | 288 | 291–292 | None |
-| `red-book::8::8.5` | `pending` | 288 | 293 | None |
-| `red-book::8::8.25` | `pending` | 290 | 307–308 | None |
-| `red-book::8::8.26` | `pending` | 290 | 308 | None |
-| `150-most-frequently-asked::2.7::8` | `pending` | 45 | 182–185 | None |
-| `150-most-frequently-asked::2.7::16` | `pending` | 46 | 192–194 | None |
-| `150-most-frequently-asked::2.7::23` | `pending` | 48 | 199–201 | None |
-| `150-most-frequently-asked::2.7::30` | `pending` | 49 | 215–216 | None |
+| `green-book::2.1::theory` | `knowledge-only` | 19 | None | `small-cases-recurrence-and-structural-simplification` |
+| `green-book::2.1.screwy-pirates::question` | `canonical-problem` | 19–20 | None | `sequential-voting-elimination-backward-induction`, `small-cases-recurrence-and-structural-simplification`, `recursion-problem-solving` |
+| `green-book::2.1.tiger-and-sheep::question` | `canonical-problem` | 20–21 | None | `predator-replacement-parity`, `small-cases-recurrence-and-structural-simplification` |
+| `red-book::8::8.2` | `knowledge-only` | 288 | 291–292 | `small-cases-recurrence-and-structural-simplification` |
+| `red-book::8::8.5` | `knowledge-only` | 288 | 293 | `small-cases-recurrence-and-structural-simplification` |
+| `red-book::8::8.25` | `knowledge-only` | 290 | 307 | `fermi-estimation-assumption-decomposition` |
+| `red-book::8::8.26` | `knowledge-only` | 290 | 308 | `fermi-estimation-assumption-decomposition` |
+| `150-most-frequently-asked::2.7::8` | `canonical-problem` | 45 | 182–185 | `two-egg-threshold-search`, `small-cases-recurrence-and-structural-simplification`, `recursion-problem-solving` |
+| `150-most-frequently-asked::2.7::16` | `canonical-problem` | 46 | 192–194 | `large-power-digit-count-without-log-tables`, `small-cases-recurrence-and-structural-simplification` |
+| `150-most-frequently-asked::2.7::23` | `canonical-problem` | 48 | 199–201 | `minimum-comparisons-for-both-extremes`, `small-cases-recurrence-and-structural-simplification` |
+| `150-most-frequently-asked::2.7::30` | `knowledge-only` | 49 | 215 | `small-cases-recurrence-and-structural-simplification` |
 
 
 ### 02.02. Logical Deduction
@@ -2166,7 +2168,7 @@
 ## 10. Algorithms, Data Structures & C++
 
 - Curriculum: 0 published / 0 planned
-- Problems: 0
+- Problems: 2
 - Green Book sections: `5.3`, `5.3.dice-game`, `5.3.dp-algorithm`, `5.3.dynamic-card-game`, `5.3.dynamic-dice-game`, `5.3.world-series`, `7.1`, `7.1.fibonacci`, `7.1.horner`, `7.1.max-subarray`, `7.1.moving-average`, `7.1.number-swap`, `7.1.random-permutation`, `7.1.search`, `7.1.sorting`, `7.1.unique-elements`, `7.2`, `7.2.multiply-by-7`, `7.2.poisonous-wine`, `7.2.power-of-2`, `7.2.probability-simulation`
 - Red Book sections: `5`, `7`, `10`, `10.2`
 - 150 Questions sections: `1`, `2.4`, `3.4`
@@ -2181,13 +2183,13 @@
 
 - Green Book: `pending`: 21
 - Red Book: `pending`: 4
-- 150 Questions: `pending`: 3
+- 150 Questions: `canonical-problem`: 2, `pending`: 3
 
 
 ### 10.01. Algorithmic Complexity
 
 - Curriculum: 0 published / 0 planned
-- Problems: 0
+- Problems: 1
 - Green Book sections: `7.1`, `7.1.fibonacci`, `7.1.horner`, `7.1.max-subarray`, `7.1.moving-average`, `7.1.number-swap`, `7.1.random-permutation`, `7.1.search`, `7.1.sorting`, `7.1.unique-elements`, `7.2`, `7.2.multiply-by-7`, `7.2.poisonous-wine`, `7.2.power-of-2`, `7.2.probability-simulation`
 - Red Book sections: `5`
 - 150 Questions sections: None
@@ -2202,7 +2204,7 @@
 
 - Green Book: `pending`: 15
 - Red Book: `pending`: 1
-- 150 Questions: None
+- 150 Questions: `canonical-problem`: 1
 
 #### Master queue records
 
@@ -2270,7 +2272,7 @@
 ### 10.03. Dynamic Programming
 
 - Curriculum: 0 published / 0 planned
-- Problems: 0
+- Problems: 1
 - Green Book sections: `5.3`, `5.3.dice-game`, `5.3.dp-algorithm`, `5.3.dynamic-card-game`, `5.3.dynamic-dice-game`, `5.3.world-series`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -2285,7 +2287,7 @@
 
 - Green Book: `pending`: 6
 - Red Book: None
-- 150 Questions: None
+- 150 Questions: `canonical-problem`: 1
 
 #### Master queue records
 

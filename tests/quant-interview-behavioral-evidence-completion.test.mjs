@@ -107,10 +107,27 @@ test('017 lifecycle is field-safe while active and factually strict when complet
   );
   assert.match(closure, /76 (?:canonical )?Problems.*54 .*Knowledge/is);
   assert.match(closure, /228 terminal.*522 pending/is);
-  assert.match(masterIngestion, /First pending master record: `green-book::2\.1::theory`/i);
-  assert.equal(current.trim(), completeCurrent);
   assertCompletedSectionsInactive(closure, masterIngestion);
-  assert.match(masterIngestion, /018.*not (?:active|authorized)|does not authorize workstream 018/i);
   const workstreamFiles = await readdir('src/data/quant-interview/workstreams');
-  assert.equal(workstreamFiles.some((file) => /-018\.json$/.test(file)), false);
+  const workstream018File = workstreamFiles.find((file) => /-018\.json$/.test(file));
+  if (!workstream018File) {
+    assert.match(masterIngestion, /First pending master record: `green-book::2\.1::theory`/i);
+    assert.equal(current.trim(), completeCurrent);
+    assert.match(masterIngestion, /018.*not (?:active|authorized)|does not authorize workstream 018/i);
+    return;
+  }
+
+  const workstream018 = JSON.parse(await readFile(
+    `src/data/quant-interview/workstreams/${workstream018File}`,
+    'utf8',
+  ));
+  assert.match(workstream018.status, /^(?:active|complete)$/);
+  if (workstream018.status === 'active') {
+    assert.match(current, /Logic, Brainteasers.*Problem Simplification/is);
+    assert.match(current, /Workstream 018 is active/i);
+    assert.match(masterIngestion, /First pending master record after the active 018 scope: `green-book::2\.2::theory`/i);
+  } else {
+    assert.match(current, /Workstream 018 is complete/i);
+    assert.match(masterIngestion, /First pending master record: `green-book::2\.2::theory`/i);
+  }
 });

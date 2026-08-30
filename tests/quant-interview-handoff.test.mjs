@@ -294,6 +294,19 @@ test('handoff current topic and remaining queue follow workstream 012 status', a
             } else {
               assert.match(handoff, /^## Completed cross-book workstream 17$/m);
               assert.doesNotMatch(current, /Workstream 017 is active/i);
+              const workstream018 = JSON.parse(await readFile(
+                'src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-problem-simplification-018.json',
+                'utf8',
+              ));
+              assert.match(workstream018.status, /^(?:active|complete)$/);
+              if (workstream018.status === 'active') {
+                assert.match(current, /Logic, Brainteasers.*Problem Simplification/is);
+                assert.match(current, /Workstream 018 is active/i);
+                assert.doesNotMatch(handoff, /^## Completed cross-book workstream 18$/m);
+              } else {
+                assert.match(handoff, /^## Completed cross-book workstream 18$/m);
+                assert.doesNotMatch(current, /Workstream 018 is active/i);
+              }
             }
           }
         }
