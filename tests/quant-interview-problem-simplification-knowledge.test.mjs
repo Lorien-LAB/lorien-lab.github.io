@@ -53,6 +53,13 @@ function assertNonemptySections(text, headings) {
   }
 }
 
+function numberedItems(text, heading) {
+  return (section(text, heading).match(/^\d+\. .+$/gm) ?? [])
+    .map((item) => item.replace(/^\d+\. /, ''));
+}
+
+const compact = (text) => text.replace(/[`$\\\s]/g, '');
+
 test('small-cases Knowledge teaches a complete simplification-to-proof loop', async () => {
   const { text, metadata } = await page(files.small);
   assert.deepEqual(metadata, smallMetadata);
@@ -68,9 +75,20 @@ test('small-cases Knowledge teaches a complete simplification-to-proof loop', as
   for (const pattern of [/size reduction/i, /backward induction/i, /state compression/i, /algebraic.*geometric re-expression/i]) assert.match(modes, pattern);
   const proof = section(text, 'From Pattern to Proof');
   for (const pattern of [/recurrence.*valid/i, /base cases?/i, /induction hypothesis.*strong enough/i, /tie-breaking/i, /adversarial.*preferences?/i, /resource bounds/i, /worst-case.*average-case/i]) assert.match(proof, pattern);
-  const checks = section(text, 'Interview Checks');
-  assert.equal((checks.match(/^\d+\. /gm) ?? []).length, 8);
-  for (const pattern of [/15.*cub/i, /quarter.*full|back.*known endpoint/i, /constant width|fall through/i]) assert.match(checks, pattern);
+  const checks = numberedItems(text, 'Interview Checks');
+  assert.equal(checks.length, 8);
+
+  const cubeExercise = compact(checks[0]);
+  assert.match(cubeExercise, /compute15\^3/i);
+  assert.match(cubeExercise, /(?:15=10\+5|\(10\+5\)\^3)/i);
+
+  const recurrenceExercise = compact(checks[1]);
+  assert.match(recurrenceExercise, /x_t=2x_\(t-1\)/i);
+  assert.match(recurrenceExercise, /x_8=640/i);
+  assert.match(checks[1], /one quarter|quarter of/i);
+  assert.match(checks[1], /which (?:earlier )?period/i);
+
+  assert.match(checks.join('\n'), /constant width|fall through/i);
 });
 
 test('Fermi Knowledge is auditable, range-based, and validation-driven', async () => {
@@ -90,10 +108,20 @@ test('Fermi Knowledge is auditable, range-based, and validation-driven', async (
   for (const pattern of [/authoritative|first-party/i, /current-data/i, /observation.*reduce uncertainty/i, /assumption.*replace first/i]) assert.match(validation, pattern);
   const mistakes = section(text, 'Common Mistakes');
   for (const pattern of [/memorized answers/i, /false precision/i]) assert.match(mistakes, pattern);
-  const checks = section(text, 'Interview Checks');
-  assert.equal((checks.match(/^\d+\. /gm) ?? []).length, 6);
-  assert.match(checks, /locations?/i);
-  assert.match(checks, /specialized.*providers?/i);
+  const checks = numberedItems(text, 'Interview Checks');
+  assert.equal(checks.length, 6);
+
+  const locationExercise = checks.find((item) => /estimate how many.*locations?/i.test(item));
+  assert.ok(locationExercise, 'location-count exercise must ask for an estimate');
+  for (const pattern of [/geographic boundary/i, /target unit/i, /low.*base.*high/i, /per .*year/i, /location range/i]) {
+    assert.match(locationExercise, pattern);
+  }
+
+  const providerExercise = checks.find((item) => /estimate how many specialized.*(?:technicians|providers)/i.test(item));
+  assert.ok(providerExercise, 'specialized-provider exercise must ask for an estimate');
+  for (const pattern of [/low.*base.*high/i, /demand.*capacity/i, /cross-check/i, /per .*year/i]) {
+    assert.match(providerExercise, pattern);
+  }
   assert.doesNotMatch(text, /United Kingdom|Oxford|petrol station|piano tuner|12,?000|60 tuners/i);
 });
 

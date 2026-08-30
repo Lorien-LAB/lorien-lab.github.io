@@ -23,7 +23,7 @@ featured: false
 
 ## Problem
 
-There are 100 ordered levels and an unknown deterministic threshold $T$. A probe survives a test at or below $T$, but is destroyed by a test above $T$. A destroyed probe cannot be reused; a surviving probe can be tested again. Using two identical probes, determine the smallest possible worst-case number of tests needed to identify $T$, and give a strategy that attains it.
+There are 100 physical levels, labeled 1 through 100, and an unknown deterministic threshold $T\in\{0,\ldots,100\}$. A probe survives a test at or below $T$, but is destroyed by a test above $T$; $T=0$ means no physical level is safe. A destroyed probe cannot be reused, while a surviving probe can be tested again. Using two identical probes, determine the smallest possible worst-case number of tests needed to identify $T$, and give a strategy that attains it.
 
 ## Think Before Revealing
 
@@ -35,7 +35,7 @@ There are 100 ordered levels and an unknown deterministic threshold $T$. A probe
 
 ## Solution
 
-Let $h_e(d)$ be the largest number of consecutive levels whose threshold can always be resolved with $e$ probes and at most $d$ tests. The base cases are $h_0(d)=0$ and $h_e(0)=0$.
+Measure capacity above a known-safe sentinel, initially the boundary at level 0 below the physical levels. Let $h_e(d)$ be the largest number of consecutive unresolved physical levels above that known-safe sentinel whose threshold can always be resolved with $e$ probes and at most $d$ tests. The base cases are $h_0(d)=0$ and $h_e(0)=0$.
 
 For a first test, reserve $h_{e-1}(d-1)$ levels below the test level and $h_e(d-1)$ levels above it. If the probe is destroyed, there are $e-1$ probes and $d-1$ tests for the lower block. If it survives, there are still $e$ probes and $d-1$ tests for the upper block. No strategy can cover larger branches than those two capacities, while placing the test level between blocks of exactly those sizes attains both capacities. The tested level itself contributes one more resolved level, so
 
@@ -67,7 +67,9 @@ $$
 14,\ 27,\ 39,\ 50,\ 60,\ 69,\ 77,\ 84,\ 90,\ 95,\ 99,\ 100.
 $$
 
-If the first probe is destroyed at a tested level $x$, let $y$ be its preceding surviving level, with $y=0$ for the first test. Test the second probe successively at $y+1,y+2,\ldots,x-1$. If destruction occurs on the $k$-th first-probe test before the final truncated steps, that jump has size $15-k$, so the linear scan needs at most $14-k$ more tests. The total is at most $k+(14-k)=14$. The truncated steps near 100 can only reduce this total. Thus the smallest worst-case number of tests is 14.
+If the first probe is destroyed at a tested level $x$, let $y$ be its preceding surviving level, with $y=0$ for the first test. Test the second probe successively at $y+1,y+2,\ldots,x-1$. If the second probe is destroyed at level $z$, infer that $T$ is one less than that destroyed level, namely $T=z-1$. If all remaining levels through $x-1$ survive, infer $T=x-1$. If every scheduled first-probe test survives through level 100, infer $T=100$.
+
+If first-probe destruction occurs on its $k$-th test before the final truncated steps, that jump has size $15-k$, so the linear scan needs at most $14-k$ more tests. The total is at most $k+(14-k)=14$. The truncated steps near 100 can only reduce this total. Thus the smallest worst-case number of tests is 14.
 
 ## Why This Problem Matters
 

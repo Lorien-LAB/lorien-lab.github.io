@@ -53,9 +53,9 @@ Memorized answers hide assumptions and make adaptation difficult. False precisio
 
 ## Interview Checks
 
-1. Define the relevant locations and the geographic boundary before estimating demand.
+1. Estimate how many walk-in repair locations a metropolitan area could support in a typical year. Define the geographic boundary and target unit (operating locations); give low, base, and high ranges for residents, repair visits per resident-year, and visits handled per location-year; then report the resulting location range.
 2. Separate the number of locations from the visits per location and the time period.
-3. Ask whether specialized providers change the eligible population or the participation rate.
+3. Estimate how many specialized robotics-maintenance technicians a region needs. Give low, base, and high ranges for installed robots, service visits per robot-year, and visits completed per technician-year; calculate demand divided by capacity, then cross-check with service firms times technicians per firm.
 4. State low, base, and high assumptions with units before giving a midpoint.
 5. Produce an independent capacity-based cross-check and explain any disagreement.
 6. Identify the single highest-sensitivity input and the current datum needed to validate it.

@@ -23,7 +23,9 @@ featured: false
 
 ## Problem
 
-Five agents are ranked A5 (most senior) through A1. They must allocate 100 identical units. The most senior surviving agent proposes an integer allocation; every survivor, including the proposer, votes. A proposal passes when at least half of the current survivors approve. Rejection removes the proposer and repeats the process. Preferences are lexicographic: survive, receive more units, then have fewer rivals survive. Determine the allocation proposed by A5.
+Five agents are ranked A5 (most senior) through A1. They must allocate 100 identical units. The most senior surviving agent proposes an integer allocation; every survivor, including the proposer, votes. A proposal passes when at least half of the current survivors approve. Rejection removes the proposer and repeats the process.
+
+All agents are rational, these rules and that rationality are common knowledge, and each proposer chooses an allocation that maximizes its own lexicographic payoff subject to passage. Preferences are lexicographic: survive, receive more units, then have fewer rivals survive. Each voter compares the passage allocation with the rejection continuation. If both outcomes give a voter equal survival and equal units, rejection leaves fewer rivals, so equal units make that voter reject. Determine the allocation proposed by A5.
 
 ## Think Before Revealing
 
@@ -35,7 +37,7 @@ Five agents are ranked A5 (most senior) through A1. They must allocate 100 ident
 
 ## Solution
 
-Work backward, always treating the proposer as one affirmative vote. A proposal needs at least half of the survivors to approve; when the number of survivors is odd, this rounds up to a strict majority.
+Work backward, always treating the proposer as one affirmative vote. With $n$ survivors, let a(n)=ceil(n/2) be the required number of approvals under the at-least-half rule. The proposer therefore recruits a(n)-1 other voters. For a recruited voter, the minimum payment is the rejection continuation payoff plus one, because equal units make the voter reject. The proposer buys the a(n)-1 cheapest votes under that rule.
 
 - With 1 agent, A1 votes for the only proposal, so the allocation is `100`.
 - With 2 agents, the proposer A2 needs one vote, and the proposer votes. The allocation is `100/0` in senior-to-junior order.
@@ -44,6 +46,8 @@ Work backward, always treating the proposer as one affirmative vote. A proposal 
 - With 5 agents, A5 needs three votes: at least half of five means three approvals. If A5 is removed, the four-agent allocation is `99/0/1/0`. A3 and A1 receive zero, so A5 gives each one unit and proposes `98/0/1/0/1` in senior-to-junior order.
 
 Thus A5 keeps 98 units, A4 receives 0, A3 receives 1, A2 receives 0, and A1 receives 1. The argument uses the stated lexicographic priorities: survival comes before units, and units come before having fewer rivals survive.
+
+The recurrence changes mechanically with either convention. Under a strict-majority rule, the approval count is a_strict(n)=floor(n/2)+1, so the proposer recruits a_strict(n)-1 other voters. Under passage-favoring indifference, matching the rejection continuation payoff is sufficient; the cheapest payment to a recruited voter is then its continuation payoff rather than that payoff plus one.
 
 ## Why This Problem Matters
 

@@ -5,6 +5,8 @@ import { readFile } from 'node:fs/promises';
 
 const id = 'logic-brainteasers-discrete-reasoning-problem-simplification-018';
 const manifestPath = `src/data/quant-interview/workstreams/${id}.json`;
+// SHA-256(JSON.stringify({key, questionPages, solutionPages}[])) from git object b3fe52b, in master order.
+const PRE_018_PAGE_PROJECTION_SHA256 = 'b58d28eec32dbd581e58d0cb90620b4da3c7bb68b0e02e555c10e47ae688d7fb';
 const keys = [
   'green-book::2.1::theory',
   'green-book::2.1.screwy-pirates::question',
@@ -80,6 +82,28 @@ const pages = {
   '150-most-frequently-asked::2.7::30': [page(49), page(215)],
 };
 
+function pageProjection(master) {
+  return master.items.map(({ key, questionPages, solutionPages }) => ({
+    key,
+    questionPages,
+    solutionPages,
+  }));
+}
+
+function projectionHash(projection) {
+  return createHash('sha256').update(JSON.stringify(projection)).digest('hex');
+}
+
+function restoreApprovedPageRepairs(projection) {
+  const restored = JSON.parse(JSON.stringify(projection));
+  const byKey = new Map(restored.map((row) => [row.key, row]));
+  assert.ok(byKey.has('red-book::8::8.25'));
+  assert.ok(byKey.has('150-most-frequently-asked::2.7::30'));
+  byKey.get('red-book::8::8.25').solutionPages = page(307, 308);
+  byKey.get('150-most-frequently-asked::2.7::30').solutionPages = page(215, 216);
+  return restored;
+}
+
 test('018 manifest preserves immutable scope across the lifecycle', async () => {
   const manifest = await readJson(manifestPath);
   if (manifest.status === 'active') {
@@ -151,7 +175,7 @@ test('018 records exact terminal source decisions and two topic overrides', asyn
   }
 });
 
-test('018 binds exact pages and preserves the protected source-topic map', async () => {
+test('018 binds exact repairs and freezes every pre-018 page range', async () => {
   const master = await readJson('src/data/quant-interview/master-directory.json');
   const masterByKey = new Map(master.items.map((row) => [row.key, row]));
   for (const [key, [questionPages, solutionPages]] of Object.entries(pages)) {
@@ -159,6 +183,17 @@ test('018 binds exact pages and preserves the protected source-topic map', async
     assert.deepEqual(row.questionPages, questionPages, `${key} question pages`);
     assert.deepEqual(row.solutionPages, solutionPages, `${key} solution pages`);
   }
+
+  const currentProjection = pageProjection(master);
+  assert.equal(currentProjection.length, 750);
+  const restoredProjection = restoreApprovedPageRepairs(currentProjection);
+  assert.equal(
+    projectionHash(restoredProjection),
+    PRE_018_PAGE_PROJECTION_SHA256,
+    'only the two approved solution-page repairs may differ from pre-018',
+  );
+  assert.deepEqual(masterByKey.get('red-book::8::8.25').solutionPages, page(307));
+  assert.deepEqual(masterByKey.get('150-most-frequently-asked::2.7::30').solutionPages, page(215));
 
   const sourceMapText = await readFile('src/data/quant-interview/topics/source-topic-map.json', 'utf8');
   assert.equal(createHash('sha256').update(sourceMapText).digest('hex'), '04f6bc640094ae774acfe5fe13b764a0a4bd155f18e1786a5b744f33cc9aceed');

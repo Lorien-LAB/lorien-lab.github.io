@@ -50,8 +50,8 @@ Treating a few examples as proof can conceal exceptional cases. Other frequent e
 
 ## Interview Checks
 
-1. For a 15-unit cube built from smaller blocks, identify which geometric features remain relevant after reducing the side length.
-2. In a container that is one quarter full, write the state variables before inferring how the next action changes them.
+1. Compute $15^3$ by decomposition: write $15=10+5$, expand $(10+5)^3$, and sum the terms without direct long multiplication.
+2. Given the recurrence `x_t = 2x_(t-1)` and the known endpoint `x_8 = 640`, at which earlier period was the sequence one quarter of `x_8`? Backtrack the recurrence and show each state.
 3. Work backward from a known endpoint when the final state is easier to characterize than the initial move.
 4. Test whether a constant width creates a fall through path or a conserved quantity in the smaller configuration.
 5. List every terminal state before proposing a recurrence.
