@@ -157,3 +157,13 @@ test('built OMD narrative is bilingual, stitched-first, and public-safe', async 
   assert.doesNotMatch(detailHtml, /paper_faithful_shadow|a_share_lowvol_mom12|three[- ]lane/i);
   assert.doesNotMatch(detailHtml, /\bL1\b|\bL3\b/);
 });
+
+test('built OMD benchmark classification names the executed PIT account and non-executable index', async () => {
+  await buildSite();
+  const detailHtml = await readFile(detailOutput, 'utf8');
+  assert.match(detailHtml, /executed PIT equal-weight account/i);
+  assert.match(detailHtml, /same next-open A-share execution/i);
+  assert.match(detailHtml, /modeled costs and capacity/i);
+  assert.match(detailHtml, /frozen last-close delist convention/i);
+  assert.match(detailHtml, /official price index[^.]*not an executable account/i);
+});

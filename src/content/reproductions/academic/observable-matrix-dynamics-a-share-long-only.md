@@ -114,7 +114,9 @@ The window split matters. At CNY 100m per sleeve, the combined annual return is 
 
 ## Benchmark comparison
 
-Two reference accounts are kept distinct. The official CSI price-index series is a non-executable index reference: it does not apply PIT membership, stock-level fills, or the cost and constraint rules above. The PIT equal-weight account is closer to an executable baseline because it uses historical eligible constituents, but it still represents an equal-weight account rather than this OMD target-and-trade process.
+Two reference accounts are kept distinct. The official price index is not an executable account; it is a non-executable index reference that does not apply PIT membership, stock-level fills, or the cost and constraint rules above.
+
+The PIT equal-weight reference is an executed PIT equal-weight account, not merely a membership-weight series. It uses the exact signal-date PIT membership (时点成分股), then passes through the same next-open A-share execution (下一开盘成交), modeled costs and capacity, and frozen last-close delist convention as the OMD account. This makes it a directly replayed, executable-universe baseline while keeping its equal-weight construction distinct from the OMD target-and-trade process.
 
 For the CNY 100m scenario, the combined strategy return is 6.60% versus 7.61% for the official-index reference in OOS1, while the PIT equal-weight account is 9.14%. In OOS2, the corresponding values are 43.70%, 41.00%, and 23.68%. These references answer different questions: an official index shows broad index movement, a PIT equal-weight account shows a tradable-universe baseline, and the reproduction shows the OMD portfolio after its own turnover and constraints.
 
