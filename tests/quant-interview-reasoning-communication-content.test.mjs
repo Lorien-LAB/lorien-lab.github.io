@@ -69,6 +69,8 @@ test('problem framing page teaches clarification and revisable assumptions', asy
       'quant-interview-preparation-breadth-and-practice',
       'quant-interview-formats-and-assessment-strategy',
       'behavioral-interview-evidence-and-authenticity',
+      'small-cases-recurrence-and-structural-simplification',
+      'fermi-estimation-assumption-decomposition',
     ],
   });
   assertSourceNeutral(text);
@@ -147,6 +149,8 @@ test('reasoning Knowledge nodes keep their preparation links aligned', async () 
     'quant-interview-preparation-breadth-and-practice',
     'quant-interview-formats-and-assessment-strategy',
     'behavioral-interview-evidence-and-authenticity',
+    'small-cases-recurrence-and-structural-simplification',
+    'fermi-estimation-assumption-decomposition',
   ]);
   assert.deepEqual(parseInlineArray(structured, 'related'), [
     'problem-framing-clarification-assumption-management',

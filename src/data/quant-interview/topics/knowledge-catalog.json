@@ -87,6 +87,32 @@
       "prerequisites": []
     },
     {
+      "slug": "small-cases-recurrence-and-structural-simplification",
+      "title": "Small Cases, Recurrence & Structural Simplification",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "problem-simplification"
+      ],
+      "primaryTopic": "problem-simplification",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "fermi-estimation-assumption-decomposition",
+      "title": "Fermi Estimation & Assumption Decomposition",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "problem-simplification"
+      ],
+      "primaryTopic": "problem-simplification",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "small-cases-recurrence-and-structural-simplification"
+      ]
+    },
+    {
       "slug": "modular-arithmetic",
       "title": "Modular Arithmetic",
       "canonicalTopics": [

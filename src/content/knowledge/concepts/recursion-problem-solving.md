@@ -9,7 +9,7 @@ date: 2026-08-16
 tags: [Recursion, Dynamic Programming, Problem Solving]
 quantInterviewTopics: [logic-brainteasers-discrete-reasoning]
 featured: false
-related: []
+related: [small-cases-recurrence-and-structural-simplification]
 relatedNotes: []
 ---
 

@@ -66,6 +66,10 @@ const exactOrder = {
     'structured-think-aloud-reasoning',
   ],
   'logic-brainteasers-discrete-reasoning': ['recursion-problem-solving'],
+  'problem-simplification': [
+    'small-cases-recurrence-and-structural-simplification',
+    'fermi-estimation-assumption-decomposition',
+  ],
   'modular-arithmetic': ['modular-arithmetic'],
   'invariants-state-transformations': ['identity-swapping-invariance', 'modular-invariants'],
   'limits-derivatives': [
@@ -144,6 +148,7 @@ const exactPrerequisites = {
   'expectation-variance-covariance-algebra': ['expectation-linearity-indicators'],
   'finite-combinatorial-probability-modeling': ['counting-permutations-combinations'],
   'finite-state-markov-chains': [],
+  'fermi-estimation-assumption-decomposition': ['small-cases-recurrence-and-structural-simplification'],
   'first-step-analysis': ['finite-state-markov-chains', 'conditioning'],
   'gaussian-lognormal-structure': ['common-probability-distributions'],
   'identity-swapping-invariance': [],
@@ -179,13 +184,14 @@ const exactPrerequisites = {
   'recursion-problem-solving': [],
   'related-rates-and-implicit-differentiation': ['derivative-definition-and-core-rules'],
   'singular-value-decomposition': ['eigenvalues-eigenvectors', 'vector-geometry-inner-products'],
+  'small-cases-recurrence-and-structural-simplification': [],
   'static-arbitrage-construction': ['no-arbitrage-principle'],
   'structured-think-aloud-reasoning': ['problem-framing-clarification-assumption-management'],
   'symmetry-equiprobability-geometric-probability': ['probability-axioms-derived-rules'],
   'vector-geometry-inner-products': [],
 };
 
-test('repository catalog contains the exact published 76/54 corpus', async () => {
+test('repository catalog contains the exact published 81/56 corpus', async () => {
   const [catalogText, taxonomyText, knowledgeRecords] = await Promise.all([
     readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
     readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'),
@@ -194,8 +200,8 @@ test('repository catalog contains the exact published 76/54 corpus', async () =>
   const repositoryCatalog = JSON.parse(catalogText);
   const repositoryTaxonomy = JSON.parse(taxonomyText);
   assert.equal(validateKnowledgeCatalog(repositoryCatalog, repositoryTaxonomy, knowledgeRecords), true);
-  assert.equal(repositoryCatalog.modules.length, 54);
-  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 54);
+  assert.equal(repositoryCatalog.modules.length, 56);
+  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 56);
   assert.deepEqual(
     repositoryCatalog.modules.filter((module) => module.status === 'planned').map((module) => module.slug).sort(),
     [],
@@ -227,7 +233,7 @@ test('repository public projection exposes the complete source-neutral curriculu
     problemRecords,
     base: '/',
   });
-  assert.deepEqual(result.totals, { published: 54, planned: 0 });
+  assert.deepEqual(result.totals, { published: 56, planned: 0 });
   assert.equal(result.topics.length, 10);
   const interview = result.topics.find((topic) => topic.id === 'interview-strategy-communication');
   const reasoning = interview.children.find((topic) => topic.id === 'reasoning-communication');
