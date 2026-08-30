@@ -1,7 +1,7 @@
 # Quant Interview Problem Simplification 018 Design
 
 **Date:** 2026-08-30
-**Status:** Approved in conversation; pending implementation plan
+**Status:** Approved; implementation planned
 
 ## Objective
 
@@ -12,7 +12,7 @@ Close the complete cross-book **Problem Simplification** topic as workstream 018
 - Use one Topic-first cross-book workstream, not a Green-only batch.
 - Own exactly the eleven current master records whose `primaryTopic` is `problem-simplification`.
 - Publish exactly **+5 Problems / +2 Knowledge**.
-- Resolve exactly five source records as `ingested` and six as `knowledge-only`.
+- Resolve exactly five source records as `canonical-problem` and six as `knowledge-only`.
 - Treat Fermi estimation as reusable Knowledge and public self-tests only; do not publish a standalone Fermi Problem or any historical numeric answer.
 - Keep low-complexity mental-arithmetic, exponential-backtracking, and round-cover prompts visible as Knowledge checks rather than inflating the Problem bank.
 - Add item-level secondary topics only where the source item genuinely crosses into Dynamic Programming or Algorithmic Complexity, with explicit override reasons.
@@ -62,15 +62,15 @@ The public layer contains canonical Knowledge and Problems only. Source titles, 
 | Master key | Evidence | State | Canonical Problems | Canonical Knowledge |
 |---|---:|---|---|---|
 | `green-book::2.1::theory` | Q 19 | `knowledge-only` | None | `small-cases-recurrence-and-structural-simplification` |
-| `green-book::2.1.screwy-pirates::question` | Q 19–20 | `ingested` | `sequential-voting-elimination-backward-induction` | `small-cases-recurrence-and-structural-simplification`, `recursion-problem-solving` |
-| `green-book::2.1.tiger-and-sheep::question` | Q 20–21 | `ingested` | `predator-replacement-parity` | `small-cases-recurrence-and-structural-simplification` |
+| `green-book::2.1.screwy-pirates::question` | Q 19–20 | `canonical-problem` | `sequential-voting-elimination-backward-induction` | `small-cases-recurrence-and-structural-simplification`, `recursion-problem-solving` |
+| `green-book::2.1.tiger-and-sheep::question` | Q 20–21 | `canonical-problem` | `predator-replacement-parity` | `small-cases-recurrence-and-structural-simplification` |
 | `red-book::8::8.2` | Q 288; S 291–292 | `knowledge-only` | None | `small-cases-recurrence-and-structural-simplification` |
 | `red-book::8::8.5` | Q 288; S 293 | `knowledge-only` | None | `small-cases-recurrence-and-structural-simplification` |
 | `red-book::8::8.25` | Q 290; S 307 | `knowledge-only` | None | `fermi-estimation-assumption-decomposition` |
 | `red-book::8::8.26` | Q 290; S 308 | `knowledge-only` | None | `fermi-estimation-assumption-decomposition` |
-| `150-most-frequently-asked::2.7::8` | Q 45; S 182–185 | `ingested` | `two-egg-threshold-search` | `small-cases-recurrence-and-structural-simplification`, `recursion-problem-solving` |
-| `150-most-frequently-asked::2.7::16` | Q 46; S 192–194 | `ingested` | `large-power-digit-count-without-log-tables` | `small-cases-recurrence-and-structural-simplification` |
-| `150-most-frequently-asked::2.7::23` | Q 48; S 199–201 | `ingested` | `minimum-comparisons-for-both-extremes` | `small-cases-recurrence-and-structural-simplification` |
+| `150-most-frequently-asked::2.7::8` | Q 45; S 182–185 | `canonical-problem` | `two-egg-threshold-search` | `small-cases-recurrence-and-structural-simplification`, `recursion-problem-solving` |
+| `150-most-frequently-asked::2.7::16` | Q 46; S 192–194 | `canonical-problem` | `large-power-digit-count-without-log-tables` | `small-cases-recurrence-and-structural-simplification` |
+| `150-most-frequently-asked::2.7::23` | Q 48; S 199–201 | `canonical-problem` | `minimum-comparisons-for-both-extremes` | `small-cases-recurrence-and-structural-simplification` |
 | `150-most-frequently-asked::2.7::30` | Q 49; S 215 | `knowledge-only` | None | `small-cases-recurrence-and-structural-simplification` |
 
 No other master or coverage record may be claimed, terminalized, page-repaired, or assigned to workstream 018.
@@ -214,7 +214,7 @@ Tests must freeze all other pre-018 question and solution ranges byte-for-byte o
 9. Capture immutable active-state evidence, remove the temporary workflow, and write factual completion fields.
 10. Regenerate the directory and write completed-018 HANDOFF state.
 
-Coverage and master records must remain exact mirrors for state, canonical targets, workstream id, resolution note, and item-level topic reasoning.
+Coverage and master records must remain exact mirrors for state, canonical targets, workstream id, and resolution note. Coverage retains each required `topicOverrideReason`; master mirrors the resulting expanded canonical-topic path.
 
 ## Lifecycle and Verification Evidence
 
@@ -267,7 +267,7 @@ No verification record may be invented, prefilled, or copied from another workst
 ### Workstream tests
 
 - Assert the exact ordered eleven-key manifest scope.
-- Assert source distribution 3/4/4 and state distribution 5 `ingested` / 6 `knowledge-only`.
+- Assert source distribution 3/4/4 and state distribution 5 `canonical-problem` / 6 `knowledge-only`.
 - Assert every coverage row and master record are exact mirrors.
 - Assert the two item-level cross-topic overrides and their reasons.
 - Assert no source-topic-map change.
