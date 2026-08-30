@@ -26,6 +26,7 @@
 - Do not modify the existing stock-index-futures reproduction page or its data/components.
 - Reuse the existing reproduction route and case-study components; introduce only one L2-specific evidence panel.
 - The page must remain useful without JavaScript and accessible by keyboard and screen reader.
+- Automated tests must exercise imported public data and generated Astro HTML; do not treat source-text matching as proof of rendered behavior.
 - Preserve unrelated untracked files in the main website checkout.
 
 ---
@@ -59,40 +60,50 @@ Create `tests/omd-l2-reproduction-page.test.mjs`:
 ```js
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { access, readFile } from 'node:fs/promises';
+import { execFile } from 'node:child_process';
+import { promisify } from 'node:util';
+import { readFile } from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
 
 const dataPath = 'src/data/reproduction-results/omd-a-share-long-only.ts';
-const recordPath = 'src/content/reproductions/academic/observable-matrix-dynamics-a-share-long-only.md';
-const componentPath = 'src/components/reproduction-note/OMDL2EvidencePanel.astro';
-const routePath = 'src/pages/projects/reproductions/[...id].astro';
+const detailOutput = 'dist/projects/reproductions/observable-matrix-dynamics-a-share-long-only/index.html';
+const indexOutput = 'dist/projects/reproductions/index.html';
+const existingBrokerOutput = 'dist/projects/reproductions/stock-index-futures-roll-basis-timing/index.html';
+const execFileAsync = promisify(execFile);
+let buildPromise;
+const buildSite = () => buildPromise ??= execFileAsync(
+  process.platform === 'win32' ? 'npm.cmd' : 'npm',
+  ['run', 'build'],
+  { cwd: process.cwd(), maxBuffer: 16 * 1024 * 1024 },
+);
 
 test('OMD L2 public evidence freezes the approved stitched headline', async () => {
-  await access(dataPath);
-  const data = await readFile(dataPath, 'utf8');
-  for (const token of [
-    "slug: 'observable-matrix-dynamics-a-share-long-only'",
-    "start: '2024-01-02'",
-    "end: '2026-06-30'",
-    'annualReturn: 0.202245',
-    'sharpe: 0.794502',
-    'maxDrawdown: -0.224887',
-    'annualReturn: 0.191262',
-    'sharpe: 0.760208',
-    'maxDrawdown: -0.223963',
-    'totalNominalCapitalCny: 300_000_000',
-    'totalNominalCapitalCny: 1_500_000_000',
-  ]) assert.ok(data.includes(token), `missing evidence token ${token}`);
+  const moduleUrl = `${pathToFileURL(dataPath).href}?test=${Date.now()}`;
+  const { omdL2Evidence } = await import(moduleUrl);
+  assert.equal(omdL2Evidence.slug, 'observable-matrix-dynamics-a-share-long-only');
+  assert.deepEqual(omdL2Evidence.stitchedPeriod, {
+    start: '2024-01-02', end: '2026-06-30', label: 'OOS1 → OOS2 Stitched',
+    aggregation: 'Equal-weighted daily returns across three independent index sleeves',
+  });
+  assert.deepEqual(omdL2Evidence.capitalScenarios.map((scenario) => ({
+    key: scenario.key,
+    totalNominalCapitalCny: scenario.totalNominalCapitalCny,
+    ...scenario.headline,
+  })), [
+    { key: '100m', totalNominalCapitalCny: 300_000_000, annualReturn: 0.202245, sharpe: 0.794502, maxDrawdown: -0.224887 },
+    { key: '500m', totalNominalCapitalCny: 1_500_000_000, annualReturn: 0.191262, sharpe: 0.760208, maxDrawdown: -0.223963 },
+  ]);
 });
 
-test('OMD L2 public artifacts exclude private paths and out-of-scope strategy lines', async () => {
-  const existing = [];
-  for (const path of [dataPath, recordPath, componentPath]) {
-    try { existing.push([path, await readFile(path, 'utf8')]); } catch {}
-  }
-  for (const [path, source] of existing) {
-    assert.doesNotMatch(source, /[A-Z]:\\|[A-Z]:\//, `${path} exposes a local path`);
-    assert.doesNotMatch(source, /paper_faithful_shadow|a_share_lowvol_mom12|three[- ]lane/i, `${path} leaks another strategy line`);
-    assert.doesNotMatch(source, /\bL1\b|\bL3\b/, `${path} names another strategy line`);
+test('OMD L2 public evidence contains only aggregate L2-safe values', async () => {
+  const moduleUrl = `${pathToFileURL(dataPath).href}?privacy=${Date.now()}`;
+  const { omdL2Evidence } = await import(moduleUrl);
+  const publicPayload = JSON.stringify(omdL2Evidence);
+  assert.doesNotMatch(publicPayload, /[A-Z]:\\|[A-Z]:\//);
+  assert.doesNotMatch(publicPayload, /paper_faithful_shadow|a_share_lowvol_mom12|three[- ]lane/i);
+  assert.doesNotMatch(publicPayload, /\bL1\b|\bL3\b/);
+  for (const privateKey of ['holdings', 'orders', 'ledger', 'forecasts', 'configurationUrl', 'resultsUrl']) {
+    assert.equal(Object.hasOwn(omdL2Evidence, privateKey), false, `unexpected public key ${privateKey}`);
   }
 });
 ```
@@ -199,41 +210,39 @@ git commit -m "feat(reproductions): freeze OMD L2 public evidence"
 Append these tests:
 
 ```js
-test('OMD L2 is a featured private-code academic reproduction record', async () => {
-  await access(recordPath);
-  const record = await readFile(recordPath, 'utf8');
-  for (const token of [
-    'slug: observable-matrix-dynamics-a-share-long-only',
-    'sourceType: academic',
-    'stage: reproduction',
-    'result: partial',
-    'codeVisibility: private',
-    'featured: true',
-    'Igor Halperin',
-    'year: 2026',
-    'arxiv: "2607.27461"',
-    'https://arxiv.org/abs/2607.27461',
-    'Point-in-time and causality',
-    'Cross-window stability',
-  ]) assert.ok(record.includes(token), `record missing ${token}`);
-  assert.doesNotMatch(record, /^(codeUrl|notebookUrl|configurationUrl|resultsUrl):/m);
-  assert.doesNotMatch(record, /^score:/m);
-  assert.doesNotMatch(record, /^metrics:/m);
+test('built workbench publishes one featured private-code OMD academic record', async () => {
+  await buildSite();
+  const [indexHtml, detailHtml] = await Promise.all([
+    readFile(indexOutput, 'utf8'), readFile(detailOutput, 'utf8'),
+  ]);
+  assert.match(indexHtml, /Academic Papers<\/span>\s*<strong>1<\/strong>/);
+  assert.match(indexHtml, /href="\/projects\/reproductions\/observable-matrix-dynamics-a-share-long-only\/"/);
+  assert.match(indexHtml, /Are Three Matrices All You Need To Beat the Market\? · A股 Long-Only Reproduction/);
+  for (const visible of [
+    'OMD Portfolio Optimization · A股 Long-Only Reproduction',
+    'Academic Paper', 'Portfolio Construction', 'Partial', 'Implementation Private',
+    'Igor Halperin', '2026', 'Point-in-time and causality', 'Cross-window stability',
+  ]) assert.ok(detailHtml.includes(visible), `built detail missing ${visible}`);
+  assert.match(detailHtml, /href="https:\/\/arxiv\.org\/abs\/2607\.27461"/);
+  assert.doesNotMatch(detailHtml, /View Research Code|View Code|Repository ↗|Configuration ↗|Results ↗/);
 });
 
-test('OMD L2 narrative keeps the stitched result honest and bilingual', async () => {
-  const record = await readFile(recordPath, 'utf8');
+test('built OMD narrative is bilingual, stitched-first, and public-safe', async () => {
+  await buildSite();
+  const detailHtml = await readFile(detailOutput, 'utf8');
   for (const heading of [
-    '## Research question', '## Paper mechanism', '## A-share long-only adaptation',
-    '## Data and point-in-time universe', '## Portfolio construction',
-    '## Execution and cost model', '## No-lookahead validation',
-    '## Empirical results', '## Benchmark comparison',
-    '## Capacity and robustness', '## Limitations', '## Conclusion',
-  ]) assert.ok(record.includes(heading), `missing ${heading}`);
-  for (const token of ['20.22%', '19.13%', 'CSI 1000', 'OOS1', 'OOS2', '下一开盘成交', '时点成分股', '涨跌停', '停牌']) {
-    assert.ok(record.includes(token), `narrative missing ${token}`);
+    'Research question', 'Paper mechanism', 'A-share long-only adaptation',
+    'Data and point-in-time universe', 'Portfolio construction',
+    'Execution and cost model', 'No-lookahead validation', 'Empirical results',
+    'Benchmark comparison', 'Capacity and robustness', 'Limitations', 'Conclusion',
+  ]) assert.ok(detailHtml.includes(heading), `built narrative missing ${heading}`);
+  for (const visible of ['20.22%', '19.13%', 'CSI 1000', 'OOS1', 'OOS2', '下一开盘成交', '时点成分股', '涨跌停', '停牌']) {
+    assert.ok(detailHtml.includes(visible), `built narrative missing ${visible}`);
   }
-  assert.match(record, /not an investment recommendation/i);
+  assert.match(detailHtml, /not an investment recommendation/i);
+  assert.doesNotMatch(detailHtml, /[A-Z]:\\|[A-Z]:\//);
+  assert.doesNotMatch(detailHtml, /paper_faithful_shadow|a_share_lowvol_mom12|three[- ]lane/i);
+  assert.doesNotMatch(detailHtml, /\bL1\b|\bL3\b/);
 });
 ```
 
@@ -391,30 +400,32 @@ Append:
 
 ```js
 test('OMD L2 evidence panel is accessible and progressively enhanced', async () => {
-  await access(componentPath);
-  const component = await readFile(componentPath, 'utf8');
-  const data = await readFile(dataPath, 'utf8');
-  const publicContract = `${component}\n${data}`;
-  for (const token of [
+  await buildSite();
+  const detailHtml = await readFile(detailOutput, 'utf8');
+  for (const visible of [
     'OOS1 → OOS2 Stitched', 'Annualized Return', 'Sharpe', 'Max Drawdown',
     'CNY 100m / sleeve', 'CNY 500m / sleeve',
     'CSI 300', 'CSI 500', 'CSI 1000', 'Combined',
-    'Official price index', 'PIT equal-weight',
-    'ADV participation cap',
-  ]) assert.ok(publicContract.includes(token), `public contract missing ${token}`);
-  for (const token of ['aria-pressed', 'data-omd-capital', 'data-omd-capital-panel', '<table']) {
-    assert.ok(component.includes(token), `component missing ${token}`);
-  }
-  assert.match(component, /prefers-reduced-motion/);
+    'Official price index', 'PIT equal-weight', 'ADV participation cap',
+    '20.22%', '19.13%', '-3.50%', '-4.86%',
+  ]) assert.ok(detailHtml.includes(visible), `built panel missing ${visible}`);
+  assert.match(detailHtml, /data-omd-evidence/);
+  assert.match(detailHtml, /data-omd-capital="100m"[^>]*aria-pressed="true"/);
+  assert.match(detailHtml, /data-omd-capital="500m"[^>]*aria-pressed="false"/);
+  assert.match(detailHtml, /data-omd-capital-panel="100m"/);
+  assert.match(detailHtml, /data-omd-capital-panel="500m"[^>]*hidden/);
+  assert.ok((detailHtml.match(/<table/g) ?? []).length >= 3, 'expected exact-value fallback tables');
+  assert.match(detailHtml, /prefers-reduced-motion/);
 });
 
 test('OMD L2 panel is isolated to its canonical reproduction slug', async () => {
-  const route = await readFile(routePath, 'utf8');
-  assert.match(route, /OMDL2EvidencePanel/);
-  assert.match(route, /observable-matrix-dynamics-a-share-long-only/);
-  assert.match(route, /isOmdL2/);
-  assert.match(route, /isOmdL2[\s\S]{0,240}<OMDL2EvidencePanel/);
-  assert.match(route, /stock-index-futures-roll-basis-timing/);
+  await buildSite();
+  const [omdHtml, brokerHtml] = await Promise.all([
+    readFile(detailOutput, 'utf8'), readFile(existingBrokerOutput, 'utf8'),
+  ]);
+  assert.match(omdHtml, /data-omd-evidence/);
+  assert.doesNotMatch(brokerHtml, /data-omd-evidence|OOS1 → OOS2 Stitched/);
+  assert.match(brokerHtml, /股指期货滚贴水择时与市场情绪因子/);
 });
 ```
 
