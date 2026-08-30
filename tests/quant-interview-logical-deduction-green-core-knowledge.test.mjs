@@ -60,7 +60,7 @@ const treeCheckPatterns = [
   /partial order.*a>b.*a>c.*d>e.*top three.*additional comparisons?.*certificate/is,
   /(?=.*leaf)(?=.*s_1)(?=.*s_2)(?=.*accept)(?=.*reject)(?=.*verification failure)(?=.*legal test)(?=.*outcomes)(?=.*split)/is,
   /nine possible states.*three outcomes.*balanced.*unbalanced.*worst-case.*deepest branch/is,
-  /binary tree.*root.*left.*right.*ll.*lr.*rl.*rr.*table.*legal states?.*exactly one leaf.*conclusion/is,
+  /audit.*binary tree.*candidates A.*leaf path.*conclusion table.*coverage.*uniqueness/is,
 ];
 
 test('constraint-propagation Knowledge has exact structure and executable checks', async () => {
@@ -104,6 +104,20 @@ test('decision-tree Knowledge has exact structure and executable checks', async 
   const checks = interviewChecks(text);
   assert.equal(checks.length, 8);
   treeCheckPatterns.forEach((pattern, index) => assert.match(checks[index], pattern));
+  const audit = checks[7];
+  assert.match(audit, /candidates A, B, C, and D/i);
+  assert.match(audit, /root predicate.*candidate is in.*A,B.*Yes.*A,B.*No.*C,D/is);
+  assert.match(audit, /On Yes.*predicate.*candidate is A.*Yes.*A.*No.*B/is);
+  assert.match(audit, /On No.*predicate.*candidate is C.*Yes.*C.*No.*D/is);
+  assert.match(audit, /leaf path.*conclusion table/i);
+  const table = audit.match(/The leaf path → conclusion table is `([^`]+)`/i)?.[1] ?? '';
+  assert.notEqual(table, '');
+  assert.match(table, /root Yes\s*\/\s*second Yes\s*→\s*A/i);
+  assert.match(table, /root Yes\s*\/\s*second No\s*→\s*B/i);
+  assert.match(table, /root No\s*\/\s*second Yes\s*→\s*C/i);
+  assert.match(table, /root No\s*\/\s*second No\s*→\s*D/i);
+  assert.match(audit, /audit coverage and uniqueness/i);
+  assert.match(audit, /mutate.*root No\s*\/\s*second No\s*→\s*D.*→\s*C.*duplicate.*missing.*failure/is);
 });
 
 test('both Logical Deduction Knowledge pages are source-neutral', async () => {
