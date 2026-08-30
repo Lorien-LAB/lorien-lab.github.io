@@ -1,0 +1,84 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import { readFile } from 'node:fs/promises';
+import { JSON_SCHEMA, load as parseYaml } from 'js-yaml';
+
+const files = {
+  small: 'src/content/knowledge/concepts/small-cases-recurrence-and-structural-simplification.md',
+  fermi: 'src/content/knowledge/concepts/fermi-estimation-assumption-decomposition.md',
+};
+const topics = ['logic-brainteasers-discrete-reasoning', 'problem-simplification'];
+
+const smallMetadata = {
+  title: 'Small Cases, Recurrence & Structural Simplification',
+  description: 'Reduce complex interview problems to valid base cases, derive recurrences or structural invariants, prove the emerging pattern, and lift it back to the original scale.',
+  date: '2026-08-30', type: 'concept', domain: 'Mathematics & Statistics',
+  category: 'Problem Solving Techniques', status: 'growing',
+  tags: ['Problem Simplification', 'Recurrence', 'Induction', 'Interview'],
+  quantInterviewTopics: topics, featured: false,
+  related: ['recursion-problem-solving', 'problem-framing-clarification-assumption-management', 'fermi-estimation-assumption-decomposition'],
+  relatedNotes: [],
+};
+const fermiMetadata = {
+  title: 'Fermi Estimation & Assumption Decomposition',
+  description: 'Build auditable Fermi estimates by defining units, decomposing assumptions, bounding sensitive factors, cross-checking independently, and planning validation.',
+  date: '2026-08-30', type: 'concept', domain: 'Mathematics & Statistics',
+  category: 'Problem Solving Techniques', status: 'growing',
+  tags: ['Fermi Estimation', 'Assumptions', 'Sensitivity', 'Interview'],
+  quantInterviewTopics: topics, featured: false,
+  related: ['small-cases-recurrence-and-structural-simplification', 'problem-framing-clarification-assumption-management'],
+  relatedNotes: [],
+};
+
+async function page(path) {
+  const text = await readFile(path, 'utf8');
+  assert.equal(text.startsWith('---\n'), true);
+  return {
+    text,
+    metadata: parseYaml(text.split(/^---$/m)[1] ?? '', { schema: JSON_SCHEMA }),
+  };
+}
+
+function section(text, heading) {
+  return text.split(new RegExp(`^## ${heading}$`, 'm'))[1]?.split(/^## /m)[0] ?? '';
+}
+
+test('small-cases Knowledge teaches a complete simplification-to-proof loop', async () => {
+  const { text, metadata } = await page(files.small);
+  assert.deepEqual(metadata, smallMetadata);
+  for (const heading of ['Core Idea', 'Seven-Step Workflow', 'Four Simplification Modes', 'From Pattern to Proof', 'Recognition Signals', 'Common Mistakes', 'Interview Checks']) {
+    assert.match(text, new RegExp(`^## ${heading}$`, 'm'));
+  }
+  const workflow = section(text, 'Seven-Step Workflow').match(/^\d+\. .+$/gm) ?? [];
+  assert.equal(workflow.length, 7);
+  for (const pattern of [/preserve.*rules/i, /base cases?/i, /solve.*completely/i, /increase.*one step/i, /state transitions?/i, /conjecture/i, /prove.*original/i]) {
+    assert.match(workflow.join('\n'), pattern);
+  }
+  const modes = section(text, 'Four Simplification Modes');
+  for (const pattern of [/size reduction/i, /backward induction/i, /state compression/i, /algebraic.*geometric re-expression/i]) assert.match(modes, pattern);
+  const checks = section(text, 'Interview Checks');
+  assert.equal((checks.match(/^\d+\. /gm) ?? []).length >= 8, true);
+  for (const pattern of [/15.*cub/i, /quarter.*full|back.*known endpoint/i, /constant width|fall through/i]) assert.match(checks, pattern);
+});
+
+test('Fermi Knowledge is auditable, range-based, and validation-driven', async () => {
+  const { text, metadata } = await page(files.fermi);
+  assert.deepEqual(metadata, fermiMetadata);
+  for (const heading of ['Core Idea', 'Define the Estimate', 'Assumption Tree', 'Ranges and Units', 'Sensitivity', 'Independent Cross-Check', 'Validation Plan', 'Common Mistakes', 'Interview Checks']) {
+    assert.match(text, new RegExp(`^## ${heading}$`, 'm'));
+  }
+  for (const pattern of [/target quantity.*unit.*time horizon.*boundary/i, /low.*base.*high/i, /stock.*flow/i, /sensitivity/i, /independent.*cross-check/i, /authoritative|first-party/i]) assert.match(text, pattern);
+  const checks = section(text, 'Interview Checks');
+  assert.equal((checks.match(/^\d+\. /gm) ?? []).length >= 6, true);
+  assert.match(checks, /locations?/i);
+  assert.match(checks, /specialized.*providers?/i);
+  assert.doesNotMatch(text, /United Kingdom|Oxford|petrol station|piano tuner|12,?000|60 tuners/i);
+  assert.match(text, /false precision|memorized/i);
+});
+
+test('both Knowledge pages are source-neutral', async () => {
+  for (const path of Object.values(files)) {
+    const { text } = await page(path);
+    assert.doesNotMatch(text, /Green Book|Red Book|150 Most Frequently Asked|Question 8\.|Question 30|PDF page|source item|source answer/i);
+  }
+});
