@@ -200,6 +200,7 @@ function hasExactlyOneCanonicalReference(text) {
 
 const excludedPolicyScanDirectories = new Set([
   '.git',
+  '.worktrees',
   '.superpowers',
   '.astro',
   'coverage',
