@@ -1841,6 +1841,58 @@
         "derivative-definition-and-core-rules"
       ],
       "resolutionNote": "The reusable derivative-rule review is fused into core public Knowledge, including an Interview Check that differentiates x ln x on x>0 as ln x+1."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.2",
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "resolutionNote": "The mental-cube prompt is retained as a Knowledge check on arithmetic decomposition, not expanded into a low-depth public Problem."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.5",
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "resolutionNote": "The exponential-growth prompt is retained as a Knowledge check on backing up from a known endpoint, not expanded into a trick page."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.25",
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "fermi-estimation-assumption-decomposition"
+      ],
+      "resolutionNote": "The service-location estimate resolves to source-neutral Fermi-estimation Knowledge without publishing a dated country total."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.26",
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "fermi-estimation-assumption-decomposition"
+      ],
+      "resolutionNote": "The specialized-provider estimate resolves to source-neutral Fermi-estimation Knowledge without publishing a dated city total."
     }
   ]
 }

@@ -729,6 +729,69 @@
         "positive-series-convergence"
       ],
       "resolutionNote": "The canonical Problem proves divergence of the harmonic and logarithmic-harmonic series and convergence of the square series by elementary non-integral arguments."
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "8",
+      "canonicalTopics": [
+        "problem-simplification",
+        "dynamic-programming-algorithms"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "two-egg-threshold-search"
+      ],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification",
+        "recursion-problem-solving"
+      ],
+      "topicOverrideReason": "Item-level review identifies a minimax state recurrence with reusable subproblem structure, so this specific Brainteaser also belongs to Dynamic Programming.",
+      "resolutionNote": "The two-resource threshold family becomes the canonical minimax recurrence Problem and receives a justified Dynamic Programming topic refinement."
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "16",
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "large-power-digit-count-without-log-tables"
+      ],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "resolutionNote": "The large-power digit-count family becomes the canonical strict-bounds Problem without log tables or direct expansion."
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "23",
+      "canonicalTopics": [
+        "problem-simplification",
+        "algorithmic-complexity"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "minimum-comparisons-for-both-extremes"
+      ],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "topicOverrideReason": "Item-level review identifies an optimal comparison algorithm plus matching lower bound, so this specific Brainteaser also belongs to Algorithmic Complexity.",
+      "resolutionNote": "The joint-extremes comparison family becomes the canonical optimal-comparison Problem and receives a justified Algorithmic Complexity topic refinement."
+    },
+    {
+      "sourceSection": "2.7",
+      "sourceItem": "30",
+      "canonicalTopics": [
+        "problem-simplification"
+      ],
+      "state": "knowledge-only",
+      "canonicalProblems": [],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "resolutionNote": "The round-cover prompt is retained as a Knowledge check on structural geometry, not expanded into a one-answer public Problem."
     }
   ]
 }

@@ -4631,11 +4631,13 @@
         "problem-simplification"
       ],
       "sortKey": "02.01|01|0006|green-book::2.1::theory",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "Green Book 2.1 theory contributes the valid-small-case workflow, recurrence discipline, and pattern-to-proof boundary to canonical simplification Knowledge."
     },
     {
       "key": "green-book::2.1.screwy-pirates::question",
@@ -4656,11 +4658,16 @@
         "problem-simplification"
       ],
       "sortKey": "02.01|01|0007|green-book::2.1.screwy-pirates::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "sequential-voting-elimination-backward-induction"
+      ],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification",
+        "recursion-problem-solving"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "The sequential allocation vote becomes the canonical backward-induction Problem, with the recurrence and tie assumptions exposed rather than a source-named wrapper."
     },
     {
       "key": "green-book::2.1.tiger-and-sheep::question",
@@ -4681,11 +4688,15 @@
         "problem-simplification"
       ],
       "sortKey": "02.01|01|0008|green-book::2.1.tiger-and-sheep::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "predator-replacement-parity"
+      ],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "The replacement-predator process becomes the canonical parity-induction Problem, with action and preference assumptions made explicit."
     },
     {
       "key": "red-book::8::8.2",
@@ -4711,11 +4722,13 @@
         "problem-simplification"
       ],
       "sortKey": "02.01|02|1203|red-book::8::8.2",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "The mental-cube prompt is retained as a Knowledge check on arithmetic decomposition, not expanded into a low-depth public Problem."
     },
     {
       "key": "red-book::8::8.5",
@@ -4741,11 +4754,13 @@
         "problem-simplification"
       ],
       "sortKey": "02.01|02|1206|red-book::8::8.5",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "The exponential-growth prompt is retained as a Knowledge check on backing up from a known endpoint, not expanded into a trick page."
     },
     {
       "key": "red-book::8::8.25",
@@ -4762,7 +4777,7 @@
       "solutionPages": [
         {
           "startPage": 307,
-          "endPage": 308
+          "endPage": 307
         }
       ],
       "primaryTopic": "problem-simplification",
@@ -4771,11 +4786,13 @@
         "problem-simplification"
       ],
       "sortKey": "02.01|02|1226|red-book::8::8.25",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "fermi-estimation-assumption-decomposition"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "The service-location estimate resolves to source-neutral Fermi-estimation Knowledge without publishing a dated country total."
     },
     {
       "key": "red-book::8::8.26",
@@ -4801,11 +4818,13 @@
         "problem-simplification"
       ],
       "sortKey": "02.01|02|1227|red-book::8::8.26",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "fermi-estimation-assumption-decomposition"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "The specialized-provider estimate resolves to source-neutral Fermi-estimation Knowledge without publishing a dated city total."
     },
     {
       "key": "150-most-frequently-asked::2.7::8",
@@ -4828,14 +4847,21 @@
       "primaryTopic": "problem-simplification",
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning",
-        "problem-simplification"
+        "problem-simplification",
+        "algorithms-data-structures-cpp",
+        "dynamic-programming-algorithms"
       ],
       "sortKey": "02.01|03|1135|150-most-frequently-asked::2.7::8",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "two-egg-threshold-search"
+      ],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification",
+        "recursion-problem-solving"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "The two-resource threshold family becomes the canonical minimax recurrence Problem and receives a justified Dynamic Programming topic refinement."
     },
     {
       "key": "150-most-frequently-asked::2.7::16",
@@ -4861,11 +4887,15 @@
         "problem-simplification"
       ],
       "sortKey": "02.01|03|1143|150-most-frequently-asked::2.7::16",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "large-power-digit-count-without-log-tables"
+      ],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "The large-power digit-count family becomes the canonical strict-bounds Problem without log tables or direct expansion."
     },
     {
       "key": "150-most-frequently-asked::2.7::23",
@@ -4888,14 +4918,20 @@
       "primaryTopic": "problem-simplification",
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning",
-        "problem-simplification"
+        "problem-simplification",
+        "algorithms-data-structures-cpp",
+        "algorithmic-complexity"
       ],
       "sortKey": "02.01|03|1150|150-most-frequently-asked::2.7::23",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "minimum-comparisons-for-both-extremes"
+      ],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "The joint-extremes comparison family becomes the canonical optimal-comparison Problem and receives a justified Algorithmic Complexity topic refinement."
     },
     {
       "key": "150-most-frequently-asked::2.7::30",
@@ -4912,7 +4948,7 @@
       "solutionPages": [
         {
           "startPage": 215,
-          "endPage": 216
+          "endPage": 215
         }
       ],
       "primaryTopic": "problem-simplification",
@@ -4921,11 +4957,13 @@
         "problem-simplification"
       ],
       "sortKey": "02.01|03|1157|150-most-frequently-asked::2.7::30",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+      "resolutionNote": "The round-cover prompt is retained as a Knowledge check on structural geometry, not expanded into a one-answer public Problem."
     },
     {
       "key": "green-book::2.2::theory",

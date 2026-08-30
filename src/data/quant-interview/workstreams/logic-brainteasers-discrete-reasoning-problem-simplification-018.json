@@ -1,0 +1,95 @@
+{
+  "id": "logic-brainteasers-discrete-reasoning-problem-simplification-018",
+  "canonicalTopics": [
+    "logic-brainteasers-discrete-reasoning",
+    "problem-simplification"
+  ],
+  "status": "active",
+  "masterItemKeys": [
+    "green-book::2.1::theory",
+    "green-book::2.1.screwy-pirates::question",
+    "green-book::2.1.tiger-and-sheep::question",
+    "red-book::8::8.2",
+    "red-book::8::8.5",
+    "red-book::8::8.25",
+    "red-book::8::8.26",
+    "150-most-frequently-asked::2.7::8",
+    "150-most-frequently-asked::2.7::16",
+    "150-most-frequently-asked::2.7::23",
+    "150-most-frequently-asked::2.7::30"
+  ],
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": [
+        "2.1",
+        "2.1.screwy-pirates",
+        "2.1.tiger-and-sheep"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 19,
+          "endPage": 21
+        }
+      ],
+      "reviewOutcome": "complete-problem-simplification-topic-review",
+      "reviewNote": "Three consecutive Green records establish the small-case method and two canonical recurrence or backward-induction Problems."
+    },
+    {
+      "source": "red-book",
+      "sourceSections": [
+        "8"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 288,
+          "endPage": 293
+        },
+        {
+          "startPage": 307,
+          "endPage": 308
+        }
+      ],
+      "reviewOutcome": "selective-problem-simplification-knowledge",
+      "reviewNote": "Four Red prompts resolve to reusable simplification or Fermi-estimation Knowledge without creating low-depth or dated public Problems."
+    },
+    {
+      "source": "150-most-frequently-asked",
+      "sourceSections": [
+        "2.7"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 45,
+          "endPage": 49
+        },
+        {
+          "startPage": 182,
+          "endPage": 185
+        },
+        {
+          "startPage": 192,
+          "endPage": 194
+        },
+        {
+          "startPage": 199,
+          "endPage": 201
+        },
+        {
+          "startPage": 215,
+          "endPage": 216
+        }
+      ],
+      "reviewOutcome": "canonical-problems-and-knowledge-check",
+      "reviewNote": "Four Brainteaser items yield three canonical Problems and one structural Knowledge check, with two justified algorithmic topic refinements."
+    }
+  ],
+  "publicDelta": {
+    "problems": 5,
+    "knowledge": 2
+  },
+  "knowledgeSlugs": [
+    "small-cases-recurrence-and-structural-simplification",
+    "fermi-estimation-assumption-decomposition"
+  ]
+}

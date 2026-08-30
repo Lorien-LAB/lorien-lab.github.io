@@ -97,9 +97,12 @@
       "canonicalTopics": [
         "problem-simplification"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "resolutionNote": "Green Book 2.1 theory contributes the valid-small-case workflow, recurrence discipline, and pattern-to-proof boundary to canonical simplification Knowledge."
     },
     {
       "sourceSection": "2.1.screwy-pirates",
@@ -107,9 +110,15 @@
       "canonicalTopics": [
         "problem-simplification"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "sequential-voting-elimination-backward-induction"
+      ],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification",
+        "recursion-problem-solving"
+      ],
+      "resolutionNote": "The sequential allocation vote becomes the canonical backward-induction Problem, with the recurrence and tie assumptions exposed rather than a source-named wrapper."
     },
     {
       "sourceSection": "2.1.tiger-and-sheep",
@@ -117,9 +126,14 @@
       "canonicalTopics": [
         "problem-simplification"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "predator-replacement-parity"
+      ],
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "resolutionNote": "The replacement-predator process becomes the canonical parity-induction Problem, with action and preference assumptions made explicit."
     },
     {
       "sourceSection": "2.2",
