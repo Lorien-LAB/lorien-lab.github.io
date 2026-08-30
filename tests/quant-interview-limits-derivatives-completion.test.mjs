@@ -114,6 +114,18 @@ test('012 completion contract is phase-safe and pins factual active-gate evidenc
         } else {
           assert.match(handoff, /^## Completed cross-book workstream 16$/m);
           assert.doesNotMatch(current, /Workstream 016 is active/i);
+          const workstream017 = await readJson(
+            'src/data/quant-interview/workstreams/interview-strategy-communication-soft-interview-behavioral-evidence-017.json',
+          );
+          assert.match(workstream017.status, /^(?:active|complete)$/);
+          if (workstream017.status === 'active') {
+            assert.match(current, /Interview Strategy & Communication.*Soft Interview/is);
+            assert.match(current, /Workstream 017 is active/i);
+            assert.doesNotMatch(handoff, /^## Completed cross-book workstream 17$/m);
+          } else {
+            assert.match(handoff, /^## Completed cross-book workstream 17$/m);
+            assert.doesNotMatch(current, /Workstream 017 is active/i);
+          }
         }
       }
     }

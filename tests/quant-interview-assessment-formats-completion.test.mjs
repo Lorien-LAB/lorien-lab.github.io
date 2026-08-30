@@ -4,6 +4,8 @@ import { access, readFile } from 'node:fs/promises';
 
 const manifestPath =
   'src/data/quant-interview/workstreams/interview-strategy-communication-interview-process-formats-assessment-strategy-016.json';
+const nextManifestPath =
+  'src/data/quant-interview/workstreams/interview-strategy-communication-soft-interview-behavioral-evidence-017.json';
 const temporaryArtifact =
   '.github/workflows/quant-interview-assessment-formats-016-temporary.yml';
 const commands = [
@@ -19,8 +21,6 @@ const currentTopicBlock = (handoff) =>
   handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0] ?? '';
 const completedWorkstream16Block = (handoff) =>
   handoff.split(/^## Completed cross-book workstream 16$/m)[1]?.split(/^## /m)[0] ?? '';
-const masterIngestionBlock = (handoff) =>
-  handoff.split(/^## Master directory ingestion state$/m)[1]?.split(/^## /m)[0] ?? '';
 
 test('016 lifecycle is field-safe while active and factually strict when complete', async () => {
   const [manifest, handoff] = await Promise.all([
@@ -44,7 +44,6 @@ test('016 lifecycle is field-safe while active and factually strict when complet
   }
 
   const closure = completedWorkstream16Block(handoff);
-  const masterIngestion = masterIngestionBlock(handoff);
   const gate = manifest.preClosureActiveGate;
   const verification = manifest.verification;
   const finalTree = manifest.finalTreeGate;
@@ -67,6 +66,15 @@ test('016 lifecycle is field-safe while active and factually strict when complet
   assert.match(closure, new RegExp(gate.commit));
   assert.match(closure, new RegExp(String(verification.runId)));
   assert.match(closure, /76 (?:canonical )?Problems.*53 .*Knowledge/is);
-  assert.match(masterIngestion, /First pending master record: `red-book::9\.2::guidance`/i);
   assert.doesNotMatch(current, /Workstream 016 is active/i);
+  const nextManifest = JSON.parse(await readFile(nextManifestPath, 'utf8'));
+  assert.match(nextManifest.status, /^(?:active|complete)$/);
+  if (nextManifest.status === 'active') {
+    assert.match(current, /Interview Strategy & Communication.*Soft Interview/is);
+    assert.match(current, /Workstream 017 is active/i);
+    assert.doesNotMatch(handoff, /^## Completed cross-book workstream 17$/m);
+  } else {
+    assert.match(handoff, /^## Completed cross-book workstream 17$/m);
+    assert.doesNotMatch(current, /Workstream 017 is active/i);
+  }
 });

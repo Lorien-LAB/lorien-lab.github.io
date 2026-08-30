@@ -6,6 +6,8 @@ const manifestPath =
   'src/data/quant-interview/workstreams/interview-strategy-communication-interview-preparation-role-employer-fit-015.json';
 const nextManifestPath =
   'src/data/quant-interview/workstreams/interview-strategy-communication-interview-process-formats-assessment-strategy-016.json';
+const workstream017Path =
+  'src/data/quant-interview/workstreams/interview-strategy-communication-soft-interview-behavioral-evidence-017.json';
 const temporaryArtifact =
   '.github/workflows/quant-interview-role-employer-fit-015-temporary.yml';
 const commands = [
@@ -72,5 +74,18 @@ test('015 lifecycle is field-safe while active and factually strict when complet
   } else {
     assert.match(handoff, /^## Completed cross-book workstream 16$/m);
     assert.doesNotMatch(currentTopicBlock(handoff), /Workstream 016 is active/i);
+    const workstream017 = JSON.parse(await readFile(workstream017Path, 'utf8'));
+    assert.match(workstream017.status, /^(?:active|complete)$/);
+    if (workstream017.status === 'active') {
+      assert.match(
+        currentTopicBlock(handoff),
+        /Interview Strategy & Communication.*Soft Interview/is,
+      );
+      assert.match(currentTopicBlock(handoff), /Workstream 017 is active/i);
+      assert.doesNotMatch(handoff, /^## Completed cross-book workstream 17$/m);
+    } else {
+      assert.match(handoff, /^## Completed cross-book workstream 17$/m);
+      assert.doesNotMatch(currentTopicBlock(handoff), /Workstream 017 is active/i);
+    }
   }
 });

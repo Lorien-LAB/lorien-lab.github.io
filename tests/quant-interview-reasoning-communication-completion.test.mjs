@@ -129,6 +129,21 @@ test('013 completion contract is phase-safe and factually strict', async () => {
       } else {
         assert.match(handoff, /^## Completed cross-book workstream 16$/m);
         assert.doesNotMatch(currentTopicBlock(handoff), /Workstream 016 is active/i);
+        const workstream017 = await readJson(
+          'src/data/quant-interview/workstreams/interview-strategy-communication-soft-interview-behavioral-evidence-017.json',
+        );
+        assert.match(workstream017.status, /^(?:active|complete)$/);
+        if (workstream017.status === 'active') {
+          assert.match(
+            currentTopicBlock(handoff),
+            /Interview Strategy & Communication.*Soft Interview/is,
+          );
+          assert.match(currentTopicBlock(handoff), /Workstream 017 is active/i);
+          assert.doesNotMatch(handoff, /^## Completed cross-book workstream 17$/m);
+        } else {
+          assert.match(handoff, /^## Completed cross-book workstream 17$/m);
+          assert.doesNotMatch(currentTopicBlock(handoff), /Workstream 017 is active/i);
+        }
       }
     }
   }

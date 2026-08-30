@@ -672,15 +672,17 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**No bounded topic is active. Workstream 016 is complete.**
+**Interview Strategy & Communication → Soft Interview.**
 
-A later workstream requires its own approved design and evidence audit; workstream 017 is not active or authorized by this closure.
+Workstream 017 is active at `red-book::9.2::guidance` and `red-book::9.2::9.1` through `red-book::9.2::9.22`. Its public delta is +0 Problems / +1 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.
 
 ## Master directory ingestion state
 
-**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+**Workstream 017 is active. The three-book master directory migration remains complete.**
 
-First pending master record: `red-book::9.2::guidance`
+First pending master record after the active 017 scope: `green-book::2.1::theory`
+
+The observed next key does not authorize workstream 018.
 
 ## Parallel workstream coordination
 

@@ -6,13 +6,13 @@
 
 ## Summary
 
-- Published Knowledge: 53
+- Published Knowledge: 54
 - Planned Knowledge: 0
 - Canonical Problems: 76
 - Master records: 750
-- Terminal master records: 205
-- Pending master records: 545
-- First pending: `red-book::9.2::guidance`
+- Terminal master records: 228
+- Pending master records: 522
+- First pending: `green-book::2.1::theory`
 
 
 ## 01. Interview Strategy & Communication
@@ -22,7 +22,7 @@
 - Green Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`
 - Red Book sections: `1.1`, `1.2`, `1.3`, `1.4`, `1.5`, `1.6`, `1.7`, `1.8`, `1.9`, `1.10`, `1.11`, `1.12`, `9`, `9.2`, `9.3`
 - 150 Questions sections: None
-- Workstreams: `interview-strategy-communication-interview-preparation-014` (complete), `interview-strategy-communication-interview-preparation-role-employer-fit-015` (complete), `interview-strategy-communication-interview-process-formats-assessment-strategy-016` (complete), `interview-strategy-communication-reasoning-communication-013` (complete)
+- Workstreams: `interview-strategy-communication-interview-preparation-014` (complete), `interview-strategy-communication-interview-preparation-role-employer-fit-015` (complete), `interview-strategy-communication-interview-process-formats-assessment-strategy-016` (complete), `interview-strategy-communication-reasoning-communication-013` (complete), `interview-strategy-communication-soft-interview-behavioral-evidence-017` (active)
 
 ### Modules
 
@@ -32,7 +32,7 @@
 ### Coverage records
 
 - Green Book: `knowledge-only`: 5
-- Red Book: `interview-guidance`: 17, `knowledge-only`: 9, `pending`: 1
+- Red Book: `interview-guidance`: 22, `knowledge-only`: 27
 - 150 Questions: None
 
 
@@ -152,51 +152,52 @@
 
 ### 01.04. Soft Interview
 
-- Curriculum: 0 published / 0 planned
+- Curriculum: 1 published / 0 planned
 - Problems: 0
 - Green Book sections: None
 - Red Book sections: `9.2`
 - 150 Questions sections: None
-- Workstreams: None
+- Workstreams: `interview-strategy-communication-soft-interview-behavioral-evidence-017` (active)
 
 #### Modules
 
 | Order | State | Slug | Prerequisites |
 |---:|---|---|---|
+| 13 | published | `behavioral-interview-evidence-and-authenticity` | None |
 
 #### Coverage records
 
 - Green Book: None
-- Red Book: `pending`: 1
+- Red Book: `interview-guidance`: 5, `knowledge-only`: 18
 - 150 Questions: None
 
 #### Master queue records
 
 | Key | State | Question pages | Solution pages | Targets |
 |---|---|---:|---:|---|
-| `red-book::9.2::guidance` | `pending` | 309–315 | None | None |
-| `red-book::9.2::9.1` | `pending` | 309–310 | 309–310 | None |
-| `red-book::9.2::9.2` | `pending` | 310 | 310–311 | None |
-| `red-book::9.2::9.3` | `pending` | 310–311 | 310–311 | None |
-| `red-book::9.2::9.4` | `pending` | 311 | 311 | None |
-| `red-book::9.2::9.5` | `pending` | 311 | 311 | None |
-| `red-book::9.2::9.6` | `pending` | 311–312 | 311–312 | None |
-| `red-book::9.2::9.7` | `pending` | 312 | 312 | None |
-| `red-book::9.2::9.8` | `pending` | 312 | 312 | None |
-| `red-book::9.2::9.9` | `pending` | 312 | 312 | None |
-| `red-book::9.2::9.10` | `pending` | 312 | 312 | None |
-| `red-book::9.2::9.11` | `pending` | 312–313 | 312–313 | None |
-| `red-book::9.2::9.12` | `pending` | 313 | 312–313 | None |
-| `red-book::9.2::9.13` | `pending` | 313 | 313–314 | None |
-| `red-book::9.2::9.14` | `pending` | 313–314 | 313–314 | None |
-| `red-book::9.2::9.15` | `pending` | 314 | 314 | None |
-| `red-book::9.2::9.16` | `pending` | 314 | 314 | None |
-| `red-book::9.2::9.17` | `pending` | 314 | 314 | None |
-| `red-book::9.2::9.18` | `pending` | 314 | 314 | None |
-| `red-book::9.2::9.19` | `pending` | 314–315 | 314–315 | None |
-| `red-book::9.2::9.20` | `pending` | 315 | 315 | None |
-| `red-book::9.2::9.21` | `pending` | 315 | 315 | None |
-| `red-book::9.2::9.22` | `pending` | 315–316 | 315 | None |
+| `red-book::9.2::guidance` | `knowledge-only` | 309–315 | None | `behavioral-interview-evidence-and-authenticity` |
+| `red-book::9.2::9.1` | `knowledge-only` | 309–310 | 309–310 | `behavioral-interview-evidence-and-authenticity`, `quant-role-and-employer-fit` |
+| `red-book::9.2::9.2` | `knowledge-only` | 310 | 310 | `behavioral-interview-evidence-and-authenticity` |
+| `red-book::9.2::9.3` | `interview-guidance` | 310 | 310 | None |
+| `red-book::9.2::9.4` | `knowledge-only` | 311 | 311 | `behavioral-interview-evidence-and-authenticity`, `quant-role-and-employer-fit` |
+| `red-book::9.2::9.5` | `knowledge-only` | 311 | 311 | `behavioral-interview-evidence-and-authenticity` |
+| `red-book::9.2::9.6` | `knowledge-only` | 311 | 311 | `behavioral-interview-evidence-and-authenticity` |
+| `red-book::9.2::9.7` | `knowledge-only` | 312 | 312 | `behavioral-interview-evidence-and-authenticity` |
+| `red-book::9.2::9.8` | `interview-guidance` | 312 | 312 | None |
+| `red-book::9.2::9.9` | `knowledge-only` | 312 | 312 | `behavioral-interview-evidence-and-authenticity`, `quant-role-and-employer-fit` |
+| `red-book::9.2::9.10` | `knowledge-only` | 312 | 312 | `behavioral-interview-evidence-and-authenticity`, `quant-role-and-employer-fit` |
+| `red-book::9.2::9.11` | `knowledge-only` | 312–313 | 312–313 | `behavioral-interview-evidence-and-authenticity`, `structured-think-aloud-reasoning` |
+| `red-book::9.2::9.12` | `interview-guidance` | 313 | 313 | None |
+| `red-book::9.2::9.13` | `knowledge-only` | 313 | 313 | `behavioral-interview-evidence-and-authenticity` |
+| `red-book::9.2::9.14` | `knowledge-only` | 313 | 313 | `behavioral-interview-evidence-and-authenticity` |
+| `red-book::9.2::9.15` | `interview-guidance` | 314 | 314 | None |
+| `red-book::9.2::9.16` | `interview-guidance` | 314 | 314 | None |
+| `red-book::9.2::9.17` | `knowledge-only` | 314 | 314 | `behavioral-interview-evidence-and-authenticity` |
+| `red-book::9.2::9.18` | `knowledge-only` | 314 | 314 | `behavioral-interview-evidence-and-authenticity`, `quant-interview-preparation-breadth-and-practice` |
+| `red-book::9.2::9.19` | `knowledge-only` | 314–315 | 314–315 | `behavioral-interview-evidence-and-authenticity`, `quant-role-and-employer-fit` |
+| `red-book::9.2::9.20` | `knowledge-only` | 315 | 315 | `behavioral-interview-evidence-and-authenticity`, `quant-role-and-employer-fit` |
+| `red-book::9.2::9.21` | `knowledge-only` | 315 | 315 | `behavioral-interview-evidence-and-authenticity` |
+| `red-book::9.2::9.22` | `knowledge-only` | 315 | 315 | `behavioral-interview-evidence-and-authenticity`, `quant-role-and-employer-fit` |
 
 
 ## 02. Logic, Brainteasers & Discrete Reasoning

@@ -2,10 +2,6 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import {
-  getNextPendingItem,
-  TERMINAL_STATES,
-} from '../src/lib/quantInterviewMasterDirectory.mjs';
-import {
   loadMasterDirectoryRepository,
   validateMasterDirectoryRepository,
 } from '../scripts/validate-quant-interview-master-directory.mjs';
@@ -194,21 +190,4 @@ test('016 preserves literal source identity while repairing only Red 1.7 pages',
     };
   });
   assert.deepEqual(actual, identityFixtures);
-});
-
-test('016 yields exact 76/53, 205/545, and Red 9.2 next', async () => {
-  const inputs = await loadMasterDirectoryRepository(process.cwd());
-  assert.equal(inputs.problemSlugs.size, 76);
-  assert.equal(inputs.knowledgeSlugs.size, 53);
-  assert.equal(
-    inputs.directory.items.filter((item) => TERMINAL_STATES.has(item.state))
-      .length,
-    205,
-  );
-  assert.equal(
-    inputs.directory.items.filter((item) => item.state === 'pending').length,
-    545,
-  );
-  assert.equal(getNextPendingItem(inputs.directory)?.key, 'red-book::9.2::guidance');
-  assert.equal(inputs.workstreams.some(({ id }) => /-017$/.test(id)), false);
 });
