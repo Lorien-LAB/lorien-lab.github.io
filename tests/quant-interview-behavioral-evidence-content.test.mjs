@@ -55,11 +55,15 @@ test('behavioral-evidence page has exact byte-zero frontmatter', async () => {
 
 test('behavioral-evidence page implements the exact answer framework and prompt bank', async () => {
   const text = await readFile(knowledgePath, 'utf8');
-  for (const heading of [
+  const approvedHeadings = [
     'Core Idea', 'Four-Part Answer Structure', 'Evidence Quality', 'Prompt Families',
     'Answer Preparation Workflow', 'Authenticity and Integrity Boundary',
     'Practice Prompts', 'Common Mistakes', 'Interview Checks',
-  ]) assert.match(text, new RegExp(`^## ${heading}$`, 'm'));
+  ];
+  assert.deepEqual(
+    [...text.matchAll(/^(#{1,6})\s+(.+)$/gm)].map(([, hashes, heading]) => `${hashes.length}:${heading}`),
+    approvedHeadings.map((heading) => `2:${heading}`),
+  );
   for (const word of ['Claim', 'Evidence', 'Relevance', 'Reflection']) {
     assert.match(text, new RegExp(`\\b${word}\\b`, 'i'));
   }
@@ -120,6 +124,7 @@ test('behavioral page rejects scripts, stereotypes, source answers, and skipped 
   assert.doesNotMatch(text, /^#{1,6}\s*(?:Sample|Example|Model|Suggested Answer)\b/im);
   assert.doesNotMatch(text, /\b(?:Sample|Example|Model|Suggested Answer)\s*(?:Answer|Response)?\s*:/i);
   assert.doesNotMatch(text, /\bI\s+(?:led|built|managed|delivered|did|was|am)\b/i);
+  assert.doesNotMatch(text, /\b(?:I|me|my|mine|myself)\b/i);
   assert.doesNotMatch(text, /Red Book|Quant Job Interview Questions and Answers|Question 9\.(?:[1-9]|1\d|2[0-2])|PDF page/i);
   assert.doesNotMatch(text, /swearing|share price|own shares|French food|first thing.*first day|Goldman Sachs|answer had better be|team player/i);
   const files = await readdir('src/content/problems', { recursive: true });
