@@ -184,7 +184,7 @@
 | `red-book::9.2::9.6` | `knowledge-only` | 311 | 311 | `behavioral-interview-evidence-and-authenticity` |
 | `red-book::9.2::9.7` | `knowledge-only` | 312 | 312 | `behavioral-interview-evidence-and-authenticity` |
 | `red-book::9.2::9.8` | `interview-guidance` | 312 | 312 | None |
-| `red-book::9.2::9.9` | `knowledge-only` | 312 | 312 | `behavioral-interview-evidence-and-authenticity`, `quant-role-and-employer-fit` |
+| `red-book::9.2::9.9` | `knowledge-only` | 312 | 312 | `behavioral-interview-evidence-and-authenticity` |
 | `red-book::9.2::9.10` | `knowledge-only` | 312 | 312 | `behavioral-interview-evidence-and-authenticity`, `quant-role-and-employer-fit` |
 | `red-book::9.2::9.11` | `knowledge-only` | 312–313 | 312–313 | `behavioral-interview-evidence-and-authenticity`, `structured-think-aloud-reasoning` |
 | `red-book::9.2::9.12` | `interview-guidance` | 313 | 313 | None |

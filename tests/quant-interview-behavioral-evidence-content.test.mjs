@@ -136,9 +136,19 @@ test('behavioral-evidence page implements the exact answer framework and prompt 
 
 test('behavioral page rejects scripts, stereotypes, source answers, and skipped identities', async () => {
   const text = await readFile(knowledgePath, 'utf8');
-  assert.match(text, /invented stories|fabricat/i);
-  assert.match(text, /borrowed accomplishments|copied/i);
-  assert.match(text, /memorized script|exact wording/i);
+  const authenticityBoundary =
+    text.split(/^## Authenticity and Integrity Boundary$/m)[1]?.split(/^## /m)[0] ?? '';
+  for (const [category, pattern] of [
+    ['invented stories', /invent(?:ed|ing) stor(?:y|ies)|fabricat/i],
+    ['borrowed accomplishments', /borrowed accomplishments?/i],
+    ['unsupported scripted claims', /(?:script(?:ed)? claims?.*without evidence|script.*unsupported claims?)/i],
+    ['manipulating or flattering difficult colleagues', /(?:manipulat(?:e|ing)|flatter(?:ing)?).*(?:difficult )?(?:colleague|coworker|collaborator)/i],
+    ['disguised-strength weaknesses', /(?:disguis(?:e|ing)|present).*weakness.*(?:as|into).*strength/i],
+    ['mandatory affirmative culture or tool answers', /(?:mandatory.*affirmative|affirmative answer.*mandatory).*(?:culture|tool)|(?:culture|tool).*mandatory.*(?:yes|affirmative)/i],
+    ['superficial interest proxies', /ownership.*food.*prestige.*compensation/i],
+    ['repeating a preferred source answer', /(?:repeat|repeating).*(?:guide|source).*preferred answer|preferred answer.*(?:guide|source)/i],
+  ]) assert.match(authenticityBoundary, pattern, category);
+  assert.match(authenticityBoundary, /memorized script|exact wording/i);
   assert.doesNotMatch(text, /^#{1,6}\s*(?:Sample|Example|Model|Suggested Answer)\b/im);
   assert.doesNotMatch(text, /\b(?:Sample|Example|Model|Suggested Answer)\s*(?:Answer|Response)?\s*:/i);
   assert.doesNotMatch(text, /\bI\s+(?:led|built|managed|delivered|did|was|am)\b/i);

@@ -776,10 +776,9 @@
       "state": "knowledge-only",
       "canonicalProblems": [],
       "canonicalKnowledge": [
-        "behavioral-interview-evidence-and-authenticity",
-        "quant-role-and-employer-fit"
+        "behavioral-interview-evidence-and-authenticity"
       ],
-      "resolutionNote": "Red Book 9.9 organization-specific research evidence resolves to the behavioral-evidence and role-fit Knowledge pages without publishing current facts."
+      "resolutionNote": "Red Book 9.9 organization-specific research evidence resolves to the behavioral-evidence Knowledge page without publishing current facts."
     },
     {
       "sourceSection": "9.2",

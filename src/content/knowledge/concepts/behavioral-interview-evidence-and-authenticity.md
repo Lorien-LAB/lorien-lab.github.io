@@ -58,7 +58,9 @@ Do a follow-up pass for every story: identify the weakest causal link, a plausib
 
 ## Authenticity and Integrity Boundary
 
-Use only experiences you can discuss accurately. Do not invent stories, fabricate metrics, inflate ownership, or present borrowed accomplishments as your own. Do not use copied answers or present a borrowed accomplishment as your own. It is acceptable to say that an example is limited, that a result was mixed, or that you do not know.
+Use only experiences you can discuss accurately. Do not invent stories, fabricate metrics, inflate ownership, or present borrowed accomplishments as your own. Do not offer scripted claims without evidence. It is acceptable to say that an example is limited, that a result was mixed, or that you do not know.
+
+Do not manipulate or flatter a difficult colleague; describe concrete interactions and boundaries instead. Do not disguise a weakness as a strength. Do not treat an affirmative answer as mandatory for culture or tool questions. Do not use ownership, food preferences, prestige, or compensation as superficial proxies for genuine interest. Do not repeat a guide’s preferred answer.
 
 Avoid a memorized script or exact wording. Prepare facts, decisions, and reflections as cues, then answer the question actually asked. If pressured toward a preferred answer, preserve the truth: state the real preference, qualify uncertainty, and explain what evidence could change your view. Confidentiality also matters; describe sensitive work at an appropriate level without revealing restricted data.
 
