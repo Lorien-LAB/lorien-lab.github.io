@@ -4,7 +4,7 @@
     "logic-brainteasers-discrete-reasoning",
     "problem-simplification"
   ],
-  "status": "active",
+  "status": "complete",
   "masterItemKeys": [
     "green-book::2.1::theory",
     "green-book::2.1.screwy-pirates::question",
@@ -91,5 +91,45 @@
   "knowledgeSlugs": [
     "small-cases-recurrence-and-structural-simplification",
     "fermi-estimation-assumption-decomposition"
-  ]
+  ],
+  "preClosureActiveGate": {
+    "status": "active",
+    "commit": "f63bf8529e1833f2e122c59cc29dc44843168edc",
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "f63bf8529e1833f2e122c59cc29dc44843168edc",
+    "runId": 33305049381,
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifacts": [
+      ".github/workflows/quant-interview-problem-simplification-018-temporary.yml"
+    ]
+  },
+  "finalTreeGate": {
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifactsAbsent": true
+  }
 }

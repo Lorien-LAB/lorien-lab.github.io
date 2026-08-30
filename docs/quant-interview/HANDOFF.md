@@ -723,17 +723,29 @@ All 23 owned rows are terminal, yielding exactly **228 terminal / 522 pending** 
 
 The 23 source records remain internal evidence. The public page is source-neutral and provides prompts and an answer-building method, not copied source answers, prescribed personality, or fabricated user experience. It rejects invented stories, borrowed accomplishments, and memorized scripts. This closes only registered workstream 017 and the exact Red Book 9.2 scope on evidence pages 309–315; it does not claim completeness for Soft Interview, Interview Strategy & Communication, the Red Book, any source book, or any material outside that bounded scope.
 
-## Active cross-book workstream 18
+## Completed cross-book workstream 18
 
 `logic-brainteasers-discrete-reasoning-problem-simplification-018`
 
-Status: **active and evidence-free**. The manifest has no `preClosureActiveGate`, `verification`, or `finalTreeGate`; completion evidence must not be added until the exact active commit passes Windows, WSL, and GitHub CI.
+Status: **complete**.
 
 Scope: **Logic, Brainteasers & Discrete Reasoning → Problem Simplification**. The exact eleven-record cross-book scope is distributed **3 Green / 4 Red / 4 150 Questions**:
 
 - Green Book (3): `green-book::2.1::theory`, `green-book::2.1.screwy-pirates::question`, and `green-book::2.1.tiger-and-sheep::question`.
 - Red Book (4): `red-book::8::8.2`, `red-book::8::8.5`, `red-book::8::8.25`, and `red-book::8::8.26`.
 - 150 Most Frequently Asked Questions (4): `150-most-frequently-asked::2.7::8`, `150-most-frequently-asked::2.7::16`, `150-most-frequently-asked::2.7::23`, and `150-most-frequently-asked::2.7::30`.
+
+### Active integrated verification
+
+- CI-tested pre-closure active commit: `f63bf8529e1833f2e122c59cc29dc44843168edc`.
+- Windows environment: the locked feature worktree at `D:\lorien-lab.github.io\.worktrees\problem-simplification-018` used Windows Node 24 and passed all five ordered gates at the exact active commit.
+- WSL environment: a fresh detached native-filesystem checkout used WSL2 Ubuntu, native Node `v24.20.0`, LF-only tracked text, and passed `npm ci` plus all five ordered gates at the exact active commit; its exact proof path and registration were removed without pruning the Windows repository.
+- CI environment: GitHub Actions run `33305049381` at `https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33305049381` used Ubuntu and Node 24, ran `npm ci`, and passed all five ordered gates with `head_sha` `f63bf8529e1833f2e122c59cc29dc44843168edc`.
+- Ordered gates: `npm test`, `npm run knowledge:directory:check`, `npm run master:directory:check`, `npm run check`, then `npm run build`.
+- Workflow-free active-state proof: removal commit `3698e8f22c867f4395f29ad0af8e2d1566ceaa9a` passed `npm ci`, an LF audit, and the same five gates in a fresh detached `wsl-native-lf-node24` checkout; the temporary workflow was absent, the manifest remained active and evidence-free, and the proof path and registration were removed without pruning.
+- Conclusion: success.
+
+This evidence belongs to the immutable active commit above, not to the later workflow-free closure commit. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`.
 
 ### Canonical Knowledge
 
@@ -748,13 +760,32 @@ Scope: **Logic, Brainteasers & Discrete Reasoning → Problem Simplification**. 
 - **Digit Count of a Large Power Without Log Tables** — `large-power-digit-count-without-log-tables`.
 - **Minimum Comparisons for Both Extremes** — `minimum-comparisons-for-both-extremes`.
 
-### Exact dispositions, refinements, and repairs
+Workstream 018 adds exactly **+5 Problems / +2 Knowledge**, producing the current **81 Problems / 56 Knowledge** source-neutral corpus.
 
-- The eleven records resolve to exactly **5 `canonical-problem` / 6 `knowledge-only`**. Workstream 018 adds exactly **+5 Problems / +2 Knowledge**, producing the current **81 Problems / 56 Knowledge** corpus and **239 terminal / 511 pending** master-directory state.
-- Exactly two item-level topic overrides are present: `150-most-frequently-asked::2.7::8` adds `dynamic-programming-algorithms`, and `150-most-frequently-asked::2.7::23` adds `algorithmic-complexity`. The other nine rows remain solely under `problem-simplification`.
+### Exact eleven dispositions
+
+- `green-book::2.1::theory` is `knowledge-only` and resolves to `small-cases-recurrence-and-structural-simplification`.
+- `green-book::2.1.screwy-pirates::question` is `canonical-problem` and resolves to `sequential-voting-elimination-backward-induction`, with `small-cases-recurrence-and-structural-simplification` and `recursion-problem-solving` Knowledge.
+- `green-book::2.1.tiger-and-sheep::question` is `canonical-problem` and resolves to `predator-replacement-parity`, with `small-cases-recurrence-and-structural-simplification` Knowledge.
+- `red-book::8::8.2` is `knowledge-only` and resolves to `small-cases-recurrence-and-structural-simplification`.
+- `red-book::8::8.5` is `knowledge-only` and resolves to `small-cases-recurrence-and-structural-simplification`.
+- `red-book::8::8.25` is `knowledge-only` and resolves to `fermi-estimation-assumption-decomposition`.
+- `red-book::8::8.26` is `knowledge-only` and resolves to `fermi-estimation-assumption-decomposition`.
+- `150-most-frequently-asked::2.7::8` is `canonical-problem` and resolves to `two-egg-threshold-search`, with `small-cases-recurrence-and-structural-simplification` and `recursion-problem-solving` Knowledge.
+- `150-most-frequently-asked::2.7::16` is `canonical-problem` and resolves to `large-power-digit-count-without-log-tables`, with `small-cases-recurrence-and-structural-simplification` Knowledge.
+- `150-most-frequently-asked::2.7::23` is `canonical-problem` and resolves to `minimum-comparisons-for-both-extremes`, with `small-cases-recurrence-and-structural-simplification` Knowledge.
+- `150-most-frequently-asked::2.7::30` is `knowledge-only` and resolves to `small-cases-recurrence-and-structural-simplification`.
+
+The exact state split is **5 `canonical-problem` / 6 `knowledge-only`**. All eleven rows are terminal, yielding exactly **239 terminal / 511 pending** master-directory records. The next pending record is `green-book::2.2::theory`.
+
+### Topic refinements and page repairs
+
+- `150-most-frequently-asked::2.7::8` adds `dynamic-programming-algorithms` because item-level review identifies a minimax state recurrence with reusable subproblem structure, so this specific Brainteaser also belongs to Dynamic Programming.
+- `150-most-frequently-asked::2.7::23` adds `algorithmic-complexity` because item-level review identifies an optimal comparison algorithm plus matching lower bound, so this specific Brainteaser also belongs to Algorithmic Complexity.
+- The other nine rows remain solely under `problem-simplification` and have no topic override.
 - Exactly two page fields were repaired: `red-book::8::8.25` solution pages changed from 307–308 to 307, and `150-most-frequently-asked::2.7::30` solution pages changed from 215–216 to 215. Every other question and solution page field in the eleven-record fixture is unchanged.
 
-### Active boundary
+### Source-neutral and Fermi boundary
 
 All public Knowledge and Problems remain source-neutral. The Fermi material teaches assumption decomposition, sensitivity, validation, and uncertainty rather than publishing dated source-era totals. Arithmetic shortcuts, endpoint tricks, and the one-answer geometry prompt remain visible Knowledge checks rather than low-value public Problems.
 
@@ -780,15 +811,15 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**Logic, Brainteasers & Discrete Reasoning → Problem Simplification.**
+**No bounded topic is active. Workstream 018 is complete.**
 
-Workstream 018 is active across the exact eleven-record cross-book Problem Simplification scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.
+A later workstream requires its own approved design and evidence audit; workstream 019 is not active or authorized by this closure.
 
 ## Master directory ingestion state
 
-**Workstream 018 owns the exact eleven-record Problem Simplification scope. The three-book master directory migration remains complete.**
+**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
 
-First pending master record after the active 018 scope: `green-book::2.2::theory`
+First pending master record: `green-book::2.2::theory`
 
 Workstream 019 is not active or authorized.
 

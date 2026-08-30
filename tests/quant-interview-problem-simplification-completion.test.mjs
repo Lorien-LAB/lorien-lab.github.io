@@ -49,3 +49,14 @@ test('018 alone advances the exact public and master contracts without 019', asy
   const workstreams = await readdir('src/data/quant-interview/workstreams');
   assert.equal(workstreams.some((file) => /-019\.json$/.test(file)), false);
 });
+
+test('018 final tree is complete and workflow-free', async () => {
+  const [manifest, handoff] = await Promise.all([
+    readFile(manifestPath, 'utf8').then(JSON.parse),
+    readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
+  ]);
+  assert.equal(manifest.status, 'complete');
+  assert.match(handoff, /^## Completed cross-book workstream 18$/m);
+  assert.equal(currentBlock(handoff), completeCurrent);
+  await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
+});

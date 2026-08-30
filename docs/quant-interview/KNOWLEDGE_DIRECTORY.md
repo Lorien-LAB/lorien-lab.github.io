@@ -207,7 +207,7 @@
 - Green Book sections: `2.1`, `2.1.screwy-pirates`, `2.1.tiger-and-sheep`, `2.2`, `2.2.birthday-problem`, `2.2.burning-ropes`, `2.2.card-game`, `2.2.defective-ball`, `2.2.horse-race`, `2.2.infinite-sequence`, `2.2.river-crossing`, `2.2.trailing-zeros`, `2.3`, `2.3.box-packing`, `2.3.calendar-cubes`, `2.3.door-to-offer`, `2.3.last-ball`, `2.3.light-switches`, `2.3.message-delivery`, `2.3.quant-salary`, `2.4`, `2.4.coin-piles`, `2.4.mislabeled-bags`, `2.4.wise-men`, `2.5`, `2.5.clock-pieces`, `2.5.counterfeit-coins-i`, `2.5.missing-integers`, `2.6`, `2.6.ants-on-a-square`, `2.6.counterfeit-coins-ii`, `2.6.handshakes`, `2.6.have-we-met-before`, `2.6.matching-socks`, `2.7`, `2.7.chameleon-colors`, `2.7.division-by-9`, `2.7.prisoner-problem`, `2.8`, `2.8.chocolate-bar-problem`, `2.8.coin-split-problem`, `2.8.race-track`, `2.9`, `2.9.irrational-number`, `2.9.rainbow-hats`
 - Red Book sections: `8`, `10`, `10.2`
 - 150 Questions sections: `1`, `2.7`, `3.7`
-- Workstreams: `logic-brainteasers-discrete-reasoning-problem-simplification-018` (active)
+- Workstreams: `logic-brainteasers-discrete-reasoning-problem-simplification-018` (complete)
 
 ### Modules
 
@@ -229,7 +229,7 @@
 - Green Book sections: `2.1`, `2.1.screwy-pirates`, `2.1.tiger-and-sheep`
 - Red Book sections: None
 - 150 Questions sections: None
-- Workstreams: `logic-brainteasers-discrete-reasoning-problem-simplification-018` (active)
+- Workstreams: `logic-brainteasers-discrete-reasoning-problem-simplification-018` (complete)
 
 #### Modules
 

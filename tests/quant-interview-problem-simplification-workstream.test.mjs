@@ -80,10 +80,17 @@ const pages = {
   '150-most-frequently-asked::2.7::30': [page(49), page(215)],
 };
 
-test('018 active manifest is exact and evidence-free', async () => {
+test('018 manifest preserves immutable scope across the lifecycle', async () => {
   const manifest = await readJson(manifestPath);
-  assert.deepEqual(manifest, expectedActiveManifest);
-  for (const field of ['preClosureActiveGate', 'verification', 'finalTreeGate']) assert.equal(field in manifest, false);
+  if (manifest.status === 'active') {
+    assert.deepEqual(manifest, expectedActiveManifest);
+    return;
+  }
+  assert.equal(manifest.status, 'complete');
+  const { preClosureActiveGate, verification, finalTreeGate, ...immutable } = manifest;
+  const { status: _activeStatus, ...immutableActive } = expectedActiveManifest;
+  assert.deepEqual(immutable, { ...immutableActive, status: 'complete' });
+  assert.ok(preClosureActiveGate && verification && finalTreeGate);
 });
 
 test('018 records exact terminal source decisions and two topic overrides', async () => {
