@@ -162,6 +162,7 @@ test('built OMD benchmark classification names the executed PIT account and non-
   await buildSite();
   const detailHtml = await readFile(detailOutput, 'utf8');
   assert.match(detailHtml, /executed PIT equal-weight account/i);
+  assert.match(detailHtml, /executed PIT equal-weight account, not merely a membership-weight series\. It uses the exact signal-date PIT membership/i);
   assert.match(detailHtml, /same next-open A-share execution/i);
   assert.match(detailHtml, /modeled costs and capacity/i);
   assert.match(detailHtml, /frozen last-close delist convention/i);
