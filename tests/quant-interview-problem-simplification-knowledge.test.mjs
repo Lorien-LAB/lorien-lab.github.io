@@ -43,12 +43,22 @@ function section(text, heading) {
   return text.split(new RegExp(`^## ${heading}$`, 'm'))[1]?.split(/^## /m)[0] ?? '';
 }
 
+function levelTwoHeadings(text) {
+  return [...text.matchAll(/^## (.+)$/gm)].map((match) => match[1]);
+}
+
+function assertNonemptySections(text, headings) {
+  for (const heading of headings) {
+    assert.notEqual(section(text, heading).trim(), '', `${heading} must contain content`);
+  }
+}
+
 test('small-cases Knowledge teaches a complete simplification-to-proof loop', async () => {
   const { text, metadata } = await page(files.small);
   assert.deepEqual(metadata, smallMetadata);
-  for (const heading of ['Core Idea', 'Seven-Step Workflow', 'Four Simplification Modes', 'From Pattern to Proof', 'Recognition Signals', 'Common Mistakes', 'Interview Checks']) {
-    assert.match(text, new RegExp(`^## ${heading}$`, 'm'));
-  }
+  const headings = ['Core Idea', 'Seven-Step Workflow', 'Four Simplification Modes', 'From Pattern to Proof', 'Recognition Signals', 'Common Mistakes', 'Interview Checks'];
+  assert.deepEqual(levelTwoHeadings(text), headings);
+  assertNonemptySections(text, headings);
   const workflow = section(text, 'Seven-Step Workflow').match(/^\d+\. .+$/gm) ?? [];
   assert.equal(workflow.length, 7);
   for (const pattern of [/preserve.*rules/i, /base cases?/i, /solve.*completely/i, /increase.*one step/i, /state transitions?/i, /conjecture/i, /prove.*original/i]) {
@@ -56,20 +66,29 @@ test('small-cases Knowledge teaches a complete simplification-to-proof loop', as
   }
   const modes = section(text, 'Four Simplification Modes');
   for (const pattern of [/size reduction/i, /backward induction/i, /state compression/i, /algebraic.*geometric re-expression/i]) assert.match(modes, pattern);
+  const proof = section(text, 'From Pattern to Proof');
+  for (const pattern of [/recurrence.*valid/i, /base cases?/i, /induction hypothesis.*strong enough/i, /tie-breaking/i, /adversarial.*preferences?/i, /resource bounds/i, /worst-case.*average-case/i]) assert.match(proof, pattern);
   const checks = section(text, 'Interview Checks');
-  assert.equal((checks.match(/^\d+\. /gm) ?? []).length >= 8, true);
+  assert.equal((checks.match(/^\d+\. /gm) ?? []).length, 8);
   for (const pattern of [/15.*cub/i, /quarter.*full|back.*known endpoint/i, /constant width|fall through/i]) assert.match(checks, pattern);
 });
 
 test('Fermi Knowledge is auditable, range-based, and validation-driven', async () => {
   const { text, metadata } = await page(files.fermi);
   assert.deepEqual(metadata, fermiMetadata);
-  for (const heading of ['Core Idea', 'Define the Estimate', 'Assumption Tree', 'Ranges and Units', 'Sensitivity', 'Independent Cross-Check', 'Validation Plan', 'Common Mistakes', 'Interview Checks']) {
-    assert.match(text, new RegExp(`^## ${heading}$`, 'm'));
-  }
-  for (const pattern of [/target quantity.*unit.*time horizon.*boundary/i, /low.*base.*high/i, /stock.*flow/i, /sensitivity/i, /independent.*cross-check/i, /authoritative|first-party/i]) assert.match(text, pattern);
+  const headings = ['Core Idea', 'Define the Estimate', 'Assumption Tree', 'Ranges and Units', 'Sensitivity', 'Independent Cross-Check', 'Validation Plan', 'Common Mistakes', 'Interview Checks'];
+  assert.deepEqual(levelTwoHeadings(text), headings);
+  assertNonemptySections(text, headings);
+  assert.match(section(text, 'Define the Estimate'), /target quantity.*unit.*time horizon.*boundary/i);
+  assert.match(section(text, 'Assumption Tree'), /multiplicative assumption tree/i);
+  const ranges = section(text, 'Ranges and Units');
+  for (const pattern of [/low.*base.*high/i, /stock.*flow/i]) assert.match(ranges, pattern);
+  assert.match(section(text, 'Sensitivity'), /sensitivity/i);
+  const crossCheck = section(text, 'Independent Cross-Check');
+  for (const pattern of [/independent.*cross-check/i, /reconcile disagreement/i]) assert.match(crossCheck, pattern);
+  assert.match(section(text, 'Validation Plan'), /authoritative|first-party/i);
   const checks = section(text, 'Interview Checks');
-  assert.equal((checks.match(/^\d+\. /gm) ?? []).length >= 6, true);
+  assert.equal((checks.match(/^\d+\. /gm) ?? []).length, 6);
   assert.match(checks, /locations?/i);
   assert.match(checks, /specialized.*providers?/i);
   assert.doesNotMatch(text, /United Kingdom|Oxford|petrol station|piano tuner|12,?000|60 tuners/i);
