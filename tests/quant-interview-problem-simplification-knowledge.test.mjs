@@ -83,16 +83,18 @@ test('Fermi Knowledge is auditable, range-based, and validation-driven', async (
   assert.match(section(text, 'Assumption Tree'), /multiplicative assumption tree/i);
   const ranges = section(text, 'Ranges and Units');
   for (const pattern of [/low.*base.*high/i, /stock.*flow/i]) assert.match(ranges, pattern);
-  assert.match(section(text, 'Sensitivity'), /sensitivity/i);
+  assert.match(section(text, 'Sensitivity'), /rank.*assumptions.*sensitivity/i);
   const crossCheck = section(text, 'Independent Cross-Check');
   for (const pattern of [/independent.*cross-check/i, /reconcile disagreement/i]) assert.match(crossCheck, pattern);
-  assert.match(section(text, 'Validation Plan'), /authoritative|first-party/i);
+  const validation = section(text, 'Validation Plan');
+  for (const pattern of [/authoritative|first-party/i, /current-data/i, /observation.*reduce uncertainty/i, /assumption.*replace first/i]) assert.match(validation, pattern);
+  const mistakes = section(text, 'Common Mistakes');
+  for (const pattern of [/memorized answers/i, /false precision/i]) assert.match(mistakes, pattern);
   const checks = section(text, 'Interview Checks');
   assert.equal((checks.match(/^\d+\. /gm) ?? []).length, 6);
   assert.match(checks, /locations?/i);
   assert.match(checks, /specialized.*providers?/i);
   assert.doesNotMatch(text, /United Kingdom|Oxford|petrol station|piano tuner|12,?000|60 tuners/i);
-  assert.match(text, /false precision|memorized/i);
 });
 
 test('both Knowledge pages are source-neutral', async () => {
