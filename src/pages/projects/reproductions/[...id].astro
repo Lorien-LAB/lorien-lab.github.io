@@ -17,7 +17,9 @@ import OriginalStrategyStory from '../../../components/reproduction-note/Origina
 import ReproductionAuditStory from '../../../components/reproduction-note/ReproductionAuditStory.astro';
 import OptimizationStory from '../../../components/reproduction-note/OptimizationStory.astro';
 import ResearchAuditAppendix from '../../../components/reproduction-note/ResearchAuditAppendix.astro';
+import OMDL2EvidencePanel from '../../../components/reproduction-note/OMDL2EvidencePanel.astro';
 import { researchNoteData } from '../../../data/reproduction-research-note/stock-index-futures-roll-basis-timing';
+import { omdL2Evidence } from '../../../data/reproduction-results/omd-a-share-long-only';
 
 export async function getStaticPaths() {
   const entries = await getCollection('reproductions');
@@ -31,6 +33,7 @@ const slugOf = (id: string) => id.split('/').pop() ?? id;
 const withBase = (path: string) => `${base}${path.replace(/^\//, '')}`;
 const caseStudy = entry.data.caseStudy;
 const isResearchNoteV3 = entry.data.slug === 'stock-index-futures-roll-basis-timing';
+const isOmdL2 = entry.data.slug === omdL2Evidence.slug;
 const sourceLabel = entry.data.sourceType === 'academic' ? 'Academic Paper' : 'Broker Report';
 const resultLabel = entry.data.result.replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
 const visibilityLabel = entry.data.codeVisibility === 'partial' ? 'Partial Code Release' : entry.data.codeVisibility === 'private' ? 'Implementation Private' : 'Public Code';
@@ -82,6 +85,8 @@ const artifactLinks = [
         <div class="facts">{entry.data.market && <span>Market · {entry.data.market}</span>}{entry.data.frequency && <span>Frequency · {entry.data.frequency}</span>}{entry.data.dataAvailability && <span>Data · {entry.data.dataAvailability}</span>}</div>
         <div class="pipeline"><ReproductionPipeline stage={entry.data.stage} /></div>
       </div></section>
+
+      {isOmdL2 && <OMDL2EvidencePanel data={omdL2Evidence} />}
 
       {caseStudy ? <div class="container legacy-case">
         <ReproductionVerdictGrid verdicts={caseStudy.verdicts} />

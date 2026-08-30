@@ -168,3 +168,32 @@ test('built OMD benchmark classification names the executed PIT account and non-
   assert.match(detailHtml, /frozen last-close delist convention/i);
   assert.match(detailHtml, /official price index[^.]*not an executable account/i);
 });
+
+test('OMD L2 evidence panel is accessible and progressively enhanced', async () => {
+  await buildSite();
+  const detailHtml = await readFile(detailOutput, 'utf8');
+  for (const visible of [
+    'OOS1 → OOS2 Stitched', 'Annualized Return', 'Sharpe', 'Max Drawdown',
+    'CNY 100m / sleeve', 'CNY 500m / sleeve',
+    'CSI 300', 'CSI 500', 'CSI 1000', 'Combined',
+    'Official price index', 'PIT equal-weight', 'ADV participation cap',
+    '20.22%', '19.13%', '-3.50%', '-4.86%',
+  ]) assert.ok(detailHtml.includes(visible), `built panel missing ${visible}`);
+  assert.match(detailHtml, /data-omd-evidence/);
+  assert.match(detailHtml, /data-omd-capital="100m"[^>]*aria-pressed="true"/);
+  assert.match(detailHtml, /data-omd-capital="500m"[^>]*aria-pressed="false"/);
+  assert.match(detailHtml, /data-omd-capital-panel="100m"/);
+  assert.match(detailHtml, /data-omd-capital-panel="500m"[^>]*hidden/);
+  assert.ok((detailHtml.match(/<table/g) ?? []).length >= 3, 'expected exact-value fallback tables');
+  assert.match(detailHtml, /prefers-reduced-motion/);
+});
+
+test('OMD L2 panel is isolated to its canonical reproduction slug', async () => {
+  await buildSite();
+  const [omdHtml, brokerHtml] = await Promise.all([
+    readFile(detailOutput, 'utf8'), readFile(existingBrokerOutput, 'utf8'),
+  ]);
+  assert.match(omdHtml, /data-omd-evidence/);
+  assert.doesNotMatch(brokerHtml, /data-omd-evidence|OOS1 → OOS2 Stitched/);
+  assert.match(brokerHtml, /股指期货滚贴水择时与市场情绪因子/);
+});
