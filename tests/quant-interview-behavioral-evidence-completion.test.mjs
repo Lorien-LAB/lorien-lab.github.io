@@ -26,6 +26,26 @@ const section = (handoff, heading) =>
   handoff.split(new RegExp(`^## ${heading}$`, 'im'))[1]?.split(/^## /m)[0] ?? '';
 const currentTopicBlock = (handoff) =>
   handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0] ?? '';
+const assertCompletedSectionsInactive = (closure, masterIngestion) => {
+  assert.doesNotMatch(closure, /Workstream 017 is active/i);
+  assert.doesNotMatch(masterIngestion, /Workstream 017 is active/i);
+  assert.doesNotMatch(masterIngestion, /after the active 017 scope/i);
+};
+
+test('completed 017 sections reject stale active wording', () => {
+  assert.throws(
+    () => assertCompletedSectionsInactive('Workstream 017 is active', ''),
+    { code: 'ERR_ASSERTION' },
+  );
+  assert.throws(
+    () => assertCompletedSectionsInactive('', 'Workstream 017 is active'),
+    { code: 'ERR_ASSERTION' },
+  );
+  assert.throws(
+    () => assertCompletedSectionsInactive('', 'after the active 017 scope'),
+    { code: 'ERR_ASSERTION' },
+  );
+});
 
 test('017 lifecycle is field-safe while active and factually strict when complete', async () => {
   const [manifest, handoff] = await Promise.all([
@@ -89,7 +109,7 @@ test('017 lifecycle is field-safe while active and factually strict when complet
   assert.match(closure, /228 terminal.*522 pending/is);
   assert.match(masterIngestion, /First pending master record: `green-book::2\.1::theory`/i);
   assert.equal(current.trim(), completeCurrent);
-  assert.doesNotMatch(masterIngestion, /Workstream 017 is active/i);
+  assertCompletedSectionsInactive(closure, masterIngestion);
   assert.match(masterIngestion, /018.*not (?:active|authorized)|does not authorize workstream 018/i);
   const workstreamFiles = await readdir('src/data/quant-interview/workstreams');
   assert.equal(workstreamFiles.some((file) => /-018\.json$/.test(file)), false);
