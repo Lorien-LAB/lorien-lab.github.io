@@ -38,6 +38,18 @@
       "prerequisites": []
     },
     {
+      "slug": "behavioral-interview-evidence-and-authenticity",
+      "title": "Behavioral Interview Evidence & Authenticity",
+      "canonicalTopics": [
+        "interview-strategy-communication",
+        "soft-interview"
+      ],
+      "primaryTopic": "soft-interview",
+      "learningOrder": 13,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
       "slug": "problem-framing-clarification-assumption-management",
       "title": "Problem Framing, Clarification & Assumption Management",
       "canonicalTopics": [

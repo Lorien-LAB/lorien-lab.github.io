@@ -53,6 +53,24 @@ test('behavioral-evidence page has exact byte-zero frontmatter', async () => {
   assert.deepEqual(parseYaml(text.split(/^---$/m)[1] ?? '', { schema: JSON_SCHEMA }), metadata);
 });
 
+test('behavioral-evidence Knowledge is the published soft-interview module', async () => {
+  const catalog = JSON.parse(
+    await readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
+  );
+  assert.deepEqual(
+    catalog.modules.find(({ slug }) => slug === 'behavioral-interview-evidence-and-authenticity'),
+    {
+      slug: 'behavioral-interview-evidence-and-authenticity',
+      title: 'Behavioral Interview Evidence & Authenticity',
+      canonicalTopics: ['interview-strategy-communication', 'soft-interview'],
+      primaryTopic: 'soft-interview',
+      learningOrder: 13,
+      status: 'published',
+      prerequisites: [],
+    },
+  );
+});
+
 test('behavioral-evidence page implements the exact answer framework and prompt bank', async () => {
   const text = await readFile(knowledgePath, 'utf8');
   const approvedHeadings = [

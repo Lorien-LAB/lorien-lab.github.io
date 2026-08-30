@@ -39,6 +39,7 @@ test('preparation Knowledge owns breadth and deliberate practice as one loop', a
     'structured-think-aloud-reasoning',
     'quant-role-and-employer-fit',
     'quant-interview-formats-and-assessment-strategy',
+    'behavioral-interview-evidence-and-authenticity',
   ]);
   assert.deepEqual(readArray(text, 'relatedNotes'), []);
 
@@ -88,7 +89,7 @@ test('preparation scope creates no public Problem', async () => {
 });
 
 test('preparation Knowledge is published and reciprocally connected', async () => {
-  const [catalogText, framing, thinkAloud] = await Promise.all([
+  const [catalogText, framing, thinkAloud, behavioral] = await Promise.all([
     readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
     readFile(
       'src/content/knowledge/concepts/problem-framing-clarification-assumption-management.md',
@@ -96,6 +97,10 @@ test('preparation Knowledge is published and reciprocally connected', async () =
     ),
     readFile(
       'src/content/knowledge/concepts/structured-think-aloud-reasoning.md',
+      'utf8',
+    ),
+    readFile(
+      'src/content/knowledge/concepts/behavioral-interview-evidence-and-authenticity.md',
       'utf8',
     ),
   ]);
@@ -118,6 +123,10 @@ test('preparation Knowledge is published and reciprocally connected', async () =
   );
   assert.match(
     thinkAloud,
+    /^related: \[[^\]]*quant-interview-preparation-breadth-and-practice[^\]]*\]$/m,
+  );
+  assert.match(
+    behavioral,
     /^related: \[[^\]]*quant-interview-preparation-breadth-and-practice[^\]]*\]$/m,
   );
 });

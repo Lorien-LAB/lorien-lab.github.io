@@ -9,7 +9,7 @@ status: growing
 tags: [Interview, Careers, Quant Roles, Employer Fit]
 quantInterviewTopics: [interview-strategy-communication, interview-preparation]
 featured: false
-related: [quant-interview-preparation-breadth-and-practice]
+related: [quant-interview-preparation-breadth-and-practice, behavioral-interview-evidence-and-authenticity]
 relatedNotes: []
 ---
 

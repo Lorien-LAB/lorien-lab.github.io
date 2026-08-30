@@ -68,6 +68,7 @@ test('problem framing page teaches clarification and revisable assumptions', asy
       'structured-think-aloud-reasoning',
       'quant-interview-preparation-breadth-and-practice',
       'quant-interview-formats-and-assessment-strategy',
+      'behavioral-interview-evidence-and-authenticity',
     ],
   });
   assertSourceNeutral(text);
@@ -108,6 +109,7 @@ test('structured think-aloud page exposes decisive and revisable reasoning', asy
       'problem-framing-clarification-assumption-management',
       'quant-interview-preparation-breadth-and-practice',
       'quant-interview-formats-and-assessment-strategy',
+      'behavioral-interview-evidence-and-authenticity',
     ],
   });
   assertSourceNeutral(text);
@@ -144,11 +146,13 @@ test('reasoning Knowledge nodes keep their preparation links aligned', async () 
     'structured-think-aloud-reasoning',
     'quant-interview-preparation-breadth-and-practice',
     'quant-interview-formats-and-assessment-strategy',
+    'behavioral-interview-evidence-and-authenticity',
   ]);
   assert.deepEqual(parseInlineArray(structured, 'related'), [
     'problem-framing-clarification-assumption-management',
     'quant-interview-preparation-breadth-and-practice',
     'quant-interview-formats-and-assessment-strategy',
+    'behavioral-interview-evidence-and-authenticity',
   ]);
   assert.deepEqual(parseInlineArray(framing, 'relatedNotes'), []);
   assert.deepEqual(parseInlineArray(structured, 'relatedNotes'), []);
