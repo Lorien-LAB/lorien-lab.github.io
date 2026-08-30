@@ -137,6 +137,8 @@ const reproductionCaseStudy = z.object({
     status: z.enum(['reproduced', 'partial', 'not-reproduced', 'extension']),
     evidence: z.string(),
   })).default([]),
+  strategyFlowTitle: z.string().optional(),
+  strategyFlowDescription: z.string().optional(),
   factorEvidence: z.array(z.object({
     factor: z.string(),
     paper: z.string(),

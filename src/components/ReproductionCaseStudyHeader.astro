@@ -6,6 +6,7 @@ interface Props { entry: CollectionEntry<'reproductions'>; }
 const { entry } = Astro.props;
 const caseStudy = entry.data.caseStudy!;
 const sourceLabel = entry.data.sourceType === 'academic' ? 'Academic Paper' : 'Broker Report';
+const sourceTitleLabel = entry.data.sourceType === 'academic' ? 'Source paper' : 'Source report';
 const resultLabel = entry.data.result.replace(/(^|\s)\S/g, (letter) => letter.toUpperCase());
 const visibilityLabel = entry.data.codeVisibility === 'partial' ? 'Partial Code Release' : entry.data.codeVisibility === 'private' ? 'Implementation Private' : 'Public Code';
 ---
@@ -15,7 +16,7 @@ const visibilityLabel = entry.data.codeVisibility === 'partial' ? 'Partial Code 
     <div class="case-kicker"><span>{sourceLabel}</span><span>{entry.data.researchArea}</span></div>
     <h1>{caseStudy.shortTitle}</h1>
     {caseStudy.subtitle && <p class="subtitle">{caseStudy.subtitle}</p>}
-    <p class="source-title"><span>Source report</span>{entry.data.title}</p>
+    <p class="source-title"><span>{sourceTitleLabel}</span>{entry.data.title}</p>
 
     <div class="identity-grid">
       {entry.data.sourceType === 'academic' ? <>
