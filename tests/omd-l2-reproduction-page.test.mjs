@@ -22,6 +22,39 @@ const buildSite = () => buildPromise ??= execFileAsync(
   },
 );
 
+const stripHtml = (value) => value
+  .replace(/<[^>]+>/g, '')
+  .replace(/&amp;/g, '&')
+  .replace(/&nbsp;/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const extractEvidenceRoot = (html) => {
+  const rootMatch = html.match(/<section\b[^>]*data-omd-evidence\b[^>]*>/);
+  assert.ok(rootMatch?.index !== undefined, 'built page missing OMD evidence root');
+  const start = rootMatch.index;
+  const endMarker = '</section>';
+  const end = html.indexOf(endMarker, start);
+  assert.notEqual(end, -1, 'OMD evidence root is not closed');
+  return html.slice(start, end + endMarker.length);
+};
+
+const extractEvidenceTables = (rootHtml) => [...rootHtml.matchAll(/<table\b[^>]*>[\s\S]*?<\/table>/g)].map((match) => {
+  const tableHtml = match[0];
+  const caption = stripHtml(tableHtml.match(/<caption\b[^>]*>([\s\S]*?)<\/caption>/)?.[1] ?? '');
+  const tbody = tableHtml.match(/<tbody\b[^>]*>([\s\S]*?)<\/tbody>/)?.[1] ?? '';
+  const rows = [...tbody.matchAll(/<tr\b[^>]*>([\s\S]*?)<\/tr>/g)].map((rowMatch) => (
+    [...rowMatch[1].matchAll(/<(?:th|td)\b[^>]*>([\s\S]*?)<\/(?:th|td)>/g)].map((cellMatch) => stripHtml(cellMatch[1]))
+  ));
+  return { caption, rows };
+});
+
+const readEvidenceStylesheet = async (detailHtml) => {
+  const href = detailHtml.match(/<link rel="stylesheet" href="(\/_astro\/_id_[^"]+\.css)">/)?.[1];
+  assert.ok(href, 'built page missing detail stylesheet link');
+  return readFile(`dist/${href.slice(1)}`, 'utf8');
+};
+
 const LOCAL_PATH_PATTERN = /^(?:[A-Z]:[\\/]|\\\\[^\\/]+[\\/][^\\/]+|\/\/[^/\\]+[\\/][^/\\]+|file:\/\/|~[\\/]|\/(?:[^/]+\/)+)/i;
 const FORBIDDEN_PUBLIC_TERM_PATTERN = /(?:paper[_-]?faithful[_-]?shadow|a[_-]?share[_-]?lowvol[_-]?mom12|three[-_ ]lane|holdings?|orders?|ledger|forecasts?|config(?:uration)?(?:url)?|results?url|hash|\bL[13]\b)/i;
 
@@ -184,8 +217,50 @@ test('OMD L2 evidence panel is accessible and progressively enhanced', async () 
   assert.match(detailHtml, /data-omd-capital="500m"[^>]*aria-pressed="false"/);
   assert.match(detailHtml, /data-omd-capital-panel="100m"/);
   assert.match(detailHtml, /data-omd-capital-panel="500m"[^>]*hidden/);
-  assert.ok((detailHtml.match(/<table/g) ?? []).length >= 3, 'expected exact-value fallback tables');
-  assert.match(detailHtml, /prefers-reduced-motion/);
+  const evidenceTables = extractEvidenceTables(extractEvidenceRoot(detailHtml));
+  assert.deepEqual(evidenceTables, [
+    {
+      caption: 'Exact index and combined annual returns',
+      rows: [
+        ['OOS1', '100m', '13.20%', '9.19%', '-3.50%', '6.60%'],
+        ['OOS1', '500m', '12.98%', '7.75%', '-4.86%', '5.56%'],
+        ['OOS2', '100m', '36.63%', '65.96%', '29.11%', '43.70%'],
+        ['OOS2', '500m', '36.65%', '65.21%', '26.54%', '42.53%'],
+      ],
+    },
+    {
+      caption: 'Independent-window robustness',
+      rows: [
+        ['OOS1', '100m', '6.60%', '29.13%', '0.36', '-22.49%', '0.29'],
+        ['OOS1', '500m', '5.56%', '29.30%', '0.33', '-22.40%', '0.25'],
+        ['OOS2', '100m', '43.70%', '26.38%', '1.51', '-13.63%', '3.21'],
+        ['OOS2', '500m', '42.53%', '26.35%', '1.48', '-13.63%', '3.12'],
+      ],
+    },
+    {
+      caption: 'Official price index and PIT equal-weight comparison',
+      rows: [
+        ['OOS1', '100m', '6.60%', '7.61%', '9.14%'],
+        ['OOS1', '500m', '5.56%', '7.61%', '9.11%'],
+        ['OOS2', '100m', '43.70%', '41.00%', '23.68%'],
+        ['OOS2', '500m', '42.53%', '41.00%', '23.54%'],
+      ],
+    },
+  ]);
+});
+
+test('OMD L2 evidence stylesheet uses responsive two-column charts and theme-safe pressed controls', async () => {
+  await buildSite();
+  const detailHtml = await readFile(detailOutput, 'utf8');
+  const stylesheet = await readEvidenceStylesheet(detailHtml);
+  const baseChartRule = stylesheet.match(/\.bar-chart\[data-astro-cid-[^\]]+\]\{[^}]*\}/)?.[0];
+  assert.ok(baseChartRule, 'missing scoped bar-chart rule');
+  assert.match(baseChartRule, /grid-template-columns:repeat\(2,minmax\(0,1fr\)\)/);
+  assert.doesNotMatch(baseChartRule, /grid-template-columns:repeat\(4/);
+  assert.match(stylesheet, /\.bar-chart\[data-astro-cid-[^\]]+\]\{grid-template-columns:1fr\}/);
+  assert.match(stylesheet, /\.capital-controls\[data-astro-cid-[^\]]+\]\sbutton\[data-astro-cid-[^\]]+\]\[aria-pressed=true\]\{[^}]*color:var\(--hero\)/);
+  assert.doesNotMatch(stylesheet, /\.capital-controls\[data-astro-cid-[^\]]+\]\sbutton\[data-astro-cid-[^\]]+\]\[aria-pressed=true\]\{[^}]*#03140e/);
+  assert.equal((stylesheet.match(/prefers-reduced-motion/g) ?? []).length, 1);
 });
 
 test('OMD L2 panel is isolated to its canonical reproduction slug', async () => {
