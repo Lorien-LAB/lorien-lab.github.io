@@ -1,0 +1,41 @@
+{
+  "id": "logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020",
+  "canonicalTopics": [
+    "logic-brainteasers-discrete-reasoning",
+    "logical-deduction"
+  ],
+  "status": "active",
+  "masterItemKeys": [
+    "green-book::2.3::theory",
+    "green-book::2.3.box-packing::question",
+    "green-book::2.3.calendar-cubes::question",
+    "green-book::2.3.door-to-offer::question",
+    "green-book::2.3.message-delivery::question",
+    "green-book::2.3.last-ball::question",
+    "green-book::2.3.light-switches::question",
+    "green-book::2.3.quant-salary::question"
+  ],
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": [
+        "2.3"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 26,
+          "endPage": 31
+        }
+      ],
+      "reviewOutcome": "green-core-thinking-outside-box-publication",
+      "reviewNote": "Eight consecutive Green records yield one canonical Knowledge node and seven independently verified canonical Problems."
+    }
+  ],
+  "publicDelta": {
+    "problems": 7,
+    "knowledge": 1
+  },
+  "knowledgeSlugs": [
+    "constraint-reframing-and-latent-state"
+  ]
+}

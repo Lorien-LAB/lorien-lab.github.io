@@ -277,19 +277,30 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state"
+      ],
+      "resolutionNote": "The section-level reframing method becomes a source-neutral Knowledge node for alternate representations, latent state, reversible operations, and explicit assumptions."
     },
     {
       "sourceSection": "2.3.box-packing",
       "sourceItem": null,
       "canonicalTopics": [
-        "logical-deduction"
+        "logical-deduction",
+        "invariants-state-transformations"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "topicOverrideReason": "Item-level review identifies a three-dimensional coloring invariant and capacity obstruction, so this Logical Deduction item also belongs to Invariants & State Transformations.",
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "pack-length-four-bricks-in-six-cube"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "modular-invariants"
+      ],
+      "resolutionNote": "The three-dimensional packing prompt becomes a canonical coloring-invariant impossibility Problem."
     },
     {
       "sourceSection": "2.3.calendar-cubes",
@@ -297,9 +308,15 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "two-cube-calendar-digit-labeling"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "resolutionNote": "The date-display prompt becomes a canonical constructive constraint-satisfaction Problem with all dates verified."
     },
     {
       "sourceSection": "2.3.door-to-offer",
@@ -307,9 +324,15 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "two-guards-one-question"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "resolutionNote": "The truth-and-lie prompt becomes a canonical Boolean case-analysis Problem with a complete four-state truth table."
     },
     {
       "sourceSection": "2.3.message-delivery",
@@ -317,19 +340,33 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "message-delivery-with-independent-padlocks"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state"
+      ],
+      "resolutionNote": "The independent-lock prompt becomes a canonical three-transit protocol Problem with lock-state and confidentiality boundaries explicit."
     },
     {
       "sourceSection": "2.3.last-ball",
       "sourceItem": null,
       "canonicalTopics": [
-        "logical-deduction"
+        "logical-deduction",
+        "invariants-state-transformations",
+        "modular-arithmetic"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "topicOverrideReason": "Item-level review identifies parity preservation under every replacement transition, so this Logical Deduction item also belongs to Invariants & State Transformations and Modular Arithmetic.",
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "last-ball-color-by-parity-invariant"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "modular-invariants"
+      ],
+      "resolutionNote": "The replacement process becomes a canonical parity-invariant Problem with every legal transition verified."
     },
     {
       "sourceSection": "2.3.light-switches",
@@ -337,9 +374,15 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "four-switches-one-room-entry"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "decision-trees-information-bounds-and-adaptive-testing"
+      ],
+      "resolutionNote": "The bulb prompt becomes a canonical latent-state encoding Problem using light and thermal observations."
     },
     {
       "sourceSection": "2.3.quant-salary",
@@ -347,9 +390,15 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "private-average-with-canceling-mask"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "problem-framing-clarification-assumption-management"
+      ],
+      "resolutionNote": "The private-average prompt becomes a canonical canceling-mask protocol Problem with an honest non-colluding privacy boundary."
     },
     {
       "sourceSection": "2.4",

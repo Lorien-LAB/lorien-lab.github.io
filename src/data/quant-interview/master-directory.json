@@ -5245,11 +5245,13 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0018|green-book::2.3::theory",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020",
+      "resolutionNote": "The section-level reframing method becomes a source-neutral Knowledge node for alternate representations, latent state, reversible operations, and explicit assumptions."
     },
     {
       "key": "green-book::2.3.box-packing::question",
@@ -5267,14 +5269,20 @@
       "primaryTopic": "logical-deduction",
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning",
-        "logical-deduction"
+        "logical-deduction",
+        "invariants-state-transformations"
       ],
       "sortKey": "02.02|01|0019|green-book::2.3.box-packing::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "pack-length-four-bricks-in-six-cube"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "modular-invariants"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020",
+      "resolutionNote": "The three-dimensional packing prompt becomes a canonical coloring-invariant impossibility Problem."
     },
     {
       "key": "green-book::2.3.calendar-cubes::question",
@@ -5295,11 +5303,16 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0020|green-book::2.3.calendar-cubes::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "two-cube-calendar-digit-labeling"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020",
+      "resolutionNote": "The date-display prompt becomes a canonical constructive constraint-satisfaction Problem with all dates verified."
     },
     {
       "key": "green-book::2.3.door-to-offer::question",
@@ -5320,11 +5333,16 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0021|green-book::2.3.door-to-offer::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "two-guards-one-question"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020",
+      "resolutionNote": "The truth-and-lie prompt becomes a canonical Boolean case-analysis Problem with a complete four-state truth table."
     },
     {
       "key": "green-book::2.3.message-delivery::question",
@@ -5345,11 +5363,15 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0022|green-book::2.3.message-delivery::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "message-delivery-with-independent-padlocks"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020",
+      "resolutionNote": "The independent-lock prompt becomes a canonical three-transit protocol Problem with lock-state and confidentiality boundaries explicit."
     },
     {
       "key": "green-book::2.3.last-ball::question",
@@ -5367,14 +5389,21 @@
       "primaryTopic": "logical-deduction",
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning",
-        "logical-deduction"
+        "logical-deduction",
+        "invariants-state-transformations",
+        "modular-arithmetic"
       ],
       "sortKey": "02.02|01|0023|green-book::2.3.last-ball::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "last-ball-color-by-parity-invariant"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "modular-invariants"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020",
+      "resolutionNote": "The replacement process becomes a canonical parity-invariant Problem with every legal transition verified."
     },
     {
       "key": "green-book::2.3.light-switches::question",
@@ -5395,11 +5424,16 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0024|green-book::2.3.light-switches::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "four-switches-one-room-entry"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "decision-trees-information-bounds-and-adaptive-testing"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020",
+      "resolutionNote": "The bulb prompt becomes a canonical latent-state encoding Problem using light and thermal observations."
     },
     {
       "key": "green-book::2.3.quant-salary::question",
@@ -5420,11 +5454,16 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0025|green-book::2.3.quant-salary::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "private-average-with-canceling-mask"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "problem-framing-clarification-assumption-management"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020",
+      "resolutionNote": "The private-average prompt becomes a canonical canceling-mask protocol Problem with an honest non-colluding privacy boundary."
     },
     {
       "key": "red-book::8::theory",
