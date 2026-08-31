@@ -23,7 +23,7 @@ featured: false
 
 ## Problem
 
-A box contains blue and red balls. Repeatedly choose two balls uniformly at random, remove both, and replace them with one ball: two blue balls are replaced by one blue ball, two red balls by one blue ball, and one ball of each color is replaced by one blue ball. Continue until exactly one ball remains.
+A box contains blue and red balls. Repeatedly choose two balls uniformly at random and remove both. Two blue balls are replaced by one blue ball. Two red balls are replaced by one blue ball. One ball of each color is replaced by one red ball. Continue until exactly one ball remains.
 
 Determine the final color when the box starts with 20 blue and 14 red balls. Then determine it when the box starts with 20 blue and 13 red balls. Explain why the random sequence of selected pairs cannot change either answer.
 

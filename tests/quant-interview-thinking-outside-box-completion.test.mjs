@@ -5,7 +5,9 @@ import { access, readFile, readdir } from 'node:fs/promises';
 const manifestPath = 'src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020.json';
 const workflow = '.github/workflows/quant-interview-thinking-outside-box-green-core-020-temporary.yml';
 const commands = ['npm test', 'npm run knowledge:directory:check', 'npm run master:directory:check', 'npm run check', 'npm run build'];
-const shaPattern = /^[0-9a-f]{40}$/;
+const activeSha = 'dde337bcc7efe59b42557b5faabfaec03e5b9c2e';
+const runId = 33422563783;
+const ciUrl = 'https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33422563783';
 const activeCurrent = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
 Workstream 020 is active across the exact eight-record Green Book 2.3 scope. Its public delta is +7 Problems / +1 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
@@ -48,38 +50,41 @@ function assertLifecycleEvidence(manifest) {
     return;
   }
 
-  const { preClosureActiveGate: gate, verification, finalTreeGate } = manifest;
-  const commit = gate?.commit ?? '';
-  const runId = verification?.runId;
-  assert.match(commit, shaPattern);
-  assert.equal(Number.isInteger(runId) && runId > 0, true);
-  assert.deepEqual(gate, {
-    status: 'active', commit, environment: 'wsl-native-lf-node24', commands, conclusion: 'success',
+  assert.deepEqual(manifest.preClosureActiveGate, {
+    status: 'active', commit: activeSha, environment: 'wsl-native-lf-node24', commands, conclusion: 'success',
   });
-  assert.deepEqual(verification, {
-    commit, runId, commands, conclusion: 'success', temporaryArtifacts: [workflow],
+  assert.deepEqual(manifest.verification, {
+    commit: activeSha, runId, commands, conclusion: 'success', temporaryArtifacts: [workflow],
   });
-  assert.deepEqual(finalTreeGate, {
+  assert.deepEqual(manifest.finalTreeGate, {
     environment: 'wsl-native-lf-node24', commands, conclusion: 'success', temporaryArtifactsAbsent: true,
   });
 }
 
+function assertClosureIdentity(closure, manifestId) {
+  for (const fact of [manifestId, activeSha, String(runId), ciUrl]) assert.ok(closure.includes(fact));
+}
+
 test('completion evidence rejects extra fields while the active phase stays evidence-free', () => {
   assert.doesNotThrow(() => assertLifecycleEvidence({ status: 'active' }));
-  const commit = 'a'.repeat(40);
   const complete = {
     status: 'complete',
     preClosureActiveGate: {
-      status: 'active', commit, environment: 'wsl-native-lf-node24', commands, conclusion: 'success',
+      status: 'active', commit: activeSha, environment: 'wsl-native-lf-node24', commands, conclusion: 'success',
     },
     verification: {
-      commit, runId: 1, commands, conclusion: 'success', temporaryArtifacts: [workflow],
+      commit: activeSha, runId, commands, conclusion: 'success', temporaryArtifacts: [workflow],
     },
     finalTreeGate: {
       environment: 'wsl-native-lf-node24', commands, conclusion: 'success', temporaryArtifactsAbsent: true,
     },
   };
   assert.doesNotThrow(() => assertLifecycleEvidence(complete));
+  const alternate = structuredClone(complete);
+  alternate.preClosureActiveGate.commit = 'a'.repeat(40);
+  alternate.verification.commit = 'a'.repeat(40);
+  alternate.verification.runId = 1;
+  assert.throws(() => assertLifecycleEvidence(alternate), { name: 'AssertionError' });
   const mutated = structuredClone(complete);
   mutated.verification.unexpected = true;
   assert.throws(() => assertLifecycleEvidence(mutated), { name: 'AssertionError' });
@@ -103,15 +108,15 @@ test('020 lifecycle is evidence-free while active and factually strict when comp
     return;
   }
 
-  const { preClosureActiveGate: gate, verification } = manifest;
   await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
   assert.equal(currentBlock(handoff), completeCurrent);
   assert.doesNotMatch(handoff, /^## Active cross-book workstream 20$/m);
   assert.match(handoff, /^## Completed cross-book workstream 20$/m);
   const closure = section(handoff, 'Completed cross-book workstream 20');
-  for (const fact of [manifest.id, gate.commit, String(verification.runId)]) {
-    assert.ok(closure.includes(fact));
-  }
+  assertClosureIdentity(closure, manifest.id);
+  const wrongUrl = closure.replace(ciUrl, 'https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/1');
+  assert.notEqual(wrongUrl, closure);
+  assert.throws(() => assertClosureIdentity(wrongUrl, manifest.id), { name: 'AssertionError' });
   assert.match(handoff, /First pending master record: `red-book::8::theory`/i);
   assert.match(handoff, /Workstream 021 is not active or authorized/);
 });

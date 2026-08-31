@@ -23,9 +23,7 @@ featured: false
 
 ## Problem
 
-Two doors stand before you. Exactly one is desirable. One guard always lies, and the other always tells the truth; you do not know which guard is which. You may ask one yes-or-no question to either guard. Find a question and a response rule that identify the desirable door.
-
-Ask either guard: “If I asked the other guard whether the door you are standing by is the desirable door, would the other guard say yes?” If the answer is yes, choose the other door; if the answer is no, choose the door guarded by the person you asked.
+Two doors stand before you. One guard stands at each door. Exactly one door is desirable, and both guards know which door is desirable. One guard always lies, and the other always tells the truth; you do not know which guard is which. You may ask one yes-or-no question to either guard. Find a question and a response rule that identify the desirable door.
 
 Each guard's behavior is deterministic: one always lies and one always tells the truth. The two doors, the guards' behavior rules, and the fact that exactly one door is desirable are common knowledge.
 
@@ -39,7 +37,9 @@ Each guard's behavior is deterministic: one always lies and one always tells the
 
 ## Solution
 
-Use the nested question in the prompt. It makes the answer `Yes` exactly when the chosen guard's door is bad, so reverse that answer: choose the selected guard's door after `No`, and choose the other door after `Yes`.
+Ask either guard: “If I asked the other guard whether the door you are standing by is the desirable door, would the other guard say yes?” If the answer is yes, choose the other door; if the answer is no, choose the door guarded by the person you asked.
+
+This nested question makes the answer `Yes` exactly when the chosen guard's door is bad, so reverse that answer: choose the selected guard's door after `No`, and choose the other door after `Yes`.
 
 The four cases are:
 

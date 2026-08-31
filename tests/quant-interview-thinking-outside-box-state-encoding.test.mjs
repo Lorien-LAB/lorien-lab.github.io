@@ -51,6 +51,34 @@ function parityTransitions(body) {
   return new Map(rows.map(([, pair, blue, red]) => [pair, [Number(blue), Number(red)]]));
 }
 
+function problem(text) {
+  const body = text.split(/^## Problem$/m)[1]?.split(/^## /m)[0] ?? '';
+  assert.notEqual(body, '', 'missing Problem section');
+  return body;
+}
+
+function statedReplacementColors(body) {
+  const rules = new Map();
+  for (const [pair, pattern] of [
+    ['BB', /two blue balls are replaced by one (blue|red) ball/i],
+    ['RR', /two red balls(?: are replaced)? by one (blue|red) ball/i],
+    ['BR', /one ball of each color is replaced by one (blue|red) ball/i],
+  ]) {
+    const color = body.match(pattern)?.[1]?.toLowerCase();
+    assert.ok(color, `Problem must state the ${pair} replacement color`);
+    rules.set(pair, color);
+  }
+  return rules;
+}
+
+function transitionsFromReplacementColors(rules) {
+  const removed = { BB: [2, 0], RR: [0, 2], BR: [1, 1] };
+  return new Map([...rules].map(([pair, color]) => {
+    const [blueRemoved, redRemoved] = removed[pair];
+    return [pair, [Number(color === 'blue') - blueRemoved, Number(color === 'red') - redRemoved]];
+  }));
+}
+
 function assertRedParityIsInvariant(transitions) {
   for (let blue = 0; blue <= 8; blue++) for (let red = 0; red <= 8; red++) {
     for (const [pair, [blueChange, redChange]] of transitions) {
@@ -82,14 +110,26 @@ test('last-ball Problem publishes exact metadata and a parity-preserving transit
   assert.match(body, /20 blue, 13 red.*red/i);
   assert.match(body, /random(?:ly)? selected pair.*does not affect.*parity/i);
 
+  const statedRules = statedReplacementColors(problem(text));
+  assert.deepEqual(transitionsFromReplacementColors(statedRules), transitions);
+
   const mutant = new Map(transitions);
   mutant.set('RR', [1, -1]);
   assert.throws(() => assertRedParityIsInvariant(mutant), /changed red parity/);
+  const replacementMutant = new Map(statedRules);
+  replacementMutant.set('BR', 'blue');
+  assert.throws(
+    () => assert.deepEqual(transitionsFromReplacementColors(replacementMutant), transitions),
+    { name: 'AssertionError' },
+  );
 });
 
 test('four-switch Problem publishes exact metadata, schedule, and four distinct observable signatures', async () => {
   const { text, metadata } = await page(paths.switches);
   assert.deepEqual(metadata, switchMetadata);
+  const prompt = problem(text);
+  assert.match(prompt, /explain why zero entries cannot identify the switch/i);
+  assert.doesNotMatch(prompt, /no entry cannot identify/i);
   const body = solution(text);
   assert.match(body, /switches 1 and 2 on.*long enough to heat/i);
   assert.match(body, /switch 2 off and switch 3 on immediately before entry/i);

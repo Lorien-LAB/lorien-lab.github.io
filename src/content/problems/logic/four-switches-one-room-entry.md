@@ -25,7 +25,7 @@ featured: false
 
 Outside a closed room are four labeled switches, all initially off. Inside is one ordinary incandescent bulb. Exactly one switch controls the bulb; the other three do nothing. You may operate the switches in any order but may enter the room exactly once. Once inside, you may look at the bulb and carefully touch it.
 
-Give a procedure that identifies the controlling switch in that one entry. State the assumptions that make the light and temperature observations reliable, and explain why no entry cannot identify the switch.
+Give a procedure that identifies the controlling switch in that one entry. State the assumptions that make the light and temperature observations reliable, and explain why zero entries cannot identify the switch.
 
 ## Think Before Revealing
 

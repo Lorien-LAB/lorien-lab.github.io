@@ -119,12 +119,17 @@ test('guard and independent-padlock Problems have exact metadata and disclosure 
 test('guard response rule identifies the desirable door in every truthful-liar state', async () => {
   const { text } = await page(paths.guards);
   const problem = section(text, 'Problem');
-  assert.match(problem, /“If I asked the other guard whether the door you are standing by is the desirable door, would the other guard say yes\?”/);
-  assert.match(problem, /If the answer is yes, choose the other door; if the answer is no, choose the door guarded by the person you asked\./);
+  const revealed = solution(text);
+  assert.doesNotMatch(problem, /If I asked the other guard whether the door you are standing by is the desirable door/i);
+  assert.doesNotMatch(problem, /If the answer is yes, choose the other door; if the answer is no, choose the door guarded by the person you asked\./i);
+  assert.match(revealed, /“If I asked the other guard whether the door you are standing by is the desirable door, would the other guard say yes\?”/);
+  assert.match(revealed, /If the answer is yes, choose the other door; if the answer is no, choose the door guarded by the person you asked\./);
   assert.match(problem, /Each guard's behavior is deterministic: one always lies and one always tells the truth\./);
+  assert.match(problem, /One guard stands at each door\./);
+  assert.match(problem, /both guards know which door is desirable/i);
   assert.match(problem, /The two doors, the guards' behavior rules, and the fact that exactly one door is desirable are common knowledge\./);
 
-  const rows = parseGuardRows(solution(text));
+  const rows = parseGuardRows(revealed);
   validateGuardRows(rows);
 
   const mutantText = text.replace('| Truthful | Bad | Yes | Yes | No |', '| Truthful | Bad | Yes | No | No |');
