@@ -50,7 +50,7 @@ The symbolic transcript is:
 
 Each forwarding step preserves the earlier terms and appends exactly one new input. By induction, the value returned by participant 8 is `r + sum_{i=1}^{8} s_i`. Since participant 1 knows `r`, subtraction cancels the mask exactly; division by `8` is therefore the requested average.
 
-This is a deliberately limited privacy model. Honest, non-colluding participants use private channels around the ring, and the mask is known only to participant 1. For a single participant, the sent-minus-received difference reveals only that participant's own input. The public aggregate and any side information may still reveal individual values. This small protocol does not address collusion, dishonest inputs, authentication, auditing, or a general secure-aggregation setting.
+This is a deliberately limited privacy model. Honest, non-colluding participants use private channels around the ring, and the mask is known only to participant 1. For a single participant numbered 2 through 8, the sent-minus-received difference reveals only that participant's own input. Participant 1 is different: its sent-minus-received value is `m_1 - m_8 = -sum_{i=2}^{8} s_i`, the negative aggregate of the other seven inputs. The public aggregate and any side information may still reveal individual values. This small protocol does not address collusion, dishonest inputs, authentication, auditing, or a general secure-aggregation setting.
 
 ## Why This Problem Matters
 

@@ -51,7 +51,9 @@ function validatePrivacyBoundary(solutionText) {
   for (const pattern of [/honest/i, /non-collud/i, /private channel/i, /single participant/i, /aggregate/i, /collusion/i, /side information/i, /dishonest inputs?/i]) {
     assert.match(solutionText, pattern);
   }
-  assert.match(solutionText, /sent-minus-received difference[^.]*only[^.]*own input/i);
+  assert.match(solutionText, /single participant numbered 2 through 8[^.]*sent-minus-received difference[^.]*only[^.]*own input/i);
+  assert.match(solutionText, /participant 1[^.]*sent-minus-received[^.]*negative[^.]*aggregate[^.]*other seven inputs/i);
+  assert.match(solutionText, /m_1 - m_8 = -sum_\{i=2\}\^\{8\} s_i/i);
   assert.match(solutionText, /public aggregate[^.]*side information[^.]*reveal/i);
   assert.doesNotMatch(solutionText, /perfect secrecy|cryptographically secure|collusion-resistant|tamper-proof/i);
 }
@@ -92,4 +94,26 @@ test('privacy-boundary check rejects a page that omits the non-collusion assumpt
   const withoutNonCollusion = publishedSolution.replace(/non-collud\w*/gi, 'coordinated');
   assert.notEqual(withoutNonCollusion, publishedSolution);
   assert.throws(() => validatePrivacyBoundary(withoutNonCollusion));
+});
+
+test('privacy-boundary check rejects a page that omits participant 1’s exception', async () => {
+  const { text } = await page();
+  const publishedSolution = solution(text);
+  const withoutParticipantOneException = publishedSolution.replace(/Participant 1 is different:[^.]*\./, '');
+  assert.notEqual(withoutParticipantOneException, publishedSolution);
+  assert.throws(() => validatePrivacyBoundary(withoutParticipantOneException));
+});
+
+test('participant 1 observes the other-seven aggregate, unlike participants 2 through 8', async () => {
+  const salaries = [41, 53, 67, 72, 88, 91, 104, 116];
+  const mask = 137;
+  const participantOneSent = mask + salaries[0];
+  const participantOneReceived = mask + salaries.reduce((a, b) => a + b, 0);
+  assert.equal(participantOneSent, 178);
+  assert.equal(participantOneReceived, 769);
+  assert.equal(participantOneSent - participantOneReceived, -591);
+  assert.equal(participantOneReceived - participantOneSent, salaries.slice(1).reduce((a, b) => a + b, 0));
+
+  const { text } = await page();
+  validatePrivacyBoundary(solution(text));
 });
