@@ -63,6 +63,61 @@ const treeCheckPatterns = [
   /audit.*binary tree.*candidates A.*leaf path.*conclusion table.*coverage.*uniqueness/is,
 ];
 
+function mCoefficient(value) {
+  return value === '' ? 1 : Number(value);
+}
+
+function verifyCardPairInvariant(check) {
+  const match = check.match(/contains (\d*)m cards:\s*(\d*)m black and (\d*)m red\. Pair the cards into (\d*)m pairs/i);
+  assert.ok(match, 'card-pair assumptions');
+  const [, totalFactor, blackFactor, redFactor, pairFactor] = match.map(String);
+  let verifiedCases = 0;
+
+  for (let m = 1; m <= 12; m += 1) {
+    const total = mCoefficient(totalFactor) * m;
+    const black = mCoefficient(blackFactor) * m;
+    const red = mCoefficient(redFactor) * m;
+    const pairs = mCoefficient(pairFactor) * m;
+    assert.equal(total, black + red, `m=${m} card total`);
+    assert.equal(total, 2 * pairs, `m=${m} pair total`);
+
+    for (let blackBlack = 0; blackBlack <= pairs; blackBlack += 1) {
+      for (let redRed = 0; redRed <= pairs - blackBlack; redRed += 1) {
+        const mixed = pairs - blackBlack - redRed;
+        if (2 * blackBlack + mixed !== black || 2 * redRed + mixed !== red) continue;
+        verifiedCases += 1;
+        assert.equal(blackBlack, redRed, `m=${m}, mixed=${mixed}`);
+      }
+    }
+  }
+
+  assert.ok(verifiedCases > 0);
+  return verifiedCases;
+}
+
+function verifyFuseConstruction(check, {
+  referenceEndsAtStart = 2,
+  timerEndsAtStart = 1,
+  timerEndsLitAtReferenceCompletion = 1,
+} = {}) {
+  const duration = Number(check.match(/takes (\d+) minutes to burn completely/i)?.[1] ?? Number.NaN);
+  const target = Number(check.match(/measure (\d+) minutes/i)?.[1] ?? Number.NaN);
+  assert.equal(Number.isFinite(duration) && Number.isFinite(target), true);
+  assert.match(check, /burns nonuniformly/i);
+  assert.match(check, /Either end.*multiple ends.*time zero or later/is);
+  assert.ok(referenceEndsAtStart >= 1 && referenceEndsAtStart <= 2);
+  assert.ok(timerEndsAtStart >= 1 && timerEndsAtStart <= 2);
+
+  const firstEvent = duration / referenceEndsAtStart;
+  const timerRemaining = Math.max(0, duration - firstEvent * timerEndsAtStart);
+  const timerEndsAfterEvent = timerEndsAtStart + timerEndsLitAtReferenceCompletion;
+  assert.ok(timerEndsAfterEvent >= 1 && timerEndsAfterEvent <= 2);
+  const finalInterval = timerRemaining / timerEndsAfterEvent;
+  const completion = firstEvent + finalInterval;
+  assert.equal(completion, target);
+  return { firstEvent, timerRemaining, finalInterval, completion };
+}
+
 test('constraint-propagation Knowledge has exact structure and executable checks', async () => {
   const { text, metadata } = await page(paths.constraint);
   assert.deepEqual(metadata, constraintMetadata);
@@ -82,6 +137,40 @@ test('constraint-propagation Knowledge has exact structure and executable checks
   const checks = interviewChecks(text);
   assert.equal(checks.length, 8);
   constraintCheckPatterns.forEach((pattern, index) => assert.match(checks[index], pattern));
+});
+
+test('two-color card check programmatically preserves equal monochromatic pair counts', async () => {
+  const { text } = await page(paths.constraint);
+  const [cardCheck] = interviewChecks(text);
+  assert.ok(verifyCardPairInvariant(cardCheck) > 0);
+
+  const unequalColors = cardCheck
+    .replace('2m cards: m black and m red', '4m cards: 3m black and m red')
+    .replace('into m pairs', 'into 2m pairs');
+  assert.throws(() => verifyCardPairInvariant(unequalColors), { name: 'AssertionError' });
+});
+
+test('two-fuse check programmatically measures forty-five minutes', async () => {
+  const { text } = await page(paths.constraint);
+  const [, fuseCheck] = interviewChecks(text);
+  assert.deepEqual(verifyFuseConstruction(fuseCheck), {
+    firstEvent: 30,
+    timerRemaining: 30,
+    finalInterval: 15,
+    completion: 45,
+  });
+  assert.throws(
+    () => verifyFuseConstruction(fuseCheck, { referenceEndsAtStart: 1 }),
+    { name: 'AssertionError' },
+  );
+  assert.throws(
+    () => verifyFuseConstruction(fuseCheck, { timerEndsLitAtReferenceCompletion: 0 }),
+    { name: 'AssertionError' },
+  );
+  assert.throws(
+    () => verifyFuseConstruction(fuseCheck.replace('45 minutes', '50 minutes')),
+    { name: 'AssertionError' },
+  );
 });
 
 test('decision-tree Knowledge has exact structure and executable checks', async () => {
