@@ -96,12 +96,17 @@ function assertProtectedPageProjection(directory) {
   assert.equal(sha256(JSON.stringify(projection)), pageProjectionHash);
 }
 
-test('019 starts as the exact evidence-free active manifest', async () => {
+test('019 manifest preserves immutable scope across the lifecycle', async () => {
   const manifest = await readJson(manifestPath);
-  assert.deepEqual(manifest, expectedActiveManifest);
-  for (const field of ['preClosureActiveGate', 'verification', 'finalTreeGate']) {
-    assert.equal(field in manifest, false, field);
+  if (manifest.status === 'active') {
+    assert.deepEqual(manifest, expectedActiveManifest);
+    return;
   }
+
+  assert.equal(manifest.status, 'complete');
+  const { preClosureActiveGate, verification, finalTreeGate, ...immutable } = manifest;
+  assert.deepEqual(immutable, { ...expectedActiveManifest, status: 'complete' });
+  assert.ok(preClosureActiveGate && verification && finalTreeGate);
 });
 
 test('019 records nine exact mirrored Green dispositions', async () => {

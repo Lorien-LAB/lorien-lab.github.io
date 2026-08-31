@@ -791,11 +791,11 @@ All public Knowledge and Problems remain source-neutral. The Fermi material teac
 
 Workstream 018 alone is bounded to the exact eleven records above. It does not claim completeness for Problem Simplification, Logic, Brainteasers & Discrete Reasoning, any source book, or adjacent topics. Workstream 019 is not active or authorized.
 
-## Active cross-book workstream 19
+## Completed cross-book workstream 19
 
 `logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019`
 
-Status: **active and evidence-free**. Completion is not claimed. The manifest contains no `preClosureActiveGate`, `verification`, or `finalTreeGate`; those fields remain absent until the exact active commit passes Windows, WSL, and GitHub CI.
+Status: **complete**.
 
 Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**. This is a one-source, exact nine-record Green Book 2.2 core scope on evidence pages 21–26:
 
@@ -808,6 +808,18 @@ Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**. This 
 - `green-book::2.2.trailing-zeros::question`
 - `green-book::2.2.horse-race::question`
 - `green-book::2.2.infinite-sequence::question`
+
+### Active integrated verification
+
+- CI-tested pre-closure active commit: `b7a21f5beb17ceb3bb62875ee6736d9eaf651b92`.
+- Windows environment: the locked feature worktree used Windows Node 24 and passed all five ordered gates at the exact active commit.
+- WSL environment: a fresh detached native-filesystem checkout used WSL2, native Node `v24.20.0`, LF-only tracked text, and passed `npm ci` plus all five ordered gates at the exact active commit; its exact proof path and registration were removed without pruning the Windows repository.
+- CI environment: GitHub Actions run `33355185200` at `https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33355185200` used Ubuntu and Node 24, ran `npm ci`, and passed all five ordered gates with `head_sha` `b7a21f5beb17ceb3bb62875ee6736d9eaf651b92`.
+- Ordered gates: `npm test`, `npm run knowledge:directory:check`, `npm run master:directory:check`, `npm run check`, then `npm run build`.
+- Workflow-free active-state proof: removal commit `bedd5f1ead5199c0ed1cc5b69313856b07c0f00f` passed `npm ci`, an LF audit, 567/567 tests, all five ordered gates, and 36/36 focused invariants in a fresh detached `wsl-native-lf-node24` checkout; the temporary workflow was absent, the manifest remained active and evidence-free, and the proof path and registration were removed without pruning.
+- Conclusion: success.
+
+This evidence belongs to the immutable active commit above, not to the later workflow-free closure commit. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`.
 
 ### Canonical Knowledge
 
@@ -836,7 +848,7 @@ Workstream 019 adds exactly **+5 Problems / +2 Knowledge**, producing the curren
 - `green-book::2.2.horse-race::question` is `canonical-problem` and resolves to `top-three-from-batched-races`.
 - `green-book::2.2.infinite-sequence::question` is `merged-duplicate`; the recursive tower merges into the existing `infinite-power-tower-limit` Problem and its complete convergence and branch-selection proof.
 
-The exact state split is **5 `canonical-problem` / 3 `knowledge-only` / 1 `merged-duplicate`**. All nine rows are terminal, yielding exactly **248 terminal / 502 pending** master-directory records. The first pending record after the active scope is `green-book::2.3::theory`.
+The exact state split is **5 `canonical-problem` / 3 `knowledge-only` / 1 `merged-duplicate`**. All nine rows are terminal, yielding exactly **248 terminal / 502 pending** master-directory records. The first pending record after the completed scope is `green-book::2.3::theory`.
 
 ### Topic refinements and page freeze
 
@@ -844,11 +856,11 @@ The exact state split is **5 `canonical-problem` / 3 `knowledge-only` / 1 `merge
 - `green-book::2.2.horse-race::question` adds `algorithmic-complexity`. Reason: Item-level review identifies a comparison-selection strategy with an optimal race lower bound, so this Logical Deduction item also belongs to Algorithmic Complexity.
 - `green-book::2.2.infinite-sequence::question` adds `limits-derivatives`. Reason: Item-level review identifies the recursive tower as the existing Limits & Derivatives fixed-point and convergence identity while retaining its editorial Logical Deduction context.
 - The other six rows remain solely under `logical-deduction` and have no topic override.
-- No question or solution page range changed. The protected source-topic map and all 750 master page rows remain byte-stable under their pinned projections.
+- No question or solution page range changed. The protected source-topic map is unchanged, and the full ordered 750-row `{key, questionPages, solutionPages}` projection remains frozen at SHA-256 `2275e9e3414f249dc39bcef52bbaf202ab8d43445e61845f63a94724059eeb3e`.
 
 ### Source-neutral and completion boundary
 
-All public Knowledge and Problems remain source-neutral. The card and rope prompts remain visible checks instead of inflated public Problems, and the tower identity is merged rather than duplicated. This active workstream is bounded to the exact nine Green Book 2.2 records above; it does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Green Book, any source book, or adjacent topics.
+All public Knowledge and Problems remain source-neutral. The card and rope prompts remain visible checks instead of inflated public Problems, and the tower identity is merged rather than duplicated. This completed workstream is bounded to the exact nine Green Book 2.2 records above; it does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Green Book, any source book, or adjacent topics.
 
 Workstream 020 is not active or authorized.
 
@@ -872,15 +884,15 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
+**No bounded topic is active. Workstream 019 is complete.**
 
-Workstream 019 is active across the exact nine-record Green Book 2.2 core scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.
+A later workstream requires its own approved design and evidence audit; workstream 020 is not active or authorized by this closure.
 
 ## Master directory ingestion state
 
-**Workstream 019 owns the exact nine-record Green Book 2.2 core scope. The three-book master directory migration remains complete.**
+**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
 
-First pending master record after the active 019 scope: `green-book::2.3::theory`
+First pending master record: `green-book::2.3::theory`
 
 Workstream 020 is not active or authorized.
 

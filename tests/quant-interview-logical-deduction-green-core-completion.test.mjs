@@ -5,7 +5,9 @@ import { access, readFile, readdir } from 'node:fs/promises';
 const manifestPath = 'src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019.json';
 const workflow = '.github/workflows/quant-interview-logical-deduction-green-core-019-temporary.yml';
 const commands = ['npm test', 'npm run knowledge:directory:check', 'npm run master:directory:check', 'npm run check', 'npm run build'];
-const shaPattern = /^[0-9a-f]{40}$/;
+const activeSha = 'b7a21f5beb17ceb3bb62875ee6736d9eaf651b92';
+const runId = 33355185200;
+const ciUrl = 'https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33355185200';
 const activeCurrent = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
 Workstream 019 is active across the exact nine-record Green Book 2.2 core scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
@@ -26,15 +28,11 @@ function assertLifecycleEvidence(manifest) {
   }
 
   const { preClosureActiveGate: gate, verification, finalTreeGate } = manifest;
-  const commit = gate?.commit ?? '';
-  const runId = verification?.runId;
-  assert.match(commit, shaPattern);
-  assert.equal(Number.isInteger(runId) && runId > 0, true);
   assert.deepEqual(gate, {
-    status: 'active', commit, environment: 'wsl-native-lf-node24', commands, conclusion: 'success',
+    status: 'active', commit: activeSha, environment: 'wsl-native-lf-node24', commands, conclusion: 'success',
   });
   assert.deepEqual(verification, {
-    commit, runId, commands, conclusion: 'success', temporaryArtifacts: [workflow],
+    commit: activeSha, runId, commands, conclusion: 'success', temporaryArtifacts: [workflow],
   });
   assert.deepEqual(finalTreeGate, {
     environment: 'wsl-native-lf-node24', commands, conclusion: 'success', temporaryArtifactsAbsent: true,
@@ -43,14 +41,13 @@ function assertLifecycleEvidence(manifest) {
 
 test('completion evidence rejects extra fields while the active phase stays evidence-free', () => {
   assert.doesNotThrow(() => assertLifecycleEvidence({ status: 'active' }));
-  const commit = 'a'.repeat(40);
   const complete = {
     status: 'complete',
     preClosureActiveGate: {
-      status: 'active', commit, environment: 'wsl-native-lf-node24', commands, conclusion: 'success',
+      status: 'active', commit: activeSha, environment: 'wsl-native-lf-node24', commands, conclusion: 'success',
     },
     verification: {
-      commit, runId: 1, commands, conclusion: 'success', temporaryArtifacts: [workflow],
+      commit: activeSha, runId, commands, conclusion: 'success', temporaryArtifacts: [workflow],
     },
     finalTreeGate: {
       environment: 'wsl-native-lf-node24', commands, conclusion: 'success', temporaryArtifactsAbsent: true,
@@ -77,13 +74,12 @@ test('019 lifecycle is evidence-free while active and factually strict when comp
     return;
   }
 
-  const { preClosureActiveGate: gate, verification } = manifest;
   await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
   assert.equal(currentBlock(handoff), completeCurrent);
   assert.doesNotMatch(handoff, /^## Active cross-book workstream 19$/m);
   assert.match(handoff, /^## Completed cross-book workstream 19$/m);
   const closure = section(handoff, 'Completed cross-book workstream 19');
-  for (const fact of [manifest.id, gate.commit, String(verification.runId)]) {
+  for (const fact of [manifest.id, activeSha, String(runId), ciUrl]) {
     assert.ok(closure.includes(fact));
   }
   assert.match(handoff, /First pending master record: `green-book::2\.3::theory`/i);
@@ -104,4 +100,17 @@ test('019 advances the exact public and master contracts without 020', async () 
   assert.match(generated, /Pending master records: 502/);
   assert.match(generated, /First pending: `green-book::2\.3::theory`/);
   assert.equal(workstreams.some((file) => /-020\.json$/.test(file)), false);
+});
+
+test('019 final tree is complete and workflow-free', async () => {
+  const [manifest, handoff] = await Promise.all([
+    readFile(manifestPath, 'utf8').then(JSON.parse),
+    readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
+  ]);
+  assert.equal(manifest.status, 'complete');
+  assert.equal(currentBlock(handoff), completeCurrent);
+  assert.match(handoff, /^## Completed cross-book workstream 19$/m);
+  assert.doesNotMatch(handoff, /^## Active cross-book workstream 19$/m);
+  await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
+  assert.match(handoff, /First pending master record: `green-book::2\.3::theory`/i);
 });
