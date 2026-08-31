@@ -24,6 +24,7 @@ test('Constraint Reframing Knowledge has exact source-neutral executable structu
   assert.deepEqual(frontmatter, metadata);
   assert.deepEqual([...text.matchAll(/^## (.+)$/gm)].map(([, h]) => h), headings);
   for (const pattern of [/state variables/i, /representation/i, /granularity/i, /latent state/i, /reversible/i, /cancel/i, /constructive witness/i, /necessary/i, /assumptions/i]) assert.match(text, pattern);
+  assert.match(text, /State assumptions and boundaries alongside the argument\./);
   const checks = text.split(/^## Interview Checks$/m)[1]?.match(/^\d+\. .+$/gm) ?? [];
   assert.equal(checks.length, 6);
   assert.doesNotMatch(checks.join('\n'), /53.*brick|calendar.*cube|two guards|padlock|last ball|four switches|salary/i);
