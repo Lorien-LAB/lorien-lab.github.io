@@ -69,6 +69,7 @@ const exactOrder = {
   'logical-deduction': [
     'logical-deduction-constraint-propagation-and-case-elimination',
     'decision-trees-information-bounds-and-adaptive-testing',
+    'constraint-reframing-and-latent-state',
   ],
   'problem-simplification': [
     'small-cases-recurrence-and-structural-simplification',
@@ -141,6 +142,7 @@ const exactPrerequisites = {
   'bayes-rule-base-rates': ['conditioning'],
   'bounded-monotone-convergence-and-fixed-points': ['monotonicity-convexity-critical-points-and-inflection'],
   'common-probability-distributions': ['random-variables-cdf-pmf-pdf'],
+  'constraint-reframing-and-latent-state': ['logical-deduction-constraint-propagation-and-case-elimination'],
   'conditional-expectation-tower-property': ['conditioning', 'expectation-linearity-indicators'],
   conditioning: [],
   'correlation-matrix': [],
@@ -197,7 +199,7 @@ const exactPrerequisites = {
   'vector-geometry-inner-products': [],
 };
 
-test('repository catalog contains the exact published 86/58 corpus', async () => {
+test('repository catalog contains the exact published 93/59 corpus', async () => {
   const [catalogText, taxonomyText, knowledgeRecords] = await Promise.all([
     readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
     readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'),
@@ -206,8 +208,8 @@ test('repository catalog contains the exact published 86/58 corpus', async () =>
   const repositoryCatalog = JSON.parse(catalogText);
   const repositoryTaxonomy = JSON.parse(taxonomyText);
   assert.equal(validateKnowledgeCatalog(repositoryCatalog, repositoryTaxonomy, knowledgeRecords), true);
-  assert.equal(repositoryCatalog.modules.length, 58);
-  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 58);
+  assert.equal(repositoryCatalog.modules.length, 59);
+  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 59);
   assert.deepEqual(
     repositoryCatalog.modules.filter((module) => module.status === 'planned').map((module) => module.slug).sort(),
     [],
@@ -239,7 +241,7 @@ test('repository public projection exposes the complete source-neutral curriculu
     problemRecords,
     base: '/',
   });
-  assert.deepEqual(result.totals, { published: 58, planned: 0 });
+  assert.deepEqual(result.totals, { published: 59, planned: 0 });
   assert.equal(result.topics.length, 10);
   const interview = result.topics.find((topic) => topic.id === 'interview-strategy-communication');
   const reasoning = interview.children.find((topic) => topic.id === 'reasoning-communication');

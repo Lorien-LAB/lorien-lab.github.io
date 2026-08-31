@@ -5,6 +5,7 @@ import { JSON_SCHEMA, load as parseYaml } from 'js-yaml';
 
 const constraint = 'logical-deduction-constraint-propagation-and-case-elimination';
 const trees = 'decision-trees-information-bounds-and-adaptive-testing';
+const reframing = 'constraint-reframing-and-latent-state';
 const topics = ['logic-brainteasers-discrete-reasoning', 'logical-deduction'];
 const paths = {
   constraint: `src/content/knowledge/concepts/${constraint}.md`,
@@ -27,7 +28,7 @@ const constraintMetadata = {
   category: 'Problem Solving Techniques', status: 'growing',
   tags: ['Logical Deduction', 'Constraints', 'Case Analysis', 'Interview'],
   quantInterviewTopics: topics, featured: false,
-  related: ['small-cases-recurrence-and-structural-simplification', 'problem-framing-clarification-assumption-management', trees],
+  related: ['small-cases-recurrence-and-structural-simplification', 'problem-framing-clarification-assumption-management', trees, reframing],
   relatedNotes: [],
 };
 const treeMetadata = {
@@ -37,7 +38,7 @@ const treeMetadata = {
   category: 'Problem Solving Techniques', status: 'growing',
   tags: ['Decision Trees', 'Information Bounds', 'Adaptive Testing', 'Interview'],
   quantInterviewTopics: topics, featured: false,
-  related: [constraint, 'small-cases-recurrence-and-structural-simplification'],
+  related: [constraint, 'small-cases-recurrence-and-structural-simplification', reframing],
   relatedNotes: [],
 };
 

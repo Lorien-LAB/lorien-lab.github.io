@@ -862,7 +862,68 @@ The exact state split is **5 `canonical-problem` / 3 `knowledge-only` / 1 `merge
 
 All public Knowledge and Problems remain source-neutral. The card and rope prompts remain visible checks instead of inflated public Problems, and the tower identity is merged rather than duplicated. This completed workstream is bounded to the exact nine Green Book 2.2 records above; it does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Green Book, any source book, or adjacent topics.
 
-Workstream 020 is not active or authorized.
+At the time of this closure, Workstream 020 was not active or authorized. That boundary is historical; the active 020 section below now owns current state.
+
+## Active cross-book workstream 20
+
+`logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020`
+
+Status: **active**.
+
+Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**. This is a one-source, exact eight-record Green Book 2.3 scope on evidence pages 26–31:
+
+- `green-book::2.3::theory`
+- `green-book::2.3.box-packing::question`
+- `green-book::2.3.calendar-cubes::question`
+- `green-book::2.3.door-to-offer::question`
+- `green-book::2.3.message-delivery::question`
+- `green-book::2.3.last-ball::question`
+- `green-book::2.3.light-switches::question`
+- `green-book::2.3.quant-salary::question`
+
+Completion evidence is intentionally absent while this manifest is active. `preClosureActiveGate`, `verification`, and `finalTreeGate` are not populated until the exact active commit passes Windows, WSL, and GitHub CI.
+
+### Canonical Knowledge
+
+- **Constraint Reframing & Latent State** — `constraint-reframing-and-latent-state`.
+
+### Canonical Problems
+
+- **Packing Length-Four Bricks in a Six-Cube** — `pack-length-four-bricks-in-six-cube`.
+- **Two-Cube Calendar Digit Labeling** — `two-cube-calendar-digit-labeling`.
+- **Two Guards, Two Doors, One Question** — `two-guards-one-question`.
+- **Message Delivery with Independent Padlocks** — `message-delivery-with-independent-padlocks`.
+- **Last-Ball Color from a Parity Invariant** — `last-ball-color-by-parity-invariant`.
+- **Four Switches with One Room Entry** — `four-switches-one-room-entry`.
+- **Private Average with a Canceling Mask** — `private-average-with-canceling-mask`.
+
+Workstream 020 adds exactly **+7 Problems / +1 Knowledge**, producing the current **93 Problems / 59 Knowledge** source-neutral corpus.
+
+### Exact eight dispositions
+
+- `green-book::2.3::theory` is `knowledge-only` and resolves to `constraint-reframing-and-latent-state`.
+- `green-book::2.3.box-packing::question` is `canonical-problem` and resolves to `pack-length-four-bricks-in-six-cube`.
+- `green-book::2.3.calendar-cubes::question` is `canonical-problem` and resolves to `two-cube-calendar-digit-labeling`.
+- `green-book::2.3.door-to-offer::question` is `canonical-problem` and resolves to `two-guards-one-question`.
+- `green-book::2.3.message-delivery::question` is `canonical-problem` and resolves to `message-delivery-with-independent-padlocks`.
+- `green-book::2.3.last-ball::question` is `canonical-problem` and resolves to `last-ball-color-by-parity-invariant`.
+- `green-book::2.3.light-switches::question` is `canonical-problem` and resolves to `four-switches-one-room-entry`.
+- `green-book::2.3.quant-salary::question` is `canonical-problem` and resolves to `private-average-with-canceling-mask`.
+
+The exact state split is **7 `canonical-problem` / 1 `knowledge-only`**. All eight rows are terminal, yielding exactly **256 terminal / 494 pending** master-directory records. The first pending master record after the active 020 scope is `red-book::8::theory`.
+
+### Topic refinements and page freeze
+
+- `green-book::2.3.box-packing::question` adds `invariants-state-transformations`. Reason: Item-level review identifies a three-dimensional coloring invariant and capacity obstruction, so this Logical Deduction item also belongs to Invariants & State Transformations.
+- `green-book::2.3.last-ball::question` adds `invariants-state-transformations` and `modular-arithmetic`. Reason: Item-level review identifies parity preservation under every replacement transition, so this Logical Deduction item also belongs to Invariants & State Transformations and Modular Arithmetic.
+- The other six rows remain solely under `logical-deduction` and have no topic override.
+- Zero question or solution page fields changed. The protected source-topic map is unchanged, and the full ordered 750-row `{key, questionPages, solutionPages}` projection remains frozen at SHA-256 `2275e9e3414f249dc39bcef52bbaf202ab8d43445e61845f63a94724059eeb3e`.
+
+### Source-neutrality, privacy, and security boundaries
+
+All public Knowledge and Problems remain source-neutral. The independent-padlock construction guarantees only that the box remains locked during each courier transit; it does not provide authentication, tamper evidence, or general cryptographic security. The canceling-mask average assumes honest, non-colluding participants and private ring channels; it does not address collusion, dishonest inputs, authentication, auditing, endpoint observations, or general secure aggregation.
+
+Workstream 020 alone is bounded to the exact eight Green Book 2.3 records above. It does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Green Book, any source book, or adjacent topics. Workstream 021 is not active or authorized.
 
 ## Next action
 
@@ -884,17 +945,17 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**No bounded topic is active. Workstream 019 is complete.**
+**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
-A later workstream requires its own approved design and evidence audit; workstream 020 is not active or authorized by this closure.
+Workstream 020 is active across the exact eight-record Green Book 2.3 scope. Its public delta is +7 Problems / +1 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.
 
 ## Master directory ingestion state
 
-**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+**Workstream 020 owns the exact eight-record Green Book 2.3 scope. The three-book master directory migration remains complete.**
 
-First pending master record: `green-book::2.3::theory`
+First pending master record after the active 020 scope: `red-book::8::theory`
 
-Workstream 020 is not active or authorized.
+Workstream 021 is not active or authorized.
 
 ## Parallel workstream coordination
 

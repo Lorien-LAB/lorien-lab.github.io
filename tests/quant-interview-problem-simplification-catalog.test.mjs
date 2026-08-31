@@ -18,7 +18,7 @@ test('Problem Simplification Knowledge modules have exact catalog order', async 
     { slug: small, title: 'Small Cases, Recurrence & Structural Simplification', canonicalTopics: topics, primaryTopic: 'problem-simplification', learningOrder: 10, status: 'published', prerequisites: [] },
     { slug: fermi, title: 'Fermi Estimation & Assumption Decomposition', canonicalTopics: topics, primaryTopic: 'problem-simplification', learningOrder: 20, status: 'published', prerequisites: [small] },
   ]);
-  assert.equal(catalog.modules.length, 58);
+  assert.equal(catalog.modules.length, 59);
 });
 
 test('new and existing Knowledge pages expose the exact reciprocal graph', async () => {
@@ -31,12 +31,16 @@ test('new and existing Knowledge pages expose the exact reciprocal graph', async
   assert.deepEqual(pages[small].related, ['recursion-problem-solving', 'problem-framing-clarification-assumption-management', fermi, 'logical-deduction-constraint-propagation-and-case-elimination', 'decision-trees-information-bounds-and-adaptive-testing']);
   assert.deepEqual(pages[fermi].related, [small, 'problem-framing-clarification-assumption-management']);
   assert.deepEqual(pages.recursion.related, [small]);
-  assert.deepEqual(pages.framing.related, ['structured-think-aloud-reasoning', 'quant-interview-preparation-breadth-and-practice', 'quant-interview-formats-and-assessment-strategy', 'behavioral-interview-evidence-and-authenticity', small, fermi, 'logical-deduction-constraint-propagation-and-case-elimination']);
+  assert.deepEqual(pages.framing.related, ['structured-think-aloud-reasoning', 'quant-interview-preparation-breadth-and-practice', 'quant-interview-formats-and-assessment-strategy', 'behavioral-interview-evidence-and-authenticity', small, fermi, 'logical-deduction-constraint-propagation-and-case-elimination', 'constraint-reframing-and-latent-state']);
 });
 
-test('public corpus contains exactly 86 Problems and 58 classified Knowledge nodes', async () => {
+test('Problem Simplification remains registered in the exact 93/59 corpus after 020', async () => {
   const problemFiles = (await readdir('src/content/problems', { recursive: true })).filter((file) => String(file).endsWith('.md'));
   const catalog = JSON.parse(await readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'));
-  assert.equal(problemFiles.length, 86);
-  assert.equal(catalog.modules.length, 58);
+  assert.deepEqual(
+    catalog.modules.filter(({ primaryTopic }) => primaryTopic === 'problem-simplification').map(({ slug }) => slug),
+    [small, fermi],
+  );
+  assert.equal(problemFiles.length, 93);
+  assert.equal(catalog.modules.length, 59);
 });

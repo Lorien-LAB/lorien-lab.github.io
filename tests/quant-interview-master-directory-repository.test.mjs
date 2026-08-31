@@ -17,11 +17,11 @@ function firstMissingSource(directory) {
       || !directory.items.some((item) => item.source === source));
 }
 
-test('repository loader preserves explicit 86/58 state and reports the next enumeration gap', async () => {
+test('repository loader preserves explicit 93/59 state and reports the next enumeration gap', async () => {
   await access('src/data/quant-interview/master-directory.json');
   const inputs = await loadMasterDirectoryRepository(process.cwd());
-  assert.equal(inputs.problemSlugs.size, 86);
-  assert.equal(inputs.knowledgeSlugs.size, 58);
+  assert.equal(inputs.problemSlugs.size, 93);
+  assert.equal(inputs.knowledgeSlugs.size, 59);
   const missingSource = firstMissingSource(inputs.directory);
   if (missingSource) {
     assert.throws(
@@ -216,16 +216,17 @@ test('every legacy coverage row maps exactly once into the master directory', as
   }
 });
 
-test('master corpus preserves the 76/50 baseline plus explicit 014 through 019 deltas', async () => {
+test('master corpus preserves the 76/50 baseline plus explicit 014 through 020 deltas', async () => {
   const inputs = await loadMasterDirectoryRepository(process.cwd());
-  assert.equal(inputs.problemSlugs.size, 86);
-  assert.equal(inputs.knowledgeSlugs.size, 58);
+  assert.equal(inputs.problemSlugs.size, 93);
+  assert.equal(inputs.knowledgeSlugs.size, 59);
   const workstream014 = inputs.workstreams.find(({ id }) => id.endsWith('-014'));
   const workstream015 = inputs.workstreams.find(({ id }) => id.endsWith('-015'));
   const workstream016 = inputs.workstreams.find(({ id }) => id.endsWith('-016'));
   const workstream017 = inputs.workstreams.find(({ id }) => id.endsWith('-017'));
   const workstream018 = inputs.workstreams.find(({ id }) => id.endsWith('-018'));
   const workstream019 = inputs.workstreams.find(({ id }) => id.endsWith('-019'));
+  const workstream020 = inputs.workstreams.find(({ id }) => id.endsWith('-020'));
   assert.deepEqual(workstream014.publicDelta, { problems: 0, knowledge: 1 });
   assert.deepEqual(workstream015.publicDelta, { problems: 0, knowledge: 1 });
   assert.deepEqual(workstream016.publicDelta, { problems: 0, knowledge: 1 });
@@ -240,14 +241,19 @@ test('master corpus preserves the 76/50 baseline plus explicit 014 through 019 d
     'logical-deduction-constraint-propagation-and-case-elimination',
     'decision-trees-information-bounds-and-adaptive-testing',
   ]);
+  assert.deepEqual(workstream020.publicDelta, { problems: 7, knowledge: 1 });
+  assert.deepEqual(workstream020.knowledgeSlugs, [
+    'constraint-reframing-and-latent-state',
+  ]);
   assert.equal(
     workstream014.publicDelta.knowledge
       + workstream015.publicDelta.knowledge
       + workstream016.publicDelta.knowledge
       + workstream017.publicDelta.knowledge
       + workstream018.publicDelta.knowledge
-      + workstream019.publicDelta.knowledge,
-    8,
+      + workstream019.publicDelta.knowledge
+      + workstream020.publicDelta.knowledge,
+    9,
   );
   assert.deepEqual(inputs.workstreams.map(({ id }) => id).sort(), [
     'calculus-differential-equations-limits-derivatives-012',
@@ -262,6 +268,7 @@ test('master corpus preserves the 76/50 baseline plus explicit 014 through 019 d
     'linear-algebra-vectors-linear-systems-004',
     'logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019',
     'logic-brainteasers-discrete-reasoning-problem-simplification-018',
+    'logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020',
     'probability-statistics-combinatorial-probability-006',
     'probability-statistics-conditional-probability-bayes-007',
     'probability-statistics-expectation-variance-covariance-009',
@@ -289,28 +296,33 @@ test('repository validator rejects coverage and master lifecycle drift', async (
   );
 });
 
-test('019 lifecycle advances the next pending record and blocks 020', async () => {
+test('019 remains complete while the 020 lifecycle advances the next pending record and blocks 021', async () => {
   const { directory, workstreams } = await loadMasterDirectoryRepository(process.cwd());
   const first = getNextPendingItem(directory);
-  assert.equal(first?.key, 'green-book::2.3::theory');
+  assert.equal(first?.key, 'red-book::8::theory');
   assert.equal(validateSequentialScope(directory, [first.key]), true);
   const workstream017 = workstreams.find(({ id }) => /-017$/.test(id));
   const workstream018 = workstreams.find(({ id }) => /-018$/.test(id));
   const workstream019 = workstreams.find(({ id }) => /-019$/.test(id));
+  const workstream020 = workstreams.find(({ id }) => /-020$/.test(id));
   assert.equal(workstream017.status, 'complete');
   assert.equal(workstream018.status, 'complete');
-  assert.match(workstream019.status, /^(?:active|complete)$/);
-  assert.equal(workstreams.some(({ id }) => /-020$/.test(id)), false);
+  assert.equal(workstream019.status, 'complete');
+  assert.match(workstream020.status, /^(?:active|complete)$/);
+  assert.equal(workstreams.some(({ id }) => /-021$/.test(id)), false);
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
   const current = handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0] ?? '';
-  if (workstream019.status === 'active') {
+  assert.match(handoff, /^## Completed cross-book workstream 19$/m);
+  if (workstream020.status === 'active') {
     assert.match(current, /Logic, Brainteasers.*Logical Deduction/is);
-    assert.match(current, /Workstream 019 is active/i);
-    assert.doesNotMatch(handoff, /^## Completed cross-book workstream 19$/m);
-    assert.match(handoff, /First pending master record after the active 019 scope: `green-book::2\.3::theory`/i);
+    assert.match(current, /Workstream 020 is active/i);
+    assert.match(handoff, /^## Active cross-book workstream 20$/m);
+    assert.doesNotMatch(handoff, /^## Completed cross-book workstream 20$/m);
+    assert.match(handoff, /First pending master record after the active 020 scope: `red-book::8::theory`/i);
   } else {
-    assert.match(handoff, /^## Completed cross-book workstream 19$/m);
-    assert.doesNotMatch(current, /Workstream 019 is active/i);
-    assert.match(handoff, /First pending master record: `green-book::2\.3::theory`/i);
+    assert.match(handoff, /^## Completed cross-book workstream 20$/m);
+    assert.doesNotMatch(current, /Workstream 020 is active/i);
+    assert.match(handoff, /First pending master record: `red-book::8::theory`/i);
   }
+  assert.match(handoff, /Workstream 021 is not active or authorized/);
 });

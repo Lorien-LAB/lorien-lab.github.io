@@ -318,6 +318,21 @@ test('handoff current topic and remaining queue follow the latest workstream sta
                 } else {
                   assert.match(handoff, /^## Completed cross-book workstream 19$/m);
                   assert.doesNotMatch(current, /Workstream 019 is active/i);
+                  const workstream020 = JSON.parse(await readFile(
+                    'src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020.json',
+                    'utf8',
+                  ));
+                  assert.match(workstream020.status, /^(?:active|complete)$/);
+                  if (workstream020.status === 'active') {
+                    assert.match(current, /Logic, Brainteasers.*Logical Deduction/is);
+                    assert.match(current, /Workstream 020 is active/i);
+                    assert.match(handoff, /^## Active cross-book workstream 20$/m);
+                    assert.doesNotMatch(handoff, /^## Completed cross-book workstream 20$/m);
+                  } else {
+                    assert.match(handoff, /^## Completed cross-book workstream 20$/m);
+                    assert.doesNotMatch(current, /Workstream 020 is active/i);
+                  }
+                  assert.match(handoff, /Workstream 021 is not active or authorized/i);
                 }
               }
             }
