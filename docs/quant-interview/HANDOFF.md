@@ -862,13 +862,13 @@ The exact state split is **5 `canonical-problem` / 3 `knowledge-only` / 1 `merge
 
 All public Knowledge and Problems remain source-neutral. The card and rope prompts remain visible checks instead of inflated public Problems, and the tower identity is merged rather than duplicated. This completed workstream is bounded to the exact nine Green Book 2.2 records above; it does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Green Book, any source book, or adjacent topics.
 
-At the time of this closure, Workstream 020 was not active or authorized. That boundary is historical; the active 020 section below now owns current state.
+At the time of this closure, Workstream 020 was not active or authorized. That boundary is historical; the completed 020 section below now owns current durable state.
 
-## Active cross-book workstream 20
+## Completed cross-book workstream 20
 
 `logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020`
 
-Status: **active**.
+Status: **complete**.
 
 Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**. This is a one-source, exact eight-record Green Book 2.3 scope on evidence pages 26–31:
 
@@ -881,7 +881,17 @@ Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**. This 
 - `green-book::2.3.light-switches::question`
 - `green-book::2.3.quant-salary::question`
 
-Completion evidence is intentionally absent while this manifest is active. `preClosureActiveGate`, `verification`, and `finalTreeGate` are not populated until the exact active commit passes Windows, WSL, and GitHub CI.
+### Active integrated verification
+
+- CI-tested pre-closure active commit: `dde337bcc7efe59b42557b5faabfaec03e5b9c2e`.
+- Windows environment: the locked feature worktree used Node `v24.15.0` and passed all five ordered gates at the exact active commit.
+- WSL environment: a fresh detached native-filesystem checkout used Node `v24.15.0`, LF-only tracked text, ran `npm ci`, and passed all five ordered gates at the exact active commit; its exact proof path and registration were removed without pruning the Windows repository.
+- CI environment: GitHub Actions run `33422563783` at `https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33422563783` used Ubuntu and Node 24, ran `npm ci`, and passed all five ordered gates with `head_sha` `dde337bcc7efe59b42557b5faabfaec03e5b9c2e`.
+- Ordered gates: `npm test`, `npm run knowledge:directory:check`, `npm run master:directory:check`, `npm run check`, then `npm run build`.
+- Workflow-free active-state proof: removal commit `032ffe676afd5d2ba94531ebcbd415932bdce83e` passed `npm ci`, an LF audit, 610/610 tests, all five ordered gates, and the exact 93/59, 256/494, Red-8, 7/1, two-override, full-page-hash, no-021, no-source-media, and clean-tree invariants in a fresh detached `wsl-native-lf-node24` checkout; the temporary workflow was absent, the manifest remained active and evidence-free, and the proof path and registration were removed without pruning.
+- Conclusion: success.
+
+This evidence belongs to the immutable active commit above, not to the later workflow-free closure commit. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`.
 
 ### Canonical Knowledge
 
@@ -910,7 +920,7 @@ Workstream 020 adds exactly **+7 Problems / +1 Knowledge**, producing the curren
 - `green-book::2.3.light-switches::question` is `canonical-problem` and resolves to `four-switches-one-room-entry`.
 - `green-book::2.3.quant-salary::question` is `canonical-problem` and resolves to `private-average-with-canceling-mask`.
 
-The exact state split is **7 `canonical-problem` / 1 `knowledge-only`**. All eight rows are terminal, yielding exactly **256 terminal / 494 pending** master-directory records. The first pending master record after the active 020 scope is `red-book::8::theory`.
+The exact state split is **7 `canonical-problem` / 1 `knowledge-only`**. All eight rows are terminal, yielding exactly **256 terminal / 494 pending** master-directory records. The first pending master record after the completed 020 scope is `red-book::8::theory`.
 
 ### Topic refinements and page freeze
 
@@ -919,7 +929,7 @@ The exact state split is **7 `canonical-problem` / 1 `knowledge-only`**. All eig
 - The other six rows remain solely under `logical-deduction` and have no topic override.
 - Zero question or solution page fields changed. The protected source-topic map is unchanged, and the full ordered 750-row `{key, questionPages, solutionPages}` projection remains frozen at SHA-256 `2275e9e3414f249dc39bcef52bbaf202ab8d43445e61845f63a94724059eeb3e`.
 
-### Source-neutrality, privacy, and security boundaries
+### Source-neutrality and protocol boundaries
 
 All public Knowledge and Problems remain source-neutral. The independent-padlock construction guarantees only that the box remains locked during each courier transit; it does not provide authentication, tamper evidence, or general cryptographic security. The canceling-mask average assumes honest, non-colluding participants and private ring channels; it does not address collusion, dishonest inputs, authentication, auditing, endpoint observations, or general secure aggregation.
 
@@ -945,15 +955,15 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
+**No bounded topic is active. Workstream 020 is complete.**
 
-Workstream 020 is active across the exact eight-record Green Book 2.3 scope. Its public delta is +7 Problems / +1 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.
+A later workstream requires its own approved design and evidence audit; workstream 021 is not active or authorized by this closure.
 
 ## Master directory ingestion state
 
-**Workstream 020 owns the exact eight-record Green Book 2.3 scope. The three-book master directory migration remains complete.**
+**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
 
-First pending master record after the active 020 scope: `red-book::8::theory`
+First pending master record: `red-book::8::theory`
 
 Workstream 021 is not active or authorized.
 

@@ -12,6 +12,11 @@ Workstream 020 is active across the exact eight-record Green Book 2.3 scope. Its
 const completeCurrent = `**No bounded topic is active. Workstream 020 is complete.**
 
 A later workstream requires its own approved design and evidence audit; workstream 021 is not active or authorized by this closure.`;
+const completeMaster = `**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+
+First pending master record: \`red-book::8::theory\`
+
+Workstream 021 is not active or authorized.`;
 const newProblemPaths = [
   'src/content/problems/logic/pack-length-four-bricks-in-six-cube.md',
   'src/content/problems/logic/two-cube-calendar-digit-labeling.md',
@@ -107,6 +112,26 @@ test('020 lifecycle is evidence-free while active and factually strict when comp
   for (const fact of [manifest.id, gate.commit, String(verification.runId)]) {
     assert.ok(closure.includes(fact));
   }
+  assert.match(handoff, /First pending master record: `red-book::8::theory`/i);
+  assert.match(handoff, /Workstream 021 is not active or authorized/);
+});
+
+test('020 final tree requires the complete workflow-free lifecycle without 021', async () => {
+  const [manifest, workstreams] = await Promise.all([
+    readFile(manifestPath, 'utf8').then(JSON.parse),
+    readdir('src/data/quant-interview/workstreams'),
+  ]);
+  assert.equal(manifest.status, 'complete');
+  await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
+  assert.equal(workstreams.some((file) => /-021\.json$/.test(file)), false);
+});
+
+test('020 final HANDOFF records the exact completed current and master state', async () => {
+  const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
+  assert.equal(currentBlock(handoff), completeCurrent);
+  assert.equal(section(handoff, 'Master directory ingestion state').trim(), completeMaster);
+  assert.doesNotMatch(handoff, /^## Active cross-book workstream 20$/m);
+  assert.match(handoff, /^## Completed cross-book workstream 20$/m);
   assert.match(handoff, /First pending master record: `red-book::8::theory`/i);
   assert.match(handoff, /Workstream 021 is not active or authorized/);
 });

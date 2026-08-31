@@ -15,10 +15,9 @@ const keys = [
   'green-book::2.3.light-switches::question',
   'green-book::2.3.quant-salary::question',
 ];
-const expectedActiveManifest = {
+const expectedManifestScope = {
   id,
   canonicalTopics: ['logic-brainteasers-discrete-reasoning', 'logical-deduction'],
-  status: 'active',
   masterItemKeys: keys,
   sourceScopes: [{
     source: 'green-book',
@@ -92,12 +91,15 @@ function mutateQuestionPages(row) {
   row.questionPages[0].startPage += 1;
 }
 
-test('020 manifest is the exact evidence-free active manifest', async () => {
+test('020 manifest preserves its exact scope and public delta across the lifecycle', async () => {
   const manifest = await readJson(manifestPath);
-  assert.deepEqual(manifest, expectedActiveManifest);
-  assert.equal('preClosureActiveGate' in manifest, false);
-  assert.equal('verification' in manifest, false);
-  assert.equal('finalTreeGate' in manifest, false);
+  assert.match(manifest.status, /^(?:active|complete)$/);
+  const phaseInvariant = structuredClone(manifest);
+  for (const field of ['preClosureActiveGate', 'verification', 'finalTreeGate']) delete phaseInvariant[field];
+  assert.deepEqual(phaseInvariant, { ...expectedManifestScope, status: manifest.status });
+  if (manifest.status === 'active') {
+    assert.deepEqual(manifest, { ...expectedManifestScope, status: 'active' });
+  }
 });
 
 test('020 records eight exact mirrored Green dispositions in source order', async () => {

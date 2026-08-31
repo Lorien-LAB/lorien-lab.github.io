@@ -4,7 +4,7 @@
     "logic-brainteasers-discrete-reasoning",
     "logical-deduction"
   ],
-  "status": "active",
+  "status": "complete",
   "masterItemKeys": [
     "green-book::2.3::theory",
     "green-book::2.3.box-packing::question",
@@ -37,5 +37,45 @@
   },
   "knowledgeSlugs": [
     "constraint-reframing-and-latent-state"
-  ]
+  ],
+  "preClosureActiveGate": {
+    "status": "active",
+    "commit": "dde337bcc7efe59b42557b5faabfaec03e5b9c2e",
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "dde337bcc7efe59b42557b5faabfaec03e5b9c2e",
+    "runId": 33422563783,
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifacts": [
+      ".github/workflows/quant-interview-thinking-outside-box-green-core-020-temporary.yml"
+    ]
+  },
+  "finalTreeGate": {
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifactsAbsent": true
+  }
 }
