@@ -9,7 +9,7 @@ status: growing
 tags: [Logical Deduction, Constraints, Case Analysis, Interview]
 quantInterviewTopics: [logic-brainteasers-discrete-reasoning, logical-deduction]
 featured: false
-related: [small-cases-recurrence-and-structural-simplification, problem-framing-clarification-assumption-management, decision-trees-information-bounds-and-adaptive-testing]
+related: [small-cases-recurrence-and-structural-simplification, problem-framing-clarification-assumption-management, decision-trees-information-bounds-and-adaptive-testing, constraint-reframing-and-latent-state]
 relatedNotes: []
 ---
 

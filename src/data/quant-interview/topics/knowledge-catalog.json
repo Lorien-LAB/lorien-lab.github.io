@@ -113,6 +113,20 @@
       ]
     },
     {
+      "slug": "constraint-reframing-and-latent-state",
+      "title": "Constraint Reframing & Latent State",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "primaryTopic": "logical-deduction",
+      "learningOrder": 30,
+      "status": "published",
+      "prerequisites": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ]
+    },
+    {
       "slug": "small-cases-recurrence-and-structural-simplification",
       "title": "Small Cases, Recurrence & Structural Simplification",
       "canonicalTopics": [

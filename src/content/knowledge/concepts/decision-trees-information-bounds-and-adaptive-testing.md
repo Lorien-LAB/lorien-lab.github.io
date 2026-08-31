@@ -9,7 +9,7 @@ status: growing
 tags: [Decision Trees, Information Bounds, Adaptive Testing, Interview]
 quantInterviewTopics: [logic-brainteasers-discrete-reasoning, logical-deduction]
 featured: false
-related: [logical-deduction-constraint-propagation-and-case-elimination, small-cases-recurrence-and-structural-simplification]
+related: [logical-deduction-constraint-propagation-and-case-elimination, small-cases-recurrence-and-structural-simplification, constraint-reframing-and-latent-state]
 relatedNotes: []
 ---
 

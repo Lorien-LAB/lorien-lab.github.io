@@ -90,6 +90,13 @@ const currentProblemSlugs = [
   'twelve-object-balance-scale-diagnosis',
   'factorial-trailing-zeros-in-arbitrary-base',
   'top-three-from-batched-races',
+  'pack-length-four-bricks-in-six-cube',
+  'two-cube-calendar-digit-labeling',
+  'two-guards-one-question',
+  'message-delivery-with-independent-padlocks',
+  'last-ball-color-by-parity-invariant',
+  'four-switches-one-room-entry',
+  'private-average-with-canceling-mask',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -151,6 +158,7 @@ const expectedKnowledgeTopics = new Map([
   ['structured-think-aloud-reasoning', ['interview-strategy-communication', 'reasoning-communication']],
   ['logical-deduction-constraint-propagation-and-case-elimination', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
   ['decision-trees-information-bounds-and-adaptive-testing', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
+  ['constraint-reframing-and-latent-state', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
 ]);
 
 async function findProblem(slug) {
@@ -189,14 +197,14 @@ async function classifiedMarkdownSlugs(root) {
   return slugs.sort();
 }
 
-test('source-neutral regression discovers exactly the current 86 Problem and 58 Knowledge contracts', async () => {
+test('source-neutral regression discovers exactly the current 93 Problem and 59 Knowledge contracts', async () => {
   const actualProblemSlugs = await classifiedMarkdownSlugs('src/content/problems');
   const actualKnowledgeSlugs = await classifiedMarkdownSlugs('src/content/knowledge');
   const expectedProblemSlugs = [...currentProblemSlugs].sort();
   const expectedKnowledgeSlugs = [...expectedKnowledgeTopics.keys()].sort();
 
-  assert.equal(actualProblemSlugs.length, 86);
-  assert.equal(actualKnowledgeSlugs.length, 58);
+  assert.equal(actualProblemSlugs.length, 93);
+  assert.equal(actualKnowledgeSlugs.length, 59);
   assert.deepEqual(actualProblemSlugs, expectedProblemSlugs);
   assert.deepEqual(actualKnowledgeSlugs, expectedKnowledgeSlugs);
 });

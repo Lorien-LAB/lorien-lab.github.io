@@ -9,7 +9,7 @@ date: 2026-08-16
 tags: [Problem Solving, Invariants, Modular Arithmetic]
 quantInterviewTopics: [logic-brainteasers-discrete-reasoning, modular-arithmetic, invariants-state-transformations]
 featured: false
-related: [modular-arithmetic]
+related: [modular-arithmetic, constraint-reframing-and-latent-state]
 relatedNotes: []
 ---
 
