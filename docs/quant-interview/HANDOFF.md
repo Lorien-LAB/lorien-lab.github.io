@@ -811,13 +811,13 @@ Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**. This 
 
 ### Canonical Knowledge
 
-- **Logical Deduction: Constraint Propagation & Case Elimination** — `logical-deduction-constraint-propagation-and-case-elimination`.
+- **Logical Deduction, Constraint Propagation & Case Elimination** — `logical-deduction-constraint-propagation-and-case-elimination`.
 - **Decision Trees, Information Bounds & Adaptive Testing** — `decision-trees-information-bounds-and-adaptive-testing`.
 
 ### Canonical Problems
 
-- **Bridge Crossing in Minimum Time** — `bridge-crossing-minimum-time`.
-- **Public Announcements and Candidate Elimination** — `public-announcement-candidate-elimination`.
+- **Minimum-Time Bridge Crossing** — `bridge-crossing-minimum-time`.
+- **Public-Announcement Candidate Elimination** — `public-announcement-candidate-elimination`.
 - **Twelve-Object Balance-Scale Diagnosis** — `twelve-object-balance-scale-diagnosis`.
 - **Factorial Trailing Zeros in an Arbitrary Base** — `factorial-trailing-zeros-in-arbitrary-base`.
 - **Top Three from Batched Races** — `top-three-from-batched-races`.

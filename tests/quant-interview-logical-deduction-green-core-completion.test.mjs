@@ -16,17 +16,60 @@ A later workstream requires its own approved design and evidence audit; workstre
 const section = (text, heading) => text.split(new RegExp(`^## ${heading}$`, 'im'))[1]?.split(/^## /m)[0] ?? '';
 const currentBlock = (handoff) => handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0]?.trim() ?? '';
 
+function assertLifecycleEvidence(manifest) {
+  assert.match(manifest.status, /^(?:active|complete)$/);
+  if (manifest.status === 'active') {
+    for (const field of ['preClosureActiveGate', 'verification', 'finalTreeGate']) {
+      assert.equal(field in manifest, false);
+    }
+    return;
+  }
+
+  const { preClosureActiveGate: gate, verification, finalTreeGate } = manifest;
+  const commit = gate?.commit ?? '';
+  const runId = verification?.runId;
+  assert.match(commit, shaPattern);
+  assert.equal(Number.isInteger(runId) && runId > 0, true);
+  assert.deepEqual(gate, {
+    status: 'active', commit, environment: 'wsl-native-lf-node24', commands, conclusion: 'success',
+  });
+  assert.deepEqual(verification, {
+    commit, runId, commands, conclusion: 'success', temporaryArtifacts: [workflow],
+  });
+  assert.deepEqual(finalTreeGate, {
+    environment: 'wsl-native-lf-node24', commands, conclusion: 'success', temporaryArtifactsAbsent: true,
+  });
+}
+
+test('completion evidence rejects extra fields while the active phase stays evidence-free', () => {
+  assert.doesNotThrow(() => assertLifecycleEvidence({ status: 'active' }));
+  const commit = 'a'.repeat(40);
+  const complete = {
+    status: 'complete',
+    preClosureActiveGate: {
+      status: 'active', commit, environment: 'wsl-native-lf-node24', commands, conclusion: 'success',
+    },
+    verification: {
+      commit, runId: 1, commands, conclusion: 'success', temporaryArtifacts: [workflow],
+    },
+    finalTreeGate: {
+      environment: 'wsl-native-lf-node24', commands, conclusion: 'success', temporaryArtifactsAbsent: true,
+    },
+  };
+  assert.doesNotThrow(() => assertLifecycleEvidence(complete));
+  const mutated = structuredClone(complete);
+  mutated.verification.unexpected = true;
+  assert.throws(() => assertLifecycleEvidence(mutated), { name: 'AssertionError' });
+});
+
 test('019 lifecycle is evidence-free while active and factually strict when complete', async () => {
   const [manifest, handoff] = await Promise.all([
     readFile(manifestPath, 'utf8').then(JSON.parse),
     readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
   ]);
-  assert.match(manifest.status, /^(?:active|complete)$/);
+  assertLifecycleEvidence(manifest);
 
   if (manifest.status === 'active') {
-    for (const field of ['preClosureActiveGate', 'verification', 'finalTreeGate']) {
-      assert.equal(field in manifest, false);
-    }
     assert.equal(currentBlock(handoff), activeCurrent);
     assert.match(handoff, /^## Active cross-book workstream 19$/m);
     assert.doesNotMatch(handoff, /^## Completed cross-book workstream 19$/m);
@@ -34,21 +77,7 @@ test('019 lifecycle is evidence-free while active and factually strict when comp
     return;
   }
 
-  const { preClosureActiveGate: gate, verification, finalTreeGate } = manifest;
-  assert.equal(gate?.status, 'active');
-  assert.match(gate?.commit ?? '', shaPattern);
-  assert.equal(gate?.environment, 'wsl-native-lf-node24');
-  assert.deepEqual(gate?.commands, commands);
-  assert.equal(gate?.conclusion, 'success');
-  assert.equal(verification?.commit, gate.commit);
-  assert.equal(Number.isInteger(verification?.runId) && verification.runId > 0, true);
-  assert.deepEqual(verification?.commands, commands);
-  assert.equal(verification?.conclusion, 'success');
-  assert.deepEqual(verification?.temporaryArtifacts, [workflow]);
-  assert.equal(finalTreeGate?.environment, 'wsl-native-lf-node24');
-  assert.deepEqual(finalTreeGate?.commands, commands);
-  assert.equal(finalTreeGate?.conclusion, 'success');
-  assert.equal(finalTreeGate?.temporaryArtifactsAbsent, true);
+  const { preClosureActiveGate: gate, verification } = manifest;
   await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
   assert.equal(currentBlock(handoff), completeCurrent);
   assert.doesNotMatch(handoff, /^## Active cross-book workstream 19$/m);
