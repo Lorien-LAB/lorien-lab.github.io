@@ -32,6 +32,18 @@ function solution(text) {
   return body;
 }
 
+function problemModel(text) {
+  const body = text.match(/^## Problem\r?\n([\s\S]*?)^## Think Before Revealing$/m)?.[1] ?? '';
+  assert.ok(body, `${path} missing public problem model`);
+  return body;
+}
+
+function validateMaskAssumption(problemText) {
+  assert.match(problemText, /participant 1 must (?:choose|sample) a fresh random additive mask `r`/i);
+  assert.match(problemText, /mask `r`[^.]*independent(?:ly)? of all participant inputs/i);
+  assert.match(problemText, /mask `r`[^.]*known only to participant 1/i);
+}
+
 function parseSymbolicTranscript(solutionText) {
   return [...solutionText.matchAll(/^\d+\. `([^`]+)`$/gm)].map(([, expression]) => expression);
 }
@@ -48,24 +60,37 @@ function validateSymbolicTranscript(expressions) {
 }
 
 function validatePrivacyBoundary(solutionText) {
-  for (const pattern of [/honest/i, /non-collud/i, /private channel/i, /single participant/i, /aggregate/i, /collusion/i, /side information/i, /dishonest inputs?/i]) {
+  for (const pattern of [/honest/i, /non-collud/i, /private channel/i, /single participant/i, /aggregate/i, /collusion/i, /side information/i, /dishonest inputs?/i, /authentication/i, /auditing/i, /general secure-aggregation/i]) {
     assert.match(solutionText, pattern);
   }
   assert.match(solutionText, /single participant numbered 2 through 8[^.]*sent-minus-received difference[^.]*only[^.]*own input/i);
   assert.match(solutionText, /participant 1[^.]*sent-minus-received[^.]*negative[^.]*aggregate[^.]*other seven inputs/i);
   assert.match(solutionText, /m_1 - m_8 = -sum_\{i=2\}\^\{8\} s_i/i);
   assert.match(solutionText, /public aggregate[^.]*side information[^.]*reveal/i);
-  assert.doesNotMatch(solutionText, /perfect secrecy|cryptographically secure|collusion-resistant|tamper-proof/i);
+  assert.match(solutionText, /does not address[^.]*collusion[^.]*dishonest inputs?[^.]*authentication[^.]*auditing[^.]*general secure-aggregation/i);
+  assert.doesNotMatch(solutionText, /perfect secrecy|cryptographic(?:ally)? secure|general cryptographic security|collusion[- ]resistan\w*|dishonest-input protection|tamper-proof(?:ing)?/i);
+  assert.doesNotMatch(solutionText, /\b(?:provides?|guarantees?|achieves?|ensures?)\b[^.]{0,80}\b(?:authentication|auditing)\b/i);
 }
 
 test('private-average Problem has exact metadata, disclosure structure, and limited privacy wording', async () => {
   const { text, metadata: actualMetadata } = await page();
   assert.deepEqual(actualMetadata, metadata);
   assert.match(text, /^## Problem$/m);
+  assert.match(text, /Arithmetic is exact\./);
   assert.match(text, /^## Think Before Revealing$/m);
   assert.equal((text.match(/<summary>Hint [12]<\/summary>/g) ?? []).length, 2);
   validatePrivacyBoundary(solution(text));
   assert.doesNotMatch(text, /Green Book|A Practical Guide|PDF page|source item/i);
+});
+
+test('public model binds the mask to freshness, randomness, input independence, and participant 1 alone', async () => {
+  const { text } = await page();
+  const publishedModel = problemModel(text);
+  validateMaskAssumption(publishedModel);
+
+  const withoutIndependence = publishedModel.replace(/independent(?:ly)? of all participant inputs/i, 'chosen after seeing the participant inputs');
+  assert.notEqual(withoutIndependence, publishedModel);
+  assert.throws(() => validateMaskAssumption(withoutIndependence));
 });
 
 test('masked running sum cancels the first participant mask and recovers the exact eight-person average', async () => {

@@ -23,7 +23,7 @@ featured: false
 
 ## Problem
 
-Eight neutral participants hold private values `s_1` through `s_8` and want to publish their exact average without directly announcing their individual values. They may communicate only around a private ring channel: participant 1 sends to participant 2, then onward through participant 8, which returns to participant 1. Arithmetic is exact. Participant 1 may choose a mask `r` known only to that participant. Give a protocol, prove that it returns the exact average, and state precisely what privacy it does and does not provide.
+Eight neutral participants hold private values `s_1` through `s_8` and want to publish their exact average without directly announcing their individual values. They may communicate only around a private ring channel: participant 1 sends to participant 2, then onward through participant 8, which returns to participant 1. Arithmetic is exact. Participant 1 must choose a fresh random additive mask `r`, independently of all participant inputs; the mask is known only to participant 1. Give a protocol, prove that it returns the exact average, and state precisely what privacy it does and does not provide.
 
 Assume every participant is honest and non-colluding. The private channel hides a message from people outside its two endpoints; it does not add any broader security property.
 
@@ -37,7 +37,7 @@ Assume every participant is honest and non-colluding. The private channel hides 
 
 ## Solution
 
-Participant 1 chooses `r`, adds `s_1`, and sends the result privately to participant 2. Each later participant adds only that participant's own value before forwarding the running value. Participant 8 returns the final running value to participant 1. Participant 1 subtracts `r`, divides by `8`, and publishes the resulting aggregate average.
+Participant 1 samples the required fresh random additive mask `r` independently of all participant inputs, adds `s_1`, and sends the result privately to participant 2. Each later participant adds only that participant's own value before forwarding the running value. Participant 8 returns the final running value to participant 1. Participant 1 subtracts `r`, divides by `8`, and publishes the resulting aggregate average.
 
 The symbolic transcript is:
 

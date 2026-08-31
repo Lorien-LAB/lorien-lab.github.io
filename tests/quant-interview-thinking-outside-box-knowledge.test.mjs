@@ -18,6 +18,19 @@ const metadata = {
   relatedNotes: [],
 };
 
+function interviewChecks(text) {
+  return text.split(/^## Interview Checks$/m)[1]?.match(/^\d+\. .+$/gm) ?? [];
+}
+
+function validateFixedBinaryReachabilityCheck(check) {
+  assert.match(check, /fixed row has five bits/i);
+  assert.match(check, /initial row is `00000`/i);
+  assert.match(check, /target row is `10101`/i);
+  assert.match(check, /legal move chooses exactly three consecutive positions and flips all three bits/i);
+  assert.match(check, /without changing the row length or position order/i);
+  assert.match(check, /determine whether the target is reachable/i);
+}
+
 test('Constraint Reframing Knowledge has exact source-neutral executable structure', async () => {
   const text = await readFile(path, 'utf8');
   const frontmatter = parseYaml(text.split(/^---$/m)[1] ?? '', { schema: JSON_SCHEMA });
@@ -25,8 +38,18 @@ test('Constraint Reframing Knowledge has exact source-neutral executable structu
   assert.deepEqual([...text.matchAll(/^## (.+)$/gm)].map(([, h]) => h), headings);
   for (const pattern of [/state variables/i, /representation/i, /granularity/i, /latent state/i, /reversible/i, /cancel/i, /constructive witness/i, /necessary/i, /assumptions/i]) assert.match(text, pattern);
   assert.match(text, /State assumptions and boundaries alongside the argument\./);
-  const checks = text.split(/^## Interview Checks$/m)[1]?.match(/^\d+\. .+$/gm) ?? [];
+  const checks = interviewChecks(text);
   assert.equal(checks.length, 6);
   assert.doesNotMatch(checks.join('\n'), /53.*brick|calendar.*cube|two guards|padlock|last ball|four switches|salary/i);
   assert.doesNotMatch(text, /Green Book|A Practical Guide|section 2\.3|PDF page|source item/i);
+});
+
+test('Interview Check 4 gives a complete fixed-length binary reachability instance', async () => {
+  const text = await readFile(path, 'utf8');
+  const check = interviewChecks(text)[3] ?? '';
+  validateFixedBinaryReachabilityCheck(check);
+
+  const withoutTarget = check.replace(/target row is `10101`/i, 'target row is unspecified');
+  assert.notEqual(withoutTarget, check);
+  assert.throws(() => validateFixedBinaryReachabilityCheck(withoutTarget));
 });

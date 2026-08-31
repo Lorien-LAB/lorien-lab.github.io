@@ -3,6 +3,18 @@ import assert from 'node:assert/strict';
 import { readFile, readdir } from 'node:fs/promises';
 import path from 'node:path';
 
+const workstream020PublicPages = [
+  'src/content/knowledge/concepts/constraint-reframing-and-latent-state.md',
+  'src/content/problems/logic/pack-length-four-bricks-in-six-cube.md',
+  'src/content/problems/logic/two-cube-calendar-digit-labeling.md',
+  'src/content/problems/logic/two-guards-one-question.md',
+  'src/content/problems/logic/message-delivery-with-independent-padlocks.md',
+  'src/content/problems/logic/last-ball-color-by-parity-invariant.md',
+  'src/content/problems/logic/four-switches-one-room-entry.md',
+  'src/content/problems/logic/private-average-with-canceling-mask.md',
+];
+const workstream020SourceLeak = /\b(?:Green Book|Red Book)\b|A Practical Guide|150 Most Frequently Asked|section 2\.3|PDF page|source(?:\s+(?:item|section|page)|Item|Section|Chapter|Problem|Reference|Url)|questionPages|solutionPages/i;
+
 const currentProblemSlugs = [
   'put-quotes-zero-cost-static-portfolio',
   'missing-digit-power-of-two',
@@ -197,6 +209,16 @@ async function classifiedMarkdownSlugs(root) {
   return slugs.sort();
 }
 
+function markdownBody(text, file) {
+  const match = text.match(/^---\r?\n[\s\S]*?\r?\n---\r?\n([\s\S]*)$/);
+  assert.ok(match, `${file} missing frontmatter boundary`);
+  return match[1];
+}
+
+function assertSourceNeutralPublicBody(body, file) {
+  assert.doesNotMatch(body, workstream020SourceLeak, `${file} public body exposes source provenance`);
+}
+
 test('source-neutral regression discovers exactly the current 93 Problem and 59 Knowledge contracts', async () => {
   const actualProblemSlugs = await classifiedMarkdownSlugs('src/content/problems');
   const actualKnowledgeSlugs = await classifiedMarkdownSlugs('src/content/knowledge');
@@ -207,6 +229,25 @@ test('source-neutral regression discovers exactly the current 93 Problem and 59 
   assert.equal(actualKnowledgeSlugs.length, 59);
   assert.deepEqual(actualProblemSlugs, expectedProblemSlugs);
   assert.deepEqual(actualKnowledgeSlugs, expectedKnowledgeSlugs);
+});
+
+test('Workstream 020 keeps exactly its eight new public page bodies source-neutral', async () => {
+  assert.equal(workstream020PublicPages.length, 8);
+  assert.equal(new Set(workstream020PublicPages).size, 8);
+  const bodies = await Promise.all(workstream020PublicPages.map(async (file) => [
+    file,
+    markdownBody(await readFile(file, 'utf8'), file),
+  ]));
+  for (const [file, body] of bodies) assertSourceNeutralPublicBody(body, file);
+
+  for (const leak of ['Green Book', 'A Practical Guide', 'section 2.3', 'PDF page', 'source item', 'sourceSection', 'questionPages', 'solutionPages']) {
+    const mutatedBody = `${bodies[0][1]}\n\n${leak}`;
+    assert.throws(
+      () => assertSourceNeutralPublicBody(mutatedBody, 'mutated Workstream 020 page'),
+      /public body exposes source provenance/,
+      `${leak} mutation must be rejected`,
+    );
+  }
 });
 
 test('public Problem schema is source-neutral', async () => {
