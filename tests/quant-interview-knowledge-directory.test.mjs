@@ -66,6 +66,10 @@ const exactOrder = {
     'structured-think-aloud-reasoning',
   ],
   'logic-brainteasers-discrete-reasoning': ['recursion-problem-solving'],
+  'logical-deduction': [
+    'logical-deduction-constraint-propagation-and-case-elimination',
+    'decision-trees-information-bounds-and-adaptive-testing',
+  ],
   'problem-simplification': [
     'small-cases-recurrence-and-structural-simplification',
     'fermi-estimation-assumption-decomposition',
@@ -141,6 +145,7 @@ const exactPrerequisites = {
   conditioning: [],
   'correlation-matrix': [],
   'counting-permutations-combinations': [],
+  'decision-trees-information-bounds-and-adaptive-testing': ['logical-deduction-constraint-propagation-and-case-elimination'],
   'derivative-definition-and-core-rules': [],
   'eigenbasis-decomposition': ['eigenvalues-eigenvectors'],
   'eigenvalues-eigenvectors': [],
@@ -158,6 +163,7 @@ const exactPrerequisites = {
   'limit-theorems-lln-clt': ['moments-moment-generating-functions'],
   'linear-independence-span-basis-rank': ['vector-geometry-inner-products'],
   'linear-systems-consistency': ['linear-independence-span-basis-rank'],
+  'logical-deduction-constraint-propagation-and-case-elimination': [],
   'logarithmic-differentiation': ['derivative-definition-and-core-rules'],
   'lu-cholesky-decomposition': ['linear-independence-span-basis-rank'],
   'markov-chain-state-compression': ['finite-state-markov-chains'],
@@ -191,7 +197,7 @@ const exactPrerequisites = {
   'vector-geometry-inner-products': [],
 };
 
-test('repository catalog contains the exact published 81/56 corpus', async () => {
+test('repository catalog contains the exact published 86/58 corpus', async () => {
   const [catalogText, taxonomyText, knowledgeRecords] = await Promise.all([
     readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
     readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'),
@@ -200,8 +206,8 @@ test('repository catalog contains the exact published 81/56 corpus', async () =>
   const repositoryCatalog = JSON.parse(catalogText);
   const repositoryTaxonomy = JSON.parse(taxonomyText);
   assert.equal(validateKnowledgeCatalog(repositoryCatalog, repositoryTaxonomy, knowledgeRecords), true);
-  assert.equal(repositoryCatalog.modules.length, 56);
-  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 56);
+  assert.equal(repositoryCatalog.modules.length, 58);
+  assert.equal(repositoryCatalog.modules.filter((module) => module.status === 'published').length, 58);
   assert.deepEqual(
     repositoryCatalog.modules.filter((module) => module.status === 'planned').map((module) => module.slug).sort(),
     [],
@@ -233,7 +239,7 @@ test('repository public projection exposes the complete source-neutral curriculu
     problemRecords,
     base: '/',
   });
-  assert.deepEqual(result.totals, { published: 56, planned: 0 });
+  assert.deepEqual(result.totals, { published: 58, planned: 0 });
   assert.equal(result.topics.length, 10);
   const interview = result.topics.find((topic) => topic.id === 'interview-strategy-communication');
   const reasoning = interview.children.find((topic) => topic.id === 'reasoning-communication');

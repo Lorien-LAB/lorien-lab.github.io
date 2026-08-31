@@ -71,6 +71,7 @@ test('problem framing page teaches clarification and revisable assumptions', asy
       'behavioral-interview-evidence-and-authenticity',
       'small-cases-recurrence-and-structural-simplification',
       'fermi-estimation-assumption-decomposition',
+      'logical-deduction-constraint-propagation-and-case-elimination',
     ],
   });
   assertSourceNeutral(text);
@@ -151,6 +152,7 @@ test('reasoning Knowledge nodes keep their preparation links aligned', async () 
     'behavioral-interview-evidence-and-authenticity',
     'small-cases-recurrence-and-structural-simplification',
     'fermi-estimation-assumption-decomposition',
+    'logical-deduction-constraint-propagation-and-case-elimination',
   ]);
   assert.deepEqual(parseInlineArray(structured, 'related'), [
     'problem-framing-clarification-assumption-management',

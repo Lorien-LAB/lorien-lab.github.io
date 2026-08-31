@@ -87,6 +87,32 @@
       "prerequisites": []
     },
     {
+      "slug": "logical-deduction-constraint-propagation-and-case-elimination",
+      "title": "Logical Deduction, Constraint Propagation & Case Elimination",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "primaryTopic": "logical-deduction",
+      "learningOrder": 10,
+      "status": "published",
+      "prerequisites": []
+    },
+    {
+      "slug": "decision-trees-information-bounds-and-adaptive-testing",
+      "title": "Decision Trees, Information Bounds & Adaptive Testing",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "primaryTopic": "logical-deduction",
+      "learningOrder": 20,
+      "status": "published",
+      "prerequisites": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ]
+    },
+    {
       "slug": "small-cases-recurrence-and-structural-simplification",
       "title": "Small Cases, Recurrence & Structural Simplification",
       "canonicalTopics": [

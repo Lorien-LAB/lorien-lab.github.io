@@ -117,6 +117,36 @@ test('coverage may override a coarse TOC topic only with an explicit item-level 
   }] }, context));
 });
 
+test('content subsection coverage may override mapped topics only with an explicit reason', async () => {
+  const taxonomy = await readJson('src/data/quant-interview/topics/taxonomy.json');
+  const { validateCoverageLedger } = await import('../src/lib/quantInterviewCoverage.mjs');
+  const sourceTopicMap = { version: 1, entries: [
+    { source: 'x', sourceSection: 'mixed-subsection', role: 'content', canonicalTopics: ['logical-deduction'] },
+  ] };
+  const context = { sourceTopicMap, taxonomy, problemSlugs: new Set(), knowledgeSlugs: new Set(), allowUnresolvedCanonicalRefs: true };
+  const baseEntry = {
+    sourceSection: 'mixed-subsection', sourceItem: null,
+    state: 'needs-review', canonicalProblems: [], canonicalKnowledge: [],
+  };
+  const exactMappedEntry = { ...baseEntry, canonicalTopics: ['logical-deduction'] };
+  const overrideEntry = { ...baseEntry, canonicalTopics: ['logical-deduction', 'modular-arithmetic'] };
+
+  assert.doesNotThrow(() => validateCoverageLedger({ source: 'x', version: 1, entries: [exactMappedEntry] }, context));
+  assert.throws(
+    () => validateCoverageLedger({ source: 'x', version: 1, entries: [overrideEntry] }, context),
+  );
+  assert.throws(
+    () => validateCoverageLedger({ source: 'x', version: 1, entries: [{
+      ...overrideEntry,
+      topicOverrideReason: '   ',
+    }] }, context),
+  );
+  assert.doesNotThrow(() => validateCoverageLedger({ source: 'x', version: 1, entries: [{
+    ...overrideEntry,
+    topicOverrideReason: 'This subsection contains a reviewed modular-arithmetic identity inside a broader logical-deduction chapter.',
+  }] }, context));
+});
+
 test('every inspected covariance/correlation/PSD source item has an item-level coverage row', async () => {
   for (const [source, keys] of Object.entries(inventory)) {
     const ledger = await readJson(`src/data/quant-interview/coverage/${source}.json`);

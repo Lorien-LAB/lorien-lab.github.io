@@ -482,7 +482,9 @@ const expectedCandidates = ['A1','A2','A3','B1','B2','C1'];
 
 Build a transitive closure from group edges `X1>X2>...>X5` and winner edges `A1>B1>C1>D1>E1`. Assert every non-candidate has at least three known predecessors except `A1`, which is already certified first. Require the final race to contain exactly `A2,A3,B1,B2,C1`.
 
-Prove six races insufficient by checking these two total orders both satisfy every first-six-race edge but give different podiums:
+Require a strategy-independent unbeaten-first adversary lower bound. Certifying one fastest racer among 25 requires 24 first losses. Under an adversary that places every previously unbeaten entrant ahead of every already-beaten entrant, a race creates at most four first losses; equality after six races therefore forces every race to contain five previously unbeaten entrants. After five races exactly five racers remain unbeaten, so race 6 must compare all five. Choose its champion to have won an earlier race: the runner-up from that earlier race and the runner-up in race 6 each have only the champion known above them and remain incomparable, so six races cannot determine the full podium.
+
+Preserve these normalized candidate orders as a concrete illustration, not the sole lower-bound proof. Check that each admits a total extension satisfying every first-six-race edge and that their podiums differ:
 
 ```js
 const orderA = ['A1','A2','A3','B1','B2','C1'];
@@ -499,7 +501,7 @@ node --test tests/quant-interview-logical-deduction-green-core-math-selection.te
 
 - [ ] **Step 4: Author both complete Problems**
 
-Factorial page derives the formulas and both exact answers. Race page publishes five group orders, winners' order, exact candidate-elimination table, final race, seven-race count, elimination certificates, and the two-order six-race adversary.
+Factorial page derives the formulas and both exact answers. Race page publishes five group orders, winners' order, exact candidate-elimination table, final race, seven-race count, and elimination certificates. It must prove the global seven-race minimum with the strategy-independent unbeaten-first argument: 24 necessary first losses, equality forcing five previously unbeaten entrants in every one of six races, and the incomparable earlier-race and race-6 runners-up beneath the same champion. Retain the normalized two-order witness as a concrete illustration of the published construction's remaining ambiguity, not as the sole proof that six races are insufficient.
 
 - [ ] **Step 5: Run GREEN and mutation checks**
 
@@ -591,10 +593,13 @@ git commit -m "feat(quant-interview): register logical deduction green core grap
 - Create: `src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019.json`
 - Modify: `src/data/quant-interview/coverage/green-book.json`
 - Modify: `src/data/quant-interview/master-directory.json`
+- Modify: `tests/quant-interview-cross-book-workstream.test.mjs`
+- Modify: `src/lib/quantInterviewCoverage.mjs`
+- Modify: `docs/superpowers/plans/2026-08-30-quant-interview-logical-deduction-green-core.md` (this approved correction)
 
 **Interfaces:**
 - Consumes: exact seven public slugs and 86/58 catalog contract.
-- Produces: evidence-free active manifest, nine terminal mirrored decisions, three override reasons, unchanged page projection, and Green 2.3 next state.
+- Produces: evidence-free active manifest, nine terminal mirrored decisions, three override reasons, a reason-gated subsection override contract, unchanged page projection, and Green 2.3 next state.
 
 - [ ] **Step 1: Write failing exact active-manifest test**
 
@@ -676,6 +681,8 @@ const overrides = {
 
 All other 019 coverage topics remain exactly `['logical-deduction']` and have no override reason.
 
+Extend the focused coverage-validator fixture first. A content/subsection row with `sourceItem: null` and topics that differ from the mapped section must pass only with a non-empty `topicOverrideReason`; the same divergence without a reason must fail. Exact mapped section rows and existing non-null item overrides remain unchanged. Observe RED before editing the validator.
+
 Freeze protected files:
 
 ```js
@@ -687,13 +694,14 @@ assert.equal(sha256(JSON.stringify(projection)), '2275e9e3414f249dc39bcef52bbaf2
 
 Mutation checks must change `green-book::2.3::theory` page 26 to 27 and verify the full-projection assertion fails.
 
-- [ ] **Step 4: Create active manifest and apply nine decisions**
+- [ ] **Step 4: Create active manifest, apply nine decisions, and allow reason-gated subsection overrides**
 
-Write `expectedActiveManifest` exactly. Update only nine Green entries and nine master rows. Preserve every page field and primary logical-deduction queue placement; expanded master topics use the exact arrays above.
+Write `expectedActiveManifest` exactly. Update only nine Green entries and nine master rows. Preserve every page field and primary logical-deduction queue placement; expanded master topics use the exact arrays above. Make the smallest readable coverage-validator change so a `sourceItem: null` section/subsection topic divergence is accepted only when `topicOverrideReason` is a non-empty string. Do not change the source-topic map or the existing non-null item-override behavior.
 
 - [ ] **Step 5: Run focused GREEN, validator, and scope audit**
 
 ```bash
+node --test --test-name-pattern="coverage may override|content subsection coverage" tests/quant-interview-cross-book-workstream.test.mjs
 node --test tests/quant-interview-logical-deduction-green-core-workstream.test.mjs
 npm run master:directory:check
 npm test
@@ -706,7 +714,7 @@ Focused test and repository validator must pass. Record stale current-state fail
 - [ ] **Step 6: Commit Task 6**
 
 ```bash
-git add -- tests/quant-interview-logical-deduction-green-core-workstream.test.mjs src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019.json src/data/quant-interview/coverage/green-book.json src/data/quant-interview/master-directory.json
+git add -- tests/quant-interview-logical-deduction-green-core-workstream.test.mjs src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019.json src/data/quant-interview/coverage/green-book.json src/data/quant-interview/master-directory.json tests/quant-interview-cross-book-workstream.test.mjs src/lib/quantInterviewCoverage.mjs docs/superpowers/plans/2026-08-30-quant-interview-logical-deduction-green-core.md
 git commit -m "feat(quant-interview): activate logical deduction green core 019"
 ```
 

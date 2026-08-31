@@ -1,0 +1,83 @@
+{
+  "id": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+  "canonicalTopics": [
+    "logic-brainteasers-discrete-reasoning",
+    "logical-deduction"
+  ],
+  "status": "complete",
+  "masterItemKeys": [
+    "green-book::2.2::theory",
+    "green-book::2.2.river-crossing::question",
+    "green-book::2.2.birthday-problem::question",
+    "green-book::2.2.card-game::question",
+    "green-book::2.2.burning-ropes::question",
+    "green-book::2.2.defective-ball::question",
+    "green-book::2.2.trailing-zeros::question",
+    "green-book::2.2.horse-race::question",
+    "green-book::2.2.infinite-sequence::question"
+  ],
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": [
+        "2.2"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 21,
+          "endPage": 26
+        }
+      ],
+      "reviewOutcome": "green-core-logical-deduction-publication-and-rerouting",
+      "reviewNote": "Nine consecutive Green records yield two canonical Knowledge nodes, five canonical Problems, two lower-depth Knowledge checks, and one merged power-tower identity."
+    }
+  ],
+  "publicDelta": {
+    "problems": 5,
+    "knowledge": 2
+  },
+  "knowledgeSlugs": [
+    "logical-deduction-constraint-propagation-and-case-elimination",
+    "decision-trees-information-bounds-and-adaptive-testing"
+  ],
+  "preClosureActiveGate": {
+    "status": "active",
+    "commit": "b7a21f5beb17ceb3bb62875ee6736d9eaf651b92",
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "b7a21f5beb17ceb3bb62875ee6736d9eaf651b92",
+    "runId": 33355185200,
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifacts": [
+      ".github/workflows/quant-interview-logical-deduction-green-core-019-temporary.yml"
+    ]
+  },
+  "finalTreeGate": {
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifactsAbsent": true
+  }
+}

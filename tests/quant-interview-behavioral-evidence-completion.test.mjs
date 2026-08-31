@@ -126,8 +126,27 @@ test('017 lifecycle is field-safe while active and factually strict when complet
     assert.match(current, /Logic, Brainteasers.*Problem Simplification/is);
     assert.match(current, /Workstream 018 is active/i);
     assert.match(masterIngestion, /First pending master record after the active 018 scope: `green-book::2\.2::theory`/i);
-  } else {
+    return;
+  }
+
+  const workstream019File = workstreamFiles.find((file) => /-019\.json$/.test(file));
+  if (!workstream019File) {
     assert.match(current, /Workstream 018 is complete/i);
     assert.match(masterIngestion, /First pending master record: `green-book::2\.2::theory`/i);
+    return;
+  }
+
+  const workstream019 = JSON.parse(await readFile(
+    `src/data/quant-interview/workstreams/${workstream019File}`,
+    'utf8',
+  ));
+  assert.match(workstream019.status, /^(?:active|complete)$/);
+  if (workstream019.status === 'active') {
+    assert.match(current, /Logic, Brainteasers.*Logical Deduction/is);
+    assert.match(current, /Workstream 019 is active/i);
+    assert.match(masterIngestion, /First pending master record after the active 019 scope: `green-book::2\.3::theory`/i);
+  } else {
+    assert.match(current, /Workstream 019 is complete/i);
+    assert.match(masterIngestion, /First pending master record: `green-book::2\.3::theory`/i);
   }
 });

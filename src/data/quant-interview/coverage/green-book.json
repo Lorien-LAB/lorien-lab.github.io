@@ -141,9 +141,12 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "resolutionNote": "Green Book 2.2 groups finite candidate elimination, invariant checks, and adaptive testing into the bounded Logical Deduction learning path."
     },
     {
       "sourceSection": "2.2.river-crossing",
@@ -151,9 +154,14 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "bridge-crossing-minimum-time"
+      ],
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "resolutionNote": "The bridge family becomes the canonical state-search Problem with an independently verified optimal schedule and lower bound."
     },
     {
       "sourceSection": "2.2.birthday-problem",
@@ -161,9 +169,14 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "public-announcement-candidate-elimination"
+      ],
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "resolutionNote": "The private-information dialogue becomes a source-neutral public-announcement Problem with every candidate-set update explicit."
     },
     {
       "sourceSection": "2.2.card-game",
@@ -171,9 +184,12 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "resolutionNote": "The two-color pairing invariant remains an executable Knowledge check rather than a low-depth standalone Problem."
     },
     {
       "sourceSection": "2.2.burning-ropes",
@@ -181,9 +197,12 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "resolutionNote": "The nonuniform timer remains an executable constraint-composition Knowledge check rather than a one-trick standalone Problem."
     },
     {
       "sourceSection": "2.2.defective-ball",
@@ -191,39 +210,66 @@
       "canonicalTopics": [
         "logical-deduction"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "twelve-object-balance-scale-diagnosis"
+      ],
+      "canonicalKnowledge": [
+        "decision-trees-information-bounds-and-adaptive-testing"
+      ],
+      "resolutionNote": "The heavy-or-light anomaly family becomes the canonical 24-hypothesis ternary decision-tree Problem."
     },
     {
       "sourceSection": "2.2.trailing-zeros",
       "sourceItem": null,
       "canonicalTopics": [
-        "logical-deduction"
+        "logical-deduction",
+        "modular-arithmetic"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "factorial-trailing-zeros-in-arbitrary-base"
+      ],
+      "canonicalKnowledge": [
+        "modular-arithmetic",
+        "counting-permutations-combinations"
+      ],
+      "topicOverrideReason": "Item-level review identifies factorial prime valuations and base divisibility as Modular Arithmetic while retaining the source section’s logical-deduction context.",
+      "resolutionNote": "The factorial-zero prompt is generalized to prime valuations in arbitrary bases and receives a justified Modular Arithmetic refinement."
     },
     {
       "sourceSection": "2.2.horse-race",
       "sourceItem": null,
       "canonicalTopics": [
-        "logical-deduction"
+        "logical-deduction",
+        "algorithmic-complexity"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "top-three-from-batched-races"
+      ],
+      "canonicalKnowledge": [
+        "decision-trees-information-bounds-and-adaptive-testing"
+      ],
+      "topicOverrideReason": "Item-level review identifies a comparison-selection strategy with an optimal race lower bound, so this Logical Deduction item also belongs to Algorithmic Complexity.",
+      "resolutionNote": "The batched-race family becomes the canonical partial-order selection Problem and receives a justified Algorithmic Complexity refinement."
     },
     {
       "sourceSection": "2.2.infinite-sequence",
       "sourceItem": null,
       "canonicalTopics": [
-        "logical-deduction"
+        "logical-deduction",
+        "limits-derivatives"
       ],
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "infinite-power-tower-limit"
+      ],
+      "canonicalKnowledge": [
+        "bounded-monotone-convergence-and-fixed-points"
+      ],
+      "topicOverrideReason": "Item-level review identifies the recursive tower as the existing Limits & Derivatives fixed-point and convergence identity while retaining its editorial Logical Deduction context.",
+      "resolutionNote": "The recursive tower prompt is the existing canonical power-tower identity and merges into its complete convergence and branch-selection proof."
     },
     {
       "sourceSection": "2.3",

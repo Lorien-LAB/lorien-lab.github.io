@@ -365,14 +365,16 @@ test('017 binds exactly 17 relevant source items to exact public prompt semantic
   }
 });
 
-test('017 remains durable after 018 advances the corpus', async () => {
+test('017 remains durable after 019 advances the corpus', async () => {
   const inputs = await loadMasterDirectoryRepository(process.cwd());
   const manifest017 = inputs.workstreams.find(({ id }) => /-017$/.test(id));
   const manifest018 = inputs.workstreams.find(({ id }) => /-018$/.test(id));
+  const manifest019 = inputs.workstreams.find(({ id }) => /-019$/.test(id));
   assert.equal(manifest017.status, 'complete');
   assert.deepEqual(manifest017.publicDelta, { problems: 0, knowledge: 1 });
-  assert.match(manifest018.status, /^(?:active|complete)$/);
-  assert.equal(inputs.problemSlugs.size, 81);
-  assert.equal(inputs.knowledgeSlugs.size, 56);
-  assert.equal(getNextPendingItem(inputs.directory)?.key, 'green-book::2.2::theory');
+  assert.equal(manifest018.status, 'complete');
+  assert.match(manifest019.status, /^(?:active|complete)$/);
+  assert.equal(inputs.problemSlugs.size, 86);
+  assert.equal(inputs.knowledgeSlugs.size, 58);
+  assert.equal(getNextPendingItem(inputs.directory)?.key, 'green-book::2.3::theory');
 });

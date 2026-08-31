@@ -174,10 +174,10 @@ test('skip audit repairs pages and remains intact in the current corpus', async 
   }
   const terminal = inputs.directory.items.filter((item) => TERMINAL_STATES.has(item.state));
   const pending = inputs.directory.items.filter((item) => item.state === 'pending');
-  assert.equal(terminal.length, 239);
-  assert.equal(pending.length, 511);
-  assert.equal(inputs.problemSlugs.size, 81);
-  assert.equal(inputs.knowledgeSlugs.size, 56);
+  assert.equal(terminal.length, 248);
+  assert.equal(pending.length, 502);
+  assert.equal(inputs.problemSlugs.size, 86);
+  assert.equal(inputs.knowledgeSlugs.size, 58);
 });
 
 test('skip audit creates no public market-awareness artifact', async () => {
@@ -269,8 +269,8 @@ These 14 records contain time-sensitive market snapshots, source-era office hold
 
 No workstream ordinal was consumed. Workstream 016 is not active and remains available for the next substantive scope.`,
   );
-  assert.match(directory, /Terminal master records: 239/);
-  assert.match(directory, /Pending master records: 511/);
+  assert.match(directory, /Terminal master records: 248/);
+  assert.match(directory, /Pending master records: 502/);
   for (const key of keys) {
     const rows = directory
       .split(/\r?\n/)
