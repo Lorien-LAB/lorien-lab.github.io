@@ -11,6 +11,11 @@ const handoffPath = 'docs/quant-interview/HANDOFF.md';
 const manifest011Path = 'src/data/quant-interview/workstreams/stochastic-processes-random-walks-markov-chains-011.json';
 const manifest013Path = 'src/data/quant-interview/workstreams/interview-strategy-communication-reasoning-communication-013.json';
 const terminalStates = new Set(['canonical-problem', 'merged-duplicate', 'variant', 'knowledge-only']);
+const laterTerminalKeys = {
+  'green-book': ['2.2.infinite-sequence::'],
+  'red-book': [],
+  '150-most-frequently-asked': [],
+};
 const keyOf = (entry) => `${entry.sourceSection}::${entry.sourceItem ?? ''}`;
 const expectedCoverage = {};
 
@@ -181,7 +186,11 @@ async function assertCoverageSource(source, expectedRows) {
     .filter((entry) => terminalStates.has(entry.state) && entry.canonicalTopics?.includes('limits-derivatives'))
     .map(keyOf)
     .sort();
-  assert.deepEqual(actualOwned, Object.keys(expectedRows).sort(), `${source} has an unexpected 012 terminal row`);
+  assert.deepEqual(
+    actualOwned,
+    [...Object.keys(expectedRows), ...laterTerminalKeys[source]].sort(),
+    `${source} has an unexpected current terminal row`,
+  );
   return Object.keys(expectedRows).map((key) => rows.get(key));
 }
 

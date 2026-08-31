@@ -6,13 +6,13 @@
 
 ## Summary
 
-- Published Knowledge: 56
+- Published Knowledge: 58
 - Planned Knowledge: 0
-- Canonical Problems: 81
+- Canonical Problems: 86
 - Master records: 750
-- Terminal master records: 239
-- Pending master records: 511
-- First pending: `green-book::2.2::theory`
+- Terminal master records: 248
+- Pending master records: 502
+- First pending: `green-book::2.3::theory`
 
 
 ## 01. Interview Strategy & Communication
@@ -203,11 +203,11 @@
 ## 02. Logic, Brainteasers & Discrete Reasoning
 
 - Curriculum: 1 published / 0 planned
-- Problems: 7
+- Problems: 12
 - Green Book sections: `2.1`, `2.1.screwy-pirates`, `2.1.tiger-and-sheep`, `2.2`, `2.2.birthday-problem`, `2.2.burning-ropes`, `2.2.card-game`, `2.2.defective-ball`, `2.2.horse-race`, `2.2.infinite-sequence`, `2.2.river-crossing`, `2.2.trailing-zeros`, `2.3`, `2.3.box-packing`, `2.3.calendar-cubes`, `2.3.door-to-offer`, `2.3.last-ball`, `2.3.light-switches`, `2.3.message-delivery`, `2.3.quant-salary`, `2.4`, `2.4.coin-piles`, `2.4.mislabeled-bags`, `2.4.wise-men`, `2.5`, `2.5.clock-pieces`, `2.5.counterfeit-coins-i`, `2.5.missing-integers`, `2.6`, `2.6.ants-on-a-square`, `2.6.counterfeit-coins-ii`, `2.6.handshakes`, `2.6.have-we-met-before`, `2.6.matching-socks`, `2.7`, `2.7.chameleon-colors`, `2.7.division-by-9`, `2.7.prisoner-problem`, `2.8`, `2.8.chocolate-bar-problem`, `2.8.coin-split-problem`, `2.8.race-track`, `2.9`, `2.9.irrational-number`, `2.9.rainbow-hats`
 - Red Book sections: `8`, `10`, `10.2`
 - 150 Questions sections: `1`, `2.7`, `3.7`
-- Workstreams: `logic-brainteasers-discrete-reasoning-problem-simplification-018` (complete)
+- Workstreams: `logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019` (active), `logic-brainteasers-discrete-reasoning-problem-simplification-018` (complete)
 
 ### Modules
 
@@ -217,7 +217,7 @@
 
 ### Coverage records
 
-- Green Book: `canonical-problem`: 2, `knowledge-only`: 1, `pending`: 42
+- Green Book: `canonical-problem`: 7, `knowledge-only`: 4, `merged-duplicate`: 1, `pending`: 33
 - Red Book: `knowledge-only`: 4, `pending`: 3
 - 150 Questions: `canonical-problem`: 5, `knowledge-only`: 1, `pending`: 3
 
@@ -263,21 +263,23 @@
 
 ### 02.02. Logical Deduction
 
-- Curriculum: 0 published / 0 planned
-- Problems: 0
+- Curriculum: 2 published / 0 planned
+- Problems: 4
 - Green Book sections: `2.2`, `2.2.birthday-problem`, `2.2.burning-ropes`, `2.2.card-game`, `2.2.defective-ball`, `2.2.horse-race`, `2.2.infinite-sequence`, `2.2.river-crossing`, `2.2.trailing-zeros`, `2.3`, `2.3.box-packing`, `2.3.calendar-cubes`, `2.3.door-to-offer`, `2.3.last-ball`, `2.3.light-switches`, `2.3.message-delivery`, `2.3.quant-salary`
 - Red Book sections: None
 - 150 Questions sections: None
-- Workstreams: None
+- Workstreams: `logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019` (active)
 
 #### Modules
 
 | Order | State | Slug | Prerequisites |
 |---:|---|---|---|
+| 10 | published | `logical-deduction-constraint-propagation-and-case-elimination` | None |
+| 20 | published | `decision-trees-information-bounds-and-adaptive-testing` | `logical-deduction-constraint-propagation-and-case-elimination` |
 
 #### Coverage records
 
-- Green Book: `pending`: 17
+- Green Book: `canonical-problem`: 5, `knowledge-only`: 3, `merged-duplicate`: 1, `pending`: 8
 - Red Book: None
 - 150 Questions: None
 
@@ -285,15 +287,15 @@
 
 | Key | State | Question pages | Solution pages | Targets |
 |---|---|---:|---:|---|
-| `green-book::2.2::theory` | `pending` | 21 | None | None |
-| `green-book::2.2.river-crossing::question` | `pending` | 21 | None | None |
-| `green-book::2.2.birthday-problem::question` | `pending` | 21–22 | None | None |
-| `green-book::2.2.card-game::question` | `pending` | 22–23 | None | None |
-| `green-book::2.2.burning-ropes::question` | `pending` | 23 | None | None |
-| `green-book::2.2.defective-ball::question` | `pending` | 23–25 | None | None |
-| `green-book::2.2.trailing-zeros::question` | `pending` | 25 | None | None |
-| `green-book::2.2.horse-race::question` | `pending` | 25–26 | None | None |
-| `green-book::2.2.infinite-sequence::question` | `pending` | 26 | None | None |
+| `green-book::2.2::theory` | `knowledge-only` | 21 | None | `logical-deduction-constraint-propagation-and-case-elimination` |
+| `green-book::2.2.river-crossing::question` | `canonical-problem` | 21 | None | `bridge-crossing-minimum-time`, `logical-deduction-constraint-propagation-and-case-elimination` |
+| `green-book::2.2.birthday-problem::question` | `canonical-problem` | 21–22 | None | `public-announcement-candidate-elimination`, `logical-deduction-constraint-propagation-and-case-elimination` |
+| `green-book::2.2.card-game::question` | `knowledge-only` | 22–23 | None | `logical-deduction-constraint-propagation-and-case-elimination` |
+| `green-book::2.2.burning-ropes::question` | `knowledge-only` | 23 | None | `logical-deduction-constraint-propagation-and-case-elimination` |
+| `green-book::2.2.defective-ball::question` | `canonical-problem` | 23–25 | None | `twelve-object-balance-scale-diagnosis`, `decision-trees-information-bounds-and-adaptive-testing` |
+| `green-book::2.2.trailing-zeros::question` | `canonical-problem` | 25 | None | `factorial-trailing-zeros-in-arbitrary-base`, `modular-arithmetic`, `counting-permutations-combinations` |
+| `green-book::2.2.horse-race::question` | `canonical-problem` | 25–26 | None | `top-three-from-batched-races`, `decision-trees-information-bounds-and-adaptive-testing` |
+| `green-book::2.2.infinite-sequence::question` | `merged-duplicate` | 26 | None | `infinite-power-tower-limit`, `bounded-monotone-convergence-and-fixed-points` |
 | `green-book::2.3::theory` | `pending` | 26 | None | None |
 | `green-book::2.3.box-packing::question` | `pending` | 26–27 | None | None |
 | `green-book::2.3.calendar-cubes::question` | `pending` | 27–28 | None | None |
@@ -427,7 +429,7 @@
 ### 02.06. Modular Arithmetic
 
 - Curriculum: 1 published / 0 planned
-- Problems: 1
+- Problems: 2
 - Green Book sections: `2.7`, `2.7.chameleon-colors`, `2.7.division-by-9`, `2.7.prisoner-problem`
 - Red Book sections: None
 - 150 Questions sections: None
@@ -441,7 +443,7 @@
 
 #### Coverage records
 
-- Green Book: `pending`: 4
+- Green Book: `canonical-problem`: 1, `pending`: 4
 - Red Book: None
 - 150 Questions: `canonical-problem`: 1
 
@@ -573,7 +575,7 @@
 
 ### Coverage records
 
-- Green Book: `canonical-problem`: 3, `knowledge-only`: 1, `pending`: 14
+- Green Book: `canonical-problem`: 3, `knowledge-only`: 1, `merged-duplicate`: 1, `pending`: 14
 - Red Book: `canonical-problem`: 6, `knowledge-only`: 1, `merged-duplicate`: 3, `pending`: 7
 - 150 Questions: `canonical-problem`: 3, `merged-duplicate`: 3, `pending`: 3
 
@@ -601,7 +603,7 @@
 
 #### Coverage records
 
-- Green Book: `canonical-problem`: 3, `knowledge-only`: 1
+- Green Book: `canonical-problem`: 3, `knowledge-only`: 1, `merged-duplicate`: 1
 - Red Book: `canonical-problem`: 6, `knowledge-only`: 1, `merged-duplicate`: 3, `pending`: 2
 - 150 Questions: `canonical-problem`: 3, `merged-duplicate`: 3
 
@@ -2168,7 +2170,7 @@
 ## 10. Algorithms, Data Structures & C++
 
 - Curriculum: 0 published / 0 planned
-- Problems: 2
+- Problems: 3
 - Green Book sections: `5.3`, `5.3.dice-game`, `5.3.dp-algorithm`, `5.3.dynamic-card-game`, `5.3.dynamic-dice-game`, `5.3.world-series`, `7.1`, `7.1.fibonacci`, `7.1.horner`, `7.1.max-subarray`, `7.1.moving-average`, `7.1.number-swap`, `7.1.random-permutation`, `7.1.search`, `7.1.sorting`, `7.1.unique-elements`, `7.2`, `7.2.multiply-by-7`, `7.2.poisonous-wine`, `7.2.power-of-2`, `7.2.probability-simulation`
 - Red Book sections: `5`, `7`, `10`, `10.2`
 - 150 Questions sections: `1`, `2.4`, `3.4`
@@ -2181,7 +2183,7 @@
 
 ### Coverage records
 
-- Green Book: `pending`: 21
+- Green Book: `canonical-problem`: 1, `pending`: 21
 - Red Book: `pending`: 4
 - 150 Questions: `canonical-problem`: 2, `pending`: 3
 
@@ -2189,7 +2191,7 @@
 ### 10.01. Algorithmic Complexity
 
 - Curriculum: 0 published / 0 planned
-- Problems: 1
+- Problems: 2
 - Green Book sections: `7.1`, `7.1.fibonacci`, `7.1.horner`, `7.1.max-subarray`, `7.1.moving-average`, `7.1.number-swap`, `7.1.random-permutation`, `7.1.search`, `7.1.sorting`, `7.1.unique-elements`, `7.2`, `7.2.multiply-by-7`, `7.2.poisonous-wine`, `7.2.power-of-2`, `7.2.probability-simulation`
 - Red Book sections: `5`
 - 150 Questions sections: None
@@ -2202,7 +2204,7 @@
 
 #### Coverage records
 
-- Green Book: `pending`: 15
+- Green Book: `canonical-problem`: 1, `pending`: 15
 - Red Book: `pending`: 1
 - 150 Questions: `canonical-problem`: 1
 

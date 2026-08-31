@@ -429,7 +429,7 @@ Historical corpus checkpoint after workstream 11: **63 canonical Problems** and 
 
 ## Public corpus state (current)
 
-The current source-neutral regression contract discovers exactly **81 canonical Problems / 56 explicitly topic-classified Knowledge / Technique nodes**.
+The current source-neutral regression contract discovers exactly **86 canonical Problems / 58 explicitly topic-classified Knowledge / Technique nodes**.
 
 These are repository-record counts only. They are not whole-book completeness percentages and do not imply that Interview Strategy & Communication, Reasoning & Communication, or Green/Red/150 as a whole is complete.
 
@@ -791,6 +791,67 @@ All public Knowledge and Problems remain source-neutral. The Fermi material teac
 
 Workstream 018 alone is bounded to the exact eleven records above. It does not claim completeness for Problem Simplification, Logic, Brainteasers & Discrete Reasoning, any source book, or adjacent topics. Workstream 019 is not active or authorized.
 
+## Active cross-book workstream 19
+
+`logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019`
+
+Status: **active and evidence-free**. Completion is not claimed. The manifest contains no `preClosureActiveGate`, `verification`, or `finalTreeGate`; those fields remain absent until the exact active commit passes Windows, WSL, and GitHub CI.
+
+Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**. This is a one-source, exact nine-record Green Book 2.2 core scope on evidence pages 21–26:
+
+- `green-book::2.2::theory`
+- `green-book::2.2.river-crossing::question`
+- `green-book::2.2.birthday-problem::question`
+- `green-book::2.2.card-game::question`
+- `green-book::2.2.burning-ropes::question`
+- `green-book::2.2.defective-ball::question`
+- `green-book::2.2.trailing-zeros::question`
+- `green-book::2.2.horse-race::question`
+- `green-book::2.2.infinite-sequence::question`
+
+### Canonical Knowledge
+
+- **Logical Deduction: Constraint Propagation & Case Elimination** — `logical-deduction-constraint-propagation-and-case-elimination`.
+- **Decision Trees, Information Bounds & Adaptive Testing** — `decision-trees-information-bounds-and-adaptive-testing`.
+
+### Canonical Problems
+
+- **Bridge Crossing in Minimum Time** — `bridge-crossing-minimum-time`.
+- **Public Announcements and Candidate Elimination** — `public-announcement-candidate-elimination`.
+- **Twelve-Object Balance-Scale Diagnosis** — `twelve-object-balance-scale-diagnosis`.
+- **Factorial Trailing Zeros in an Arbitrary Base** — `factorial-trailing-zeros-in-arbitrary-base`.
+- **Top Three from Batched Races** — `top-three-from-batched-races`.
+
+Workstream 019 adds exactly **+5 Problems / +2 Knowledge**, producing the current **86 Problems / 58 Knowledge** source-neutral corpus.
+
+### Exact nine dispositions and boundaries
+
+- `green-book::2.2::theory` is `knowledge-only` and resolves to the constraint-propagation Knowledge page.
+- `green-book::2.2.river-crossing::question` is `canonical-problem` and resolves to `bridge-crossing-minimum-time`.
+- `green-book::2.2.birthday-problem::question` is `canonical-problem` and resolves to `public-announcement-candidate-elimination`.
+- `green-book::2.2.card-game::question` is `knowledge-only`; the two-color pairing invariant remains an executable Knowledge check rather than a low-depth standalone Problem.
+- `green-book::2.2.burning-ropes::question` is `knowledge-only`; the nonuniform-rope timer remains an executable constraint-composition Knowledge check rather than a one-trick standalone Problem.
+- `green-book::2.2.defective-ball::question` is `canonical-problem` and resolves to `twelve-object-balance-scale-diagnosis`.
+- `green-book::2.2.trailing-zeros::question` is `canonical-problem` and resolves to `factorial-trailing-zeros-in-arbitrary-base`.
+- `green-book::2.2.horse-race::question` is `canonical-problem` and resolves to `top-three-from-batched-races`.
+- `green-book::2.2.infinite-sequence::question` is `merged-duplicate`; the recursive tower merges into the existing `infinite-power-tower-limit` Problem and its complete convergence and branch-selection proof.
+
+The exact state split is **5 `canonical-problem` / 3 `knowledge-only` / 1 `merged-duplicate`**. All nine rows are terminal, yielding exactly **248 terminal / 502 pending** master-directory records. The first pending record after the active scope is `green-book::2.3::theory`.
+
+### Topic refinements and page freeze
+
+- `green-book::2.2.trailing-zeros::question` adds `modular-arithmetic`. Reason: Item-level review identifies factorial prime valuations and base divisibility as Modular Arithmetic while retaining the source section’s logical-deduction context.
+- `green-book::2.2.horse-race::question` adds `algorithmic-complexity`. Reason: Item-level review identifies a comparison-selection strategy with an optimal race lower bound, so this Logical Deduction item also belongs to Algorithmic Complexity.
+- `green-book::2.2.infinite-sequence::question` adds `limits-derivatives`. Reason: Item-level review identifies the recursive tower as the existing Limits & Derivatives fixed-point and convergence identity while retaining its editorial Logical Deduction context.
+- The other six rows remain solely under `logical-deduction` and have no topic override.
+- No question or solution page range changed. The protected source-topic map and all 750 master page rows remain byte-stable under their pinned projections.
+
+### Source-neutral and completion boundary
+
+All public Knowledge and Problems remain source-neutral. The card and rope prompts remain visible checks instead of inflated public Problems, and the tower identity is merged rather than duplicated. This active workstream is bounded to the exact nine Green Book 2.2 records above; it does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Green Book, any source book, or adjacent topics.
+
+Workstream 020 is not active or authorized.
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -811,17 +872,17 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**No bounded topic is active. Workstream 018 is complete.**
+**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
-A later workstream requires its own approved design and evidence audit; workstream 019 is not active or authorized by this closure.
+Workstream 019 is active across the exact nine-record Green Book 2.2 core scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.
 
 ## Master directory ingestion state
 
-**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+**Workstream 019 owns the exact nine-record Green Book 2.2 core scope. The three-book master directory migration remains complete.**
 
-First pending master record: `green-book::2.2::theory`
+First pending master record after the active 019 scope: `green-book::2.3::theory`
 
-Workstream 019 is not active or authorized.
+Workstream 020 is not active or authorized.
 
 ## Parallel workstream coordination
 

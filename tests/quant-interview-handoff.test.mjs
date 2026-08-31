@@ -220,7 +220,7 @@ test('root README points agents to durable Quant Interview repository memory', a
   assert.match(readme, /repository.*memory/i);
 });
 
-test('handoff current topic and remaining queue follow workstream 012 status', async () => {
+test('handoff current topic and remaining queue follow the latest workstream status', async () => {
   const workstream011 = JSON.parse(await readFile(workstream011Path, 'utf8'));
   const workstream012 = JSON.parse(await readFile(workstream012Path, 'utf8'));
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
@@ -306,6 +306,19 @@ test('handoff current topic and remaining queue follow workstream 012 status', a
               } else {
                 assert.match(handoff, /^## Completed cross-book workstream 18$/m);
                 assert.doesNotMatch(current, /Workstream 018 is active/i);
+                const workstream019 = JSON.parse(await readFile(
+                  'src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019.json',
+                  'utf8',
+                ));
+                assert.match(workstream019.status, /^(?:active|complete)$/);
+                if (workstream019.status === 'active') {
+                  assert.match(current, /Logic, Brainteasers.*Logical Deduction/is);
+                  assert.match(current, /Workstream 019 is active/i);
+                  assert.doesNotMatch(handoff, /^## Completed cross-book workstream 19$/m);
+                } else {
+                  assert.match(handoff, /^## Completed cross-book workstream 19$/m);
+                  assert.doesNotMatch(current, /Workstream 019 is active/i);
+                }
               }
             }
           }
