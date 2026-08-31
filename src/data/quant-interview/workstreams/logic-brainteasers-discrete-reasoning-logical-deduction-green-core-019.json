@@ -1,0 +1,43 @@
+{
+  "id": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+  "canonicalTopics": [
+    "logic-brainteasers-discrete-reasoning",
+    "logical-deduction"
+  ],
+  "status": "active",
+  "masterItemKeys": [
+    "green-book::2.2::theory",
+    "green-book::2.2.river-crossing::question",
+    "green-book::2.2.birthday-problem::question",
+    "green-book::2.2.card-game::question",
+    "green-book::2.2.burning-ropes::question",
+    "green-book::2.2.defective-ball::question",
+    "green-book::2.2.trailing-zeros::question",
+    "green-book::2.2.horse-race::question",
+    "green-book::2.2.infinite-sequence::question"
+  ],
+  "sourceScopes": [
+    {
+      "source": "green-book",
+      "sourceSections": [
+        "2.2"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 21,
+          "endPage": 26
+        }
+      ],
+      "reviewOutcome": "green-core-logical-deduction-publication-and-rerouting",
+      "reviewNote": "Nine consecutive Green records yield two canonical Knowledge nodes, five canonical Problems, two lower-depth Knowledge checks, and one merged power-tower identity."
+    }
+  ],
+  "publicDelta": {
+    "problems": 5,
+    "knowledge": 2
+  },
+  "knowledgeSlugs": [
+    "logical-deduction-constraint-propagation-and-case-elimination",
+    "decision-trees-information-bounds-and-adaptive-testing"
+  ]
+}

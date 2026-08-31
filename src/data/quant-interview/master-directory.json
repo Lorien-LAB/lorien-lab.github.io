@@ -4984,11 +4984,13 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0009|green-book::2.2::theory",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+      "resolutionNote": "Green Book 2.2 groups finite candidate elimination, invariant checks, and adaptive testing into the bounded Logical Deduction learning path."
     },
     {
       "key": "green-book::2.2.river-crossing::question",
@@ -5009,11 +5011,15 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0010|green-book::2.2.river-crossing::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "bridge-crossing-minimum-time"
+      ],
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+      "resolutionNote": "The bridge family becomes the canonical state-search Problem with an independently verified optimal schedule and lower bound."
     },
     {
       "key": "green-book::2.2.birthday-problem::question",
@@ -5034,11 +5040,15 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0011|green-book::2.2.birthday-problem::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "public-announcement-candidate-elimination"
+      ],
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+      "resolutionNote": "The private-information dialogue becomes a source-neutral public-announcement Problem with every candidate-set update explicit."
     },
     {
       "key": "green-book::2.2.card-game::question",
@@ -5059,11 +5069,13 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0012|green-book::2.2.card-game::question",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+      "resolutionNote": "The two-color pairing invariant remains an executable Knowledge check rather than a low-depth standalone Problem."
     },
     {
       "key": "green-book::2.2.burning-ropes::question",
@@ -5084,11 +5096,13 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0013|green-book::2.2.burning-ropes::question",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+      "resolutionNote": "The nonuniform timer remains an executable constraint-composition Knowledge check rather than a one-trick standalone Problem."
     },
     {
       "key": "green-book::2.2.defective-ball::question",
@@ -5109,11 +5123,15 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|01|0014|green-book::2.2.defective-ball::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "twelve-object-balance-scale-diagnosis"
+      ],
+      "canonicalKnowledge": [
+        "decision-trees-information-bounds-and-adaptive-testing"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+      "resolutionNote": "The heavy-or-light anomaly family becomes the canonical 24-hypothesis ternary decision-tree Problem."
     },
     {
       "key": "green-book::2.2.trailing-zeros::question",
@@ -5131,14 +5149,20 @@
       "primaryTopic": "logical-deduction",
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning",
-        "logical-deduction"
+        "logical-deduction",
+        "modular-arithmetic"
       ],
       "sortKey": "02.02|01|0015|green-book::2.2.trailing-zeros::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "factorial-trailing-zeros-in-arbitrary-base"
+      ],
+      "canonicalKnowledge": [
+        "modular-arithmetic",
+        "counting-permutations-combinations"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+      "resolutionNote": "The factorial-zero prompt is generalized to prime valuations in arbitrary bases and receives a justified Modular Arithmetic refinement."
     },
     {
       "key": "green-book::2.2.horse-race::question",
@@ -5156,14 +5180,20 @@
       "primaryTopic": "logical-deduction",
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning",
-        "logical-deduction"
+        "logical-deduction",
+        "algorithms-data-structures-cpp",
+        "algorithmic-complexity"
       ],
       "sortKey": "02.02|01|0016|green-book::2.2.horse-race::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "top-three-from-batched-races"
+      ],
+      "canonicalKnowledge": [
+        "decision-trees-information-bounds-and-adaptive-testing"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+      "resolutionNote": "The batched-race family becomes the canonical partial-order selection Problem and receives a justified Algorithmic Complexity refinement."
     },
     {
       "key": "green-book::2.2.infinite-sequence::question",
@@ -5181,14 +5211,20 @@
       "primaryTopic": "logical-deduction",
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning",
-        "logical-deduction"
+        "logical-deduction",
+        "calculus-differential-equations",
+        "limits-derivatives"
       ],
       "sortKey": "02.02|01|0017|green-book::2.2.infinite-sequence::question",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "merged-duplicate",
+      "canonicalProblems": [
+        "infinite-power-tower-limit"
+      ],
+      "canonicalKnowledge": [
+        "bounded-monotone-convergence-and-fixed-points"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019",
+      "resolutionNote": "The recursive tower prompt is the existing canonical power-tower identity and merges into its complete convergence and branch-selection proof."
     },
     {
       "key": "green-book::2.3::theory",

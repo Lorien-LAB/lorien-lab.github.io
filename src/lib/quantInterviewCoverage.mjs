@@ -78,7 +78,9 @@ export function validateCoverageLedger(ledger, context) {
       const mapped = [...mapEntry.canonicalTopics].sort();
       const covered = [...entry.canonicalTopics].sort();
       if (JSON.stringify(mapped) !== JSON.stringify(covered)) {
-        throw new Error(`Section-level coverage topics are inconsistent with source-topic map at ${key}.`);
+        if (typeof entry.topicOverrideReason !== 'string' || !entry.topicOverrideReason.trim()) {
+          throw new Error(`Coverage section-level topic override requires a topic override reason at ${key}.`);
+        }
       }
     }
 
