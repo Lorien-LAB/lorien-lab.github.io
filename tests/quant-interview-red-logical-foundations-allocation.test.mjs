@@ -115,7 +115,12 @@ test('publishes the alternating geometric allocation problem with finite and inf
   assert.match(body, /a=b=\\frac\{1\}\{2\}/, 'the equal-half specialization must set both fractions');
   assert.match(body, /A_\\infty\s*=\s*\\frac\{2\}\{3\}/, 'equal halves give first share two thirds');
   assert.match(body, /B_\\infty\s*=\s*\\frac\{1\}\{3\}/, 'equal halves give second share one third');
-  assert.match(body, /not universal|not always|only.*equal-half/i, 'the equal-half shares must not be presented as universal');
+  assert.match(body, /not universal|not always/i, 'the equal-half shares must not be presented as universal');
+  assert.doesNotMatch(
+    body,
+    /split into two thirds and one third is only the equal-half case/i,
+    'equal halves are a familiar specialization, not the unique parameters producing those shares',
+  );
 });
 
 test('keeps independently calculated finite and limiting shares conservative', () => {
@@ -128,6 +133,9 @@ test('keeps independently calculated finite and limiting shares conservative', (
   assert.deepEqual(shares(0.5, 0.5, 1), { first: 0.5, second: 0.25, remainder: 0.25 });
   assert.ok(Math.abs(shares(0.5, 0.5, 20).first - 2 / 3) < 1e-12);
   assert.ok(Math.abs(shares(0.5, 0.5, 20).second - 1 / 3) < 1e-12);
+  const alternative = shares(1 / 3, 1 / 4, 80);
+  assert.ok(Math.abs(alternative.first - 2 / 3) < 1e-12);
+  assert.ok(Math.abs(alternative.second - 1 / 3) < 1e-12);
   for (const [a, b] of [[0.2, 0.3], [0.8, 0.1]]) {
     const { first, second, remainder } = shares(a, b, 12);
     assert.ok(Math.abs(first + second + remainder - 1) < 1e-12);

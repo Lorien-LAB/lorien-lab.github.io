@@ -180,6 +180,16 @@ test('publishes the cube-surface problem with a feasible route and global proof'
 
   assert.deepEqual(parseModelRows(body), expectedModelRows);
   assertGlobalSurfaceProof(body);
+  assert.match(
+    body,
+    /ordinary three-dimensional separation[\s\S]{0,160}valid but non-sharp lower bound/i,
+    'the page must distinguish a valid Euclidean lower bound from an attainable or sharp surface distance',
+  );
+  assert.doesNotMatch(
+    body,
+    /ordinary three-dimensional separation were a surface lower bound/i,
+    'the Euclidean separation is a valid, though non-sharp, lower bound',
+  );
 });
 
 test('keeps the independently calculated cube distances ordered by model', () => {

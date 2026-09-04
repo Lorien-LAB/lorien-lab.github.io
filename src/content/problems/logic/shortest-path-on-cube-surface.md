@@ -111,7 +111,7 @@ Unfolding converts a constrained three-dimensional route into a planar one, but 
 - Using the interior space diagonal even though the path must stay on the surface.
 - Restricting motion to edges when crossing a face is allowed.
 - Finding one short net and declaring it optimal without ruling out other face strips.
-- Treating the folded endpoints as if their ordinary three-dimensional separation were a surface lower bound.
+- Treating the folded endpoints' ordinary three-dimensional separation as an attainable surface distance, or mistaking that valid but non-sharp lower bound for the surface optimum.
 
 ## Extensions
 

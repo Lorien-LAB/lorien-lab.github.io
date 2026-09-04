@@ -112,7 +112,7 @@ The remainder tends to zero, and the limiting shares sum to one.
 
 ### Equal-Half Case
 
-The familiar split into two thirds and one third is only the equal-half case, not a universal allocation rule. If
+The equal-half case gives the familiar split into two thirds and one third; that split is not universal for arbitrary fractions. If
 
 $$
 a=b=\frac{1}{2},
