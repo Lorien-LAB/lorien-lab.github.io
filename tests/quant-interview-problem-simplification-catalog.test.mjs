@@ -34,13 +34,13 @@ test('new and existing Knowledge pages expose the exact reciprocal graph', async
   assert.deepEqual(pages.framing.related, ['structured-think-aloud-reasoning', 'quant-interview-preparation-breadth-and-practice', 'quant-interview-formats-and-assessment-strategy', 'behavioral-interview-evidence-and-authenticity', small, fermi, 'logical-deduction-constraint-propagation-and-case-elimination', 'constraint-reframing-and-latent-state']);
 });
 
-test('Problem Simplification remains registered in the exact 93/59 corpus after 020', async () => {
+test('Problem Simplification remains registered in the exact 96/59 corpus after 021', async () => {
   const problemFiles = (await readdir('src/content/problems', { recursive: true })).filter((file) => String(file).endsWith('.md'));
   const catalog = JSON.parse(await readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'));
   assert.deepEqual(
     catalog.modules.filter(({ primaryTopic }) => primaryTopic === 'problem-simplification').map(({ slug }) => slug),
     [small, fermi],
   );
-  assert.equal(problemFiles.length, 93);
+  assert.equal(problemFiles.length, 96);
   assert.equal(catalog.modules.length, 59);
 });

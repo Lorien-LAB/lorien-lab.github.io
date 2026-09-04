@@ -199,7 +199,7 @@ const exactPrerequisites = {
   'vector-geometry-inner-products': [],
 };
 
-test('repository catalog contains the exact published 93/59 corpus', async () => {
+test('repository catalog contains the exact published 96/59 corpus', async () => {
   const [catalogText, taxonomyText, knowledgeRecords] = await Promise.all([
     readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'),
     readFile('src/data/quant-interview/topics/taxonomy.json', 'utf8'),
@@ -241,6 +241,7 @@ test('repository public projection exposes the complete source-neutral curriculu
     problemRecords,
     base: '/',
   });
+  assert.equal(problemRecords.length, 96);
   assert.deepEqual(result.totals, { published: 59, planned: 0 });
   assert.equal(result.topics.length, 10);
   const interview = result.topics.find((topic) => topic.id === 'interview-strategy-communication');

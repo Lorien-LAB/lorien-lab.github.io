@@ -14,11 +14,17 @@ Workstream 020 is active across the exact eight-record Green Book 2.3 scope. Its
 const completeCurrent = `**No bounded topic is active. Workstream 020 is complete.**
 
 A later workstream requires its own approved design and evidence audit; workstream 021 is not active or authorized by this closure.`;
-const completeMaster = `**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+const complete021Master = `**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
 
-First pending master record: \`red-book::8::theory\`
+First pending master record: \`red-book::8::8.11\`
 
-Workstream 021 is not active or authorized.`;
+Workstream 022 is not active or authorized.`;
+const active021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
+
+Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
+const complete021Current = `**No bounded topic is active. Workstream 021 is complete.**
+
+A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.`;
 const newProblemPaths = [
   'src/content/problems/logic/pack-length-four-bricks-in-six-cube.md',
   'src/content/problems/logic/two-cube-calendar-digit-labeling.md',
@@ -97,9 +103,9 @@ test('020 lifecycle is evidence-free while active and factually strict when comp
     readdir('src/data/quant-interview/workstreams'),
   ]);
   assertLifecycleEvidence(manifest);
-  assert.equal(workstreams.some((file) => /-021\.json$/.test(file)), false);
 
   if (manifest.status === 'active') {
+    assert.equal(workstreams.some((file) => /-021\.json$/.test(file)), false);
     assert.equal(currentBlock(handoff), activeCurrent);
     assert.match(handoff, /^## Active cross-book workstream 20$/m);
     assert.doesNotMatch(handoff, /^## Completed cross-book workstream 20$/m);
@@ -109,7 +115,6 @@ test('020 lifecycle is evidence-free while active and factually strict when comp
   }
 
   await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
-  assert.equal(currentBlock(handoff), completeCurrent);
   assert.doesNotMatch(handoff, /^## Active cross-book workstream 20$/m);
   assert.match(handoff, /^## Completed cross-book workstream 20$/m);
   const closure = section(handoff, 'Completed cross-book workstream 20');
@@ -117,31 +122,65 @@ test('020 lifecycle is evidence-free while active and factually strict when comp
   const wrongUrl = closure.replace(ciUrl, 'https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/1');
   assert.notEqual(wrongUrl, closure);
   assert.throws(() => assertClosureIdentity(wrongUrl, manifest.id), { name: 'AssertionError' });
-  assert.match(handoff, /First pending master record: `red-book::8::theory`/i);
-  assert.match(handoff, /Workstream 021 is not active or authorized/);
+  const workstream021File = workstreams.find((file) => /-021\.json$/.test(file));
+  if (!workstream021File) {
+    assert.equal(currentBlock(handoff), completeCurrent);
+    assert.match(handoff, /First pending master record: `red-book::8::theory`/i);
+    assert.match(handoff, /Workstream 021 is not active or authorized/);
+    return;
+  }
+  const workstream021 = JSON.parse(await readFile(
+    `src/data/quant-interview/workstreams/${workstream021File}`,
+    'utf8',
+  ));
+  assert.match(workstream021.status, /^(?:active|complete)$/);
+  if (workstream021.status === 'active') {
+    assert.equal(currentBlock(handoff), active021Current);
+    assert.match(handoff, /^## Active cross-book workstream 21$/m);
+    assert.match(handoff, /First pending master record after the active 021 scope: `red-book::8::8\.11`/i);
+  } else {
+    assert.equal(currentBlock(handoff), complete021Current);
+    assert.match(handoff, /^## Completed cross-book workstream 21$/m);
+    assert.match(handoff, /First pending master record: `red-book::8::8\.11`/i);
+  }
+  assert.match(handoff, /Workstream 022 is not active or authorized/);
 });
 
-test('020 final tree requires the complete workflow-free lifecycle without 021', async () => {
+test('020 final tree remains complete and workflow-free after 021 starts', async () => {
   const [manifest, workstreams] = await Promise.all([
     readFile(manifestPath, 'utf8').then(JSON.parse),
     readdir('src/data/quant-interview/workstreams'),
   ]);
   assert.equal(manifest.status, 'complete');
   await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
-  assert.equal(workstreams.some((file) => /-021\.json$/.test(file)), false);
+  const workstream021File = workstreams.find((file) => /-021\.json$/.test(file));
+  assert.ok(workstream021File);
+  const workstream021 = JSON.parse(await readFile(
+    `src/data/quant-interview/workstreams/${workstream021File}`,
+    'utf8',
+  ));
+  assert.match(workstream021.status, /^(?:active|complete)$/);
 });
 
-test('020 final HANDOFF records the exact completed current and master state', async () => {
-  const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
-  assert.equal(currentBlock(handoff), completeCurrent);
-  assert.equal(section(handoff, 'Master directory ingestion state').trim(), completeMaster);
+test('020 final HANDOFF remains complete while 021 owns current state', async () => {
+  const [handoff, workstream021] = await Promise.all([
+    readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
+    readFile('src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-red-logical-foundations-021.json', 'utf8').then(JSON.parse),
+  ]);
   assert.doesNotMatch(handoff, /^## Active cross-book workstream 20$/m);
   assert.match(handoff, /^## Completed cross-book workstream 20$/m);
-  assert.match(handoff, /First pending master record: `red-book::8::theory`/i);
-  assert.match(handoff, /Workstream 021 is not active or authorized/);
+  if (workstream021.status === 'active') {
+    assert.equal(currentBlock(handoff), active021Current);
+    assert.match(handoff, /^## Active cross-book workstream 21$/m);
+    assert.match(handoff, /First pending master record after the active 021 scope: `red-book::8::8\.11`/i);
+  } else {
+    assert.equal(currentBlock(handoff), complete021Current);
+    assert.equal(section(handoff, 'Master directory ingestion state').trim(), complete021Master);
+  }
+  assert.match(handoff, /Workstream 022 is not active or authorized/);
 });
 
-test('020 advances the exact public and master contracts without 021', async () => {
+test('020 remains durable after 021 advances the exact public and master contracts', async () => {
   const [directory, generated, catalog, problemFiles] = await Promise.all([
     readFile('src/data/quant-interview/master-directory.json', 'utf8').then(JSON.parse),
     readFile('docs/quant-interview/KNOWLEDGE_DIRECTORY.md', 'utf8'),
@@ -151,14 +190,14 @@ test('020 advances the exact public and master contracts without 021', async () 
   ]);
   const terminal = directory.items.filter(({ state }) => !['pending', 'needs-review'].includes(state)).length;
   assert.equal(newProblemPaths.length, 7);
-  assert.equal(problemFiles.filter((file) => String(file).endsWith('.md')).length, 93);
+  assert.equal(problemFiles.filter((file) => String(file).endsWith('.md')).length, 96);
   assert.deepEqual(catalog.modules.filter(({ slug }) => slug === expectedModule.slug), [expectedModule]);
   assert.equal(catalog.modules.length, 59);
-  assert.equal(terminal, 256);
-  assert.equal(directory.items.length - terminal, 494);
+  assert.equal(terminal, 262);
+  assert.equal(directory.items.length - terminal, 488);
   assert.match(generated, /Published Knowledge: 59/);
-  assert.match(generated, /Canonical Problems: 93/);
-  assert.match(generated, /Terminal master records: 256/);
-  assert.match(generated, /Pending master records: 494/);
-  assert.match(generated, /First pending: `red-book::8::theory`/);
+  assert.match(generated, /Canonical Problems: 96/);
+  assert.match(generated, /Terminal master records: 262/);
+  assert.match(generated, /Pending master records: 488/);
+  assert.match(generated, /First pending: `red-book::8::8\.11`/);
 });

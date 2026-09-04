@@ -26,6 +26,12 @@ Workstream 020 is active across the exact eight-record Green Book 2.3 scope. Its
 const complete020Current = `**No bounded topic is active. Workstream 020 is complete.**
 
 A later workstream requires its own approved design and evidence audit; workstream 021 is not active or authorized by this closure.`;
+const active021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
+
+Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
+const complete021Current = `**No bounded topic is active. Workstream 021 is complete.**
+
+A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.`;
 const section = (text, heading) => text.split(new RegExp(`^## ${heading}$`, 'im'))[1]?.split(/^## /m)[0] ?? '';
 const currentBlock = (handoff) => handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0]?.trim() ?? '';
 
@@ -82,21 +88,39 @@ test('018 lifecycle is evidence-free while active and factually strict when comp
       'utf8',
     ));
     assert.match(workstream020.status, /^(?:active|complete)$/);
-    assert.equal(workstreamFiles.some((file) => /-021\.json$/.test(file)), false);
     if (workstream020.status === 'active') {
+      assert.equal(workstreamFiles.some((file) => /-021\.json$/.test(file)), false);
       assert.equal(currentBlock(handoff), active020Current);
       assert.match(handoff, /^## Active cross-book workstream 20$/m);
       assert.doesNotMatch(handoff, /^## Completed cross-book workstream 20$/m);
       assert.match(handoff, /First pending master record after the active 020 scope: `red-book::8::theory`/i);
     } else {
-      assert.equal(currentBlock(handoff), complete020Current);
       assert.match(handoff, /^## Completed cross-book workstream 20$/m);
-      assert.match(handoff, /First pending master record: `red-book::8::theory`/i);
+      const workstream021File = workstreamFiles.find((file) => /-021\.json$/.test(file));
+      if (!workstream021File) {
+        assert.equal(currentBlock(handoff), complete020Current);
+        assert.match(handoff, /First pending master record: `red-book::8::theory`/i);
+        return;
+      }
+      const workstream021 = JSON.parse(await readFile(
+        `src/data/quant-interview/workstreams/${workstream021File}`,
+        'utf8',
+      ));
+      assert.match(workstream021.status, /^(?:active|complete)$/);
+      if (workstream021.status === 'active') {
+        assert.equal(currentBlock(handoff), active021Current);
+        assert.match(handoff, /^## Active cross-book workstream 21$/m);
+        assert.match(handoff, /First pending master record after the active 021 scope: `red-book::8::8\.11`/i);
+      } else {
+        assert.equal(currentBlock(handoff), complete021Current);
+        assert.match(handoff, /^## Completed cross-book workstream 21$/m);
+        assert.match(handoff, /First pending master record: `red-book::8::8\.11`/i);
+      }
     }
   }
 });
 
-test('018 and the 019 corpus remain durable after 020 advances current state', async () => {
+test('018 and the 019 corpus remain durable after 021 advances current state', async () => {
   const [manifest018, directory, workstreams] = await Promise.all([
     readFile(manifestPath, 'utf8').then(JSON.parse),
     readFile('src/data/quant-interview/master-directory.json', 'utf8').then(JSON.parse),
@@ -126,9 +150,16 @@ test('018 and the 019 corpus remain durable after 020 advances current state', a
   ));
   assert.match(workstream020.status, /^(?:active|complete)$/);
   assert.equal(workstream020.masterItemKeys.length, 8);
-  assert.equal(terminal - workstream020.masterItemKeys.length, 248);
-  assert.equal(directory.items.length - terminal + workstream020.masterItemKeys.length, 502);
-  assert.equal(workstreams.some((file) => /-021\.json$/.test(file)), false);
+  const workstream021File = workstreams.find((file) => /-021\.json$/.test(file));
+  assert.ok(workstream021File);
+  const workstream021 = JSON.parse(await readFile(
+    `src/data/quant-interview/workstreams/${workstream021File}`,
+    'utf8',
+  ));
+  assert.match(workstream021.status, /^(?:active|complete)$/);
+  assert.equal(workstream021.masterItemKeys.length, 6);
+  assert.equal(terminal - workstream020.masterItemKeys.length - workstream021.masterItemKeys.length, 248);
+  assert.equal(directory.items.length - terminal + workstream020.masterItemKeys.length + workstream021.masterItemKeys.length, 502);
 });
 
 test('018 final tree is complete and workflow-free', async () => {

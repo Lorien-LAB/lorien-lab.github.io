@@ -53,6 +53,10 @@ const overrides = {
 };
 const sourceMapHash = '04f6bc640094ae774acfe5fe13b764a0a4bd155f18e1786a5b744f33cc9aceed';
 const pageProjectionHash = '2275e9e3414f249dc39bcef52bbaf202ab8d43445e61845f63a94724059eeb3e';
+const post020PageRepairs = [
+  ['red-book::8::theory', [{ startPage: 287, endPage: 287 }], [{ startPage: 287, endPage: 309 }]],
+  ['red-book::10.2::theory', [{ startPage: 317, endPage: 318 }], [{ startPage: 317, endPage: 320 }]],
+];
 
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
 
@@ -79,6 +83,13 @@ function assertProtectedPageProjection(directory) {
     questionPages,
     solutionPages,
   }));
+  const byKey = new Map(projection.map((row) => [row.key, row]));
+  for (const [key, currentPages, historicalPages] of post020PageRepairs) {
+    const row = byKey.get(key);
+    assert.ok(row, key);
+    assert.deepEqual(row.questionPages, currentPages, `${key} approved 021 repair`);
+    row.questionPages = historicalPages;
+  }
   assert.equal(projection.length, 750);
   assert.equal(sha256(JSON.stringify(projection)), pageProjectionHash);
 }
@@ -173,10 +184,11 @@ test('020 preserves the source-topic map and all 750 master page rows', async ()
   assertProtectedPageProjection(directory);
 });
 
-test('the full page freeze catches Red 8 theory and every Green page mutation', async () => {
+test('the full page freeze catches both approved repairs and every Green page mutation', async () => {
   const directory = await readJson('src/data/quant-interview/master-directory.json');
   const mutationKeys = [
     'red-book::8::theory',
+    'red-book::10.2::theory',
     ...directory.items.filter(({ source }) => source === 'green-book').map(({ key }) => key),
   ];
   assert.ok(mutationKeys.length > 1);

@@ -99,8 +99,20 @@ function restoreApprovedPageRepairs(projection) {
   const byKey = new Map(restored.map((row) => [row.key, row]));
   assert.ok(byKey.has('red-book::8::8.25'));
   assert.ok(byKey.has('150-most-frequently-asked::2.7::30'));
+  assert.deepEqual(
+    byKey.get('red-book::8::theory')?.questionPages,
+    page(287),
+    'red-book::8::theory approved 021 repair',
+  );
+  assert.deepEqual(
+    byKey.get('red-book::10.2::theory')?.questionPages,
+    page(317, 318),
+    'red-book::10.2::theory approved 021 repair',
+  );
   byKey.get('red-book::8::8.25').solutionPages = page(307, 308);
   byKey.get('150-most-frequently-asked::2.7::30').solutionPages = page(215, 216);
+  byKey.get('red-book::8::theory').questionPages = page(287, 309);
+  byKey.get('red-book::10.2::theory').questionPages = page(317, 320);
   return restored;
 }
 

@@ -21,6 +21,12 @@ Workstream 017 is active at \`red-book::9.2::guidance\` and \`red-book::9.2::9.1
 const completeCurrent = `**No bounded topic is active. Workstream 017 is complete.**
 
 A later workstream requires its own approved design and evidence audit; workstream 018 is not active or authorized by this closure.`;
+const active021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
+
+Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
+const complete021Current = `**No bounded topic is active. Workstream 021 is complete.**
+
+A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.`;
 
 const section = (handoff, heading) =>
   handoff.split(new RegExp(`^## ${heading}$`, 'im'))[1]?.split(/^## /m)[0] ?? '';
@@ -160,13 +166,32 @@ test('017 lifecycle is field-safe while active and factually strict when complet
     'utf8',
   ));
   assert.match(workstream020.status, /^(?:active|complete)$/);
-  assert.equal(workstreamFiles.some((file) => /-021\.json$/.test(file)), false);
   if (workstream020.status === 'active') {
     assert.match(current, /Logic, Brainteasers.*Logical Deduction/is);
     assert.match(current, /Workstream 020 is active/i);
     assert.match(masterIngestion, /First pending master record after the active 020 scope: `red-book::8::theory`/i);
-  } else {
+    return;
+  }
+
+  const workstream021File = workstreamFiles.find((file) => /-021\.json$/.test(file));
+  if (!workstream021File) {
     assert.match(current, /Workstream 020 is complete/i);
     assert.match(masterIngestion, /First pending master record: `red-book::8::theory`/i);
+    return;
   }
+  const workstream021 = JSON.parse(await readFile(
+    `src/data/quant-interview/workstreams/${workstream021File}`,
+    'utf8',
+  ));
+  assert.match(workstream021.status, /^(?:active|complete)$/);
+  if (workstream021.status === 'active') {
+    assert.equal(current.trim(), active021Current);
+    assert.match(handoff, /^## Active cross-book workstream 21$/m);
+    assert.match(masterIngestion, /First pending master record after the active 021 scope: `red-book::8::8\.11`/i);
+  } else {
+    assert.equal(current.trim(), complete021Current);
+    assert.match(handoff, /^## Completed cross-book workstream 21$/m);
+    assert.match(masterIngestion, /First pending master record: `red-book::8::8\.11`/i);
+  }
+  assert.match(masterIngestion, /Workstream 022 is not active or authorized/i);
 });

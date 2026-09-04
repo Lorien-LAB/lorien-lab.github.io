@@ -8,11 +8,11 @@
 
 - Published Knowledge: 59
 - Planned Knowledge: 0
-- Canonical Problems: 93
+- Canonical Problems: 96
 - Master records: 750
-- Terminal master records: 256
-- Pending master records: 494
-- First pending: `red-book::8::theory`
+- Terminal master records: 262
+- Pending master records: 488
+- First pending: `red-book::8::8.11`
 
 
 ## 01. Interview Strategy & Communication
@@ -203,11 +203,11 @@
 ## 02. Logic, Brainteasers & Discrete Reasoning
 
 - Curriculum: 1 published / 0 planned
-- Problems: 19
+- Problems: 22
 - Green Book sections: `2.1`, `2.1.screwy-pirates`, `2.1.tiger-and-sheep`, `2.2`, `2.2.birthday-problem`, `2.2.burning-ropes`, `2.2.card-game`, `2.2.defective-ball`, `2.2.horse-race`, `2.2.infinite-sequence`, `2.2.river-crossing`, `2.2.trailing-zeros`, `2.3`, `2.3.box-packing`, `2.3.calendar-cubes`, `2.3.door-to-offer`, `2.3.last-ball`, `2.3.light-switches`, `2.3.message-delivery`, `2.3.quant-salary`, `2.4`, `2.4.coin-piles`, `2.4.mislabeled-bags`, `2.4.wise-men`, `2.5`, `2.5.clock-pieces`, `2.5.counterfeit-coins-i`, `2.5.missing-integers`, `2.6`, `2.6.ants-on-a-square`, `2.6.counterfeit-coins-ii`, `2.6.handshakes`, `2.6.have-we-met-before`, `2.6.matching-socks`, `2.7`, `2.7.chameleon-colors`, `2.7.division-by-9`, `2.7.prisoner-problem`, `2.8`, `2.8.chocolate-bar-problem`, `2.8.coin-split-problem`, `2.8.race-track`, `2.9`, `2.9.irrational-number`, `2.9.rainbow-hats`
 - Red Book sections: `8`, `10`, `10.2`
 - 150 Questions sections: `1`, `2.7`, `3.7`
-- Workstreams: `logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019` (complete), `logic-brainteasers-discrete-reasoning-problem-simplification-018` (complete), `logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020` (complete)
+- Workstreams: `logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019` (complete), `logic-brainteasers-discrete-reasoning-problem-simplification-018` (complete), `logic-brainteasers-discrete-reasoning-red-logical-foundations-021` (active), `logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020` (complete)
 
 ### Modules
 
@@ -218,7 +218,7 @@
 ### Coverage records
 
 - Green Book: `canonical-problem`: 14, `knowledge-only`: 5, `merged-duplicate`: 1, `pending`: 25
-- Red Book: `knowledge-only`: 4, `pending`: 3
+- Red Book: `canonical-problem`: 3, `interview-guidance`: 2, `knowledge-only`: 5
 - 150 Questions: `canonical-problem`: 5, `knowledge-only`: 1, `pending`: 3
 
 
@@ -264,11 +264,11 @@
 ### 02.02. Logical Deduction
 
 - Curriculum: 3 published / 0 planned
-- Problems: 11
+- Problems: 14
 - Green Book sections: `2.2`, `2.2.birthday-problem`, `2.2.burning-ropes`, `2.2.card-game`, `2.2.defective-ball`, `2.2.horse-race`, `2.2.infinite-sequence`, `2.2.river-crossing`, `2.2.trailing-zeros`, `2.3`, `2.3.box-packing`, `2.3.calendar-cubes`, `2.3.door-to-offer`, `2.3.last-ball`, `2.3.light-switches`, `2.3.message-delivery`, `2.3.quant-salary`
 - Red Book sections: None
 - 150 Questions sections: None
-- Workstreams: `logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019` (complete), `logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020` (complete)
+- Workstreams: `logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019` (complete), `logic-brainteasers-discrete-reasoning-red-logical-foundations-021` (active), `logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020` (complete)
 
 #### Modules
 
@@ -281,7 +281,7 @@
 #### Coverage records
 
 - Green Book: `canonical-problem`: 12, `knowledge-only`: 4, `merged-duplicate`: 1
-- Red Book: None
+- Red Book: `canonical-problem`: 3
 - 150 Questions: None
 
 #### Master queue records
@@ -305,12 +305,12 @@
 | `green-book::2.3.last-ball::question` | `canonical-problem` | 29–30 | None | `last-ball-color-by-parity-invariant`, `constraint-reframing-and-latent-state`, `modular-invariants` |
 | `green-book::2.3.light-switches::question` | `canonical-problem` | 30–31 | None | `four-switches-one-room-entry`, `constraint-reframing-and-latent-state`, `decision-trees-information-bounds-and-adaptive-testing` |
 | `green-book::2.3.quant-salary::question` | `canonical-problem` | 31 | None | `private-average-with-canceling-mask`, `constraint-reframing-and-latent-state`, `problem-framing-clarification-assumption-management` |
-| `red-book::8::theory` | `pending` | 287–309 | None | None |
-| `red-book::10::theory` | `pending` | 317 | None | None |
-| `red-book::10.2::theory` | `pending` | 317–320 | None | None |
-| `red-book::8::8.1` | `pending` | 288 | 291 | None |
-| `red-book::8::8.4` | `pending` | 288 | 292–293 | None |
-| `red-book::8::8.9` | `pending` | 288 | 295–296 | None |
+| `red-book::8::theory` | `knowledge-only` | 287 | None | `small-cases-recurrence-and-structural-simplification`, `constraint-reframing-and-latent-state` |
+| `red-book::10::theory` | `interview-guidance` | 317 | None | None |
+| `red-book::10.2::theory` | `interview-guidance` | 317–318 | None | None |
+| `red-book::8::8.1` | `canonical-problem` | 288 | 291 | `clock-hand-angles-and-relative-motion`, `logical-deduction-constraint-propagation-and-case-elimination`, `small-cases-recurrence-and-structural-simplification` |
+| `red-book::8::8.4` | `canonical-problem` | 288 | 292–293 | `shortest-path-on-cube-surface`, `constraint-reframing-and-latent-state`, `logical-deduction-constraint-propagation-and-case-elimination` |
+| `red-book::8::8.9` | `canonical-problem` | 288 | 295–296 | `alternating-geometric-resource-allocation`, `positive-series-convergence`, `small-cases-recurrence-and-structural-simplification` |
 | `red-book::8::8.11` | `pending` | 288–289 | 297–298 | None |
 | `red-book::8::8.15` | `pending` | 289 | 300–301 | None |
 | `red-book::8::8.16` | `pending` | 289 | 301–302 | None |
@@ -563,7 +563,7 @@
 ## 03. Calculus & Differential Equations
 
 - Curriculum: 0 published / 0 planned
-- Problems: 13
+- Problems: 14
 - Green Book sections: `3.1`, `3.1.1`, `3.1.2`, `3.1.3`, `3.2`, `3.2.1`, `3.2.2`, `3.2.3`, `3.3`, `3.4`, `3.4.1`, `3.4.2`, `3.4.3`, `3.5`, `3.5.1`, `3.5.2`, `3.5.3`, `3.5.4`
 - Red Book sections: `6.1`, `6.2.1`, `6.2.2`, `6.3.1`, `6.3.2`, `10`, `10.2`
 - 150 Questions sections: `1`, `2.1`, `3.1`
@@ -577,14 +577,14 @@
 ### Coverage records
 
 - Green Book: `canonical-problem`: 3, `knowledge-only`: 1, `merged-duplicate`: 1, `pending`: 14
-- Red Book: `canonical-problem`: 6, `knowledge-only`: 1, `merged-duplicate`: 3, `pending`: 7
+- Red Book: `canonical-problem`: 7, `interview-guidance`: 2, `knowledge-only`: 1, `merged-duplicate`: 3, `pending`: 5
 - 150 Questions: `canonical-problem`: 3, `merged-duplicate`: 3, `pending`: 3
 
 
 ### 03.01. Limits & Derivatives
 
 - Curriculum: 7 published / 0 planned
-- Problems: 13
+- Problems: 14
 - Green Book sections: `3.1`, `3.1.1`, `3.1.2`, `3.1.3`
 - Red Book sections: `6.2.2`, `6.3.2`
 - 150 Questions sections: None
@@ -605,7 +605,7 @@
 #### Coverage records
 
 - Green Book: `canonical-problem`: 3, `knowledge-only`: 1, `merged-duplicate`: 1
-- Red Book: `canonical-problem`: 6, `knowledge-only`: 1, `merged-duplicate`: 3, `pending`: 2
+- Red Book: `canonical-problem`: 7, `knowledge-only`: 1, `merged-duplicate`: 3, `pending`: 2
 - 150 Questions: `canonical-problem`: 3, `merged-duplicate`: 3
 
 #### Master queue records
@@ -794,7 +794,7 @@
 ### Coverage records
 
 - Green Book: `canonical-problem`: 3, `knowledge-only`: 15, `pending`: 5, `variant`: 1
-- Red Book: `canonical-problem`: 2, `knowledge-only`: 1, `pending`: 4, `variant`: 1
+- Red Book: `canonical-problem`: 2, `interview-guidance`: 2, `knowledge-only`: 1, `pending`: 2, `variant`: 1
 - 150 Questions: `canonical-problem`: 7, `knowledge-only`: 1, `merged-duplicate`: 1, `pending`: 3, `variant`: 2
 
 
@@ -998,7 +998,7 @@
 ### Coverage records
 
 - Green Book: `canonical-problem`: 23, `knowledge-only`: 5, `pending`: 37, `variant`: 1
-- Red Book: `canonical-problem`: 10, `knowledge-only`: 8, `merged-duplicate`: 7, `pending`: 5, `variant`: 2
+- Red Book: `canonical-problem`: 10, `interview-guidance`: 2, `knowledge-only`: 8, `merged-duplicate`: 7, `pending`: 3, `variant`: 2
 - 150 Questions: `canonical-problem`: 8, `knowledge-only`: 4, `merged-duplicate`: 2, `pending`: 3
 
 
@@ -1323,7 +1323,7 @@
 ### Coverage records
 
 - Green Book: `canonical-problem`: 4, `knowledge-only`: 1, `pending`: 9
-- Red Book: `canonical-problem`: 1, `merged-duplicate`: 2, `pending`: 4
+- Red Book: `canonical-problem`: 1, `interview-guidance`: 2, `merged-duplicate`: 2, `pending`: 2
 - 150 Questions: `pending`: 3
 
 
@@ -1538,7 +1538,7 @@
 ### Coverage records
 
 - Green Book: `pending`: 16
-- Red Book: `pending`: 17
+- Red Book: `interview-guidance`: 2, `pending`: 15
 - 150 Questions: `canonical-problem`: 1, `pending`: 3
 
 
@@ -1862,7 +1862,7 @@
 ### Coverage records
 
 - Green Book: `pending`: 6
-- Red Book: `interview-guidance`: 13, `pending`: 3
+- Red Book: `interview-guidance`: 15, `pending`: 1
 - 150 Questions: `pending`: 3
 
 
@@ -2035,7 +2035,7 @@
 ### Coverage records
 
 - Green Book: `pending`: 3
-- Red Book: `pending`: 3
+- Red Book: `interview-guidance`: 2, `pending`: 1
 - 150 Questions: `pending`: 3
 
 
@@ -2185,7 +2185,7 @@
 ### Coverage records
 
 - Green Book: `canonical-problem`: 1, `pending`: 21
-- Red Book: `pending`: 4
+- Red Book: `interview-guidance`: 2, `pending`: 2
 - 150 Questions: `canonical-problem`: 2, `pending`: 3
 
 

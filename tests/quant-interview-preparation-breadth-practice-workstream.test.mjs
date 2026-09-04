@@ -80,7 +80,7 @@ test('014 Knowledge remains classified after later workstreams', async () => {
     markdownSlugs('src/content/problems'),
     markdownSlugs('src/content/knowledge'),
   ]);
-  assert.equal(problems.size, 93);
+  assert.equal(problems.size, 96);
   assert.equal(knowledge.has(knowledgeSlug), true);
   const classifiedKnowledge = [];
   for (const slug of knowledge) {

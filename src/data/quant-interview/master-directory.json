@@ -5474,7 +5474,7 @@
       "questionPages": [
         {
           "startPage": 287,
-          "endPage": 309
+          "endPage": 287
         }
       ],
       "solutionPages": [],
@@ -5484,11 +5484,14 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|02|0041|red-book::8::theory",
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification",
+        "constraint-reframing-and-latent-state"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-foundations-021",
+      "resolutionNote": "The chapter methodology introduction resolves to existing source-neutral simplification and constraint-reframing Knowledge without claiming its questions are covered."
     },
     {
       "key": "red-book::10::theory",
@@ -5525,11 +5528,11 @@
         "algorithmic-complexity"
       ],
       "sortKey": "02.02|02|0045|red-book::10::theory",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-foundations-021",
+      "resolutionNote": "The chapter introduction is an internal revision-list framing record and creates no public target or completion claim for its referenced questions."
     },
     {
       "key": "red-book::10.2::theory",
@@ -5540,7 +5543,7 @@
       "questionPages": [
         {
           "startPage": 317,
-          "endPage": 320
+          "endPage": 318
         }
       ],
       "solutionPages": [],
@@ -5566,11 +5569,11 @@
         "algorithmic-complexity"
       ],
       "sortKey": "02.02|02|0046|red-book::10.2::theory",
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
       "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-foundations-021",
+      "resolutionNote": "The repeated-question index remains internal guidance; every referenced source item retains its independent coverage state."
     },
     {
       "key": "red-book::8::8.1",
@@ -5596,11 +5599,16 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|02|1202|red-book::8::8.1",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "clock-hand-angles-and-relative-motion"
+      ],
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination",
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-foundations-021",
+      "resolutionNote": "The clock prompt becomes a canonical continuous relative-motion and angular-normalization Problem."
     },
     {
       "key": "red-book::8::8.4",
@@ -5626,11 +5634,16 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|02|1205|red-book::8::8.4",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "shortest-path-on-cube-surface"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-foundations-021",
+      "resolutionNote": "The surface-travel prompt becomes a canonical cube-unfolding Problem with a global minimality argument."
     },
     {
       "key": "red-book::8::8.9",
@@ -5653,14 +5666,21 @@
       "primaryTopic": "logical-deduction",
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning",
-        "logical-deduction"
+        "logical-deduction",
+        "calculus-differential-equations",
+        "limits-derivatives"
       ],
       "sortKey": "02.02|02|1210|red-book::8::8.9",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "alternating-geometric-resource-allocation"
+      ],
+      "canonicalKnowledge": [
+        "positive-series-convergence",
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-foundations-021",
+      "resolutionNote": "The alternating-share prompt becomes a canonical finite-and-infinite geometric-allocation Problem with an item-level limits refinement."
     },
     {
       "key": "red-book::8::8.11",

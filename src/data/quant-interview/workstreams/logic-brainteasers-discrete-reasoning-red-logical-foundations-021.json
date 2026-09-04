@@ -1,0 +1,43 @@
+{
+  "id": "logic-brainteasers-discrete-reasoning-red-logical-foundations-021",
+  "canonicalTopics": [
+    "logic-brainteasers-discrete-reasoning",
+    "logical-deduction"
+  ],
+  "status": "active",
+  "masterItemKeys": [
+    "red-book::8::theory",
+    "red-book::10::theory",
+    "red-book::10.2::theory",
+    "red-book::8::8.1",
+    "red-book::8::8.4",
+    "red-book::8::8.9"
+  ],
+  "sourceScopes": [
+    {
+      "source": "red-book",
+      "sourceSections": [
+        "8",
+        "10",
+        "10.2"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 287,
+          "endPage": 296
+        },
+        {
+          "startPage": 317,
+          "endPage": 318
+        }
+      ],
+      "reviewOutcome": "red-logical-foundations-publication-and-index-disposition",
+      "reviewNote": "Six ordered records yield three canonical Problems, one existing-Knowledge introduction, and two non-public revision-index dispositions."
+    }
+  ],
+  "publicDelta": {
+    "problems": 3,
+    "knowledge": 0
+  },
+  "knowledgeSlugs": []
+}

@@ -68,6 +68,10 @@ const overrides = {
 };
 const sourceMapHash = '04f6bc640094ae774acfe5fe13b764a0a4bd155f18e1786a5b744f33cc9aceed';
 const pageProjectionHash = '2275e9e3414f249dc39bcef52bbaf202ab8d43445e61845f63a94724059eeb3e';
+const post019PageRepairs = [
+  ['red-book::8::theory', [{ startPage: 287, endPage: 287 }], [{ startPage: 287, endPage: 309 }]],
+  ['red-book::10.2::theory', [{ startPage: 317, endPage: 318 }], [{ startPage: 317, endPage: 320 }]],
+];
 
 function coverageKey(source, row) {
   return `${source}::${row.sourceSection}::${row.sourceItem ?? ''}`;
@@ -92,6 +96,13 @@ function assertProtectedPageProjection(directory) {
     questionPages,
     solutionPages,
   }));
+  const byKey = new Map(projection.map((row) => [row.key, row]));
+  for (const [key, currentPages, historicalPages] of post019PageRepairs) {
+    const row = byKey.get(key);
+    assert.ok(row, key);
+    assert.deepEqual(row.questionPages, currentPages, `${key} approved 021 repair`);
+    row.questionPages = historicalPages;
+  }
   assert.equal(projection.length, 750);
   assert.equal(sha256(JSON.stringify(projection)), pageProjectionHash);
 }

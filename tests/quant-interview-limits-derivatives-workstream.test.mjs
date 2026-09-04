@@ -13,7 +13,7 @@ const manifest013Path = 'src/data/quant-interview/workstreams/interview-strategy
 const terminalStates = new Set(['canonical-problem', 'merged-duplicate', 'variant', 'knowledge-only']);
 const laterTerminalKeys = {
   'green-book': ['2.2.infinite-sequence::'],
-  'red-book': [],
+  'red-book': ['8::8.9'],
   '150-most-frequently-asked': [],
 };
 const keyOf = (entry) => `${entry.sourceSection}::${entry.sourceItem ?? ''}`;

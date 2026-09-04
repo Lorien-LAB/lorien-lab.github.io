@@ -14,6 +14,17 @@ const workstream020PublicPages = [
   'src/content/problems/logic/private-average-with-canceling-mask.md',
 ];
 const workstream020SourceLeak = /\b(?:Green Book|Red Book)\b|A Practical Guide|150 Most Frequently Asked|section 2\.3|PDF page|source(?:\s+(?:item|section|page)|Item|Section|Chapter|Problem|Reference|Url)|questionPages|solutionPages/i;
+const workstream021ProblemTopics = new Map([
+  ['clock-hand-angles-and-relative-motion', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
+  ['shortest-path-on-cube-surface', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
+  ['alternating-geometric-resource-allocation', ['logic-brainteasers-discrete-reasoning', 'logical-deduction', 'calculus-differential-equations', 'limits-derivatives']],
+]);
+const workstream021ProblemIds = new Map([
+  ['clock-hand-angles-and-relative-motion', 'logic-logical-deduction-012'],
+  ['shortest-path-on-cube-surface', 'logic-logical-deduction-013'],
+  ['alternating-geometric-resource-allocation', 'logic-logical-deduction-014'],
+]);
+const workstream021SourceLeak = /\b(?:source|book|section|page|provenance)\b/i;
 
 const currentProblemSlugs = [
   'put-quotes-zero-cost-static-portfolio',
@@ -109,6 +120,9 @@ const currentProblemSlugs = [
   'last-ball-color-by-parity-invariant',
   'four-switches-one-room-entry',
   'private-average-with-canceling-mask',
+  'clock-hand-angles-and-relative-motion',
+  'shortest-path-on-cube-surface',
+  'alternating-geometric-resource-allocation',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -219,16 +233,48 @@ function assertSourceNeutralPublicBody(body, file) {
   assert.doesNotMatch(body, workstream020SourceLeak, `${file} public body exposes source provenance`);
 }
 
-test('source-neutral regression discovers exactly the current 93 Problem and 59 Knowledge contracts', async () => {
+test('source-neutral regression discovers exactly the current 96 Problem and 59 Knowledge contracts', async () => {
   const actualProblemSlugs = await classifiedMarkdownSlugs('src/content/problems');
   const actualKnowledgeSlugs = await classifiedMarkdownSlugs('src/content/knowledge');
   const expectedProblemSlugs = [...currentProblemSlugs].sort();
   const expectedKnowledgeSlugs = [...expectedKnowledgeTopics.keys()].sort();
 
-  assert.equal(actualProblemSlugs.length, 93);
+  assert.equal(actualProblemSlugs.length, 96);
   assert.equal(actualKnowledgeSlugs.length, 59);
   assert.deepEqual(actualProblemSlugs, expectedProblemSlugs);
   assert.deepEqual(actualKnowledgeSlugs, expectedKnowledgeSlugs);
+});
+
+test('Workstream 021 registers exact topics and unique Problem ids 012 through 014', async () => {
+  const observedIds = [];
+  for (const [slug, expectedTopics] of workstream021ProblemTopics) {
+    const file = await findProblem(slug);
+    const text = await readFile(file, 'utf8');
+    assert.deepEqual(parseInlineArray(text, 'quantInterviewTopics'), expectedTopics, `${slug} topics`);
+    const problemId = text.match(/^problemId:\s*(.+)$/m)?.[1]?.trim();
+    assert.equal(problemId, workstream021ProblemIds.get(slug), `${slug} problemId`);
+    observedIds.push(problemId);
+  }
+  assert.equal(new Set(observedIds).size, 3, 'Workstream 021 Problem ids must be unique');
+});
+
+test('Workstream 021 keeps exactly its three new Problem bodies source-neutral', async () => {
+  const pages = await Promise.all([...workstream021ProblemTopics.keys()].map(async (slug) => {
+    const file = await findProblem(slug);
+    return [file, markdownBody(await readFile(file, 'utf8'), file)];
+  }));
+  assert.equal(pages.length, 3);
+  for (const [file, body] of pages) {
+    assert.doesNotMatch(body, workstream021SourceLeak, `${file} public body exposes source provenance`);
+  }
+
+  for (const leak of ['source', 'book', 'section', 'page', 'provenance']) {
+    assert.throws(
+      () => assert.doesNotMatch(`${pages[0][1]}\n\n${leak}`, workstream021SourceLeak),
+      { name: 'AssertionError' },
+      `${leak} mutation must be rejected`,
+    );
+  }
 });
 
 test('Workstream 020 keeps exactly its eight new public page bodies source-neutral', async () => {

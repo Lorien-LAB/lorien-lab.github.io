@@ -331,8 +331,22 @@ test('handoff current topic and remaining queue follow the latest workstream sta
                   } else {
                     assert.match(handoff, /^## Completed cross-book workstream 20$/m);
                     assert.doesNotMatch(current, /Workstream 020 is active/i);
+                    const workstream021 = JSON.parse(await readFile(
+                      'src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-red-logical-foundations-021.json',
+                      'utf8',
+                    ));
+                    assert.match(workstream021.status, /^(?:active|complete)$/);
+                    if (workstream021.status === 'active') {
+                      assert.match(current, /Logic, Brainteasers.*Logical Deduction/is);
+                      assert.match(current, /Workstream 021 is active/i);
+                      assert.match(handoff, /^## Active cross-book workstream 21$/m);
+                      assert.doesNotMatch(handoff, /^## Completed cross-book workstream 21$/m);
+                    } else {
+                      assert.match(current, /Workstream 021 is complete/i);
+                      assert.match(handoff, /^## Completed cross-book workstream 21$/m);
+                    }
+                    assert.match(handoff, /Workstream 022 is not active or authorized/i);
                   }
-                  assert.match(handoff, /Workstream 021 is not active or authorized/i);
                 }
               }
             }

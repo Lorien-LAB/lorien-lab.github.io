@@ -1,6 +1,6 @@
 # Quant Interview — Current Handoff
 
-Updated: 2026-08-30
+Updated: 2026-09-05
 
 ## Current architecture state
 
@@ -935,6 +935,58 @@ All public Knowledge and Problems remain source-neutral. The independent-padlock
 
 Workstream 020 alone is bounded to the exact eight Green Book 2.3 records above. It does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Green Book, any source book, or adjacent topics. Workstream 021 is not active or authorized.
 
+## Active cross-book workstream 21
+
+`logic-brainteasers-discrete-reasoning-red-logical-foundations-021`
+
+Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**, bounded to these exact six Red records in master order:
+
+- `red-book::8::theory`
+- `red-book::10::theory`
+- `red-book::10.2::theory`
+- `red-book::8::8.1`
+- `red-book::8::8.4`
+- `red-book::8::8.9`
+
+### Active status
+
+- The manifest is `active` and intentionally contains no `preClosureActiveGate`, `verification`, `finalTreeGate`, workflow, or other completion-evidence field.
+- Completion evidence remains absent until one immutable active commit passes the ordered Windows, WSL, and GitHub CI gates.
+- Workstream 022 is not active or authorized.
+
+### Canonical Problems
+
+- **Clock Hand Angles and Relative Motion** — `clock-hand-angles-and-relative-motion`.
+- **Shortest Path on a Cube Surface** — `shortest-path-on-cube-surface`.
+- **Alternating Geometric Resource Allocation** — `alternating-geometric-resource-allocation`.
+
+No Knowledge node is added. Workstream 021 contributes exactly **+3 Problems / +0 Knowledge**, producing the current **96 Problems / 59 Knowledge** source-neutral corpus.
+
+### Exact six dispositions
+
+- `red-book::8::theory` is `knowledge-only` and resolves to `small-cases-recurrence-and-structural-simplification` plus `constraint-reframing-and-latent-state`. The chapter methodology introduction resolves to existing source-neutral simplification and constraint-reframing Knowledge without claiming its questions are covered.
+- `red-book::10::theory` is target-free `interview-guidance`. The chapter introduction is an internal revision-list framing record and creates no public target or completion claim for its referenced questions.
+- `red-book::10.2::theory` is target-free `interview-guidance`. The repeated-question index remains internal guidance; every referenced source item retains its independent coverage state.
+- `red-book::8::8.1` is `canonical-problem` and resolves to `clock-hand-angles-and-relative-motion`, with `logical-deduction-constraint-propagation-and-case-elimination` and `small-cases-recurrence-and-structural-simplification` as Knowledge targets. The clock prompt becomes a canonical continuous relative-motion and angular-normalization Problem.
+- `red-book::8::8.4` is `canonical-problem` and resolves to `shortest-path-on-cube-surface`, with `constraint-reframing-and-latent-state` and `logical-deduction-constraint-propagation-and-case-elimination` as Knowledge targets. The surface-travel prompt becomes a canonical cube-unfolding Problem with a global minimality argument.
+- `red-book::8::8.9` is `canonical-problem` and resolves to `alternating-geometric-resource-allocation`, with `positive-series-convergence` and `small-cases-recurrence-and-structural-simplification` as Knowledge targets. The alternating-share prompt becomes a canonical finite-and-infinite geometric-allocation Problem with an item-level limits refinement.
+
+The exact state split is **3 `canonical-problem` / 1 `knowledge-only` / 2 `interview-guidance`**. All six owned rows are terminal, yielding exactly **262 terminal / 488 pending** master-directory records. The first pending master record after the active 021 scope is `red-book::8::8.11`.
+
+### Topic refinement and page repairs
+
+- The clock and cube rows remain exactly under `logical-deduction` at coverage level.
+- The allocation row alone also belongs to `limits-derivatives`. Reason: Item-level review identifies finite geometric partial sums and a zero-remainder limit, so this Logical Deduction item also belongs to Limits & Derivatives.
+- `red-book::8::theory` question pages are repaired from 287–309 to 287 only.
+- `red-book::10.2::theory` question pages are repaired from 317–320 to 317–318.
+- Every solution-page array and the other 748 page rows remain unchanged. The protected source-topic map is unchanged. The repaired full ordered 750-row `{key, questionPages, solutionPages}` projection is SHA-256 `92470e19ba2b116f2d98142465a2df38cb7b13f0f908d646cc64360d1ba16eb0`; reversing exactly the two repairs restores historical SHA-256 `2275e9e3414f249dc39bcef52bbaf202ab8d43445e61845f63a94724059eeb3e`.
+
+### Source-neutrality and protocol boundaries
+
+All three public Problems are independently authored and source-neutral: their frontmatter, prose, routes, titles, and Problem ids expose no book, section, page, source, or provenance data. The clock page assumes ideal continuous hand motion and normalizes modular angular separation; the cube page distinguishes surface, edge-only, and interior paths and proves global surface minimality; the allocation page derives finite conservation before taking the zero-remainder limit and treats the two-thirds/one-third split only as the equal-half specialization.
+
+The chapter introduction creates only existing-Knowledge linkage. The chapter and repeated-question indexes are internal framing records, create no public target, and do not terminalize any referenced question; all ten `red-book::10.2::*` question rows retain their pre-021 pending state. Workstream 021 alone is bounded to the exact six records above and does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Red Book, any source book, or adjacent topics.
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -955,17 +1007,19 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**No bounded topic is active. Workstream 020 is complete.**
+**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
-A later workstream requires its own approved design and evidence audit; workstream 021 is not active or authorized by this closure.
+Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.
 
 ## Master directory ingestion state
 
-**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+**Logic, Brainteasers & Discrete Reasoning → Logical Deduction is active in the combined master directory.**
 
-First pending master record: `red-book::8::theory`
+Active workstream: `logic-brainteasers-discrete-reasoning-red-logical-foundations-021`
 
-Workstream 021 is not active or authorized.
+First pending master record after the active 021 scope: `red-book::8::8.11`
+
+Workstream 022 is not active or authorized.
 
 ## Parallel workstream coordination
 

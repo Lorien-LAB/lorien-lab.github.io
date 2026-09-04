@@ -605,9 +605,13 @@
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning"
       ],
-      "state": "pending",
+      "state": "knowledge-only",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [
+        "small-cases-recurrence-and-structural-simplification",
+        "constraint-reframing-and-latent-state"
+      ],
+      "resolutionNote": "The chapter methodology introduction resolves to existing source-neutral simplification and constraint-reframing Knowledge without claiming its questions are covered."
     },
     {
       "sourceSection": "8.1",
@@ -1119,9 +1123,10 @@
         "monte-carlo-numerical-methods",
         "algorithms-data-structures-cpp"
       ],
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [],
+      "resolutionNote": "The chapter introduction is an internal revision-list framing record and creates no public target or completion claim for its referenced questions."
     },
     {
       "sourceSection": "10.1",
@@ -1145,9 +1150,10 @@
         "monte-carlo-numerical-methods",
         "algorithms-data-structures-cpp"
       ],
-      "state": "pending",
+      "state": "interview-guidance",
       "canonicalProblems": [],
-      "canonicalKnowledge": []
+      "canonicalKnowledge": [],
+      "resolutionNote": "The repeated-question index remains internal guidance; every referenced source item retains its independent coverage state."
     },
     {
       "sourceSection": "bibliography",
@@ -1893,6 +1899,56 @@
         "fermi-estimation-assumption-decomposition"
       ],
       "resolutionNote": "The specialized-provider estimate resolves to source-neutral Fermi-estimation Knowledge without publishing a dated city total."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.1",
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "clock-hand-angles-and-relative-motion"
+      ],
+      "canonicalKnowledge": [
+        "logical-deduction-constraint-propagation-and-case-elimination",
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "resolutionNote": "The clock prompt becomes a canonical continuous relative-motion and angular-normalization Problem."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.4",
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "shortest-path-on-cube-surface"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state",
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ],
+      "resolutionNote": "The surface-travel prompt becomes a canonical cube-unfolding Problem with a global minimality argument."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.9",
+      "canonicalTopics": [
+        "logical-deduction",
+        "limits-derivatives"
+      ],
+      "topicOverrideReason": "Item-level review identifies finite geometric partial sums and a zero-remainder limit, so this Logical Deduction item also belongs to Limits & Derivatives.",
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "alternating-geometric-resource-allocation"
+      ],
+      "canonicalKnowledge": [
+        "positive-series-convergence",
+        "small-cases-recurrence-and-structural-simplification"
+      ],
+      "resolutionNote": "The alternating-share prompt becomes a canonical finite-and-infinite geometric-allocation Problem with an item-level limits refinement."
     }
   ]
 }
