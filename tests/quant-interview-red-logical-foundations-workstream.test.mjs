@@ -17,10 +17,9 @@ const keys = [
   'red-book::8::8.4',
   'red-book::8::8.9',
 ];
-const activeManifest = {
+const expectedManifestScope = {
   id,
   canonicalTopics: ['logic-brainteasers-discrete-reasoning', 'logical-deduction'],
-  status: 'active',
   masterItemKeys: keys,
   sourceScopes: [{
     source: 'red-book',
@@ -88,11 +87,16 @@ function assertProjectionHash(projection, expectedHash) {
   assert.equal(sha256(JSON.stringify(projection)), expectedHash);
 }
 
-test('021 active manifest is exact and contains no workflow or evidence fields', async () => {
+test('021 manifest preserves its exact scope and public delta across the lifecycle', async () => {
   const manifest = await readJson(manifestPath);
-  assert.deepEqual(manifest, activeManifest);
-  for (const field of ['workflow', 'preClosureActiveGate', 'verification', 'finalTreeGate']) {
-    assert.equal(field in manifest, false, `${field} must be absent while active`);
+  assert.match(manifest.status, /^(?:active|complete)$/);
+  const phaseInvariant = structuredClone(manifest);
+  for (const field of ['preClosureActiveGate', 'verification', 'finalTreeGate']) {
+    delete phaseInvariant[field];
+  }
+  assert.deepEqual(phaseInvariant, { ...expectedManifestScope, status: manifest.status });
+  if (manifest.status === 'active') {
+    assert.deepEqual(manifest, { ...expectedManifestScope, status: 'active' });
   }
 });
 

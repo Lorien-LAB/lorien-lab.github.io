@@ -12,9 +12,9 @@ const commands = [
   'npm run check',
   'npm run build',
 ];
-const activeCurrent = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
-
-Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
+const activeSha = '73720d3a743e0312d2ceeeb63e5bb918c2df242a';
+const runId = 33916517774;
+const ciUrl = 'https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33916517774';
 const completeCurrent = `**No bounded topic is active. Workstream 021 is complete.**
 
 A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.`;
@@ -58,10 +58,6 @@ function assertLifecycleEvidence(manifest) {
     return;
   }
 
-  const activeSha = manifest.preClosureActiveGate?.commit;
-  const runId = manifest.verification?.runId;
-  assert.match(activeSha ?? '', /^[0-9a-f]{40}$/);
-  assert.ok(Number.isInteger(runId) && runId > 0, 'CI run id must be a positive integer');
   assert.deepEqual(manifest.preClosureActiveGate, {
     status: 'active',
     commit: activeSha,
@@ -84,6 +80,12 @@ function assertLifecycleEvidence(manifest) {
   });
 }
 
+function assertClosureIdentity(closure, manifestId) {
+  for (const fact of [manifestId, activeSha, String(runId), ciUrl]) {
+    assert.ok(closure.includes(fact), `missing completion fact ${fact}`);
+  }
+}
+
 function assertRepeatedIndexState(directory) {
   const observed = directory.items
     .filter((row) => row.source === 'red-book' && row.sourceSection === '10.2' && row.kind === 'question')
@@ -91,14 +93,13 @@ function assertRepeatedIndexState(directory) {
   assert.deepEqual(observed, repeatedIndexSnapshot);
 }
 
-test('021 lifecycle is evidence-free while active and exact when complete', () => {
+test('021 lifecycle is evidence-free while active and pins exact immutable evidence when complete', () => {
   assert.doesNotThrow(() => assertLifecycleEvidence({ status: 'active' }));
   for (const field of ['preClosureActiveGate', 'verification', 'finalTreeGate', 'workflow']) {
     const mutated = { status: 'active', [field]: {} };
     assert.throws(() => assertLifecycleEvidence(mutated), { name: 'AssertionError' }, field);
   }
 
-  const activeSha = 'a'.repeat(40);
   const complete = {
     status: 'complete',
     preClosureActiveGate: {
@@ -110,7 +111,7 @@ test('021 lifecycle is evidence-free while active and exact when complete', () =
     },
     verification: {
       commit: activeSha,
-      runId: 1,
+      runId,
       commands,
       conclusion: 'success',
       temporaryArtifacts: [workflow],
@@ -124,51 +125,45 @@ test('021 lifecycle is evidence-free while active and exact when complete', () =
   };
   assert.doesNotThrow(() => assertLifecycleEvidence(complete));
 
-  const mismatchedSha = structuredClone(complete);
-  mismatchedSha.verification.commit = 'b'.repeat(40);
-  assert.throws(() => assertLifecycleEvidence(mismatchedSha), { name: 'AssertionError' });
-  const invalidRun = structuredClone(complete);
-  invalidRun.verification.runId = 0;
-  assert.throws(() => assertLifecycleEvidence(invalidRun), { name: 'AssertionError' });
+  const coordinatedFake = structuredClone(complete);
+  const fakeSha = 'a'.repeat(40);
+  const fakeRunId = 1;
+  const fakeUrl = 'https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/1';
+  coordinatedFake.preClosureActiveGate.commit = fakeSha;
+  coordinatedFake.verification.commit = fakeSha;
+  coordinatedFake.verification.runId = fakeRunId;
+  assert.throws(() => assertLifecycleEvidence(coordinatedFake), { name: 'AssertionError' });
+  const fakeClosure = `${id}\n${fakeSha}\n${fakeRunId}\n${fakeUrl}`;
+  assert.throws(() => assertClosureIdentity(fakeClosure, id), { name: 'AssertionError' });
+
   const unexpectedEvidence = structuredClone(complete);
   unexpectedEvidence.verification.unexpected = true;
   assert.throws(() => assertLifecycleEvidence(unexpectedEvidence), { name: 'AssertionError' });
 });
 
-test('021 HANDOFF is exact for the active phase and workflow-free completion contract', async () => {
-  const [manifest, handoff, workstreamFiles] = await Promise.all([
+test('021 current manifest is complete with exact evidence and no temporary workflow or 022', async () => {
+  const [manifest, workstreamFiles] = await Promise.all([
     readJson(manifestPath),
-    readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
     readdir('src/data/quant-interview/workstreams'),
   ]);
+  assert.equal(manifest.status, 'complete');
   assertLifecycleEvidence(manifest);
-  assert.equal(workstreamFiles.some((file) => /-022\.json$/.test(file)), false);
-  assert.match(handoff, /Workstream 022 is not active or authorized\./);
-
-  if (manifest.status === 'active') {
-    assert.equal(currentBlock(handoff), activeCurrent);
-    assert.match(handoff, /^## Active cross-book workstream 21$/m);
-    assert.doesNotMatch(handoff, /^## Completed cross-book workstream 21$/m);
-    assert.match(handoff, /First pending master record after the active 021 scope: `red-book::8::8\.11`/i);
-    return;
-  }
-
   await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
+  assert.equal(workstreamFiles.some((file) => /-022\.json$/.test(file)), false);
+});
+
+test('021 HANDOFF records exact workflow-free completion and no active topic', async () => {
+  const [manifest, handoff] = await Promise.all([
+    readJson(manifestPath),
+    readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
+  ]);
   assert.equal(currentBlock(handoff), completeCurrent);
   assert.equal(section(handoff, 'Master directory ingestion state').trim(), completeMaster);
   assert.doesNotMatch(handoff, /^## Active cross-book workstream 21$/m);
   assert.match(handoff, /^## Completed cross-book workstream 21$/m);
+  assert.match(handoff, /Workstream 022 is not active or authorized\./);
   const closure = section(handoff, 'Completed cross-book workstream 21');
-  const activeSha = manifest.preClosureActiveGate.commit;
-  const runId = manifest.verification.runId;
-  for (const fact of [
-    manifest.id,
-    activeSha,
-    String(runId),
-    `https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/${runId}`,
-  ]) {
-    assert.ok(closure.includes(fact), `missing completion fact ${fact}`);
-  }
+  assertClosureIdentity(closure, manifest.id);
 });
 
 test('021 current repository is exactly 96/59 with 262/488 master state and Red 8.11 next', async () => {

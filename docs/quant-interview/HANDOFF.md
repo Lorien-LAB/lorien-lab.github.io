@@ -933,11 +933,13 @@ The exact state split is **7 `canonical-problem` / 1 `knowledge-only`**. All eig
 
 All public Knowledge and Problems remain source-neutral. The independent-padlock construction guarantees only that the box remains locked during each courier transit; it does not provide authentication, tamper evidence, or general cryptographic security. The canceling-mask average assumes honest, non-colluding participants and private ring channels; it does not address collusion, dishonest inputs, authentication, auditing, endpoint observations, or general secure aggregation.
 
-Workstream 020 alone is bounded to the exact eight Green Book 2.3 records above. It does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Green Book, any source book, or adjacent topics. Workstream 021 is not active or authorized.
+Workstream 020 alone is bounded to the exact eight Green Book 2.3 records above. It does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Green Book, any source book, or adjacent topics. At the time of this closure, Workstream 021 was not active or authorized. That boundary is historical; the completed 021 section below now owns current durable state.
 
-## Active cross-book workstream 21
+## Completed cross-book workstream 21
 
 `logic-brainteasers-discrete-reasoning-red-logical-foundations-021`
+
+Status: **complete**.
 
 Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**, bounded to these exact six Red records in master order:
 
@@ -948,11 +950,17 @@ Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**, bound
 - `red-book::8::8.4`
 - `red-book::8::8.9`
 
-### Active status
+### Active integrated verification
 
-- The manifest is `active` and intentionally contains no `preClosureActiveGate`, `verification`, `finalTreeGate`, workflow, or other completion-evidence field.
-- Completion evidence remains absent until one immutable active commit passes the ordered Windows, WSL, and GitHub CI gates.
-- Workstream 022 is not active or authorized.
+- CI-tested pre-closure active commit: `73720d3a743e0312d2ceeeb63e5bb918c2df242a`.
+- Windows environment: the locked feature worktree used Node `v24.15.0` and npm `11.12.1`, then passed all five ordered gates at that exact active commit: 640/640 tests, both directory checks, 177 Astro-checked files with 0 errors and the two pre-existing hints, and 190 built pages.
+- WSL environment: a fresh detached native-filesystem checkout used Node `v24.15.0`, npm `11.12.1`, and LF-only tracked text, ran `npm ci` with 348 packages added and 349 audited, and reproduced the same five successful gate outputs at that exact active commit. Its literal proof path and registration were removed without pruning the Windows repository.
+- CI environment: GitHub Actions run `33916517774` at `https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33916517774` used Ubuntu and Node 24, ran `npm ci`, and passed every ordered gate with `head_sha` `73720d3a743e0312d2ceeeb63e5bb918c2df242a`.
+- Ordered gates: `npm test`, `npm run knowledge:directory:check`, `npm run master:directory:check`, `npm run check`, then `npm run build`.
+- Workflow-free active-state proof: removal commit `9c774444f691e4cd61a13b79956c79f37dc420ed` passed a native-LF WSL audit, `npm ci`, 640/640 tests, both directory checks, an error-free 177-file Astro check, a 190-page build, and the exact 96/59, 262/488, Red-8.11, six-row 3/1/2, one-override, repaired-page-hash, no-022, no-source-media, and clean-tree invariants. The temporary workflow was absent, the manifest remained active and evidence-free, and the literal proof path and registration were removed without `--force` or pruning.
+- Conclusion: success.
+
+This evidence belongs to the immutable active commit above, not to the later workflow-removal or closure commits. The active SHA is identical in `preClosureActiveGate.commit`, `verification.commit`, and the CI `head_sha`; the final workflow-free tree is separately represented by `finalTreeGate`.
 
 ### Canonical Problems
 
@@ -971,7 +979,7 @@ No Knowledge node is added. Workstream 021 contributes exactly **+3 Problems / +
 - `red-book::8::8.4` is `canonical-problem` and resolves to `shortest-path-on-cube-surface`, with `constraint-reframing-and-latent-state` and `logical-deduction-constraint-propagation-and-case-elimination` as Knowledge targets. The surface-travel prompt becomes a canonical cube-unfolding Problem with a global minimality argument.
 - `red-book::8::8.9` is `canonical-problem` and resolves to `alternating-geometric-resource-allocation`, with `positive-series-convergence` and `small-cases-recurrence-and-structural-simplification` as Knowledge targets. The alternating-share prompt becomes a canonical finite-and-infinite geometric-allocation Problem with an item-level limits refinement.
 
-The exact state split is **3 `canonical-problem` / 1 `knowledge-only` / 2 `interview-guidance`**. All six owned rows are terminal, yielding exactly **262 terminal / 488 pending** master-directory records. The first pending master record after the active 021 scope is `red-book::8::8.11`.
+The exact state split is **3 `canonical-problem` / 1 `knowledge-only` / 2 `interview-guidance`**. All six owned rows are terminal, yielding exactly **262 terminal / 488 pending** master-directory records. The first pending master record after the completed 021 scope is `red-book::8::8.11`.
 
 ### Topic refinement and page repairs
 
@@ -985,7 +993,7 @@ The exact state split is **3 `canonical-problem` / 1 `knowledge-only` / 2 `inter
 
 All three public Problems are independently authored and source-neutral: their frontmatter, prose, routes, titles, and Problem ids expose no book, section, page, source, or provenance data. The clock page assumes ideal continuous hand motion and normalizes modular angular separation; the cube page distinguishes surface, edge-only, and interior paths and proves global surface minimality; the allocation page derives finite conservation before taking the zero-remainder limit and treats the two-thirds/one-third split only as the equal-half specialization.
 
-The chapter introduction creates only existing-Knowledge linkage. The chapter and repeated-question indexes are internal framing records, create no public target, and do not terminalize any referenced question; all ten `red-book::10.2::*` question rows retain their pre-021 pending state. Workstream 021 alone is bounded to the exact six records above and does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Red Book, any source book, or adjacent topics.
+The chapter introduction creates only existing-Knowledge linkage. The chapter and repeated-question indexes are internal framing records, create no public target, and do not terminalize any referenced question; all ten `red-book::10.2::*` question rows retain their pre-021 pending state. Workstream 021 alone is bounded to the exact six records above and does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Red Book, any source book, or adjacent topics. Workstream 022 is not active or authorized by this closure.
 
 ## Next action
 
@@ -1007,17 +1015,15 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
+**No bounded topic is active. Workstream 021 is complete.**
 
-Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.
+A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.
 
 ## Master directory ingestion state
 
-**Logic, Brainteasers & Discrete Reasoning → Logical Deduction is active in the combined master directory.**
+**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
 
-Active workstream: `logic-brainteasers-discrete-reasoning-red-logical-foundations-021`
-
-First pending master record after the active 021 scope: `red-book::8::8.11`
+First pending master record: `red-book::8::8.11`
 
 Workstream 022 is not active or authorized.
 

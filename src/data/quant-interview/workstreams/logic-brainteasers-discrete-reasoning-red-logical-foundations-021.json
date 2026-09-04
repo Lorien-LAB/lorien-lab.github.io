@@ -4,7 +4,7 @@
     "logic-brainteasers-discrete-reasoning",
     "logical-deduction"
   ],
-  "status": "active",
+  "status": "complete",
   "masterItemKeys": [
     "red-book::8::theory",
     "red-book::10::theory",
@@ -39,5 +39,45 @@
     "problems": 3,
     "knowledge": 0
   },
-  "knowledgeSlugs": []
+  "knowledgeSlugs": [],
+  "preClosureActiveGate": {
+    "status": "active",
+    "commit": "73720d3a743e0312d2ceeeb63e5bb918c2df242a",
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "73720d3a743e0312d2ceeeb63e5bb918c2df242a",
+    "runId": 33916517774,
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifacts": [
+      ".github/workflows/quant-interview-red-logical-foundations-021-temporary.yml"
+    ]
+  },
+  "finalTreeGate": {
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifactsAbsent": true
+  }
 }
