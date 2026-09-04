@@ -70,29 +70,29 @@ It crosses the shared edge inside the rectangle, so folding back turns the segme
 
 ### Global Surface Minimality
 
-We now classify the alternative face strips and apply a straight-line lower bound to each class. Inside any traversed face, replacing a bent portion by its planar chord cannot increase length. Unfolding the successive faces by reflection preserves every remaining segment length, so a path through a fixed strip is at least the Euclidean distance between its developed endpoints.
+We now classify the alternative face strips and apply a straight-line lower bound to each surviving class.
 
-All developed faces lie on the unit square lattice. Put the developed copy of $A$ at $(0,0)$ and write a developed copy of $B$ as $(a,b)$. The lattice offsets with squared length below $5$ are, up to signs and swapping coordinates,
+#### 1. Reduce Repeated Faces
 
-$$
-(0,0),\quad(1,0),\quad(1,1),\quad(2,0).
-$$
+Among all shortest surface paths, choose one that visits the fewest faces. Suppose it visits the same square face more than once. Mark the endpoint of its first visit and the start of its last visit to that face. The same square face is convex, so the straight segment joining those two points stays in the face. Replacing the intervening detour by this chord is no longer and removes at least one face visit. That contradicts the choice of path. Hence some shortest path has a simple, non-repeating strip.
 
-Following the cube labels across each reflected square shows what these short offsets represent: respectively the same vertex, an edge neighbor, or a vertex differing from $A$ in only two cube coordinates. None is the opposite vertex $B$, which must differ in all three coordinates. Therefore every developed image of $B$ satisfies
+The same shortcut applies when the path first enters a face incident to $B$: the straight segment from its entry point to $B$ lies in that face and is no longer than a route that leaves it. We may therefore stop at the first face incident to $B$. Any longer wrap either repeats a face or continues after that first $B$-incident face, so it cannot improve the reduced path.
 
-$$
-a^2+b^2\ge 5.
-$$
+#### 2. Enumerate Simple Face Strips
 
-The face-strip classification is consequently:
+Every cube face is incident to exactly one of the opposite vertices $A$ and $B$. Before the first face incident to $B$, a reduced path can use only three faces incident to $A$. Because faces do not repeat and no single face contains both endpoints, the complete list has two, three, or four faces.
 
-| Face-strip class | Developed endpoint displacement | Straight-line lower bound |
-| --- | --- | --- |
-| Two adjacent endpoint faces | $(1,2)$ or $(2,1)$ | $\sqrt{5}$ |
-| Other simple, non-repeating strip | Integer $(a,b)$ with $a^2+b^2\ge 5$ | At least $\sqrt{5}$ |
-| Repeated-face strip or longer wrap | Shortcut between the first and last visits to a repeated face, producing a simple strip | At least $\sqrt{5}$ |
+Unfold each finite case by reflecting successive faces across their shared edges. Once the first face axis is named $x$ and the next is named $y$, equality or inequality of the terminal axis gives the two distinct 3-face and 4-face cases below. Coordinate permutations, cube reflections, and reversing a strip cover every route within each case.
 
-The repeated-face shortcut is legitimate because its two boundary points lie on the same square face; their straight chord stays on that face and is no longer than the intervening wrap. Thus a global minimizer may be taken to use a simple, non-repeating strip, already covered by the lattice bound. Cube rotations and reflections give symmetric 1-by-2 routes, while longer wraps cannot beat their lower bound. The feasible route attains the bound, so the shortest surface distance is $\sqrt{5}$.
+| Simple strip class | Representative strip | Developed endpoint displacement | Straight-line lower bound |
+| --- | --- | --- | --- |
+| 2 faces | $x=0 \to y=1$ | $(1,2)$ or $(2,1)$ | $\sqrt{5}$ |
+| 3 faces, terminal repeats first axis | $x=0 \to y=0 \to x=1$ | $(1,2)$ or $(2,1)$ | $\sqrt{5}$ |
+| 3 faces, all axes distinct | $x=0 \to y=0 \to z=1$ | $(1,2)$ or $(2,1)$ | $\sqrt{5}$ |
+| 4 faces, terminal repeats first axis | $x=0 \to y=0 \to z=0 \to x=1$ | $(1,2)$ or $(2,1)$ | $\sqrt{5}$ |
+| 4 faces, terminal repeats second axis | $x=0 \to y=0 \to z=0 \to y=1$ | $(1,2)$ or $(2,1)$ | $\sqrt{5}$ |
+
+Unfolding preserves path length. Within each developed strip, a path is at least the straight-line distance between its endpoints, namely $\sqrt{1^2+2^2}=\sqrt{5}$. Every simple case is therefore at least $\sqrt{5}$. The repeated-face reduction transfers that bound to every surface path. The feasible route attains it, so the shortest surface distance is $\sqrt{5}$.
 
 For edge-only travel, each of the three coordinates must change from $0$ to $1$, and one unit edge changes only one coordinate. Three edges are necessary and sufficient, so the distance is $3$.
 

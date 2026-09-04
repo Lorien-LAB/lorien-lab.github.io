@@ -49,6 +49,34 @@ const expectedModelRows = [
   ['Interior', 'Any point inside the cube', '$\\sqrt{3}$'],
 ];
 
+const expectedSimpleStripBounds = [
+  ['2 faces', '$x=0 \\to y=1$', '$(1,2)$ or $(2,1)$', '$\\sqrt{5}$'],
+  [
+    '3 faces, terminal repeats first axis',
+    '$x=0 \\to y=0 \\to x=1$',
+    '$(1,2)$ or $(2,1)$',
+    '$\\sqrt{5}$',
+  ],
+  [
+    '3 faces, all axes distinct',
+    '$x=0 \\to y=0 \\to z=1$',
+    '$(1,2)$ or $(2,1)$',
+    '$\\sqrt{5}$',
+  ],
+  [
+    '4 faces, terminal repeats first axis',
+    '$x=0 \\to y=0 \\to z=0 \\to x=1$',
+    '$(1,2)$ or $(2,1)$',
+    '$\\sqrt{5}$',
+  ],
+  [
+    '4 faces, terminal repeats second axis',
+    '$x=0 \\to y=0 \\to z=0 \\to y=1$',
+    '$(1,2)$ or $(2,1)$',
+    '$\\sqrt{5}$',
+  ],
+];
+
 const parsePage = (page) => {
   const match = page.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/);
   assert.ok(match, 'page must contain YAML front matter followed by Markdown');
@@ -63,15 +91,47 @@ const section = (body, heading) => {
   return nextHeading < 0 ? rest : rest.slice(0, nextHeading);
 };
 
-const parseModelRows = (body) => {
-  const modelSection = section(body, '### Model Separation');
-  const lines = modelSection.split(/\r?\n/).filter((line) => /^\|.*\|$/.test(line.trim()));
-  assert.ok(lines.length >= 5, 'model table must have a header, divider, and three model rows');
+const parseTableRows = (text) => {
+  const lines = text.split(/\r?\n/).filter((line) => /^\|.*\|$/.test(line.trim()));
+  assert.ok(lines.length >= 5, 'table must have a header, divider, and three data rows');
   return lines.slice(2).map((line) =>
     line
       .slice(1, -1)
       .split('|')
       .map((cell) => cell.trim()),
+  );
+};
+
+const parseModelRows = (body) => parseTableRows(section(body, '### Model Separation'));
+
+const assertReducedSimpleStripProof = (global) => {
+  const reductionHeading = '#### 1. Reduce Repeated Faces';
+  const enumerationHeading = '#### 2. Enumerate Simple Face Strips';
+  const reductionIndex = global.indexOf(reductionHeading);
+  const enumerationIndex = global.indexOf(enumerationHeading);
+  assert.ok(
+    reductionIndex >= 0,
+    'global proof must reduce repeated faces before enumerating developed strips',
+  );
+  assert.ok(
+    enumerationIndex > reductionIndex,
+    'repeated-face reduction must precede the finite simple-strip bound',
+  );
+
+  const reduction = global.slice(reductionIndex, enumerationIndex);
+  assert.match(reduction, /same square face[\s\S]*convex/i);
+  assert.match(reduction, /first[\s\S]*last visit[\s\S]*(?:chord|straight segment)/i);
+  assert.match(reduction, /no longer/i);
+
+  const enumeration = global.slice(enumerationIndex);
+  assert.match(enumeration, /first face incident to \$B\$/i);
+  assert.match(enumeration, /only three faces incident to \$A\$/i);
+  const simpleStripRows = parseTableRows(enumeration);
+  assert.deepEqual(simpleStripRows, expectedSimpleStripBounds);
+  assert.doesNotMatch(
+    global,
+    /every developed image of \$B\$/i,
+    'the proof must not extend the simple-strip label bound to repeated-face developments',
   );
 };
 
@@ -87,8 +147,8 @@ const assertGlobalSurfaceProof = (body) => {
   assert.match(global, /simple, non-repeating strip/i);
   assert.match(global, /longer wrap|repeated-face/i);
   assert.match(global, /straight-line lower bound/i);
-  assert.match(global, /a\^2\+b\^2\s*\\ge\s*5/);
   assert.match(global, /at least\s*\$?\\sqrt\{5\}\$?/i);
+  assertReducedSimpleStripProof(global);
 };
 
 test('publishes the cube-surface problem with a feasible route and global proof', async () => {
@@ -134,4 +194,18 @@ test('keeps the independently calculated cube distances ordered by model', () =>
   for (const [width, height] of [[1, 2], [2, 1]]) {
     assert.equal(Math.hypot(width, height), Math.sqrt(5));
   }
+});
+
+test('rejects the prior universal development argument before repeated faces are reduced', () => {
+  const priorFalseProof = `
+All developed faces lie on the unit square lattice. Put A at (0,0) and a developed copy of B at (a,b).
+Following the cube labels across each reflected square shows that every developed image of $B$ satisfies
+$a^2+b^2\\ge 5$.
+The face-strip classification then assigns repeated-face strips the same lower bound.
+`;
+
+  assert.throws(
+    () => assertReducedSimpleStripProof(priorFalseProof),
+    /reduce repeated faces before enumerating developed strips/,
+  );
 });
