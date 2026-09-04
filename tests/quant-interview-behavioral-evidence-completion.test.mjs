@@ -37,6 +37,9 @@ const assertCompletedSectionsInactive = (closure, masterIngestion) => {
   assert.doesNotMatch(masterIngestion, /Workstream 017 is active/i);
   assert.doesNotMatch(masterIngestion, /after the active 017 scope/i);
 };
+const assertNo021RegistrationWhile020Active = (workstreamFiles) => {
+  assert.equal(workstreamFiles.some((file) => /-021\.json$/.test(file)), false);
+};
 
 test('completed 017 sections reject stale active wording', () => {
   assert.throws(
@@ -50,6 +53,20 @@ test('completed 017 sections reject stale active wording', () => {
   assert.throws(
     () => assertCompletedSectionsInactive('', 'after the active 017 scope'),
     { code: 'ERR_ASSERTION' },
+  );
+});
+
+test('active 020 rejects a simultaneous 021 workstream registration', () => {
+  const active020Files = [
+    'logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020.json',
+  ];
+  assert.doesNotThrow(() => assertNo021RegistrationWhile020Active(active020Files));
+  assert.throws(
+    () => assertNo021RegistrationWhile020Active([
+      ...active020Files,
+      'logic-brainteasers-discrete-reasoning-red-logical-foundations-021.json',
+    ]),
+    { name: 'AssertionError' },
   );
 });
 
@@ -167,6 +184,7 @@ test('017 lifecycle is field-safe while active and factually strict when complet
   ));
   assert.match(workstream020.status, /^(?:active|complete)$/);
   if (workstream020.status === 'active') {
+    assert.equal(workstreamFiles.some((file) => /-021\.json$/.test(file)), false);
     assert.match(current, /Logic, Brainteasers.*Logical Deduction/is);
     assert.match(current, /Workstream 020 is active/i);
     assert.match(masterIngestion, /First pending master record after the active 020 scope: `red-book::8::theory`/i);

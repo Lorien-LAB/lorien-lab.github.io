@@ -18,6 +18,21 @@ const tocPaths = {
 const workstream011Path = 'src/data/quant-interview/workstreams/stochastic-processes-random-walks-markov-chains-011.json';
 const workstream012Path = 'src/data/quant-interview/workstreams/calculus-differential-equations-limits-derivatives-012.json';
 const workstream013Path = 'src/data/quant-interview/workstreams/interview-strategy-communication-reasoning-communication-013.json';
+const assertNo021AuthorizationWhile020Active = (handoff) => {
+  assert.match(handoff, /Workstream 021 is not active or authorized/i);
+};
+
+test('active 020 HANDOFF rejects simultaneous 021 authorization', () => {
+  assert.doesNotThrow(() => assertNo021AuthorizationWhile020Active(
+    'Workstream 020 is active. Workstream 021 is not active or authorized.',
+  ));
+  assert.throws(
+    () => assertNo021AuthorizationWhile020Active(
+      'Workstream 020 is active. Workstream 021 is active.',
+    ),
+    { name: 'AssertionError' },
+  );
+});
 
 test('repository memory defines the Topic-first cross-book protocol', async () => {
   for (const file of docs) await access(file);
@@ -328,6 +343,7 @@ test('handoff current topic and remaining queue follow the latest workstream sta
                     assert.match(current, /Workstream 020 is active/i);
                     assert.match(handoff, /^## Active cross-book workstream 20$/m);
                     assert.doesNotMatch(handoff, /^## Completed cross-book workstream 20$/m);
+                    assert.match(handoff, /Workstream 021 is not active or authorized/i);
                   } else {
                     assert.match(handoff, /^## Completed cross-book workstream 20$/m);
                     assert.doesNotMatch(current, /Workstream 020 is active/i);
