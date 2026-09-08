@@ -17,6 +17,5 @@ const zh = publicContentZh.notes[entry.id];
     <p><span class="lang-en">{entry.data.description}</span>{zh?.description && <span class="lang-zh" lang="zh-CN">{zh.description}</span>}</p>
     <TagList tags={entry.data.tags}/>
   </div>
-  <span class="arrow" aria-hidden="true">↗</span>
 </a>
-<style>.note-row{display:grid;grid-template-columns:1fr auto;gap:20px;padding:24px 0;border-top:1px solid var(--border)}.note-row:last-child{border-bottom:1px solid var(--border)}.note-row h3{margin:0 0 7px;font-size:1.12rem;letter-spacing:-.02em}.note-row h3>.lang-en,.note-row h3>.lang-zh,.note-row p>.lang-en,.note-row p>.lang-zh{display:block}.note-row p{margin:0;color:var(--muted);max-width:740px}.arrow{font-size:1.4rem;color:var(--accent-strong);transition:transform .18s ease}.note-row:hover{color:var(--ink)}.note-row:hover .arrow{transform:translate(3px,-3px)}</style>
+<style>.note-row{display:block;padding:24px 0;border-top:1px solid var(--border)}.note-row:last-child{border-bottom:1px solid var(--border)}.note-row h3{margin:0 0 7px;font-size:1.12rem;letter-spacing:-.02em;transition:color .18s ease}.note-row h3>.lang-en,.note-row h3>.lang-zh,.note-row p>.lang-en,.note-row p>.lang-zh{display:block}.note-row p{margin:0;color:var(--muted);max-width:740px}.note-row:hover{color:var(--ink)}.note-row:hover h3{color:var(--accent-strong)}</style>

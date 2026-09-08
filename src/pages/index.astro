@@ -21,7 +21,7 @@ const knowledgeDomainsZh = ['量化金融','数学与统计','机器学习','AI 
 
   <section class="section home-portfolio">
     <div class="container">
-      <SectionHeading label="01 / Research & Projects" labelZh="01 / 研究与项目" title="Research & Projects" titleZh="研究与项目" description="Research questions, strategy frameworks, and research systems presented as one connected portfolio." descriptionZh="将研究问题、策略框架与研究系统放在同一个研究组合中呈现。" href={`${base}research-projects/`} linkLabel="Explore research & projects →" linkLabelZh="查看研究与项目 →"/>
+      <SectionHeading title="Research & Projects" titleZh="研究与项目" description="Research questions, strategy frameworks, and research systems presented as one connected portfolio." descriptionZh="将研究问题、策略框架与研究系统放在同一个研究组合中呈现。" href={`${base}research-projects/`} linkLabel="Explore research & projects →" linkLabelZh="查看研究与项目 →"/>
       <div class="home-portfolio-block">
         <div class="portfolio-subhead"><div class="mono-label"><span class="lang-en">Research Tracks</span><span class="lang-zh" lang="zh-CN">研究方向</span></div><p><span class="lang-en">Mechanisms, data-generating processes, and falsifiable questions.</span><span class="lang-zh" lang="zh-CN">围绕机制、数据生成过程与可证伪问题展开研究。</span></p></div>
         <div class="card-grid">{research.map(entry => <ResearchCard entry={entry}/>)}</div>
@@ -35,7 +35,7 @@ const knowledgeDomainsZh = ['量化金融','数学与统计','机器学习','AI 
 
   <section class="section home-knowledge">
     <div class="container">
-      <SectionHeading label="02 / Knowledge" labelZh="02 / 知识" title="Personal Knowledge Base" titleZh="个人知识库" description="A structured research library connecting concepts, tools, papers, and research topics across quantitative finance and research engineering." descriptionZh="连接量化金融、研究工程中的概念、工具、论文与研究主题的结构化研究资料库。" href={`${base}knowledge/`} linkLabel="Explore Knowledge →" linkLabelZh="探索知识库 →"/>
+      <SectionHeading title="Personal Knowledge Base" titleZh="个人知识库" description="A structured research library connecting concepts, tools, papers, and research topics across quantitative finance and research engineering." descriptionZh="连接量化金融、研究工程中的概念、工具、论文与研究主题的结构化研究资料库。" href={`${base}knowledge/`} linkLabel="Explore Knowledge →" linkLabelZh="探索知识库 →"/>
       <div class="knowledge-home-grid">
         <div class="knowledge-domain-list">{knowledgeDomains.map((domain,i) => <a href={`${base}knowledge/#knowledge-index`}><span>{String(i+1).padStart(2,'0')}</span><strong><span class="lang-en">{domain}</span><span class="lang-zh" lang="zh-CN">{knowledgeDomainsZh[i]}</span></strong><i aria-hidden="true">→</i></a>)}</div>
         <div class="knowledge-home-cards">{knowledge.map(entry => <KnowledgeCard entry={entry} compact />)}</div>
@@ -45,7 +45,7 @@ const knowledgeDomainsZh = ['量化金融','数学与统计','机器学习','AI 
 
   <section class="section home-notes">
     <div class="container">
-      <SectionHeading label="03 / Notes" labelZh="03 / 笔记" title="Latest Research Notes" titleZh="最新研究笔记" description="Methodology, architecture decisions, paper reading, and experiment write-ups." descriptionZh="记录研究方法、架构决策、论文阅读与实验过程。" href={`${base}notes/`} linkLabel="Read all notes →" linkLabelZh="阅读全部笔记 →"/>
+      <SectionHeading title="Latest Research Notes" titleZh="最新研究笔记" description="Methodology, architecture decisions, paper reading, and experiment write-ups." descriptionZh="记录研究方法、架构决策、论文阅读与实验过程。" href={`${base}notes/`} linkLabel="Read all notes →" linkLabelZh="阅读全部笔记 →"/>
       <div>{notes.map(entry => <NoteCard entry={entry}/>)}</div>
     </div>
   </section>
