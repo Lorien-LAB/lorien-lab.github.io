@@ -12,6 +12,8 @@ npm run test
 npm run build
 ```
 
+Browser regressions cover desktop and mobile interactions. After installing Chromium with `npx playwright install chromium`, run `npm run build` followed by `npm run test:browser`. The runner starts its own preview; see [browser checks](tests/browser/README.md) for details.
+
 ## Personal information
 
 - Display name: `Lorien Lab`.

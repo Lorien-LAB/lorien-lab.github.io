@@ -5,129 +5,153 @@ import KnowledgeCard from '../../components/KnowledgeCard.astro';
 import LearningResourcesGateway from '../../components/LearningResourcesGateway.astro';
 import QuantInterviewGateway from '../../components/QuantInterviewGateway.astro';
 import LeetCodeGateway from '../../components/LeetCodeGateway.astro';
+import { getKnowledgeDomains } from '../../lib/knowledgeLibrary.mjs';
+import { typeLabels, statusLabelsZh, categoryLabelsZh, featuredKnowledgeZh } from '../../data/i18n/knowledgeUi.mjs';
 
 const base = import.meta.env.BASE_URL;
 const entries = (await getCollection('knowledge')).sort((a,b) => (b.data.updated ?? b.data.date).valueOf() - (a.data.updated ?? a.data.date).valueOf());
 const featured = entries.filter((entry) => entry.data.featured).slice(0, 3);
+const domains = getKnowledgeDomains(entries);
 const slugOf = (id: string) => id.split('/').pop() ?? id;
-const typeLabel = (type: string) => type === 'topic' ? 'Research Topic' : type[0].toUpperCase() + type.slice(1);
-
-const domains = [
-  { name: 'Quantitative Finance', categories: ['Factor Investing','Asset Pricing','Portfolio Construction','Futures & Derivatives','CTA / Systematic Trading','Market Microstructure','Risk Management'] },
-  { name: 'Mathematics & Statistics', categories: ['Probability','Stochastic Processes','Optimization','Time Series','Econometrics','Linear Algebra','Numerical Methods'] },
-  { name: 'Machine Learning', categories: ['Tree Models','Deep Learning','Representation Learning','Time-Series ML','Reinforcement Learning','Model Validation'] },
-  { name: 'AI & Research Agents', categories: ['LLM','Agent Architecture','Loop Engineering','RAG / Knowledge Systems','Genetic Programming','Automated Factor Discovery'] },
-  { name: 'Research Infrastructure', categories: ['Backtesting','Data Engineering','Factor Libraries','Experiment Tracking','Quant Platforms','Research Workflows'] },
-];
-const domainCounts = Object.fromEntries(domains.map((domain) => [domain.name, entries.filter((entry) => entry.data.domain === domain.name).length]));
-const typeCounts = Object.fromEntries(['concept','paper','tool','topic'].map((type) => [type, entries.filter((entry) => entry.data.type === type).length]));
+const typeCounts = Object.fromEntries(Object.keys(typeLabels).map((type) => [type, entries.filter((entry) => entry.data.type === type).length]));
 const visibleTypeCounts = Object.entries(typeCounts).filter(([, count]) => count > 0);
 ---
-<BaseLayout title="Knowledge Base · Lorien Lab" description="A connected research library for quantitative finance, mathematics, machine learning, AI research agents, and quantitative research infrastructure.">
+<BaseLayout title="Knowledge Base · Lorien Lab" description="A connected research library for quantitative finance, mathematics, machine learning, AI research agents, and research infrastructure.">
   <header class="knowledge-hero">
-    <div class="container hero-layout">
-      <div class="hero-copy">
-        <div class="mono-label">Knowledge Base</div>
-        <h1>A connected research library.</h1>
-        <p>Structured concepts, tools, and research topics across quantitative finance, mathematics, machine learning, and research systems.</p>
-      </div>
-      <div class="type-tally" aria-label="Current knowledge entry counts">
-        {visibleTypeCounts.map(([type,count]) => <div><span>{typeLabel(type)}</span><strong>{count}</strong></div>)}
-      </div>
+    <div class="container">
+      <h1><span class="lang-en">Knowledge library.</span><span class="lang-zh" lang="zh-CN">知识库。</span></h1>
+      <p><span class="lang-en">Find concepts, tools and research methods, then explore their applications.</span><span class="lang-zh" lang="zh-CN">查找概念、工具与研究方法，连接理论与实践。</span></p>
+      <div class="type-tally" aria-label="Entry counts / 条目数量">{visibleTypeCounts.map(([type,count]) => <span><strong>{count}</strong> <span class="lang-en">{typeLabels[type].en}{count === 1 ? '' : 's'}</span><span class="lang-zh" lang="zh-CN">{typeLabels[type].zh}</span></span>)}</div>
     </div>
   </header>
-
-  <section class="section domain-section">
-    <div class="container">
-      <div class="section-intro"><div><div class="mono-label">Knowledge Map</div><h2>Explore by domain</h2></div><p>Browse the library by research area, then narrow the index by type or search across titles, descriptions, tags, and categories.</p></div>
-      <div class="domain-rail">
-        {domains.map((domain, index) => <a class="domain-block" href="#knowledge-index" data-domain-jump={domain.name}>
-          <div class="domain-number">{String(index + 1).padStart(2,'0')}</div>
-          <div class="domain-copy"><h3>{domain.name}</h3><p>{domain.categories.join(' · ')}</p></div>
-          <div class="domain-count"><strong>{domainCounts[domain.name]}</strong><span>{domainCounts[domain.name] === 1 ? 'entry' : 'entries'}</span></div>
-          <span class="domain-arrow" aria-hidden="true">→</span>
-        </a>)}
-      </div>
-    </div>
-  </section>
-
-  <section class="section gateway-section"><div class="container"><QuantInterviewGateway href={`${base}knowledge/quant-interview/`} /></div></section>
-  <section class="section gateway-section"><div class="container"><LeetCodeGateway href={`${base}knowledge/leetcode/`} /></div></section>
-  <section class="section gateway-section"><div class="container"><LearningResourcesGateway href={`${base}knowledge/financial-engineering-learning-resources/`} /></div></section>
-
-  {featured.length > 0 && <section class="section featured-section">
-    <div class="container">
-      <div class="section-intro"><div><div class="mono-label">Selected Knowledge</div><h2>Featured entries</h2></div><p>Compact, reusable knowledge objects that connect directly to the research and tooling used across this portfolio.</p></div>
-      <div class="knowledge-grid">{featured.map((entry) => <KnowledgeCard entry={entry} />)}</div>
-    </div>
-  </section>}
-
   <section id="knowledge-index" class="section index-section">
     <div class="container">
-      <div class="section-intro"><div><div class="mono-label">Knowledge Index</div><h2>Search the library</h2></div><p>All entries remain visible without JavaScript. Search and filters progressively narrow the static index in your browser.</p></div>
-      <div class="filter-bar" data-knowledge-controls>
-        <label class="search-field"><span>Search knowledge</span><input type="search" placeholder="Search concepts, tools, tags…" data-knowledge-search /></label>
-        <label><span>Type</span><select data-type-filter><option value="">All types</option><option value="concept">Concepts</option><option value="paper">Papers</option><option value="tool">Tools</option><option value="topic">Research topics</option></select></label>
-        <label><span>Domain</span><select data-domain-filter><option value="">All domains</option>{domains.map((domain) => <option value={domain.name}>{domain.name}</option>)}</select></label>
-        <button class="reset-button" type="button" data-filter-reset>Reset</button>
-      </div>
-
+      <h2 class="sr-only"><span class="lang-en">Search the library</span><span class="lang-zh" lang="zh-CN">搜索知识库</span></h2>
+      <form class="filter-bar" data-knowledge-controls role="search">
+        <label class="search-field"><span class="lang-en">Search knowledge</span><span class="lang-zh" lang="zh-CN">搜索知识</span><input type="search" name="q" placeholder="Search concepts, tools, tags…" data-label-en="Search concepts, tools, tags…" data-label-zh="搜索概念、工具、标签…" data-knowledge-search /></label>
+        <label><span class="lang-en">Type</span><span class="lang-zh" lang="zh-CN">类型</span><select name="type" data-type-filter>
+          <option value="" data-label-en="All types" data-label-zh="全部类型">All types</option>
+          {Object.entries(typeLabels).map(([type, labels]) => <option value={type} data-label-en={labels.en} data-label-zh={labels.zh}>{labels.en}</option>)}
+        </select></label>
+        <label><span class="lang-en">Domain</span><span class="lang-zh" lang="zh-CN">领域</span><select name="domain" data-domain-filter>
+          <option value="" data-label-en="All domains" data-label-zh="全部领域">All domains</option>
+          {domains.map((domain) => <option value={domain.name} data-label-en={`${domain.name} (${domain.count})`} data-label-zh={`${domain.zh}（${domain.count}）`}>{domain.name} ({domain.count})</option>)}
+        </select></label>
+        <button type="button" class="reset-button" data-filter-reset><span class="lang-en">Reset</span><span class="lang-zh" lang="zh-CN">重置</span></button>
+      </form>
+      <p class="result-count" role="status" aria-live="polite"><strong data-knowledge-count>{entries.length}</strong> <span class="lang-en">entries shown</span><span class="lang-zh" lang="zh-CN">条结果</span></p>
+      <nav class="topic-shortcuts" aria-label="Learning paths / 学习路径">
+        <QuantInterviewGateway compact href={`${base}knowledge/quant-interview/`} />
+        <LeetCodeGateway compact href={`${base}knowledge/leetcode/`} />
+        <LearningResourcesGateway compact href={`${base}knowledge/financial-engineering-learning-resources/`} />
+      </nav>
       <div class="index-list" data-knowledge-list>
         {entries.map((entry) => {
-          const searchText = [entry.data.title,entry.data.description,entry.data.domain,entry.data.category,...entry.data.tags].join(' ').toLowerCase();
+          const zh = featuredKnowledgeZh[slugOf(entry.id)];
+          const domain = domains.find((domain) => domain.name === entry.data.domain);
+          const searchText = [entry.data.title,entry.data.description,entry.data.domain,entry.data.category,domain?.zh,zh?.title,zh?.description,categoryLabelsZh[entry.data.category],...entry.data.tags].filter(Boolean).join(' ').toLowerCase();
           return <a class="index-row" href={`${base}knowledge/${slugOf(entry.id)}/`} data-knowledge-row data-type={entry.data.type} data-domain={entry.data.domain} data-search={searchText}>
-            <div class="row-type"><span>{typeLabel(entry.data.type)}</span><small>{entry.data.status}</small></div>
-            <div class="row-main"><h3>{entry.data.title}</h3><p>{entry.data.description}</p></div>
-            <div class="row-domain"><strong>{entry.data.domain}</strong><span>{entry.data.category}</span></div>
-            <span class="row-arrow" aria-hidden="true">→</span>
+            <div class="row-type"><span class="lang-en">{typeLabels[entry.data.type].en}</span><span class="lang-zh" lang="zh-CN">{typeLabels[entry.data.type].zh}</span><small><span class="lang-en">{entry.data.status}</span><span class="lang-zh" lang="zh-CN">{statusLabelsZh[entry.data.status]}</span></small></div>
+            <div class="row-main"><h3>{zh ? <><span class="lang-en">{entry.data.title}</span><span class="lang-zh" lang="zh-CN">{zh.title}</span></> : entry.data.title}</h3><p>{zh ? <><span class="lang-en">{entry.data.description}</span><span class="lang-zh" lang="zh-CN">{zh.description}</span></> : entry.data.description}</p></div>
+            <div class="row-domain"><strong><span class="lang-en">{entry.data.domain}</span><span class="lang-zh" lang="zh-CN">{domain?.zh}</span></strong><span class="lang-en">{entry.data.category}</span><span class="lang-zh" lang="zh-CN">{categoryLabelsZh[entry.data.category] ?? entry.data.category}</span></div>
           </a>;
         })}
       </div>
-      <p class="no-results" data-no-results hidden>No entries match the current filters.</p>
+      <p class="no-results" data-no-results hidden><span class="lang-en">No entries match the current filters.</span><span class="lang-zh" lang="zh-CN">没有符合当前筛选条件的条目。</span></p>
     </div>
   </section>
+  {featured.length > 0 && <section class="section featured-section"><div class="container">
+    <h2><span class="lang-en">Featured entries</span><span class="lang-zh" lang="zh-CN">精选条目</span></h2>
+    <div class="knowledge-grid">{featured.map((entry) => <KnowledgeCard entry={entry} />)}</div>
+  </div></section>}
 </BaseLayout>
 
-<script is:inline>
-(() => {
-  const search = document.querySelector('[data-knowledge-search]');
-  const typeFilter = document.querySelector('[data-type-filter]');
-  const domainFilter = document.querySelector('[data-domain-filter]');
-  const reset = document.querySelector('[data-filter-reset]');
-  const rows = [...document.querySelectorAll('[data-knowledge-row]')];
-  const noResults = document.querySelector('[data-no-results]');
+<script>
+  import { readKnowledgeFilters, updateKnowledgeUrl } from '../../lib/knowledgeLibrary.mjs';
+
+  const controls = document.querySelector<HTMLFormElement>('[data-knowledge-controls]')!;
+  const search = document.querySelector<HTMLInputElement>('[data-knowledge-search]')!;
+  const typeFilter = document.querySelector<HTMLSelectElement>('[data-type-filter]')!;
+  const domainFilter = document.querySelector<HTMLSelectElement>('[data-domain-filter]')!;
+  const rows = [...document.querySelectorAll<HTMLElement>('[data-knowledge-row]')];
+  const noResults = document.querySelector<HTMLElement>('[data-no-results]')!;
+  const count = document.querySelector<HTMLElement>('[data-knowledge-count]')!;
+  const domains = [...domainFilter.options].map(({ value }) => ({ name: value }));
+
   const apply = () => {
-    const q = (search?.value || '').trim().toLowerCase();
-    const type = typeFilter?.value || '';
-    const domain = domainFilter?.value || '';
+    const q = search.value.trim().toLowerCase();
     let visible = 0;
     rows.forEach((row) => {
-      const matches = (!q || row.dataset.search.includes(q)) && (!type || row.dataset.type === type) && (!domain || row.dataset.domain === domain);
+      const matches = (!q || row.dataset.search?.includes(q)) && (!typeFilter.value || row.dataset.type === typeFilter.value) && (!domainFilter.value || row.dataset.domain === domainFilter.value);
       row.hidden = !matches;
       if (matches) visible += 1;
     });
-    if (noResults) noResults.hidden = visible !== 0;
+    count.textContent = String(visible);
+    noResults.hidden = visible !== 0;
   };
-  [search, typeFilter, domainFilter].forEach((control) => control?.addEventListener(control === search ? 'input' : 'change', apply));
-  reset?.addEventListener('click', () => { if (search) search.value=''; if (typeFilter) typeFilter.value=''; if (domainFilter) domainFilter.value=''; apply(); search?.focus(); });
-  document.querySelectorAll('[data-domain-jump]').forEach((link) => link.addEventListener('click', () => { if (domainFilter) domainFilter.value = link.dataset.domainJump || ''; apply(); }));
-})();
+  const restore = () => {
+    const filters = readKnowledgeFilters(location.search, domains);
+    search.value = filters.q;
+    typeFilter.value = filters.type;
+    domainFilter.value = filters.domain;
+    apply();
+  };
+  const save = (mode: 'pushState' | 'replaceState') => {
+    const url = updateKnowledgeUrl(location.href, { q: search.value, type: typeFilter.value, domain: domainFilter.value });
+    if (url.href !== location.href) history[mode](null, '', url);
+    apply();
+  };
+  const localize = () => {
+    const language = document.documentElement.dataset.lang === 'zh' ? 'zh' : 'en';
+    controls.querySelectorAll<HTMLOptionElement | HTMLInputElement>('[data-label-en]').forEach((element) => {
+      const label = (language === 'zh' ? element.dataset.labelZh : element.dataset.labelEn) ?? '';
+      if (element instanceof HTMLInputElement) element.placeholder = label;
+      else element.textContent = label;
+    });
+  };
+  controls.addEventListener('submit', (event) => { event.preventDefault(); save('pushState'); });
+  search.addEventListener('input', () => save('replaceState'));
+  [typeFilter, domainFilter].forEach((filter) => filter.addEventListener('change', () => save('pushState')));
+  document.querySelector('[data-filter-reset]')!.addEventListener('click', () => {
+    search.value = ''; typeFilter.value = ''; domainFilter.value = '';
+    save('pushState'); search.focus();
+  });
+  window.addEventListener('popstate', restore);
+  window.addEventListener('pageshow', restore);
+  window.addEventListener('site-language-change', localize);
+  restore(); localize();
+  controls.dataset.ready = 'true';
 </script>
 
 <style>
-  .knowledge-hero{background:var(--hero);color:var(--hero-ink);border-bottom:1px solid rgba(255,255,255,.08)}
-  .hero-layout{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(320px,.65fr);gap:70px;align-items:end;padding-top:52px;padding-bottom:48px}
-  .hero-copy h1{max-width:850px;margin:10px 0 0;font:700 clamp(2.8rem,5vw,4.1rem)/.98 var(--font-mono);letter-spacing:-.06em}
-  .hero-copy>p{max-width:720px;margin:18px 0 0;color:#bfd0da;font:400 1rem/1.65 var(--font-mono)}
-  .type-tally{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(255,255,255,.14);border-bottom:1px solid rgba(255,255,255,.14)}
-  .type-tally div{padding:12px 10px;border-right:1px solid rgba(255,255,255,.1)}.type-tally div:last-child{border-right:0}
-  .type-tally span{display:block;color:#8fa5b2;font:600 .61rem var(--font-mono);text-transform:uppercase}.type-tally strong{display:block;margin-top:4px;font:800 1.2rem var(--font-mono);color:var(--accent)}
-  .section-intro{display:grid;grid-template-columns:1fr minmax(280px,520px);gap:48px;align-items:end;margin-bottom:24px}.section-intro h2{margin:6px 0 0;font-size:clamp(1.9rem,3.5vw,2.8rem);letter-spacing:-.045em}.section-intro>p{margin:0;color:var(--muted);line-height:1.6}
-  .domain-rail{border-top:1px solid var(--border)}.domain-block{display:grid;grid-template-columns:48px minmax(0,1fr) 68px 22px;gap:18px;align-items:center;padding:17px 4px;border-bottom:1px solid var(--border);color:var(--ink);transition:background .18s ease,padding .18s ease}.domain-block:hover{padding-left:10px;padding-right:10px;background:color-mix(in srgb,var(--surface) 72%,transparent);color:var(--ink)}
-  .domain-number{font:700 .68rem var(--font-mono);color:var(--accent-strong)}.domain-copy h3{margin:0 0 4px;font-size:1rem}.domain-copy p{margin:0;color:var(--muted);font-size:.8rem;line-height:1.5}.domain-count{text-align:right}.domain-count strong{display:block;font:800 .95rem var(--font-mono)}.domain-count span{color:var(--muted);font-size:.66rem}.domain-arrow{font:800 1rem var(--font-mono);color:var(--accent-strong)}
-  .gateway-section{padding-top:8px}.featured-section{background:color-mix(in srgb,var(--surface) 70%,transparent);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.knowledge-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-  .filter-bar{display:grid;grid-template-columns:minmax(240px,1fr) 170px minmax(200px,250px) auto;gap:12px;align-items:end;padding:14px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface);margin-bottom:18px}.filter-bar label{display:grid;gap:6px}.filter-bar label>span{font:700 .65rem var(--font-mono);text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}.filter-bar input,.filter-bar select{width:100%;height:40px;border:1px solid var(--border);border-radius:8px;background:var(--bg);color:var(--ink);padding:0 12px;font:600 .82rem var(--font-sans)}.filter-bar input:focus,.filter-bar select:focus{outline:2px solid color-mix(in srgb,var(--accent) 55%,transparent);outline-offset:2px}.reset-button{height:40px;padding:0 15px;border:1px solid var(--border);border-radius:8px;background:transparent;color:var(--muted);font-weight:700;cursor:pointer}.reset-button:hover{color:var(--ink);border-color:var(--accent)}
-  .index-list{border-top:1px solid var(--border)}.index-row{display:grid;grid-template-columns:120px minmax(0,1.3fr) minmax(190px,.7fr) 22px;gap:18px;align-items:center;padding:15px 3px;border-bottom:1px solid var(--border);color:var(--ink)}.index-row:hover{color:var(--ink);background:color-mix(in srgb,var(--surface) 68%,transparent)}.row-type span{display:block;font:700 .67rem var(--font-mono);text-transform:uppercase;color:var(--accent-strong)}.row-type small{color:var(--muted);text-transform:uppercase;font:600 .6rem var(--font-mono)}.row-main h3{margin:0 0 4px;font-size:.98rem}.row-main p{margin:0;color:var(--muted);font-size:.81rem;line-height:1.45}.row-domain strong,.row-domain span{display:block}.row-domain strong{font-size:.75rem}.row-domain span{margin-top:3px;color:var(--muted);font-size:.68rem}.row-arrow{color:var(--accent-strong);font-weight:800}.no-results{padding:26px;text-align:center;color:var(--muted);border-bottom:1px solid var(--border)}
-  @media(max-width:960px){.hero-layout{grid-template-columns:1fr;gap:28px}.knowledge-grid{grid-template-columns:1fr}.filter-bar{grid-template-columns:1fr 1fr}.search-field{grid-column:1/-1}.section-intro{grid-template-columns:1fr}.index-row{grid-template-columns:110px 1fr 24px}.row-domain{display:none}}
-  @media(max-width:640px){.hero-layout{padding-top:46px;padding-bottom:42px}.hero-copy h1{font-size:clamp(2.7rem,14vw,4.4rem)}.type-tally{grid-template-columns:repeat(3,1fr)}.domain-block{grid-template-columns:38px 1fr 22px}.domain-count{display:none}.filter-bar{grid-template-columns:1fr}.search-field{grid-column:auto}.index-row{grid-template-columns:1fr 22px;gap:12px}.row-type{grid-column:1}.row-main{grid-column:1}.row-arrow{grid-column:2;grid-row:1/3}.domain-copy p{font-size:.76rem}}
+  .knowledge-hero { padding: 32px 0 24px; border-bottom: 1px solid var(--border); }
+  .knowledge-hero h1 { margin: 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.15; letter-spacing: -.04em; }
+  .knowledge-hero p { margin: 12px 0 0; color: var(--muted); }
+  .type-tally { display: flex; flex-wrap: wrap; gap: 18px; margin-top: 16px; color: var(--muted); font-size: .8rem; }
+  .type-tally strong { color: var(--ink); }
+  .index-section { padding-top: 24px; }
+  .filter-bar { display: grid; grid-template-columns: minmax(220px,1fr) 160px minmax(210px,280px) auto; gap: 12px; align-items: end; }
+  .filter-bar label { display: grid; gap: 6px; font-size: .8rem; font-weight: 650; }
+  .filter-bar input,.filter-bar select,.reset-button { width: 100%; min-width: 0; height: 44px; padding: 0 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--surface); color: var(--ink); font: inherit; }
+  .reset-button { width: auto; cursor: pointer; }
+  .reset-button:hover { border-color: var(--accent-strong); }
+  .result-count { margin: 12px 0; color: var(--muted); font-size: .82rem; }
+  .topic-shortcuts { display: flex; flex-wrap: wrap; gap: 8px 24px; padding: 12px 0 18px; }
+  .topic-shortcuts :global(a) { display: inline-flex; align-items: center; min-height: 44px; color: var(--accent-strong); font-size: .88rem; font-weight: 650; }
+  .index-list { border-top: 1px solid var(--border); }
+  .index-row { display: grid; grid-template-columns: 110px minmax(0,1fr) minmax(160px,.35fr); gap: 20px; align-items: start; padding: 18px 0; border-bottom: 1px solid var(--border); }
+  .index-row:hover { background: var(--surface); color: var(--ink); }
+  .index-row:hover h3 { color: var(--accent-strong); }
+  .row-type { font-size: .75rem; color: var(--accent-strong); }
+  .row-type small { display: block; margin-top: 4px; color: var(--muted); }
+  .row-main h3 { margin: 0 0 6px; font-size: 1rem; line-height: 1.4; }
+  .row-main p { margin: 0; color: var(--muted); font-size: .86rem; line-height: 1.6; }
+  .row-domain { color: var(--muted); font-size: .78rem; }
+  .row-domain strong { display: block; margin-bottom: 5px; color: var(--ink); }
+  .no-results { padding: 28px 0; color: var(--muted); }
+  .featured-section { border-top: 1px solid var(--border); }
+  .featured-section h2 { margin: 0 0 20px; }
+  .knowledge-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 18px; }
+  @media(max-width:960px) { .filter-bar { grid-template-columns: 1fr 1fr auto; }.search-field { grid-column: 1/-1; }.index-row { grid-template-columns: 90px minmax(0,1fr); }.row-domain { grid-column: 2; }.knowledge-grid { grid-template-columns: 1fr; } }
+  @media(max-width:560px) { .knowledge-hero { padding: 24px 0 20px; }.filter-bar { grid-template-columns: minmax(0,1fr) minmax(0,1fr); }.reset-button { justify-self: start; }.topic-shortcuts { gap: 0 20px; }.index-row { grid-template-columns: 1fr; gap: 8px; }.row-domain { grid-column: auto; }.row-type small { display: inline; margin-left: 10px; } }
 </style>

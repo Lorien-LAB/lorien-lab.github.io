@@ -1,7 +1,8 @@
 ---
-interface Props { href: string; }
-const { href } = Astro.props;
+interface Props { href: string; compact?: boolean; }
+const { href, compact = false } = Astro.props;
 ---
+{compact ? <a href={href}><span class="lang-en">Quant Interview & Problem Bank →</span><span class="lang-zh" lang="zh-CN">量化面试与题库 →</span></a> : (
 <section class="quant-interview-gateway" aria-labelledby="quant-interview-gateway-title">
   <div>
     <div class="mono-label">Quant Interview</div>
@@ -10,6 +11,7 @@ const { href } = Astro.props;
     <a href={href}>Explore problem bank →</a>
   </div>
 </section>
+)}
 <style>
 .quant-interview-gateway{padding:30px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.quant-interview-gateway h2{max-width:900px;margin:8px 0 11px;font-size:clamp(1.8rem,4vw,3rem);line-height:1.04;letter-spacing:-.045em}.quant-interview-gateway p{margin:0;color:var(--muted);line-height:1.65}.quant-interview-gateway a{display:inline-block;margin-top:19px;color:var(--accent-strong);font-weight:800}
 </style>
