@@ -37,6 +37,18 @@ type RecursiveTopicProps = {
 
 const { topic, depth = 0, base: suppliedBase } = Astro.props as RecursiveTopicProps;
 const base = suppliedBase ?? import.meta.env.BASE_URL;
+const topicLabelsZh: Record<string, string> = {
+  'interview-strategy-communication': '面试策略与沟通',
+  'logic-brainteasers-discrete-reasoning': '逻辑、脑筋急转弯与离散推理',
+  'calculus-differential-equations': '微积分与微分方程',
+  'linear-algebra-matrix-methods': '线性代数与矩阵方法',
+  'probability-statistics': '概率与统计',
+  'stochastic-processes-stochastic-calculus': '随机过程与随机微积分',
+  'derivatives-options-no-arbitrage': '衍生品、期权与无套利',
+  'fixed-income-rates-general-finance': '固定收益、利率与金融基础',
+  'monte-carlo-numerical-methods': '蒙特卡洛与数值方法',
+  'algorithms-data-structures-cpp': '算法、数据结构与 C++',
+};
 const subtreeModuleCount = (node: DirectoryTopic): number => node.modules.length
   + node.children.reduce((count, child) => count + subtreeModuleCount(child), 0);
 const topicModuleCount = topic ? subtreeModuleCount(topic) : 0;
@@ -74,12 +86,12 @@ if (!topic) {
   <section id={topic.anchor} class="directory-topic" data-directory-topic data-has-rows={topicModuleCount > 0 ? 'true' : 'false'}>
     <header class="topic-heading">
       <div>
-        <div class="mono-label">{`${depth === 0 ? 'Topic' : 'Subtopic'} ${String(topic.order).padStart(2, '0')}`}</div>
-        <TopicHeading>{topic.title}</TopicHeading>
+        <div class="mono-label"><span class="lang-en">{depth === 0 ? 'Topic' : 'Subtopic'}</span><span class="lang-zh" lang="zh-CN">{depth === 0 ? '主题' : '子主题'}</span> {String(topic.order).padStart(2, '0')}</div>
+        <TopicHeading><span class="lang-en">{topic.title}</span><span class="lang-zh" lang="zh-CN">{topicLabelsZh[topic.id] ?? topic.title}</span></TopicHeading>
       </div>
       <div class="topic-summary">
-        <span>{topic.problemCount} Problems</span>
-        <a href={`${base}problems/?topic=${encodeURIComponent(topic.id)}`}>Practice →</a>
+        <span>{topic.problemCount} <span class="lang-en">Problems</span><span class="lang-zh" lang="zh-CN">道题</span></span>
+        <a href={`${base}problems/?topic=${encodeURIComponent(topic.id)}`}><span class="lang-en">Practice →</span><span class="lang-zh" lang="zh-CN">练习 →</span></a>
       </div>
     </header>
     {topic.modules.length > 0 && <div class="module-list">
@@ -88,16 +100,16 @@ if (!topic) {
           <span class="module-order">{String(module.learningOrder).padStart(2, '0')}</span>
           <div class="module-title">
             {module.href ? <a href={module.href}>{module.title}</a> : <strong>{module.title}</strong>}
-            {module.status === 'planned' && <span class="planned-badge">Planned</span>}
+            {module.status === 'planned' && <span class="planned-badge"><span class="lang-en">Planned</span><span class="lang-zh" lang="zh-CN">规划中</span></span>}
           </div>
-          <span class={`status ${module.status}`}>{module.status}</span>
-          {module.prerequisites.length > 0 && <div class="module-prerequisites"><span>Prerequisites</span>{module.prerequisites.map((prerequisite) => prerequisite.href ? <a href={prerequisite.href}>{prerequisite.title}</a> : <span>{prerequisite.title}</span>)}</div>}
-          {module.problemCount !== null && <span class="module-problems">{module.problemCount} Problems</span>}
-          {module.href && <a class="module-action" href={module.href}>Learn →</a>}
+          <span class={`status ${module.status}`}><span class="lang-en">{module.status}</span><span class="lang-zh" lang="zh-CN">{module.status === 'published' ? '已发布' : '规划中'}</span></span>
+          {module.prerequisites.length > 0 && <div class="module-prerequisites"><span><span class="lang-en">Prerequisites</span><span class="lang-zh" lang="zh-CN">前置知识</span></span>{module.prerequisites.map((prerequisite) => prerequisite.href ? <a href={prerequisite.href}>{prerequisite.title}</a> : <span>{prerequisite.title}</span>)}</div>}
+          {module.problemCount !== null && <span class="module-problems">{module.problemCount} <span class="lang-en">Problems</span><span class="lang-zh" lang="zh-CN">道题</span></span>}
+          {module.href && <a class="module-action" href={module.href}><span class="lang-en">Learn →</span><span class="lang-zh" lang="zh-CN">学习 →</span></a>}
         </article>
       ))}
     </div>}
-    {topic.modules.length === 0 && topic.children.length === 0 && <p class="empty-topic">No curriculum modules published or planned yet.</p>}
+    {topic.modules.length === 0 && topic.children.length === 0 && <p class="empty-topic"><span class="lang-en">No curriculum modules published or planned yet.</span><span class="lang-zh" lang="zh-CN">暂无已发布或规划中的学习模块。</span></p>}
     {topic.children.length > 0 && <div class="directory-children">
       {topic.children.map((child) => <Astro.self topic={child} depth={depth + 1} base={base} />)}
     </div>}
@@ -107,13 +119,13 @@ if (!topic) {
     <header class="directory-hero">
       <div class="container hero-grid">
         <div>
-          <div class="mono-label">Knowledge · Quant Interview</div>
-          <h1>Knowledge Directory.</h1>
-          <p>Learn concepts in a deliberate order, then practice the canonical problems connected to each topic.</p>
+          <div class="mono-label"><span class="lang-en">Knowledge · Quant Interview</span><span class="lang-zh" lang="zh-CN">知识库 · 量化面试</span></div>
+          <h1><span class="lang-en">Knowledge Directory.</span><span class="lang-zh" lang="zh-CN">学习目录。</span></h1>
+          <p><span class="lang-en">Learn concepts in a deliberate order, then practice the canonical problems connected to each topic.</span><span class="lang-zh" lang="zh-CN">循序学习概念，再通过各主题的关联题目巩固理解。</span></p>
         </div>
         <div class="directory-stats" aria-label="Curriculum module counts">
-          <span><strong>{directory.totals.published}</strong>Published</span>
-          <span><strong>{directory.totals.planned}</strong>Planned</span>
+          <span><strong>{directory.totals.published}</strong><span class="lang-en">Published</span><span class="lang-zh" lang="zh-CN">已发布</span></span>
+          <span><strong>{directory.totals.planned}</strong><span class="lang-en">Planned</span><span class="lang-zh" lang="zh-CN">规划中</span></span>
         </div>
       </div>
     </header>
@@ -121,26 +133,26 @@ if (!topic) {
     <section class="section">
       <div class="container">
         <nav class="topic-jump" aria-label="Knowledge directory topics">
-          {directory.topics.map((directoryTopic) => <a href={`#${directoryTopic.anchor}`}>{directoryTopic.title}</a>)}
+          {directory.topics.map((directoryTopic) => <a href={`#${directoryTopic.anchor}`}><span class="lang-en">{directoryTopic.title}</span><span class="lang-zh" lang="zh-CN">{topicLabelsZh[directoryTopic.id] ?? directoryTopic.title}</span></a>)}
         </nav>
 
         <div class="directory-controls" data-directory-controls>
           <label>
-            <span>Search modules</span>
+            <span class="lang-en">Search modules</span><span class="lang-zh" lang="zh-CN">搜索模块</span>
             <input type="search" data-directory-search placeholder="Concept, technique, or topic…" />
           </label>
           <div class="status-filter" role="group" aria-label="Module status">
-            <button type="button" data-status-filter="all" aria-pressed="true">All</button>
-            <button type="button" data-status-filter="published" aria-pressed="false">Published</button>
-            <button type="button" data-status-filter="planned" aria-pressed="false">Planned</button>
+            <button type="button" data-status-filter="all" aria-pressed="true"><span class="lang-en">All</span><span class="lang-zh" lang="zh-CN">全部</span></button>
+            <button type="button" data-status-filter="published" aria-pressed="false"><span class="lang-en">Published</span><span class="lang-zh" lang="zh-CN">已发布</span></button>
+            <button type="button" data-status-filter="planned" aria-pressed="false"><span class="lang-en">Planned</span><span class="lang-zh" lang="zh-CN">规划中</span></button>
           </div>
-          <p role="status" aria-live="polite"><strong data-directory-count>{directory.totals.published + directory.totals.planned}</strong> modules shown</p>
+          <p role="status" aria-live="polite"><strong data-directory-count>{directory.totals.published + directory.totals.planned}</strong> <span class="lang-en">modules shown</span><span class="lang-zh" lang="zh-CN">个模块</span></p>
         </div>
 
         <div class="directory-topics">
           {directory.topics.map((directoryTopic) => <Astro.self topic={directoryTopic} depth={0} base={base} />)}
         </div>
-        <p class="directory-empty" data-directory-empty hidden>No curriculum modules match the current filters.</p>
+        <p class="directory-empty" data-directory-empty hidden><span class="lang-en">No curriculum modules match the current filters.</span><span class="lang-zh" lang="zh-CN">没有符合当前筛选条件的学习模块。</span></p>
       </div>
     </section>
   </BaseLayout>
@@ -186,8 +198,12 @@ if (!topic) {
     applyFilters();
   }));
   window.addEventListener('pageshow', resetFilters);
+  const localize = () => { search.placeholder = document.documentElement.dataset.lang === 'zh' ? '搜索概念、方法或主题…' : 'Concept, technique, or topic…'; };
+  window.addEventListener('site-language-change', localize);
+  localize();
+  search.dataset.ready = 'true';
 </script>
 
 <style>
-  .directory-hero{padding:74px 0 62px;background:radial-gradient(circle at 78% 22%,#0d3140 0,#071a25 34%,var(--hero) 72%);color:var(--hero-ink);border-bottom:1px solid rgba(255,255,255,.08)}.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:70px;align-items:end}.directory-hero h1{margin:13px 0 20px;font-size:clamp(3rem,6vw,5.8rem);line-height:.94;letter-spacing:-.065em}.directory-hero p{max-width:720px;margin:0;color:#b9cbd5;font:400 1rem/1.7 var(--font-mono)}.directory-stats{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);background:rgba(4,16,25,.55)}.directory-stats span{padding:20px;color:#9db0bc;font:600 .65rem var(--font-mono);text-transform:uppercase}.directory-stats span+span{border-left:1px solid rgba(255,255,255,.1)}.directory-stats strong{display:block;color:var(--accent);font:800 1.8rem var(--font-mono)}.topic-jump{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}.topic-jump a{padding:7px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font:600 .66rem var(--font-mono)}.directory-controls{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:14px;align-items:end;padding:16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}.directory-controls label{display:grid;gap:6px;color:var(--muted);font:600 .65rem var(--font-mono)}.directory-controls input{min-width:0;padding:10px 11px;border:1px solid var(--border);border-radius:7px;background:var(--paper);color:var(--ink);font:inherit}.status-filter{display:flex;gap:6px}.status-filter button{padding:10px;border:1px solid var(--border);border-radius:7px;background:var(--paper);color:var(--muted);font:700 .64rem var(--font-mono);cursor:pointer}.status-filter button[aria-pressed=true]{border-color:var(--accent);color:var(--accent-strong)}.directory-controls p{margin:0;color:var(--muted);font:600 .68rem var(--font-mono);white-space:nowrap}.directory-controls p strong{color:var(--ink)}.directory-topics{margin-top:22px}.directory-topic{padding:28px 0;border-bottom:1px solid var(--border)}.directory-children{margin-left:20px;padding-left:20px;border-left:1px solid var(--border)}.topic-heading{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:15px}.topic-heading :is(h2,h3,h4,h5,h6){margin:8px 0 0;letter-spacing:-.035em}.topic-heading h2{font-size:clamp(1.35rem,2vw,2rem)}.topic-heading h3{font-size:clamp(1.15rem,1.7vw,1.6rem)}.topic-heading :is(h4,h5,h6){font-size:clamp(1rem,1.5vw,1.35rem)}.topic-summary{display:flex;gap:14px;align-items:center;color:var(--muted);font:600 .67rem var(--font-mono);white-space:nowrap}.topic-summary a,.module-action,.module-title a,.module-prerequisites a{color:var(--accent-strong)}.module-list{border-top:1px solid var(--border)}.module-row{display:grid;grid-template-columns:36px minmax(220px,1.8fr) 76px minmax(150px,1fr) 84px 64px;gap:12px;align-items:center;padding:14px 4px;border-bottom:1px solid var(--border)}.module-order,.status,.module-problems,.module-action{font:700 .64rem var(--font-mono)}.module-order{color:var(--accent-strong)}.module-title{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-width:0}.module-title a,.module-title strong{font-size:.92rem;line-height:1.3;overflow-wrap:anywhere}.planned-badge{padding:3px 5px;border:1px solid color-mix(in srgb,var(--accent) 48%,var(--border));border-radius:999px;color:var(--accent-strong);font:700 .58rem var(--font-mono);text-transform:uppercase}.status{color:var(--muted);text-transform:capitalize}.status.planned{color:var(--accent-strong)}.module-prerequisites{display:flex;flex-wrap:wrap;min-width:0;gap:4px 7px;color:var(--muted);font:600 .63rem/1.35 var(--font-mono);overflow-wrap:anywhere}.module-prerequisites>span:first-child{width:100%;color:var(--muted);text-transform:uppercase}.module-problems{color:var(--muted);white-space:nowrap}.empty-topic,.directory-empty{margin:0;color:var(--muted);font:italic .88rem/1.6 var(--font-mono)}.directory-empty{margin-top:24px;padding:16px;border:1px dashed var(--border);border-radius:var(--radius)}@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.directory-stats{max-width:360px}.directory-controls{grid-template-columns:1fr auto}.directory-controls p{grid-column:1/-1}.module-row{grid-template-columns:36px minmax(0,1fr) auto;gap:9px}.module-prerequisites,.module-problems,.module-action{grid-column:2}.status{grid-column:3;grid-row:1}.module-action{grid-row:auto}.module-prerequisites{margin-top:2px}}@media(max-width:640px){.directory-hero{padding-top:56px}.directory-controls{grid-template-columns:1fr}.status-filter{flex-wrap:wrap}.directory-controls p{grid-column:auto}.directory-children{margin-left:0;padding-left:12px}.topic-heading{align-items:flex-start;flex-direction:column}.module-row{grid-template-columns:30px minmax(0,1fr)}.status{grid-column:2;grid-row:auto}.module-prerequisites,.module-problems,.module-action{grid-column:2}}@media(max-width:360px){:global(body){min-width:0}:global(.site-header .brand>span:not(.brand-mark)){display:none}}
+  .directory-hero{padding:74px 0 62px;background:radial-gradient(circle at 78% 22%,#0d3140 0,#071a25 34%,var(--hero) 72%);color:var(--hero-ink);border-bottom:1px solid rgba(255,255,255,.08)}.hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 310px;gap:70px;align-items:end}.directory-hero h1{margin:13px 0 20px;font-size:clamp(3rem,6vw,5.8rem);line-height:.94;letter-spacing:-.065em}.directory-hero p{max-width:720px;margin:0;color:#b9cbd5;font:400 1rem/1.7 var(--font-mono)}.directory-stats{display:grid;grid-template-columns:repeat(2,1fr);border:1px solid rgba(255,255,255,.15);border-radius:var(--radius);background:rgba(4,16,25,.55)}.directory-stats>span{padding:20px;color:#9db0bc;font:600 .65rem var(--font-mono);text-transform:uppercase}.directory-stats>span+span{border-left:1px solid rgba(255,255,255,.1)}.directory-stats strong{display:block;color:var(--accent);font:800 1.8rem var(--font-mono)}.topic-jump{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}.topic-jump a{padding:7px 10px;border:1px solid var(--border);border-radius:999px;color:var(--muted);font:600 .66rem var(--font-mono)}.directory-controls{display:grid;grid-template-columns:minmax(220px,1fr) auto auto;gap:14px;align-items:end;padding:16px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}.directory-controls label{display:grid;gap:6px;color:var(--muted);font:600 .65rem var(--font-mono)}.directory-controls input{min-width:0;padding:10px 11px;border:1px solid var(--border);border-radius:7px;background:var(--paper);color:var(--ink);font:inherit}.status-filter{display:flex;gap:6px}.status-filter button{padding:10px;border:1px solid var(--border);border-radius:7px;background:var(--paper);color:var(--muted);font:700 .64rem var(--font-mono);cursor:pointer}.status-filter button[aria-pressed=true]{border-color:var(--accent);color:var(--accent-strong)}.directory-controls p{margin:0;color:var(--muted);font:600 .68rem var(--font-mono);white-space:nowrap}.directory-controls p strong{color:var(--ink)}.directory-topics{margin-top:22px}.directory-topic{padding:28px 0;border-bottom:1px solid var(--border)}.directory-children{margin-left:20px;padding-left:20px;border-left:1px solid var(--border)}.topic-heading{display:flex;justify-content:space-between;gap:18px;align-items:end;margin-bottom:15px}.topic-heading :is(h2,h3,h4,h5,h6){margin:8px 0 0;letter-spacing:-.035em}.topic-heading h2{font-size:clamp(1.35rem,2vw,2rem)}.topic-heading h3{font-size:clamp(1.15rem,1.7vw,1.6rem)}.topic-heading :is(h4,h5,h6){font-size:clamp(1rem,1.5vw,1.35rem)}.topic-summary{display:flex;gap:14px;align-items:center;color:var(--muted);font:600 .67rem var(--font-mono);white-space:nowrap}.topic-summary a,.module-action,.module-title a,.module-prerequisites a{color:var(--accent-strong)}.module-list{border-top:1px solid var(--border)}.module-row{display:grid;grid-template-columns:36px minmax(220px,1.8fr) 76px minmax(150px,1fr) 84px 64px;gap:12px;align-items:center;padding:14px 4px;border-bottom:1px solid var(--border)}.module-order,.status,.module-problems,.module-action{font:700 .64rem var(--font-mono)}.module-order{color:var(--accent-strong)}.module-title{display:flex;flex-wrap:wrap;gap:8px;align-items:center;min-width:0}.module-title a,.module-title strong{font-size:.92rem;line-height:1.3;overflow-wrap:anywhere}.planned-badge{padding:3px 5px;border:1px solid color-mix(in srgb,var(--accent) 48%,var(--border));border-radius:999px;color:var(--accent-strong);font:700 .58rem var(--font-mono);text-transform:uppercase}.status{color:var(--muted);text-transform:capitalize}.status.planned{color:var(--accent-strong)}.module-prerequisites{display:flex;flex-wrap:wrap;min-width:0;gap:4px 7px;color:var(--muted);font:600 .63rem/1.35 var(--font-mono);overflow-wrap:anywhere}.module-prerequisites>span:first-child{width:100%;color:var(--muted);text-transform:uppercase}.module-problems{color:var(--muted);white-space:nowrap}.empty-topic,.directory-empty{margin:0;color:var(--muted);font:italic .88rem/1.6 var(--font-mono)}.directory-empty{margin-top:24px;padding:16px;border:1px dashed var(--border);border-radius:var(--radius)}@media(max-width:900px){.hero-grid{grid-template-columns:1fr}.directory-stats{max-width:360px}.directory-controls{grid-template-columns:1fr auto}.directory-controls p{grid-column:1/-1}.module-row{grid-template-columns:36px minmax(0,1fr) auto;gap:9px}.module-prerequisites,.module-problems,.module-action{grid-column:2}.status{grid-column:3;grid-row:1}.module-action{grid-row:auto}.module-prerequisites{margin-top:2px}}@media(max-width:640px){.directory-hero{padding-top:56px}.directory-controls{grid-template-columns:1fr}.status-filter{flex-wrap:wrap}.directory-controls p{grid-column:auto}.directory-children{margin-left:0;padding-left:12px}.topic-heading{align-items:flex-start;flex-direction:column}.module-row{grid-template-columns:30px minmax(0,1fr)}.status{grid-column:2;grid-row:auto}.module-prerequisites,.module-problems,.module-action{grid-column:2}}@media(max-width:360px){:global(body){min-width:0}:global(.site-header .brand>span:not(.brand-mark)){display:none}}
 </style>

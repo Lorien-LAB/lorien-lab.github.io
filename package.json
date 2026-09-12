@@ -11,13 +11,15 @@
     "test": "node --test tests/*.test.mjs",
     "master:directory:check": "node scripts/validate-quant-interview-master-directory.mjs --check",
     "knowledge:directory": "node scripts/generate-quant-interview-knowledge-directory.mjs --write",
-    "knowledge:directory:check": "node scripts/generate-quant-interview-knowledge-directory.mjs --check"
+    "knowledge:directory:check": "node scripts/generate-quant-interview-knowledge-directory.mjs --check",
+    "test:browser": "playwright test"
   },
   "dependencies": {
     "astro": "^5.0.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.0",
+    "@playwright/test": "1.63.0",
     "typescript": "^5.7.0"
   }
 }

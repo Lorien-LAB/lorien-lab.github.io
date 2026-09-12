@@ -1,4 +1,5 @@
 ---
+import geometryUrl from '../../lib/reproductionChartGeometry.mjs?url';
 const { data } = Astro.props as { data: any };
 const chartData = data.charts;
 const oosStart = data.oosStart;
@@ -11,47 +12,60 @@ const cutoff = data.cutoff;
       <p>时间序列仅使用 Lorien Lab 的真实回测输出；原研报只以已报告指标出现，不构造 synthetic paper NAV。Roll Timing 与 Cross-Maturity Arbitrage 既可单独检查，也可查看最终组合。</p>
     </div>
     <div class="chart-toolbar">
-      <div class="segmented" role="tablist" aria-label="Strategy view">
-        <button class="mode active" data-mode="roll">Optimized Roll</button>
-        <button class="mode" data-mode="arb">Cross-Maturity Arb</button>
-        <button class="mode" data-mode="portfolio">Flagship Portfolio</button>
+      <div class="segmented" role="group" aria-label="Strategy view" data-chart-label="strategyView">
+        <button class="mode active" data-mode="roll" aria-pressed="true"><span class="lang-en">Optimized Roll</span><span class="lang-zh">优化移仓</span></button>
+        <button class="mode" data-mode="arb" aria-pressed="false"><span class="lang-en">Cross-Maturity Arb</span><span class="lang-zh">跨期套利</span></button>
+        <button class="mode" data-mode="portfolio" aria-pressed="false"><span class="lang-en">Flagship Portfolio</span><span class="lang-zh">旗舰组合</span></button>
       </div>
-      <div class="segmented ranges" aria-label="Date range">
-        <button class="range active" data-range="all">All</button>
-        <button class="range" data-range="is">In Sample</button>
-        <button class="range" data-range="oos">OOS</button>
+      <div class="segmented ranges" role="group" aria-label="Date range" data-chart-label="dateRange">
+        <button class="range active" data-range="all" aria-pressed="true"><span class="lang-en">All</span><span class="lang-zh">全部</span></button>
+        <button class="range" data-range="is" aria-pressed="false"><span class="lang-en">In Sample</span><span class="lang-zh">样本内</span></button>
+        <button class="range" data-range="oos" aria-pressed="false"><span class="lang-en">OOS</span><span class="lang-zh">样本外</span></button>
       </div>
     </div>
     <div class="metric-strip" id="rn-metrics">
-      <div><span>Annualized Return</span><strong>—</strong></div><div><span>Sharpe*</span><strong>—</strong></div><div><span>Max Drawdown</span><strong>—</strong></div><div><span>Window</span><strong>—</strong></div>
+      <div><span><span class="lang-en">Annualized Return</span><span class="lang-zh">年化收益</span></span><strong>—</strong></div><div><span><span class="lang-en">Sharpe*</span><span class="lang-zh">夏普比率*</span></span><strong>—</strong></div><div><span><span class="lang-en">Max Drawdown</span><span class="lang-zh">最大回撤</span></span><strong>—</strong></div><div><span><span class="lang-en">Window</span><span class="lang-zh">区间</span></span><strong>—</strong></div>
     </div>
     <div class="plot-card">
       <div class="plot-head"><div><strong id="rn-chart-title">Optimized Roll</strong><span id="rn-chart-subtitle">Core Roll Timing strategy vs passive benchmark</span></div><div class="legend" id="rn-legend"></div></div>
-      <div id="rn-nav" class="svg-host" aria-label="NAV chart"></div>
-      <div class="dd-label"><span>Drawdown</span><span id="rn-oos-label">OUT OF SAMPLE · {oosStart}</span></div>
-      <div id="rn-dd" class="svg-host dd" aria-label="Drawdown chart"></div>
+      <div id="rn-nav" class="svg-host" aria-label="NAV chart" data-chart-label="navChart"></div>
+      <div class="dd-label"><span><span class="lang-en">Drawdown</span><span class="lang-zh">回撤</span></span><span id="rn-oos-label"><span class="lang-en">OUT OF SAMPLE</span><span class="lang-zh">样本外</span> · {oosStart}</span></div>
+      <div id="rn-dd" class="svg-host dd" aria-label="Drawdown chart" data-chart-label="drawdownChart"></div>
+      <div class="chart-inspector">
+        <label for="rn-inspect"><span class="lang-en">Inspect date · tap a chart or use arrow keys</span><span class="lang-zh">检查日期 · 点击图表或使用方向键</span></label>
+        <input id="rn-inspect" type="range" min="0" max="0" value="0" step="1" aria-describedby="rn-inspection" disabled />
+        <output id="rn-inspection" for="rn-inspect" aria-live="polite" aria-atomic="true"></output>
+      </div>
       <div id="rn-tooltip" class="tooltip" hidden></div>
     </div>
-    <p class="chart-foot">Comparable research cutoff: <strong>{cutoff}</strong>. OOS begins <strong>{oosStart}</strong>. Hover the NAV panel to inspect dates and values. <strong>*</strong> Dynamic Sharpe is estimated from the displayed sampled NAV cadence; headline Sharpe above comes from the full run. The underlying research covers Roll Timing, Cross-Maturity Arbitrage, and their flagship portfolio combination.</p>
+    <p class="chart-foot">Comparable research cutoff: <strong>{cutoff}</strong>. OOS begins <strong>{oosStart}</strong>. Tap or hover either panel, or use the date slider and arrow keys, to inspect dates and values. <strong>*</strong> Dynamic Sharpe is estimated from the displayed sampled NAV cadence; headline Sharpe above comes from the full run. The underlying research covers Roll Timing, Cross-Maturity Arbitrage, and their flagship portfolio combination.</p>
   </div>
 </section>
 
 <style>
 .chart-section{padding:44px 0 54px;border-bottom:1px solid var(--border)}.chart-wrap{max-width:1180px}.chart-intro{display:grid;grid-template-columns:1fr minmax(280px,470px);gap:40px;align-items:end}.chart-intro h2{margin:7px 0 0;font-size:clamp(2rem,4vw,3.35rem);letter-spacing:-.05em}.chart-intro p{margin:0;color:var(--muted);line-height:1.7}.chart-toolbar{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:26px 0 12px}.segmented{display:inline-flex;padding:3px;border:1px solid var(--border);border-radius:10px;background:var(--surface);flex-wrap:wrap}.segmented button{border:0;background:transparent;color:var(--muted);padding:8px 11px;border-radius:7px;font:700 .65rem var(--font-mono);cursor:pointer}.segmented button.active{background:var(--ink);color:var(--bg)}.metric-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;border:1px solid var(--border);border-radius:12px;overflow:hidden;background:var(--border);margin-bottom:12px}.metric-strip>div{background:var(--surface);padding:12px 14px}.metric-strip span,.metric-strip strong{display:block}.metric-strip span{font:600 .55rem var(--font-mono);color:var(--muted);text-transform:uppercase}.metric-strip strong{margin-top:4px;font:800 .9rem var(--font-mono)}.plot-card{position:relative;padding:18px;border:1px solid var(--border);border-radius:var(--radius);background:var(--surface)}.plot-head{display:flex;justify-content:space-between;gap:20px;align-items:start;margin-bottom:6px}.plot-head strong,.plot-head span{display:block}.plot-head strong{font-size:1rem}.plot-head span{color:var(--muted);font-size:.72rem}.legend{display:flex;gap:8px;flex-wrap:wrap}.legend :global(span){display:inline-flex;align-items:center;gap:5px;font:650 .6rem var(--font-mono)}.legend :global(i){width:18px;height:2px;display:inline-block}.svg-host :global(svg){width:100%;height:auto;display:block;overflow:visible}.dd-label{display:flex;justify-content:space-between;margin:8px 4px 1px;color:var(--muted);font:700 .58rem var(--font-mono);text-transform:uppercase}.dd-label span:last-child{color:var(--accent-strong)}.tooltip{position:absolute;z-index:5;pointer-events:none;padding:9px 11px;border:1px solid var(--border);border-radius:9px;background:var(--surface);box-shadow:var(--shadow);font:650 .65rem var(--font-mono);min-width:165px}.chart-foot{margin:12px 2px 0;color:var(--muted);font-size:.75rem}.chart-foot strong{color:var(--ink)}
 @media(max-width:760px){.chart-intro{grid-template-columns:1fr}.metric-strip{grid-template-columns:1fr 1fr}.plot-head{flex-direction:column}.chart-toolbar{align-items:flex-start;flex-direction:column}}
+.segmented button{min-height:44px;font-size:.7rem}.segmented button:focus-visible,.chart-inspector input:focus-visible{outline:2px solid var(--accent-strong);outline-offset:3px}.svg-host{min-width:0}.svg-host :global(svg){font-family:var(--font-mono);font-variant-numeric:tabular-nums}.legend :global(span){font-size:.7rem}.dd-label{font-size:.7rem;gap:12px;flex-wrap:wrap}.chart-inspector{border-top:1px solid var(--border);padding-top:12px;margin-top:8px}.chart-inspector label{display:block;font-size:.75rem;color:var(--muted)}.chart-inspector input{display:block;width:100%;min-height:44px;margin:0;accent-color:var(--accent-strong)}.chart-inspector output{display:flex;flex-wrap:wrap;gap:6px 16px;min-height:3em;font:600 .75rem/1.6 var(--font-mono)}.chart-inspector output :global(strong){flex-basis:100%}.metric-strip>div{min-width:0}.metric-strip span{font-size:.7rem}.metric-strip strong{overflow-wrap:anywhere}.tooltip{max-width:calc(100% - 16px);min-width:0;font-size:.75rem}.tooltip :global(strong),.tooltip :global(span){display:block;margin-bottom:4px}.plot-card{min-width:0}
 </style>
 
-<script is:inline define:vars={{ chartData, oosStart, cutoff }}>
-(function(){
+<script is:inline type="module" define:vars={{ chartData, oosStart, cutoff, geometryUrl }}>
+(async function(){
+  const { chartGeometry, dateTickIndices, nearestPointIndex } = await import(geometryUrl);
   const host=document.getElementById('rn-nav'), ddHost=document.getElementById('rn-dd'), tip=document.getElementById('rn-tooltip');
   if(!host||!ddHost||!tip) return;
-  let mode='roll', range='all';
-  const W=1000,H=360,DH=145,L=54,R=18,T=18,B=30;
+  const slider=document.getElementById('rn-inspect'), inspection=document.getElementById('rn-inspection');
+  let mode='roll', range='all', selectedDate=null, renderedWidth=0;
+  let inspectPoint=()=>{};
   const palette=['var(--accent)','var(--muted)','var(--accent-strong)'];
+  const localized=(en,zh)=>document.documentElement.dataset.lang==='zh'?zh:en;
   const modeLabels={
-    roll:{title:'Optimized Roll',subtitle:'Core Roll Timing strategy vs passive benchmark',primary:'Optimized Roll'},
-    arb:{title:'Cross-Maturity Arb',subtitle:'6× Cross-Maturity Arbitrage vs positive-spread benchmark',primary:'Cross-Maturity Arb'},
-    portfolio:{title:'Flagship Portfolio',subtitle:'IC Roll Timing + 1.0× Cross-Maturity Arbitrage',primary:'Flagship Portfolio'},
+    roll:{title:['Optimized Roll','优化移仓'],subtitle:['Core Roll Timing strategy vs passive benchmark','核心移仓择时策略与被动基准对比']},
+    arb:{title:['Cross-Maturity Arb','跨期套利'],subtitle:['6× Cross-Maturity Arbitrage vs positive-spread benchmark','6 倍跨期套利与正价差基准对比']},
+    portfolio:{title:['Flagship Portfolio','旗舰组合'],subtitle:['IC Roll Timing + 1.0× Cross-Maturity Arbitrage','IC 移仓择时 + 1.0 倍跨期套利']},
+  };
+  const ariaLabels={
+    strategyView:['Strategy view','策略视图'],dateRange:['Date range','日期区间'],
+    navChart:['NAV chart','净值图'],drawdownChart:['Drawdown chart','回撤图'],
   };
   const pick=()=>chartData[mode];
   const slice=()=>{
@@ -61,31 +75,79 @@ const cutoff = data.cutoff;
     if(!idx.length) return null; const ids=idx.map(x=>x.i);
     return {title:c.title,dates:ids.map(i=>c.dates[i]),series:c.series.map(s=>({...s,values:ids.map(i=>s.values[i])})),dd:ids.map(i=>c.dd[i])};
   };
-  const svg=(h)=>{const e=document.createElementNS('http://www.w3.org/2000/svg','svg');e.setAttribute('viewBox',`0 0 ${W} ${h}`);return e};
+  const svg=(w,h,label)=>{const e=document.createElementNS('http://www.w3.org/2000/svg','svg');e.setAttribute('viewBox',`0 0 ${w} ${h}`);e.setAttribute('role','img');e.setAttribute('aria-label',label);return e};
   const node=(tag,a={})=>{const e=document.createElementNS('http://www.w3.org/2000/svg',tag);Object.entries(a).forEach(([k,v])=>e.setAttribute(k,String(v)));return e};
   const text=(s,x,y,a={})=>{const e=node('text',{x,y,...a});e.textContent=s;return e};
   const path=(vals,x,y)=>vals.map((v,i)=>(i?'L':'M')+' '+x(i).toFixed(1)+' '+y(v).toFixed(1)).join(' ');
   const mean=a=>a.reduce((s,x)=>s+x,0)/Math.max(1,a.length);
   const sd=a=>{if(a.length<2)return 0;const m=mean(a);return Math.sqrt(a.reduce((s,x)=>s+(x-m)*(x-m),0)/(a.length-1))};
   function render(){
-    const c=slice(); if(!c) return; host.innerHTML='';ddHost.innerHTML='';
-    const labels=modeLabels[mode];
-    document.getElementById('rn-chart-title').textContent=labels.title;
-    document.getElementById('rn-chart-subtitle').textContent=labels.subtitle;
-    const lg=document.getElementById('rn-legend');lg.innerHTML='';c.series.forEach((s,i)=>{const z=document.createElement('span');z.innerHTML=`<i style="background:${palette[i]}"></i>${i===0?labels.primary:s.name}`;lg.appendChild(z)});
+    const c=slice(), width=host.getBoundingClientRect().width; if(!c||width<=0) return;
+    const {width:W,navHeight:H,drawdownHeight:DH,left:L,right:R,top:T,bottom:B,fontSize}=chartGeometry(width);
+    renderedWidth=width; host.innerHTML='';ddHost.innerHTML='';tip.hidden=true;
+    const labels=modeLabels[mode], primary=localized(...labels.title);
+    document.getElementById('rn-chart-title').textContent=primary;
+    document.getElementById('rn-chart-subtitle').textContent=localized(...labels.subtitle);
+    document.querySelectorAll('[data-chart-label]').forEach(el=>el.setAttribute('aria-label',localized(...ariaLabels[el.dataset.chartLabel])));
+    const seriesName=(series,index)=>index===0?primary:series.name;
+    const lg=document.getElementById('rn-legend');lg.innerHTML='';c.series.forEach((series,index)=>{const z=document.createElement('span'), swatch=document.createElement('i');swatch.style.background=palette[index];z.append(swatch,seriesName(series,index));lg.appendChild(z)});
     const n=c.dates.length, xs=i=>L+i/Math.max(1,n-1)*(W-L-R); const all=c.series.flatMap(s=>s.values);let lo=Math.min(...all),hi=Math.max(...all),pad=(hi-lo)*.07||.1;lo-=pad;hi+=pad;const ys=v=>T+(hi-v)/(hi-lo)*(H-T-B);
-    const s=svg(H); for(let k=0;k<5;k++){const v=lo+(hi-lo)*k/4,y=ys(v);s.appendChild(node('line',{x1:L,y1:y,x2:W-R,y2:y,stroke:'var(--border)'}));s.appendChild(text(v.toFixed(2),L-7,y+4,{'text-anchor':'end',fill:'var(--muted)','font-size':'11'}));}
-    const oos=c.dates.findIndex(d=>d>=oosStart); if(oos>=0){s.insertBefore(node('rect',{x:xs(oos),y:T,width:W-R-xs(oos),height:H-T-B,fill:'var(--accent-soft)',opacity:.35}),s.firstChild);s.appendChild(text('OUT OF SAMPLE',Math.min(W-R-8,xs(oos)+8),T+14,{fill:'var(--accent-strong)','font-size':'10','font-weight':'700'}));}
+    const s=svg(W,H,localized('NAV chart; inspect exact values with the date slider below.','净值图；使用下方日期滑块检查精确数值。'));
+    for(let k=0;k<5;k++){const v=lo+(hi-lo)*k/4,y=ys(v);s.appendChild(node('line',{x1:L,y1:y,x2:W-R,y2:y,stroke:'var(--border)'}));s.appendChild(text(v.toFixed(2),L-7,y+4,{'text-anchor':'end',fill:'var(--muted)','font-size':fontSize}));}
+    const oos=c.dates.findIndex(d=>d>=oosStart); if(oos>=0){s.insertBefore(node('rect',{x:xs(oos),y:T,width:W-R-xs(oos),height:H-T-B,fill:'var(--accent-soft)',opacity:.35}),s.firstChild);s.appendChild(text(localized(W<600?'OOS':'OUT OF SAMPLE','样本外'),W-R-4,T+14,{'text-anchor':'end',fill:'var(--accent-strong)','font-size':fontSize,'font-weight':'700'}));}
     c.series.forEach((ser,i)=>{const p=node('path',{d:path(ser.values,xs,ys),fill:'none',stroke:palette[i],'stroke-width':i===0?2.6:1.7,'stroke-dasharray':ser.dash?'6 4':'','stroke-linejoin':'round','stroke-linecap':'round'});s.appendChild(p)});
-    const overlay=node('rect',{x:L,y:T,width:W-L-R,height:H-T-B,fill:'transparent'});s.appendChild(overlay);const cross=node('line',{y1:T,y2:H-B,stroke:'var(--muted)','stroke-dasharray':'3 3',opacity:0});s.appendChild(cross);
-    overlay.addEventListener('pointermove',ev=>{const b=s.getBoundingClientRect(),px=(ev.clientX-b.left)/b.width*W,i=Math.max(0,Math.min(n-1,Math.round((px-L)/(W-L-R)*(n-1))));const x=xs(i);cross.setAttribute('x1',x);cross.setAttribute('x2',x);cross.setAttribute('opacity','1');tip.hidden=false;tip.style.left=Math.min(b.width-190,Math.max(8,ev.clientX-b.left+12))+'px';tip.style.top=Math.max(8,ev.clientY-b.top-10)+'px';tip.innerHTML=`<strong>${c.dates[i]}</strong>`+c.series.map((q,j)=>`<div style="margin-top:4px">${j===0?labels.primary:q.name}: <b>${q.values[i].toFixed(3)}x</b></div>`).join('')});
-    overlay.addEventListener('pointerleave',()=>{cross.setAttribute('opacity','0');tip.hidden=true});host.appendChild(s);
-    let dlo=Math.min(...c.dd,0);const dy=v=>T+(0-v)/(0-dlo||1)*(DH-T-22);const d=svg(DH);[0,.5,1].forEach(q=>{const v=dlo*q,y=dy(v);d.appendChild(node('line',{x1:L,y1:y,x2:W-R,y2:y,stroke:'var(--border)'}));d.appendChild(text(v.toFixed(1)+'%',L-7,y+4,{'text-anchor':'end',fill:'var(--muted)','font-size':'11'}));});d.appendChild(node('path',{d:path(c.dd,xs,dy),fill:'none',stroke:'var(--danger)','stroke-width':1.7}));ddHost.appendChild(d);
+    let dlo=Math.min(...c.dd,0);const dy=v=>T+(0-v)/(0-dlo||1)*(DH-T-B);
+    const d=svg(W,DH,localized('Drawdown chart; inspect exact values with the date slider below.','回撤图；使用下方日期滑块检查精确数值。'));
+    [0,.5,1].forEach(q=>{const v=dlo*q,y=dy(v);d.appendChild(node('line',{x1:L,y1:y,x2:W-R,y2:y,stroke:'var(--border)'}));d.appendChild(text(v.toFixed(1)+'%',L-7,y+4,{'text-anchor':'end',fill:'var(--muted)','font-size':fontSize}));});d.appendChild(node('path',{d:path(c.dd,xs,dy),fill:'none',stroke:'var(--danger)','stroke-width':1.7}));
+    const crosshairs=[];
+    for(const [panel,height] of [[s,H],[d,DH]]){
+      const ticks=dateTickIndices(n,W-L-R);
+      ticks.forEach((i,k)=>{
+        panel.appendChild(text(c.dates[i],xs(i),height-9,{'text-anchor':k===0?'start':k===ticks.length-1?'end':'middle',fill:'var(--muted)','font-size':fontSize,'data-date-tick':''}));
+      });
+      const overlay=node('rect',{x:L,y:T,width:W-L-R,height:height-T-B,fill:'transparent','data-chart-inspect':''});
+      panel.appendChild(overlay);
+      const cross=node('line',{y1:T,y2:height-B,stroke:'var(--muted)','stroke-dasharray':'3 3','pointer-events':'none'});
+      panel.appendChild(cross);crosshairs.push(cross);
+      const inspectPointer=ev=>{
+        const bounds=panel.getBoundingClientRect(),px=(ev.clientX-bounds.left)/bounds.width*W;
+        inspectPoint(nearestPointIndex(px,L,W-R,n));
+        if(ev.pointerType==='touch') return;
+        tip.replaceChildren(...Array.from(inspection.children,el=>el.cloneNode(true)));
+        tip.hidden=false;
+        const card=tip.parentElement.getBoundingClientRect();
+        tip.style.left=Math.max(8,Math.min(card.width-tip.offsetWidth-8,ev.clientX-card.left+12))+'px';
+        tip.style.top=Math.max(8,Math.min(card.height-tip.offsetHeight-8,ev.clientY-card.top+12))+'px';
+      };
+      overlay.addEventListener('pointerdown',inspectPointer);
+      overlay.addEventListener('pointermove',ev=>{if(ev.pointerType==='mouse') inspectPointer(ev)});
+      overlay.addEventListener('pointerleave',()=>{tip.hidden=true});
+    }
+    host.appendChild(s);ddHost.appendChild(d);
+    slider.max=String(n-1);slider.disabled=n<2;
+    inspectPoint=index=>{
+      const i=Math.max(0,Math.min(n-1,index));
+      selectedDate=c.dates[i];slider.value=String(i);
+      crosshairs.forEach(cross=>{cross.setAttribute('x1',xs(i));cross.setAttribute('x2',xs(i))});
+      const date=document.createElement('strong');date.textContent=selectedDate;
+      inspection.replaceChildren(date);
+      const values=c.series.map((series,j)=>`${seriesName(series,j)}: ${series.values[i].toFixed(3)}x`);
+      values.push(`${localized('Drawdown','回撤')}: ${c.dd[i].toFixed(2)}%`);
+      values.forEach(value=>{const item=document.createElement('span');item.textContent=value;inspection.appendChild(item)});
+      slider.setAttribute('aria-valuetext',`${selectedDate}; ${values.join('; ')}`);
+    };
+    const selectedIndex=c.dates.indexOf(selectedDate);inspectPoint(selectedIndex<0?n-1:selectedIndex);
     const nav=c.series[0].values,first=nav[0],last=nav.at(-1),days=(new Date(c.dates.at(-1))-new Date(c.dates[0]))/86400000,years=Math.max(days/365.25,1/365.25),ann=Math.pow(last/first,1/years)-1;
     const rs=nav.slice(1).map((v,i)=>v/nav[i]-1),obsPerYear=rs.length/years,vol=sd(rs),sharpe=vol>0?mean(rs)/vol*Math.sqrt(obsPerYear):0,mdd=Math.min(...c.dd),m=document.querySelectorAll('#rn-metrics strong');
     m[0].textContent=(ann*100).toFixed(1)+'%';m[1].textContent=sharpe.toFixed(2);m[2].textContent=mdd.toFixed(1)+'%';m[3].textContent=c.dates[0]+' → '+c.dates.at(-1);
   }
-  document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.mode').forEach(x=>x.classList.remove('active'));b.classList.add('active');mode=b.dataset.mode;render()}));
-  document.querySelectorAll('.range').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.range').forEach(x=>x.classList.remove('active'));b.classList.add('active');range=b.dataset.range;render()}));render();
+  document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.mode').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});mode=b.dataset.mode;render()}));
+  document.querySelectorAll('.range').forEach(b=>b.addEventListener('click',()=>{document.querySelectorAll('.range').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',String(x===b))});range=b.dataset.range;render()}));
+  slider.addEventListener('input',()=>{tip.hidden=true;inspectPoint(Number(slider.value))});
+  window.addEventListener('site-language-change',render);
+  const resize=()=>{if(Math.abs(host.getBoundingClientRect().width-renderedWidth)>.5)render()};
+  if(typeof ResizeObserver==='function') new ResizeObserver(resize).observe(host);
+  else window.addEventListener('resize',resize);
+  render();
 })();
 </script>
