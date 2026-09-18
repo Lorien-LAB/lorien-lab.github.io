@@ -1949,6 +1949,99 @@
         "small-cases-recurrence-and-structural-simplification"
       ],
       "resolutionNote": "The alternating-share prompt becomes a canonical finite-and-infinite geometric-allocation Problem with an item-level limits refinement."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.11",
+      "canonicalTopics": [
+        "logical-deduction",
+        "ordinary-differential-equations"
+      ],
+      "topicOverrideReason": "Item-level review identifies a reciprocal-rate accumulation model with an integral over elapsed snow time, so this Logical Deduction item also belongs to Ordinary Differential Equations.",
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "snow-removal-start-time-from-distance-ratio"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state"
+      ],
+      "resolutionNote": "The snow-removal prompt becomes a canonical latent-start-time Problem using a reciprocal-rate integral and an exact positive-root selection."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.15",
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "falsifying-a-one-way-card-rule"
+      ],
+      "canonicalKnowledge": [
+        "conditional-implication-contrapositive-and-falsification"
+      ],
+      "resolutionNote": "The one-way rule prompt becomes a canonical falsification Problem separating implication from converse reasoning."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.16",
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "variant",
+      "canonicalProblems": [
+        "twelve-object-balance-scale-diagnosis"
+      ],
+      "canonicalKnowledge": [
+        "decision-trees-information-bounds-and-adaptive-testing"
+      ],
+      "resolutionNote": "The one-heavy nine-object scale prompt is retained as a tested two-weighing variant of the stronger twelve-object adaptive diagnosis page."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.18",
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "anchor-overboard-water-level"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state"
+      ],
+      "resolutionNote": "The displacement prompt becomes a canonical Problem comparing floating-load displacement with the submerged object's own volume."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.20",
+      "canonicalTopics": [
+        "logical-deduction"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "public-announcement-departure-day"
+      ],
+      "canonicalKnowledge": [
+        "common-knowledge-and-iterated-reasoning"
+      ],
+      "resolutionNote": "The public-announcement puzzle becomes a harmless canonical departure-day Problem with an explicit common-knowledge induction."
+    },
+    {
+      "sourceSection": "8",
+      "sourceItem": "8.22",
+      "canonicalTopics": [
+        "logical-deduction",
+        "symmetry"
+      ],
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "bisecting-a-rectangular-frame-with-one-line"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state"
+      ],
+      "resolutionNote": "The rectangular-frame prompt becomes a canonical central-symmetry construction that bisects the outer rectangle, inner rectangle, and their area difference."
     }
   ]
 }

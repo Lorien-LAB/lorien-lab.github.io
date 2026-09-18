@@ -1,0 +1,40 @@
+{
+  "id": "logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022",
+  "canonicalTopics": [
+    "logic-brainteasers-discrete-reasoning",
+    "logical-deduction"
+  ],
+  "status": "active",
+  "masterItemKeys": [
+    "red-book::8::8.11",
+    "red-book::8::8.15",
+    "red-book::8::8.16",
+    "red-book::8::8.18",
+    "red-book::8::8.20",
+    "red-book::8::8.22"
+  ],
+  "sourceScopes": [
+    {
+      "source": "red-book",
+      "sourceSections": [
+        "8"
+      ],
+      "evidencePageRanges": [
+        {
+          "startPage": 288,
+          "endPage": 306
+        }
+      ],
+      "reviewOutcome": "red-logical-reasoning-core-publication-and-variant-disposition",
+      "reviewNote": "Six ordered question records yield five canonical Problems, one balance-scale variant, and two reusable Knowledge nodes."
+    }
+  ],
+  "publicDelta": {
+    "problems": 5,
+    "knowledge": 2
+  },
+  "knowledgeSlugs": [
+    "conditional-implication-contrapositive-and-falsification",
+    "common-knowledge-and-iterated-reasoning"
+  ]
+}

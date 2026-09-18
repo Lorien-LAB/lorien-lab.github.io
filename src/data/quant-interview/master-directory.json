@@ -5703,14 +5703,20 @@
       "primaryTopic": "logical-deduction",
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning",
-        "logical-deduction"
+        "logical-deduction",
+        "calculus-differential-equations",
+        "ordinary-differential-equations"
       ],
       "sortKey": "02.02|02|1212|red-book::8::8.11",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "snow-removal-start-time-from-distance-ratio"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022",
+      "resolutionNote": "The snow-removal prompt becomes a canonical latent-start-time Problem using a reciprocal-rate integral and an exact positive-root selection."
     },
     {
       "key": "red-book::8::8.15",
@@ -5736,11 +5742,15 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|02|1216|red-book::8::8.15",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "falsifying-a-one-way-card-rule"
+      ],
+      "canonicalKnowledge": [
+        "conditional-implication-contrapositive-and-falsification"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022",
+      "resolutionNote": "The one-way rule prompt becomes a canonical falsification Problem separating implication from converse reasoning."
     },
     {
       "key": "red-book::8::8.16",
@@ -5766,11 +5776,15 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|02|1217|red-book::8::8.16",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "variant",
+      "canonicalProblems": [
+        "twelve-object-balance-scale-diagnosis"
+      ],
+      "canonicalKnowledge": [
+        "decision-trees-information-bounds-and-adaptive-testing"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022",
+      "resolutionNote": "The one-heavy nine-object scale prompt is retained as a tested two-weighing variant of the stronger twelve-object adaptive diagnosis page."
     },
     {
       "key": "red-book::8::8.18",
@@ -5796,11 +5810,15 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|02|1219|red-book::8::8.18",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "anchor-overboard-water-level"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022",
+      "resolutionNote": "The displacement prompt becomes a canonical Problem comparing floating-load displacement with the submerged object's own volume."
     },
     {
       "key": "red-book::8::8.20",
@@ -5826,11 +5844,15 @@
         "logical-deduction"
       ],
       "sortKey": "02.02|02|1221|red-book::8::8.20",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "public-announcement-departure-day"
+      ],
+      "canonicalKnowledge": [
+        "common-knowledge-and-iterated-reasoning"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022",
+      "resolutionNote": "The public-announcement puzzle becomes a harmless canonical departure-day Problem with an explicit common-knowledge induction."
     },
     {
       "key": "red-book::8::8.22",
@@ -5853,14 +5875,19 @@
       "primaryTopic": "logical-deduction",
       "canonicalTopics": [
         "logic-brainteasers-discrete-reasoning",
-        "logical-deduction"
+        "logical-deduction",
+        "symmetry"
       ],
       "sortKey": "02.02|02|1223|red-book::8::8.22",
-      "state": "pending",
-      "canonicalProblems": [],
-      "canonicalKnowledge": [],
-      "workstream": null,
-      "resolutionNote": null
+      "state": "canonical-problem",
+      "canonicalProblems": [
+        "bisecting-a-rectangular-frame-with-one-line"
+      ],
+      "canonicalKnowledge": [
+        "constraint-reframing-and-latent-state"
+      ],
+      "workstream": "logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022",
+      "resolutionNote": "The rectangular-frame prompt becomes a canonical central-symmetry construction that bisects the outer rectangle, inner rectangle, and their area difference."
     },
     {
       "key": "150-most-frequently-asked::2.7::theory",

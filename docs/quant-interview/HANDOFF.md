@@ -995,6 +995,30 @@ All three public Problems are independently authored and source-neutral: their f
 
 The chapter introduction creates only existing-Knowledge linkage. The chapter and repeated-question indexes are internal framing records, create no public target, and do not terminalize any referenced question; all ten `red-book::10.2::*` question rows retain their pre-021 pending state. Workstream 021 alone is bounded to the exact six records above and does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Red Book, any source book, or adjacent topics. Workstream 022 is not active or authorized by this closure.
 
+## Active cross-book workstream 22
+
+`logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022`
+
+Status: **active**.
+
+Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**, bounded to exactly six Red question records:
+
+- `red-book::8::8.11`
+- `red-book::8::8.15`
+- `red-book::8::8.16`
+- `red-book::8::8.18`
+- `red-book::8::8.20`
+- `red-book::8::8.22`
+
+The active public delta is exactly **+5 Problems / +2 Knowledge**. The nine-object one-heavy balance prompt is a `variant` of `twelve-object-balance-scale-diagnosis`; it does not create a sixth Problem. The active corpus is therefore **101 Problems / 61 Knowledge**.
+
+All six owned master rows are terminal in the active implementation, producing **268 terminal / 482 pending** records. The first pending record after the active scope is `150-most-frequently-asked::2.7::theory`.
+
+The only item-level out-of-branch topic override is `red-book::8::8.11`, which also maps to `ordinary-differential-equations` because its solution is a reciprocal-rate accumulation model. The rectangular-frame item also carries the existing sibling topic `symmetry` within the Logic branch and requires no out-of-branch override.
+
+Completion evidence is intentionally absent while the workstream is active. The workstream must not be marked complete until the exact active commit passes the repository validation gates and matching GitHub CI evidence is recorded.
+
+
 ## Next action
 
 The durable **cross-book** Topic-first workflow remains unchanged: all three verified sources form one evidence pool, public pages stay source-neutral, and item-level mathematical identity controls ownership and deduplication.
@@ -1015,17 +1039,15 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**No bounded topic is active. Workstream 021 is complete.**
+**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
-A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.
+Workstream 022 is active across the exact six-record Red logical-reasoning scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes the repository validation gates and GitHub CI.
 
 ## Master directory ingestion state
 
-**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+**Workstream 022 is active across exactly six terminalized Red records; the three-book master directory migration remains complete.**
 
-First pending master record: `red-book::8::8.11`
-
-Workstream 022 is not active or authorized.
+First pending master record after the active 022 scope: `150-most-frequently-asked::2.7::theory`
 
 ## Parallel workstream coordination
 
