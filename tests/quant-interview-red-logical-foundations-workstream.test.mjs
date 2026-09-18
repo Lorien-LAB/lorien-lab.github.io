@@ -146,9 +146,13 @@ test('021 adds exactly three unique Red coverage tuples in source-item order', a
 
   const addedKeys = new Set(addedCoverageTuples.map(([section, item]) => `${section}::${item}`));
   const observedAdded = tuples.filter(([section, item]) => addedKeys.has(`${section}::${item ?? ''}`));
-  const legacyTuples = tuples.filter(([section, item]) => !addedKeys.has(`${section}::${item ?? ''}`));
+  const later022Keys = new Set(['8::8.11', '8::8.15', '8::8.16', '8::8.18', '8::8.20', '8::8.22']);
+  const legacyTuples = tuples.filter(([section, item]) => {
+    const key = `${section}::${item ?? ''}`;
+    return !addedKeys.has(key) && !later022Keys.has(key);
+  });
   assert.deepEqual(observedAdded, addedCoverageTuples);
-  assert.equal(coverage.entries.length, 157);
+  assert.equal(coverage.entries.length, 163);
   assert.equal(legacyTuples.length, 154);
   assert.equal(sha256(JSON.stringify(legacyTuples)), legacyCoverageTupleHash);
 });

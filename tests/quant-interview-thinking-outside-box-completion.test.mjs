@@ -14,17 +14,15 @@ Workstream 020 is active across the exact eight-record Green Book 2.3 scope. Its
 const completeCurrent = `**No bounded topic is active. Workstream 020 is complete.**
 
 A later workstream requires its own approved design and evidence audit; workstream 021 is not active or authorized by this closure.`;
-const complete021Master = `**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+const complete021Master = `**Workstream 022 is active across exactly six terminalized Red records; the three-book master directory migration remains complete.**
 
-First pending master record: \`red-book::8::8.11\`
-
-Workstream 022 is not active or authorized.`;
+First pending master record after the active 022 scope: \`150-most-frequently-asked::2.7::theory\``;
 const active021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
 Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
-const complete021Current = `**No bounded topic is active. Workstream 021 is complete.**
+const complete021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
-A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.`;
+Workstream 022 is active across the exact six-record Red logical-reasoning scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes the repository validation gates and GitHub CI.`;
 const newProblemPaths = [
   'src/content/problems/logic/pack-length-four-bricks-in-six-cube.md',
   'src/content/problems/logic/two-cube-calendar-digit-labeling.md',
@@ -141,9 +139,9 @@ test('020 lifecycle is evidence-free while active and factually strict when comp
   } else {
     assert.equal(currentBlock(handoff), complete021Current);
     assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-    assert.match(handoff, /First pending master record: `red-book::8::8\.11`/i);
+    assert.match(handoff, /First pending master record after the active 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
   }
-  assert.match(handoff, /Workstream 022 is not active or authorized/);
+  assert.match(handoff, /Workstream 022 is active/i);
 });
 
 test('020 final tree remains complete and workflow-free after 021 starts', async () => {
@@ -177,7 +175,7 @@ test('020 final HANDOFF remains complete while 021 owns current state', async ()
     assert.equal(currentBlock(handoff), complete021Current);
     assert.equal(section(handoff, 'Master directory ingestion state').trim(), complete021Master);
   }
-  assert.match(handoff, /Workstream 022 is not active or authorized/);
+  assert.match(handoff, /Workstream 022 is active/i);
 });
 
 test('020 remains durable after 021 advances the exact public and master contracts', async () => {
@@ -190,14 +188,14 @@ test('020 remains durable after 021 advances the exact public and master contrac
   ]);
   const terminal = directory.items.filter(({ state }) => !['pending', 'needs-review'].includes(state)).length;
   assert.equal(newProblemPaths.length, 7);
-  assert.equal(problemFiles.filter((file) => String(file).endsWith('.md')).length, 96);
+  assert.equal(problemFiles.filter((file) => String(file).endsWith('.md')).length, 101);
   assert.deepEqual(catalog.modules.filter(({ slug }) => slug === expectedModule.slug), [expectedModule]);
-  assert.equal(catalog.modules.length, 59);
-  assert.equal(terminal, 262);
-  assert.equal(directory.items.length - terminal, 488);
-  assert.match(generated, /Published Knowledge: 59/);
-  assert.match(generated, /Canonical Problems: 96/);
-  assert.match(generated, /Terminal master records: 262/);
-  assert.match(generated, /Pending master records: 488/);
-  assert.match(generated, /First pending: `red-book::8::8\.11`/);
+  assert.equal(catalog.modules.length, 61);
+  assert.equal(terminal, 268);
+  assert.equal(directory.items.length - terminal, 482);
+  assert.match(generated, /Published Knowledge: 61/);
+  assert.match(generated, /Canonical Problems: 101/);
+  assert.match(generated, /Terminal master records: 268/);
+  assert.match(generated, /Pending master records: 482/);
+  assert.match(generated, /First pending: `150-most-frequently-asked::2\.7::theory`/);
 });
