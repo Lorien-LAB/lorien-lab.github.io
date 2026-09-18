@@ -27,41 +27,41 @@ A group of participants live under the following harmless protocol. Some partici
 
 At noon on day 0, a moderator publicly announces: “At least one participant is marked.” The rules, everyone's observations, everyone's rationality, and the public announcement are common knowledge. A participant leaves at midnight as soon as they are certain that they themselves are marked. Everyone observes all departures.
 
-If exactly (n\ge1) participants are marked, on which night do the marked participants leave? Prove the result.
+If exactly $n\ge1$ participants are marked, on which night do the marked participants leave? Prove the result.
 
 ## Think Before Revealing
 
 <details><summary>Hint 1</summary>Start with one marked participant. What does that person see immediately after the public announcement?</details>
-<details><summary>Hint 2</summary>For the induction step, let a marked participant temporarily suppose they are unmarked and use the predicted behavior of the (n-1) people they can see.</details>
+<details><summary>Hint 2</summary>For the induction step, let a marked participant temporarily suppose they are unmarked and use the predicted behavior of the $n-1$ people they can see.</details>
 
 <details>
 <summary>Show Solution</summary>
 
 ## Solution
 
-The marked participants all leave on **night (n)**. We prove this by induction.
+The marked participants all leave on **night $n$**. We prove this by induction.
 
-### Base case: (n=1)
+### Base case: $n=1$
 
 The unique marked participant sees no marked people. The public announcement guarantees that at least one marked participant exists. Therefore the only possibility consistent with what they see is that they themselves are marked, so they leave on night 1.
 
 ### Induction hypothesis
 
-Assume that whenever exactly (n-1) participants are marked, all of them leave on night (n-1).
+Assume that whenever exactly $n-1$ participants are marked, all of them leave on night $n-1$.
 
 ### Induction step
 
-Now suppose exactly (n) participants are marked. Pick any marked participant (A). Participant (A) sees exactly (n-1) marked people.
+Now suppose exactly $n$ participants are marked. Pick any marked participant $A$. Participant $A$ sees exactly $n-1$ marked people.
 
-Consider (A)'s counterfactual hypothesis: “I am unmarked.” Under that hypothesis there would be exactly (n-1) marked participants, namely the people (A) sees. By the induction hypothesis, those (n-1) people would all leave on night (n-1).
+Consider $A$'s counterfactual hypothesis: “I am unmarked.” Under that hypothesis there would be exactly $n-1$ marked participants, namely the people $A$ sees. By the induction hypothesis, those $n-1$ people would all leave on night $n-1$.
 
-But in the actual (n)-marked state, nobody leaves before night (n). In particular, when night (n-1) passes without those (n-1) people leaving, (A) can reject the hypothesis that they are unmarked. Therefore (A) knows they are marked.
+But in the actual $n$-marked state, nobody leaves before night $n$. In particular, when night $n-1$ passes without those $n-1$ people leaving, $A$ can reject the hypothesis that they are unmarked. Therefore $A$ knows they are marked.
 
-The same reasoning applies symmetrically to every marked participant. At midnight on night (n), all marked participants leave.
+The same reasoning applies symmetrically to every marked participant. At midnight on night $n$, all marked participants leave.
 
 ### Why the public announcement matters
 
-When (n\ge2), each marked participant already sees at least one marked person, so the statement “at least one is marked” may appear factually redundant. It is not epistemically redundant. The public announcement makes the existence claim common knowledge, which supplies the shared base case that every layer of the induction can rely on.
+When $n\ge2$, each marked participant already sees at least one marked person, so the statement “at least one is marked” may appear factually redundant. It is not epistemically redundant. The public announcement makes the existence claim common knowledge, which supplies the shared base case that every layer of the induction can rely on.
 
 Observed non-departures are also public evidence. Each quiet night eliminates the lower-count world that would have produced departures one night earlier.
 

@@ -37,28 +37,28 @@ Construct one infinite straight line that divides the area inside the larger rec
 
 ## Solution
 
-Let (O) be the center of the outer rectangle and (I) the center of the inner rectangle.
+Let $O$ be the center of the outer rectangle and $I$ the center of the inner rectangle.
 
-If (O\ne I), draw the unique infinite line through both centers.
+If $O\ne I$, draw the unique infinite line through both centers.
 
 A rectangle is centrally symmetric about its center: rotation by 180 degrees maps the rectangle onto itself. Any line through the center is preserved as a set by that rotation, while the two open half-planes on opposite sides of the line are exchanged. The rotation is area-preserving, so the portions of the rectangle on the two sides of the line have equal area.
 
-Therefore the line (OI):
+Therefore the line $OI$:
 
-- bisects the area of the outer rectangle because it passes through (O);
-- bisects the area of the inner rectangle because it passes through (I).
+- bisects the area of the outer rectangle because it passes through $O$;
+- bisects the area of the inner rectangle because it passes through $I$.
 
-Let the outer areas on the two sides be (A/2) and (A/2), and the inner areas be (a/2) and (a/2). The rectangular-frame areas are then
+Let the outer areas on the two sides be $A/2$ and $A/2$, and the inner areas be $a/2$ and $a/2$. The rectangular-frame areas are then
 
-[
+$$
 \frac{A}{2}-\frac{a}{2}
 \quad\text{and}\quad
 \frac{A}{2}-\frac{a}{2},
-]
+$$
 
 so they are equal. Hence the line through the two centers bisects the frame.
 
-If (O=I), uniqueness disappears. **Every** line through the common center bisects both rectangles by the same central-symmetry argument, so every such line bisects their area difference.
+If $O=I$, uniqueness disappears. **Every** line through the common center bisects both rectangles by the same central-symmetry argument, so every such line bisects their area difference.
 
 The construction is an existence argument, not generally a uniqueness theorem. When the centers differ, the line through both centers is a guaranteed solution; special configurations may admit additional bisecting lines.
 

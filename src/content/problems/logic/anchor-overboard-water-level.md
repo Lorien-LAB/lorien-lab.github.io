@@ -23,7 +23,7 @@ featured: false
 
 ## Problem
 
-A boat floats in a pool while carrying a dense anchor of mass (m) and density (ho_a). The water density is (ho_w), with (ho_a>ho_w). The anchor is then lowered overboard and comes to rest fully submerged in the pool.
+A boat floats in a pool while carrying a dense anchor of mass $m$ and density $\rho_a$. The water density is $\rho_w$, with $\rho_a>\rho_w$. The anchor is then lowered overboard and comes to rest fully submerged in the pool.
 
 Assume the pool has fixed horizontal area, the boat returns to equilibrium, the anchor does not touch the boat after release, and transient waves are ignored. Does the equilibrium water level rise, fall, or stay the same?
 
@@ -39,30 +39,30 @@ Assume the pool has fixed horizontal area, the boat returns to equilibrium, the 
 
 While the anchor is carried by the floating boat, Archimedes' principle requires the boat to displace extra water whose weight equals the anchor's weight. The extra displaced volume attributable to the anchor is therefore
 
-[
+$$
 V_{\text{carried}}=\frac{m}{\rho_w}.
-]
+$$
 
-After the anchor is removed, the boat is lighter by mass (m), so its required displacement decreases by exactly that amount. The submerged anchor now displaces only its own physical volume,
+After the anchor is removed, the boat is lighter by mass $m$, so its required displacement decreases by exactly that amount. The submerged anchor now displaces only its own physical volume,
 
-[
+$$
 V_{\text{submerged}}=\frac{m}{\rho_a}.
-]
+$$
 
 Because the anchor is denser than water,
 
-[
+$$
 \rho_a>\rho_w
 \quad\Longrightarrow\quad
 \frac{m}{\rho_a}<\frac{m}{\rho_w}.
-]
+$$
 
 Hence the total displaced water volume decreases by
 
-[
+$$
 \Delta V
 =\frac{m}{\rho_a}-\frac{m}{\rho_w}<0.
-]
+$$
 
 With a fixed pool footprint, lower displaced volume means a lower equilibrium water level. Therefore the **water level falls**.
 

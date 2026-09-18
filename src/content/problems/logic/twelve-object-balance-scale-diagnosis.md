@@ -107,7 +107,7 @@ Every row weighs the same number of objects on both pans. Exhaustive simulation 
 
 Suppose there are nine labeled objects, exactly one is heavier than the other eight, and the direction of the anomaly is known in advance. At most three balance-scale weighings are permitted.
 
-There are nine hypotheses and every weighing has at most three outcomes, so one weighing cannot suffice while two may: (3^1<9le 3^2). The lower bound is therefore two weighings.
+There are nine hypotheses and every weighing has at most three outcomes, so one weighing cannot suffice while two may: $3^1<9\le 3^2$. The lower bound is therefore two weighings.
 
 A matching construction reaches the bound. First weigh objects 1–3 against 4–6.
 
@@ -115,7 +115,7 @@ A matching construction reaches the bound. First weigh objects 1–3 against 4�
 - If the right pan is heavier, it is in {4,5,6}.
 - If the pans balance, it is in {7,8,9}.
 
-In the surviving triple, weigh its first object against its second. Left-heavy identifies the first, right-heavy identifies the second, and balance identifies the third. Thus all nine hypotheses reach distinct two-outcome leaves. Since (3^2=9), the construction exactly matches the information bound; the third permitted weighing is unnecessary.
+In the surviving triple, weigh its first object against its second. Left-heavy identifies the first, right-heavy identifies the second, and balance identifies the third. Thus all nine hypotheses reach distinct two-outcome leaves. Since $3^2=9$, the construction exactly matches the information bound; the third permitted weighing is unnecessary.
 
 ## Why This Problem Matters
 

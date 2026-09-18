@@ -31,7 +31,7 @@ Which cards must be turned over to determine whether the rule is violated? Prove
 
 ## Think Before Revealing
 
-<details><summary>Hint 1</summary>Write the rule as (P\Rightarrow Q). What is the only truth assignment that makes an implication false?</details>
+<details><summary>Hint 1</summary>Write the rule as $P\Rightarrow Q$. What is the only truth assignment that makes an implication false?</details>
 <details><summary>Hint 2</summary>A visible consequent can confirm nothing about the antecedent, but a visible failure of the consequent may hide a violating antecedent.</details>
 
 <details>
@@ -39,23 +39,20 @@ Which cards must be turned over to determine whether the rule is violated? Prove
 
 ## Solution
 
-Let (P) mean “the letter is a vowel” and (Q) mean “the number is even.” The rule is (P\Rightarrow Q), which is false only in the state (P\land\neg Q).
+Let $P$ mean “the letter is a vowel” and $Q$ mean “the number is even.” The rule is $P\Rightarrow Q$, which is false only in the state $P\land\neg Q$.
 
 Therefore:
 
-- **A must be inspected.** It visibly satisfies (P). If its hidden number is odd, the rule is violated.
-- **7 must be inspected.** It visibly satisfies (
-eg Q). If its hidden letter is a vowel, the rule is violated.
-- **6 need not be inspected.** It visibly satisfies (Q). Its hidden letter may be a vowel or a consonant; both are compatible with (P\Rightarrow Q).
-- **C need not be inspected.** It visibly satisfies (
-eg P). The implication imposes no restriction on the hidden number.
+- **A must be inspected.** It visibly satisfies $P$. If its hidden number is odd, the rule is violated.
+- **7 must be inspected.** It visibly satisfies $\neg Q$. If its hidden letter is a vowel, the rule is violated.
+- **6 need not be inspected.** It visibly satisfies $Q$. Its hidden letter may be a vowel or a consonant; both are compatible with $P\Rightarrow Q$.
+- **C need not be inspected.** It visibly satisfies $\neg P$. The implication imposes no restriction on the hidden number.
 
 Thus the necessary and sufficient inspection set is **A and 7**.
 
-Necessity follows because either uninspected card could conceal the unique counterexample pattern: A could hide an odd number, and 7 could hide a vowel. Sufficiency follows because after both are checked, every possible instance of (P\land\neg Q) among the four cards has been ruled out.
+Necessity follows because either uninspected card could conceal the unique counterexample pattern: A could hide an odd number, and 7 could hide a vowel. Sufficiency follows because after both are checked, every possible instance of $P\land\neg Q$ among the four cards has been ruled out.
 
-Equivalently, the contrapositive is (
-eg Q\Rightarrow\neg P): an odd-number card must not have a vowel on its reverse. That is why 7 matters. The converse (Q\Rightarrow P) is not part of the rule, which is why 6 does not matter.
+Equivalently, the contrapositive is $\neg Q\Rightarrow\neg P$: an odd-number card must not have a vowel on its reverse. That is why 7 matters. The converse $Q\Rightarrow P$ is not part of the rule, which is why 6 does not matter.
 
 ## Why This Problem Matters
 
@@ -72,7 +69,6 @@ The problem tests whether you can distinguish falsification from confirmation. U
 
 - Replace the symbols with a compliance rule such as “production record implies signed approval.”
 - Add a second implication and determine how the inspection set changes.
-- Generalize to many visible cards and characterize the minimum audit set from (P) and (
-eg Q) observations.
+- Generalize to many visible cards and characterize the minimum audit set from $P$ and $\neg Q$ observations.
 
 </details>
