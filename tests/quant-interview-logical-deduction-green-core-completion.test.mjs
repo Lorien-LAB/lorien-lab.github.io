@@ -23,9 +23,9 @@ A later workstream requires its own approved design and evidence audit; workstre
 const active021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
 Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
-const complete021Current = `**No bounded topic is active. Workstream 021 is complete.**
+const complete021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
-A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.`;
+Workstream 022 is active across the exact six-record Red logical-reasoning scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes the repository validation gates and GitHub CI.`;
 
 const section = (text, heading) => text.split(new RegExp(`^## ${heading}$`, 'im'))[1]?.split(/^## /m)[0] ?? '';
 const currentBlock = (handoff) => handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0]?.trim() ?? '';
@@ -133,7 +133,7 @@ test('019 lifecycle is evidence-free while active and remains factually strict a
       assert.match(handoff, /^## Completed cross-book workstream 21$/m);
       assert.match(handoff, /First pending master record: `red-book::8::8\.11`/i);
     }
-    assert.match(handoff, /Workstream 022 is not active or authorized/i);
+    assert.match(handoff, /Workstream 022 is active/i);
   }
 });
 
@@ -163,11 +163,11 @@ test('019 exact corpus remains derivable after 020 advances current contracts', 
   assert.equal(catalog.modules.length - workstream020.publicDelta.knowledge - workstream021.publicDelta.knowledge, 58);
   assert.equal(terminal - workstream020.masterItemKeys.length - workstream021.masterItemKeys.length, 248);
   assert.equal(directory.items.length - terminal + workstream020.masterItemKeys.length + workstream021.masterItemKeys.length, 502);
-  assert.match(generated, /Published Knowledge: 59/);
-  assert.match(generated, /Canonical Problems: 96/);
-  assert.match(generated, /Terminal master records: 262/);
-  assert.match(generated, /Pending master records: 488/);
-  assert.match(generated, /First pending: `red-book::8::8\.11`/);
+  assert.match(generated, /Published Knowledge: 61/);
+  assert.match(generated, /Canonical Problems: 101/);
+  assert.match(generated, /Terminal master records: 268/);
+  assert.match(generated, /Pending master records: 482/);
+  assert.match(generated, /First pending: `150-most-frequently-asked::2\.7::theory`/);
   assert.match(workstream021.status, /^(?:active|complete)$/);
 });
 

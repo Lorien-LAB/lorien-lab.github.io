@@ -24,9 +24,9 @@ A later workstream requires its own approved design and evidence audit; workstre
 const active021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
 Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
-const complete021Current = `**No bounded topic is active. Workstream 021 is complete.**
+const complete021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
-A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.`;
+Workstream 022 is active across the exact six-record Red logical-reasoning scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes the repository validation gates and GitHub CI.`;
 
 const section = (handoff, heading) =>
   handoff.split(new RegExp(`^## ${heading}$`, 'im'))[1]?.split(/^## /m)[0] ?? '';

@@ -15,14 +15,12 @@ const commands = [
 const activeSha = '73720d3a743e0312d2ceeeb63e5bb918c2df242a';
 const runId = 33916517774;
 const ciUrl = 'https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33916517774';
-const completeCurrent = `**No bounded topic is active. Workstream 021 is complete.**
+const completeCurrent = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
-A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.`;
-const completeMaster = `**No bounded ingestion workstream is active. The three-book master directory migration remains complete.**
+Workstream 022 is active across the exact six-record Red logical-reasoning scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes the repository validation gates and GitHub CI.`;
+const completeMaster = `**Workstream 022 is active across exactly six terminalized Red records; the three-book master directory migration remains complete.**
 
-First pending master record: \`red-book::8::8.11\`
-
-Workstream 022 is not active or authorized.`;
+First pending master record after the active 022 scope: `150-most-frequently-asked::2.7::theory``;
 const repeatedIndexSnapshot = [
   ['red-book::10.2::3.2', 'pending', [], [], null, null],
   ['red-book::10.2::2.9', 'pending', [], [], null, null],
@@ -141,7 +139,7 @@ test('021 lifecycle is evidence-free while active and pins exact immutable evide
   assert.throws(() => assertLifecycleEvidence(unexpectedEvidence), { name: 'AssertionError' });
 });
 
-test('021 current manifest is complete with exact evidence and no temporary workflow or 022', async () => {
+test('021 current manifest remains complete while active 022 owns current state', async () => {
   const [manifest, workstreamFiles] = await Promise.all([
     readJson(manifestPath),
     readdir('src/data/quant-interview/workstreams'),
@@ -149,10 +147,10 @@ test('021 current manifest is complete with exact evidence and no temporary work
   assert.equal(manifest.status, 'complete');
   assertLifecycleEvidence(manifest);
   await assert.rejects(access(workflow), (error) => error?.code === 'ENOENT');
-  assert.equal(workstreamFiles.some((file) => /-022\.json$/.test(file)), false);
+  assert.equal(workstreamFiles.some((file) => /-022\.json$/.test(file)), true);
 });
 
-test('021 HANDOFF records exact workflow-free completion and no active topic', async () => {
+test('021 HANDOFF keeps exact completion while active 022 owns current topic', async () => {
   const [manifest, handoff] = await Promise.all([
     readJson(manifestPath),
     readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
@@ -161,12 +159,13 @@ test('021 HANDOFF records exact workflow-free completion and no active topic', a
   assert.equal(section(handoff, 'Master directory ingestion state').trim(), completeMaster);
   assert.doesNotMatch(handoff, /^## Active cross-book workstream 21$/m);
   assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-  assert.match(handoff, /Workstream 022 is not active or authorized\./);
+  assert.match(handoff, /Workstream 022 is active/i);
+  assert.match(handoff, /^## Active cross-book workstream 22$/m);
   const closure = section(handoff, 'Completed cross-book workstream 21');
   assertClosureIdentity(closure, manifest.id);
 });
 
-test('021 current repository is exactly 96/59 with 262/488 master state and Red 8.11 next', async () => {
+test('021 remains durable after 022 advances corpus and master state', async () => {
   const [directory, generated, catalog, problemFiles, workstreamFiles] = await Promise.all([
     readJson('src/data/quant-interview/master-directory.json'),
     readFile('docs/quant-interview/KNOWLEDGE_DIRECTORY.md', 'utf8'),
@@ -176,17 +175,17 @@ test('021 current repository is exactly 96/59 with 262/488 master state and Red 
   ]);
   const terminal = directory.items.filter(({ state }) => !['pending', 'needs-review'].includes(state));
   const pending = directory.items.filter(({ state }) => ['pending', 'needs-review'].includes(state));
-  assert.equal(problemFiles.filter((file) => String(file).endsWith('.md')).length, 96);
-  assert.equal(catalog.modules.length, 59);
-  assert.equal(terminal.length, 262);
-  assert.equal(pending.length, 488);
-  assert.equal(pending[0]?.key, 'red-book::8::8.11');
+  assert.equal(problemFiles.filter((file) => String(file).endsWith('.md')).length, 101);
+  assert.equal(catalog.modules.length, 61);
+  assert.equal(terminal.length, 268);
+  assert.equal(pending.length, 482);
+  assert.equal(pending[0]?.key, '150-most-frequently-asked::2.7::theory');
   assert.equal(workstreamFiles.some((file) => /-022\.json$/.test(file)), false);
-  assert.match(generated, /Published Knowledge: 59/);
-  assert.match(generated, /Canonical Problems: 96/);
-  assert.match(generated, /Terminal master records: 262/);
-  assert.match(generated, /Pending master records: 488/);
-  assert.match(generated, /First pending: `red-book::8::8\.11`/);
+  assert.match(generated, /Published Knowledge: 61/);
+  assert.match(generated, /Canonical Problems: 101/);
+  assert.match(generated, /Terminal master records: 268/);
+  assert.match(generated, /Pending master records: 482/);
+  assert.match(generated, /First pending: `150-most-frequently-asked::2\.7::theory`/);
 });
 
 test('Red 10.2 repeated-question rows retain their complete pre-021 state', async () => {
