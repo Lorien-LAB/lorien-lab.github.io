@@ -131,7 +131,7 @@ test('019 lifecycle is evidence-free while active and remains factually strict a
     } else {
       assert.equal(currentBlock(handoff), complete021Current);
       assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-      assert.match(handoff, /First pending master record: `red-book::8::8\.11`/i);
+      assert.match(handoff, /First pending master record after the active 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
     }
     assert.match(handoff, /Workstream 022 is active/i);
   }
@@ -158,11 +158,17 @@ test('019 exact corpus remains derivable after 020 advances current contracts', 
     `src/data/quant-interview/workstreams/${workstream021File}`,
     'utf8',
   ));
+  const workstream022File = workstreams.find((file) => /-022\.json$/.test(file));
+  assert.ok(workstream022File);
+  const workstream022 = JSON.parse(await readFile(
+    `src/data/quant-interview/workstreams/${workstream022File}`,
+    'utf8',
+  ));
   const currentProblemCount = problemFiles.filter((file) => String(file).endsWith('.md')).length;
-  assert.equal(currentProblemCount - workstream020.publicDelta.problems - workstream021.publicDelta.problems, 86);
-  assert.equal(catalog.modules.length - workstream020.publicDelta.knowledge - workstream021.publicDelta.knowledge, 58);
-  assert.equal(terminal - workstream020.masterItemKeys.length - workstream021.masterItemKeys.length, 248);
-  assert.equal(directory.items.length - terminal + workstream020.masterItemKeys.length + workstream021.masterItemKeys.length, 502);
+  assert.equal(currentProblemCount - workstream020.publicDelta.problems - workstream021.publicDelta.problems - workstream022.publicDelta.problems, 86);
+  assert.equal(catalog.modules.length - workstream020.publicDelta.knowledge - workstream021.publicDelta.knowledge - workstream022.publicDelta.knowledge, 58);
+  assert.equal(terminal - workstream020.masterItemKeys.length - workstream021.masterItemKeys.length - workstream022.masterItemKeys.length, 248);
+  assert.equal(directory.items.length - terminal + workstream020.masterItemKeys.length + workstream021.masterItemKeys.length + workstream022.masterItemKeys.length, 502);
   assert.match(generated, /Published Knowledge: 61/);
   assert.match(generated, /Canonical Problems: 101/);
   assert.match(generated, /Terminal master records: 268/);
@@ -191,6 +197,6 @@ test('019 final tree remains complete and workflow-free while 021 owns current s
   } else {
     assert.equal(currentBlock(handoff), complete021Current);
     assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-    assert.match(handoff, /First pending master record: `red-book::8::8\.11`/i);
+    assert.match(handoff, /First pending master record after the active 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
   }
 });

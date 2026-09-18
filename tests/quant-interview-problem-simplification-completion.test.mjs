@@ -114,7 +114,7 @@ test('018 lifecycle is evidence-free while active and factually strict when comp
       } else {
         assert.equal(currentBlock(handoff), complete021Current);
         assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-        assert.match(handoff, /First pending master record: `red-book::8::8\.11`/i);
+        assert.match(handoff, /First pending master record after the active 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
       }
     }
   }
@@ -156,10 +156,18 @@ test('018 and the 019 corpus remain durable after 021 advances current state', a
     `src/data/quant-interview/workstreams/${workstream021File}`,
     'utf8',
   ));
-  assert.match(workstream021.status, /^(?:active|complete)$/);
+  assert.equal(workstream021.status, 'complete');
   assert.equal(workstream021.masterItemKeys.length, 6);
-  assert.equal(terminal - workstream020.masterItemKeys.length - workstream021.masterItemKeys.length, 248);
-  assert.equal(directory.items.length - terminal + workstream020.masterItemKeys.length + workstream021.masterItemKeys.length, 502);
+  const workstream022File = workstreams.find((file) => /-022\.json$/.test(file));
+  assert.ok(workstream022File);
+  const workstream022 = JSON.parse(await readFile(
+    `src/data/quant-interview/workstreams/${workstream022File}`,
+    'utf8',
+  ));
+  assert.match(workstream022.status, /^(?:active|complete)$/);
+  assert.equal(workstream022.masterItemKeys.length, 6);
+  assert.equal(terminal - workstream020.masterItemKeys.length - workstream021.masterItemKeys.length - workstream022.masterItemKeys.length, 248);
+  assert.equal(directory.items.length - terminal + workstream020.masterItemKeys.length + workstream021.masterItemKeys.length + workstream022.masterItemKeys.length, 502);
 });
 
 test('018 final tree is complete and workflow-free', async () => {

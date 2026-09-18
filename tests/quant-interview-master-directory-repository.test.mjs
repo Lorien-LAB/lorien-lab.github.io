@@ -218,8 +218,8 @@ test('every legacy coverage row maps exactly once into the master directory', as
 
 test('master corpus preserves the baseline plus explicit 014 through 022 deltas', async () => {
   const inputs = await loadMasterDirectoryRepository(process.cwd());
-  assert.equal(inputs.problemSlugs.size, 96);
-  assert.equal(inputs.knowledgeSlugs.size, 59);
+  assert.equal(inputs.problemSlugs.size, 101);
+  assert.equal(inputs.knowledgeSlugs.size, 61);
   const workstream014 = inputs.workstreams.find(({ id }) => id.endsWith('-014'));
   const workstream015 = inputs.workstreams.find(({ id }) => id.endsWith('-015'));
   const workstream016 = inputs.workstreams.find(({ id }) => id.endsWith('-016'));
