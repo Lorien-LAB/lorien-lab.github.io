@@ -139,7 +139,7 @@ test('020 lifecycle is evidence-free while active and factually strict when comp
   } else {
     assert.equal(currentBlock(handoff), complete021Current);
     assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-    assert.match(handoff, /First pending master record: `red-book::8::8\.11`/i);
+    assert.match(handoff, /First pending master record after the active 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
   }
   assert.match(handoff, /Workstream 022 is active/i);
 });

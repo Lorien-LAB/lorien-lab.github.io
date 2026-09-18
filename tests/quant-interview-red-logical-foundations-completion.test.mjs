@@ -180,7 +180,7 @@ test('021 remains durable after 022 advances corpus and master state', async () 
   assert.equal(terminal.length, 268);
   assert.equal(pending.length, 482);
   assert.equal(pending[0]?.key, '150-most-frequently-asked::2.7::theory');
-  assert.equal(workstreamFiles.some((file) => /-022\.json$/.test(file)), false);
+  assert.equal(workstreamFiles.some((file) => /-022\.json$/.test(file)), true);
   assert.match(generated, /Published Knowledge: 61/);
   assert.match(generated, /Canonical Problems: 101/);
   assert.match(generated, /Terminal master records: 268/);
