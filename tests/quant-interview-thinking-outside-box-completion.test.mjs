@@ -16,7 +16,7 @@ const completeCurrent = `**No bounded topic is active. Workstream 020 is complet
 A later workstream requires its own approved design and evidence audit; workstream 021 is not active or authorized by this closure.`;
 const complete021Master = `**Workstream 022 is active across exactly six terminalized Red records; the three-book master directory migration remains complete.**
 
-First pending master record after the active 022 scope: `150-most-frequently-asked::2.7::theory``;
+First pending master record after the active 022 scope: \`150-most-frequently-asked::2.7::theory\``;
 const active021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
 Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;

@@ -20,7 +20,7 @@ const completeCurrent = `**Logic, Brainteasers & Discrete Reasoning → Logical 
 Workstream 022 is active across the exact six-record Red logical-reasoning scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes the repository validation gates and GitHub CI.`;
 const completeMaster = `**Workstream 022 is active across exactly six terminalized Red records; the three-book master directory migration remains complete.**
 
-First pending master record after the active 022 scope: `150-most-frequently-asked::2.7::theory``;
+First pending master record after the active 022 scope: \`150-most-frequently-asked::2.7::theory\``;
 const repeatedIndexSnapshot = [
   ['red-book::10.2::3.2', 'pending', [], [], null, null],
   ['red-book::10.2::2.9', 'pending', [], [], null, null],

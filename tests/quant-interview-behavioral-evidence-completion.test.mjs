@@ -209,7 +209,8 @@ test('017 lifecycle is field-safe while active and factually strict when complet
   } else {
     assert.equal(current.trim(), complete021Current);
     assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-    assert.match(masterIngestion, /First pending master record: `red-book::8::8\.11`/i);
+    assert.match(handoff, /^## Active cross-book workstream 22$/m);
+    assert.match(masterIngestion, /First pending master record after the active 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
   }
-  assert.match(masterIngestion, /Workstream 022 is not active or authorized/i);
+  assert.match(handoff, /Workstream 022 is active/i);
 });
