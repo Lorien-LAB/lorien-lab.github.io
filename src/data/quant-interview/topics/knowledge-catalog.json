@@ -786,6 +786,34 @@
         "no-arbitrage-principle",
         "static-arbitrage-construction"
       ]
+    },
+    {
+      "slug": "conditional-implication-contrapositive-and-falsification",
+      "title": "Conditional Implication, Contrapositive & Falsification",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "primaryTopic": "logical-deduction",
+      "learningOrder": 40,
+      "status": "published",
+      "prerequisites": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ]
+    },
+    {
+      "slug": "common-knowledge-and-iterated-reasoning",
+      "title": "Common Knowledge & Iterated Reasoning",
+      "canonicalTopics": [
+        "logic-brainteasers-discrete-reasoning",
+        "logical-deduction"
+      ],
+      "primaryTopic": "logical-deduction",
+      "learningOrder": 50,
+      "status": "published",
+      "prerequisites": [
+        "logical-deduction-constraint-propagation-and-case-elimination"
+      ]
     }
   ]
 }

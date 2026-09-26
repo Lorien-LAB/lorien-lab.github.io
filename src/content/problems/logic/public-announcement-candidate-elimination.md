@@ -11,7 +11,7 @@ quantInterviewTopics: [logic-brainteasers-discrete-reasoning, logical-deduction]
 concepts: [logical-deduction-constraint-propagation-and-case-elimination]
 techniques: []
 prerequisites: []
-relatedProblems: [bridge-crossing-minimum-time]
+relatedProblems: [bridge-crossing-minimum-time, public-announcement-departure-day]
 family: public-announcement-elimination
 mathDifficulty: 1
 insightDifficulty: 3

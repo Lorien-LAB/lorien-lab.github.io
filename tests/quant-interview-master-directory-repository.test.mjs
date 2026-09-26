@@ -17,11 +17,11 @@ function firstMissingSource(directory) {
       || !directory.items.some((item) => item.source === source));
 }
 
-test('repository loader preserves explicit 96/59 state and reports the next enumeration gap', async () => {
+test('repository loader preserves explicit 101/61 state and reports the next enumeration gap', async () => {
   await access('src/data/quant-interview/master-directory.json');
   const inputs = await loadMasterDirectoryRepository(process.cwd());
-  assert.equal(inputs.problemSlugs.size, 96);
-  assert.equal(inputs.knowledgeSlugs.size, 59);
+  assert.equal(inputs.problemSlugs.size, 101);
+  assert.equal(inputs.knowledgeSlugs.size, 61);
   const missingSource = firstMissingSource(inputs.directory);
   if (missingSource) {
     assert.throws(
@@ -216,10 +216,10 @@ test('every legacy coverage row maps exactly once into the master directory', as
   }
 });
 
-test('master corpus preserves the 76/50 baseline plus explicit 014 through 021 deltas', async () => {
+test('master corpus preserves the baseline plus explicit 014 through 022 deltas', async () => {
   const inputs = await loadMasterDirectoryRepository(process.cwd());
-  assert.equal(inputs.problemSlugs.size, 96);
-  assert.equal(inputs.knowledgeSlugs.size, 59);
+  assert.equal(inputs.problemSlugs.size, 101);
+  assert.equal(inputs.knowledgeSlugs.size, 61);
   const workstream014 = inputs.workstreams.find(({ id }) => id.endsWith('-014'));
   const workstream015 = inputs.workstreams.find(({ id }) => id.endsWith('-015'));
   const workstream016 = inputs.workstreams.find(({ id }) => id.endsWith('-016'));
@@ -228,6 +228,7 @@ test('master corpus preserves the 76/50 baseline plus explicit 014 through 021 d
   const workstream019 = inputs.workstreams.find(({ id }) => id.endsWith('-019'));
   const workstream020 = inputs.workstreams.find(({ id }) => id.endsWith('-020'));
   const workstream021 = inputs.workstreams.find(({ id }) => id.endsWith('-021'));
+  const workstream022 = inputs.workstreams.find(({ id }) => id.endsWith('-022'));
   assert.deepEqual(workstream014.publicDelta, { problems: 0, knowledge: 1 });
   assert.deepEqual(workstream015.publicDelta, { problems: 0, knowledge: 1 });
   assert.deepEqual(workstream016.publicDelta, { problems: 0, knowledge: 1 });
@@ -248,6 +249,11 @@ test('master corpus preserves the 76/50 baseline plus explicit 014 through 021 d
   ]);
   assert.deepEqual(workstream021.publicDelta, { problems: 3, knowledge: 0 });
   assert.deepEqual(workstream021.knowledgeSlugs, []);
+  assert.deepEqual(workstream022.publicDelta, { problems: 5, knowledge: 2 });
+  assert.deepEqual(workstream022.knowledgeSlugs, [
+    'conditional-implication-contrapositive-and-falsification',
+    'common-knowledge-and-iterated-reasoning',
+  ]);
   assert.equal(
     workstream014.publicDelta.knowledge
       + workstream015.publicDelta.knowledge
@@ -256,8 +262,9 @@ test('master corpus preserves the 76/50 baseline plus explicit 014 through 021 d
       + workstream018.publicDelta.knowledge
       + workstream019.publicDelta.knowledge
       + workstream020.publicDelta.knowledge
-      + workstream021.publicDelta.knowledge,
-    9,
+      + workstream021.publicDelta.knowledge
+      + workstream022.publicDelta.knowledge,
+    11,
   );
   assert.deepEqual(inputs.workstreams.map(({ id }) => id).sort(), [
     'calculus-differential-equations-limits-derivatives-012',
@@ -273,6 +280,7 @@ test('master corpus preserves the 76/50 baseline plus explicit 014 through 021 d
     'logic-brainteasers-discrete-reasoning-logical-deduction-green-core-019',
     'logic-brainteasers-discrete-reasoning-problem-simplification-018',
     'logic-brainteasers-discrete-reasoning-red-logical-foundations-021',
+    'logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022',
     'logic-brainteasers-discrete-reasoning-thinking-outside-box-green-core-020',
     'probability-statistics-combinatorial-probability-006',
     'probability-statistics-conditional-probability-bayes-007',
@@ -301,34 +309,29 @@ test('repository validator rejects coverage and master lifecycle drift', async (
   );
 });
 
-test('019 and 020 remain complete while the 021 lifecycle advances the next pending record', async () => {
+test('019 through 021 remain complete while 022 owns the next bounded scope', async () => {
   const { directory, workstreams } = await loadMasterDirectoryRepository(process.cwd());
   const first = getNextPendingItem(directory);
-  assert.equal(first?.key, 'red-book::8::8.11');
+  assert.equal(first?.key, '150-most-frequently-asked::2.7::theory');
   assert.equal(validateSequentialScope(directory, [first.key]), true);
-  const workstream017 = workstreams.find(({ id }) => /-017$/.test(id));
-  const workstream018 = workstreams.find(({ id }) => /-018$/.test(id));
-  const workstream019 = workstreams.find(({ id }) => /-019$/.test(id));
-  const workstream020 = workstreams.find(({ id }) => /-020$/.test(id));
-  const workstream021 = workstreams.find(({ id }) => /-021$/.test(id));
-  assert.equal(workstream017.status, 'complete');
-  assert.equal(workstream018.status, 'complete');
-  assert.equal(workstream019.status, 'complete');
-  assert.equal(workstream020.status, 'complete');
-  assert.match(workstream021.status, /^(?:active|complete)$/);
+  for (const ordinal of ['017','018','019','020','021']) {
+    const ws = workstreams.find(({ id }) => id.endsWith(`-${ordinal}`));
+    assert.equal(ws.status, 'complete', ordinal);
+  }
+  const workstream022 = workstreams.find(({ id }) => /-022$/.test(id));
+  assert.ok(workstream022);
+  assert.match(workstream022.status, /^(?:active|complete)$/);
+
   const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
   const current = handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0] ?? '';
-  assert.match(handoff, /^## Completed cross-book workstream 19$/m);
-  if (workstream021.status === 'active') {
+  assert.match(handoff, /^## Completed cross-book workstream 21$/m);
+  if (workstream022.status === 'active') {
     assert.match(current, /Logic, Brainteasers.*Logical Deduction/is);
-    assert.match(current, /Workstream 021 is active/i);
-    assert.match(handoff, /^## Active cross-book workstream 21$/m);
-    assert.doesNotMatch(handoff, /^## Completed cross-book workstream 21$/m);
-    assert.match(handoff, /First pending master record after the active 021 scope: `red-book::8::8\.11`/i);
+    assert.match(current, /Workstream 022 is active/i);
+    assert.match(handoff, /^## Active cross-book workstream 22$/m);
+    assert.match(handoff, /First pending master record after the active 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
   } else {
-    assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-    assert.doesNotMatch(current, /Workstream 021 is active/i);
-    assert.match(handoff, /First pending master record: `red-book::8::8\.11`/i);
+    assert.match(handoff, /^## Completed cross-book workstream 22$/m);
+    assert.match(current, /Workstream 022 is complete/i);
   }
-  assert.match(handoff, /Workstream 022 is not active or authorized/);
 });

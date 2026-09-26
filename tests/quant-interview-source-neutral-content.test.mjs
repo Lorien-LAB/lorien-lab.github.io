@@ -123,6 +123,11 @@ const currentProblemSlugs = [
   'clock-hand-angles-and-relative-motion',
   'shortest-path-on-cube-surface',
   'alternating-geometric-resource-allocation',
+  'snow-removal-start-time-from-distance-ratio',
+  'falsifying-a-one-way-card-rule',
+  'anchor-overboard-water-level',
+  'public-announcement-departure-day',
+  'bisecting-a-rectangular-frame-with-one-line',
 ];
 
 const expectedKnowledgeTopics = new Map([
@@ -185,6 +190,8 @@ const expectedKnowledgeTopics = new Map([
   ['logical-deduction-constraint-propagation-and-case-elimination', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
   ['decision-trees-information-bounds-and-adaptive-testing', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
   ['constraint-reframing-and-latent-state', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
+  ['conditional-implication-contrapositive-and-falsification', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
+  ['common-knowledge-and-iterated-reasoning', ['logic-brainteasers-discrete-reasoning', 'logical-deduction']],
 ]);
 
 async function findProblem(slug) {
@@ -233,14 +240,14 @@ function assertSourceNeutralPublicBody(body, file) {
   assert.doesNotMatch(body, workstream020SourceLeak, `${file} public body exposes source provenance`);
 }
 
-test('source-neutral regression discovers exactly the current 96 Problem and 59 Knowledge contracts', async () => {
+test('source-neutral regression discovers exactly the current 101 Problem and 61 Knowledge contracts', async () => {
   const actualProblemSlugs = await classifiedMarkdownSlugs('src/content/problems');
   const actualKnowledgeSlugs = await classifiedMarkdownSlugs('src/content/knowledge');
   const expectedProblemSlugs = [...currentProblemSlugs].sort();
   const expectedKnowledgeSlugs = [...expectedKnowledgeTopics.keys()].sort();
 
-  assert.equal(actualProblemSlugs.length, 96);
-  assert.equal(actualKnowledgeSlugs.length, 59);
+  assert.equal(actualProblemSlugs.length, 101);
+  assert.equal(actualKnowledgeSlugs.length, 61);
   assert.deepEqual(actualProblemSlugs, expectedProblemSlugs);
   assert.deepEqual(actualKnowledgeSlugs, expectedKnowledgeSlugs);
 });

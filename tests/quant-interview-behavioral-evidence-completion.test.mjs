@@ -24,9 +24,9 @@ A later workstream requires its own approved design and evidence audit; workstre
 const active021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
 Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
-const complete021Current = `**No bounded topic is active. Workstream 021 is complete.**
+const complete021Current = `**No bounded topic is active. Workstream 022 is complete.**
 
-A later workstream requires its own approved design and evidence audit; workstream 022 is not active or authorized by this closure.`;
+The completed six-record Red logical-reasoning scope added 5 Problems and 2 Knowledge nodes. The first pending record is \`150-most-frequently-asked::2.7::theory\`; Workstream 023 is absent and not authorized.`;
 
 const section = (handoff, heading) =>
   handoff.split(new RegExp(`^## ${heading}$`, 'im'))[1]?.split(/^## /m)[0] ?? '';
@@ -209,7 +209,8 @@ test('017 lifecycle is field-safe while active and factually strict when complet
   } else {
     assert.equal(current.trim(), complete021Current);
     assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-    assert.match(masterIngestion, /First pending master record: `red-book::8::8\.11`/i);
+    assert.match(handoff, /^## Completed cross-book workstream 22$/m);
+    assert.match(masterIngestion, /First pending master record after the completed 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
   }
-  assert.match(masterIngestion, /Workstream 022 is not active or authorized/i);
+  assert.match(handoff, /Workstream 022 is complete/i);
 });

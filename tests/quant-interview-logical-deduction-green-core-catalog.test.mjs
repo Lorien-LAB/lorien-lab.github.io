@@ -31,7 +31,7 @@ test('Logical Deduction Knowledge exposes the exact reciprocal graph', async () 
     metadata('small-cases-recurrence-and-structural-simplification'),
     metadata('problem-framing-clarification-assumption-management'),
   ]);
-  assert.deepEqual(newConstraint.related, ['small-cases-recurrence-and-structural-simplification', 'problem-framing-clarification-assumption-management', trees, 'constraint-reframing-and-latent-state']);
+  assert.deepEqual(newConstraint.related, ['small-cases-recurrence-and-structural-simplification', 'problem-framing-clarification-assumption-management', trees, 'constraint-reframing-and-latent-state', 'conditional-implication-contrapositive-and-falsification', 'common-knowledge-and-iterated-reasoning']);
   assert.deepEqual(newTrees.related, [constraint, 'small-cases-recurrence-and-structural-simplification', 'constraint-reframing-and-latent-state']);
   assert.deepEqual(smallCases.related, ['recursion-problem-solving', 'problem-framing-clarification-assumption-management', 'fermi-estimation-assumption-decomposition', constraint, trees]);
   assert.deepEqual(problemFraming.related, ['structured-think-aloud-reasoning', 'quant-interview-preparation-breadth-and-practice', 'quant-interview-formats-and-assessment-strategy', 'behavioral-interview-evidence-and-authenticity', 'small-cases-recurrence-and-structural-simplification', 'fermi-estimation-assumption-decomposition', constraint, 'constraint-reframing-and-latent-state']);

@@ -102,6 +102,21 @@ The first-right-heavy branch is the tested symmetric transformation of the first
 
 Every row weighs the same number of objects on both pans. Exhaustive simulation of the 24 hypotheses follows the table for three outcomes and reaches 24 distinct labeled leaves, so no two hypotheses share a diagnosis and none is omitted.
 
+
+### Variant: Nine Objects with One Known-Heavy Anomaly
+
+Suppose there are nine labeled objects, exactly one is heavier than the other eight, and the direction of the anomaly is known in advance. At most three balance-scale weighings are permitted.
+
+There are nine hypotheses and every weighing has at most three outcomes, so one weighing cannot suffice while two may: $3^1<9\le 3^2$. The lower bound is therefore two weighings.
+
+A matching construction reaches the bound. First weigh objects 1–3 against 4–6.
+
+- If the left pan is heavier, the heavy object is in {1,2,3}.
+- If the right pan is heavier, it is in {4,5,6}.
+- If the pans balance, it is in {7,8,9}.
+
+In the surviving triple, weigh its first object against its second. Left-heavy identifies the first, right-heavy identifies the second, and balance identifies the third. Thus all nine hypotheses reach distinct two-outcome leaves. Since $3^2=9$, the construction exactly matches the information bound; the third permitted weighing is unnecessary.
+
 ## Why This Problem Matters
 
 An information count proves only that a depth might be sufficient. A complete adaptive solution must also construct legal physical tests, keep track of which objects are known normal, and certify every leaf of the decision tree.

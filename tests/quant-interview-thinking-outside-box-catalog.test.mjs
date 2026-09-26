@@ -12,6 +12,8 @@ const expected = [
   { slug: constraint, title: 'Logical Deduction, Constraint Propagation & Case Elimination', canonicalTopics: topics, primaryTopic: 'logical-deduction', learningOrder: 10, status: 'published', prerequisites: [] },
   { slug: trees, title: 'Decision Trees, Information Bounds & Adaptive Testing', canonicalTopics: topics, primaryTopic: 'logical-deduction', learningOrder: 20, status: 'published', prerequisites: [constraint] },
   { slug: reframing, title: 'Constraint Reframing & Latent State', canonicalTopics: topics, primaryTopic: 'logical-deduction', learningOrder: 30, status: 'published', prerequisites: [constraint] },
+  { slug: 'conditional-implication-contrapositive-and-falsification', title: 'Conditional Implication, Contrapositive & Falsification', canonicalTopics: topics, primaryTopic: 'logical-deduction', learningOrder: 40, status: 'published', prerequisites: [constraint] },
+  { slug: 'common-knowledge-and-iterated-reasoning', title: 'Common Knowledge & Iterated Reasoning', canonicalTopics: topics, primaryTopic: 'logical-deduction', learningOrder: 50, status: 'published', prerequisites: [constraint] },
 ];
 const newProblemSlugs = [
   'pack-length-four-bricks-in-six-cube',
@@ -38,7 +40,7 @@ async function problemMetadata(slug) {
 test('020 registers exact Logical Deduction catalog order', async () => {
   const catalog = JSON.parse(await readFile('src/data/quant-interview/topics/knowledge-catalog.json', 'utf8'));
   assert.deepEqual(catalog.modules.filter(({ primaryTopic }) => primaryTopic === 'logical-deduction'), expected);
-  assert.equal(catalog.modules.length, 59);
+  assert.equal(catalog.modules.length, 61);
 });
 
 test('020 exposes the exact reciprocal Knowledge graph', async () => {
@@ -51,7 +53,7 @@ test('020 exposes the exact reciprocal Knowledge graph', async () => {
   ]);
 
   assert.deepEqual(reframingMeta.related, [constraint, trees, 'modular-invariants', 'problem-framing-clarification-assumption-management']);
-  assert.deepEqual(constraintMeta.related, ['small-cases-recurrence-and-structural-simplification', 'problem-framing-clarification-assumption-management', trees, reframing]);
+  assert.deepEqual(constraintMeta.related, ['small-cases-recurrence-and-structural-simplification', 'problem-framing-clarification-assumption-management', trees, reframing, 'conditional-implication-contrapositive-and-falsification', 'common-knowledge-and-iterated-reasoning']);
   assert.deepEqual(treesMeta.related, [constraint, 'small-cases-recurrence-and-structural-simplification', reframing]);
   assert.deepEqual(modularMeta.related, ['modular-arithmetic', reframing]);
   assert.deepEqual(framingMeta.related, ['structured-think-aloud-reasoning', 'quant-interview-preparation-breadth-and-practice', 'quant-interview-formats-and-assessment-strategy', 'behavioral-interview-evidence-and-authenticity', 'small-cases-recurrence-and-structural-simplification', 'fermi-estimation-assumption-decomposition', constraint, reframing]);
