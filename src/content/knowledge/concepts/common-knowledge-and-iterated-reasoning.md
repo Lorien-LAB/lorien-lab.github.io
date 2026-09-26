@@ -58,9 +58,9 @@ For a family indexed by an integer $n\ge1$:
 
 ## Interview Checks
 
-1. Give an example of a fact that two people both know but that is not common knowledge.
-2. In a two-state public-announcement model, write the survivor set after a truthful announcement that eliminates one state.
-3. Explain why a public non-action can remove states even though no new private signal was observed.
-4. State the base case and induction step for a protocol where exactly $n$ participants act on round $n$.
-5. Construct a timing convention with observations at noon and actions at midnight, then explain how one day of non-action becomes evidence.
-6. Compare a private message sent independently to every participant with one public announcement. Why can the resulting higher-order knowledge differ?
+1. Two analysts each see a private “system ready” dashboard, but neither can tell whether the other's dashboard updated. Both dashboards in fact updated. Explain why readiness is mutually known but may fail to be common knowledge, and how a public broadcast would change that.
+2. The shared candidate states are {both sensors off, only sensor A on, only sensor B on}. A public display truthfully announces “at least one sensor is on,” and everyone sees the display. Write the surviving shared state set and explain what every observer now knows about the others' update.
+3. A monitor rings a public bell at the end of round 1 exactly when the hidden machine state is failed; the common candidate set is {healthy, warning, failed}. Everyone hears silence at the scheduled time. Which state is removed, and why is no new private sensor reading needed?
+4. A public counter is known to have value in {1,2,3,4}. After each round $r=1,2,3$, a controller publicly signals if the value equals $r$; otherwise everyone observes a quiet round. Prove by induction that after $r$ quiet rounds the surviving values are $\{r+1,\ldots,4\}$, stating the base case and update step.
+5. At noon an inspector privately reads a gauge that is either high or low. The common rule is that a high reading causes a public warning at midnight; everyone observes the outcome immediately after that decision. If midnight passes quietly, when can others exclude the high state, and why could they not do so just before midnight?
+6. Agents A and B receive separate private messages saying “the system is active,” but delivery to the other agent may fail without notice. Each sends an acknowledgment only when certain both messages arrived. Compare this with one public broadcast heard by both: what can each agent infer about the other's knowledge before the acknowledgment decision?

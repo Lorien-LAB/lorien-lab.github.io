@@ -25,7 +25,7 @@ featured: false
 
 A group of participants live under the following harmless protocol. Some participants are marked. Everyone can see whether every other participant is marked, but nobody can see their own status. All participants are perfect reasoners.
 
-At noon on day 0, a moderator publicly announces: “At least one participant is marked.” The rules, everyone's observations, everyone's rationality, and the public announcement are common knowledge. A participant leaves at midnight as soon as they are certain that they themselves are marked. Everyone observes all departures.
+At noon on day 0, a moderator publicly announces: “At least one participant is marked.” The visibility rule, everyone's rationality, the decision schedule, and the public announcement are common knowledge; each participant's particular view remains private. At each midnight, participants decide simultaneously using what they know before that night's decisions. Everyone observes the departures, or their absence, afterward and before the next midnight. A participant leaves at their first such decision once certain that they themselves are marked.
 
 If exactly $n\ge1$ participants are marked, on which night do the marked participants leave? Prove the result.
 
@@ -39,7 +39,7 @@ If exactly $n\ge1$ participants are marked, on which night do the marked partici
 
 ## Solution
 
-The marked participants all leave on **night $n$**. We prove this by induction.
+The marked participants all leave on **night $n$**. We prove the stronger claim that no one leaves on an earlier night.
 
 ### Base case: $n=1$
 
@@ -47,17 +47,17 @@ The unique marked participant sees no marked people. The public announcement gua
 
 ### Induction hypothesis
 
-Assume that whenever exactly $n-1$ participants are marked, all of them leave on night $n-1$.
+Assume that whenever exactly $n-1$ participants are marked, nobody leaves on nights $1$ through $n-2$, and all marked participants leave on night $n-1$.
 
 ### Induction step
 
 Now suppose exactly $n$ participants are marked. Pick any marked participant $A$. Participant $A$ sees exactly $n-1$ marked people.
 
-Consider $A$'s counterfactual hypothesis: “I am unmarked.” Under that hypothesis there would be exactly $n-1$ marked participants, namely the people $A$ sees. By the induction hypothesis, those $n-1$ people would all leave on night $n-1$.
+Consider $A$'s counterfactual hypothesis: “I am unmarked.” Under that hypothesis there would be exactly $n-1$ marked participants, namely the people $A$ sees. By the induction hypothesis, that world is quiet through night $n-2$ and those $n-1$ people leave on night $n-1$.
 
-But in the actual $n$-marked state, nobody leaves before night $n$. In particular, when night $n-1$ passes without those $n-1$ people leaving, $A$ can reject the hypothesis that they are unmarked. Therefore $A$ knows they are marked.
+The actual $n$-marked world is also quiet through night $n-1$. To establish this, consider each decision night $r\le n-1$ in order. If the actual history has been quiet before night $r$, then it matches the counterfactual history through night $r-1\le n-2$. Participant $A$ still cannot distinguish the two worlds before that night's decision, so $A$ cannot yet be certain of their own mark. This applies to every marked participant; an unmarked participant cannot be certain of a mark they do not have. Thus nobody leaves on night $r$, completing the induction over the earlier nights.
 
-The same reasoning applies symmetrically to every marked participant. At midnight on night $n$, all marked participants leave.
+After the quiet night $n-1$ is publicly observed, $A$ can reject the unmarked-self world: its $n-1$ marked people would have left that night. The same reasoning applies to every marked participant. At the next decision, on night $n$, all marked participants leave.
 
 ### Why the public announcement matters
 

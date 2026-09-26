@@ -67,9 +67,9 @@ Use this framework for card-turning puzzles, compliance checks, screening rules,
 
 ## Interview Checks
 
-1. A policy says “if a file is encrypted, then it has an access key.” Which two visible categories can conceal a counterexample?
-2. Translate “a trade is accepted only if its risk check passes” into implication notation and write its contrapositive.
-3. Give a concrete truth assignment showing why $Q\Rightarrow P$ need not follow from $P\Rightarrow Q$.
-4. A device rule says “if the indicator is blue, the battery level is above 20%.” Explain why observing a device above 20% does not prove that its indicator is blue.
-5. For $P\Rightarrow Q$, list all four truth assignments and identify the unique violating assignment.
-6. A data-quality rule says “if a row is production data, then its timestamp is nonmissing.” Which observed rows should be audited first if only one field per row is initially visible?
+1. A file policy says “if a file is encrypted, then an access key is available.” Four records visibly show, respectively, encrypted, unencrypted, key available, and key missing; the other field is hidden on each record. Which records must be inspected to test the policy, and what would falsify it?
+2. A trade is accepted only if its risk check passes. Four audit slips visibly show accepted, rejected, risk check passed, and risk check failed; each slip hides the other status. Write the implication and its contrapositive, then choose the slips that could expose a violation.
+3. A visitor badge requires an escort: “if a person is a visitor, then they are escorted.” The visible candidates are visitor, staff member, escorted person, and unescorted person, each with the other attribute hidden. Which candidates can falsify the rule? Give a concrete staff-and-escort state that shows why the converse need not hold.
+4. A device rule says “if the indicator is blue, then the battery is above 20%.” Four devices visibly show blue, nonblue, above 20%, and at most 20%, each hiding the other property. Which devices could falsify the rule, and why does a high battery alone not imply a blue indicator?
+5. A data rule says “if a row is production data, then its timestamp is present.” Rows visibly labeled production, test, timestamp present, and timestamp missing each hide their other attribute. Identify the unique violating combination and the visible rows that must be inspected; explain why the other two cannot falsify this one-way rule.
+6. An account rule says “if an account is flagged, then it receives manual review.” Four cards visibly show flagged, unflagged, reviewed, and not reviewed; their reverse sides hide the other status. Which two cards are necessary and sufficient to test this rule, and what counterexample could each reveal?
