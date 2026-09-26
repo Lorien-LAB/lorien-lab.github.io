@@ -23,9 +23,9 @@ A later workstream requires its own approved design and evidence audit; workstre
 const active021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
 
 Workstream 021 is active across the exact six-record Red logical-foundations scope. Its public delta is +3 Problems / +0 Knowledge. Completion evidence remains absent until the exact active commit passes Windows, WSL, and GitHub CI.`;
-const complete021Current = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
+const complete021Current = `**No bounded topic is active. Workstream 022 is complete.**
 
-Workstream 022 is active across the exact six-record Red logical-reasoning scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes the repository validation gates and GitHub CI.`;
+The completed six-record Red logical-reasoning scope added 5 Problems and 2 Knowledge nodes. The first pending record is \`150-most-frequently-asked::2.7::theory\`; Workstream 023 is absent and not authorized.`;
 
 const section = (text, heading) => text.split(new RegExp(`^## ${heading}$`, 'im'))[1]?.split(/^## /m)[0] ?? '';
 const currentBlock = (handoff) => handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0]?.trim() ?? '';
@@ -131,9 +131,9 @@ test('019 lifecycle is evidence-free while active and remains factually strict a
     } else {
       assert.equal(currentBlock(handoff), complete021Current);
       assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-      assert.match(handoff, /First pending master record after the active 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
+      assert.match(handoff, /First pending master record after the completed 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
     }
-    assert.match(handoff, /Workstream 022 is active/i);
+    assert.match(handoff, /Workstream 022 is complete/i);
   }
 });
 
@@ -197,6 +197,6 @@ test('019 final tree remains complete and workflow-free while 021 owns current s
   } else {
     assert.equal(currentBlock(handoff), complete021Current);
     assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-    assert.match(handoff, /First pending master record after the active 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
+    assert.match(handoff, /First pending master record after the completed 022 scope: `150-most-frequently-asked::2\.7::theory`/i);
   }
 });

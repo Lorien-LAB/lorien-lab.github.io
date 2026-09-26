@@ -32,17 +32,17 @@
 
 ## Task 2: Prove the immutable active commit
 
-- [ ] Commit the bounded repair and this plan. Record its exact full SHA.
-- [ ] In a fresh WSL native-LF detached worktree at that SHA, use Node 24, `npm ci`, inspect line endings, and run the five ordered gates. Remove that proof worktree after recording the result.
-- [ ] Fast-forward push the exact active commit to `codex/quant-interview-red-logical-reasoning-core-022` and confirm both GitHub validation jobs succeed with matching `head_sha`.
+- [x] Commit the bounded repair and this plan. Record its exact full SHA.
+- [x] In a fresh WSL native-LF detached worktree at that SHA, use Node 24, `npm ci`, inspect line endings, and run the five ordered gates. Remove that proof worktree after recording the result.
+- [x] Fast-forward push the exact active commit to `codex/quant-interview-red-logical-reasoning-core-022` and confirm both GitHub validation jobs succeed with matching `head_sha`.
 
 ## Task 3: Remove the temporary workflow and prove the final tree
 
 **Files:**
 - Delete `.github/workflows/quant-interview-red-logical-reasoning-core-022-temporary.yml` in its own commit.
 
-- [ ] Verify the temporary workflow path is absent and commit only that deletion.
-- [ ] Run the five ordered gates in a fresh WSL native-LF Node 24 worktree at the removal SHA and record the workflow-free proof.
+- [x] Verify the temporary workflow path is absent and commit only that deletion.
+- [x] Run the five ordered gates in a fresh WSL native-LF Node 24 worktree at the removal SHA and record the workflow-free proof.
 
 ## Task 4: Record closure and integrate
 
@@ -50,8 +50,8 @@
 - Modify `src/data/quant-interview/workstreams/logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022.json`.
 - Modify `docs/quant-interview/HANDOFF.md` and the current-state lifecycle tests.
 
-- [ ] Write completion assertions using the real active SHA, CI run ID, workflow path, environment, and final-tree proof; confirm they fail while the workstream is still active.
-- [ ] Change 022 to `complete` with `preClosureActiveGate`, `verification`, and `finalTreeGate` matching the 021 schema; update HANDOFF without adding 023.
+- [x] Write completion assertions using the real active SHA, CI run ID, workflow path, environment, and final-tree proof; confirm they fail while the workstream is still active.
+- [x] Change 022 to `complete` with `preClosureActiveGate`, `verification`, and `finalTreeGate` matching the 021 schema; update HANDOFF without adding 023.
 - [ ] Run focused and full Windows gates, browser regression, and scope review; commit and fast-forward push the closure.
 - [ ] Confirm final PR checks, mark PR #12 ready, merge it into `main`, and independently confirm main validation and Pages deployment for the merge SHA.
 - [ ] Fast-forward the main checkout without touching its untracked files. Recheck all worktree statuses and report exact evidence and limits.

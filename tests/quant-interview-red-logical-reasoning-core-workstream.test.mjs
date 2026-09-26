@@ -1,9 +1,21 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { access, readFile } from 'node:fs/promises';
 import { loadMasterDirectoryRepository, validateMasterDirectoryRepository } from '../scripts/validate-quant-interview-master-directory.mjs';
 
 const workstreamId = 'logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022';
+const activeSha = '4558dee3b44700298f090017a4a40c96580bcc7d';
+const removalSha = 'af3e33ac085ac58cacf2ffbdfedd949a355493f8';
+const verificationRunId = 36228620488;
+const validationRunId = 36228622183;
+const temporaryWorkflow = '.github/workflows/quant-interview-red-logical-reasoning-core-022-temporary.yml';
+const gateCommands = [
+  'npm test',
+  'npm run knowledge:directory:check',
+  'npm run master:directory:check',
+  'npm run check',
+  'npm run build',
+];
 const keys = [
   "red-book::8::8.11",
   "red-book::8::8.15",
@@ -13,17 +25,27 @@ const keys = [
   "red-book::8::8.22"
 ];
 
-test('022 active corpus has the exact public delta and six terminal dispositions', async () => {
+test('022 completed corpus has the exact public delta and six terminal dispositions', async () => {
   const inputs = await loadMasterDirectoryRepository(process.cwd());
   assert.equal(inputs.problemSlugs.size, 101);
   assert.equal(inputs.knowledgeSlugs.size, 61);
   const ws = inputs.workstreams.find(({ id }) => id === workstreamId);
   assert.ok(ws);
-  assert.equal(ws.status, 'active');
+  assert.equal(ws.status, 'complete');
   assert.deepEqual(ws.publicDelta, { problems: 5, knowledge: 2 });
   assert.deepEqual(ws.masterItemKeys, keys);
-  assert.equal('verification' in ws, false);
-  assert.equal('preClosureActiveGate' in ws, false);
+  assert.deepEqual(ws.preClosureActiveGate, {
+    status: 'active', commit: activeSha, environment: 'wsl-native-lf-node24',
+    commands: gateCommands, conclusion: 'success',
+  });
+  assert.deepEqual(ws.verification, {
+    commit: activeSha, runId: verificationRunId, commands: gateCommands,
+    conclusion: 'success', temporaryArtifacts: [temporaryWorkflow],
+  });
+  assert.deepEqual(ws.finalTreeGate, {
+    environment: 'wsl-native-lf-node24', commands: gateCommands,
+    conclusion: 'success', temporaryArtifactsAbsent: true,
+  });
 
   const rows = keys.map((key) => inputs.directory.items.find((row) => row.key === key));
   assert.ok(rows.every(Boolean));
@@ -39,6 +61,21 @@ test('022 active corpus has the exact public delta and six terminal dispositions
   const next = inputs.directory.items.filter((row) => row.state === 'pending').sort((a,b) => a.sortKey.localeCompare(b.sortKey))[0];
   assert.equal(next.key, '150-most-frequently-asked::2.7::theory');
   assert.equal(validateMasterDirectoryRepository(inputs), true);
+});
+
+test('022 closure records exact active CI and workflow-free proof', async () => {
+  const handoff = await readFile('docs/quant-interview/HANDOFF.md', 'utf8');
+  const closure = handoff.split(/^## Completed cross-book workstream 22$/m)[1]?.split(/^## /m)[0] ?? '';
+  const current = handoff.split(/Current bounded topic:/i)[1]?.split(/^## /m)[0] ?? '';
+  for (const fact of [workstreamId, activeSha, removalSha, String(verificationRunId), String(validationRunId)]) {
+    assert.ok(closure.includes(fact), `022 closure omits ${fact}`);
+  }
+  assert.match(closure, /wsl-native-lf-node24/);
+  assert.match(closure, /workflow-free/i);
+  assert.match(current, /No bounded topic is active/i);
+  assert.match(current, /Workstream 022 is complete/i);
+  assert.doesNotMatch(handoff, /^## Active cross-book workstream 22$/m);
+  await assert.rejects(access(temporaryWorkflow), (error) => error?.code === 'ENOENT');
 });
 
 test('022 source-neutral pages and reciprocal relationships are present', async () => {

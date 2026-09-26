@@ -995,11 +995,11 @@ All three public Problems are independently authored and source-neutral: their f
 
 The chapter introduction creates only existing-Knowledge linkage. The chapter and repeated-question indexes are internal framing records, create no public target, and do not terminalize any referenced question; all ten `red-book::10.2::*` question rows retain their pre-021 pending state. Workstream 021 alone is bounded to the exact six records above and does not claim completeness for Logical Deduction, Logic, Brainteasers & Discrete Reasoning, the Red Book, any source book, or adjacent topics. Workstream 022 is not active or authorized by this closure.
 
-## Active cross-book workstream 22
+## Completed cross-book workstream 22
 
 `logic-brainteasers-discrete-reasoning-red-logical-reasoning-core-022`
 
-Status: **active**.
+Status: **complete**.
 
 Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**, bounded to exactly six Red question records:
 
@@ -1010,13 +1010,21 @@ Scope: **Logic, Brainteasers & Discrete Reasoning → Logical Deduction**, bound
 - `red-book::8::8.20`
 - `red-book::8::8.22`
 
-The active public delta is exactly **+5 Problems / +2 Knowledge**. The nine-object one-heavy balance prompt is a `variant` of `twelve-object-balance-scale-diagnosis`; it does not create a sixth Problem. The active corpus is therefore **101 Problems / 61 Knowledge**.
+The public delta is exactly **+5 Problems / +2 Knowledge**. The nine-object one-heavy balance prompt is a `variant` of `twelve-object-balance-scale-diagnosis`; it does not create a sixth Problem. The corpus is therefore **101 Problems / 61 Knowledge**.
 
-All six owned master rows are terminal in the active implementation, producing **268 terminal / 482 pending** records. The first pending record after the active scope is `150-most-frequently-asked::2.7::theory`.
+All six owned master rows are terminal, producing **268 terminal / 482 pending** records. The first pending record after this scope is `150-most-frequently-asked::2.7::theory`.
 
 The only item-level out-of-branch topic override is `red-book::8::8.11`, which also maps to `ordinary-differential-equations` because its solution is a reciprocal-rate accumulation model. The rectangular-frame item also carries the existing sibling topic `symmetry` within the Logic branch and requires no out-of-branch override.
 
-Completion evidence is intentionally absent while the workstream is active. The workstream must not be marked complete until the exact active commit passes the repository validation gates and matching GitHub CI evidence is recorded.
+### Active integrated verification
+
+- Exact active commit: `4558dee3b44700298f090017a4a40c96580bcc7d`.
+- Windows Node 24.15.0: `npm test` (658 passed), `npm run knowledge:directory:check`, `npm run master:directory:check`, `npm run check` (0 errors, 0 warnings, 2 existing hints), and `npm run build` (197 pages) succeeded in that order; 26 browser regressions passed after the build.
+- Fresh detached `wsl-native-lf-node24` worktree at the same commit: Node 24.20.0, `npm ci`, LF audit, and the same five ordered gates succeeded. The proof worktree was removed after verification.
+- Temporary CI run [`36228620488`](https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/36228620488) completed successfully with `head_sha` equal to the active commit; it ran Node 24, `npm ci`, and the five ordered gates. The separate [site validation run `36228622183`](https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/36228622183) also succeeded at that same `head_sha`, including Chromium browser regressions.
+- The temporary workflow `.github/workflows/quant-interview-red-logical-reasoning-core-022-temporary.yml` was deleted in its own commit `af3e33ac085ac58cacf2ffbdfedd949a355493f8`.
+- Workflow-free proof: a fresh detached `wsl-native-lf-node24` worktree at that removal commit passed `npm ci`, the LF audit, and the same five ordered gates (658 tests, 197 pages); the temporary workflow was absent. The proof worktree was removed afterward.
+- Conclusion: **success**. `preClosureActiveGate.commit` and `verification.commit` refer to the immutable active commit, not to the later workflow-removal or completion commit. `finalTreeGate` records the separate workflow-free proof.
 
 
 ## Next action
@@ -1039,15 +1047,15 @@ Historical transition marker: **Limits & Derivatives** is fully closed. Its seve
 
 Current bounded topic:
 
-**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
+**No bounded topic is active. Workstream 022 is complete.**
 
-Workstream 022 is active across the exact six-record Red logical-reasoning scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes the repository validation gates and GitHub CI.
+The completed six-record Red logical-reasoning scope added 5 Problems and 2 Knowledge nodes. The first pending record is `150-most-frequently-asked::2.7::theory`; Workstream 023 is absent and not authorized.
 
 ## Master directory ingestion state
 
-**Workstream 022 is active across exactly six terminalized Red records; the three-book master directory migration remains complete.**
+**Workstream 022 is complete across exactly six terminalized Red records; the three-book master directory migration remains complete.**
 
-First pending master record after the active 022 scope: `150-most-frequently-asked::2.7::theory`
+First pending master record after the completed 022 scope: `150-most-frequently-asked::2.7::theory`
 
 ## Parallel workstream coordination
 

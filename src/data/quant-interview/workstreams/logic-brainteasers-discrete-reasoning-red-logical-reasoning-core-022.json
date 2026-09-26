@@ -4,7 +4,7 @@
     "logic-brainteasers-discrete-reasoning",
     "logical-deduction"
   ],
-  "status": "active",
+  "status": "complete",
   "masterItemKeys": [
     "red-book::8::8.11",
     "red-book::8::8.15",
@@ -36,5 +36,45 @@
   "knowledgeSlugs": [
     "conditional-implication-contrapositive-and-falsification",
     "common-knowledge-and-iterated-reasoning"
-  ]
+  ],
+  "preClosureActiveGate": {
+    "status": "active",
+    "commit": "4558dee3b44700298f090017a4a40c96580bcc7d",
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success"
+  },
+  "verification": {
+    "commit": "4558dee3b44700298f090017a4a40c96580bcc7d",
+    "runId": 36228620488,
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifacts": [
+      ".github/workflows/quant-interview-red-logical-reasoning-core-022-temporary.yml"
+    ]
+  },
+  "finalTreeGate": {
+    "environment": "wsl-native-lf-node24",
+    "commands": [
+      "npm test",
+      "npm run knowledge:directory:check",
+      "npm run master:directory:check",
+      "npm run check",
+      "npm run build"
+    ],
+    "conclusion": "success",
+    "temporaryArtifactsAbsent": true
+  }
 }

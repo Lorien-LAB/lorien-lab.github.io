@@ -15,12 +15,12 @@ const commands = [
 const activeSha = '73720d3a743e0312d2ceeeb63e5bb918c2df242a';
 const runId = 33916517774;
 const ciUrl = 'https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/33916517774';
-const completeCurrent = `**Logic, Brainteasers & Discrete Reasoning → Logical Deduction.**
+const completeCurrent = `**No bounded topic is active. Workstream 022 is complete.**
 
-Workstream 022 is active across the exact six-record Red logical-reasoning scope. Its public delta is +5 Problems / +2 Knowledge. Completion evidence remains absent until the exact active commit passes the repository validation gates and GitHub CI.`;
-const completeMaster = `**Workstream 022 is active across exactly six terminalized Red records; the three-book master directory migration remains complete.**
+The completed six-record Red logical-reasoning scope added 5 Problems and 2 Knowledge nodes. The first pending record is \`150-most-frequently-asked::2.7::theory\`; Workstream 023 is absent and not authorized.`;
+const completeMaster = `**Workstream 022 is complete across exactly six terminalized Red records; the three-book master directory migration remains complete.**
 
-First pending master record after the active 022 scope: \`150-most-frequently-asked::2.7::theory\``;
+First pending master record after the completed 022 scope: \`150-most-frequently-asked::2.7::theory\``;
 const repeatedIndexSnapshot = [
   ['red-book::10.2::3.2', 'pending', [], [], null, null],
   ['red-book::10.2::2.9', 'pending', [], [], null, null],
@@ -150,7 +150,7 @@ test('021 current manifest remains complete while active 022 owns current state'
   assert.equal(workstreamFiles.some((file) => /-022\.json$/.test(file)), true);
 });
 
-test('021 HANDOFF keeps exact completion while active 022 owns current topic', async () => {
+test('021 HANDOFF keeps exact completion while completed 022 owns current topic', async () => {
   const [manifest, handoff] = await Promise.all([
     readJson(manifestPath),
     readFile('docs/quant-interview/HANDOFF.md', 'utf8'),
@@ -159,8 +159,8 @@ test('021 HANDOFF keeps exact completion while active 022 owns current topic', a
   assert.equal(section(handoff, 'Master directory ingestion state').trim(), completeMaster);
   assert.doesNotMatch(handoff, /^## Active cross-book workstream 21$/m);
   assert.match(handoff, /^## Completed cross-book workstream 21$/m);
-  assert.match(handoff, /Workstream 022 is active/i);
-  assert.match(handoff, /^## Active cross-book workstream 22$/m);
+  assert.match(handoff, /Workstream 022 is complete/i);
+  assert.match(handoff, /^## Completed cross-book workstream 22$/m);
   const closure = section(handoff, 'Completed cross-book workstream 21');
   assertClosureIdentity(closure, manifest.id);
 });
