@@ -21,6 +21,7 @@
   --max: 1410px;
   --font-sans: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --anchor-clearance: 96px;
 }
 
 html[data-theme='dark'] {
@@ -51,6 +52,7 @@ html[data-lang='zh'] body {
 /* Component display rules must not reveal filtered or collapsed content. */
 [hidden]:not([hidden="until-found"]) { display: none !important; }
 html { scroll-behavior: smooth; background: var(--bg); }
+main [id] { scroll-margin-top: var(--anchor-clearance); }
 body {
   margin: 0;
   min-width: 320px;

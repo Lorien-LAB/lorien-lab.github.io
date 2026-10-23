@@ -48,7 +48,7 @@ const announcementMetadata = {
   date: '2026-08-30', domain: 'Mathematics & Statistics', category: 'Discrete Mathematics',
   subcategories: ['Epistemic Logic', 'Case Elimination'], tags: ['Logical Deduction', 'Public Information', 'Interview'],
   quantInterviewTopics: topics, concepts: [constraint], techniques: [], prerequisites: [],
-  relatedProblems: ['bridge-crossing-minimum-time'], family: 'public-announcement-elimination',
+  relatedProblems: ['bridge-crossing-minimum-time', 'public-announcement-departure-day'], family: 'public-announcement-elimination',
   mathDifficulty: 1, insightDifficulty: 3, interviewDifficulty: 3, estimatedMinutes: 15,
   status: 'solved', featured: false,
 };

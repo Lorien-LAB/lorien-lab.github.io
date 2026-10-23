@@ -7,14 +7,15 @@ import ResearchCard from '../components/ResearchCard.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 import KnowledgeCard from '../components/KnowledgeCard.astro';
 import NoteCard from '../components/NoteCard.astro';
+import { getKnowledgeDomains, knowledgeHref } from '../lib/knowledgeLibrary.mjs';
 
 const base = import.meta.env.BASE_URL;
 const research = (await getCollection('research', ({ data }) => data.featured)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0,3);
 const projects = (await getCollection('projects', ({ data }) => data.featured)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0,3);
-const knowledge = (await getCollection('knowledge', ({ data }) => data.featured)).sort((a,b) => (b.data.updated ?? b.data.date).valueOf() - (a.data.updated ?? a.data.date).valueOf()).slice(0,3);
+const allKnowledge = await getCollection('knowledge');
+const knowledge = allKnowledge.filter(({ data }) => data.featured).sort((a,b) => (b.data.updated ?? b.data.date).valueOf() - (a.data.updated ?? a.data.date).valueOf()).slice(0,3);
 const notes = (await getCollection('notes', ({ data }) => !data.draft)).sort((a,b) => b.data.date.valueOf() - a.data.date.valueOf()).slice(0,3);
-const knowledgeDomains = ['Quantitative Finance','Mathematics & Statistics','Machine Learning','AI & Research Agents','Research Infrastructure'];
-const knowledgeDomainsZh = ['量化金融','数学与统计','机器学习','AI 与研究 Agent','研究基础设施'];
+const knowledgeDomains = getKnowledgeDomains(allKnowledge);
 ---
 <BaseLayout title="Lorien Lab · Quantitative Research" description="Quantitative research portfolio covering alpha discovery, futures, market microstructure, systematic trading, and research infrastructure.">
   <Hero />
@@ -37,7 +38,7 @@ const knowledgeDomainsZh = ['量化金融','数学与统计','机器学习','AI 
     <div class="container">
       <SectionHeading title="Personal Knowledge Base" titleZh="个人知识库" description="A structured research library connecting concepts, tools, papers, and research topics across quantitative finance and research engineering." descriptionZh="连接量化金融、研究工程中的概念、工具、论文与研究主题的结构化研究资料库。" href={`${base}knowledge/`} linkLabel="Explore Knowledge →" linkLabelZh="探索知识库 →"/>
       <div class="knowledge-home-grid">
-        <div class="knowledge-domain-list">{knowledgeDomains.map((domain,i) => <a href={`${base}knowledge/#knowledge-index`}><span>{String(i+1).padStart(2,'0')}</span><strong><span class="lang-en">{domain}</span><span class="lang-zh" lang="zh-CN">{knowledgeDomainsZh[i]}</span></strong><i aria-hidden="true">→</i></a>)}</div>
+        <div class="knowledge-domain-list">{knowledgeDomains.map((domain) => <a href={knowledgeHref(base, domain.name)}><strong><span class="lang-en">{domain.name}</span><span class="lang-zh" lang="zh-CN">{domain.zh}</span></strong><i aria-hidden="true">→</i></a>)}</div>
         <div class="knowledge-home-cards">{knowledge.map(entry => <KnowledgeCard entry={entry} compact />)}</div>
       </div>
     </div>
@@ -61,9 +62,8 @@ const knowledgeDomainsZh = ['量化金融','数学与统计','机器学习','AI 
   .home-knowledge { background: color-mix(in srgb,var(--surface) 62%,transparent); border-bottom: 1px solid var(--border); }
   .knowledge-home-grid { display: grid; grid-template-columns: .85fr 1.15fr; gap: 30px; align-items: start; }
   .knowledge-domain-list { border-top: 1px solid var(--border); }
-  .knowledge-domain-list a { display: grid; grid-template-columns: 42px 1fr 22px; gap: 10px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--border); color: var(--ink); }
+  .knowledge-domain-list a { display: grid; grid-template-columns: 1fr 22px; gap: 10px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--border); color: var(--ink); }
   .knowledge-domain-list a:hover { color: var(--accent-strong); }
-  .knowledge-domain-list span { font: 700 .68rem var(--font-mono); color: var(--accent-strong); }
   .knowledge-domain-list strong { font-size: .88rem; }
   .knowledge-domain-list strong>.lang-en,.knowledge-domain-list strong>.lang-zh { display: block; }
   .knowledge-domain-list i { font-style: normal; font-weight: 800; }

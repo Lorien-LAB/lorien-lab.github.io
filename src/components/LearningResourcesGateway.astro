@@ -1,8 +1,9 @@
 ---
-interface Props { href: string; }
-const { href } = Astro.props;
+interface Props { href: string; compact?: boolean; }
+const { href, compact = false } = Astro.props;
 const stages = ['Core Skills', 'Factor Investing', 'Advanced Concepts', 'Systems', 'Stay Current'];
 ---
+{compact ? <a href={href}><span class="lang-en">Financial Engineering Resources →</span><span class="lang-zh" lang="zh-CN">金融工程学习资源 →</span></a> : (
 <section class="learning-gateway" aria-labelledby="learning-gateway-title">
   <div class="gateway-copy">
     <div class="mono-label">Learning Roadmap</div>
@@ -15,6 +16,7 @@ const stages = ['Core Skills', 'Factor Investing', 'Advanced Concepts', 'Systems
     {stages.map((stage, index) => <div><span>{String(index + 1).padStart(2, '0')}</span><strong>{stage}</strong></div>)}
   </div>
 </section>
+)}
 
 <style>
 .learning-gateway{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center;padding:32px;border:1px solid color-mix(in srgb,var(--accent) 30%,var(--border));border-radius:var(--radius-lg);background:linear-gradient(135deg,color-mix(in srgb,var(--accent-soft) 30%,var(--surface)),color-mix(in srgb,var(--surface) 92%,var(--bg)));box-shadow:0 16px 50px rgba(16,40,55,.05)}

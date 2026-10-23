@@ -28,7 +28,7 @@ const constraintMetadata = {
   category: 'Problem Solving Techniques', status: 'growing',
   tags: ['Logical Deduction', 'Constraints', 'Case Analysis', 'Interview'],
   quantInterviewTopics: topics, featured: false,
-  related: ['small-cases-recurrence-and-structural-simplification', 'problem-framing-clarification-assumption-management', trees, reframing],
+  related: ['small-cases-recurrence-and-structural-simplification', 'problem-framing-clarification-assumption-management', trees, reframing, 'conditional-implication-contrapositive-and-falsification', 'common-knowledge-and-iterated-reasoning'],
   relatedNotes: [],
 };
 const treeMetadata = {
