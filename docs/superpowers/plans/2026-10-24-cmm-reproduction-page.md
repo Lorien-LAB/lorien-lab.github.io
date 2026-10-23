@@ -38,14 +38,22 @@
 
 ## Task 3: Full verification and review
 
-- [ ] Run `npm test`, both directory checks, `npm run check`, `npm run build`, and `npm run test:browser` on the final tree.
-- [ ] Inspect the rendered desktop and 390×844 mobile page, light/dark display, chart load, link targets, and console errors; save temporary QA screenshots outside the repo.
-- [ ] Review `git diff` for factual claims, privacy boundary, readability, and change scope; verify the research source directory remains untouched.
-- [ ] Commit only the plan, Markdown, PNG, and focused test to `codex/cmm-reproduction-page`.
+- [x] Run `npm test`, both directory checks, `npm run check`, `npm run build`, and `npm run test:browser` on the final tree.
+- [x] Inspect the rendered desktop and 390×844 mobile page, light/dark display, chart load, link targets, and console errors; save temporary QA screenshots outside the repo.
+- [x] Review `git diff` for factual claims, privacy boundary, readability, and change scope; verify the research source directory remains untouched.
+- [x] Commit only the plan, Markdown, PNG, and focused test to `codex/cmm-reproduction-page`.
 
 ## Task 4: Integrate and verify publication
 
-- [ ] Confirm the branch is a fast-forward descendant of current remote `main`; update safely if remote moved, without resetting unrelated work.
-- [ ] Fast-forward publish the reviewed branch to remote `main` as approved by the CMM page design and current CMM task selection.
-- [ ] Confirm exact-head GitHub validation and Pages deployment separately, then inspect the live index, detail route, and image.
-- [ ] Fast-forward the main checkout while preserving its three existing untracked paths; recheck the dirty 022 and other worktree statuses.
+- [x] Confirm the branch is a fast-forward descendant of current remote `main`; update safely if remote moved, without resetting unrelated work.
+- [x] Fast-forward publish the reviewed branch to remote `main` as approved by the CMM page design and current CMM task selection.
+- [x] Confirm exact-head GitHub validation and Pages deployment separately, then inspect the live index, detail route, and image.
+- [x] Fast-forward the main checkout while preserving its three existing untracked paths; recheck the dirty 022 and other worktree statuses.
+
+## Completion evidence — 2026-10-24
+
+- Published website commit: `050d5601a54940fee289e8f763a5ef55d63a7e74`, fast-forwarded from `6dc04dbcb78c5d2bebd6f192dc0846ad6326f48b`.
+- Final local gates on the published tree: 659 Node tests passed; both directory checks passed; Astro check found 0 errors and 0 warnings (2 existing hints); 198 pages built; 28 Chromium browser tests passed.
+- [Validate site](https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/39995385821) and [Deploy to GitHub Pages](https://github.com/Lorien-LAB/lorien-lab.github.io/actions/runs/39995385379) both completed successfully with `head_sha` equal to the website commit.
+- Live index, canonical CMM detail, and aggregate PNG returned HTTP 200. The detail rendered the five metric pairs and `Implementation Private`; the PNG served as `image/png` with 206576 bytes.
+- The source research worktree was read-only. The main checkout retained its three pre-existing untracked paths, and no new CMM backtest or Workstream 023 was started.
