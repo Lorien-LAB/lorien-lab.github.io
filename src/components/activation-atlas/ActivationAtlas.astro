@@ -1,0 +1,113 @@
+---
+import styles from './atlas.css?inline';
+---
+<section data-activation-atlas data-theme="light" lang="zh-CN" aria-label="激活函数交互图鉴">
+  <template shadowrootmode="open">
+    <style is:inline set:html={styles}></style>
+      <div id="app">
+        <button type="button" class="sidebar-backdrop" aria-label="关闭图鉴菜单" tabindex="-1" hidden></button>
+        <aside class="sidebar" id="sidebar">
+          <a class="brand" href="#explore" id="brandLink" aria-label="返回激活函数图鉴">
+            <span class="brand-icon"><svg viewBox="0 0 44 44" aria-hidden="true"><path d="M3 33C14 33 15 31 20 22S29 11 41 11"/><path d="M3 37C16 37 15 26 22 21S30 8 41 8"/><circle cx="22" cy="21" r="3.2"/></svg></span>
+            <span class="brand-copy"><b>ACTIVATION<span class="brand-accent">.</span></b><small>ATLAS / 激活函数图鉴</small></span>
+          </a>
+          <div class="side-divider"></div>
+          <div class="side-section-title">WORKSPACE <span>工作台</span></div>
+          <nav id="mainNav" class="main-nav" aria-label="图鉴导航">
+            <button class="nav-link active" data-view="explore"><span class="nav-ico">◫</span> 图鉴探索 <span class="nav-shortcut">01</span></button>
+            <button class="nav-link" data-view="lab"><span class="nav-ico">⌘</span> 机制实验室 <span class="nav-shortcut">02</span></button>
+            <button class="nav-link" data-view="timeline"><span class="nav-ico">◷</span> 发展时间线 <span class="nav-shortcut">03</span></button>
+            <button class="nav-link" data-view="guide"><span class="nav-ico">◇</span> 选型指南 <span class="nav-shortcut">04</span></button>
+          </nav>
+          <div class="side-divider"></div>
+          <div class="side-section-title">LIBRARY <span>函数分类</span></div>
+          <nav id="categoryNav" class="category-nav" aria-label="激活函数分类"></nav>
+          <div class="sidebar-bottom">
+            <div class="side-callout"><span class="pulse-dot"></span> RESEARCH NOTE <p>这是一份可交互的代表性图鉴，非全部 400+ 研究变体的完整目录。</p></div>
+            <span class="side-foot">© 2026 ACTIVATION ATLAS</span>
+          </div>
+        </aside>
+        <div class="site-shell">
+          <header class="topbar">
+            <div class="breadcrumbs"><span class="muted">RESEARCH / DEEP LEARNING</span><span class="breadcrumb-divider">/</span><strong id="breadcrumbText">函数探索</strong></div>
+            <div class="header-actions">
+              <button id="mobileMenuBtn" class="icon-btn mobile-menu" aria-label="图鉴菜单" aria-controls="sidebar" aria-expanded="false">☰</button>
+              <button id="searchTrigger" class="header-search" aria-label="搜索激活函数"><span>⌕</span> <span>搜索函数</span> <kbd>/</kbd></button>
+              <a href="#sources" id="sourceShortcut" class="header-source">参考文献 ↗</a>
+            </div>
+          </header>
+          <div class="main-content">
+            <section id="view-explore" class="view active">
+              <div class="hero">
+                <div class="hero-copy">
+                  <div class="eyebrow"><span class="eyebrow-mark"></span> AN INTERACTIVE FIELD GUIDE <span class="tiny-rule"></span> 1943—2026</div>
+                  <h1>看见<span>非线性</span>。<br/>理解每一种激活。</h1>
+                  <p>从感知机的阶跃函数，到 Transformer 中的 SwiGLU。<br/>在真实曲线上探索数学性质、梯度行为与架构演化。</p>
+                  <div class="hero-actions"><button class="primary-btn" id="jumpExplorer">开始探索 <span>↗</span></button><button class="quiet-btn" id="jumpLab">打开交互实验室 <span>↗</span></button></div>
+                </div>
+                <div class="hero-art" aria-label="ReLU、SiLU 和 Tanh 函数曲线艺术展示">
+                  <div class="art-title">FUNCTION SPACE <span>f : ℝ → ℝ</span></div>
+                  <svg viewBox="0 0 500 285" id="heroSVG" preserveAspectRatio="xMidYMid meet" aria-hidden="true"></svg>
+                  <div class="art-caption"><span><i class="dot" style="background:var(--accent)"></i> SiLU / SWISH</span><span><i class="dot" style="background:var(--purple)"></i> TANH</span><span><i class="dot" style="background:var(--amber)"></i> RELU</span></div>
+                  <div class="art-corner">FIG. 001 <span>NONLINEARITY</span></div>
+                </div>
+              </div>
+              <div class="stat-strip">
+                <div><strong id="statTotal">—</strong><span>收录条目</span></div>
+                <div><strong id="statCats">—</strong><span>函数家族</span></div>
+                <div><strong id="statPlots">—</strong><span>可绘制函数</span></div>
+                <div class="stat-note"><span class="status-light"></span> <strong>浏览器内计算</strong><small>曲线和实验即时更新</small></div>
+              </div>
+              <section id="explorer" class="section-block explorer-section">
+                <div class="section-heading"><div><div class="eyebrow slate">01 / CURVE STUDIO</div><h2>曲线实验台 <span>Curve Studio</span></h2><p>选择函数加入对比；悬停读取数值；改变参数观察非线性形态。</p></div><div class="section-actions"><button id="resetCompare" class="outline-btn">↺ 重置</button><button id="exportSvg" class="outline-btn">↓ 曲线 SVG</button><button id="exportCsv" class="outline-btn">↓ 数据 CSV</button></div></div>
+                <div class="studio-layout">
+                  <div class="chart-panel panel">
+                    <div class="panel-heading"><div><span class="mini-kicker">LIVE GRAPH</span><h3>激活响应 · 梯度传播</h3></div><div class="segmented" id="plotModes" role="group" aria-label="曲线显示方式"><button data-mode="function" class="active" aria-pressed="true">f(x)</button><button data-mode="derivative" aria-pressed="false">f′(x)</button><button data-mode="both" aria-pressed="false">双视图</button></div></div>
+                    <div id="compareLegend" class="compare-legend"></div>
+                    <div id="plotWrap" class="plot-wrap"><div id="plotContent" class="plot-content"></div><div id="plotTooltip" class="plot-tooltip" hidden></div></div>
+                    <div class="chart-toolbar"><span>观察区间</span><input id="domainSlider" type="range" min="2" max="12" step="1" value="6" aria-label="曲线横坐标观察区间"/><strong id="domainLabel">−6 ~ +6</strong><span class="toolbar-spacer"></span><span>最多叠加 4 条曲线</span></div>
+                  </div>
+                  <div class="inspect-panel panel" id="inspector">
+                    <div class="panel-heading"><span class="mini-kicker">FUNCTION INSPECTOR</span><button class="outline-btn compact" id="copyPytorch">复制代码 ↗</button></div>
+                    <div id="inspectorContent"></div>
+                  </div>
+                </div>
+              </section>
+              <section class="section-block catalog-section" id="catalog">
+                <div class="section-heading catalog-title"><div><div class="eyebrow slate">02 / FUNCTION LIBRARY</div><h2>激活函数图鉴 <span>Activation Library</span></h2><p>按数学结构、研究用途和计算机制分类。非标量结构另设交互实验。</p></div></div>
+                <div class="catalog-tools"><div class="catalog-search"><span>⌕</span><input id="catalogSearch" type="search" aria-label="搜索图鉴目录" placeholder="搜索 ReLU、GELU、门控、周期、KAN ..." autocomplete="off"/><kbd>/</kbd></div><div class="filter-group"><button class="filter-btn active" data-kind="all">全部</button><button class="filter-btn" data-kind="scalar">可绘制</button><button class="filter-btn" data-kind="special">结构 / 向量</button><button class="filter-btn" data-kind="favorite">★ 收藏</button></div><select id="sortSelect" aria-label="排序方式"><option value="recommended">推荐排序</option><option value="alpha">按名称</option><option value="year">按年代</option></select></div>
+                <div class="catalog-info"><span id="catalogCount"></span><button id="clearFilters">清除筛选 ×</button></div>
+                <div id="catalogGrid" class="catalog-grid"></div>
+                <div id="emptyState" class="empty-state" hidden><span>⌕</span><h3>没有匹配的函数</h3><p>尝试其他英文名、中文关键词或切换分类。</p></div>
+              </section>
+              <footer class="footer"><span>ACTIVATION ATLAS · INTERACTIVE KNOWLEDGE BASE</span><span>图鉴不是性能排名。所有选型建议都需要在任务与算力约束下验证。</span></footer>
+            </section>
+            <section id="view-lab" class="view">
+              <div class="page-intro"><div class="eyebrow">02 / MECHANISM LAB</div><h1>机制实验室<span class="accent-point">.</span></h1><p>标量曲线无法呈现所有激活机制。这里用独立实验模拟门控乘法、向量概率、复数相位、脉冲替代梯度和可学习折线。</p></div>
+              <div class="lab-tabs" id="labTabs"><button data-lab="gating" class="active">◈ GLU 门控</button><button data-lab="prob">▥ 概率向量</button><button data-lab="complex">◉ 复值激活</button><button data-lab="spike">⌁ 脉冲与替代梯度</button><button data-lab="learn">⟡ 可学习函数</button></div>
+              <div id="labContent"></div>
+              <div class="lab-endnote">注：实验室为教学用的低维示例。真实 GLU/SwiGLU 包含可学习投影矩阵；KAN 使用更复杂的样条基；SNN 的膜电位动态需要跨时间迭代。</div>
+            </section>
+            <section id="view-timeline" class="view">
+              <div class="page-intro"><div class="eyebrow">03 / A BRIEF HISTORY</div><h1>非线性的进化<span class="accent-point">.</span></h1><p>为什么激活函数不断演进？每一代方案都试图回答一个新的训练、表达或计算问题。年份表示代表性论文或推广节点，而不总是数学函数最初出现的年份。</p></div>
+              <div class="timeline-layout"><div class="timeline-rail" id="timelineRail"></div><aside class="timeline-aside panel"><div class="mini-kicker">THE CENTRAL QUESTION</div><h3>为什么需要新的激活函数？</h3><p>人们不是为了创造新曲线而创造新曲线，而是为了改善梯度传播、表达结构、引入归纳偏置、节约算力和提高任务拟合能力。</p><div class="problem-tags"><span>梯度消失</span><span>死神经元</span><span>计算效率</span><span>特征交互</span><span>函数自适应</span></div><button class="primary-btn small" id="timelineExplore">前往函数图鉴 ↗</button></aside></div>
+            </section>
+            <section id="view-guide" class="view">
+              <div class="page-intro"><div class="eyebrow">04 / PRACTITIONER'S GUIDE</div><h1>该如何选择<span>激活函数</span>？</h1><p>从目标输出域、梯度形态和计算预算出发，而不是仅凭新颖度。以下建议是可复现的实验起点，不是通用性能保证。</p></div>
+              <div class="guide-callout"><div class="mini-kicker">RULE ZERO</div><h2>先固定基线，再改变非线性。</h2><p>控制参数量、初始化、正则化、随机种子与训练预算，只替换一项变量，才能判断激活函数是否真正产生增益。</p></div>
+              <div id="guideCards" class="guide-grid"></div>
+              <div class="section-heading gap-top"><div><div class="eyebrow slate">HOW TO THINK</div><h2>六个数学观察维度</h2></div></div>
+              <div class="properties-grid"><div><b>01 / 输出范围</b><p>有界、无界、非负、零中心，直接影响目标变量约束。</p></div><div><b>02 / 梯度</b><p>关注导数分布、饱和区及链式法则中的梯度衰减或放大。</p></div><div><b>03 / 平滑性</b><p>PINN 和高阶微分任务通常更关注一阶及高阶导数。</p></div><div><b>04 / 单调性</b><p>非单调函数可保留小幅负响应，但不自动保证性能更好。</p></div><div><b>05 / 结构交互</b><p>门控块包含乘法与投影，不等同于更换逐元素标量函数。</p></div><div><b>06 / 计算成本</b><p>理论 FLOPs、硬件算子支持与真实推理延迟可能不一致。</p></div></div>
+              <div id="sources" class="sources-section"><div class="eyebrow slate">REFERENCES / FURTHER READING</div><h2>原始论文与学习资料</h2><div id="references"></div><p class="sources-note">参考文献链接需联网打开；网页中的图形、公式检索与交互实验均在浏览器本地完成。</p></div>
+            </section>
+          </div>
+        </div>
+      </div>
+      <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </template>
+  <noscript><p>激活函数图鉴需要 JavaScript 才能绘制曲线和运行实验。</p></noscript>
+</section>
+
+<script>
+  import './atlas.js';
+</script>

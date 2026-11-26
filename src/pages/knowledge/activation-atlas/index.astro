@@ -1,0 +1,38 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import ActivationAtlas from '../../../components/activation-atlas/ActivationAtlas.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+<BaseLayout
+  title="Activation Atlas · 激活函数交互图鉴 · Lorien Lab"
+  description="Compare activation functions and their gradients, tune parameters, and explore SwiGLU and other neural network mechanisms in interactive labs."
+>
+  <nav class="atlas-path" aria-label="Breadcrumb / 路径导航">
+    <div class="container">
+      <a href={`${base}knowledge/`}>
+        <span class="lang-en">Knowledge library</span>
+        <span class="lang-zh" lang="zh-CN">知识库</span>
+      </a>
+      <span aria-hidden="true">/</span>
+      <span aria-current="page">
+        <span class="lang-en">Activation Atlas</span>
+        <span class="lang-zh" lang="zh-CN">激活函数交互图鉴</span>
+      </span>
+    </div>
+  </nav>
+  <ActivationAtlas />
+</BaseLayout>
+
+<style>
+  .atlas-path {
+    padding-block: 10px;
+    border-bottom: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--muted);
+    font-size: .875rem;
+  }
+  .atlas-path .container { display: flex; flex-wrap: wrap; align-items: center; gap: 4px 10px; }
+  .atlas-path a { color: var(--accent-strong); font-weight: 650; }
+  .atlas-path a:hover { text-decoration: underline; }
+</style>
